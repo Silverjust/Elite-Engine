@@ -94,9 +94,8 @@ public class Ticul extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isCollision(x, y, basicAttack.range + e.radius)) {
-							// evtl abfrage wegen groundposition
-
+						if (e.isCollision(x, y, basicAttack.range + e.radius)
+								&& e.groundPosition == GroundPosition.GROUND) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -106,8 +105,7 @@ public class Ticul extends Unit implements Attacker {
 					}
 				}
 			}
-			if (importantEntity != null && getBasicAttack().isNotOnCooldown()
-					&& importantEntity.groundPosition == GroundPosition.GROUND) {
+			if (importantEntity != null && getBasicAttack().isNotOnCooldown()) {
 				// System.out.println(thread);
 				sendAnimation("basicAttack " + importantEntity.number);
 			}

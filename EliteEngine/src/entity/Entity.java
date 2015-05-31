@@ -102,7 +102,8 @@ public abstract class Entity {
 	public void hit(int damage, byte pirce) {
 
 		if (isMortal()) {// only for nonimmortal objects
-			hp -= damage * (1.0 - (armor - pirce) * 0.05);
+			hp -= damage
+					* (1.0 - ((armor - pirce > 0) ? armor - pirce : 0) * 0.05);
 			/** check if it was lasthit */
 			if (hp <= 0 && hp != Integer.MAX_VALUE) {// marker
 				hp = -32768;

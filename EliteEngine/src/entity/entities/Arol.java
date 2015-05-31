@@ -49,7 +49,7 @@ public class Arol extends Unit implements Attacker {
 		basicAttack.range = (byte) (radius + 20);
 		basicAttack.damage = 40;
 		basicAttack.cooldown = 5000;
-		basicAttack.eventTime = 500;
+		basicAttack.eventTime = 100;
 		// ************************************
 	}
 
@@ -71,24 +71,18 @@ public class Arol extends Unit implements Attacker {
 			sendAnimation(s);
 		}
 		if (animation == walk) {// ****************************************************
-			float importance = 0;
-			Entity importantEntity = null;
+			boolean isEnemyInRange = false;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isCollision(x, y, basicAttack.range + e.radius)) {
-							// evtl abfrage wegen groundposition
-
-							float newImportance = calcImportanceOf(e);
-							if (newImportance > importance) {
-								importance = newImportance;
-								importantEntity = e;
-							}
+						if (e.isCollision(x, y, basicAttack.range + e.radius)
+								&& e.groundPosition == GroundPosition.GROUND) {
+							isEnemyInRange = true;
 						}
 					}
 				}
 			}
-			if (importantEntity != null && getBasicAttack().isNotOnCooldown()) {
+			if (isEnemyInRange && getBasicAttack().isNotOnCooldown()) {
 				// System.out.println(thread);
 				sendAnimation("basicAttack " + x + " " + y);
 			}

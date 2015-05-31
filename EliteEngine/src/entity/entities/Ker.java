@@ -46,7 +46,7 @@ public class Ker extends Unit implements Attacker {
 
 		aggroRange = (byte) (radius + 100);
 		basicAttack.range = (byte) (radius + 20);
-		basicAttack.damage = 50;
+		basicAttack.damage = 100;
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 1000;
 		basicAttack.eventTime = 500;
