@@ -3,6 +3,7 @@ package game;
 import java.lang.reflect.Constructor;
 
 import entity.*;
+import entity.entities.Arol;
 import entity.entities.Brux;
 import entity.entities.Colum;
 import entity.entities.Prunam;
@@ -35,6 +36,7 @@ public class ActivesGrid {
 		addTrainActive(2, 2, TestBuilding.class, Colum.class, false);
 		addTrainActive(1, 3, TestBuilding.class, Valcyrix.class, false);
 		addTrainActive(3, 3, TestBuilding.class, Ticul.class, false);
+		addTrainActive(5, 1, TestBuilding.class, Arol.class, false);
 	}
 
 	public void update() {

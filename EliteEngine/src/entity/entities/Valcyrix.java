@@ -47,8 +47,8 @@ public class Valcyrix extends Unit implements Attacker {
 
 		aggroRange = (byte) (radius + 100);
 		basicAttack.range = (byte) (radius + 20);
-		basicAttack.damage = 25;
-		basicAttack.cooldown = 1000;
+		basicAttack.damage = 50;
+		basicAttack.cooldown = 1500;
 		basicAttack.eventTime = 500;
 		// ************************************
 	}

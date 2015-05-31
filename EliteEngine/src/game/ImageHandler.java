@@ -36,6 +36,7 @@ public class ImageHandler {
 			classes.add(Brux.class);
 			classes.add(Colum.class);
 			classes.add(Valcyrix.class);
+			classes.add(Arol.class);
 			classes.add(TestLab.class);
 
 			classes.add(TestBuilding.class);

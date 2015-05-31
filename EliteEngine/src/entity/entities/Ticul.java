@@ -57,7 +57,7 @@ public class Ticul extends Unit implements Attacker {
 		xSize = 40;
 		ySize = 40;
 
-		hp = hp_max =50;
+		hp = hp_max = 50;
 		speed = 1.8f;
 		radius = 10;
 		sight = 120;
@@ -74,7 +74,7 @@ public class Ticul extends Unit implements Attacker {
 	@Override
 	public void updateDecisions() {
 
-		//isTaged = false;
+		// isTaged = false;
 		if (animation == stand) {// ****************************************************
 			String s = "";
 			for (Entity e : player.visibleEntities) {
@@ -106,7 +106,8 @@ public class Ticul extends Unit implements Attacker {
 					}
 				}
 			}
-			if (importantEntity != null && getBasicAttack().isNotOnCooldown()) {
+			if (importantEntity != null && getBasicAttack().isNotOnCooldown()
+					&& importantEntity.groundPosition == GroundPosition.GROUND) {
 				// System.out.println(thread);
 				sendAnimation("basicAttack " + importantEntity.number);
 			}
