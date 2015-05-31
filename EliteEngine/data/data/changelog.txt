@@ -1,4 +1,6 @@
-added Armor and Pirce (werte noch ändern)
+added Ker
+---------------------------
+added Armor and Pirce (werte noch aendern)
 --------------------
 added Arol with splashattack
 -------------

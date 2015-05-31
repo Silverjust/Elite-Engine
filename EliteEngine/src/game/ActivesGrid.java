@@ -6,6 +6,7 @@ import entity.*;
 import entity.entities.Arol;
 import entity.entities.Brux;
 import entity.entities.Colum;
+import entity.entities.Ker;
 import entity.entities.Prunam;
 import entity.entities.PrunamExtractor;
 import entity.entities.TestBuilding;
@@ -37,6 +38,7 @@ public class ActivesGrid {
 		addTrainActive(1, 3, TestBuilding.class, Valcyrix.class, false);
 		addTrainActive(3, 3, TestBuilding.class, Ticul.class, false);
 		addTrainActive(5, 1, TestBuilding.class, Arol.class, false);
+		addTrainActive(4, 2, TestBuilding.class, Ker.class, false);
 	}
 
 	public void update() {

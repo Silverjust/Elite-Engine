@@ -36,6 +36,7 @@ public class ImageHandler {
 			classes.add(Colum.class);
 			classes.add(Valcyrix.class);
 			classes.add(Arol.class);
+			classes.add(Ker.class);
 			classes.add(TestLab.class);
 
 			classes.add(TestBuilding.class);
