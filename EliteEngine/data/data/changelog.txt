@@ -1,3 +1,5 @@
+added Armor and Pirce (werte noch ändern)
+--------------------
 added Arol with splashattack
 -------------
 added potatoes,

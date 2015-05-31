@@ -28,6 +28,7 @@ public abstract class Entity {
 	public byte height;
 	public int hp;
 	public int hp_max;
+	public byte armor;
 	public GroundPosition groundPosition;
 
 	public byte currentFrame;
@@ -98,19 +99,24 @@ public abstract class Entity {
 		}
 	}
 
-	public void hit(int damage) {
+	public void hit(int damage, byte pirce) {
 
 		if (isMortal()) {// only for nonimmortal objects
-			hp -= damage;
+			hp -= damage * (1.0 - (armor - pirce) * 0.05);
 			/** check if it was lasthit */
 			if (hp <= 0 && hp != Integer.MAX_VALUE) {// marker
 				hp = -32768;
 				onDeath();
 			}
-			/** check if it was lasthit */
-			if (hp > hp_max) {
-				hp = hp_max;
-			}
+
+		}
+	}
+
+	public void heal(int heal) {
+		hp += heal;
+		/** check if it was overheal */
+		if (hp > hp_max) {
+			hp = hp_max;
 		}
 	}
 
@@ -148,7 +154,7 @@ public abstract class Entity {
 	}
 
 	void drawHpBar() {
-		int h=3;
+		int h = 3;
 		if (isAlive() && isMortal()) {//
 			ref.app.fill(0, 150);
 			ref.app.rect(xToGrid(x), yToGrid(y - height) - radius * 1.5f,
@@ -202,8 +208,8 @@ public abstract class Entity {
 	}
 
 	public float calcImportanceOf(Entity e) {
-		float importance = PApplet.abs(10000 / (e.hp * PApplet.dist(x, y, e.x, e.y)
-				- radius - e.radius));
+		float importance = PApplet.abs(10000 / (e.hp
+				* PApplet.dist(x, y, e.x, e.y) - radius - e.radius));
 		// TODO speziefische Thread werte
 		if (e instanceof Attacker) {
 			importance *= 20;

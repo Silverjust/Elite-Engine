@@ -29,6 +29,7 @@ public class TrainActive extends Active {
 		}
 
 		ClientHandler.send("<spawn " + unit + " " + trainer.player.ip + " "
-				+ (trainer.x + 50) + " " + (trainer.y + 50));
+				+ (trainer.x + 50) + " " + (trainer.y + 50) + " "
+				+ (trainer.x + 150) + " " + (trainer.y + 150));
 	}
 }

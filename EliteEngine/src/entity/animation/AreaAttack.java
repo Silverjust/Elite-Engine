@@ -3,10 +3,12 @@ package entity.animation;
 import processing.core.PImage;
 import shared.ref;
 import entity.Entity;
+import entity.Entity.GroundPosition;
 
 public class AreaAttack extends Ability {
 	public byte range;
 	public byte damage;
+	public byte pirce;
 	float x, y;
 
 	public AreaAttack(PImage[][] IMG, int duration) {
@@ -29,20 +31,13 @@ public class AreaAttack extends Ability {
 	@Override
 	public void updateAbility(Entity e) {
 		if (isEvent() && isNotOnCooldown()) {
-			if (damage > 0) {
-				for (Entity e2 : ref.updater.entities) {
-					// sometimes attacks ghosts
-					if (e2 != null & e2.isEnemyTo(e)
-							&& e2.isCollision(x, y, e2.radius + range)) {
-						ref.updater.send("<hit " + e2.number + " " + damage);
-					}
-				}
-			} else {
-				for (Entity e2 : ref.updater.entities) {
-					if (e2 != null & e2.isAllyTo(e)
-							&& e2.isCollision(x, y, e2.radius + range)) {
-						ref.updater.send("<hit " + e2.number + " " + damage);
-					}
+			for (Entity e2 : ref.updater.entities) {
+				// sometimes attacks ghosts
+				if (e2 != null & e2.isEnemyTo(e)
+						&& e2.isCollision(x, y, e2.radius + range)
+						&& e2.groundPosition == GroundPosition.GROUND) {
+					ref.updater.send("<hit " + e2.number + " " + damage + " "
+							+ pirce);
 				}
 			}
 			startCooldown();

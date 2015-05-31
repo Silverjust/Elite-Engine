@@ -8,6 +8,7 @@ public class TargetAttack extends Ability {
 
 	public byte range;
 	public byte damage;
+	public byte pirce;
 	public Entity target;
 
 	public TargetAttack(PImage[][] IMG, int duration) {
@@ -29,7 +30,8 @@ public class TargetAttack extends Ability {
 	@Override
 	public void updateAbility(Entity e) {
 		if (target != null && isEvent() && isNotOnCooldown()) {
-			ref.updater.send("<hit " + target.number + " " + damage);
+			ref.updater.send("<hit " + target.number + " " + damage + " "
+					+ pirce);
 			target = null;
 			startCooldown();
 		}

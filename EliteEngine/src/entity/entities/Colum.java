@@ -2,7 +2,7 @@ package entity.entities;
 
 import entity.Entity;
 import entity.Unit;
-import entity.animation.AreaAttack;
+import entity.animation.AreaHeal;
 import entity.animation.Death;
 import processing.core.PImage;
 import shared.Nation;
@@ -11,7 +11,7 @@ public class Colum extends Unit {// FIXME colum sets ismoving to false
 
 	private static PImage standingImg;
 
-	AreaAttack heal;
+	AreaHeal heal;
 
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
@@ -23,7 +23,7 @@ public class Colum extends Unit {// FIXME colum sets ismoving to false
 		super(c);
 		iconImg = standingImg;
 
-		stand = walk = heal = new AreaAttack(standingImg, 500);
+		stand = walk = heal = new AreaHeal(standingImg, 500);
 		death = new Death(standingImg, 500);
 
 		animation = nextAnimation = walk;
@@ -39,7 +39,7 @@ public class Colum extends Unit {// FIXME colum sets ismoving to false
 		height = 100;
 
 		heal.range = (byte) (radius + 50);
-		heal.damage = -25;
+		heal.heal = 25;
 		heal.cooldown = 5000;
 		heal.eventTime = 100;
 		// ************************************

@@ -30,7 +30,6 @@ public class ImageHandler {
 			 */
 
 			classes.add(Entity.class);
-			classes.add(BigTicul.class);
 			classes.add(Ticul.class);
 			classes.add(Rug.class);
 			classes.add(Brux.class);

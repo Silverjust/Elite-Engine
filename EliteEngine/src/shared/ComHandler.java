@@ -21,6 +21,7 @@ public class ComHandler {
 		String[] c = PApplet.splitTokens(com, " " + ClientHandler.endSymbol);
 
 		try {
+			byte b;
 			int n;
 			float x, y;
 			Entity e;
@@ -41,8 +42,19 @@ public class ComHandler {
 				n = Integer.parseInt(c[1]);
 				e = ref.updater.namedEntities.get(n);
 				n = Integer.parseInt(c[2]);
+				b=Byte.parseByte(c[3]);
 				if (e != null) {
-					e.hit(n);
+					e.hit(n,b);
+				} else {
+					throw new IllegalArgumentException("no entity found");
+				}
+				break;
+			case "<heal":
+				n = Integer.parseInt(c[1]);
+				e = ref.updater.namedEntities.get(n);
+				n = Integer.parseInt(c[2]);
+				if (e != null) {
+					e.heal(n);
 				} else {
 					throw new IllegalArgumentException("no entity found");
 				}
