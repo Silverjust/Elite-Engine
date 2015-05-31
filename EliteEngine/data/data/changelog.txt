@@ -1,0 +1,6 @@
+added potatoes,
+  lots of potatoes
+  
+added a pause function on 'p'
+
+singelplayermode is now OP (added godeye and godhand)
