@@ -7,7 +7,7 @@ import entity.Entity;
 public class GameDrawer {
 
 	public static float xMapOffset, yMapOffset;
-	public static float zoom = 2f;
+	public static float zoom = 4f;
 
 	public static boolean commandoutput;
 	public static boolean godeye;

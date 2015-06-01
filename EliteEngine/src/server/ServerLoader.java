@@ -25,7 +25,7 @@ public class ServerLoader extends Loader {
 				ref.preGame.player.get(key).nation = Nation.ALIENS;
 			}
 			ref.updater = new ServerUpdater();
-			state = State.STARTIMAGES;//map
+			state = State.STARTIMAGES;// map
 			break;
 		case STARTIMAGES:
 			boolean b = ImageHandler.requestAllImages();
@@ -54,20 +54,19 @@ public class ServerLoader extends Loader {
 
 			for (String key : ref.updater.player.keySet()) {
 				Player p = ref.updater.player.get(key);
-				for (int i = 0; i < 1; i++) {
+				for (int i = 0; i < 0; i++) {
 					ref.updater.send("<spawn Ticul " + p.ip + " "
-							+ ref.app.random(1000) + " " + ref.app.random(1000)
-							+ " " + ref.app.random(1000) + " "
-							+ ref.app.random(1000));
+							+ ref.app.random(500) + " " + ref.app.random(500)
+							+ " " + ref.app.random(500) + " "
+							+ ref.app.random(500));
 				}
 				ref.updater.send("<spawn TestBuilding " + p.ip + " "
-						+ ref.app.random(1000) + " " + ref.app.random(1000));
+						+ ref.app.random(500) + " " + ref.app.random(500));
 				ref.updater.send("<spawn TestLab " + p.ip + " "
-						+ ref.app.random(1000) + " " + ref.app.random(1000)
-						+ " " + ref.app.random(1000) + " "
-						+ ref.app.random(1000));
+						+ ref.app.random(500) + " " + ref.app.random(500) + " "
+						+ ref.app.random(500) + " " + ref.app.random(500));
 				ref.updater.send("<spawn Prunam " + p.ip + " "
-						+ ref.app.random(1000) + " " + ref.app.random(1000));
+						+ ref.app.random(500) + " " + ref.app.random(500));
 			}
 			/*
 			 * for (int i = 0; i < 10; i++) { ref.updater.send("<spawn Ticul " +
@@ -93,7 +92,7 @@ public class ServerLoader extends Loader {
 			state = State.END;
 			break;
 		case END:
-			//ServerDisplay.main(new String[] {});
+			// ServerDisplay.main(new String[] {});
 			state = State.NEWGAME;
 			((ServerApp) ref.app).mode = Mode.GAME;
 			((ServerApp) ref.app).serverHandler.send("<startGame");

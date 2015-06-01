@@ -27,10 +27,10 @@ public class Prunam extends Building {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 60;
-		ySize = 60;
+		xSize = 30;
+		ySize = 30;
 
-		radius = 30;
+		radius = 15;
 		// ************************************
 	}
 

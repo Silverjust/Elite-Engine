@@ -40,13 +40,13 @@ public class TestBuilding extends Building implements Buildable, commanding {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 60;
-		ySize = 60;
+		xSize = 30;
+		ySize = 30;
 		
-		sight = 100;
+		sight = 50;
 
 		hp = hp_max = 1000;
-		radius = 30;
+		radius = 15;
 
 		mainRange = 500;
 		// ************************************

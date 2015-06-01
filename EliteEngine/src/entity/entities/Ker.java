@@ -35,15 +35,15 @@ public class Ker extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 60;
-		ySize = 60;
+		xSize = 30;
+		ySize = 30;
 		
 		kerit=220;
 
 		hp = hp_max = 300;
 		speed = 1.8f;
-		radius = 15;
-		sight = 120;
+		radius = 8;
+		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 100);

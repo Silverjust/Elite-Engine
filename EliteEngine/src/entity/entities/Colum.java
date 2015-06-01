@@ -28,17 +28,17 @@ public class Colum extends Unit {// FIXME colum sets ismoving to false
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 90;
-		ySize = 90;
+		xSize = 45;
+		ySize = 45;
 		
 		kerit=150;
 
 		hp = hp_max = 300;
 		speed = 1.8f;
-		radius = 15;
-		sight = 120;
+		radius = 7;
+		sight = 70;
 		groundPosition = Entity.GroundPosition.AIR;
-		height = 100;
+		height = 50;
 
 		heal.range = (byte) (radius + 50);
 		heal.heal = 25;

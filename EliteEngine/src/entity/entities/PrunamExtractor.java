@@ -32,12 +32,12 @@ public class PrunamExtractor extends Building implements Buildable {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 60;
-		ySize = 60;
+		xSize = 30;
+		ySize = 30;
 
 		hp = hp_max = 100;
-		radius = 30;
-		sight = 100;
+		radius = 15;
+		sight = 50;
 
 		((Extract) stand).cooldown = 1000;
 		((Extract) stand).resource = "prunam";

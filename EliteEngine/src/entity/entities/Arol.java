@@ -35,16 +35,16 @@ public class Arol extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 100;
-		ySize = 70;
+		xSize = 50;
+		ySize = 35;
 		
 		kerit=250;
 
 		hp = hp_max = 2200;
 		armor = 3;
 		speed = 0.8f;
-		radius = 20;
-		sight = 120;
+		radius = 10;
+		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 100);

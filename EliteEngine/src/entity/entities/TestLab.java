@@ -30,14 +30,14 @@ public class TestLab extends Unit {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 15;
+		ySize = 15;
 
 		hp = hp_max = 500;
 		speed = 1.8f;
-		radius = 20;
-		height = 80;
-		sight = 250;
+		radius = 10;
+		height = 40;
+		sight = 125;
 		groundPosition = Entity.GroundPosition.AIR;
 		// ************************************
 	}

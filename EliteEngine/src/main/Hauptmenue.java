@@ -5,6 +5,7 @@ import java.util.UUID;
 import shared.Helper;
 import shared.Mode;
 import shared.ref;
+import g4p_controls.G4P;
 import g4p_controls.GButton;
 import g4p_controls.GEvent;
 import g4p_controls.GPassword;
@@ -36,12 +37,11 @@ public class Hauptmenue {
 		acceptButton = new GButton(ref.app, 300, 390, 300, 40);
 		acceptButton.setText("connect");
 		acceptButton.addEventHandler(this, "handleAcceptEvents");
-		
-		
-		changes=new GTextArea(ref.app, 800, 100, 600, 700);
+
+		changes = new GTextArea(ref.app, 800, 100, 600, 700,
+				G4P.SCROLLBARS_VERTICAL_ONLY | G4P.SCROLLBARS_AUTOHIDE);
 		changes.setTextEditEnabled(false);
 		changes.setText(ref.app.loadStrings("data/changelog.txt"));
-
 
 		// startServer = new GButton(ref.app, 300, 440, 300, 40);
 		// startServer.setText("start a Server");

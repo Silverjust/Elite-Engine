@@ -3,7 +3,6 @@ package entity.entities;
 import entity.Attacker;
 import entity.Entity;
 import entity.Unit;
-import entity.Entity.GroundPosition;
 import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.Death;
@@ -36,17 +35,17 @@ public class Valcyrix extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 60;
-		ySize = 60;
+		xSize = 30;
+		ySize = 30;
 
 		kerit = 40;
 
 		hp = hp_max = 60;
 		speed = 1.8f;
-		radius = 15;
-		sight = 120;
+		radius = 7;
+		sight = 70;
 		groundPosition = Entity.GroundPosition.AIR;
-		height = 40;
+		height = 20;
 
 		aggroRange = (byte) (radius + 100);
 		basicAttack.range = (byte) (radius + 20);

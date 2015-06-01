@@ -42,15 +42,15 @@ public class Rug extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 70;
-		ySize = 70;
+		xSize = 35;
+		ySize = 35;
 		
 		kerit=120;
 
 		hp = hp_max = 120;
 		speed = 1.5f;
-		radius = 15;
-		sight = 120;
+		radius = 8;
+		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 10);

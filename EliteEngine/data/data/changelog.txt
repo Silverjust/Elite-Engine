@@ -1,3 +1,6 @@
+changed size-system
+ (maby there are some wrong lenghts)
+-------------------------
 added Rug and Ruglings
 added costs (not finished)
 -------------------

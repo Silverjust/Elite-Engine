@@ -35,13 +35,13 @@ public class Rugling extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 70;
-		ySize = 70;
+		xSize = 35;
+		ySize = 35;
 
 		hp = hp_max = 35;
 		speed = 1.8f;
-		radius = 8;
-		sight = 120;
+		radius = 4;
+		sight = 50;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 100);

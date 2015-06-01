@@ -35,7 +35,8 @@ public class BuildAim extends Aim {
 		} else {
 			ref.app.tint(255, 100, 100, 150);
 		}
-		ref.app.image(buildable.preview(), x, y / 2, 60, 60);
+		ref.app.image(buildable.preview(), x, y / 2,
+				((Entity) buildable).xSize, ((Entity) buildable).ySize);
 		ref.app.tint(255);
 
 	}

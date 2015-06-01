@@ -50,29 +50,25 @@ public class MainLoader extends Loader {
 					Player p = ref.updater.player.get(key);
 					for (int i = 0; i < 0; i++) {
 						ref.updater.send("<spawn Ticul " + p.ip + " "
-								+ ref.app.random(1000) + " "
-								+ ref.app.random(1000) + " "
-								+ ref.app.random(1000) + " "
-								+ ref.app.random(1000));
+								+ ref.app.random(500) + " "
+								+ ref.app.random(500) + " "
+								+ ref.app.random(500) + " "
+								+ ref.app.random(500));
 					}
-					ref.updater
-							.send("<spawn TestBuilding " + p.ip + " "
-									+ ref.app.random(1000) + " "
-									+ ref.app.random(1000));
+					ref.updater.send("<spawn TestBuilding " + p.ip + " "
+							+ ref.app.random(500) + " " + ref.app.random(500));
 					ref.updater.send("<spawn TestLab " + p.ip + " "
-							+ ref.app.random(1000) + " " + ref.app.random(1000)
-							+ " " + ref.app.random(1000) + " "
-							+ ref.app.random(1000));
-					ref.updater
-							.send("<spawn Prunam " + p.ip + " "
-									+ ref.app.random(1000) + " "
-									+ ref.app.random(1000));
+							+ ref.app.random(500) + " " + ref.app.random(500)
+							+ " " + ref.app.random(500) + " "
+							+ ref.app.random(500));
+					ref.updater.send("<spawn Prunam " + p.ip + " "
+							+ ref.app.random(500) + " " + ref.app.random(500));
 				}
 			}
 			GameDrawer.setup();
-			if (ClientHandler.SinglePlayer) {		
-				GameDrawer.godeye=true;
-				GameDrawer.godhand=true;				
+			if (ClientHandler.SinglePlayer) {
+				GameDrawer.godeye = true;
+				GameDrawer.godhand = true;
 			}
 			state = State.WAIT;
 			break;

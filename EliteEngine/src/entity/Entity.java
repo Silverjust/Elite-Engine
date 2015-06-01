@@ -26,7 +26,7 @@ public abstract class Entity {
 
 	public float x, y;
 	public byte radius = 1;
-	public int sight = 10;
+	public byte sight = 10;
 	public byte height;
 	public int hp;
 	public int hp_max;
@@ -157,7 +157,7 @@ public abstract class Entity {
 	}
 
 	void drawHpBar() {
-		int h = 3;
+		int h = 2;
 		if (isAlive() && isMortal()) {//
 			ref.app.fill(0, 150);
 			ref.app.rect(xToGrid(x), yToGrid(y - height) - radius * 1.5f,

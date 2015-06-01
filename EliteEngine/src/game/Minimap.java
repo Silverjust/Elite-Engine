@@ -6,7 +6,7 @@ import shared.Helper;
 import shared.ref;
 
 public class Minimap {
-	static float ss = 0.1f;
+	static float ss = 0.2f;
 
 	public static void setup() {
 	}
