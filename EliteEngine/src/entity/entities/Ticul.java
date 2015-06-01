@@ -65,7 +65,7 @@ public class Ticul extends Unit implements Attacker {
 
 		aggroRange = (byte) (radius + 100);
 		basicAttack.range = (byte) (radius + 20);
-		basicAttack.damage = 10;
+		basicAttack.damage = 8;
 		basicAttack.cooldown = 800;
 		basicAttack.eventTime = 500;
 		// ************************************

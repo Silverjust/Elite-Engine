@@ -1,4 +1,5 @@
-
+nerfed Ticul
+-----------------
 added Ker
 ---------------------------
 added Armor and Pirce (werte noch aendern)
