@@ -30,6 +30,8 @@ public class Colum extends Unit {// FIXME colum sets ismoving to false
 		// ************************************
 		xSize = 90;
 		ySize = 90;
+		
+		kerit=150;
 
 		hp = hp_max = 300;
 		speed = 1.8f;

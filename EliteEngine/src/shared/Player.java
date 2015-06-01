@@ -29,20 +29,21 @@ public class Player {
 		p.ip = ip;
 		p.name = name;
 		p.online = true;
-		p.kerit = 100;
+		p.kerit = 750;
 		return p;
 	}
 
 	private Player() {
 	}
 
-	public void display(PGraphics gr,int x, int y) {
+	public void display(PGraphics gr, int x, int y) {
 		gr.fill(255);
 		gr.rect(x, y, 280, 20);
 		gr.fill(0);
-		if (nation!=null)
-		gr.text(nation.toString(), x, y + ref.app.textAscent()*ref.textScale);
-		gr.text(name, x + 70, y + ref.app.textAscent()*ref.textScale);
+		if (nation != null)
+			gr.text(nation.toString(), x, y + ref.app.textAscent()
+					* ref.textScale);
+		gr.text(name, x + 70, y + ref.app.textAscent() * ref.textScale);
 	}
 
 	@Override
@@ -51,6 +52,10 @@ public class Player {
 			return "[" + name + "]";
 		}
 		return "offline:[" + name + "]";
+	}
+
+	public void consumeKerit(int kerit) {
+		this.kerit -= kerit;
 	}
 
 }

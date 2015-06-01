@@ -37,6 +37,8 @@ public class Arol extends Unit implements Attacker {
 		// ************************************
 		xSize = 100;
 		ySize = 70;
+		
+		kerit=250;
 
 		hp = hp_max = 2200;
 		armor = 3;

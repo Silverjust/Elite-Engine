@@ -42,6 +42,7 @@ public class TestBuilding extends Building implements Buildable, commanding {
 		// ************************************
 		xSize = 60;
 		ySize = 60;
+		
 		sight = 100;
 
 		hp = hp_max = 1000;

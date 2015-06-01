@@ -21,6 +21,8 @@ public abstract class Entity {
 
 	public boolean isSelected;
 	public boolean isTaged;
+	
+	public int kerit,pax,arcanum,prunam;
 
 	public float x, y;
 	public byte radius = 1;

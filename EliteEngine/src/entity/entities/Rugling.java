@@ -10,7 +10,7 @@ import entity.animation.TargetAttack;
 import processing.core.PImage;
 import shared.Nation;
 
-public class Ker extends Unit implements Attacker {
+public class Rugling extends Unit implements Attacker {
 
 	private static PImage standingImg;
 
@@ -21,10 +21,10 @@ public class Ker extends Unit implements Attacker {
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "Ker");
+		standingImg = game.ImageHandler.load(path, "Rugling");
 	}
 
-	public Ker(String[] c) {
+	public Rugling(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
@@ -35,22 +35,19 @@ public class Ker extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 60;
-		ySize = 60;
-		
-		kerit=220;
+		xSize = 70;
+		ySize = 70;
 
-		hp = hp_max = 300;
+		hp = hp_max = 35;
 		speed = 1.8f;
-		radius = 15;
+		radius = 8;
 		sight = 120;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 100);
 		basicAttack.range = (byte) (radius + 20);
-		basicAttack.damage = 127;
-		basicAttack.pirce = 5;
-		basicAttack.cooldown = 900;
+		basicAttack.damage = 20;
+		basicAttack.cooldown = 1500;
 		basicAttack.eventTime = 500;
 		// ************************************
 	}
@@ -58,7 +55,7 @@ public class Ker extends Unit implements Attacker {
 	@Override
 	public void updateDecisions() {
 
-		//isTaged = false;
+		// isTaged = false;
 		if (animation == stand) {// ****************************************************
 			String s = "";
 			for (Entity e : player.visibleEntities) {
@@ -78,7 +75,8 @@ public class Ker extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isCollision(x, y, basicAttack.range + e.radius)) {
+						if (e.isCollision(x, y, basicAttack.range + e.radius)
+								&& e.groundPosition == GroundPosition.GROUND) {
 							// evtl abfrage wegen groundposition
 
 							float newThread = calcImportanceOf(e);
@@ -100,7 +98,8 @@ public class Ker extends Unit implements Attacker {
 
 	@Override
 	public void renderGround() {
-		drawSelected();
+		isSelected=false;//cant be selected
+		//drawSelected();
 		animation.draw(this, direction, currentFrame);
 		drawTaged();
 	}

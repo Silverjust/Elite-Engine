@@ -39,6 +39,8 @@ public class Valcyrix extends Unit implements Attacker {
 		xSize = 60;
 		ySize = 60;
 
+		kerit = 40;
+
 		hp = hp_max = 60;
 		speed = 1.8f;
 		radius = 15;

@@ -9,12 +9,12 @@ import main.ClientHandler;
 import shared.ref;
 
 public class TrainActive extends Active {
-	String unit;
+	Class<? extends Unit> unit;
 
 	public TrainActive(int x, int y, char n, Unit u,
 			Class<? extends Entity> trainer) {
 		super(x, y, n, u.iconImg);
-		unit = u.getClass().getSimpleName();
+		unit = u.getClass();
 		clazz = trainer;
 	}
 
@@ -27,9 +27,18 @@ public class TrainActive extends Active {
 				trainer = e;
 			}
 		}
-
-		ClientHandler.send("<spawn " + unit + " " + trainer.player.ip + " "
-				+ (trainer.x + 50) + " " + (trainer.y + 50) + " "
-				+ (trainer.x + 150) + " " + (trainer.y + 150));
+		Unit toTrain = null;
+		try {
+			toTrain = unit.getConstructor(String[].class).newInstance(
+					new Object[] { null });
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (trainer.player.kerit > toTrain.kerit) {
+			ClientHandler.send("<spawn " + unit.getSimpleName() + " " + trainer.player.ip + " "
+					+ (trainer.x + 50) + " " + (trainer.y + 50) + " "
+					+ (trainer.x + 150) + " " + (trainer.y + 150));
+			trainer.player.consumeKerit(toTrain.kerit);
+		}
 	}
 }
