@@ -3,6 +3,7 @@ package entity.entities;
 import entity.Attacker;
 import entity.Entity;
 import entity.Unit;
+import entity.Entity.GroundPosition;
 import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.Death;
@@ -57,7 +58,7 @@ public class Valcyrix extends Unit implements Attacker {
 	@Override
 	public void updateDecisions() {
 
-		//isTaged = false;
+		// isTaged = false;
 		if (animation == stand) {// ****************************************************
 			String s = "";
 			for (Entity e : player.visibleEntities) {
@@ -72,26 +73,24 @@ public class Valcyrix extends Unit implements Attacker {
 			sendAnimation(s);
 		}
 		if (animation == walk) {// ****************************************************
-			float thread = 0;
-			Entity threadEntity = null;
+			float importance = 0;
+			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isCollision(x, y, basicAttack.range + e.radius)) {
-							// evtl abfrage wegen groundposition
-
-							float newThread = calcImportanceOf(e);
-							if (newThread > thread) {
-								thread = newThread;
-								threadEntity = e;
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
 							}
 						}
 					}
 				}
 			}
-			if (threadEntity != null && getBasicAttack().isNotOnCooldown()) {
+			if (importantEntity != null && getBasicAttack().isNotOnCooldown()) {
 				// System.out.println(thread);
-				sendAnimation("basicAttack " + threadEntity.number);
+				sendAnimation("basicAttack " + importantEntity.number);
 			}
 		}
 		basicAttack.updateAbility(this);

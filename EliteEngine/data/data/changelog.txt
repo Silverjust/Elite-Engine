@@ -1,3 +1,5 @@
+added Rug and Ruglings
+-------------------
 nerfed Ticul
 -----------------
 added Ker

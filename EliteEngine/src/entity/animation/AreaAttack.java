@@ -30,7 +30,7 @@ public class AreaAttack extends Ability {
 
 	@Override
 	public void updateAbility(Entity e) {
-		if (isEvent() && isNotOnCooldown()) {
+		if (x > 0 && isEvent() && isNotOnCooldown()) {
 			for (Entity e2 : ref.updater.entities) {
 				// sometimes attacks ghosts
 				if (e2 != null & e2.isEnemyTo(e)
@@ -40,6 +40,7 @@ public class AreaAttack extends Ability {
 							+ pirce);
 				}
 			}
+			x = -100;
 			startCooldown();
 		}
 	}

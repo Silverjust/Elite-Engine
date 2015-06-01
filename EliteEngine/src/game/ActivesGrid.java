@@ -9,6 +9,7 @@ import entity.entities.Colum;
 import entity.entities.Ker;
 import entity.entities.Prunam;
 import entity.entities.PrunamExtractor;
+import entity.entities.Rug;
 import entity.entities.TestBuilding;
 import entity.entities.Ticul;
 import entity.entities.Valcyrix;
@@ -39,6 +40,7 @@ public class ActivesGrid {
 		addTrainActive(3, 3, TestBuilding.class, Ticul.class, false);
 		addTrainActive(5, 1, TestBuilding.class, Arol.class, false);
 		addTrainActive(4, 2, TestBuilding.class, Ker.class, false);
+		addTrainActive(4, 1, TestBuilding.class, Rug.class, false);
 	}
 
 	public void update() {
@@ -126,8 +128,8 @@ public class ActivesGrid {
 		x--;
 		y--;
 		try {
-			Building b = building.getConstructor(String[].class)
-					.newInstance(new Object[] { null });
+			Building b = building.getConstructor(String[].class).newInstance(
+					new Object[] { null });
 			if (isUnitActive) {
 				unitGrid[x][y] = new BuildActive(x, y,
 						Settings.unitsShortcuts[y][x], b, builder);

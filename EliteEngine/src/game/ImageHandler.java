@@ -31,11 +31,12 @@ public class ImageHandler {
 
 			classes.add(Entity.class);
 			classes.add(Ticul.class);
-			classes.add(Rug.class);
 			classes.add(Brux.class);
 			classes.add(Colum.class);
 			classes.add(Valcyrix.class);
 			classes.add(Arol.class);
+			classes.add(Rug.class);
+			classes.add(Rugling.class);
 			classes.add(Ker.class);
 			classes.add(TestLab.class);
 
