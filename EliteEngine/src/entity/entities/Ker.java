@@ -38,7 +38,7 @@ public class Ker extends Unit implements Attacker {
 		xSize = 60;
 		ySize = 60;
 
-		hp = hp_max = 100;
+		hp = hp_max = 300;
 		speed = 1.8f;
 		radius = 15;
 		sight = 120;
@@ -46,9 +46,9 @@ public class Ker extends Unit implements Attacker {
 
 		aggroRange = (byte) (radius + 100);
 		basicAttack.range = (byte) (radius + 20);
-		basicAttack.damage = 100;
+		basicAttack.damage = 127;
 		basicAttack.pirce = 5;
-		basicAttack.cooldown = 1000;
+		basicAttack.cooldown = 900;
 		basicAttack.eventTime = 500;
 		// ************************************
 	}
