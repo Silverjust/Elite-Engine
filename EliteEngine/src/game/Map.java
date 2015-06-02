@@ -11,7 +11,7 @@ import shared.ref;
 public class Map{
 	public Graph graph;
 
-	public int width = ref.app.width/2, height = ref.app.height/2;
+	public int width = 800, height = 450;
 	public final int fogScale = 7;
 
 	public PImage textur;
