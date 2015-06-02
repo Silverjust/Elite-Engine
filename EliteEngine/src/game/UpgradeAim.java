@@ -1,7 +1,6 @@
 package game;
 
 import shared.ref;
-import main.ClientHandler;
 import entity.Building;
 import entity.Entity;
 
@@ -22,9 +21,11 @@ public class UpgradeAim extends BuildAim {
 		x = Building.xToGrid(Building.gridToX());
 		y = Building.xToGrid(Building.gridToY());
 		if (canPlaceAt(x, y)) {
-			ClientHandler.send("<remove " + replaced.number);
-			ClientHandler.send("<spawn " + buildable.getClass().getSimpleName()
-					+ " " + ref.player.ip + " " + x + " " + y);
+			ref.updater.send("<remove " + replaced.number);
+			ref.updater.send("<spawn " + buildable.getClass().getSimpleName()
+					+ " " + builder.player.ip + " " + x + " " + y);
+			ref.updater.send("<give " + builder.player.ip + " " + "kerit"
+					+ " -" + ((Entity) buildable).kerit);
 		}
 	}
 

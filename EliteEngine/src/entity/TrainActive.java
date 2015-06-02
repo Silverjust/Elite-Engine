@@ -37,9 +37,9 @@ public class TrainActive extends Active {
 		}
 		if (trainer.player.kerit > toTrain.kerit || GameDrawer.nocosts) {
 			ClientHandler.send("<spawn " + unit.getSimpleName() + " "
-					+ trainer.player.ip + " " + (trainer.x + 50) + " "
-					+ (trainer.y + 50) + " " + (trainer.x + 150) + " "
-					+ (trainer.y + 150));
+					+ trainer.player.ip + " " + (trainer.x + 25) + " "
+					+ (trainer.y + 25) + " " + (trainer.x + 75) + " "
+					+ (trainer.y + 75));
 			ref.updater.send("<give " + trainer.player.ip + " " + "kerit"
 					+ " -" + toTrain.kerit);
 		}

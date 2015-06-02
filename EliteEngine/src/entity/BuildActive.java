@@ -24,12 +24,14 @@ public class BuildActive extends Active {
 				builder = e;
 			}
 		}
-		try {
-			Building b = building.getConstructor(String[].class).newInstance(
-					new Object[] { null });
-			AimHandler.setAim(new BuildAim(builder, b));
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (builder != null) {
+			try {
+				Building b = building.getConstructor(String[].class)
+						.newInstance(new Object[] { null });
+				AimHandler.setAim(new BuildAim(builder, b));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

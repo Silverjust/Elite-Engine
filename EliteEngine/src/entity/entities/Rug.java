@@ -56,7 +56,7 @@ public class Rug extends Unit implements Attacker {
 		aggroRange = (byte) (radius + 10);
 		basicAttack.range = (byte) (radius + 5);
 		basicAttack.damage = 20;
-		basicAttack.cooldown = 800;
+		basicAttack.cooldown = 1500;
 		basicAttack.eventTime = 100;
 
 		spawnRange = (byte) (radius + 100);
@@ -98,7 +98,7 @@ public class Rug extends Unit implements Attacker {
 					}
 				}
 			}
-			if (isEnemyInHitRange && getBasicAttack().isNotOnCooldown()) {
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + x + " " + y);
 			} else if (isEnemyTooClose && importantEntity != null) {
 				sendAnimation("walk " + importantEntity.x + " "

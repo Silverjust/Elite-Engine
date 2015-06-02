@@ -27,12 +27,14 @@ public class UpgradeActive extends Active {
 				builder = e;
 			}
 		}
-		try {
-			Building b = newBuilding.getConstructor(String[].class)
-					.newInstance(new Object[] { null });
-			AimHandler.setAim(new UpgradeAim(builder, b, oldBuilding));
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (builder != null) {
+			try {
+				Building b = newBuilding.getConstructor(String[].class)
+						.newInstance(new Object[] { null });
+				AimHandler.setAim(new UpgradeAim(builder, b, oldBuilding));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

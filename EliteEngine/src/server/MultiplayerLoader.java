@@ -7,11 +7,11 @@ import shared.Nation;
 import shared.Player;
 import shared.ref;
 
-public class ServerLoader extends Loader {
+public class MultiplayerLoader extends Loader {
 
 	ServerApp app;
 
-	public ServerLoader() {
+	public MultiplayerLoader() {
 		app = (ServerApp) ref.app;
 	}
 
@@ -62,8 +62,9 @@ public class ServerLoader extends Loader {
 				}
 				ref.updater.send("<spawn AlienMainBuilding " + p.ip + " "
 						+ ref.app.random(500) + " " + ref.app.random(500));
-				ref.updater.send("<spawn TestLab " + p.ip + " "
-						+ ref.app.random(500) + " " + ref.app.random(500) + " "
+				ref.updater.send("<spawn Kerit " + p.ip + " "
+						+ ref.app.random(500) + " " + ref.app.random(500));
+				ref.updater.send("<spawn KeritMine " + p.ip + " "
 						+ ref.app.random(500) + " " + ref.app.random(500));
 				ref.updater.send("<spawn Prunam " + p.ip + " "
 						+ ref.app.random(500) + " " + ref.app.random(500));

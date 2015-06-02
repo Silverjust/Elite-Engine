@@ -15,8 +15,7 @@ public abstract class Building extends Entity {
 			x = Float.parseFloat(c[3]);
 			y = Float.parseFloat(c[4]);
 			x = xToGrid(x);
-			y = yToGrid(y * 2);
-			
+			y = yToGrid(y) * 2;
 
 			groundPosition = GroundPosition.GROUND;
 		}
@@ -33,7 +32,7 @@ public abstract class Building extends Entity {
 			break;
 		}
 	}
-	
+
 	@Override
 	public void renderGround() {
 		drawSelected();

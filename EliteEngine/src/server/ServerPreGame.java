@@ -14,7 +14,7 @@ public class ServerPreGame extends PreGame {
 
 	@Override
 	public void startLoading() {
-		ref.loader = new ServerLoader();
+		ref.loader = new MultiplayerLoader();
 		((ServerApp) ref.app).mode = Mode.LADESCREEN;
 	}
 

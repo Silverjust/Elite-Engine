@@ -65,7 +65,8 @@ public class ThornTower extends Building implements Buildable, Attacker,
 		if (animation == stand) {
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
-					if (e.isCollision(x, y, basicAttack.range + e.radius)) {
+					if (e.isCollision(x, y, basicAttack.range + e.radius)
+							&& !(e instanceof Building)) {
 						float newImportance = calcImportanceOf(e);
 						if (newImportance > importance) {
 							importance = newImportance;
@@ -105,7 +106,7 @@ public class ThornTower extends Building implements Buildable, Attacker,
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
 		if (basicAttack.getTarget() != null) {
-			ref.app.stroke(100);
+			ref.app.stroke(100, 100, 0);
 			ref.app.line(
 					xToGrid(x),
 					yToGrid(y - ySize),

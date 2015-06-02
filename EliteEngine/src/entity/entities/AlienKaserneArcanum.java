@@ -32,6 +32,8 @@ public class AlienKaserneArcanum extends Building implements Buildable, Commandi
 		// ************************************
 		xSize = 60;
 		ySize = 60;
+		
+		kerit=600;
 
 		sight = 50;
 

@@ -2,10 +2,10 @@ package game;
 
 import shared.ref;
 import entity.Buildable;
+import entity.Building;
 import entity.Entity;
 import entity.Commanding;
 import game.AimHandler.Cursor;
-import main.ClientHandler;
 
 public class BuildAim extends Aim {
 	Buildable buildable;
@@ -29,8 +29,8 @@ public class BuildAim extends Aim {
 	@Override
 	void update() {
 		float x, y;
-		x = Entity.xToGrid(Entity.gridToX());
-		y = Entity.xToGrid(Entity.gridToY());
+		x = Building.xToGrid(Building.gridToX());
+		y = Building.xToGrid(Building.gridToY());
 		if (canPlaceAt(x, y)) {
 			ref.app.tint(255, 150);
 		} else {
@@ -39,7 +39,6 @@ public class BuildAim extends Aim {
 		ref.app.image(buildable.preview(), x, y / 2,
 				((Entity) buildable).xSize, ((Entity) buildable).ySize);
 		ref.app.tint(255);
-
 	}
 
 	boolean canPlaceAt(float x, float y) {
@@ -55,7 +54,7 @@ public class BuildAim extends Aim {
 	}
 
 	public boolean isInCommandingRange(Entity e, float x, float y) {
-		if (e instanceof Commanding && e.player == ref.player
+		if (e instanceof Commanding && e.player == builder.player
 		// TODO ally oder nur eigene range
 				&& e.isCollision(x, y, ((Commanding) e).commandRange())) {
 			return true;
@@ -69,8 +68,10 @@ public class BuildAim extends Aim {
 		x = Entity.xToGrid(Entity.gridToX());
 		y = Entity.xToGrid(Entity.gridToY());
 		if (canPlaceAt(x, y)) {
-			ClientHandler.send("<spawn " + buildable.getClass().getSimpleName()
+			ref.updater.send("<spawn " + buildable.getClass().getSimpleName()
 					+ " " + builder.player.ip + " " + x + " " + y);
+			ref.updater.send("<give " + builder.player.ip + " " + "kerit"
+					+ " -" + ((Entity) buildable).kerit);
 		}
 	}
 }

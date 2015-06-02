@@ -11,6 +11,8 @@ import entity.entities.Arol;
 import entity.entities.Brux;
 import entity.entities.Colum;
 import entity.entities.Ker;
+import entity.entities.Kerit;
+import entity.entities.KeritMine;
 import entity.entities.Prunam;
 import entity.entities.PrunamExtractor;
 import entity.entities.Rug;
@@ -38,8 +40,12 @@ public class ActivesGrid {
 
 		addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class, false);
 		addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class, false);
-		addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class, false);
-		addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class, false);
+		addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class,
+				false);
+		addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
+				false);
+		addUpgradeActive(5, 2, AlienMainBuilding.class, KeritMine.class,
+				Kerit.class, false);
 		addUpgradeActive(6, 3, AlienMainBuilding.class, PrunamExtractor.class,
 				Prunam.class, false);
 
@@ -139,7 +145,6 @@ public class ActivesGrid {
 		try {
 			Building b = building.getConstructor(String[].class).newInstance(
 					new Object[] { null });
-			System.out.println(builder);
 			if (isUnitActive) {
 				unitGrid[x][y] = new BuildActive(x, y,
 						Settings.unitsShortcuts[y][x], b, builder);
