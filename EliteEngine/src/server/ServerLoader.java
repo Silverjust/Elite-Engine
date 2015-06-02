@@ -60,7 +60,7 @@ public class ServerLoader extends Loader {
 							+ " " + ref.app.random(500) + " "
 							+ ref.app.random(500));
 				}
-				ref.updater.send("<spawn TestBuilding " + p.ip + " "
+				ref.updater.send("<spawn AlienMainBuilding " + p.ip + " "
 						+ ref.app.random(500) + " " + ref.app.random(500));
 				ref.updater.send("<spawn TestLab " + p.ip + " "
 						+ ref.app.random(500) + " " + ref.app.random(500) + " "
