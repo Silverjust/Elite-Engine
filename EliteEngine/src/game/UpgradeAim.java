@@ -10,8 +10,9 @@ public class UpgradeAim extends BuildAim {
 
 	Building replaced;
 
-	public UpgradeAim(Entity newBuildable, Class<? extends Entity> oldBuildable) {
-		super(newBuildable);
+	public UpgradeAim(Entity builder, Entity newBuildable,
+			Class<? extends Entity> oldBuildable) {
+		super(builder, newBuildable);
 		this.oldBuildable = oldBuildable;
 	}
 

@@ -6,6 +6,7 @@ import shared.ref;
 import entity.Attacker;
 import entity.Buildable;
 import entity.Building;
+import entity.Commanding;
 import entity.Entity;
 import entity.animation.Ability;
 import entity.animation.Animation;
@@ -14,7 +15,9 @@ import entity.animation.Death;
 import entity.animation.TargetAttack;
 import game.ImageHandler;
 
-public class ThornTower extends Building implements Buildable, Attacker {
+public class ThornTower extends Building implements Buildable, Attacker,
+		Commanding {
+	private int commandingRange;
 
 	TargetAttack basicAttack;
 
@@ -50,6 +53,8 @@ public class ThornTower extends Building implements Buildable, Attacker {
 		basicAttack.damage = 55;
 		basicAttack.cooldown = 2000;
 		basicAttack.eventTime = 500;
+
+		commandingRange = 250;
 		// ************************************
 	}
 
@@ -117,6 +122,11 @@ public class ThornTower extends Building implements Buildable, Attacker {
 	@Override
 	public Ability getBasicAttack() {
 		return basicAttack;
+	}
+
+	@Override
+	public int commandRange() {
+		return commandingRange;
 	}
 
 }

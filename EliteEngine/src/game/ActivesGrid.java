@@ -3,6 +3,10 @@ package game;
 import java.lang.reflect.Constructor;
 
 import entity.*;
+import entity.entities.AlienKaserne;
+import entity.entities.AlienKaserneArcanum;
+import entity.entities.AlienKasernePrunam;
+import entity.entities.AlienMainBuilding;
 import entity.entities.Arol;
 import entity.entities.Brux;
 import entity.entities.Colum;
@@ -10,7 +14,6 @@ import entity.entities.Ker;
 import entity.entities.Prunam;
 import entity.entities.PrunamExtractor;
 import entity.entities.Rug;
-import entity.entities.AlienMainBuilding;
 import entity.entities.ThornTower;
 import entity.entities.Ticul;
 import entity.entities.Valcyrix;
@@ -33,18 +36,20 @@ public class ActivesGrid {
 		addActive(4, 2, Ticul.Smite.class, true);
 		addActive(3, 2, Ticul.Flash.class, true);
 
-		addBuildActive(5, 3, AlienMainBuilding.class, AlienMainBuilding.class, false);
-		addBuildActive(7, 2, AlienMainBuilding.class, ThornTower.class, false);
-		addUpgradeActive(7, 1, AlienMainBuilding.class, PrunamExtractor.class,
+		addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class, false);
+		addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class, false);
+		addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class, false);
+		addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class, false);
+		addUpgradeActive(6, 3, AlienMainBuilding.class, PrunamExtractor.class,
 				Prunam.class, false);
 
-		addTrainActive(1, 2, AlienMainBuilding.class, Brux.class, false);
-		addTrainActive(2, 2, AlienMainBuilding.class, Colum.class, false);
-		addTrainActive(1, 3, AlienMainBuilding.class, Valcyrix.class, false);
-		addTrainActive(3, 3, AlienMainBuilding.class, Ticul.class, false);
-		addTrainActive(5, 1, AlienMainBuilding.class, Arol.class, false);
-		addTrainActive(4, 2, AlienMainBuilding.class, Ker.class, false);
-		addTrainActive(4, 1, AlienMainBuilding.class, Rug.class, false);
+		addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
+		addTrainActive(2, 3, AlienKaserne.class, Brux.class, false);
+		addTrainActive(3, 3, AlienKaserne.class, Valcyrix.class, false);
+		addTrainActive(2, 2, AlienKaserneArcanum.class, Colum.class, false);
+		addTrainActive(3, 2, AlienKaserneArcanum.class, Arol.class, false);
+		addTrainActive(2, 1, AlienKasernePrunam.class, Rug.class, false);
+		addTrainActive(3, 1, AlienKasernePrunam.class, Ker.class, false);
 	}
 
 	public void update() {
@@ -134,6 +139,7 @@ public class ActivesGrid {
 		try {
 			Building b = building.getConstructor(String[].class).newInstance(
 					new Object[] { null });
+			System.out.println(builder);
 			if (isUnitActive) {
 				unitGrid[x][y] = new BuildActive(x, y,
 						Settings.unitsShortcuts[y][x], b, builder);

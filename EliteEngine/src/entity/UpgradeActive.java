@@ -1,5 +1,6 @@
 package entity;
 
+import shared.ref;
 import entity.entities.AlienMainBuilding;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
@@ -20,10 +21,16 @@ public class UpgradeActive extends Active {
 
 	@Override
 	public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		Entity builder = null;
+		for (Entity e : ref.updater.selected) {
+			if (clazz.isAssignableFrom(e.getClass())) {
+				builder = e;
+			}
+		}
 		try {
 			Building b = newBuilding.getConstructor(String[].class)
 					.newInstance(new Object[] { null });
-			AimHandler.setAim(new UpgradeAim(b, oldBuilding));
+			AimHandler.setAim(new UpgradeAim(builder, b, oldBuilding));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

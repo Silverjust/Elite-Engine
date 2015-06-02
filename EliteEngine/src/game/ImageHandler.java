@@ -44,6 +44,9 @@ public class ImageHandler {
 			classes.add(Prunam.class);
 			classes.add(PrunamExtractor.class);
 			classes.add(ThornTower.class);
+			classes.add(AlienKaserne.class);
+			classes.add(AlienKaserneArcanum.class);
+			classes.add(AlienKasernePrunam.class);
 
 			classes.add(GameDrawer.class);
 			classes.add(HUD.class);

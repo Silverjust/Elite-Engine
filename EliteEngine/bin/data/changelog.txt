@@ -1,3 +1,6 @@
+added Barracks for aliens
+changed hotkeys
+----------------------------
 added ThornTower
 changed Rug
 --------------------------

@@ -2,7 +2,6 @@ package game;
 
 import shared.ref;
 import entity.Buildable;
-import entity.Building;
 import entity.Entity;
 import entity.Commanding;
 import game.AimHandler.Cursor;
@@ -10,9 +9,11 @@ import main.ClientHandler;
 
 public class BuildAim extends Aim {
 	Buildable buildable;
+	Entity builder;
 
-	public BuildAim(Entity building) {
+	public BuildAim(Entity builder, Entity building) {
 		try {
+			this.builder = builder;
 			this.buildable = (Buildable) building;
 		} catch (ClassCastException e) {
 			System.err.println(building + " is not buildable \n");
@@ -28,8 +29,8 @@ public class BuildAim extends Aim {
 	@Override
 	void update() {
 		float x, y;
-		x = Building.xToGrid(Building.gridToX());
-		y = Building.xToGrid(Building.gridToY());
+		x = Entity.xToGrid(Entity.gridToX());
+		y = Entity.xToGrid(Entity.gridToY());
 		if (canPlaceAt(x, y)) {
 			ref.app.tint(255, 150);
 		} else {
@@ -65,11 +66,11 @@ public class BuildAim extends Aim {
 	@Override
 	void execute() {
 		float x, y;
-		x = Building.xToGrid(Building.gridToX());
-		y = Building.xToGrid(Building.gridToY());
+		x = Entity.xToGrid(Entity.gridToX());
+		y = Entity.xToGrid(Entity.gridToY());
 		if (canPlaceAt(x, y)) {
 			ClientHandler.send("<spawn " + buildable.getClass().getSimpleName()
-					+ " " + ref.player.ip + " " + x + " " + y);
+					+ " " + builder.player.ip + " " + x + " " + y);
 		}
 	}
 }
