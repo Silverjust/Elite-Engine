@@ -10,8 +10,10 @@ public class GameDrawer {
 	public static float zoom = 4f;
 
 	public static boolean commandoutput;
+
 	public static boolean godeye;
 	public static boolean godhand;
+	public static boolean nocosts;
 
 	public static MouseSelection mouseSelection;
 
@@ -67,7 +69,7 @@ public class GameDrawer {
 
 		HUD.update();
 		if (((GameUpdater) ref.updater).pause) {
-			ref.app.fill(100,100);
+			ref.app.fill(100, 100);
 			ref.app.rect(0, 0, ref.app.width, ref.app.height);
 		}
 		// AimHandler.update();

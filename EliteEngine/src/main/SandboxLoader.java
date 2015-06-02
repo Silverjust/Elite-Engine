@@ -8,7 +8,7 @@ import game.GameUpdater;
 import game.GameDrawer;
 import game.ImageHandler;
 
-public class MainLoader extends Loader {
+public class SandboxLoader extends Loader {
 	// TODO Alle daten laden
 
 	public void update() {
@@ -55,7 +55,7 @@ public class MainLoader extends Loader {
 								+ ref.app.random(500) + " "
 								+ ref.app.random(500));
 					}
-					ref.updater.send("<spawn TestBuilding " + p.ip + " "
+					ref.updater.send("<spawn AlienMainBuilding " + p.ip + " "
 							+ ref.app.random(500) + " " + ref.app.random(500));
 					ref.updater.send("<spawn TestLab " + p.ip + " "
 							+ ref.app.random(500) + " " + ref.app.random(500)
@@ -69,6 +69,7 @@ public class MainLoader extends Loader {
 			if (ClientHandler.SinglePlayer) {
 				GameDrawer.godeye = true;
 				GameDrawer.godhand = true;
+				GameDrawer.nocosts = true;
 			}
 			state = State.WAIT;
 			break;

@@ -41,13 +41,13 @@ public class Ker extends Unit implements Attacker {
 		kerit=220;
 
 		hp = hp_max = 300;
-		speed = 1.8f;
+		speed = 0.9f;
 		radius = 8;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = (byte) (radius + 100);
-		basicAttack.range = (byte) (radius + 20);
+		aggroRange = (byte) (radius + 50);
+		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 127;
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 900;

@@ -10,7 +10,8 @@ import entity.entities.Ker;
 import entity.entities.Prunam;
 import entity.entities.PrunamExtractor;
 import entity.entities.Rug;
-import entity.entities.TestBuilding;
+import entity.entities.AlienMainBuilding;
+import entity.entities.ThornTower;
 import entity.entities.Ticul;
 import entity.entities.Valcyrix;
 import main.Settings;
@@ -31,16 +32,19 @@ public class ActivesGrid {
 		Active.y = y;
 		addActive(4, 2, Ticul.Smite.class, true);
 		addActive(3, 2, Ticul.Flash.class, true);
-		addBuildActive(5, 3, TestBuilding.class, TestBuilding.class, false);
-		addUpgradeActive(7, 1, TestBuilding.class, PrunamExtractor.class,
+
+		addBuildActive(5, 3, AlienMainBuilding.class, AlienMainBuilding.class, false);
+		addBuildActive(7, 2, AlienMainBuilding.class, ThornTower.class, false);
+		addUpgradeActive(7, 1, AlienMainBuilding.class, PrunamExtractor.class,
 				Prunam.class, false);
-		addTrainActive(1, 2, TestBuilding.class, Brux.class, false);
-		addTrainActive(2, 2, TestBuilding.class, Colum.class, false);
-		addTrainActive(1, 3, TestBuilding.class, Valcyrix.class, false);
-		addTrainActive(3, 3, TestBuilding.class, Ticul.class, false);
-		addTrainActive(5, 1, TestBuilding.class, Arol.class, false);
-		addTrainActive(4, 2, TestBuilding.class, Ker.class, false);
-		addTrainActive(4, 1, TestBuilding.class, Rug.class, false);
+
+		addTrainActive(1, 2, AlienMainBuilding.class, Brux.class, false);
+		addTrainActive(2, 2, AlienMainBuilding.class, Colum.class, false);
+		addTrainActive(1, 3, AlienMainBuilding.class, Valcyrix.class, false);
+		addTrainActive(3, 3, AlienMainBuilding.class, Ticul.class, false);
+		addTrainActive(5, 1, AlienMainBuilding.class, Arol.class, false);
+		addTrainActive(4, 2, AlienMainBuilding.class, Ker.class, false);
+		addTrainActive(4, 1, AlienMainBuilding.class, Rug.class, false);
 	}
 
 	public void update() {

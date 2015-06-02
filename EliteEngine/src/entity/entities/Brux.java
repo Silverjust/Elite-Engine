@@ -41,13 +41,13 @@ public class Brux extends Unit implements Attacker {
 		kerit=30;
 
 		hp = hp_max = 120;
-		speed = 1.8f;
+		speed = 0.9f;
 		radius = 6;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = (byte) (radius + 100);
-		basicAttack.range = (byte) (radius + 20);
+		aggroRange = (byte) (radius + 50);
+		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 20;
 		basicAttack.cooldown = 1500;
 		basicAttack.eventTime = 500;

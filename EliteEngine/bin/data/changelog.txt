@@ -1,3 +1,6 @@
+added ThornTower
+changed Rug
+--------------------------
 changed size-system
  (maby there are some wrong lenghts)
 -------------------------

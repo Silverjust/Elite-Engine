@@ -96,22 +96,7 @@ public class ComHandler {
 				break;
 			case "<give":
 				Player p = ref.updater.player.get(c[1]);
-				switch (c[2]) {
-				case "kerit":
-					p.kerit += Integer.parseInt(c[3]);
-					break;
-				case "pax":
-					p.pax += Integer.parseInt(c[3]);
-					break;
-				case "arcanum":
-					p.arcanum += Integer.parseInt(c[3]);
-					break;
-				case "prunam":
-					p.prunam += Integer.parseInt(c[3]);
-					break;
-				default:
-					break;
-				}
+				p.give(c[2],Integer.parseInt(c[3]));
 				break;
 			case "<say":
 				ref.updater.write(c[1], c);

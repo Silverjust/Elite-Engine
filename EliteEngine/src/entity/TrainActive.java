@@ -5,6 +5,7 @@ import entity.Entity;
 import entity.Unit;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
+import game.GameDrawer;
 import main.ClientHandler;
 import shared.ref;
 
@@ -34,11 +35,13 @@ public class TrainActive extends Active {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (trainer.player.kerit > toTrain.kerit) {
-			ClientHandler.send("<spawn " + unit.getSimpleName() + " " + trainer.player.ip + " "
-					+ (trainer.x + 50) + " " + (trainer.y + 50) + " "
-					+ (trainer.x + 150) + " " + (trainer.y + 150));
-			trainer.player.consumeKerit(toTrain.kerit);
+		if (trainer.player.kerit > toTrain.kerit || GameDrawer.nocosts) {
+			ClientHandler.send("<spawn " + unit.getSimpleName() + " "
+					+ trainer.player.ip + " " + (trainer.x + 50) + " "
+					+ (trainer.y + 50) + " " + (trainer.x + 150) + " "
+					+ (trainer.y + 150));
+			ref.updater.send("<give " + trainer.player.ip + " " + "kerit"
+					+ " -" + toTrain.kerit);
 		}
 	}
 }

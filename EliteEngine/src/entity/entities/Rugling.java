@@ -38,15 +38,15 @@ public class Rugling extends Unit implements Attacker {
 		xSize = 35;
 		ySize = 35;
 
-		hp = hp_max = 35;
-		speed = 1.8f;
+		hp = hp_max = 20;
+		speed = 2.2f;
 		radius = 4;
 		sight = 50;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 100);
-		basicAttack.range = (byte) (radius + 20);
-		basicAttack.damage = 20;
+		basicAttack.range = (byte) (radius + 10);
+		basicAttack.damage = 10;
 		basicAttack.cooldown = 1500;
 		basicAttack.eventTime = 500;
 		// ************************************

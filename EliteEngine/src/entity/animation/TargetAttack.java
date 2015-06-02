@@ -36,6 +36,10 @@ public class TargetAttack extends Ability {
 			startCooldown();
 		}
 	}
+
+	public Entity getTarget() {
+		return target;
+	}
 }
 /*
  * float importance = 0; Entity importantEntity = null; for (Entity e :

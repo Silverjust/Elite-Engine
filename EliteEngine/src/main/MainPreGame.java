@@ -67,7 +67,7 @@ public class MainPreGame extends PreGame {
 		for (String key : player.keySet()) {
 			player.get(key).nation = Nation.ALIENS;
 		}
-		ref.loader = new MainLoader();
+		ref.loader = new SandboxLoader();
 
 		starButton.dispose();
 		playerSlider.dispose();

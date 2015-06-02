@@ -60,13 +60,13 @@ public class Ticul extends Unit implements Attacker {
 		kerit=10;
 
 		hp = hp_max = 50;
-		speed = 1.8f;
+		speed =0.9f;
 		radius = 5;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = (byte) (radius + 100);
-		basicAttack.range = (byte) (radius + 20);
+		aggroRange = (byte) (radius + 50);
+		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 8;
 		basicAttack.cooldown = 800;
 		basicAttack.eventTime = 500;

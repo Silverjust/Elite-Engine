@@ -34,13 +34,13 @@ public class Colum extends Unit {// FIXME colum sets ismoving to false
 		kerit=150;
 
 		hp = hp_max = 300;
-		speed = 1.8f;
+		speed = 0.9f;
 		radius = 7;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.AIR;
 		height = 50;
 
-		heal.range = (byte) (radius + 50);
+		heal.range = (byte) (radius + 25);
 		heal.heal = 25;
 		heal.cooldown = 5000;
 		heal.eventTime = 100;

@@ -34,7 +34,7 @@ public class TestLab extends Unit {
 		ySize = 15;
 
 		hp = hp_max = 500;
-		speed = 1.8f;
+		speed = 2.0f;
 		radius = 10;
 		height = 40;
 		sight = 125;

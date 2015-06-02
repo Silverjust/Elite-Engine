@@ -1,6 +1,6 @@
 package entity;
 
-import entity.entities.TestBuilding;
+import entity.entities.AlienMainBuilding;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import game.AimHandler;
@@ -15,7 +15,7 @@ public class UpgradeActive extends Active {
 		super(x, y, n, b.iconImg);
 		this.newBuilding = b.getClass();
 		this.oldBuilding = oldBuilding;
-		clazz = TestBuilding.class;
+		clazz = AlienMainBuilding.class;
 	}
 
 	@Override

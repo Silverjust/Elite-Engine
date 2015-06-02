@@ -44,17 +44,17 @@ public class Rug extends Unit implements Attacker {
 		// ************************************
 		xSize = 35;
 		ySize = 35;
-		
-		kerit=120;
+
+		kerit = 120;
 
 		hp = hp_max = 120;
-		speed = 1.5f;
+		speed = 0.5f;
 		radius = 8;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 10);
-		basicAttack.range = (byte) (radius + 10);
+		basicAttack.range = (byte) (radius + 5);
 		basicAttack.damage = 20;
 		basicAttack.cooldown = 800;
 		basicAttack.eventTime = 100;
@@ -67,30 +67,25 @@ public class Rug extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-
 		// isTaged = false;
-		if (animation == stand) {// ****************************************************
-			String s = "";
-			for (Entity e : player.visibleEntities) {
-				if (e != this) {
-					if (e.isEnemyTo(this)) {// server
-						if (e.isCollision(x, y, aggroRange + e.radius)) {
-							s = ("walk " + e.x + " " + e.y);
-						}
-					}
-				}
-			}
-			sendAnimation(s);
-		}
-		if (animation == walk) {// ****************************************************
+		if (animation == walk || animation == stand) {// ****************************************************
 			boolean isEnemyTooClose = false;
+			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isCollision(x, y, basicAttack.range + e.radius)) {
+						if (e.isCollision(x, y, aggroRange + e.radius)) {
 							isEnemyTooClose = true;
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
+						}
+						if (e.isCollision(x, y, basicAttack.range + e.radius)) {
+							isEnemyInHitRange = true;
 						}
 						if (e.isCollision(x, y, spawnRange + e.radius)) {
 							float newImportance = calcImportanceOf(e);
@@ -103,8 +98,11 @@ public class Rug extends Unit implements Attacker {
 					}
 				}
 			}
-			if (isEnemyTooClose && getBasicAttack().isNotOnCooldown()) {
+			if (isEnemyInHitRange && getBasicAttack().isNotOnCooldown()) {
 				sendAnimation("basicAttack " + x + " " + y);
+			} else if (isEnemyTooClose && importantEntity != null) {
+				sendAnimation("walk " + importantEntity.x + " "
+						+ importantEntity.y);
 			} else if (importantEntity != null && spawn.isNotOnCooldown()) {
 				sendAnimation("spawn " + importantEntity.number);
 			}

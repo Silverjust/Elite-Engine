@@ -54,8 +54,28 @@ public class Player {
 		return "offline:[" + name + "]";
 	}
 
-	public void consumeKerit(int kerit) {
-		this.kerit -= kerit;
+	public void give(String resource, int amount) {
+		switch (resource) {
+		case "kerit":
+			if (kerit - amount > 0)
+				kerit += amount;
+			break;
+		case "pax":
+			if (pax - amount > 0)
+				pax += amount;
+			break;
+		case "arcanum":
+			if (arcanum - amount > 0)
+				arcanum += amount;
+			break;
+		case "prunam":
+			if (prunam - amount > 0)
+				prunam += amount;
+			break;
+		default:
+			break;
+		}
+
 	}
 
 }

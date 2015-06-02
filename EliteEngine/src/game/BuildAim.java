@@ -4,7 +4,7 @@ import shared.ref;
 import entity.Buildable;
 import entity.Building;
 import entity.Entity;
-import entity.commanding;
+import entity.Commanding;
 import game.AimHandler.Cursor;
 import main.ClientHandler;
 
@@ -54,9 +54,9 @@ public class BuildAim extends Aim {
 	}
 
 	public boolean isInCommandingRange(Entity e, float x, float y) {
-		if (e instanceof commanding && e.player == ref.player
+		if (e instanceof Commanding && e.player == ref.player
 		// TODO ally oder nur eigene range
-				&& e.isCollision(x, y, ((commanding) e).commandRange())) {
+				&& e.isCollision(x, y, ((Commanding) e).commandRange())) {
 			return true;
 		}
 		return false;

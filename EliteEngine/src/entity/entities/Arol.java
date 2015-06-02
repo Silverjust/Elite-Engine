@@ -42,13 +42,13 @@ public class Arol extends Unit implements Attacker {
 
 		hp = hp_max = 2200;
 		armor = 3;
-		speed = 0.8f;
+		speed = 0.4f;
 		radius = 10;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = (byte) (radius + 100);
-		basicAttack.range = (byte) (radius + 20);
+		aggroRange = (byte) (radius + 50);
+		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 40;
 		basicAttack.cooldown = 5000;
 		basicAttack.eventTime = 100;

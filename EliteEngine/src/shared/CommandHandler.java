@@ -111,6 +111,9 @@ public class CommandHandler {
 				if (c[1].equals("godhand")) {
 					GameDrawer.godhand = Helper.StringToBoolean(c[2]);
 				}
+				if (c[1].equals("nocosts")) {
+					GameDrawer.nocosts = Helper.StringToBoolean(c[2]);
+				}
 				break;
 			default:
 				throw new NoInitialContextException("no command found");

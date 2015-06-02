@@ -3,20 +3,15 @@ package entity.entities;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
-import entity.Active;
 import entity.Buildable;
 import entity.Building;
 import entity.Entity;
-import entity.commanding;
+import entity.Commanding;
 import entity.animation.Animation;
 import entity.animation.Death;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
-import game.AimHandler;
-import game.BuildAim;
 import game.ImageHandler;
 
-public class TestBuilding extends Building implements Buildable, commanding {
+public class AlienMainBuilding extends Building implements Buildable, Commanding {
 	TestLab testLab;
 
 	private int mainRange;
@@ -25,12 +20,12 @@ public class TestBuilding extends Building implements Buildable, commanding {
 	private static PImage previewImg;
 
 	public static void loadImages() {
-		String path = path(Nation.SCIENTISTS, new Object() {
+		String path = path(Nation.ALIENS, new Object() {
 		});
-		previewImg = standImg = ImageHandler.load(path, "TestBuilding");
+		previewImg = standImg = ImageHandler.load(path, "AlienMainBuilding");
 	}
 
-	public TestBuilding(String[] c) {
+	public AlienMainBuilding(String[] c) {
 		super(c);
 
 		iconImg = standImg;
@@ -40,15 +35,15 @@ public class TestBuilding extends Building implements Buildable, commanding {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 60;
+		ySize = 60;
 		
 		sight = 50;
 
 		hp = hp_max = 1000;
 		radius = 15;
 
-		mainRange = 500;
+		mainRange = 250;
 		// ************************************
 	}
 
@@ -73,6 +68,7 @@ public class TestBuilding extends Building implements Buildable, commanding {
 
 	@Override
 	public void renderGround() {
+		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
 		if (testLab != null) {
 			ref.app.stroke(100);
@@ -89,19 +85,6 @@ public class TestBuilding extends Building implements Buildable, commanding {
 	@Override
 	public int commandRange() {
 		return mainRange;
-	}
-
-	static public class BuildTestBuilding extends Active {
-
-		public BuildTestBuilding(int x, int y, char n) {
-			super(x, y, n, new TestBuilding(null).iconImg);
-			clazz = TestBuilding.class;
-		}
-
-		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
-			AimHandler.setAim(new BuildAim(new TestBuilding(null)));
-		}
 	}
 
 }

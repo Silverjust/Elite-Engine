@@ -41,14 +41,14 @@ public class Valcyrix extends Unit implements Attacker {
 		kerit = 40;
 
 		hp = hp_max = 60;
-		speed = 1.8f;
+		speed = 1.0f;
 		radius = 7;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.AIR;
 		height = 20;
 
-		aggroRange = (byte) (radius + 100);
-		basicAttack.range = (byte) (radius + 20);
+		aggroRange = (byte) (radius + 50);
+		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 50;
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 1500;

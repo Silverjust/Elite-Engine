@@ -1,6 +1,6 @@
 package entity;
 
-import entity.entities.TestBuilding;
+import entity.entities.AlienMainBuilding;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import game.AimHandler;
@@ -13,7 +13,7 @@ public class BuildActive extends Active {
 			Class<? extends Entity> builder) {
 		super(x, y, n, b.iconImg);
 		building = b.getClass();
-		clazz = TestBuilding.class;
+		clazz = AlienMainBuilding.class;
 	}
 
 	@Override
