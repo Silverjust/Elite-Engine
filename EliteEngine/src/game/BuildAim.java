@@ -44,16 +44,15 @@ public class BuildAim extends Aim {
 	boolean canPlaceAt(float x, float y) {
 		boolean placeFree = true;
 		boolean inCommanderRange = false;
-		boolean buyable = true;
 		for (Entity e : ref.updater.entities) {
 			if (e.isCollision(x, y, ((Entity) buildable).radius + e.radius))
 				placeFree = false;
 			if (isInCommandingRange(e, x, y))
 				inCommanderRange = true;
 		}
-		if (((Entity) buildable).kerit > builder.player.kerit)
-			buyable = false;
-		return placeFree && inCommanderRange && buyable;
+
+		return placeFree && inCommanderRange
+				&& ((Entity) buildable).canBeBought(builder.player);
 	}
 
 	public boolean isInCommandingRange(Entity e, float x, float y) {

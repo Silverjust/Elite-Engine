@@ -33,7 +33,6 @@ public class UpgradeAim extends BuildAim {
 	boolean canPlaceAt(float x, float y) {
 		boolean rightPlace = false;
 		boolean inCommanderRange = false;
-		boolean buyable = true;
 		for (Entity e : ref.updater.entities) {
 			if (e.getClass().equals(oldBuildable) && e.x == x && e.y == y) {
 				replaced = (Building) e;
@@ -42,9 +41,7 @@ public class UpgradeAim extends BuildAim {
 			if (isInCommandingRange(e, x, y))
 				inCommanderRange = true;
 		}
-
-		if (((Entity) buildable).kerit > builder.player.kerit)
-			buyable = false;
-		return rightPlace && inCommanderRange && buyable;
+		return rightPlace && inCommanderRange
+				&&  ((Entity) buildable).canBeBought(builder.player);
 	}
 }

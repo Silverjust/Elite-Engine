@@ -300,6 +300,21 @@ public abstract class Entity {
 		return isVisible;
 	}
 
+	public boolean canBeBought(Player player) {
+		boolean buyable = true;
+		if (!GameDrawer.nocosts) {
+			if (kerit > player.kerit)
+				buyable = false;
+			if (pax > player.pax)
+				buyable = false;
+			if (arcanum > player.arcanum)
+				buyable = false;
+			if (prunam > player.prunam)
+				buyable = false;
+		}
+		return buyable;
+	}
+
 	protected static String path(Nation nation, Object object) {
 		String path = nation.toString() + "/"
 				+ object.getClass().getEnclosingClass().getSimpleName() + "/";

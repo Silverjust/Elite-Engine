@@ -5,7 +5,8 @@ import shared.ref;
 
 public class ClientHandler {
 
-	public static boolean SinglePlayer = false;
+	public static boolean singlePlayer = false;
+	public static boolean sandbox = false;
 
 	public static String identification;
 
@@ -17,9 +18,8 @@ public class ClientHandler {
 	private static boolean reportCommunication = false;
 
 	public static void setup(String ip) {
-		if (ip.equals(""))
-			SinglePlayer = true;
-		if (SinglePlayer) {
+
+		if (singlePlayer) {
 			System.out.println("SinglePlayer");
 			identification = "1";
 		} else {
@@ -33,17 +33,15 @@ public class ClientHandler {
 				e.printStackTrace();
 			}
 			if (client == null || !client.active()) {
-				System.out.println("no server found");
-				System.out.println("SinglePlayer");
-				SinglePlayer = true;
+				System.out.println("no connection");
 				client = null;
-				identification = "1";
+				return;
 			} else {
 				System.out.println("MultiPlayer");
 				System.out.println(identification);
 			}
 		}
-		((MainPreGame) ref.preGame).setupPlayer();
+
 	}
 
 	public static void update() {
@@ -59,7 +57,7 @@ public class ClientHandler {
 
 	public static void send(String s) {
 		if (s != null) {
-			if (SinglePlayer) {
+			if (singlePlayer) {
 				ComHandler.executeCom(s);
 			} else {
 				if (client != null && client.active()) {

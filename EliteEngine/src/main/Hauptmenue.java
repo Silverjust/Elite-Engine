@@ -16,7 +16,8 @@ public class Hauptmenue {
 
 	GTextField playerName, serverIp;
 	GPassword password;
-	GButton acceptButton, localhost, startServer;
+	GButton multiplayerButton, singleplayerButton, sandboxButton, localhost,
+			startServer;
 	GTextArea changes;
 
 	public Hauptmenue() {
@@ -34,9 +35,17 @@ public class Hauptmenue {
 		localhost.setText("127.0.0.1");
 		localhost.addEventHandler(this, "handleLocalhostEvents");
 
-		acceptButton = new GButton(ref.app, 300, 390, 300, 40);
-		acceptButton.setText("connect");
-		acceptButton.addEventHandler(this, "handleAcceptEvents");
+		multiplayerButton = new GButton(ref.app, 300, 390, 300, 40);
+		multiplayerButton.setText("multiplayer");
+		multiplayerButton.addEventHandler(this, "handleAcceptEvents");
+
+		singleplayerButton = new GButton(ref.app, 300, 440, 300, 40);
+		singleplayerButton.setText("singleplayer");
+		singleplayerButton.addEventHandler(this, "handleAcceptEvents");
+
+		sandboxButton = new GButton(ref.app, 300, 490, 300, 40);
+		sandboxButton.setText("sandbox");
+		sandboxButton.addEventHandler(this, "handleAcceptEvents");
 
 		changes = new GTextArea(ref.app, 800, 100, 600, 700,
 				G4P.SCROLLBARS_VERTICAL_ONLY | G4P.SCROLLBARS_AUTOHIDE);
@@ -57,16 +66,33 @@ public class Hauptmenue {
 			ip = ip.substring(1);
 
 		if (event == GEvent.CLICKED) {
-			ref.preGame = new MainPreGame(name);
+			if (button == multiplayerButton) {
+				if (ip.equals("")) {
+					serverIp.setFocus(true);
+					return;
+				}
+			} else if (button == singleplayerButton) {
+				ClientHandler.singlePlayer = true;
+			} else if (button == sandboxButton) {
+				ClientHandler.singlePlayer = true;
+				ClientHandler.sandbox = true;
+			}
 			ClientHandler.setup(ip);
+			if (!ClientHandler.singlePlayer && ClientHandler.client == null) {
+				serverIp.setFocus(true);
+				return;
+			}
+			ref.preGame = new MainPreGame(name);
+
 			playerName.dispose();
 			password.dispose();
 			serverIp.dispose();
 			localhost.dispose();
-			acceptButton.dispose();
+			multiplayerButton.dispose();
+			singleplayerButton.dispose();
+			sandboxButton.dispose();
 			changes.dispose();
 			((MainApp) ref.app).mode = Mode.PREGAME;
-
 		}
 	}
 

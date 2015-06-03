@@ -5,7 +5,6 @@ import entity.Entity;
 import entity.Unit;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
-import game.GameDrawer;
 import main.ClientHandler;
 import shared.ref;
 
@@ -22,7 +21,7 @@ public class TrainActive extends Active {
 	@Override
 	public void onButtonPressed(GGameButton gamebutton, GEvent event) {
 		Entity trainer = null;
-		for (Entity e :  ref.updater.selected) {
+		for (Entity e : ref.updater.selected) {
 			if (clazz.isAssignableFrom(e.getClass())) {
 				trainer = e;
 			}
@@ -34,7 +33,7 @@ public class TrainActive extends Active {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (trainer.player.kerit > toTrain.kerit || GameDrawer.nocosts) {
+		if (toTrain.canBeBought(trainer.player)) {
 			ClientHandler.send("<spawn " + unit.getSimpleName() + " "
 					+ trainer.player.ip + " " + (trainer.x + 25) + " "
 					+ (trainer.y + 25) + " " + (trainer.x + 75) + " "

@@ -42,6 +42,7 @@ public class MainPreGame extends PreGame {
 					200, 500, getNationImages(i));// change buttons
 			nationButtons[i].addEventHandler(this, "handleSelectNation");
 		}
+		setupPlayer();
 	}
 
 	public void update() {
@@ -67,7 +68,7 @@ public class MainPreGame extends PreGame {
 		for (String key : player.keySet()) {
 			player.get(key).nation = Nation.ALIENS;
 		}
-		ref.loader = new SandboxLoader();
+		ref.loader = new MainLoader();
 
 		starButton.dispose();
 		playerSlider.dispose();
@@ -127,7 +128,7 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void setupPlayer() {
-		if (!ClientHandler.SinglePlayer) {
+		if (!ClientHandler.singlePlayer) {
 			addThisPlayer(name);
 		} else {
 			addThisPlayer(name);

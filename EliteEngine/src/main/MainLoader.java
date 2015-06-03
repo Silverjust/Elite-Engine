@@ -8,7 +8,7 @@ import game.GameUpdater;
 import game.GameDrawer;
 import game.ImageHandler;
 
-public class SandboxLoader extends Loader {
+public class MainLoader extends Loader {
 	// TODO Alle daten laden
 
 	public void update() {
@@ -44,7 +44,7 @@ public class SandboxLoader extends Loader {
 			break;
 		case ENTITIES:// spawn entity-setup
 
-			if (ClientHandler.SinglePlayer) {
+			if (ClientHandler.singlePlayer) {
 
 				for (String key : ref.updater.player.keySet()) {
 					Player p = ref.updater.player.get(key);
@@ -66,7 +66,7 @@ public class SandboxLoader extends Loader {
 				}
 			}
 			GameDrawer.setup();
-			if (ClientHandler.SinglePlayer) {
+			if (ClientHandler.sandbox) {
 				GameDrawer.godeye = true;
 				GameDrawer.godhand = true;
 				GameDrawer.nocosts = true;
@@ -103,7 +103,7 @@ public class SandboxLoader extends Loader {
 	@Override
 	public void tryStartGame() {
 		// do nothing when multiplayer
-		if (ClientHandler.SinglePlayer)
+		if (ClientHandler.singlePlayer)
 			startGame();
 	}
 }

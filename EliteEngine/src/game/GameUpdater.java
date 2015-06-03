@@ -67,7 +67,7 @@ public class GameUpdater extends Updater {
 			// sortierfunktion
 			Collections.sort(ref.player.visibleEntities,
 					new EntityHeightComparator());
-			if (ClientHandler.SinglePlayer) {
+			if (ClientHandler.singlePlayer) {
 				for (Entity e : entities) {
 					e.updateAnimation();
 					e.updateDecisions();
