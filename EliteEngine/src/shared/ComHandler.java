@@ -42,9 +42,9 @@ public class ComHandler {
 				n = Integer.parseInt(c[1]);
 				e = ref.updater.namedEntities.get(n);
 				n = Integer.parseInt(c[2]);
-				b=Byte.parseByte(c[3]);
+				b = Byte.parseByte(c[3]);
 				if (e != null) {
-					e.hit(n,b);
+					e.hit(n, b);
 				} else {
 					throw new IllegalArgumentException("no entity found");
 				}
@@ -96,7 +96,7 @@ public class ComHandler {
 				break;
 			case "<give":
 				Player p = ref.updater.player.get(c[1]);
-				p.give(c[2],Integer.parseInt(c[3]));
+				p.give(c[2], Integer.parseInt(c[3]));
 				break;
 			case "<say":
 				ref.updater.write(c[1], c);
@@ -110,6 +110,7 @@ public class ComHandler {
 				// nur an clienthandler
 				break;
 			case "<identifying":
+				ref.app.delay(1000);
 				ref.preGame.addPlayer(c[1], c[2]);
 				break;
 			case "<setNation":
