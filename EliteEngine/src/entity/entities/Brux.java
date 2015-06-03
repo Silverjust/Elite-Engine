@@ -35,14 +35,15 @@ public class Brux extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 20;
-		ySize = 20;
+		xSize = 30;
+		ySize = 30;
 		
 		kerit=120;
+		trainTime = 3000;
 
 		hp = hp_max = 120;
-		speed = 0.9f;
-		radius = 6;
+		speed = 0.8f;
+		radius = 8;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 

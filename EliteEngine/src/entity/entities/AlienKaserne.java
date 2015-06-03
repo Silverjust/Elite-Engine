@@ -38,16 +38,16 @@ public class AlienKaserne extends Building implements Buildable, Commander,
 
 		animation = nextAnimation = build;
 		// ************************************
-		xSize = 60;
-		ySize = 60;
+		xSize = 50;
+		ySize = 50;
 
 		kerit = 1000;
-		build.setBuildTime(10000);
+		build.setBuildTime(5000);
 
 		sight = 50;
 
 		hp = hp_max = 1000;
-		radius = 15;
+		radius = 10;
 
 		commandingRange = 250;
 		// ************************************

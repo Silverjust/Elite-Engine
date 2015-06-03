@@ -38,8 +38,8 @@ public class AlienKaserneArcanum extends Building implements Buildable,
 
 		animation = nextAnimation = build;
 		// ************************************
-		xSize = 60;
-		ySize = 60;
+		xSize = 50;
+		ySize = 50;
 
 		kerit = 1200;
 		build.setBuildTime(10000);
@@ -47,7 +47,7 @@ public class AlienKaserneArcanum extends Building implements Buildable,
 		sight = 50;
 
 		hp = hp_max = 1000;
-		radius = 15;
+		radius = 10;
 
 		commandRange = 250;
 		// ************************************

@@ -57,8 +57,8 @@ public class Ticul extends Unit implements Attacker {
 		xSize = 20;
 		ySize = 20;
 
-		kerit = 40;
-		trainTime = 5000;
+		kerit = 35;
+		trainTime = 1500;
 
 		hp = hp_max = 50;
 		speed = 0.9f;
