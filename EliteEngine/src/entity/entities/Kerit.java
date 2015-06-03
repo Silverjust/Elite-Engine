@@ -32,7 +32,7 @@ public class Kerit extends Building {
 
 		radius = 15;
 
-		descrip = "Kerit";
+		descr = "Kerit";
 		// ************************************
 	}
 

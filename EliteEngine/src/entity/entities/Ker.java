@@ -52,6 +52,11 @@ public class Ker extends Unit implements Attacker {
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 900;
 		basicAttack.eventTime = 500;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max + "§dps: "
+				+ basicAttack.damage + "/" + basicAttack.cooldown/1000.0;
 		// ************************************
 	}
 

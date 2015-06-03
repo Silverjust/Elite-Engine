@@ -37,8 +37,8 @@ public class Brux extends Unit implements Attacker {
 		// ************************************
 		xSize = 30;
 		ySize = 30;
-		
-		kerit=120;
+
+		kerit = 120;
 		trainTime = 3000;
 
 		hp = hp_max = 120;
@@ -52,13 +52,18 @@ public class Brux extends Unit implements Attacker {
 		basicAttack.damage = 20;
 		basicAttack.cooldown = 1500;
 		basicAttack.eventTime = 500;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max + "§dps: "
+				+ basicAttack.damage + "/" + basicAttack.cooldown/1000.0;
 		// ************************************
 	}
 
 	@Override
 	public void updateDecisions() {
 
-		//isTaged = false;
+		// isTaged = false;
 		if (animation == stand) {// ****************************************************
 			String s = "";
 			for (Entity e : player.visibleEntities) {

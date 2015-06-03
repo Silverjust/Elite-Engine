@@ -46,6 +46,11 @@ public class Colum extends Unit {
 		heal.heal = 25;
 		heal.cooldown = 5000;
 		heal.eventTime = 100;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max + "§heal/s: "
+				+ heal.heal + "/" + heal.cooldown/1000.0;
 		// ************************************
 	}
 

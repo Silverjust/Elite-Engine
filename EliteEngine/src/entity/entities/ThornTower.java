@@ -60,6 +60,11 @@ public class ThornTower extends Building implements Buildable, Attacker,
 		basicAttack.eventTime = 500;
 
 		commandingRange = 250;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max + "§dps: "
+				+ basicAttack.damage + "/" + basicAttack.cooldown/1000.0;
 		// ************************************
 	}
 

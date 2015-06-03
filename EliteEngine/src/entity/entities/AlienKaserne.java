@@ -50,6 +50,10 @@ public class AlienKaserne extends Building implements Buildable, Commander,
 		radius = 10;
 
 		commandingRange = 250;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max;
 		// ************************************
 	}
 

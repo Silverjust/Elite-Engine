@@ -1,4 +1,6 @@
-build and traintime
+desciptions and stats
+---------------------
+build and train
 ------------------
 as you can see, 
 i changed this page

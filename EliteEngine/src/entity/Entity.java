@@ -13,7 +13,7 @@ import game.Chat;
 import game.GameDrawer;
 import game.ImageHandler;
 
-public abstract class Entity {
+public abstract class Entity extends Informing {
 	// TODO upgrades für einheiten
 	public static int entityCounter;
 	public int number;
@@ -40,7 +40,7 @@ public abstract class Entity {
 	private static PImage selectedImg;
 	private static PImage hpImg;
 	public PImage iconImg;
-	protected String descrip = " ";
+	protected String descr = " ", stats = " ";
 
 	public Death death;
 	public Animation stand;
@@ -204,13 +204,20 @@ public abstract class Entity {
 				/ scale, sight / scale);
 	}
 
+	@Override
 	public void drawIcon(PGraphics graphic, float x, float y, int size) {
 		// TODO mit xsize,ysize verbinden
 		graphic.image(iconImg, x, y, size, size);
 	}
 
+	@Override
 	public String getDesription() {
-		return descrip;
+		return descr;
+	}
+
+	@Override
+	public String getStatistics() {
+		return stats;
 	}
 
 	public void sendDefaultAnimation(Animation oldAnimation) {

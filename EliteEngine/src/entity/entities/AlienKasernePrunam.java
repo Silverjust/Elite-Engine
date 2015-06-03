@@ -34,6 +34,7 @@ public class AlienKasernePrunam extends Building implements Buildable,
 		stand = new Animation(standImg, 100);
 		build = new Build(standImg, 6000);
 		death = new Death(standImg, 100);
+		training = new Training(standImg, 100);
 
 		animation = nextAnimation = build;
 		// ************************************
@@ -49,6 +50,10 @@ public class AlienKasernePrunam extends Building implements Buildable,
 		radius = 10;
 
 		commanderRange = 250;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max;
 		// ************************************
 	}
 

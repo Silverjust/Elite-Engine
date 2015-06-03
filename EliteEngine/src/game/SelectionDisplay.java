@@ -27,7 +27,7 @@ public class SelectionDisplay {
 		graphic = ref.app.createGraphics(w, h, PApplet.JAVA2D);
 		font = ref.app.createFont("Aharoni Fett", 40);
 		graphic.textFont(font);
-		graphic.textSize(20);
+		graphic.textSize(15);
 		selectedEntitiesSlider = new GCustomSlider(ref.app, x + w + 20, y + 10,
 				h - 20, 20, ref.player.nation.toString());
 		selectedEntitiesSlider.setRotation(PConstants.TAU / 4,
@@ -49,8 +49,12 @@ public class SelectionDisplay {
 			graphic.fill(0);
 			ref.updater.selected.get(0).drawIcon(graphic, 0, 0, iconSize * 4);
 			String descr = ref.updater.selected.get(0).getDesription()
-					.replaceAll("§", "\n\n");
+					.replaceAll("§", "\n");
 			graphic.text(descr, iconSize * 5, ref.app.textAscent()
+					* ref.textScale + 10);
+			String stats = ref.updater.selected.get(0).getStatistics()
+					.replaceAll("§", "\n");
+			graphic.text(stats, iconSize * 10, ref.app.textAscent()
 					* ref.textScale + 10);
 		} else {
 			r = PApplet.ceil(ref.updater.selected.size() / c) + 1;

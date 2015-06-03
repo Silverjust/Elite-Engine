@@ -9,6 +9,7 @@ import game.UpgradeAim;
 
 public class UpgradeActive extends Active {
 	Class<? extends Building> newBuilding, oldBuilding;
+	 String descr = " ", stats = " ";
 
 	public UpgradeActive(int x, int y, char n, Building b,
 			Class<? extends Building> oldBuilding,
@@ -36,5 +37,15 @@ public class UpgradeActive extends Active {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public String getDesription() {
+		return descr;
+	}
+
+	@Override
+	public String getStatistics() {
+		return stats;
 	}
 }

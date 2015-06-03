@@ -62,6 +62,12 @@ public class Rug extends Unit implements Attacker {
 		spawnRange = (byte) (radius + 100);
 		spawn.cooldown = 5000;
 		spawn.eventTime = 500;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max + "§dps: "
+				+ basicAttack.damage + "/" + basicAttack.cooldown/1000.0
+				+ "§spawns/s: " + 2 + "/" + spawn.cooldown/1000.0;
 		// ************************************
 	}
 
@@ -126,7 +132,7 @@ public class Rug extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		drawCircle(spawnRange);
+		//drawCircle(spawnRange);
 		animation.draw(this, direction, currentFrame);
 		drawTaged();
 	}

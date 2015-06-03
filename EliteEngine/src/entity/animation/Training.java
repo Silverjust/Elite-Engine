@@ -26,8 +26,10 @@ public class Training extends Ability {
 		if (toTrain != null && isNotOnCooldown()) {
 			if (toTrain.canBeBought(e.player)) {
 				ref.updater.send("<spawn " + toTrain.getClass().getSimpleName()
-						+ " " + e.player.ip + " " + (e.x + 25) + " "
-						+ (e.y + 25) + " " + (e.x + 75) + " " + (e.y + 75));
+						+ " " + e.player.ip + " "
+						+ (e.x + e.radius + toTrain.radius) + " "
+						+ (e.y + e.radius + toTrain.radius) + " " + (e.x + 75)
+						+ " " + (e.y + 75));
 				toTrain = null;
 			}
 
@@ -56,8 +58,7 @@ public class Training extends Ability {
 	}
 
 	public static void updateExecTraining(String[] c, Entity trainer) {
-		if (c[2].equals("train") && trainer instanceof Trainer
-				) {
+		if (c[2].equals("train") && trainer instanceof Trainer) {
 			Entity toTrain = null;
 			try {
 				toTrain = (Entity) Class.forName("entity.entities." + c[3])
@@ -70,7 +71,7 @@ public class Training extends Ability {
 				toTrain.buyFrom(trainer.player);
 				Training a = (Training) ((Trainer) trainer).getTraining();
 
-				a.cooldown = ((Unit)toTrain).trainTime;// cooldown=traintime
+				a.cooldown = ((Unit) toTrain).trainTime;// cooldown=traintime
 				a.setEntity(toTrain);
 				trainer.setAnimation(a);
 			}

@@ -8,11 +8,14 @@ import game.BuildAim;
 
 public class BuildActive extends Active {
 	Class<? extends Building> building;
+	String descr = " ", stats = " ";
 
 	public BuildActive(int x, int y, char n, Building b,
 			Class<? extends Entity> builder) {
 		super(x, y, n, b.iconImg);
 		building = b.getClass();
+		descr = b.getDesription();
+		stats = b.getStatistics();
 		clazz = builder;
 	}
 
@@ -24,7 +27,7 @@ public class BuildActive extends Active {
 				builder = e;
 			}
 		}
-		
+
 		if (builder != null) {
 			try {
 				Building b = building.getConstructor(String[].class)
@@ -34,5 +37,15 @@ public class BuildActive extends Active {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public String getDesription() {
+		return descr;
+	}
+
+	@Override
+	public String getStatistics() {
+		return stats;
 	}
 }

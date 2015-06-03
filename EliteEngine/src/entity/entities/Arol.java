@@ -37,8 +37,8 @@ public class Arol extends Unit implements Attacker {
 		// ************************************
 		xSize = 50;
 		ySize = 35;
-		
-		kerit=1000;
+
+		kerit = 1000;
 
 		hp = hp_max = 2200;
 		armor = 3;
@@ -52,6 +52,11 @@ public class Arol extends Unit implements Attacker {
 		basicAttack.damage = 40;
 		basicAttack.cooldown = 5000;
 		basicAttack.eventTime = 100;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max + "§dps: "
+				+ basicAttack.damage + "/" + basicAttack.cooldown/1000.0;
 		// ************************************
 	}
 

@@ -71,6 +71,11 @@ public class Ticul extends Unit implements Attacker {
 		basicAttack.damage = 8;
 		basicAttack.cooldown = 800;
 		basicAttack.eventTime = 500;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max + "§dps: "
+				+ basicAttack.damage + "/" + basicAttack.cooldown/1000.0;
 		// ************************************
 	}
 
@@ -145,6 +150,18 @@ public class Ticul extends Unit implements Attacker {
 			}
 
 		}
+
+		@Override
+		public String getDesription() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getStatistics() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 
 	static public class Flash extends Active {// ******************************************************
@@ -168,6 +185,18 @@ public class Ticul extends Unit implements Attacker {
 				ClientHandler.send("<tp " + e.number + " " + x + " " + y);
 			}
 
+		}
+
+		@Override
+		public String getDesription() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getStatistics() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 

@@ -9,6 +9,7 @@ import shared.ref;
 
 public class TrainActive extends Active {
 	Class<? extends Unit> unit;
+	 String descr = " ", stats = " ";
 
 	public TrainActive(int x, int y, char n, Unit u,
 			Class<? extends Entity> trainer) {
@@ -27,5 +28,13 @@ public class TrainActive extends Active {
 			}
 		}
 		trainer.sendAnimation("train " + unit.getSimpleName());
+	}	@Override
+	public String getDesription() {
+		return descr;
+	}
+
+	@Override
+	public String getStatistics() {
+		return stats;
 	}
 }

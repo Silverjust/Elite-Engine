@@ -33,7 +33,8 @@ public class PrunamExtractor extends Building implements Buildable {
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 1000;build.setBuildTime(10000);
+		kerit = 1000;
+		build.setBuildTime(10000);
 
 		hp = hp_max = 100;
 		radius = 15;
@@ -42,6 +43,11 @@ public class PrunamExtractor extends Building implements Buildable {
 		((Extract) stand).cooldown = 1000;
 		((Extract) stand).resource = "prunam";
 		((Extract) stand).efficenty = 10;
+
+		descr = " ";
+		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
+				+ "§prunam: " + prunam + "§hp: " + hp_max + "§resource/s: "
+				+ (((Extract) stand).efficenty / ((Extract) stand).cooldown);
 
 		// ************************************
 	}

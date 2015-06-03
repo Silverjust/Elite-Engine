@@ -1,5 +1,6 @@
 package entity;
 
+import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.ref;
 import g4p_controls.GEvent;
@@ -9,13 +10,15 @@ import game.HUD;
 /**
  * Aktive Fähigkeit
  * */
-public abstract class Active {
+public abstract class Active extends Informing {
 	public GGameButton button;
 
 	public Class<? extends Entity> clazz;
 
 	protected int cooldown;
 	protected int cooldownTimer;
+
+	private PImage symbol;
 
 	static int w = 50;
 	public static int x;
@@ -28,6 +31,7 @@ public abstract class Active {
 		button.setText(n + "");
 		button.setSymbol(symbol);
 		button.addEventHandler(this, "handleActiveEvents");
+		this.symbol = symbol;
 	}
 
 	public void update() {
@@ -66,5 +70,10 @@ public abstract class Active {
 	public float getCooldownPercent() {
 		float f = 1 - (float) (cooldownTimer - ref.app.millis()) / cooldown;
 		return f > 1 || f < 0 ? 1 : f;
+	}
+
+	public void drawIcon(PGraphics graphic, float x, float y, int size) {
+		// TODO gleich wie entity
+		graphic.image(symbol, x, y, size, size);
 	}
 }
