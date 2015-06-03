@@ -59,13 +59,17 @@ public class Hauptmenue {
 
 	public void handleAcceptEvents(GButton button, GEvent event) {
 		String name = Helper.secureInput(playerName.getText());
-		if (name.charAt(0) == ' ')
+		if (name != "" && name.charAt(0) == ' ')
 			name = name.substring(1);
 		String ip = Helper.secureInput(serverIp.getText());
 		if (ip != "" && ip.charAt(0) == ' ')
 			ip = ip.substring(1);
 
 		if (event == GEvent.CLICKED) {
+			if (name.equals("")) {
+				playerName.setFocus(true);
+				return;
+			}
 			if (button == multiplayerButton) {
 				if (ip.equals("")) {
 					serverIp.setFocus(true);
