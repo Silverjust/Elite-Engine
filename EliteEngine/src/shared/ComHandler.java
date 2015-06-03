@@ -110,7 +110,6 @@ public class ComHandler {
 				// nur an clienthandler
 				break;
 			case "<identifying":
-				ref.app.delay(1000);
 				ref.preGame.addPlayer(c[1], c[2]);
 				break;
 			case "<setNation":

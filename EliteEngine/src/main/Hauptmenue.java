@@ -81,12 +81,13 @@ public class Hauptmenue {
 				ClientHandler.singlePlayer = true;
 				ClientHandler.sandbox = true;
 			}
+			ref.preGame = new MainPreGame(name);
 			ClientHandler.setup(ip);
 			if (!ClientHandler.singlePlayer && ClientHandler.client == null) {
 				serverIp.setFocus(true);
 				return;
 			}
-			ref.preGame = new MainPreGame(name);
+			((MainPreGame) ref.preGame).setup();
 
 			playerName.dispose();
 			password.dispose();

@@ -41,7 +41,7 @@ public class ClientHandler {
 				System.out.println(identification);
 			}
 		}
-
+		((MainPreGame)ref.preGame).setupPlayer();
 	}
 
 	public static void update() {

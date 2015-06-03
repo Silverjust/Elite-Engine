@@ -22,7 +22,16 @@ public class MainPreGame extends PreGame {
 	PGraphics playerList;
 	private String name;
 
-	MainPreGame(String name) {
+	public MainPreGame(String name) {
+		this.name = name;
+	}
+
+	public void closeBecauseServer() {
+		player.clear();
+		name = "";
+	}
+
+	public void setup() {
 		this.name = name;
 
 		starButton = new GButton(ref.app, ref.app.width - 320,
@@ -42,7 +51,6 @@ public class MainPreGame extends PreGame {
 					200, 500, getNationImages(i));// change buttons
 			nationButtons[i].addEventHandler(this, "handleSelectNation");
 		}
-		setupPlayer();
 	}
 
 	public void update() {
