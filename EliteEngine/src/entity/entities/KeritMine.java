@@ -33,7 +33,7 @@ public class KeritMine extends Building implements Buildable {
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 1000;
+		kerit = 1000;build.setBuildTime(10000);
 
 		hp = hp_max = 100;
 		radius = 15;

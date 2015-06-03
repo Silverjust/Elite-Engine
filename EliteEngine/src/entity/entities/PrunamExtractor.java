@@ -24,19 +24,17 @@ public class PrunamExtractor extends Building implements Buildable {
 		super(c);
 
 		iconImg = standImg;
-		stand = new Extract(standImg,100);
-		build = new Build(standImg,100);
-		death = new Death(standImg,100);
-
-		
+		stand = new Extract(standImg, 100);
+		build = new Build(standImg, 4000);
+		death = new Death(standImg, 100);
 
 		animation = nextAnimation = stand;
 		// ************************************
 		xSize = 30;
 		ySize = 30;
 
-		kerit=1000;
-		
+		kerit = 1000;build.setBuildTime(10000);
+
 		hp = hp_max = 100;
 		radius = 15;
 		sight = 50;
@@ -53,6 +51,7 @@ public class PrunamExtractor extends Building implements Buildable {
 		super.updateDecisions();
 		((Extract) stand).updateAbility(this);
 	}
+
 	@Override
 	protected void onDeath() {
 		super.onDeath();

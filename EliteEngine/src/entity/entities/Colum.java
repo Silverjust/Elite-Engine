@@ -30,8 +30,8 @@ public class Colum extends Unit {
 		// ************************************
 		xSize = 45;
 		ySize = 45;
-		
-		kerit=600;
+
+		kerit = 600;
 
 		hp = hp_max = 300;
 		speed = 0.9f;
@@ -39,6 +39,8 @@ public class Colum extends Unit {
 		sight = 70;
 		groundPosition = Entity.GroundPosition.AIR;
 		height = 50;
+
+		trainTime = 1000;
 
 		heal.range = (byte) (radius + 25);
 		heal.heal = 25;
@@ -50,7 +52,7 @@ public class Colum extends Unit {
 	@Override
 	public void updateDecisions() {
 
-		//isTaged = false;
+		// isTaged = false;
 		if (animation == stand) {// ****************************************************
 			/*
 			 * String s = ""; for (Entity e : player.visibleEntities) { if (e !=

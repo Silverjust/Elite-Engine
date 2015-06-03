@@ -1,12 +1,12 @@
 package entity;
 
 import shared.ref;
-import entity.animation.Animation;
+import entity.animation.Build;
 import game.Chat;
 
 public abstract class Building extends Entity {
 
-	public Animation build;
+	public Build build;
 
 	public Building(String[] c) {
 		if (c != null) {
@@ -41,9 +41,9 @@ public abstract class Building extends Entity {
 	@Override
 	public void display() {
 		super.display();
-		if (animation == build) {
-
-		}
+		if (animation == build) 
+			drawBar(build.getCooldownPercent());
+		
 	}
 
 	public static float xToGrid(float x) {

@@ -97,6 +97,7 @@ public abstract class Entity {
 				break;
 			}
 		} catch (Exception e) {
+			System.out.println(animation + " " + nextAnimation);
 			PApplet.printArray(c);
 			e.printStackTrace();
 		}
@@ -170,6 +171,19 @@ public abstract class Entity {
 		}
 	}
 
+	public void drawBar(float f) {
+		int h = 2;
+		if (isAlive() && isMortal()) {//
+			ref.app.fill(0, 150);
+			ref.app.rect(xToGrid(x), yToGrid(y - height - h * 3) - radius
+					* 1.5f, radius * 2, h);
+			ref.app.tint(200);
+			ref.app.image(hpImg, xToGrid(x), yToGrid(y - height - h * 3)
+					- radius * 1.5f, radius * 2 * f, h);
+			ref.app.tint(255);
+		}
+	}
+
 	protected void drawCircle(int r) {
 		ref.app.image(selectedImg, xToGrid(x), yToGrid(y), r * 2, r);
 
@@ -214,6 +228,10 @@ public abstract class Entity {
 			nextAnimation = a;
 			a.setup(this);
 		}
+	}
+
+	public Animation getAnimation() {
+		return animation;
 	}
 
 	public float calcImportanceOf(Entity e) {
@@ -313,6 +331,13 @@ public abstract class Entity {
 				buyable = false;
 		}
 		return buyable;
+	}
+
+	public void buyFrom(Player p) {
+		ref.updater.send("<give " + p.ip + " " + "kerit" + " -" + kerit);
+		ref.updater.send("<give " + p.ip + " " + "pax" + " -" + pax);
+		ref.updater.send("<give " + p.ip + " " + "arcanum" + " -" + arcanum);
+		ref.updater.send("<give " + p.ip + " " + "prunam" + " -" + prunam);
 	}
 
 	protected static String path(Nation nation, Object object) {

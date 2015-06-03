@@ -56,11 +56,12 @@ public class Ticul extends Unit implements Attacker {
 		// ************************************
 		xSize = 20;
 		ySize = 20;
-		
-		kerit=40;
+
+		kerit = 40;
+		trainTime = 5000;
 
 		hp = hp_max = 50;
-		speed =0.9f;
+		speed = 0.9f;
 		radius = 5;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;

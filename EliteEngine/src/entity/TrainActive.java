@@ -5,7 +5,6 @@ import entity.Entity;
 import entity.Unit;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
-import main.ClientHandler;
 import shared.ref;
 
 public class TrainActive extends Active {
@@ -22,24 +21,11 @@ public class TrainActive extends Active {
 	public void onButtonPressed(GGameButton gamebutton, GEvent event) {
 		Entity trainer = null;
 		for (Entity e : ref.updater.selected) {
-			if (clazz.isAssignableFrom(e.getClass())) {
+			if (clazz.isAssignableFrom(e.getClass())
+					&& e.getAnimation() == e.stand) {
 				trainer = e;
 			}
 		}
-		Unit toTrain = null;
-		try {
-			toTrain = unit.getConstructor(String[].class).newInstance(
-					new Object[] { null });
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if (toTrain.canBeBought(trainer.player)) {
-			ClientHandler.send("<spawn " + unit.getSimpleName() + " "
-					+ trainer.player.ip + " " + (trainer.x + 25) + " "
-					+ (trainer.y + 25) + " " + (trainer.x + 75) + " "
-					+ (trainer.y + 75));
-			ref.updater.send("<give " + trainer.player.ip + " " + "kerit"
-					+ " -" + toTrain.kerit);
-		}
+		trainer.sendAnimation("train " + unit.getSimpleName());
 	}
 }

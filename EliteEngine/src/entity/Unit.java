@@ -18,6 +18,7 @@ public abstract class Unit extends Entity {
 	protected byte direction;
 	protected float speed;
 	protected boolean isMoving;
+	public int trainTime;
 
 	protected Animation walk;
 

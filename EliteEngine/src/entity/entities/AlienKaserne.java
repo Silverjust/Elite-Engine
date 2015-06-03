@@ -4,13 +4,20 @@ import processing.core.PImage;
 import shared.Nation;
 import entity.Buildable;
 import entity.Building;
-import entity.Commanding;
+import entity.Commander;
+import entity.Trainer;
+import entity.animation.Ability;
 import entity.animation.Animation;
+import entity.animation.Build;
 import entity.animation.Death;
+import entity.animation.Training;
 import game.ImageHandler;
 
-public class AlienKaserne extends Building implements Buildable, Commanding {
+public class AlienKaserne extends Building implements Buildable, Commander,
+		Trainer {
 	private int commandingRange;
+
+	private Ability training;
 
 	private static PImage standImg;
 
@@ -25,15 +32,17 @@ public class AlienKaserne extends Building implements Buildable, Commanding {
 
 		iconImg = standImg;
 		stand = new Animation(standImg, 100);
-		build = new Animation(standImg, 100);
+		build = new Build(standImg, 5000);
 		death = new Death(standImg, 100);
+		training = new Training(standImg, 100);
 
-		animation = nextAnimation = stand;
+		animation = nextAnimation = build;
 		// ************************************
 		xSize = 60;
 		ySize = 60;
-		
-		kerit=1000;
+
+		kerit = 1000;
+		build.setBuildTime(10000);
 
 		sight = 50;
 
@@ -46,13 +55,26 @@ public class AlienKaserne extends Building implements Buildable, Commanding {
 
 	@Override
 	public void updateDecisions() {
-		
+		training.updateAbility(this);
+	}
+
+	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		Training.updateExecTraining(c, this);
 	}
 
 	@Override
 	public void renderGround() {
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
+	}
+
+	@Override
+	public void display() {
+		super.display();
+		if (animation == training)
+			drawBar(training.getCooldownPercent());
 	}
 
 	public PImage preview() {
@@ -64,4 +86,8 @@ public class AlienKaserne extends Building implements Buildable, Commanding {
 		return commandingRange;
 	}
 
+	@Override
+	public Ability getTraining() {
+		return training;
+	}
 }

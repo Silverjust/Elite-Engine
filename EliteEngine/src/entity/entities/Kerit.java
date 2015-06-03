@@ -22,7 +22,7 @@ public class Kerit extends Building {
 
 		iconImg = standImg;
 		stand = new Animation(standImg, 1);
-		build = new Animation(standImg, 1);
+		build = null;
 		death = null;
 
 		animation = nextAnimation = stand;

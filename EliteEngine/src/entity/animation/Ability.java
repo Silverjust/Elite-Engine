@@ -48,7 +48,8 @@ public class Ability extends Animation {
 	}
 
 	public void updateAbility(Entity e) {
-		if (isEvent() && isNotOnCooldown()) {
+		if (/** security */
+		isEvent() && isNotOnCooldown()) {
 			/** do smthing */
 			startCooldown();
 		}

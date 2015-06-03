@@ -3,6 +3,6 @@ package entity;
 /**
  * ermöglicht es entity gebäude in der nähe plazieren zu lassen
  * */
-public interface Commanding {
+public interface Commander {
 	int commandRange();
 }

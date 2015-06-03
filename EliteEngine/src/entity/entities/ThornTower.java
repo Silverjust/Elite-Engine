@@ -6,17 +6,18 @@ import shared.ref;
 import entity.Attacker;
 import entity.Buildable;
 import entity.Building;
-import entity.Commanding;
+import entity.Commander;
 import entity.Entity;
 import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.AreaAttack;
+import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.TargetAttack;
 import game.ImageHandler;
 
 public class ThornTower extends Building implements Buildable, Attacker,
-		Commanding {
+		Commander {
 	private int commandingRange;
 
 	TargetAttack basicAttack;
@@ -35,16 +36,18 @@ public class ThornTower extends Building implements Buildable, Attacker,
 
 		iconImg = standImg;
 		stand = new Animation(standImg, 100);
-		build = new Animation(standImg, 100);
+		build = new Build(standImg, 7000);
 		death = new Death(standImg, 100);
 		basicAttack = new TargetAttack(standImg, 800);
 
-		animation = nextAnimation = stand;
+		animation = nextAnimation = build;
 		// ************************************
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 600;
+		kerit = 700;
+
+		build.setBuildTime(10000);
 
 		sight = 70;
 

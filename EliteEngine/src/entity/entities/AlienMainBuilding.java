@@ -6,13 +6,14 @@ import shared.ref;
 import entity.Buildable;
 import entity.Building;
 import entity.Entity;
-import entity.Commanding;
+import entity.Commander;
 import entity.animation.Animation;
+import entity.animation.Build;
 import entity.animation.Death;
 import game.ImageHandler;
 
 public class AlienMainBuilding extends Building implements Buildable,
-		Commanding {
+		Commander {
 	TestLab testLab;
 
 	private int commandingRange;
@@ -31,7 +32,7 @@ public class AlienMainBuilding extends Building implements Buildable,
 
 		iconImg = standImg;
 		stand = new Animation(standImg, 100);
-		build = new Animation(standImg, 100);
+		build = new Build(standImg, 100);
 		death = new Death(standImg, 100);
 
 		animation = nextAnimation = stand;

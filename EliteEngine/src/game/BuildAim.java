@@ -4,7 +4,7 @@ import shared.ref;
 import entity.Buildable;
 import entity.Building;
 import entity.Entity;
-import entity.Commanding;
+import entity.Commander;
 import game.AimHandler.Cursor;
 
 public class BuildAim extends Aim {
@@ -56,8 +56,8 @@ public class BuildAim extends Aim {
 	}
 
 	public boolean isInCommandingRange(Entity e, float x, float y) {
-		if (e instanceof Commanding && e.player == builder.player
-				&& e.isCollision(x, y, ((Commanding) e).commandRange())) {
+		if (e instanceof Commander && e.player == builder.player
+				&& e.isCollision(x, y, ((Commander) e).commandRange())) {
 			return true;
 		}
 		return false;

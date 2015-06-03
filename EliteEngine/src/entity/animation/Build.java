@@ -3,11 +3,10 @@ package entity.animation;
 import entity.Entity;
 import processing.core.PImage;
 
-public class Build extends Animation {
+public class Build extends Ability {
 
 	public Build(PImage[][] IMG, int duration) {
 		super(IMG, duration);
-
 	}
 
 	public Build(PImage[] IMG, int duration) {
@@ -22,9 +21,14 @@ public class Build extends Animation {
 	public void update(Entity e) {
 		if (isFinished()) {
 			setup(e);
-			e.sendAnimation("stand");
+			if (isNotOnCooldown())
+				e.sendDefaultAnimation(this);
 		}
-
 	}
 
+	public void setBuildTime(int buildTime) {
+		cooldown = buildTime;
+		startCooldown();
+
+	}
 }
