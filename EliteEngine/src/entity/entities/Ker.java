@@ -38,7 +38,7 @@ public class Ker extends Unit implements Attacker {
 		xSize = 30;
 		ySize = 30;
 		
-		kerit=220;
+		kerit=880;
 
 		hp = hp_max = 300;
 		speed = 0.9f;

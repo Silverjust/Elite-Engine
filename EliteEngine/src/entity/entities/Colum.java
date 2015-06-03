@@ -7,7 +7,7 @@ import entity.animation.Death;
 import processing.core.PImage;
 import shared.Nation;
 
-public class Colum extends Unit {// FIXME colum sets ismoving to false
+public class Colum extends Unit {
 
 	private static PImage standingImg;
 
@@ -31,7 +31,7 @@ public class Colum extends Unit {// FIXME colum sets ismoving to false
 		xSize = 45;
 		ySize = 45;
 		
-		kerit=150;
+		kerit=600;
 
 		hp = hp_max = 300;
 		speed = 0.9f;

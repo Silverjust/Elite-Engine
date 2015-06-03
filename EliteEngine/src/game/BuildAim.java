@@ -44,18 +44,20 @@ public class BuildAim extends Aim {
 	boolean canPlaceAt(float x, float y) {
 		boolean placeFree = true;
 		boolean inCommanderRange = false;
+		boolean buyable = true;
 		for (Entity e : ref.updater.entities) {
 			if (e.isCollision(x, y, ((Entity) buildable).radius + e.radius))
 				placeFree = false;
 			if (isInCommandingRange(e, x, y))
 				inCommanderRange = true;
 		}
-		return placeFree && inCommanderRange;
+		if (((Entity) buildable).kerit > builder.player.kerit)
+			buyable = false;
+		return placeFree && inCommanderRange && buyable;
 	}
 
 	public boolean isInCommandingRange(Entity e, float x, float y) {
 		if (e instanceof Commanding && e.player == builder.player
-		// TODO ally oder nur eigene range
 				&& e.isCollision(x, y, ((Commanding) e).commandRange())) {
 			return true;
 		}

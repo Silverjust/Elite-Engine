@@ -28,7 +28,7 @@ public class Player {
 		Player p = new Player();
 		p.ip = ip;
 		p.name = name;
-		p.kerit = 300;
+		p.kerit = 800;
 		p.online = true;
 		return p;
 	}
@@ -57,19 +57,15 @@ public class Player {
 	public void give(String resource, int amount) {
 		switch (resource) {
 		case "kerit":
-			if (kerit + amount > 0)
 				kerit += amount;
 			break;
 		case "pax":
-			if (pax + amount > 0)
 				pax += amount;
 			break;
 		case "arcanum":
-			if (arcanum + amount > 0)
 				arcanum += amount;
 			break;
 		case "prunam":
-			if (prunam + amount > 0)
 				prunam += amount;
 			break;
 		default:

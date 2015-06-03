@@ -48,7 +48,7 @@ public class ThornTower extends Building implements Buildable, Attacker,
 
 		sight = 70;
 
-		hp = hp_max = 1000;
+		hp = hp_max = 1500;
 		radius = 15;
 
 		basicAttack.range = 70;

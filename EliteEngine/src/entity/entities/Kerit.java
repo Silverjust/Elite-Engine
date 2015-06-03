@@ -21,8 +21,8 @@ public class Kerit extends Building {
 		player = ref.updater.neutral;// neutral
 
 		iconImg = standImg;
-		stand = new Animation(standImg,1);
-		build = new Animation(standImg,1);
+		stand = new Animation(standImg, 1);
+		build = new Animation(standImg, 1);
 		death = null;
 
 		animation = nextAnimation = stand;
@@ -31,6 +31,8 @@ public class Kerit extends Building {
 		ySize = 30;
 
 		radius = 15;
+
+		descrip = "Kerit";
 		// ************************************
 	}
 

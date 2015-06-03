@@ -21,8 +21,8 @@ public abstract class Entity {
 
 	public boolean isSelected;
 	public boolean isTaged;
-	
-	public int kerit,pax,arcanum,prunam;
+
+	public int kerit, pax, arcanum, prunam;
 
 	public float x, y;
 	public byte radius = 1;
@@ -40,6 +40,7 @@ public abstract class Entity {
 	private static PImage selectedImg;
 	private static PImage hpImg;
 	public PImage iconImg;
+	protected String descrip = " ";
 
 	public Death death;
 	public Animation stand;
@@ -55,7 +56,7 @@ public abstract class Entity {
 		hpImg = ImageHandler.load(path, "hp");
 	}
 
-	public void updateAnimation() {// TODO client server zusammenspiel
+	public void updateAnimation() {
 		animation = nextAnimation;
 		animation.update(this);
 	}
@@ -179,10 +180,6 @@ public abstract class Entity {
 
 	}
 
-	public void drawIcon(PGraphics graphic, float x, float y, int size) {
-		graphic.image(iconImg, x, y, size, size);
-	}
-
 	public void drawOnMinimap() {
 
 	}
@@ -191,6 +188,15 @@ public abstract class Entity {
 		int scale = updater.map.fogScale;
 		updater.map.fogOfWar.ellipse(x / scale, y / scale / 2, sight * 2
 				/ scale, sight / scale);
+	}
+
+	public void drawIcon(PGraphics graphic, float x, float y, int size) {
+		// TODO mit xsize,ysize verbinden
+		graphic.image(iconImg, x, y, size, size);
+	}
+
+	public String getDesription() {
+		return descrip;
 	}
 
 	public void sendDefaultAnimation(Animation oldAnimation) {

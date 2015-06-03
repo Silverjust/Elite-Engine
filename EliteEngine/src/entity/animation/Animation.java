@@ -4,7 +4,7 @@ import processing.core.PImage;
 import shared.ref;
 import entity.Entity;
 
-public class Animation {// TODO frames zu zeit umstellen
+public class Animation {
 	byte directions;
 	private byte frames;
 	PImage[][] imgWD;

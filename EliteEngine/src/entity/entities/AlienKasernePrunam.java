@@ -33,7 +33,7 @@ public class AlienKasernePrunam extends Building implements Buildable, Commandin
 		xSize = 60;
 		ySize = 60;
 
-		kerit=600;
+		kerit=1200;
 		
 		sight = 50;
 

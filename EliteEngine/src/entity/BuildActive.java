@@ -24,6 +24,7 @@ public class BuildActive extends Active {
 				builder = e;
 			}
 		}
+		
 		if (builder != null) {
 			try {
 				Building b = building.getConstructor(String[].class)

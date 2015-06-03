@@ -21,7 +21,6 @@ public class TrainActive extends Active {
 
 	@Override
 	public void onButtonPressed(GGameButton gamebutton, GEvent event) {
-		// TODO wo spawnt einheit
 		Entity trainer = null;
 		for (Entity e :  ref.updater.selected) {
 			if (clazz.isAssignableFrom(e.getClass())) {

@@ -33,7 +33,7 @@ public class KeritMine extends Building implements Buildable {
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 500;
+		kerit = 1000;
 
 		hp = hp_max = 100;
 		radius = 15;
@@ -41,7 +41,7 @@ public class KeritMine extends Building implements Buildable {
 
 		((Extract) stand).cooldown = 1000;
 		((Extract) stand).resource = "kerit";
-		((Extract) stand).efficenty = 40;
+		((Extract) stand).efficenty = 20;
 
 		// ************************************
 	}

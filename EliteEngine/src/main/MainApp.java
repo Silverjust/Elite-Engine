@@ -21,7 +21,7 @@ import shared.ref;
 public class MainApp extends PApplet {
 	public static void main(String args[]) {
 		boolean fullscreen = false;
-		// fullscreen = true;
+		 fullscreen = true;
 		if (fullscreen) {
 			PApplet.main(new String[] { "--present", "main.MainApp" });
 		} else {

@@ -11,7 +11,8 @@ import entity.animation.Animation;
 import entity.animation.Death;
 import game.ImageHandler;
 
-public class AlienMainBuilding extends Building implements Buildable, Commanding {
+public class AlienMainBuilding extends Building implements Buildable,
+		Commanding {
 	TestLab testLab;
 
 	private int commandingRange;
@@ -37,13 +38,15 @@ public class AlienMainBuilding extends Building implements Buildable, Commanding
 		// ************************************
 		xSize = 60;
 		ySize = 60;
-		
+
 		sight = 50;
 
 		hp = hp_max = 1000;
 		radius = 15;
 
 		commandingRange = 250;
+
+		descrip = "Alien Main Building§when it dies, you loose";
 		// ************************************
 	}
 

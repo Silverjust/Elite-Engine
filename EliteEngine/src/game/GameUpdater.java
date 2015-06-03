@@ -11,9 +11,7 @@ import entity.Entity;
 import entity.EntityHeightComparator;
 
 public class GameUpdater extends Updater {
-	// FIXME ADD Client Server system
 	// FIXME einheiten vibrieren
-	// TODO Einheitliche ingame größen, ausgehend von einer edge-breite als 1
 
 	public Input input;
 

@@ -35,7 +35,7 @@ public class PrunamExtractor extends Building implements Buildable {
 		xSize = 30;
 		ySize = 30;
 
-		kerit=500;
+		kerit=1000;
 		
 		hp = hp_max = 100;
 		radius = 15;

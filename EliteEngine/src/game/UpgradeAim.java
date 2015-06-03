@@ -32,15 +32,19 @@ public class UpgradeAim extends BuildAim {
 	@Override
 	boolean canPlaceAt(float x, float y) {
 		boolean rightPlace = false;
-		boolean inMainRange = false;
+		boolean inCommanderRange = false;
+		boolean buyable = true;
 		for (Entity e : ref.updater.entities) {
 			if (e.getClass().equals(oldBuildable) && e.x == x && e.y == y) {
 				replaced = (Building) e;
 				rightPlace = true;
 			}
 			if (isInCommandingRange(e, x, y))
-				inMainRange = true;
+				inCommanderRange = true;
 		}
-		return rightPlace && inMainRange;
+
+		if (((Entity) buildable).kerit > builder.player.kerit)
+			buyable = false;
+		return rightPlace && inCommanderRange && buyable;
 	}
 }

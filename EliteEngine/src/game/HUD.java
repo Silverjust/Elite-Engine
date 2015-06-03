@@ -6,7 +6,6 @@ import processing.core.PImage;
 import shared.ref;
 
 public class HUD {
-	// TODO anzeige aller verfügbaren fähigkeiten
 
 	static MouseSelection mouseSelection;
 	static PImage keritImg, paxImg, arcImg, prunImg;

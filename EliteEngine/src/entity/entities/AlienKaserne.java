@@ -33,7 +33,7 @@ public class AlienKaserne extends Building implements Buildable, Commanding {
 		xSize = 60;
 		ySize = 60;
 		
-		kerit=500;
+		kerit=1000;
 
 		sight = 50;
 
