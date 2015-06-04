@@ -18,6 +18,8 @@ public class Rugling extends Unit implements Attacker {
 
 	TargetAttack basicAttack;
 
+	private Death splashDeath;
+
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
 		});
@@ -31,6 +33,7 @@ public class Rugling extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
+		splashDeath = new Death(standingImg, 500);
 		basicAttack = new TargetAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
@@ -45,7 +48,7 @@ public class Rugling extends Unit implements Attacker {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 100);
-		basicAttack.range = (byte) (radius + 10);
+		basicAttack.range = (byte) (radius + 7);
 		basicAttack.damage = 10;
 		basicAttack.cooldown = 1500;
 		basicAttack.eventTime = 500;
@@ -55,51 +58,56 @@ public class Rugling extends Unit implements Attacker {
 	@Override
 	public void updateDecisions() {
 
-		// isTaged = false;
-		if (animation == stand) {// ****************************************************
-			String s = "";
-			for (Entity e : player.visibleEntities) {
-				if (e != this) {
-					if (e.isEnemyTo(this)) {// server
-						if (e.isCollision(x, y, aggroRange + e.radius)) {
-							s = ("walk " + e.x + " " + e.y);
-						}
-					}
-				}
-			}
-			sendAnimation(s);
-		}
-		if (animation == walk) {// ****************************************************
-			float thread = 0;
-			Entity threadEntity = null;
+		if (animation == walk || animation == stand) {// ****************************************************
+			boolean isEnemyInHitRange = false;
+			float importance = 0;
+			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
+						if (e.isCollision(x, y, aggroRange + e.radius)) {
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
+						}
 						if (e.isCollision(x, y, basicAttack.range + e.radius)
 								&& e.groundPosition == GroundPosition.GROUND) {
-							// evtl abfrage wegen groundposition
-
-							float newThread = calcImportanceOf(e);
-							if (newThread > thread) {
-								thread = newThread;
-								threadEntity = e;
+							isEnemyInHitRange = true;
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
 							}
 						}
 					}
 				}
 			}
-			if (threadEntity != null && getBasicAttack().isNotOnCooldown()) {
-				// System.out.println(thread);
-				sendAnimation("basicAttack " + threadEntity.number);
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
+				sendAnimation("basicAttack " + importantEntity.number);
+			} else if (importantEntity != null && !isEnemyInHitRange) {
+				sendAnimation("walk " + importantEntity.x + " "
+						+ importantEntity.y);
+			} else if (importantEntity == null) {
+				sendAnimation("splashDeath");
 			}
 		}
 		basicAttack.updateAbility(this);
 	}
 
 	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if (c[2].equals("splashDeath")) {
+			setAnimation(splashDeath);
+		}
+	}
+
+	@Override
 	public void renderGround() {
-		isSelected=false;//cant be selected
-		//drawSelected();
+		isSelected = false;// cant be selected
+		// drawSelected();
 		animation.draw(this, direction, currentFrame);
 		drawTaged();
 	}

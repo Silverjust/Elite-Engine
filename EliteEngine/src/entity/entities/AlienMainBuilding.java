@@ -8,7 +8,6 @@ import entity.Building;
 import entity.Entity;
 import entity.Commander;
 import entity.animation.Animation;
-import entity.animation.Build;
 import entity.animation.Death;
 import game.ImageHandler;
 

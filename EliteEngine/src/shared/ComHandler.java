@@ -107,6 +107,8 @@ public class ComHandler {
 				System.out.println("identifying " + ref.player.name);
 				ClientHandler.send("<identifying "
 						+ ClientHandler.identification + " " + ref.player.name);
+				//ClientHandler.send("<setNation " + ClientHandler.identification
+				//		+ " " + ref.player.nation.ge);
 				// nur an clienthandler
 				break;
 			case "<identifying":

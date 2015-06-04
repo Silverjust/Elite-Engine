@@ -87,7 +87,7 @@ public class Input {
 		}
 
 		if (isKeyFocusInGame()) {
-			if (app.keyCode == Settings.togglePause) {
+			if (app.key == Settings.togglePause) {
 				((GameUpdater) ref.updater).pause = !((GameUpdater) ref.updater).pause;
 			}
 			if (app.keyCode == Settings.changeAbilityMode) {
