@@ -5,11 +5,7 @@ import shared.ref;
 import entity.Attacker;
 import entity.Entity;
 
-public class TargetAttack extends Ability {
-
-	public byte range;
-	public byte damage;
-	public byte pirce;
+public class TargetAttack extends Attack {
 	private Entity target;
 
 	public TargetAttack(PImage[][] IMG, int duration) {

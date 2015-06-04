@@ -52,8 +52,7 @@ public class AlienKaserneArcanum extends Building implements Buildable,
 		commandRange = 250;
 
 		descr = " ";
-		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
-				+ "§prunam: " + prunam + "§hp: " + hp_max;
+		stats = " ";
 		// ************************************
 	}
 

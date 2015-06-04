@@ -5,8 +5,8 @@ import entity.Active;
 import entity.Attacker;
 import entity.Entity;
 import entity.Unit;
-import entity.animation.Ability;
 import entity.animation.Animation;
+import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.TargetAttack;
 import g4p_controls.GEvent;
@@ -73,9 +73,7 @@ public class Ticul extends Unit implements Attacker {
 		basicAttack.eventTime = 500;
 
 		descr = " ";
-		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
-				+ "§prunam: " + prunam + "§hp: " + hp_max + "§dps: "
-				+ basicAttack.damage + "/" + basicAttack.cooldown/1000.0;
+		stats = " ";
 		// ************************************
 	}
 
@@ -129,7 +127,7 @@ public class Ticul extends Unit implements Attacker {
 	}
 
 	@Override
-	public Ability getBasicAttack() {
+	public Attack getBasicAttack() {
 		return basicAttack;
 	}
 

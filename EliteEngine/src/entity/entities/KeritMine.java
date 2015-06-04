@@ -45,9 +45,8 @@ public class KeritMine extends Building implements Buildable {
 		((Extract) stand).efficenty = 20;
 
 		descr = " ";
-		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
-				+ "§prunam: " + prunam + "§hp: " + hp_max + "§resource/s: "
-				+ (((Extract) stand).efficenty / ((Extract) stand).cooldown);
+		stats = "resource/s: "
+				+ (((Extract) stand).efficenty / ((Extract) stand).cooldown * 1000);
 		// ************************************
 	}
 

@@ -47,7 +47,7 @@ public class AlienMainBuilding extends Building implements Buildable, Commander 
 		commandingRange = 250;
 
 		descr = "Alien Main Building§when it dies, you loose";
-		stats = "hp: " + hp_max;
+		stats = " ";
 		// ************************************
 	}
 

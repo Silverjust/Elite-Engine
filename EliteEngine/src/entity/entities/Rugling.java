@@ -3,8 +3,8 @@ package entity.entities;
 import entity.Attacker;
 import entity.Entity;
 import entity.Unit;
-import entity.animation.Ability;
 import entity.animation.Animation;
+import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.TargetAttack;
 import processing.core.PImage;
@@ -105,7 +105,7 @@ public class Rugling extends Unit implements Attacker {
 	}
 
 	@Override
-	public Ability getBasicAttack() {
+	public Attack getBasicAttack() {
 		return basicAttack;
 	}
 

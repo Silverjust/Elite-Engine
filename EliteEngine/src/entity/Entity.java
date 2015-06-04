@@ -217,7 +217,21 @@ public abstract class Entity extends Informing {
 
 	@Override
 	public String getStatistics() {
-		return stats;
+		String stats = "";
+		if (kerit == 0 && pax == 0 && arcanum == 0 && prunam == 0)
+			stats += "§§§§§";
+		else
+			stats += "kerit: " + kerit + "§pax: " + pax + "§arcanum: "
+					+ arcanum + "§prunam: " + prunam + "§§";
+
+		stats += "hp: " + hp_max + " (" + armor + ")§";
+
+		if (this instanceof Attacker) {
+			stats += "dps: " + ((Attacker) this).getBasicAttack().damage + "/"
+					+ ((Attacker) this).getBasicAttack().cooldown / 1000.0
+					+ " (" + ((Attacker) this).getBasicAttack().pirce + ")§";
+		}
+		return stats + this.stats;
 	}
 
 	public void sendDefaultAnimation(Animation oldAnimation) {

@@ -1,9 +1,9 @@
 package entity;
 
-import entity.animation.Ability;
+import entity.animation.Attack;
 
 public interface Attacker {
 
-	Ability getBasicAttack();
+	Attack getBasicAttack();
 
 }

@@ -48,9 +48,7 @@ public class Colum extends Unit {
 		heal.eventTime = 100;
 
 		descr = " ";
-		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
-				+ "§prunam: " + prunam + "§hp: " + hp_max + "§heal/s: "
-				+ heal.heal + "/" + heal.cooldown/1000.0;
+		stats = "heal/s: " + heal.heal + "/" + heal.cooldown / 1000.0;
 		// ************************************
 	}
 

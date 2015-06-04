@@ -6,10 +6,7 @@ import entity.Attacker;
 import entity.Entity;
 import entity.Entity.GroundPosition;
 
-public class AreaAttack extends Ability {
-	public byte range;
-	public byte damage;
-	public byte pirce;
+public class AreaAttack extends Attack {
 	float x, y;
 
 	public AreaAttack(PImage[][] IMG, int duration) {

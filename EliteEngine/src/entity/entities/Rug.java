@@ -6,6 +6,7 @@ import entity.Unit;
 import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.AreaAttack;
+import entity.animation.Attack;
 import entity.animation.Death;
 import processing.core.PImage;
 import shared.Nation;
@@ -64,10 +65,7 @@ public class Rug extends Unit implements Attacker {
 		spawn.eventTime = 500;
 
 		descr = " ";
-		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
-				+ "§prunam: " + prunam + "§hp: " + hp_max + "§dps: "
-				+ basicAttack.damage + "/" + basicAttack.cooldown/1000.0
-				+ "§spawns/s: " + 2 + "/" + spawn.cooldown/1000.0;
+		stats = "spawns/s: " + 2 + "/" + spawn.cooldown / 1000.0;
 		// ************************************
 	}
 
@@ -132,13 +130,13 @@ public class Rug extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		//drawCircle(spawnRange);
+		// drawCircle(spawnRange);
 		animation.draw(this, direction, currentFrame);
 		drawTaged();
 	}
 
 	@Override
-	public Ability getBasicAttack() {
+	public Attack getBasicAttack() {
 		return basicAttack;
 	}
 

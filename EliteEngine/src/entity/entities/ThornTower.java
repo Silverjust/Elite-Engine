@@ -11,6 +11,7 @@ import entity.Entity;
 import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.AreaAttack;
+import entity.animation.Attack;
 import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.TargetAttack;
@@ -62,9 +63,7 @@ public class ThornTower extends Building implements Buildable, Attacker,
 		commandingRange = 250;
 
 		descr = " ";
-		stats = "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum
-				+ "§prunam: " + prunam + "§hp: " + hp_max + "§dps: "
-				+ basicAttack.damage + "/" + basicAttack.cooldown/1000.0;
+		stats = " ";
 		// ************************************
 	}
 
@@ -131,7 +130,7 @@ public class ThornTower extends Building implements Buildable, Attacker,
 	}
 
 	@Override
-	public Ability getBasicAttack() {
+	public Attack getBasicAttack() {
 		return basicAttack;
 	}
 
