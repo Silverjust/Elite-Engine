@@ -158,9 +158,9 @@ public class Rug extends Unit implements Attacker {
 				ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
 						+ " " + (e.y + e.radius + 8) + " " + target.x + " "
 						+ target.y);
-				ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
+				/*ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
 						+ " " + (e.y - e.radius - 8) + " " + target.x + " "
-						+ target.y);
+						+ target.y);*/
 				target = null;
 				startCooldown();
 			}
