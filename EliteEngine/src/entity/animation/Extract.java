@@ -7,7 +7,7 @@ import shared.ref;
 public class Extract extends Ability {
 
 	public float efficenty;
-	public String resource;
+	public String ressource;
 
 	public Extract(PImage[][] IMG, int duration) {
 		super(IMG, duration);
@@ -26,7 +26,7 @@ public class Extract extends Ability {
 		int amount = (int) (e.hp * 1.0 / e.hp_max * efficenty);
 		amount = amount < 0 ? 0 : amount;
 		if (isEvent() && isNotOnCooldown()) {
-			ref.updater.send("<give " + e.player.ip + " " + resource + " "
+			ref.updater.send("<give " + e.player.ip + " " + ressource + " "
 					+ amount);
 			startCooldown();
 		}

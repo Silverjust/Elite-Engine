@@ -43,11 +43,11 @@ public class PrunamHarvester extends Building implements Buildable {
 		sight = 50;
 
 		((Extract) stand).cooldown = 10000;
-		((Extract) stand).resource = "prunam";
+		((Extract) stand).ressource = "prunam";
 		((Extract) stand).efficenty = 10;
 
 		descr = " ";
-		stats = "resource/s: "
+		stats = "ressource/s: "
 				+ (((Extract) stand).efficenty / ((Extract) stand).cooldown * 1000);
 		// ************************************
 	}

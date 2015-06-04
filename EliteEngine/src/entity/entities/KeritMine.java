@@ -44,11 +44,11 @@ public class KeritMine extends Building implements Buildable {
 		sight = 50;
 
 		((Extract) stand).cooldown = 1000;
-		((Extract) stand).resource = "kerit";
+		((Extract) stand).ressource = "kerit";
 		((Extract) stand).efficenty = 10;
 
 		descr = " ";
-		stats = "resource/s: "
+		stats = "ressource/s: "
 				+ (((Extract) stand).efficenty / ((Extract) stand).cooldown * 1000);
 		// ************************************
 	}

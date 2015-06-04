@@ -44,11 +44,11 @@ public class PaxDrillTower extends Building implements Buildable {
 		sight = 50;
 
 		((Extract) stand).cooldown = 1000;
-		((Extract) stand).resource = "pax";
+		((Extract) stand).ressource = "pax";
 		((Extract) stand).efficenty = 14;
 
 		descr = " ";
-		stats = "resource/s: "
+		stats = "ressource/s: "
 				+ (((Extract) stand).efficenty / ((Extract) stand).cooldown * 1000);
 		// ************************************
 	}
@@ -62,7 +62,7 @@ public class PaxDrillTower extends Building implements Buildable {
 	@Override
 	protected void onDeath() {
 		super.onDeath();
-		ref.updater.send("<spawn Kerit 0 " + x + " " + y);
+		ref.updater.send("<spawn Pax 0 " + x + " " + y);
 	}
 
 	@Override
