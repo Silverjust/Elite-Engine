@@ -33,7 +33,7 @@ public class KeritMine extends Building implements Buildable {
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 500;
+		kerit = 250;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;

@@ -33,7 +33,7 @@ public class PaxDrillTower extends Building implements Buildable {
 		xSize = 40;
 		ySize = 40;
 
-		kerit = 1000;
+		kerit = 500;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;

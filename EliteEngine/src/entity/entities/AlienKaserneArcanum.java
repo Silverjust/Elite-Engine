@@ -41,7 +41,7 @@ public class AlienKaserneArcanum extends Building implements Buildable,
 		xSize = 50;
 		ySize = 50;
 
-		kerit = 1200;
+		kerit = 600;
 		pax = 0;
 		arcanum = 40;
 		prunam = 0;

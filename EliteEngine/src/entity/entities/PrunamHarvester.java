@@ -32,7 +32,7 @@ public class PrunamHarvester extends Building implements Buildable {
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 1000;
+		kerit = 500;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
