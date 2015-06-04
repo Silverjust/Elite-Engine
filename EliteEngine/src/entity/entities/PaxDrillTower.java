@@ -9,7 +9,7 @@ import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
 
-public class PrunamExtractor extends Building implements Buildable {
+public class PaxDrillTower extends Building implements Buildable {
 
 	private static PImage standImg;
 	private static PImage previewImg;
@@ -17,15 +17,15 @@ public class PrunamExtractor extends Building implements Buildable {
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
 		});
-		previewImg = standImg = game.ImageHandler.load(path, "PrunamExtractor");
+		previewImg = standImg = game.ImageHandler.load(path, "PaxDrillTower");
 	}
 
-	public PrunamExtractor(String[] c) {
+	public PaxDrillTower(String[] c) {
 		super(c);
 
 		iconImg = standImg;
 		stand = new Extract(standImg, 100);
-		build = new Build(standImg, 4000);
+		build = new Build(standImg, 100);
 		death = new Death(standImg, 100);
 
 		animation = nextAnimation = stand;
@@ -41,8 +41,8 @@ public class PrunamExtractor extends Building implements Buildable {
 		sight = 50;
 
 		((Extract) stand).cooldown = 1000;
-		((Extract) stand).resource = "prunam";
-		((Extract) stand).efficenty = 10;
+		((Extract) stand).resource = "kerit";
+		((Extract) stand).efficenty = 20;
 
 		descr = " ";
 		stats = "resource/s: "
@@ -59,7 +59,7 @@ public class PrunamExtractor extends Building implements Buildable {
 	@Override
 	protected void onDeath() {
 		super.onDeath();
-		ref.updater.send("<spawn Prunam 0 " + x + " " + y);
+		ref.updater.send("<spawn Kerit 0 " + x + " " + y);
 	}
 
 	@Override

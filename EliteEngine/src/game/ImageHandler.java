@@ -40,15 +40,16 @@ public class ImageHandler {
 			classes.add(Ker.class);
 			classes.add(TestLab.class);
 
-			classes.add(Prunam.class);
-			classes.add(Kerit.class);
-			classes.add(PrunamExtractor.class);
-			classes.add(KeritMine.class);
 			classes.add(AlienMainBuilding.class);
 			classes.add(ThornTower.class);
 			classes.add(AlienKaserne.class);
 			classes.add(AlienKaserneArcanum.class);
 			classes.add(AlienKasernePrunam.class);
+
+			classes.add(Kerit.class);
+			classes.add(KeritMine.class);
+			classes.add(Prunam.class);
+			classes.add(PrunamHarvester.class);
 
 			classes.add(GameDrawer.class);
 			classes.add(HUD.class);

@@ -11,6 +11,7 @@ import game.GameDrawer;
 import javax.swing.JFrame;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PFont;
 import shared.CommandHandler;
 import shared.Helper;
@@ -21,7 +22,7 @@ import shared.ref;
 public class MainApp extends PApplet {
 	public static void main(String args[]) {
 		boolean fullscreen = false;
-		 fullscreen = true;
+		fullscreen = true;
 		if (fullscreen) {
 			PApplet.main(new String[] { "--present", "main.MainApp" });
 		} else {
@@ -44,11 +45,11 @@ public class MainApp extends PApplet {
 		frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		frame.setResizable(true);
 		frame.setTitle("EliteEngine");
-		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		//frame.setVisible(true);
+		// frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		// frame.setVisible(true);
 		frameRate(60);
 		font = createFont("Aharoni Fett", 40);
-		ref.setTextScale(0.5F);//so ungefär
+		ref.setTextScale(0.5F);// so ungefär
 		ref.setFont(font);
 		System.out.println(font.ascent());
 		textFont(font);
@@ -130,4 +131,25 @@ public class MainApp extends PApplet {
 		ClientHandler.clientEvent(someClient);
 	}
 
+	@Override
+	public void keyPressed() {
+		if (key == PConstants.ESC) {
+
+		}
+	}
+
+	public void keyReleased() {
+		if (keyCode == ESC || key == ESC) {
+			key = 0;
+			keyCode = 0;
+			Chat.println("Gewinner sagt", "NEIN");
+		}
+	}
+
+	public void keyTyped() {
+		if (keyCode == ESC || key == ESC) {
+			key = 0;
+			keyCode = 0;
+		}
+	}
 }

@@ -32,7 +32,6 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void setup() {
-		this.name = name;
 
 		starButton = new GButton(ref.app, ref.app.width - 320,
 				ref.app.height - 200, 300, 175);

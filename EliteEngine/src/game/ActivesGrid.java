@@ -14,7 +14,7 @@ import entity.entities.Ker;
 import entity.entities.Kerit;
 import entity.entities.KeritMine;
 import entity.entities.Prunam;
-import entity.entities.PrunamExtractor;
+import entity.entities.PrunamHarvester;
 import entity.entities.Rug;
 import entity.entities.ThornTower;
 import entity.entities.Ticul;
@@ -46,7 +46,7 @@ public class ActivesGrid {
 				false);
 		addUpgradeActive(5, 2, AlienMainBuilding.class, KeritMine.class,
 				Kerit.class, false);
-		addUpgradeActive(6, 3, AlienMainBuilding.class, PrunamExtractor.class,
+		addUpgradeActive(6, 3, AlienMainBuilding.class, PrunamHarvester.class,
 				Prunam.class, false);
 
 		addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
