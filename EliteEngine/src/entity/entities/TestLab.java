@@ -32,6 +32,7 @@ public class TestLab extends Unit {
 		// ************************************
 		xSize = 15;
 		ySize = 15;
+		
 
 		hp = hp_max = 500;
 		speed = 2.0f;

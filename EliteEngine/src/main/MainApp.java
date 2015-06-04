@@ -138,18 +138,4 @@ public class MainApp extends PApplet {
 		}
 	}
 
-	public void keyReleased() {
-		if (keyCode == ESC || key == ESC) {
-			key = 0;
-			keyCode = 0;
-			Chat.println("Gewinner sagt", "NEIN");
-		}
-	}
-
-	public void keyTyped() {
-		if (keyCode == ESC || key == ESC) {
-			key = 0;
-			keyCode = 0;
-		}
-	}
 }

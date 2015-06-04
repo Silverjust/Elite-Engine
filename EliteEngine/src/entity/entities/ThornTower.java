@@ -47,7 +47,9 @@ public class ThornTower extends Building implements Buildable, Attacker,
 		ySize = 30;
 
 		kerit = 700;
-
+		pax = 100;
+		arcanum = 0;
+		prunam = 0;
 		build.setBuildTime(10000);
 
 		sight = 70;

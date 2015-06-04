@@ -33,6 +33,9 @@ public class PrunamHarvester extends Building implements Buildable {
 		ySize = 30;
 
 		kerit = 1000;
+		pax = 0;
+		arcanum = 0;
+		prunam = 0;
 		build.setBuildTime(10000);
 
 		hp = hp_max = 100;

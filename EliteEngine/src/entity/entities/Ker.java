@@ -37,8 +37,12 @@ public class Ker extends Unit implements Attacker {
 		// ************************************
 		xSize = 30;
 		ySize = 30;
-		
-		kerit=880;
+
+		kerit = 880;
+		pax = 0;
+		arcanum = 0;
+		prunam = 0;
+		trainTime = 10000;
 
 		hp = hp_max = 300;
 		speed = 0.9f;
@@ -61,7 +65,7 @@ public class Ker extends Unit implements Attacker {
 	@Override
 	public void updateDecisions() {
 
-		//isTaged = false;
+		// isTaged = false;
 		if (animation == stand) {// ****************************************************
 			String s = "";
 			for (Entity e : player.visibleEntities) {

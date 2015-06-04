@@ -42,6 +42,9 @@ public class AlienKaserne extends Building implements Buildable, Commander,
 		ySize = 50;
 
 		kerit = 1000;
+		pax = 0;
+		arcanum = 0;
+		prunam = 0;
 		build.setBuildTime(5000);
 
 		sight = 50;

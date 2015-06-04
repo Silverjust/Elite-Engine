@@ -32,6 +32,10 @@ public class Colum extends Unit {
 		ySize = 45;
 
 		kerit = 600;
+		pax = 0;
+		arcanum = 0;
+		prunam = 0;
+		trainTime = 5000;
 
 		hp = hp_max = 300;
 		speed = 0.9f;
@@ -39,8 +43,6 @@ public class Colum extends Unit {
 		sight = 70;
 		groundPosition = Entity.GroundPosition.AIR;
 		height = 50;
-
-		trainTime = 1000;
 
 		heal.range = (byte) (radius + 25);
 		heal.heal = 25;

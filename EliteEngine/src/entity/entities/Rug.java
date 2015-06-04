@@ -46,7 +46,10 @@ public class Rug extends Unit implements Attacker {
 		xSize = 35;
 		ySize = 35;
 
-		kerit = 480;
+		kerit = 480;pax = 0;
+		arcanum = 0;
+		prunam = 0;
+		trainTime = 5000;
 
 		hp = hp_max = 120;
 		speed = 0.5f;

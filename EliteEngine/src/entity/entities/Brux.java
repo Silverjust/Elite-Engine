@@ -39,6 +39,9 @@ public class Brux extends Unit implements Attacker {
 		ySize = 30;
 
 		kerit = 152;
+		pax = 0;
+		arcanum = 0;
+		prunam = 0;
 		trainTime = 3000;
 
 		hp = hp_max = 120;
