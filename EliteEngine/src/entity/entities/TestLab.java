@@ -24,8 +24,8 @@ public class TestLab extends Unit {
 		super(c);
 
 		iconImg = standingImg;
-		stand = new Animation(standingImg,100);
-		walk = new Animation(standingImg,100);
+		stand = new Animation(standingImg,1000);
+		walk = new Animation(standingImg,1000);
 		death = new Death(standingImg,200);
 
 		animation = nextAnimation = walk;

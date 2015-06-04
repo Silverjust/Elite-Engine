@@ -36,8 +36,8 @@ public class ThornTower extends Building implements Buildable, Attacker,
 		super(c);
 
 		iconImg = standImg;
-		stand = new Animation(standImg, 100);
-		build = new Build(standImg, 7000);
+		stand = new Animation(standImg, 1000);
+		build = new Build(standImg, 1000);
 		death = new Death(standImg, 100);
 		basicAttack = new TargetAttack(standImg, 800);
 

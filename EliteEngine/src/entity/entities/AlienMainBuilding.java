@@ -30,9 +30,9 @@ public class AlienMainBuilding extends Building implements Buildable, Commander 
 		super(c);
 
 		iconImg = standImg;
-		stand = new Animation(standImg, 100);
-		build = new Build(standImg, 100);
-		death = new Death(standImg, 100);
+		stand = new Animation(standImg, 1000);
+		build = null;
+		death = new Death(standImg, 1000);
 
 		animation = nextAnimation = stand;
 		// ************************************

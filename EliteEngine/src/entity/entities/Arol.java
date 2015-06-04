@@ -28,7 +28,7 @@ public class Arol extends Unit implements Attacker {
 		super(c);
 		iconImg = standingImg;
 
-		stand = new Animation(standingImg, 100);
+		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new AreaAttack(standingImg, 800);

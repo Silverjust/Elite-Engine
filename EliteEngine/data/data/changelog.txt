@@ -1,3 +1,5 @@
+add selection to group with shift
+-----------------
 added all ressources
 -----------------------
 brux and rug nerf

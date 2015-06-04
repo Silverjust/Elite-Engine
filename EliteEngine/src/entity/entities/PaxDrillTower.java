@@ -24,8 +24,8 @@ public class PaxDrillTower extends Building implements Buildable {
 		super(c);
 
 		iconImg = standImg;
-		stand = new Extract(standImg, 100);
-		build = new Build(standImg, 100);
+		stand = new Extract(standImg, 1000);
+		build = new Build(standImg, 1000);
 		death = new Death(standImg, 100);
 
 		animation = nextAnimation = stand;

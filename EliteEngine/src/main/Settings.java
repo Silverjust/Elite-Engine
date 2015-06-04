@@ -7,6 +7,7 @@ public class Settings {
 	public static int mouseSelect = PConstants.LEFT;
 	public static int toggleChat = PConstants.ENTER;
 	public static int strg = PConstants.CONTROL;
+	public static int shift = PConstants.SHIFT;
 	public static int changeAbilityMode = PConstants.TAB;
 
 	public static int togglePause = 'p';

@@ -31,9 +31,9 @@ public class AlienKaserne extends Building implements Buildable, Commander,
 		super(c);
 
 		iconImg = standImg;
-		stand = new Animation(standImg, 100);
+		stand = new Animation(standImg, 1000);
 		build = new Build(standImg, 5000);
-		death = new Death(standImg, 100);
+		death = new Death(standImg, 1000);
 		training = new Training(standImg, 100);
 
 		animation = nextAnimation = build;

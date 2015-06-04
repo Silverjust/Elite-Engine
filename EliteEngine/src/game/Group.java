@@ -40,7 +40,14 @@ public class Group {
 
 	public void handleClickEvent(GGameButton gamebutton, GEvent event) {
 		if (event == GEvent.PRESSED) {
-			if (((GameUpdater) ref.updater).input.strgMode) {
+			if (((GameUpdater) ref.updater).input.shiftMode) {
+
+				for (Entity entity : ref.updater.selected) {
+					if (!groupEntities.contains(entity))
+						groupEntities.add(entity);
+				}
+			} else if (((GameUpdater) ref.updater).input.strgMode) {
+
 				boolean containsUnits = false;
 				groupEntities.clear();
 				for (Entity entity : ref.updater.selected) {
@@ -49,6 +56,7 @@ public class Group {
 						containsUnits = true;
 				}
 				unitActives = containsUnits;
+
 			}
 			GroupHandler.recentGroup = this;
 			ActivesGrid.showUnitActives = unitActives;

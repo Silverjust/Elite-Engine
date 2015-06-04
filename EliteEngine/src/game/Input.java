@@ -22,6 +22,7 @@ public class Input {
 	boolean isOpeningChat;
 	boolean isMPressedOutOfFocus;
 	boolean strgMode;// rename
+	boolean shiftMode;// rename
 
 	int doubleClickIntervall;
 	int doubleClickStart;
@@ -70,23 +71,23 @@ public class Input {
 	}
 
 	public void keyPressed() {// ********************************************************
-		if (!isChatVisible && app.key == Settings.toggleChat) {
+		if (!isChatVisible && app.keyCode == Settings.toggleChat) {
 			isOpeningChat = true;
 		}
-		if (isChatVisible && app.key == Settings.toggleChat
+		if (isChatVisible && app.keyCode == Settings.toggleChat
 				&& !Chat.chatLine.hasFocus()) {
 			Chat.hide();
 			isChatVisible = false;
 		}
 
-		if (app.key == PConstants.BACKSPACE
+		if (app.keyCode == PConstants.BACKSPACE
 				&& Chat.chatLine.getText().equals(" ")) {
 			Chat.hide();
 			isChatVisible = false;
 		}
 
 		if (isKeyFocusInGame()) {
-			if (app.key == Settings.togglePause) {
+			if (app.keyCode == Settings.togglePause) {
 				((GameUpdater) ref.updater).pause = !((GameUpdater) ref.updater).pause;
 			}
 			if (app.keyCode == Settings.changeAbilityMode) {
@@ -100,10 +101,13 @@ public class Input {
 			if (app.keyCode == Settings.strg) {
 				strgMode = true;
 			}
+			if (app.keyCode == Settings.shift) {
+				shiftMode = true;
+			}
 
 			// System.out.println(app.key);
 			for (int i = 0; i < Settings.hotKeys.length; i++) {
-				if (app.key == Settings.hotKeys[i]) {
+				if (app.keyCode == Settings.hotKeys[i]) {
 					GroupHandler.fireGroup(i);
 
 				}
@@ -111,6 +115,8 @@ public class Input {
 			for (int x = 0; x < 7; x++) {
 				for (int y = 0; y < 3; y++) {
 					if (app.key == Settings.unitsShortcuts[y][x]) {
+						HUD.activesGrid.fire(x, y);
+					} else if (app.key == Settings.unitsShortcuts[y][x]) {
 						HUD.activesGrid.fire(x, y);
 					}
 				}
@@ -127,6 +133,9 @@ public class Input {
 		}
 		if (app.keyCode == Settings.strg) {
 			strgMode = false;
+		}
+		if (app.keyCode == Settings.shift) {
+			shiftMode = false;
 		}
 	}
 

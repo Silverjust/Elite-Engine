@@ -21,7 +21,7 @@ public class Prunam extends Building {
 		player = ref.updater.neutral;// neutral
 
 		iconImg = standImg;
-		stand = new Animation(standImg,1);
+		stand = new Animation(standImg,1000);
 		build = null;
 		death = null;
 
