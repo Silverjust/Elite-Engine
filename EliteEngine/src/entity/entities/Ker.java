@@ -41,7 +41,7 @@ public class Ker extends Unit implements Attacker {
 		kerit = 880;
 		pax = 0;
 		arcanum = 0;
-		prunam = 0;
+		prunam = 35;
 		trainTime = 10000;
 
 		hp = hp_max = 300;

@@ -30,20 +30,21 @@ public class ArcanumMine extends Building implements Buildable {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 50;
+		ySize = 50;
 
-		kerit = 1000;pax = 0;
+		kerit = 1000;
+		pax = 0;
 		arcanum = 0;
 		prunam = 0;
 		build.setBuildTime(10000);
 
-		hp = hp_max = 100;
+		hp = hp_max = 500;
 		radius = 15;
 		sight = 50;
 
-		((Extract) stand).cooldown = 1000;
-		((Extract) stand).resource = "kerit";
+		((Extract) stand).cooldown = 5000;
+		((Extract) stand).resource = "arcanum";
 		((Extract) stand).efficenty = 20;
 
 		descr = " ";

@@ -64,7 +64,7 @@ public class Input {
 			if (Helper.isMouseOver(0, ref.app.height - rimSize, ref.app.width,
 					ref.app.height)
 					&& GameDrawer.yMapOffset - app.height + HUD.height
-							+ ref.updater.map.height * GameDrawer.zoom > 0)
+							+ ref.updater.map.height / 2 * GameDrawer.zoom > 0)
 				GameDrawer.yMapOffset -= screenSpeed;
 		}
 	}

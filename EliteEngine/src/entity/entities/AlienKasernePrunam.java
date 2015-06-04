@@ -14,7 +14,7 @@ import entity.animation.Training;
 import game.ImageHandler;
 
 public class AlienKasernePrunam extends Building implements Buildable,
-		Commander,Trainer {
+		Commander, Trainer {
 	private int commanderRange;
 
 	private Training training;
@@ -41,9 +41,10 @@ public class AlienKasernePrunam extends Building implements Buildable,
 		xSize = 50;
 		ySize = 50;
 
-		kerit = 1200;pax = 0;
+		kerit = 1200;
+		pax = 0;
 		arcanum = 0;
-		prunam = 0;
+		prunam = 10;
 		build.setBuildTime(10000);
 
 		sight = 50;
@@ -74,12 +75,14 @@ public class AlienKasernePrunam extends Building implements Buildable,
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
 	}
+
 	@Override
 	public void display() {
 		super.display();
 		if (animation == training)
 			drawBar(training.getCooldownPercent());
 	}
+
 	public PImage preview() {
 		return standImg;
 	}

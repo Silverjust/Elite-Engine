@@ -46,7 +46,8 @@ public class Rug extends Unit implements Attacker {
 		xSize = 35;
 		ySize = 35;
 
-		kerit = 480;pax = 0;
+		kerit = 480;
+		pax = 300;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 5000;
@@ -161,9 +162,11 @@ public class Rug extends Unit implements Attacker {
 				ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
 						+ " " + (e.y + e.radius + 8) + " " + target.x + " "
 						+ target.y);
-				/*ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
-						+ " " + (e.y - e.radius - 8) + " " + target.x + " "
-						+ target.y);*/
+				/*
+				 * ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
+				 * + " " + (e.y - e.radius - 8) + " " + target.x + " " +
+				 * target.y);
+				 */
 				target = null;
 				startCooldown();
 			}

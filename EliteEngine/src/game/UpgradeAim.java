@@ -24,8 +24,7 @@ public class UpgradeAim extends BuildAim {
 			ref.updater.send("<remove " + replaced.number);
 			ref.updater.send("<spawn " + buildable.getClass().getSimpleName()
 					+ " " + builder.player.ip + " " + x + " " + y);
-			ref.updater.send("<give " + builder.player.ip + " " + "kerit"
-					+ " -" + ((Entity) buildable).kerit);
+			((Entity) buildable).buyFrom(builder.player);
 		}
 	}
 
@@ -42,6 +41,6 @@ public class UpgradeAim extends BuildAim {
 				inCommanderRange = true;
 		}
 		return rightPlace && inCommanderRange
-				&&  ((Entity) buildable).canBeBought(builder.player);
+				&& ((Entity) buildable).canBeBought(builder.player);
 	}
 }

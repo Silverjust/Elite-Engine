@@ -7,12 +7,16 @@ import entity.entities.AlienKaserne;
 import entity.entities.AlienKaserneArcanum;
 import entity.entities.AlienKasernePrunam;
 import entity.entities.AlienMainBuilding;
+import entity.entities.Arcanum;
+import entity.entities.ArcanumMine;
 import entity.entities.Arol;
 import entity.entities.Brux;
 import entity.entities.Colum;
 import entity.entities.Ker;
 import entity.entities.Kerit;
 import entity.entities.KeritMine;
+import entity.entities.Pax;
+import entity.entities.PaxDrillTower;
 import entity.entities.Prunam;
 import entity.entities.PrunamHarvester;
 import entity.entities.Rug;
@@ -46,6 +50,10 @@ public class ActivesGrid {
 				false);
 		addUpgradeActive(5, 2, AlienMainBuilding.class, KeritMine.class,
 				Kerit.class, false);
+		addUpgradeActive(6, 2, AlienMainBuilding.class, PaxDrillTower.class,
+				Pax.class, false);
+		addUpgradeActive(5, 3, AlienMainBuilding.class, ArcanumMine.class,
+				Arcanum.class, false);
 		addUpgradeActive(6, 3, AlienMainBuilding.class, PrunamHarvester.class,
 				Prunam.class, false);
 

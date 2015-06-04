@@ -32,7 +32,7 @@ public class Colum extends Unit {
 		ySize = 45;
 
 		kerit = 600;
-		pax = 0;
+		pax = 300;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 5000;

@@ -38,11 +38,11 @@ public class PrunamHarvester extends Building implements Buildable {
 		prunam = 0;
 		build.setBuildTime(10000);
 
-		hp = hp_max = 100;
+		hp = hp_max = 500;
 		radius = 15;
 		sight = 50;
 
-		((Extract) stand).cooldown = 1000;
+		((Extract) stand).cooldown = 10000;
 		((Extract) stand).resource = "prunam";
 		((Extract) stand).efficenty = 10;
 

@@ -27,8 +27,8 @@ public class Arcanum extends Building {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 50;
+		ySize = 50;
 
 		radius = 15;
 

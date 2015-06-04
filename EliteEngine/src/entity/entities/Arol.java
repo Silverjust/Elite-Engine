@@ -40,7 +40,7 @@ public class Arol extends Unit implements Attacker {
 
 		kerit = 1000;
 		pax = 0;
-		arcanum = 0;
+		arcanum = 90;
 		prunam = 0;
 		trainTime =10000;
 

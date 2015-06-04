@@ -27,12 +27,12 @@ public class Pax extends Building {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 40;
+		ySize = 40;
 
-		radius = 15;
+		radius = 0;
 
-		descr = "Kerit";
+		descr = "pax";
 		// ************************************
 	}
 
@@ -41,7 +41,7 @@ public class Pax extends Building {
 	}
 
 	@Override
-	public void renderGround() {
+	public void renderUnder() {
 		animation.draw(this, (byte) 0, currentFrame);
 	}
 

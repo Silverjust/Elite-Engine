@@ -8,10 +8,10 @@ import processing.core.PImage;
 import shared.Player;
 import shared.ref;
 
-public class Map{
+public class Map {
 	public Graph graph;
 
-	public int width = 800, height = 450;
+	public int width = 800, height = 900;
 	public final int fogScale = 7;
 
 	public PImage textur;
@@ -30,7 +30,7 @@ public class Map{
 	}
 
 	public void setup() {
-		//PathHandler.makeGraph(graph, collision, 20, 20);
+		// PathHandler.makeGraph(graph, collision, 20, 20);
 	}
 
 	public void updateFogofWar(Player player) {

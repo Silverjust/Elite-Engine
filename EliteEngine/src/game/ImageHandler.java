@@ -50,8 +50,10 @@ public class ImageHandler {
 			classes.add(KeritMine.class);
 			classes.add(Pax.class);
 			classes.add(PaxDrillTower.class);
+			classes.add(Arcanum.class);
+			classes.add(ArcanumMine.class);
 			classes.add(Prunam.class);
-			// classes.add(PrunamHarvester.class);
+			classes.add(PrunamHarvester.class);
 
 			classes.add(GameDrawer.class);
 			classes.add(HUD.class);

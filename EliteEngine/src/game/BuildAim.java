@@ -71,8 +71,7 @@ public class BuildAim extends Aim {
 		if (canPlaceAt(x, y)) {
 			ref.updater.send("<spawn " + buildable.getClass().getSimpleName()
 					+ " " + builder.player.ip + " " + x + " " + y);
-			ref.updater.send("<give " + builder.player.ip + " " + "kerit"
-					+ " -" + ((Entity) buildable).kerit);
+			((Entity) buildable).buyFrom(builder.player);
 		}
 	}
 }

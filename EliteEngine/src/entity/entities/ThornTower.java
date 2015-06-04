@@ -46,7 +46,7 @@ public class ThornTower extends Building implements Buildable, Attacker,
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 700;
+		kerit = 500;
 		pax = 100;
 		arcanum = 0;
 		prunam = 0;

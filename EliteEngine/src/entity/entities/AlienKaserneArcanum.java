@@ -41,8 +41,9 @@ public class AlienKaserneArcanum extends Building implements Buildable,
 		xSize = 50;
 		ySize = 50;
 
-		kerit = 1200;pax = 0;
-		arcanum = 0;
+		kerit = 1200;
+		pax = 0;
+		arcanum = 40;
 		prunam = 0;
 		build.setBuildTime(10000);
 

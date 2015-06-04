@@ -38,11 +38,11 @@ public class GameDrawer {
 		ref.app.stroke(0);
 
 		ref.app.image(ref.updater.map.textur, 0, 0, ref.updater.map.width,
-				ref.updater.map.height);
+				ref.updater.map.height / 2);
 		ref.updater.map.updateFogofWar(ref.player);
 		ref.app.blendMode(PConstants.MULTIPLY);
 		ref.app.image(ref.updater.map.fogOfWar, 0, 0, ref.updater.map.width,
-				ref.updater.map.height);
+				ref.updater.map.height);// hä?
 		ref.app.blendMode(PConstants.BLEND);
 		ref.app.imageMode(PConstants.CENTER);
 		ref.app.rectMode(PConstants.CENTER);
