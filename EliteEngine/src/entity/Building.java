@@ -1,12 +1,26 @@
 package entity;
 
+import processing.core.PImage;
+import shared.Nation;
 import shared.ref;
 import entity.animation.Build;
+import g4p_controls.GEvent;
+import g4p_controls.GGameButton;
+import game.AimHandler;
 import game.Chat;
+import game.ImageHandler;
+import game.SetTargetAim;
 
 public abstract class Building extends Entity {
 
+	private static PImage setTarget;
 	public Build build;
+
+	public static void loadImages() {
+		String path = path(Nation.NEUTRAL, new Object() {
+		});
+		setTarget = ImageHandler.load(path, "setTarget");
+	}
 
 	public Building(String[] c) {
 		if (c != null) {
@@ -41,9 +55,9 @@ public abstract class Building extends Entity {
 	@Override
 	public void display() {
 		super.display();
-		if (animation == build) 
+		if (animation == build)
 			drawBar(build.getCooldownPercent());
-		
+
 	}
 
 	public static float xToGrid(float x) {
@@ -55,7 +69,7 @@ public abstract class Building extends Entity {
 	}
 
 	public void drawOnMinimap() {
-		ref.app.fill(player.playerColor);
+		ref.app.fill(player.color);
 		ref.app.rect(x, y, radius * 2, radius * 2);
 	}
 
@@ -65,6 +79,32 @@ public abstract class Building extends Entity {
 				+ "should not have a shadow");
 		Chat.println(this.getClass().getSimpleName() + "",
 				"should not have a shadow");
+	}
+
+	public static class SetTargetActive extends Active {
+
+		public SetTargetActive(int x, int y, char n) {
+			super(x, y, n, setTarget);
+			clazz = Trainer.class;
+		}
+
+		@Override
+		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+			
+				AimHandler.setAim(new SetTargetAim(clazz));
+			
+		}
+
+		@Override
+		public String getDesription() {
+			return "sets the Target,§where new units walk to";
+		}
+
+		@Override
+		public String getStatistics() {
+			return null;
+		}
+		
 	}
 
 }

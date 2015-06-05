@@ -18,6 +18,8 @@ public abstract class Updater {
 	public HashMap<String, Player> player;
 	public Player neutral;
 
+	public GameState gameState = GameState.PLAY;
+
 	public abstract void update();
 
 	public abstract void write(String ip, String[] c);
@@ -32,4 +34,8 @@ public abstract class Updater {
 	}
 
 	public abstract void send(String string);
+
+	public enum GameState {
+		PLAY, PAUSE, LOST, WON
+	}
 }

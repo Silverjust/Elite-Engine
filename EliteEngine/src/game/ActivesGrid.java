@@ -42,6 +42,7 @@ public class ActivesGrid {
 		addActive(4, 2, Ticul.Smite.class, true);
 		addActive(3, 2, Ticul.Flash.class, true);
 
+		addActive(1, 1, Building.SetTargetActive.class, false);
 		addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class, false);
 		addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class, false);
 		addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class,

@@ -1,3 +1,6 @@
+added win/loose
+new ability: set target(q)
+---------------------------
 changed rugling
 ---------------------
 add selection to group with shift

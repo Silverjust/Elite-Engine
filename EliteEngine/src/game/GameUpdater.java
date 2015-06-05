@@ -15,8 +15,6 @@ public class GameUpdater extends Updater {
 
 	public Input input;
 
-	public boolean pause = false;
-
 	public GameUpdater() {
 		player = ref.preGame.player;
 		neutral = Player.createNeutralPlayer();
@@ -27,7 +25,7 @@ public class GameUpdater extends Updater {
 
 	public void update() {
 
-		if (!pause) {
+		if (gameState == GameState.PLAY) {
 			input.update();
 			for (int i = 0; i < toAdd.size(); i++) {
 				Entity.entityCounter += 1;

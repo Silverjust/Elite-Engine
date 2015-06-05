@@ -6,11 +6,13 @@ import shared.ref;
 
 public class AimHandler {
 
-	private static PImage buildImg;
+	private static PImage buildImg, selectImg, shootImg;
 	static Aim aim;
 
 	public static void loadImages() {
 		buildImg = ImageHandler.load("", "build");
+		selectImg = ImageHandler.load("", "select");
+		shootImg = ImageHandler.load("", "shoot");
 	}
 
 	public static void setup() {
@@ -25,7 +27,7 @@ public class AimHandler {
 	public static void execute() {
 		if (aim != null) {
 			aim.execute();
-			//abort();
+			// abort();
 		}
 	}
 
@@ -51,6 +53,12 @@ public class AimHandler {
 			break;
 		case BUILD:
 			ref.app.cursor(buildImg, 15, 15);
+			break;
+		case SELECT:
+			ref.app.cursor(selectImg, 15, 15);
+			break;
+		case SHOOT:
+			ref.app.cursor(shootImg, 15, 15);
 			break;
 		default:
 			break;

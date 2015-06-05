@@ -7,6 +7,7 @@ import javax.naming.NoInitialContextException;
 
 import main.ClientHandler;
 import processing.core.PApplet;
+import shared.Updater.GameState;
 import entity.Entity;
 import entity.Unit;
 import game.GameUpdater;
@@ -107,18 +108,17 @@ public class ComHandler {
 				System.out.println("identifying " + ref.player.name);
 				ClientHandler.send("<identifying "
 						+ ClientHandler.identification + " " + ref.player.name);
-				//ClientHandler.send("<setNation " + ClientHandler.identification
-				//		+ " " + ref.player.nation.ge);
+				ClientHandler.send("<setNation " + ClientHandler.identification
+						+ " " + ref.player.nation.toString());
+				// TODO send color
 				// nur an clienthandler
 				break;
 			case "<identifying":
 				ref.preGame.addPlayer(c[1], c[2]);
 				break;
 			case "<setNation":
-				n = Integer.parseInt(c[2]);
-				ref.preGame.player.get(c[1]).nation = Nation.fromNumber(n);
+				ref.preGame.player.get(c[1]).nation = Nation.fromString(c[2]);
 				break;
-
 			case "<load":
 				ref.preGame.startLoading();
 				break;
@@ -128,6 +128,21 @@ public class ComHandler {
 				break;
 			case "<startGame":
 				ref.loader.startGame();
+				break;
+			case "<pause":
+				if (Boolean.valueOf(c[1])) {
+					ref.updater.gameState = GameState.PAUSE;
+				} else {
+					ref.updater.gameState = GameState.PLAY;
+				}
+				break;
+			case "<lost":
+				p = ref.updater.player.get(c[1]);
+				if (p == ref.player) {
+					ref.updater.gameState = GameState.LOST;
+				} else {
+					ref.updater.gameState = GameState.WON;
+				}
 				break;
 			default:
 				System.err.println(com + " was not found");

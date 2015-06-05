@@ -10,10 +10,10 @@ import game.HUD;
 /**
  * Aktive Fähigkeit
  * */
-public abstract class Active extends Informing {
+public abstract class Active implements Informing {
 	public GGameButton button;
 
-	public Class<? extends Entity> clazz;
+	public Class<?> clazz;
 
 	protected int cooldown;
 	protected int cooldownTimer;

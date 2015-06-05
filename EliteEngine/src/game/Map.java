@@ -25,8 +25,8 @@ public class Map {
 	public void loadImages() {
 		textur = ImageHandler.load("", "mapTextur");
 		collision = ImageHandler.load("", "mapColl");
-		fogOfWar = ref.app.createGraphics(width / fogScale, height / fogScale,
-				PConstants.P2D);
+		fogOfWar = ref.app.createGraphics(width / fogScale, height / 2
+				/ fogScale, PConstants.P2D);
 	}
 
 	public void setup() {

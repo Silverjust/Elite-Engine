@@ -6,31 +6,6 @@ import entity.Entity;
 import game.GameDrawer;
 
 public class Helper {
-	@Deprecated
-	public static String nationToString(Nation n) {
-		String S = null;
-		switch (n) {
-		case AHNEN:
-			S = "ahnen";
-			break;
-		case ALIENS:
-			S = "aliens";
-			break;
-		case ROBOTS:
-			S = "robots";
-			break;
-		case SCIENTISTS:
-			S = "scientists";
-			break;
-		case HUMANS:
-			S = "humans";
-			break;
-		case NEUTRAL:
-			S = "neutral";
-			break;
-		}
-		return S;
-	}
 
 	public static byte getDirection(float x, float y, float tx, float ty) {
 		float a = (float) Math.toDegrees(Math.atan2(y - ty, x - tx));
@@ -42,6 +17,7 @@ public class Helper {
 		return (0 <= b && b <= 8) ? b : 0;
 	}
 
+	@Deprecated
 	public static boolean StringToBoolean(String S) {
 		boolean b = false;
 		if (S.equals("true")) {

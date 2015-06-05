@@ -17,7 +17,7 @@ public class MouseSelection {
 	}
 
 	public void disp() {
-		ref.app.stroke(ref.player.playerColor);
+		ref.app.stroke(ref.player.color);
 		ref.app.fill(0, 0);
 		ref.app.rect(x1, y1 / 2, Helper.gridToX(ref.app.mouseX) - x1,
 				Helper.gridToY(ref.app.mouseY) / 2 - y1 / 2);

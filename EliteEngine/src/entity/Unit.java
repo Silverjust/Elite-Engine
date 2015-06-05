@@ -84,7 +84,7 @@ public abstract class Unit extends Entity {
 	}
 
 	public void drawOnMinimap() {
-		ref.app.fill(player.playerColor);
+		ref.app.fill(player.color);
 		ref.app.ellipse(x, y, radius * 2, radius * 2);
 	}
 

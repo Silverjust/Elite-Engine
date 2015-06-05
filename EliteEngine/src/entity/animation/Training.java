@@ -3,6 +3,7 @@ package entity.animation;
 import entity.Entity;
 import entity.Trainer;
 import entity.Unit;
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 
@@ -24,14 +25,24 @@ public class Training extends Ability {
 	@Override
 	public void updateAbility(Entity e) {
 		if (toTrain != null && isNotOnCooldown()) {
-			if (toTrain.canBeBought(e.player)) {
-				ref.updater.send("<spawn " + toTrain.getClass().getSimpleName()
-						+ " " + e.player.ip + " "
-						+ (e.x + e.radius + toTrain.radius) + " "
-						+ (e.y + e.radius + toTrain.radius) + " " + (e.x + 75)
-						+ " " + (e.y + 75));
-				toTrain = null;
-			}
+			float xt = ((Trainer) e).getXTarget();
+			float yt = ((Trainer) e).getYTarget();
+
+			ref.updater.send("<spawn "
+					+ toTrain.getClass().getSimpleName()
+					+ " "
+					+ e.player.ip
+					+ " "
+					+ (e.x + (xt - e.x) / PApplet.dist(e.x, e.y, xt, yt)
+							* (e.radius + toTrain.radius))
+					+ " "
+					+ (e.y + (yt - e.y) / PApplet.dist(e.x, e.y, xt, yt)
+							* (e.radius + toTrain.radius))//
+					+ " " //
+					+ xt //
+					+ " " //
+					+ yt);
+			toTrain = null;
 
 		}
 

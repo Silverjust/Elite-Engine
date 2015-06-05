@@ -13,7 +13,7 @@ import game.Chat;
 import game.GameDrawer;
 import game.ImageHandler;
 
-public abstract class Entity extends Informing {
+public abstract class Entity implements Informing {
 	// TODO upgrades für einheiten
 	public static int entityCounter;
 	public int number;
@@ -140,7 +140,7 @@ public abstract class Entity extends Informing {
 
 	protected void drawSelected() {
 		if (isSelected && isAlive()) {
-			ref.app.tint(player.playerColor);
+			ref.app.tint(player.color);
 			ref.app.image(selectedImg, xToGrid(x), yToGrid(y - height),
 					radius * 2, radius);
 			ref.app.tint(255);
@@ -151,7 +151,7 @@ public abstract class Entity extends Informing {
 		/** just for debug */
 		if (isTaged) {
 			ref.app.fill(0, 0);
-			ref.app.stroke(player.playerColor);
+			ref.app.stroke(player.color);
 			ref.app.rect(xToGrid(x), yToGrid(y - height) - radius * 0.3f,
 					radius * 2, radius * 1.5f);
 			ref.app.stroke(0);
@@ -164,7 +164,7 @@ public abstract class Entity extends Informing {
 			ref.app.fill(0, 150);
 			ref.app.rect(xToGrid(x), yToGrid(y - height) - radius * 1.5f,
 					radius * 2, h);
-			ref.app.tint(player.playerColor);
+			ref.app.tint(player.color);
 			ref.app.image(hpImg, xToGrid(x), yToGrid(y - height) - radius
 					* 1.5f, radius * 2 * hp / hp_max, h);
 			ref.app.tint(255);
@@ -359,6 +359,13 @@ public abstract class Entity extends Informing {
 		ref.updater.send("<give " + p.ip + " " + "pax" + " -" + pax);
 		ref.updater.send("<give " + p.ip + " " + "arcanum" + " -" + arcanum);
 		ref.updater.send("<give " + p.ip + " " + "prunam" + " -" + prunam);
+	}
+
+	public void setupTarget() {
+		try {
+			((Trainer) this).setTarget(x + radius + 50, y + radius + 50);
+		} catch (Exception e) {
+		}
 	}
 
 	protected static String path(Nation nation, Object object) {

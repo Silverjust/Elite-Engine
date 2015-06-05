@@ -1,6 +1,7 @@
 package game;
 
 import processing.core.PConstants;
+import shared.Updater.GameState;
 import shared.ref;
 import entity.Entity;
 
@@ -42,7 +43,7 @@ public class GameDrawer {
 		ref.updater.map.updateFogofWar(ref.player);
 		ref.app.blendMode(PConstants.MULTIPLY);
 		ref.app.image(ref.updater.map.fogOfWar, 0, 0, ref.updater.map.width,
-				ref.updater.map.height);// hä?
+				ref.updater.map.height / 2);// hä?
 		ref.app.blendMode(PConstants.BLEND);
 		ref.app.imageMode(PConstants.CENTER);
 		ref.app.rectMode(PConstants.CENTER);
@@ -68,9 +69,21 @@ public class GameDrawer {
 		ref.app.imageMode(PConstants.CORNER);
 
 		HUD.update();
-		if (((GameUpdater) ref.updater).pause) {
+
+		if (ref.updater.gameState != GameState.PLAY) {
 			ref.app.fill(100, 100);
 			ref.app.rect(0, 0, ref.app.width, ref.app.height);
+			String s = "bla";
+			if (ref.updater.gameState == GameState.PAUSE) {
+				s = "PAUSE";
+			} else if (ref.updater.gameState == GameState.WON) {
+				s = "WON";
+			} else if (ref.updater.gameState == GameState.LOST) {
+				s = "LOST";
+			}
+			ref.app.fill(255);
+			ref.app.text(s, ref.app.width / 2 - ref.app.textWidth(s) / 2,
+					ref.app.height / 2);
 		}
 		// AimHandler.update();
 		// app.image(render, 0, 0);

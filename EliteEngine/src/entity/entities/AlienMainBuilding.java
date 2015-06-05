@@ -4,14 +4,15 @@ import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
 import entity.Buildable;
-import entity.Building;
 import entity.Entity;
 import entity.Commander;
+import entity.MainBuilding;
 import entity.animation.Animation;
 import entity.animation.Death;
 import game.ImageHandler;
 
-public class AlienMainBuilding extends Building implements Buildable, Commander {
+public class AlienMainBuilding extends MainBuilding implements Buildable,
+		Commander {
 	TestLab testLab;
 
 	private int commandingRange;

@@ -11,6 +11,7 @@ import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 import shared.Helper;
 import shared.Mode;
+import shared.Updater.GameState;
 import shared.ref;
 import entity.Entity;
 
@@ -88,7 +89,11 @@ public class Input {
 
 		if (isKeyFocusInGame()) {
 			if (app.key == Settings.togglePause) {
-				((GameUpdater) ref.updater).pause = !((GameUpdater) ref.updater).pause;
+				if (ref.updater.gameState == GameState.PAUSE) {
+					ref.updater.send("<pause false");
+				} else {
+					ref.updater.send("<pause true");
+				}
 			}
 			if (app.keyCode == Settings.changeAbilityMode) {
 				if (GroupHandler.recentGroup != null) {

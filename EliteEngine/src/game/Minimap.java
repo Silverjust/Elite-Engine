@@ -16,10 +16,10 @@ public class Minimap {
 		ref.app.translate(10, ref.app.height - HUD.height + 10);
 		ref.app.scale(ss);
 		ref.app.image(ref.updater.map.textur, 0, 0, ref.updater.map.width,
-				ref.updater.map.height);// warum *2 ?
+				ref.updater.map.height);
 		ref.app.blendMode(PConstants.MULTIPLY);
 		ref.app.image(ref.updater.map.fogOfWar, 0, 0, ref.updater.map.width,
-				ref.updater.map.height * 2);
+				ref.updater.map.height);
 		ref.app.blendMode(PConstants.BLEND);
 		ref.app.stroke(255);
 		ref.app.rectMode(PConstants.CENTER);

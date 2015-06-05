@@ -4,22 +4,24 @@ import java.util.ArrayList;
 
 import processing.core.PGraphics;
 import entity.Entity;
+import entity.MainBuilding;
 
 public class Player {
 	public String ip;
 	public String name;
-	public int playerColor;
+	public int color;
 	public Nation nation;
 	public int kerit, pax, arcanum, prunam;
 
 	public ArrayList<Entity> visibleEntities = new ArrayList<Entity>();
 	public boolean online;
 	public boolean isReady;
+	public MainBuilding mainBuilding;
 
 	public static Player createNeutralPlayer() {
 		Player p = new Player();
 		p.online = true;
-		p.playerColor = ref.app.color(150);
+		p.color = ref.app.color(150);
 		p.nation = Nation.NEUTRAL;
 		return p;
 	}
@@ -57,16 +59,16 @@ public class Player {
 	public void give(String resource, int amount) {
 		switch (resource) {
 		case "kerit":
-				kerit += amount;
+			kerit += amount;
 			break;
 		case "pax":
-				pax += amount;
+			pax += amount;
 			break;
 		case "arcanum":
-				arcanum += amount;
+			arcanum += amount;
 			break;
 		case "prunam":
-				prunam += amount;
+			prunam += amount;
 			break;
 		default:
 			break;

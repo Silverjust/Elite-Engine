@@ -2,6 +2,7 @@ package entity.entities;
 
 import processing.core.PImage;
 import shared.Nation;
+import shared.ref;
 import entity.Buildable;
 import entity.Building;
 import entity.Commander;
@@ -16,6 +17,8 @@ import game.ImageHandler;
 public class AlienKaserneArcanum extends Building implements Buildable,
 		Commander, Trainer {
 	private int commandRange;
+	protected float xTarget;
+	protected float yTarget;
 
 	private Training training;
 
@@ -37,6 +40,7 @@ public class AlienKaserneArcanum extends Building implements Buildable,
 		training = new Training(standImg, 100);
 
 		animation = nextAnimation = build;
+		setupTarget();
 		// ************************************
 		xSize = 50;
 		ySize = 50;
@@ -71,6 +75,14 @@ public class AlienKaserneArcanum extends Building implements Buildable,
 	}
 
 	@Override
+	public void renderUnder() {
+		super.renderUnder();
+		ref.app.stroke(player.color);
+		ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget), yToGrid(yTarget));
+		ref.app.stroke(0);
+	}
+
+	@Override
 	public void renderGround() {
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
@@ -95,6 +107,23 @@ public class AlienKaserneArcanum extends Building implements Buildable,
 	@Override
 	public Ability getTraining() {
 		return training;
+	}
+
+	@Override
+	public float getXTarget() {
+		return xTarget;
+	}
+
+	@Override
+	public float getYTarget() {
+		return yTarget;
+	}
+
+	@Override
+	public void setTarget(float x, float y) {
+		xTarget = x;
+		yTarget = y;
+
 	}
 
 }

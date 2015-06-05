@@ -90,7 +90,7 @@ public class MainPreGame extends PreGame {
 	public void addPlayer(String ip, String name) {
 		if (!player.containsKey(ip)) {
 			Player p = Player.createPlayer(ip, name);
-			p.playerColor = ref.app.color(200, 0, 0);// TODO get color setting
+			p.color = ref.app.color(200, 0, 0);// TODO get color setting
 			player.put(ip, p);
 		}
 	}
@@ -98,7 +98,7 @@ public class MainPreGame extends PreGame {
 	public void addThisPlayer(String name) {
 		Player p = Player.createPlayer(ClientHandler.identification, name);
 		ref.player = p;
-		p.playerColor = ref.app.color(0, 255, 100);// TODO get color setting
+		p.color = ref.app.color(0, 255, 100);// TODO get color setting
 		player.put(ClientHandler.identification, p);
 
 	}
@@ -116,7 +116,8 @@ public class MainPreGame extends PreGame {
 				// System.out.println(nationButtons[i] == button);
 				if (nationButtons[i] == button) {
 					nationButtons[i].setSwitch(true);
-					ClientHandler.send("<setNation " + ref.player.ip + " " + i);
+					ClientHandler.send("<setNation " + ref.player.ip + " "
+							+ Nation.fromNumber(i).toString());
 				} else {
 					nationButtons[i].setSwitch(false);
 				}
