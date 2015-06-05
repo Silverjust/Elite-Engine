@@ -16,7 +16,7 @@ public class ServerApp extends PApplet {
 
 	ServerHandler serverHandler;
 
-	GUI gui;
+	public GUI gui;
 
 	Mode mode;
 

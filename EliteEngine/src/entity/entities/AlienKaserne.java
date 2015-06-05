@@ -77,9 +77,12 @@ public class AlienKaserne extends Building implements Buildable, Commander,
 	@Override
 	public void renderUnder() {
 		super.renderUnder();
-		ref.app.stroke(player.color);
-		ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget), yToGrid(yTarget));
-		ref.app.stroke(0);
+		if (isSelected) {
+			ref.app.stroke(player.color);
+			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget),
+					yToGrid(yTarget));
+			ref.app.stroke(0);
+		}
 	}
 
 	@Override

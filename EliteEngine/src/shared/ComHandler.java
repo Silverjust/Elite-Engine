@@ -7,6 +7,7 @@ import javax.naming.NoInitialContextException;
 
 import main.ClientHandler;
 import processing.core.PApplet;
+import server.ServerApp;
 import shared.Updater.GameState;
 import entity.Entity;
 import entity.Unit;
@@ -142,6 +143,9 @@ public class ComHandler {
 					ref.updater.gameState = GameState.LOST;
 				} else {
 					ref.updater.gameState = GameState.WON;
+				}
+				if (ref.app instanceof ServerApp) {
+					((ServerApp) ref.app).gui.addChatText(p.name + " has lost");
 				}
 				break;
 			default:
