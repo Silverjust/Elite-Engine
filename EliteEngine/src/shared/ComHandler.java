@@ -11,6 +11,7 @@ import server.ServerApp;
 import shared.Updater.GameState;
 import entity.Entity;
 import entity.Unit;
+import game.ContentListHandler;
 import game.GameUpdater;
 
 public class ComHandler {
@@ -73,7 +74,8 @@ public class ComHandler {
 				}
 				break;
 			case "<spawn":
-				Class<?> clazz = Class.forName("entity.entities." + c[1]);
+				c[1] = ContentListHandler.getEntityContent().getString(c[1]);
+				Class<?> clazz = Class.forName(c[1]);
 				Constructor<?> ctor = clazz.getConstructor(String[].class);
 				e = (Entity) ctor.newInstance(new Object[] { c });
 				ref.updater.toAdd.add(e);

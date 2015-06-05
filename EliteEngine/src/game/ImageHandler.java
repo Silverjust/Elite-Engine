@@ -8,7 +8,6 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 import entity.Entity;
-import entity.entities.*;
 
 public class ImageHandler {
 
@@ -30,34 +29,16 @@ public class ImageHandler {
 			 */
 
 			classes.add(Entity.class);
-			classes.add(Ticul.class);
-			classes.add(Brux.class);
-			classes.add(Colum.class);
-			classes.add(Valcyrix.class);
-			classes.add(Arol.class);
-			classes.add(Rug.class);
-			classes.add(Rugling.class);
-			classes.add(Ker.class);
-			classes.add(TestLab.class);
-
-			classes.add(AlienMainBuilding.class);
-			classes.add(ThornTower.class);
-			classes.add(AlienKaserne.class);
-			classes.add(AlienKaserneArcanum.class);
-			classes.add(AlienKasernePrunam.class);
-
-			classes.add(Kerit.class);
-			classes.add(KeritMine.class);
-			classes.add(Pax.class);
-			classes.add(PaxDrillTower.class);
-			classes.add(Arcanum.class);
-			classes.add(ArcanumMine.class);
-			classes.add(Prunam.class);
-			classes.add(PrunamHarvester.class);
-
 			classes.add(GameDrawer.class);
 			classes.add(HUD.class);
 			classes.add(AimHandler.class);
+
+			ContentListHandler.getEntityContent().keys();
+			for (Object o : ContentListHandler.getEntityContent().keys()) {
+				String s = ContentListHandler.getEntityContent().getString(
+						(String) o);
+				classes.add(Class.forName(s));
+			}
 
 			// PApplet.printArray(classes);
 

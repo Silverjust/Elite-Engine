@@ -1,7 +1,7 @@
 package entity;
 
 import shared.ref;
-import entity.entities.AlienMainBuilding;
+import entity.aliens.AlienMainBuilding;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import game.AimHandler;

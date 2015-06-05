@@ -4,6 +4,7 @@ import shared.Loader;
 import shared.Mode;
 import shared.Player;
 import shared.ref;
+import game.ContentListHandler;
 import game.GameUpdater;
 import game.GameDrawer;
 import game.ImageHandler;
@@ -17,7 +18,7 @@ public class MainLoader extends Loader {
 		case NEWGAME:// create players
 			LoadingScreen.setup();
 			ref.updater = new GameUpdater();
-
+			ContentListHandler.load();
 			state = State.STARTIMAGES;
 			break;
 		case STARTIMAGES:

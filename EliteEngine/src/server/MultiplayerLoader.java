@@ -1,5 +1,6 @@
 package server;
 
+import game.ContentListHandler;
 import game.ImageHandler;
 import shared.Loader;
 import shared.Mode;
@@ -25,6 +26,7 @@ public class MultiplayerLoader extends Loader {
 				ref.preGame.player.get(key).nation = Nation.ALIENS;
 			}
 			ref.updater = new ServerUpdater();
+			ContentListHandler.load();
 			state = State.STARTIMAGES;// map
 			break;
 		case STARTIMAGES:
