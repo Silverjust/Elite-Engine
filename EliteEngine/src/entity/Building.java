@@ -9,7 +9,7 @@ import g4p_controls.GGameButton;
 import game.AimHandler;
 import game.Chat;
 import game.ImageHandler;
-import game.SetTargetAim;
+import game.aim.SetTargetAim;
 
 public abstract class Building extends Entity {
 

@@ -1,18 +1,18 @@
-package game;
+package game.aim;
 
 import game.AimHandler.Cursor;
 
 public class Aim {
 	
-	Cursor getCursor() {
+	public Cursor getCursor() {
 		return Cursor.ARROW;
 	}
 
-	void update() {
+	public void update() {
 
 	}
 
-	void execute() {
+	public void execute() {
 
 	}
 }

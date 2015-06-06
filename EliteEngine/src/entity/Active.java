@@ -41,7 +41,8 @@ public abstract class Active implements Informing {
 	}
 
 	public void handleActiveEvents(GGameButton gamebutton, GEvent event) {
-		if (event == GEvent.PRESSED && isNotOnCooldown()) {
+		if (event == GEvent.PRESSED && gamebutton.isVisible()
+				&& isNotOnCooldown()) {
 			onButtonPressed(gamebutton, event);
 			startCooldown();
 		}

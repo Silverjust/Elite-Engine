@@ -5,7 +5,7 @@ import entity.aliens.AlienMainBuilding;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import game.AimHandler;
-import game.UpgradeAim;
+import game.aim.UpgradeAim;
 
 public class UpgradeActive extends Active {
 	Class<? extends Building> newBuilding, oldBuilding;

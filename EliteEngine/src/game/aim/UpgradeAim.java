@@ -1,4 +1,4 @@
-package game;
+package game.aim;
 
 import shared.ref;
 import entity.Building;
@@ -16,6 +16,7 @@ public class UpgradeAim extends BuildAim {
 	}
 
 	@Override
+	public
 	void execute() {
 		float x, y;
 		x = Building.xToGrid(Building.gridToX());

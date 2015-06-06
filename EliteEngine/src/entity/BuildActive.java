@@ -4,7 +4,7 @@ import shared.ref;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import game.AimHandler;
-import game.BuildAim;
+import game.aim.BuildAim;
 
 public class BuildActive extends Active {
 	Class<? extends Building> building;

@@ -1,5 +1,6 @@
 package game;
 
+import game.aim.Aim;
 import processing.core.PConstants;
 import processing.core.PImage;
 import shared.ref;
@@ -65,7 +66,7 @@ public class AimHandler {
 		}
 	}
 
-	enum Cursor {
+	public enum Cursor {
 		ARROW, BUILD, SHOOT, SELECT
 	}
 }

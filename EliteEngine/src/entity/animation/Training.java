@@ -89,6 +89,10 @@ public class Training extends Ability {
 				a.setEntity(toTrain);
 				trainer.setAnimation(a);
 			}
+		} else if (c[2].equals("setTarget") && trainer instanceof Trainer) {
+			float x = Float.parseFloat(c[3]);
+			float y = Float.parseFloat(c[4]);
+			((Trainer) trainer).setTarget(x, y);
 		}
 	}
 }

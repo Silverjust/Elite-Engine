@@ -1,4 +1,4 @@
-package game;
+package game.aim;
 
 import shared.ref;
 import entity.Buildable;
@@ -22,11 +22,13 @@ public class BuildAim extends Aim {
 	}
 
 	@Override
+	public
 	Cursor getCursor() {
 		return Cursor.BUILD;
 	}
 
 	@Override
+	public
 	void update() {
 		float x, y;
 		x = Building.xToGrid(Building.gridToX());
@@ -64,6 +66,7 @@ public class BuildAim extends Aim {
 	}
 
 	@Override
+	public
 	void execute() {
 		float x, y;
 		x = Entity.xToGrid(Entity.gridToX());

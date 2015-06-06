@@ -103,16 +103,16 @@ public class CommandHandler {
 				break;
 			case "/gamerule":
 				if (c[1].equals("commandoutput")) {
-					GameDrawer.commandoutput = Helper.StringToBoolean(c[2]);
+					GameDrawer.commandoutput = Boolean.valueOf(c[2]);
 				}
 				if (c[1].equals("godeye")) {
-					GameDrawer.godeye = Helper.StringToBoolean(c[2]);
+					GameDrawer.godeye = Boolean.valueOf(c[2]);
 				}
 				if (c[1].equals("godhand")) {
-					GameDrawer.godhand = Helper.StringToBoolean(c[2]);
+					GameDrawer.godhand = Boolean.valueOf(c[2]);
 				}
 				if (c[1].equals("nocosts")) {
-					GameDrawer.nocosts = Helper.StringToBoolean(c[2]);
+					GameDrawer.nocosts = Boolean.valueOf(c[2]);
 				}
 				break;
 			default:
