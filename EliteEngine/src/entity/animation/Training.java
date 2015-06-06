@@ -3,6 +3,7 @@ package entity.animation;
 import entity.Entity;
 import entity.Trainer;
 import entity.Unit;
+import game.ContentListHandler;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
@@ -72,7 +73,9 @@ public class Training extends Ability {
 		if (c[2].equals("train") && trainer instanceof Trainer) {
 			Entity toTrain = null;
 			try {
-				toTrain = (Entity) Class.forName("entity.entities." + c[3])
+				String name = ContentListHandler.getEntityContent().getString(
+						c[3]);
+				toTrain = (Entity) Class.forName(name)
 						.getConstructor(String[].class)
 						.newInstance(new Object[] { null });
 			} catch (Exception e) {
