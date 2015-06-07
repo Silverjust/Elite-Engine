@@ -9,6 +9,7 @@ import entity.animation.Death;
 import entity.animation.TargetAttack;
 import processing.core.PImage;
 import shared.Nation;
+import shared.ref;
 
 public class Rugling extends Unit implements Attacker {
 
@@ -100,6 +101,13 @@ public class Rugling extends Unit implements Attacker {
 	public boolean isCollision(Entity e) {
 		boolean b = e.getClass() != Rug.class;
 		return super.isCollision(e) && b;
+	}
+
+	@Override
+	public void calculateDamage(Attack a) {
+		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
+				+ a.damage + " " + a.pirce);
+
 	}
 
 	@Override

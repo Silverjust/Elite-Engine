@@ -7,9 +7,7 @@ import entity.Attacker;
 import entity.Building;
 import entity.Commander;
 import entity.Entity;
-import entity.animation.Ability;
 import entity.animation.Animation;
-import entity.animation.AreaAttack;
 import entity.animation.Attack;
 import entity.animation.Build;
 import entity.animation.Death;
@@ -95,19 +93,14 @@ public class ThornTower extends Building implements Attacker, Commander {
 	@Override
 	public void exec(String[] c) {
 		super.exec(c);
-		if (c[2].equals("basicAttack") && this instanceof Attacker) {
-			Ability a = ((Attacker) this).getBasicAttack();
-			if (a instanceof TargetAttack) {
-				int n = Integer.parseInt(c[3]);
-				Entity e = ref.updater.namedEntities.get(n);
-				((TargetAttack) a).setTarget(e);
-			} else if (a instanceof AreaAttack) {
-				float x = Float.parseFloat(c[3]);
-				float y = Float.parseFloat(c[4]);
-				((AreaAttack) a).setPosition(x, y);
-			}
-			setAnimation(a);
-		}
+		Attack.updateExecAttack(c, this);
+	}
+
+	@Override
+	public void calculateDamage(Attack a) {
+		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
+				+ a.damage + " " + a.pirce);
+
 	}
 
 	@Override

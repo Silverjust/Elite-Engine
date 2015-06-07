@@ -4,7 +4,6 @@ import processing.core.PImage;
 import shared.ref;
 import entity.Attacker;
 import entity.Entity;
-import entity.Entity.GroundPosition;
 
 public class AreaAttack extends Attack {
 	float x, y;
@@ -29,15 +28,7 @@ public class AreaAttack extends Attack {
 	@Override
 	public void updateAbility(Entity e) {
 		if (x > 0 && isEvent() && isNotOnCooldown()) {
-			for (Entity e2 : ref.updater.entities) {
-				// sometimes attacks ghosts
-				if (e2 != null & e2.isEnemyTo(e)
-						&& e2.isInArea(x, y, e2.radius + range)
-						&& e2.groundPosition == GroundPosition.GROUND) {
-					ref.updater.send("<hit " + e2.number + " " + damage + " "
-							+ pirce);
-				}
-			}
+			((Attacker) e).calculateDamage(this);
 			x = -100;
 			startCooldown();
 		}

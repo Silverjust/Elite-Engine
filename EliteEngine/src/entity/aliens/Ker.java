@@ -2,7 +2,9 @@ package entity.aliens;
 
 import processing.core.PImage;
 import shared.Nation;
+import shared.ref;
 import entity.Attacker;
+import entity.Building;
 import entity.Entity;
 import entity.Unit;
 import entity.animation.Animation;
@@ -103,6 +105,13 @@ public class Ker extends Unit implements Attacker {
 			}
 		}
 		basicAttack.updateAbility(this);
+	}
+
+	@Override
+	public void calculateDamage(Attack a) {
+		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
+				+ (basicAttack.getTarget() instanceof Building ? a.damage / 2 : a.damage) + " "
+				+ a.pirce);
 	}
 
 	@Override

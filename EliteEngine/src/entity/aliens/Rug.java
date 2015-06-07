@@ -1,6 +1,7 @@
 package entity.aliens;
 
 import entity.Attacker;
+import entity.Building;
 import entity.Entity;
 import entity.Unit;
 import entity.animation.Ability;
@@ -128,6 +129,18 @@ public class Rug extends Unit implements Attacker {
 			Entity e = ref.updater.namedEntities.get(n);
 			spawn.setTarget(e);
 			setAnimation(spawn);
+		}
+	}
+
+	@Override
+	public void calculateDamage(Attack a) {
+		for (Entity e : ref.updater.entities) {
+			if (e != null & e.isEnemyTo(this)
+					&& e.isInArea(x, y, e.radius + a.range)) {
+				ref.updater.send("<hit " + e.number + " "
+						+ (e instanceof Building ? a.damage * 2 : a.damage)
+						+ " " + a.pirce);
+			}
 		}
 	}
 

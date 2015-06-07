@@ -123,6 +123,12 @@ public class Ticul extends Unit implements Attacker {
 	}
 
 	@Override
+	public void calculateDamage(Attack a) {
+		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
+				+ a.damage + " " + a.pirce);
+	}
+
+	@Override
 	public void renderGround() {
 		drawSelected();
 		animation.draw(this, direction, currentFrame);

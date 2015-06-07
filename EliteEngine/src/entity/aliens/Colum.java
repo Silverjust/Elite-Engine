@@ -1,17 +1,20 @@
 package entity.aliens;
 
+import entity.Attacker;
 import entity.Entity;
 import entity.Unit;
-import entity.animation.AreaHeal;
+import entity.animation.AreaAttack;
+import entity.animation.Attack;
 import entity.animation.Death;
 import processing.core.PImage;
 import shared.Nation;
+import shared.ref;
 
-public class Colum extends Unit {
+public class Colum extends Unit implements Attacker {
 
 	private static PImage standingImg;
 
-	AreaHeal heal;
+	AreaAttack heal;
 
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
@@ -23,7 +26,7 @@ public class Colum extends Unit {
 		super(c);
 		iconImg = standingImg;
 
-		stand = walk = heal = new AreaHeal(standingImg, 500);
+		stand = walk = heal = new AreaAttack(standingImg, 500);
 		death = new Death(standingImg, 500);
 
 		animation = nextAnimation = walk;
@@ -45,32 +48,29 @@ public class Colum extends Unit {
 		height = 50;
 
 		heal.range = (byte) (radius + 25);
-		heal.heal = 25;
+		heal.damage = -25;
 		heal.cooldown = 5000;
 		heal.eventTime = 100;
 
 		descr = " ";
-		stats = "heal/s: " + heal.heal + "/" + heal.cooldown / 1000.0;
+		stats = "heal/s: " + (-heal.damage) + "/" + heal.cooldown / 1000.0;
 		// ************************************
 	}
 
 	@Override
 	public void updateDecisions() {
-
-		// isTaged = false;
-		if (animation == stand) {// ****************************************************
-			/*
-			 * String s = ""; for (Entity e : player.visibleEntities) { if (e !=
-			 * this) { if (e.isa(this)) {// server if (e.isCollision(x, y,
-			 * healRange + e.radius)) { s = ("walk " + e.x + " " + e.y); } } } }
-			 * sendAnimation(s);
-			 */
-		}
-		if (animation == walk) {// ****************************************************
-
-		}
 		heal.setPosition(x, y);
 		heal.updateAbility(this);
+	}
+
+	@Override
+	public void calculateDamage(Attack a) {
+		for (Entity e : ref.updater.entities) {
+			if (e != null & e.isAllyTo(this)
+					&& e.isInArea(x, y, e.radius + a.range)) {
+				ref.updater.send("<heal " + e.number + " " + heal);
+			}
+		}
 	}
 
 	@Override
@@ -80,6 +80,11 @@ public class Colum extends Unit {
 		drawCircle(heal.range);
 		drawCircle((int) (heal.range * heal.getCooldownPercent()));
 		drawTaged();
+	}
+
+	@Override
+	public Attack getBasicAttack() {
+		return heal;
 	}
 
 }

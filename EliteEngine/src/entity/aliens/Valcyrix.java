@@ -2,6 +2,7 @@ package entity.aliens;
 
 import processing.core.PImage;
 import shared.Nation;
+import shared.ref;
 import entity.Attacker;
 import entity.Entity;
 import entity.Unit;
@@ -102,6 +103,12 @@ public class Valcyrix extends Unit implements Attacker {
 			}
 		}
 		basicAttack.updateAbility(this);
+	}
+
+	@Override
+	public void calculateDamage(Attack a) {
+		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
+				+ a.damage + " " + a.pirce);
 	}
 
 	@Override

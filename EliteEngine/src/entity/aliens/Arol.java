@@ -1,14 +1,17 @@
 package entity.aliens;
 
 import entity.Attacker;
+import entity.Building;
 import entity.Entity;
 import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.AreaAttack;
 import entity.animation.Attack;
 import entity.animation.Death;
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.Nation;
+import shared.ref;
 
 public class Arol extends Unit implements Attacker {
 
@@ -17,6 +20,7 @@ public class Arol extends Unit implements Attacker {
 	byte aggroRange;
 
 	AreaAttack basicAttack;
+	byte attackDistance;
 
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
@@ -42,7 +46,7 @@ public class Arol extends Unit implements Attacker {
 		pax = 0;
 		arcanum = 90;
 		prunam = 0;
-		trainTime =10000;
+		trainTime = 10000;
 
 		hp = hp_max = 2200;
 		armor = 3;
@@ -56,6 +60,7 @@ public class Arol extends Unit implements Attacker {
 		basicAttack.damage = 40;
 		basicAttack.cooldown = 5000;
 		basicAttack.eventTime = 100;
+		attackDistance = 10;
 
 		descr = " ";
 		stats = " ";
@@ -97,6 +102,24 @@ public class Arol extends Unit implements Attacker {
 			}
 		}
 		basicAttack.updateAbility(this);
+	}
+
+	@Override
+	public void calculateDamage(Attack a) {
+		float x, y;
+		x = (this.x + (xTarget - this.x)
+				/ PApplet.dist(this.x, this.y, xTarget, yTarget) * (attackDistance));
+		y = (this.y + (yTarget - this.y)
+				/ PApplet.dist(this.x, this.y, xTarget, yTarget) * (attackDistance));
+		for (Entity e : ref.updater.entities) {
+			if (e != null & e.isEnemyTo(this)
+					&& e.isInArea(x, y, e.radius + a.range)
+					&& e.groundPosition == GroundPosition.GROUND) {
+				ref.updater.send("<hit " + e.number + " "
+						+ (e instanceof Building ? a.damage * 2 : a.damage)
+						+ " " + a.pirce);
+			}
+		}
 	}
 
 	@Override
