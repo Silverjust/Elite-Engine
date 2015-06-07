@@ -26,8 +26,7 @@ public class SetTargetAim extends Aim {
 		x = Entity.xToGrid(Entity.gridToX());
 		y = Entity.xToGrid(Entity.gridToY());
 		for (Entity e : ref.updater.selected) {
-			if (trainerClass.isAssignableFrom(e.getClass())
-					&& e.getAnimation() == e.stand) {
+			if (trainerClass.isAssignableFrom(e.getClass())) {
 				e.sendAnimation("setTarget " + x + " " + y);
 			}
 		}
