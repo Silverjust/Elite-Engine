@@ -24,8 +24,10 @@ public class HUD {
 		paxImg = ImageHandler.load("", "Pax");
 		arcImg = ImageHandler.load("", "Arcanum");
 		prunImg = ImageHandler.load("", "Prunam");
-		overlay = ImageHandler.load(ref.player.nation.toString() + "/",
-				"overlay");
+		if (ref.player != null) {
+			overlay = ImageHandler.load(ref.player.nation.toString() + "/",
+					"overlay");
+		}
 	}
 
 	public static void setup() {
