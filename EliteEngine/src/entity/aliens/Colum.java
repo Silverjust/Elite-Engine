@@ -48,12 +48,12 @@ public class Colum extends Unit implements Attacker {
 		height = 50;
 
 		heal.range = (byte) (radius + 25);
-		heal.damage = -25;
+		heal.damage = 25;//heal
 		heal.cooldown = 5000;
 		heal.eventTime = 100;
 
 		descr = " ";
-		stats = "heal/s: " + (-heal.damage) + "/" + heal.cooldown / 1000.0;
+		stats = "heal/s: " + (heal.damage) + "/" + heal.cooldown / 1000.0;
 		// ************************************
 	}
 
@@ -68,7 +68,7 @@ public class Colum extends Unit implements Attacker {
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isAllyTo(this)
 					&& e.isInArea(x, y, e.radius + a.range)) {
-				ref.updater.send("<heal " + e.number + " " + heal);
+				ref.updater.send("<heal " + e.number + " " + heal.damage);
 			}
 		}
 	}

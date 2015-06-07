@@ -60,7 +60,7 @@ public class Brux extends Unit implements Attacker {
 		basicAttack.eventTime = 500;
 
 		jump.range = (byte) (radius + 10);
-		jump.damage = 60;
+		jump.damage = 50;
 		jump.pirce = 2;
 		jump.cooldown = 5000;
 		jump.speed = 2.2f;
@@ -125,7 +125,7 @@ public class Brux extends Unit implements Attacker {
 
 	@Override
 	public boolean isCollision(Entity e) {
-		boolean b = animation != jump;
+		boolean b = !(animation == jump && e != jump.getTarget());
 		return super.isCollision(e) && b;
 	}
 
@@ -161,7 +161,7 @@ public class Brux extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	public static class Jump extends Attack {
+	public static class Jump extends TargetAttack {
 
 		public float speed;
 		private Entity target;
@@ -176,6 +176,7 @@ public class Brux extends Unit implements Attacker {
 					&& target.isInArea(e.x, e.y, e.radius + target.radius)) {
 				ref.updater.send("<hit " + target.number + " " + damage + " "
 						+ pirce);
+				e.sendDefaultAnimation(this);
 				target = null;
 				startCooldown();
 			}
