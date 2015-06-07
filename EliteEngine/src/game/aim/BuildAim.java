@@ -1,20 +1,19 @@
 package game.aim;
 
 import shared.ref;
-import entity.Buildable;
 import entity.Building;
 import entity.Entity;
 import entity.Commander;
 import game.AimHandler.Cursor;
 
 public class BuildAim extends Aim {
-	Buildable buildable;
+	Building buildable;
 	Entity builder;
 
 	public BuildAim(Entity builder, Entity building) {
 		try {
 			this.builder = builder;
-			this.buildable = (Buildable) building;
+			this.buildable =  (Building) building;
 		} catch (ClassCastException e) {
 			System.err.println(building + " is not buildable \n");
 		}

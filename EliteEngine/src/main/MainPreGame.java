@@ -2,11 +2,14 @@ package main;
 
 import processing.core.PConstants;
 import processing.core.PGraphics;
+import processing.data.JSONObject;
 import g4p_controls.GButton;
 import g4p_controls.GControlMode;
+import g4p_controls.GDropList;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import g4p_controls.GSlider;
+import shared.ContentListHandler;
 import shared.Mode;
 import shared.Nation;
 import shared.Player;
@@ -15,9 +18,11 @@ import shared.ref;
 
 public class MainPreGame extends PreGame {
 
-	GButton starButton;
+	GButton startButton;
 	GGameButton[] nationButtons = new GGameButton[5];
 	GSlider playerSlider;
+	GDropList maps;
+	String[] intNames;
 
 	PGraphics playerList;
 	private String name;
@@ -33,22 +38,48 @@ public class MainPreGame extends PreGame {
 
 	public void setup() {
 
-		starButton = new GButton(ref.app, ref.app.width - 320,
+		startButton = new GButton(ref.app, ref.app.width - 320,
 				ref.app.height - 200, 300, 175);
-		starButton.setText("START");
-		starButton.addEventHandler(this, "handleStartEvents");
+		startButton.setText("START");
+		startButton.addEventHandler(this, "handleStartEvents");
 
-		playerSlider = new GSlider(ref.app, ref.app.width - 10, 100, 500, 30,
+		playerSlider = new GSlider(ref.app, ref.app.width - 10, 100, 300, 30,
 				20);
 		playerSlider.setRotation(PConstants.PI / 2, GControlMode.CORNER);
 		playerSlider.setLimits(0, 0, 1);
 
-		playerList = ref.app.createGraphics(281, 500);
+		playerList = ref.app.createGraphics(281, 300);// 200 height?
 
 		for (int i = 0; i < nationButtons.length; i++) {
 			nationButtons[i] = new GGameButton(ref.app, 200 + 210 * i, 100,
 					200, 500, getNationImages(i));// change buttons
 			nationButtons[i].addEventHandler(this, "handleSelectNation");
+		}
+		{
+			ContentListHandler.load();
+			int i = ContentListHandler.getMapContent().size();
+			maps = new GDropList(ref.app, ref.app.width - 320,
+					ref.app.height - 450, 300, 200, 5);
+			@SuppressWarnings("unchecked")
+			String[] intNames = (String[]) ContentListHandler.getMapContent()
+					.keys().toArray(new String[i]);
+			this.intNames = intNames;
+			System.out.println(intNames);
+			String[] names = new String[i];
+			for (int j = 0; j < names.length; j++) {
+				try {
+					JSONObject mapData = ref.app.loadJSONObject("data/"
+							+ ContentListHandler.getMapContent().getString(
+									intNames[j]) + ".json");
+					names[j] = mapData.getString("name");
+				} catch (Exception e) {
+					names[j] = "(X) " + intNames[j];
+					e.printStackTrace();
+				}
+			}
+			maps.setItems(names, 0);
+			map = intNames[0];
+			maps.addEventHandler(this, "handleSelectMap");
 		}
 	}
 
@@ -77,8 +108,9 @@ public class MainPreGame extends PreGame {
 		}
 		ref.loader = new MainLoader();
 
-		starButton.dispose();
+		startButton.dispose();
 		playerSlider.dispose();
+		maps.dispose();
 		for (int i = 0; i < nationButtons.length; i++) {
 			nationButtons[i].dispose();
 		}
@@ -107,6 +139,8 @@ public class MainPreGame extends PreGame {
 		for (String key : player.keySet())
 			if (player.get(key).nation == null)
 				return;
+		if (map == null)
+			return;
 		ClientHandler.send("<load");
 	}
 
@@ -122,6 +156,13 @@ public class MainPreGame extends PreGame {
 					nationButtons[i].setSwitch(false);
 				}
 			}
+		}
+	}
+
+	public void handleSelectMap(GDropList list, GEvent event) {
+		if (event == GEvent.SELECTED) {
+			ClientHandler.send("<setMap " + ref.player.ip + " "
+					+ intNames[list.getSelectedIndex()]);
 		}
 	}
 
@@ -145,4 +186,22 @@ public class MainPreGame extends PreGame {
 		}
 	}
 
+	@Override
+	public void setMap(String string) {
+		int size = ContentListHandler.getMapContent().keys().size();
+		@SuppressWarnings("unchecked")
+		String[] mapArray = (String[]) ContentListHandler.getMapContent()
+				.keys().toArray(new String[size]);
+		int index = -1;
+		for (int i = 0; i < mapArray.length; i++) {
+			if (mapArray[i].equals(string))
+				index = i;
+		}
+		if (index < 0) {
+			System.err.println(string + " not found");
+			return;
+		}
+		map = string;
+		maps.setSelected(index);
+	}
 }

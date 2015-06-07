@@ -12,7 +12,7 @@ public class ServerUpdater extends Updater {
 		player = ref.preGame.player;
 		neutral = Player.createNeutralPlayer();
 
-		map = new Map();
+		map = new Map(ref.preGame.map);
 	}
 
 	@Override

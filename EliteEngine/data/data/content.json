@@ -1,0 +1,31 @@
+{
+  "entities": {
+    "Ticul": "entity.aliens.Ticul",
+    "Brux": "entity.aliens.Brux",
+    "Valcyrix": "entity.aliens.Valcyrix",
+    "Colum": "entity.aliens.Colum",
+    "Arol": "entity.aliens.Arol",
+    "Rug": "entity.aliens.Rug",
+    "Rugling": "entity.aliens.Rugling",
+    "Ker": "entity.aliens.Ker",
+    "AlienMainBuilding": "entity.aliens.AlienMainBuilding",
+    "ThornTower": "entity.aliens.ThornTower",
+    "AlienKaserne": "entity.aliens.AlienKaserne",
+    "AlienKaserneArcanum": "entity.aliens.AlienKaserneArcanum",
+    "AlienKasernePrunam": "entity.aliens.AlienKasernePrunam",
+    "KeritMine": "entity.aliens.KeritMine",
+    "PaxDrillTower": "entity.aliens.PaxDrillTower",
+    "ArcanumMine": "entity.aliens.ArcanumMine",
+    "PrunamHarvester": "entity.aliens.PrunamHarvester",
+    "Kerit": "entity.neutral.Kerit",
+    "Pax": "entity.neutral.Pax",
+    "Arcanum": "entity.neutral.Arcanum",
+    "Prunam": "entity.neutral.Prunam",
+	"SandboxBuilding": "entity.neutral.SandboxBuilding",
+    "TestLab": "entity.neutral.TestLab"
+  },
+  "maps": {
+	"firstTestMap" : "maps/firstTestMap/firstTestMap",
+	"newMap" : "maps/newMap/newMap"
+  }
+}

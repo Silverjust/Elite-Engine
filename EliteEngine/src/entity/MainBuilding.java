@@ -2,11 +2,14 @@ package entity;
 
 import shared.ref;
 
-public class MainBuilding extends Building {
+public abstract class MainBuilding extends Building {
 
 	public MainBuilding(String[] c) {
 		super(c);
-		player.mainBuilding = this;
+		try {
+			player.mainBuilding = this;
+		} catch (Exception e) {
+		}
 	}
 
 	@Override

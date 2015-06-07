@@ -9,6 +9,7 @@ import g4p_controls.GCScheme;
 import game.Chat;
 import game.GameDrawer;
 import game.ImageHandler;
+import game.MapHandler;
 
 public class CommandHandler {
 
@@ -90,6 +91,9 @@ public class CommandHandler {
 				break;
 			case "/reloadImages":
 				ImageHandler.requestAllImages();
+				break;
+			case "/saveMap":
+				MapHandler.saveMap(c[1], c[2]);
 				break;
 			case "/fps":
 				Chat.println("fps", ref.app.frameRate + "");

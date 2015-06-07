@@ -81,6 +81,8 @@ public abstract class Building extends Entity {
 				"should not have a shadow");
 	}
 
+	public abstract PImage preview();
+
 	public static class SetTargetActive extends Active {
 
 		public SetTargetActive(int x, int y, char n) {
@@ -90,9 +92,9 @@ public abstract class Building extends Entity {
 
 		@Override
 		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
-			
-				AimHandler.setAim(new SetTargetAim(clazz));
-			
+
+			AimHandler.setAim(new SetTargetAim(clazz));
+
 		}
 
 		@Override
@@ -104,7 +106,7 @@ public abstract class Building extends Entity {
 		public String getStatistics() {
 			return null;
 		}
-		
+
 	}
 
 }

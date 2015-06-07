@@ -18,9 +18,8 @@ public class GameUpdater extends Updater {
 	public GameUpdater() {
 		player = ref.preGame.player;
 		neutral = Player.createNeutralPlayer();
-
 		input = new Input();
-		map = new Map();
+		map = new Map(ref.preGame.map);
 	}
 
 	public void update() {

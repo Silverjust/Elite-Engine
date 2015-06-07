@@ -3,9 +3,9 @@ package entity.animation;
 import entity.Entity;
 import entity.Trainer;
 import entity.Unit;
-import game.ContentListHandler;
 import processing.core.PApplet;
 import processing.core.PImage;
+import shared.ContentListHandler;
 import shared.ref;
 
 public class Training extends Ability {

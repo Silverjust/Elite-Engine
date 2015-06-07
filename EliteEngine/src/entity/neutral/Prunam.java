@@ -45,5 +45,8 @@ public class Prunam extends Building {
 
 	@Override
 	public void updateAnimation() {
+	}@Override
+	public PImage preview() {
+		return standImg;
 	}
 }

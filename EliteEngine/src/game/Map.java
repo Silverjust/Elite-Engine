@@ -5,6 +5,8 @@ import pathfinder.Graph;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
+import processing.data.JSONObject;
+import shared.ContentListHandler;
 import shared.Player;
 import shared.ref;
 
@@ -18,13 +20,29 @@ public class Map {
 	public PImage collision;
 	public PGraphics fogOfWar;
 
-	public Map() {
+	public JSONObject mapData;
 
+	public Map(String map) {
+
+		try {
+			mapData = ref.app.loadJSONObject("data/"
+					+ ContentListHandler.getMapContent().getString(map)
+					+ ".json");
+		} catch (Exception e) {
+			System.err.println(map + " could not be loaded");
+			e.printStackTrace();
+		}
 	}
 
 	public void loadImages() {
-		textur = ImageHandler.load("", "mapTextur");
-		collision = ImageHandler.load("", "mapColl");
+		try {
+			textur = ImageHandler.load("", mapData.getString("texture"));
+			collision = ImageHandler.load("", mapData.getString("coll"));
+		} catch (Exception e) {
+			System.err.println(mapData.getString("texture") + " "
+					+ mapData.getString("coll"));
+			e.printStackTrace();
+		}
 		fogOfWar = ref.app.createGraphics(width / fogScale, height / 2
 				/ fogScale, PConstants.P2D);
 	}

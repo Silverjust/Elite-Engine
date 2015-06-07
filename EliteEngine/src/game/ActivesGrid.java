@@ -23,6 +23,8 @@ import entity.neutral.Arcanum;
 import entity.neutral.Kerit;
 import entity.neutral.Pax;
 import entity.neutral.Prunam;
+import entity.neutral.SandboxBuilding;
+import main.ClientHandler;
 import main.Settings;
 import shared.Helper;
 import shared.ref;
@@ -65,6 +67,10 @@ public class ActivesGrid {
 		addTrainActive(3, 2, AlienKaserneArcanum.class, Arol.class, false);
 		addTrainActive(2, 1, AlienKasernePrunam.class, Rug.class, false);
 		addTrainActive(3, 1, AlienKasernePrunam.class, Ker.class, false);
+
+		if (ClientHandler.sandbox) {
+			addActive(7, 1, SandboxBuilding.BuildSetup.class, false);
+		}
 	}
 
 	public void update() {
@@ -185,5 +191,17 @@ public class ActivesGrid {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void setupSandbox() {
+		System.out.println("setupSandbox");
+		addActive(1, 1, SandboxBuilding.DeleteActive.class, true);
+		addBuildActive(2, 1, SandboxBuilding.class,
+				ref.player.nation.getMainBuilding(), true);
+		addBuildActive(1, 2, SandboxBuilding.class, Kerit.class, true);
+		addBuildActive(2, 2, SandboxBuilding.class, Pax.class, true);
+		addBuildActive(1, 3, SandboxBuilding.class, Arcanum.class, true);
+		addBuildActive(2, 3, SandboxBuilding.class, Prunam.class, true);
+		addActive(3, 1, SandboxBuilding.ChangePlayerActive.class, true);
 	}
 }

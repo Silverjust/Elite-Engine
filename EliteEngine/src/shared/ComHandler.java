@@ -11,7 +11,6 @@ import server.ServerApp;
 import shared.Updater.GameState;
 import entity.Entity;
 import entity.Unit;
-import game.ContentListHandler;
 import game.GameUpdater;
 
 public class ComHandler {
@@ -121,6 +120,9 @@ public class ComHandler {
 				break;
 			case "<setNation":
 				ref.preGame.player.get(c[1]).nation = Nation.fromString(c[2]);
+				break;
+			case "<setMap":
+				ref.preGame.setMap(c[2]);
 				break;
 			case "<load":
 				ref.preGame.startLoading();

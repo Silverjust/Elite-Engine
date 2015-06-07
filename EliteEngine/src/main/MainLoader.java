@@ -2,12 +2,11 @@ package main;
 
 import shared.Loader;
 import shared.Mode;
-import shared.Player;
 import shared.ref;
-import game.ContentListHandler;
 import game.GameUpdater;
 import game.GameDrawer;
 import game.ImageHandler;
+import game.MapHandler;
 
 public class MainLoader extends Loader {
 	// TODO Alle daten laden
@@ -18,7 +17,6 @@ public class MainLoader extends Loader {
 		case NEWGAME:// create players
 			LoadingScreen.setup();
 			ref.updater = new GameUpdater();
-			ContentListHandler.load();
 			state = State.STARTIMAGES;
 			break;
 		case STARTIMAGES:
@@ -46,37 +44,30 @@ public class MainLoader extends Loader {
 		case ENTITIES:// spawn entity-setup
 
 			if (ClientHandler.singlePlayer) {
-				int i = 0;
-				for (String key : ref.updater.player.keySet()) {
-					i++;
-					Player p = ref.updater.player.get(key);
-					if (i == 1) {
-						ref.updater.send("<spawn AlienMainBuilding " + p.ip
-								+ " " + 100 + " " + 800);
-						ref.updater.send("<spawn KeritMine " + p.ip + " " + 35
-								+ " " + 850);
-					} else if (i == 2) {
-						ref.updater.send("<spawn AlienMainBuilding " + p.ip
-								+ " " + 700 + " " + 100);
-						ref.updater.send("<spawn KeritMine " + p.ip + " " + 750
-								+ " " + 35);
-					}
-					ref.updater.send("<spawn KeritMine " + p.ip + " "
-							+ ref.app.random(200, 600) + " "
-							+ ref.app.random(200, 600));
-					ref.updater.send("<spawn Kerit " + p.ip + " "
-							+ ref.app.random(200, 600) + " "
-							+ ref.app.random(200, 600));
-					ref.updater.send("<spawn Pax " + p.ip + " "
-							+ ref.app.random(200, 600) + " "
-							+ ref.app.random(200, 600));
-					ref.updater.send("<spawn Arcanum " + p.ip + " "
-							+ ref.app.random(200, 600) + " "
-							+ ref.app.random(200, 600));
-					ref.updater.send("<spawn Prunam " + p.ip + " "
-							+ ref.app.random(200, 600) + " "
-							+ ref.app.random(200, 600));
-				}
+				if (ClientHandler.sandbox)
+					ref.updater.send("<spawn SandboxBuilding 0 20 20");
+				MapHandler.setupEntities(ref.updater.map.mapData);
+				/*
+				 * int i = 0; for (String key : ref.updater.player.keySet()) {
+				 * i++; Player p = ref.updater.player.get(key); if (i == 1) {
+				 * ref.updater.send("<spawn AlienMainBuilding " + p.ip + " " +
+				 * 100 + " " + 800); ref.updater.send("<spawn KeritMine " + p.ip
+				 * + " " + 35 + " " + 850); } else if (i == 2) {
+				 * ref.updater.send("<spawn AlienMainBuilding " + p.ip + " " +
+				 * 700 + " " + 100); ref.updater.send("<spawn KeritMine " + p.ip
+				 * + " " + 750 + " " + 35); }
+				 * ref.updater.send("<spawn KeritMine " + p.ip + " " +
+				 * ref.app.random(200, 600) + " " + ref.app.random(200, 600));
+				 * ref.updater.send("<spawn Kerit " + p.ip + " " +
+				 * ref.app.random(200, 600) + " " + ref.app.random(200, 600));
+				 * ref.updater.send("<spawn Pax " + p.ip + " " +
+				 * ref.app.random(200, 600) + " " + ref.app.random(200, 600));
+				 * ref.updater.send("<spawn Arcanum " + p.ip + " " +
+				 * ref.app.random(200, 600) + " " + ref.app.random(200, 600));
+				 * ref.updater.send("<spawn Prunam " + p.ip + " " +
+				 * ref.app.random(200, 600) + " " + ref.app.random(200, 600)); }
+				 */
+
 			}
 			GameDrawer.setup();
 			if (ClientHandler.sandbox) {

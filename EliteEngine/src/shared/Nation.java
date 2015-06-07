@@ -1,5 +1,8 @@
 package shared;
 
+import entity.MainBuilding;
+import entity.aliens.AlienMainBuilding;
+
 public enum Nation {
 
 	ALIENS, AHNEN, ROBOTS, SCIENTISTS, HUMANS, NEUTRAL;
@@ -76,6 +79,33 @@ public enum Nation {
 			break;
 		}
 		return nation;
+	}
+
+	public Class<? extends MainBuilding> getMainBuilding() {
+		//Class<? extends MainBuilding> t = null;
+		return AlienMainBuilding.class;
+		
+		/*switch (this) {
+		case AHNEN:
+			t = AhnenMainBuilding.class;
+			break;
+		case ALIENS:
+			t = AliensMainBuilding.class;
+			break;
+		case ROBOTS:
+			t = RobotsMainBuilding.class;
+			break;
+		case SCIENTISTS:
+			t = ScientistsMainBuilding.class;
+			break;
+		case HUMANS:
+			t = HumansMainBuilding.class;
+			break;
+		case NEUTRAL:
+			t = NeutralMainBuilding.class;
+			break;
+		}
+		return t;*/
 	}
 
 }

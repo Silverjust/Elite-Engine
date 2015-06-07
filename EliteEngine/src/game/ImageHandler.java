@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import shared.ContentListHandler;
 import shared.ref;
 import entity.Entity;
 

@@ -1,3 +1,8 @@
+Maps
+maploading
+mapsaving with /saveMap internName name
+Sandbox with mapmaker-tool 
+---------------------------
 added win/loose
 new ability: set target(q)
 ---------------------------
