@@ -18,6 +18,7 @@ public class SelectionDisplay {
 	static float yOffset;
 	public static GCustomSlider selectedEntitiesSlider;
 	static PFont font;
+	private static int col = ref.app.color(100, 255, 100);
 
 	public static void setup() {
 		x = 300;
@@ -46,7 +47,7 @@ public class SelectionDisplay {
 		graphic.beginDraw();
 		graphic.clear();
 		if (ref.updater.selected.size() == 1) {
-			graphic.fill(0);
+			graphic.fill(col);
 			ref.updater.selected.get(0).drawIcon(graphic, 0, 0, iconSize * 4);
 			String descr = ref.updater.selected.get(0).getDesription()
 					.replaceAll("§", "\n");
@@ -78,7 +79,7 @@ public class SelectionDisplay {
 						* ye, iconSize, iconSize);
 				e.drawIcon(graphic, (iconSize + 10) * xe, -yOffset
 						+ (iconSize + 10) * ye, iconSize);
-				graphic.fill(0);
+				graphic.fill(col);
 				graphic.text(e.number, 5 + (iconSize + 10) * xe, 30 - yOffset
 						+ (iconSize + 10) * ye);
 			}

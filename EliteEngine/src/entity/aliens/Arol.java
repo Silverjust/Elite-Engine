@@ -71,7 +71,7 @@ public class Arol extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {// server
-						if (e.isCollision(x, y, aggroRange + e.radius)) {
+						if (e.isInArea(x, y, aggroRange + e.radius)) {
 							s = ("walk " + e.x + " " + e.y);
 						}
 					}
@@ -84,7 +84,7 @@ public class Arol extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isCollision(x, y, basicAttack.range + e.radius)
+						if (e.isInArea(x, y, basicAttack.range + e.radius)
 								&& e.groundPosition == GroundPosition.GROUND) {
 							isEnemyInRange = true;
 						}

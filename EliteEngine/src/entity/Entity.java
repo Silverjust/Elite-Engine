@@ -288,7 +288,7 @@ public abstract class Entity implements Informing {
 		return b;
 	}
 
-	public boolean isCollision(float X, float Y, int R) {
+	public boolean isInArea(float X, float Y, int R) {
 		float f = PApplet.dist(x, y, X, Y);
 		boolean b = f < R;
 		// System.out.println(number + "/" + f + "/" + R + " " + b);
@@ -331,7 +331,7 @@ public abstract class Entity implements Informing {
 		boolean isVisible = false;
 		for (Entity spotter : ref.updater.entities) {
 			if (spotter.player == p
-					&& spotter.isCollision(x, y, spotter.sight + radius))
+					&& spotter.isInArea(x, y, spotter.sight + radius))
 				isVisible = true;
 			if (player == ref.updater.neutral)
 				isVisible = true;

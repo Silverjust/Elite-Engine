@@ -84,7 +84,7 @@ public class Rug extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isCollision(x, y, aggroRange + e.radius)) {
+						if (e.isInArea(x, y, aggroRange + e.radius)) {
 							isEnemyTooClose = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -92,10 +92,10 @@ public class Rug extends Unit implements Attacker {
 								importantEntity = e;
 							}
 						}
-						if (e.isCollision(x, y, basicAttack.range + e.radius)) {
+						if (e.isInArea(x, y, basicAttack.range + e.radius)) {
 							isEnemyInHitRange = true;
 						}
-						if (e.isCollision(x, y, spawnRange + e.radius)) {
+						if (e.isInArea(x, y, spawnRange + e.radius)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;

@@ -72,7 +72,7 @@ public class Valcyrix extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {// server
-						if (e.isCollision(x, y, aggroRange + e.radius)) {
+						if (e.isInArea(x, y, aggroRange + e.radius)) {
 							s = ("walk " + e.x + " " + e.y);
 						}
 					}
@@ -86,7 +86,7 @@ public class Valcyrix extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isCollision(x, y, basicAttack.range + e.radius)) {
+						if (e.isInArea(x, y, basicAttack.range + e.radius)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;

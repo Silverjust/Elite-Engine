@@ -41,7 +41,7 @@ public abstract class Unit extends Entity {
 		if (isMoving) {// ****************************************************
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
-					if (e.isCollision(this)) {
+					if (isCollision(e)) {
 						hasColided = true;
 						xDeglich += x - e.x;
 						yDeglich += y - e.y;

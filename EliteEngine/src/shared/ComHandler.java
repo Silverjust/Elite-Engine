@@ -112,6 +112,8 @@ public class ComHandler {
 						+ ClientHandler.identification + " " + ref.player.name);
 				ClientHandler.send("<setNation " + ClientHandler.identification
 						+ " " + ref.player.nation.toString());
+				ClientHandler.send("<setMap " + ClientHandler.identification
+						+ " " + ref.preGame.map);
 				// TODO send color
 				// nur an clienthandler
 				break;

@@ -23,6 +23,7 @@ import entity.neutral.Arcanum;
 import entity.neutral.Kerit;
 import entity.neutral.Pax;
 import entity.neutral.Prunam;
+import entity.neutral.Rock;
 import entity.neutral.SandboxBuilding;
 import main.ClientHandler;
 import main.Settings;
@@ -202,6 +203,7 @@ public class ActivesGrid {
 		addBuildActive(2, 2, SandboxBuilding.class, Pax.class, true);
 		addBuildActive(1, 3, SandboxBuilding.class, Arcanum.class, true);
 		addBuildActive(2, 3, SandboxBuilding.class, Prunam.class, true);
+		addBuildActive(3, 2, SandboxBuilding.class, Rock.class, true);
 		addActive(3, 1, SandboxBuilding.ChangePlayerActive.class, true);
 	}
 }

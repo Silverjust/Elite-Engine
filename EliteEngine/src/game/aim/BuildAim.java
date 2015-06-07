@@ -46,7 +46,7 @@ public class BuildAim extends Aim {
 		boolean placeFree = true;
 		boolean inCommanderRange = false;
 		for (Entity e : ref.updater.entities) {
-			if (e.isCollision(x, y, ((Entity) buildable).radius + e.radius))
+			if (e.isInArea(x, y, ((Entity) buildable).radius + e.radius))
 				placeFree = false;
 			if (isInCommandingRange(e, x, y))
 				inCommanderRange = true;
@@ -58,7 +58,7 @@ public class BuildAim extends Aim {
 
 	public boolean isInCommandingRange(Entity e, float x, float y) {
 		if (e instanceof Commander && e.player == builder.player
-				&& e.isCollision(x, y, ((Commander) e).commandRange())) {
+				&& e.isInArea(x, y, ((Commander) e).commandRange())) {
 			return true;
 		}
 		return false;

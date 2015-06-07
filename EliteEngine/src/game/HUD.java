@@ -9,6 +9,7 @@ public class HUD {
 
 	static MouseSelection mouseSelection;
 	static PImage keritImg, paxImg, arcImg, prunImg;
+	static PImage overlay;
 	public static int height = 200;
 	public static ActivesGrid activesGrid;
 
@@ -23,6 +24,8 @@ public class HUD {
 		paxImg = ImageHandler.load("", "Pax");
 		arcImg = ImageHandler.load("", "Arcanum");
 		prunImg = ImageHandler.load("", "Prunam");
+		overlay = ImageHandler.load(ref.player.nation.toString() + "/",
+				"overlay");
 	}
 
 	public static void setup() {
@@ -63,7 +66,8 @@ public class HUD {
 				ref.app.textAscent() + 15 + 10 + 64 * 3);
 
 		ref.app.fill(ref.app.color(255));
-		ref.app.rect(0, ref.app.height - height, ref.app.width, height);
+		ref.app.image(overlay, 0, ref.app.height - height, ref.app.width,
+				height);
 		// TODO wünderschönes overlay bild
 
 		SelectionDisplay.update();

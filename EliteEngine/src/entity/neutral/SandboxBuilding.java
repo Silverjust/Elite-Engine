@@ -2,7 +2,6 @@ package entity.neutral;
 
 import java.util.ArrayList;
 
-import DeleteAim.DeleteAim;
 import entity.Active;
 import processing.core.PImage;
 import shared.Nation;
@@ -15,6 +14,7 @@ import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import game.AimHandler;
 import game.HUD;
+import game.aim.DeleteAim;
 
 public class SandboxBuilding extends Building implements Commander {
 

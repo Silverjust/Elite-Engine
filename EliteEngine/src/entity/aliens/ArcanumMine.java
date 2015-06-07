@@ -3,13 +3,12 @@ package entity.aliens;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
-import entity.Buildable;
 import entity.Building;
 import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
 
-public class ArcanumMine extends Building implements Buildable {
+public class ArcanumMine extends Building   {
 
 	private static PImage standImg;
 	private static PImage previewImg;

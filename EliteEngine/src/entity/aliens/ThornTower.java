@@ -4,7 +4,6 @@ import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
 import entity.Attacker;
-import entity.Buildable;
 import entity.Building;
 import entity.Commander;
 import entity.Entity;
@@ -17,8 +16,7 @@ import entity.animation.Death;
 import entity.animation.TargetAttack;
 import game.ImageHandler;
 
-public class ThornTower extends Building implements Buildable, Attacker,
-		Commander {
+public class ThornTower extends Building implements Attacker, Commander {
 	private int commandingRange;
 
 	TargetAttack basicAttack;
@@ -76,7 +74,7 @@ public class ThornTower extends Building implements Buildable, Attacker,
 		if (animation == stand) {
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
-					if (e.isCollision(x, y, basicAttack.range + e.radius)
+					if (e.isInArea(x, y, basicAttack.range + e.radius)
 							&& !(e instanceof Building)) {
 						float newImportance = calcImportanceOf(e);
 						if (newImportance > importance) {

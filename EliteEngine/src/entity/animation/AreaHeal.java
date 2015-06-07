@@ -31,7 +31,7 @@ public class AreaHeal extends Ability {
 		if (isEvent() && isNotOnCooldown()) {
 			for (Entity e2 : ref.updater.entities) {
 				if (e2 != null & e2.isAllyTo(e)
-						&& e2.isCollision(x, y, e2.radius + range)) {
+						&& e2.isInArea(x, y, e2.radius + range)) {
 					ref.updater.send("<heal " + e2.number + " " + heal);
 				}
 			}

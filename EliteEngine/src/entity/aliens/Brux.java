@@ -9,6 +9,7 @@ import entity.animation.Death;
 import entity.animation.TargetAttack;
 import processing.core.PImage;
 import shared.Nation;
+import shared.ref;
 
 public class Brux extends Unit implements Attacker {
 
@@ -17,6 +18,7 @@ public class Brux extends Unit implements Attacker {
 	byte aggroRange;
 
 	TargetAttack basicAttack;
+	Jump jump;
 
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
@@ -32,6 +34,7 @@ public class Brux extends Unit implements Attacker {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new TargetAttack(standingImg, 800);
+		jump = new Jump(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************
@@ -56,6 +59,12 @@ public class Brux extends Unit implements Attacker {
 		basicAttack.cooldown = 1500;
 		basicAttack.eventTime = 500;
 
+		jump.range = (byte) (radius + 10);
+		jump.damage = 60;
+		jump.pirce = 2;
+		jump.cooldown = 5000;
+		jump.speed = 2.2f;
+
 		descr = " ";
 		stats = " ";
 		// ************************************
@@ -63,45 +72,74 @@ public class Brux extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-
-		// isTaged = false;
-		if (animation == stand) {// ****************************************************
-			String s = "";
-			for (Entity e : player.visibleEntities) {
-				if (e != this) {
-					if (e.isEnemyTo(this)) {// server
-						if (e.isCollision(x, y, aggroRange + e.radius)) {
-							s = ("walk " + e.x + " " + e.y);
-						}
-					}
-				}
-			}
-			sendAnimation(s);
-		}
-		if (animation == walk) {// ****************************************************
-			float thread = 0;
-			Entity threadEntity = null;
+		if (animation == walk || animation == stand) {// ****************************************************
+			boolean isEnemyInHitRange = false;
+			float importance = 0;
+			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isCollision(x, y, basicAttack.range + e.radius)) {
-							// evtl abfrage wegen groundposition
-
-							float newThread = calcImportanceOf(e);
-							if (newThread > thread) {
-								thread = newThread;
-								threadEntity = e;
+						if (e.isInArea(x, y, aggroRange + e.radius)) {
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
+						}
+						if (e.isInArea(x, y, basicAttack.range + e.radius)
+								&& e.groundPosition == GroundPosition.GROUND) {
+							isEnemyInHitRange = true;
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
 							}
 						}
 					}
 				}
 			}
-			if (threadEntity != null && getBasicAttack().isNotOnCooldown()) {
-				// System.out.println(thread);
-				sendAnimation("basicAttack " + threadEntity.number);
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
+				sendAnimation("basicAttack " + importantEntity.number);
+			} else if (importantEntity != null && !isEnemyInHitRange
+					&& jump.isNotOnCooldown()) {
+				sendAnimation("jump " + importantEntity.number);
+			} else if (importantEntity != null && !isEnemyInHitRange) {
+				sendAnimation("walk " + importantEntity.x + " "
+						+ importantEntity.y);
 			}
 		}
 		basicAttack.updateAbility(this);
+		jump.updateAbility(this);
+	}
+
+	@Override
+	public void updateMovement() {
+		if (animation == jump) {
+			speed += jump.speed;
+		}
+		super.updateMovement();
+		if (animation == jump) {
+			speed -= jump.speed;
+		}
+	}
+
+	@Override
+	public boolean isCollision(Entity e) {
+		boolean b = animation != jump;
+		return super.isCollision(e) && b;
+	}
+
+	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if (c[2].equals("jump")) {
+			int n = Integer.parseInt(c[3]);
+			Entity e = ref.updater.namedEntities.get(n);
+			jump.setTarget(e);
+			xTarget = e.x;
+			yTarget = e.y;
+			setAnimation(jump);
+		}
 	}
 
 	@Override
@@ -114,6 +152,32 @@ public class Brux extends Unit implements Attacker {
 	@Override
 	public Attack getBasicAttack() {
 		return basicAttack;
+	}
+
+	public static class Jump extends Attack {
+
+		public float speed;
+		private Entity target;
+
+		public Jump(PImage IMG, int duration) {
+			super(IMG, duration);
+		}
+
+		@Override
+		public void updateAbility(Entity e) {
+			if (target != null && isNotOnCooldown()
+					&& target.isInArea(e.x, e.y, e.radius + target.radius)) {
+				ref.updater.send("<hit " + target.number + " " + damage + " "
+						+ pirce);
+				target = null;
+				startCooldown();
+			}
+		}
+
+		public void setTarget(Entity e) {
+			target = e;
+		}
+
 	}
 
 }

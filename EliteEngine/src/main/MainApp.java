@@ -44,7 +44,7 @@ public class MainApp extends PApplet {
 		size(displayWidth, displayHeight, P2D);
 		frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		frame.setResizable(true);
-		frame.setTitle("EliteEngine");
+		frame.setTitle("Battle of Orion");
 		// frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		// frame.setVisible(true);
 		frameRate(60);

@@ -3,7 +3,6 @@ package entity.aliens;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
-import entity.Buildable;
 import entity.Building;
 import entity.Commander;
 import entity.Trainer;
@@ -14,7 +13,7 @@ import entity.animation.Death;
 import entity.animation.Training;
 import game.ImageHandler;
 
-public class AlienKasernePrunam extends Building implements Buildable,
+public class AlienKasernePrunam extends Building implements 
 		Commander, Trainer {
 	private int commanderRange;
 	protected float xTarget;
