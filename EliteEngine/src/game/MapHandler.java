@@ -55,6 +55,8 @@ public class MapHandler {
 		map.setString("descr", " ");
 		map.setString("texture", oldMap.getString("texture"));
 		map.setString("coll", oldMap.getString("coll"));
+		map.setInt("w", 900);
+		map.setInt("h", 900);
 
 		JSONObject entities = new JSONObject();
 		int i = 0;

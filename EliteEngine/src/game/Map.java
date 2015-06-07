@@ -13,7 +13,7 @@ import shared.ref;
 public class Map {
 	public Graph graph;
 
-	public int width = 800, height = 900;
+	public int width, height;
 	public final int fogScale = 7;
 
 	public PImage textur;
@@ -28,6 +28,8 @@ public class Map {
 			mapData = ref.app.loadJSONObject("data/"
 					+ ContentListHandler.getMapContent().getString(map)
 					+ ".json");
+			width = mapData.getInt("w");
+			height = mapData.getInt("h");
 		} catch (Exception e) {
 			System.err.println(map + " could not be loaded");
 			e.printStackTrace();

@@ -112,5 +112,7 @@
     }
   },
   "texture": "maps/newMap/mapTextur",
-  "name": "first_test"
+  "name": "first_test",
+  "w": 900,
+  "h": 900
 }

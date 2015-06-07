@@ -88,5 +88,7 @@
     }
   },
   "texture": "maps/newMap/mapTextur",
-  "name": "newTestMap"
+  "name": "newTestMap",
+  "w": 900,
+  "h": 900
 }
