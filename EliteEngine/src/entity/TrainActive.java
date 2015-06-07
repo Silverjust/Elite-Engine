@@ -15,6 +15,8 @@ public class TrainActive extends Active {
 			Class<? extends Entity> trainer) {
 		super(x, y, n, u.iconImg);
 		unit = u.getClass();
+		descr = u.getDesription();
+		stats = u.getStatistics();
 		clazz = trainer;
 	}
 

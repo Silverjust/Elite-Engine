@@ -73,7 +73,7 @@ public class Ker extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {// server
-						if (e.isInArea(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)) {
 							s = ("walk " + e.x + " " + e.y);
 						}
 					}
@@ -87,7 +87,7 @@ public class Ker extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInArea(x, y, basicAttack.range + e.radius)) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
 							// evtl abfrage wegen groundposition
 
 							float newThread = calcImportanceOf(e);

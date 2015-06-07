@@ -70,7 +70,6 @@ public class HUD {
 		ref.app.fill(ref.app.color(255));
 		ref.app.image(overlay, 0, ref.app.height - height, ref.app.width,
 				height);
-		// TODO wünderschönes overlay bild
 
 		SelectionDisplay.update();
 		Minimap.update();

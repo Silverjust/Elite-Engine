@@ -85,7 +85,7 @@ public class Rug extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInArea(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)) {
 							isEnemyTooClose = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -93,10 +93,10 @@ public class Rug extends Unit implements Attacker {
 								importantEntity = e;
 							}
 						}
-						if (e.isInArea(x, y, basicAttack.range + e.radius)) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
 							isEnemyInHitRange = true;
 						}
-						if (e.isInArea(x, y, spawnRange + e.radius)) {
+						if (e.isInRange(x, y, spawnRange + e.radius)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -136,7 +136,7 @@ public class Rug extends Unit implements Attacker {
 	public void calculateDamage(Attack a) {
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
-					&& e.isInArea(x, y, e.radius + a.range)) {
+					&& e.isInRange(x, y, e.radius + a.range)) {
 				ref.updater.send("<hit " + e.number + " "
 						+ (e instanceof Building ? a.damage * 2 : a.damage)
 						+ " " + a.pirce);

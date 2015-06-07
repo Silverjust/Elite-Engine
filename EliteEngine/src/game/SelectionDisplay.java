@@ -1,6 +1,7 @@
 package game;
 
 import entity.Entity;
+import entity.Informing;
 import g4p_controls.G4P;
 import g4p_controls.GControlMode;
 import g4p_controls.GCustomSlider;
@@ -19,6 +20,7 @@ public class SelectionDisplay {
 	public static GCustomSlider selectedEntitiesSlider;
 	static PFont font;
 	private static int col = ref.app.color(100, 255, 100);
+	static Informing informing;
 
 	public static void setup() {
 		x = 300;
@@ -28,7 +30,8 @@ public class SelectionDisplay {
 		graphic = ref.app.createGraphics(w, h, PApplet.JAVA2D);
 		font = ref.app.createFont("Aharoni Fett", 40);
 		graphic.textFont(font);
-		graphic.textSize(15);
+		graphic.textSize(20);
+		//graphic.textLeading(100);
 		selectedEntitiesSlider = new GCustomSlider(ref.app, x + w + 20, y + 10,
 				h - 20, 20, ref.player.nation.toString());
 		selectedEntitiesSlider.setRotation(PConstants.TAU / 4,
@@ -46,15 +49,15 @@ public class SelectionDisplay {
 	public static void update() {
 		graphic.beginDraw();
 		graphic.clear();
-		if (ref.updater.selected.size() == 1) {
+		if (informing == null && ref.updater.selected.size() == 1)
+			informing = ref.updater.selected.get(0);
+		if (informing != null) {
 			graphic.fill(col);
-			ref.updater.selected.get(0).drawIcon(graphic, 0, 0, iconSize * 4);
-			String descr = ref.updater.selected.get(0).getDesription()
-					.replaceAll("§", "\n");
+			informing.drawIcon(graphic, 0, 0, iconSize * 4);
+			String descr = informing.getDesription().replaceAll("§", "\n");
 			graphic.text(descr, iconSize * 5, ref.app.textAscent()
 					* ref.textScale + 10);
-			String stats = ref.updater.selected.get(0).getStatistics()
-					.replaceAll("§", "\n");
+			String stats = informing.getStatistics().replaceAll("§", "\n");
 			graphic.text(stats, iconSize * 10, ref.app.textAscent()
 					* ref.textScale + 10);
 		} else {
@@ -87,5 +90,9 @@ public class SelectionDisplay {
 		}
 		graphic.endDraw();
 		ref.app.image(graphic, x, y);
+	}
+
+	public static void setIforming(Informing i) {
+		informing = i;
 	}
 }

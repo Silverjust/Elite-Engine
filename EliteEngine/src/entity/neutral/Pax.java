@@ -46,8 +46,16 @@ public class Pax extends Building {
 	}
 
 	@Override
+	public void drawOnMinimap() {
+		ref.app.fill(player.color);
+		ref.app.rect(x, y, 15 * 2, 15 * 2);
+	}
+
+	@Override
 	public void updateAnimation() {
-	}@Override
+	}
+
+	@Override
 	public PImage preview() {
 		return standImg;
 	}

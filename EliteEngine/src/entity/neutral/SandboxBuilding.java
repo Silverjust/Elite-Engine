@@ -69,7 +69,6 @@ public class SandboxBuilding extends Building implements Commander {
 
 	@Override
 	public int commandRange() {
-		// TODO Auto-generated method stub
 		return Integer.MAX_VALUE;
 	}
 
@@ -87,14 +86,7 @@ public class SandboxBuilding extends Building implements Commander {
 
 		@Override
 		public String getDesription() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public String getStatistics() {
-			// TODO Auto-generated method stub
-			return null;
+			return "start mapedit";
 		}
 
 	}
@@ -113,14 +105,7 @@ public class SandboxBuilding extends Building implements Commander {
 
 		@Override
 		public String getDesription() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public String getStatistics() {
-			// TODO Auto-generated method stub
-			return null;
+			return "delete";
 		}
 
 	}
@@ -156,14 +141,7 @@ public class SandboxBuilding extends Building implements Commander {
 
 		@Override
 		public String getDesription() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public String getStatistics() {
-			// TODO Auto-generated method stub
-			return null;
+			return "switch player";
 		}
 
 	}

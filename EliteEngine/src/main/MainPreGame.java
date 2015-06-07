@@ -64,7 +64,6 @@ public class MainPreGame extends PreGame {
 			String[] intNames = (String[]) ContentListHandler.getMapContent()
 					.keys().toArray(new String[i]);
 			this.intNames = intNames;
-			System.out.println(intNames);
 			String[] names = new String[i];
 			for (int j = 0; j < names.length; j++) {
 				try {
@@ -188,6 +187,7 @@ public class MainPreGame extends PreGame {
 
 	@Override
 	public void setMap(String string) {
+		//TODO stop broken maps from lockin
 		int size = ContentListHandler.getMapContent().keys().size();
 		@SuppressWarnings("unchecked")
 		String[] mapArray = (String[]) ContentListHandler.getMapContent()

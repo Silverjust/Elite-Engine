@@ -223,10 +223,13 @@ public abstract class Entity implements Informing {
 		else
 			stats += "kerit: " + kerit + "§pax: " + pax + "§arcanum: "
 					+ arcanum + "§prunam: " + prunam + "§§";
+		if (death != null)
+			stats += "hp: " + hp_max + " (" + armor + ")§";
+		else
+			stats += "hp: Immortal Object§";
 
-		stats += "hp: " + hp_max + " (" + armor + ")§";
-
-		if (this instanceof Attacker) {
+		if (this instanceof Attacker
+				&& ((Attacker) this).getBasicAttack().pirce >= 0) {
 			stats += "dps: " + ((Attacker) this).getBasicAttack().damage + "/"
 					+ ((Attacker) this).getBasicAttack().cooldown / 1000.0
 					+ " (" + ((Attacker) this).getBasicAttack().pirce + ")§";
@@ -282,13 +285,15 @@ public abstract class Entity implements Informing {
 	}
 
 	public boolean isCollision(Entity e) {
+		if (radius == 0 || e.radius == 0)
+			return false;
 		float f = PApplet.dist(x, y, e.x, e.y);
 		boolean b = f < radius + e.radius && e.groundPosition == groundPosition;
 		// if(b)System.out.println(number + "/" + e.number + ":" + f + b);
 		return b;
 	}
 
-	public boolean isInArea(float X, float Y, int R) {
+	public boolean isInRange(float X, float Y, int R) {
 		float f = PApplet.dist(x, y, X, Y);
 		boolean b = f < R;
 		// System.out.println(number + "/" + f + "/" + R + " " + b);
@@ -331,7 +336,7 @@ public abstract class Entity implements Informing {
 		boolean isVisible = false;
 		for (Entity spotter : ref.updater.entities) {
 			if (spotter.player == p
-					&& spotter.isInArea(x, y, spotter.sight + radius))
+					&& spotter.isInRange(x, y, spotter.sight + radius))
 				isVisible = true;
 			if (player == ref.updater.neutral)
 				isVisible = true;

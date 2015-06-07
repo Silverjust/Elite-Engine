@@ -102,11 +102,6 @@ public abstract class Building extends Entity {
 			return "sets the Target,§where new units walk to";
 		}
 
-		@Override
-		public String getStatistics() {
-			return null;
-		}
-
 	}
 
 }

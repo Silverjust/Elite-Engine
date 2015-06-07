@@ -49,6 +49,7 @@ public class Colum extends Unit implements Attacker {
 
 		heal.range = (byte) (radius + 25);
 		heal.damage = 25;//heal
+		heal.pirce = -1;//heal
 		heal.cooldown = 5000;
 		heal.eventTime = 100;
 
@@ -67,7 +68,7 @@ public class Colum extends Unit implements Attacker {
 	public void calculateDamage(Attack a) {
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isAllyTo(this)
-					&& e.isInArea(x, y, e.radius + a.range)) {
+					&& e.isInRange(x, y, e.radius + a.range)) {
 				ref.updater.send("<heal " + e.number + " " + heal.damage);
 			}
 		}

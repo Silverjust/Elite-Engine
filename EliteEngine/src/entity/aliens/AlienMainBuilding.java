@@ -55,14 +55,14 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 		super.updateDecisions();
 		if (animation == stand) {
 			for (Entity e : player.visibleEntities) {
-				if (e.isInArea(x, y, 100)) {
+				if (e.isInRange(x, y, 100)) {
 					try {
 						testLab = (TestLab) e;
 					} catch (Exception e1) {
 					}
 				}
 			}
-			if (testLab != null && testLab.isInArea(x, y, 100)) {
+			if (testLab != null && testLab.isInRange(x, y, 100)) {
 			} else {
 				testLab = null;
 			}

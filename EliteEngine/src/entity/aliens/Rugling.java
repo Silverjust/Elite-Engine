@@ -66,14 +66,14 @@ public class Rugling extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInArea(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
 						}
-						if (e.isInArea(x, y, basicAttack.range + e.radius)
+						if (e.isInRange(x, y, basicAttack.range + e.radius)
 								&& e.groundPosition == GroundPosition.GROUND) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);

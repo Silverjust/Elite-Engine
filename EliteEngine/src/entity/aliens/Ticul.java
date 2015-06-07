@@ -89,7 +89,7 @@ public class Ticul extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {// server
-						if (e.isInArea(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)) {
 							s = ("walk " + e.x + " " + e.y);
 						}
 					}
@@ -103,7 +103,7 @@ public class Ticul extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInArea(x, y, basicAttack.range + e.radius)
+						if (e.isInRange(x, y, basicAttack.range + e.radius)
 								&& e.groundPosition == GroundPosition.GROUND) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -140,37 +140,6 @@ public class Ticul extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	static public class Smite extends Active {// ******************************************************
-		public Smite(int x, int y, char n) {
-			super(x, y, n, smiteImg);
-			clazz = Ticul.class;
-			cooldown = 5000;
-		}
-
-		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
-
-			for (Entity e : ref.player.visibleEntities) {
-				if (e.isEnemyTo(ref.player)) {
-					ClientHandler.send("<hit " + e.number + " " + 5);
-				}
-			}
-
-		}
-
-		@Override
-		public String getDesription() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public String getStatistics() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	}
-
 	static public class Flash extends Active {// ******************************************************
 		private int range = 100;
 
@@ -196,15 +165,9 @@ public class Ticul extends Unit implements Attacker {
 
 		@Override
 		public String getDesription() {
-			// TODO Auto-generated method stub
-			return null;
+			return "short range teleport§work in progress";
 		}
 
-		@Override
-		public String getStatistics() {
-			// TODO Auto-generated method stub
-			return null;
-		}
 	}
 
 }

@@ -1,11 +1,13 @@
 package entity;
 
+import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.ref;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import game.HUD;
+import game.SelectionDisplay;
 
 /**
  * Aktive Fähigkeit
@@ -41,10 +43,14 @@ public abstract class Active implements Informing {
 	}
 
 	public void handleActiveEvents(GGameButton gamebutton, GEvent event) {
-		if (event == GEvent.PRESSED && gamebutton.isVisible()
-				&& isNotOnCooldown()) {
-			onButtonPressed(gamebutton, event);
-			startCooldown();
+		if (ref.app.keyPressed || ref.app.mouseButton != PConstants.RIGHT) {
+			if (event == GEvent.PRESSED && gamebutton.isVisible()
+					&& isNotOnCooldown()) {
+				onButtonPressed(gamebutton, event);
+				startCooldown();
+			}
+		} else {
+			SelectionDisplay.setIforming(this);
 		}
 	}
 
@@ -76,5 +82,13 @@ public abstract class Active implements Informing {
 	public void drawIcon(PGraphics graphic, float x, float y, int size) {
 		// TODO gleich wie entity
 		graphic.image(symbol, x, y, size, size);
+	}
+
+	@Override
+	public String getStatistics() {
+		if (cooldown != 0) 
+			return "cooldown: " + cooldown;
+		return " ";
+		
 	}
 }

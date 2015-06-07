@@ -25,8 +25,8 @@
     "TestLab": "entity.neutral.TestLab"
   },
   "maps": {
+	"fernisland" : "maps/fernisland/fernisland",
 	"firstTestMap" : "maps/firstTestMap/firstTestMap",
-	"newMap" : "maps/newMap/newMap",
-	"fernisland" : "maps/fernisland/fernisland"
+	"newMap" : "maps/newMap/newMap"
   }
 }

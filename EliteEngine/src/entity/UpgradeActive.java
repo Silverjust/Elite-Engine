@@ -9,7 +9,7 @@ import game.aim.UpgradeAim;
 
 public class UpgradeActive extends Active {
 	Class<? extends Building> newBuilding, oldBuilding;
-	 String descr = " ", stats = " ";
+	String descr = " ", stats = " ";
 
 	public UpgradeActive(int x, int y, char n, Building b,
 			Class<? extends Building> oldBuilding,
@@ -17,6 +17,8 @@ public class UpgradeActive extends Active {
 		super(x, y, n, b.iconImg);
 		this.newBuilding = b.getClass();
 		this.oldBuilding = oldBuilding;
+		descr = b.getDesription();
+		stats = b.getStatistics();
 		clazz = AlienMainBuilding.class;
 	}
 

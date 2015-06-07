@@ -72,7 +72,7 @@ public class ThornTower extends Building implements Attacker, Commander {
 		if (animation == stand) {
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
-					if (e.isInArea(x, y, basicAttack.range + e.radius)
+					if (e.isInRange(x, y, basicAttack.range + e.radius)
 							&& !(e instanceof Building)) {
 						float newImportance = calcImportanceOf(e);
 						if (newImportance > importance) {

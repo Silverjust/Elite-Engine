@@ -42,7 +42,6 @@ public class ActivesGrid {
 	public ActivesGrid() {
 		Active.x = x;
 		Active.y = y;
-		addActive(4, 2, Ticul.Smite.class, true);
 		addActive(3, 2, Ticul.Flash.class, true);
 
 		addActive(1, 1, Building.SetTargetActive.class, false);

@@ -79,14 +79,14 @@ public class Brux extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInArea(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
 						}
-						if (e.isInArea(x, y, basicAttack.range + e.radius)
+						if (e.isInRange(x, y, basicAttack.range + e.radius)
 								&& e.groundPosition == GroundPosition.GROUND) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
@@ -173,7 +173,7 @@ public class Brux extends Unit implements Attacker {
 		@Override
 		public void updateAbility(Entity e) {
 			if (target != null && isNotOnCooldown()
-					&& target.isInArea(e.x, e.y, e.radius + target.radius)) {
+					&& target.isInRange(e.x, e.y, e.radius + target.radius)) {
 				ref.updater.send("<hit " + target.number + " " + damage + " "
 						+ pirce);
 				e.sendDefaultAnimation(this);

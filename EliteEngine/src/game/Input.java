@@ -195,6 +195,7 @@ public class Input {
 		if (GameDrawer.mouseSelection != null) {
 			GameDrawer.mouseSelection.endSelection(app.mouseX, app.mouseY);
 			GameDrawer.mouseSelection = null;
+			SelectionDisplay.setIforming(null);
 		}
 	}
 
