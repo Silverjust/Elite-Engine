@@ -26,6 +26,7 @@
   },
   "maps": {
 	"firstTestMap" : "maps/firstTestMap/firstTestMap",
-	"newMap" : "maps/newMap/newMap"
+	"newMap" : "maps/newMap/newMap",
+	"fernisland" : "maps/fernisland/fernisland"
   }
 }
