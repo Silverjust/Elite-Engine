@@ -21,6 +21,7 @@
     "Pax": "entity.neutral.Pax",
     "Arcanum": "entity.neutral.Arcanum",
     "Prunam": "entity.neutral.Prunam",
+	"Rock": "entity.neutral.Rock",
 	"SandboxBuilding": "entity.neutral.SandboxBuilding",
     "TestLab": "entity.neutral.TestLab"
   },

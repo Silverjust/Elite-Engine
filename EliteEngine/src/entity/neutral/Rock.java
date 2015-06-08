@@ -14,6 +14,7 @@ public class Rock extends Building {
 		String path = path(Nation.NEUTRAL, new Object() {
 		});
 		standImg = game.ImageHandler.load(path, "Rock");
+		System.out.println(standImg);
 	}
 
 	public Rock(String[] c) {
@@ -27,8 +28,8 @@ public class Rock extends Building {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 50;
-		ySize = 50;
+		xSize = 30;
+		ySize = 30;
 
 		radius = 15;
 
