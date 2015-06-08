@@ -3,6 +3,8 @@ package server;
 import processing.net.Client;
 import processing.net.Server;
 import shared.ComHandler;
+import shared.Mode;
+import shared.Player;
 import shared.ref;
 
 public class ServerHandler {
@@ -46,10 +48,16 @@ public class ServerHandler {
 	}
 
 	public void serverEvent(Server server, Client someClient) {
-		app.gui.addChatText("We have a new client: " + someClient.ip());
-		ref.preGame.addPlayer(someClient.ip(), someClient.ip());
-		// app.gui.chatText.clear();
-		send("<identify");
+		if (app.mode == Mode.GAME
+				&& ref.updater.player.containsKey(someClient.ip())) {
+			Player p = ref.updater.player.get(someClient.ip());
+			app.gui.addChatText(p.name + " has reconnected");
+			send("<identify reload");
+		} else {
+			app.gui.addChatText("We have a new client: " + someClient.ip());
+			ref.preGame.addPlayer(someClient.ip(), someClient.ip());
+			send("<identify server");
+		}
 	}
 
 	public void send(String out) {

@@ -6,6 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import javax.naming.NoInitialContextException;
 
 import main.ClientHandler;
+import main.MainApp;
+import main.MainLoader;
 import processing.core.PApplet;
 import server.ServerApp;
 import shared.Updater.GameState;
@@ -107,13 +109,21 @@ public class ComHandler {
 
 			// before game
 			case "<identify":
-				System.out.println("identifying " + ref.player.name);
-				ClientHandler.send("<identifying "
-						+ ClientHandler.identification + " " + ref.player.name);
-				ClientHandler.send("<setNation " + ClientHandler.identification
-						+ " " + ref.player.nation.toString());
-				ClientHandler.send("<setMap " + ClientHandler.identification
-						+ " " + ref.preGame.map);
+				if (c[1].equals("reload")) {
+					ref.loader = new MainLoader();
+					((MainApp) ref.app).mode = Mode.LADESCREEN;
+				} else {
+					System.out.println("identifying " + ref.player.name);
+					ClientHandler.send("<identifying "
+							+ ClientHandler.identification + " "
+							+ ref.player.name);
+					ClientHandler.send("<setNation "
+							+ ClientHandler.identification + " "
+							+ ref.player.nation.toString());
+					ClientHandler.send("<setMap "
+							+ ClientHandler.identification + " "
+							+ ref.preGame.map);
+				}
 				// TODO send color
 				// nur an clienthandler
 				break;

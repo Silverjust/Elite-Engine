@@ -81,24 +81,30 @@ public class Hauptmenue {
 				ClientHandler.singlePlayer = true;
 				ClientHandler.sandbox = true;
 			}
+
 			ref.preGame = new MainPreGame(name);
 			ClientHandler.setup(ip);
 			if (!ClientHandler.singlePlayer && ClientHandler.client == null) {
 				serverIp.setFocus(true);
+				((MainPreGame) ref.preGame).closeBecauseServer();
 				return;
 			}
 			((MainPreGame) ref.preGame).setup();
 
-			playerName.dispose();
-			password.dispose();
-			serverIp.dispose();
-			localhost.dispose();
-			multiplayerButton.dispose();
-			singleplayerButton.dispose();
-			sandboxButton.dispose();
-			changes.dispose();
-			((MainApp) ref.app).mode = Mode.PREGAME;
+			dispose();
 		}
+	}
+
+	void dispose() {
+		playerName.dispose();
+		password.dispose();
+		serverIp.dispose();
+		localhost.dispose();
+		multiplayerButton.dispose();
+		singleplayerButton.dispose();
+		sandboxButton.dispose();
+		changes.dispose();
+		((MainApp) ref.app).mode = Mode.PREGAME;
 	}
 
 	public void handleStartServerEvents(GButton button, GEvent event) {

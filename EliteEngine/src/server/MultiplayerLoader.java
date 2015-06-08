@@ -57,8 +57,8 @@ public class MultiplayerLoader extends Loader {
 		case END:
 			// ServerDisplay.main(new String[] {});
 			state = State.NEWGAME;
-			((ServerApp) ref.app).mode = Mode.GAME;
-			((ServerApp) ref.app).serverHandler.send("<startGame");
+			app.mode = Mode.GAME;
+			app.serverHandler.send("<startGame");
 			System.out.println("Game Start");
 			break;
 		case ERROR:
