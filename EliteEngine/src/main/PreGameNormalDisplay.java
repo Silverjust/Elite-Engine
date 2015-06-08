@@ -32,7 +32,7 @@ public class PreGameNormalDisplay {
 		startButton = new GButton(ref.app, ref.app.width - 320,
 				ref.app.height - 200, 300, 175);
 		startButton.setText("START");
-		startButton.addEventHandler(ref.updater, "handleStartEvents");
+		startButton.addEventHandler(this, "handleStartEvents");
 
 		playerSlider = new GSlider(ref.app, ref.app.width - 10, 100, 300, 30,
 				20);
@@ -110,6 +110,10 @@ public class PreGameNormalDisplay {
 			ClientHandler.send("<setMap " + ref.player.ip + " "
 					+ intNames[list.getSelectedIndex()]);
 		}
+	}
+
+	public void handleStartEvents(GButton button, GEvent event) {
+		preGame.tryStart();
 	}
 
 	private String[] getNationImages(int i) {

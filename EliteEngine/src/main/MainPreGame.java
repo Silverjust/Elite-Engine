@@ -1,7 +1,5 @@
 package main;
 
-import g4p_controls.GButton;
-import g4p_controls.GEvent;
 import shared.ContentListHandler;
 import shared.Mode;
 import shared.Nation;
@@ -51,7 +49,7 @@ public class MainPreGame extends PreGame {
 
 	}
 
-	public void handleStartEvents(GButton button, GEvent event) {
+	public void tryStart() {
 		for (String key : player.keySet())
 			if (player.get(key).nation == null)
 				return;

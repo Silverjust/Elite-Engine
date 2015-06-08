@@ -112,8 +112,10 @@ public class ComHandler {
 				if (c[1].equals("reload")) {
 					ref.loader = new MainLoader();
 					((MainApp) ref.app).mode = Mode.LADESCREEN;
+					ClientHandler.send("<reload");
 				} else {
 					System.out.println("identifying " + ref.player.name);
+					System.out.println(ref.player + " " + ref.player.nation);
 					ClientHandler.send("<identifying "
 							+ ClientHandler.identification + " "
 							+ ref.player.name);
@@ -123,9 +125,9 @@ public class ComHandler {
 					ClientHandler.send("<setMap "
 							+ ClientHandler.identification + " "
 							+ ref.preGame.map);
+					// TODO send color
+					// nur an clienthandler
 				}
-				// TODO send color
-				// nur an clienthandler
 				break;
 			case "<identifying":
 				ref.preGame.addPlayer(c[1], c[2]);
