@@ -10,6 +10,7 @@ import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import g4p_controls.GSlider;
 import shared.ContentListHandler;
+import shared.Mode;
 import shared.Nation;
 import shared.ref;
 
@@ -26,9 +27,7 @@ public class PreGameNormalDisplay {
 	private MainPreGame preGame;
 
 	public PreGameNormalDisplay() {
-
 		preGame = (MainPreGame) ref.preGame;
-
 		startButton = new GButton(ref.app, ref.app.width - 320,
 				ref.app.height - 200, 300, 175);
 		startButton.setText("START");
@@ -90,7 +89,8 @@ public class PreGameNormalDisplay {
 	}
 
 	public void handleSelectNation(GGameButton button, GEvent event) {
-		if (event == GEvent.PRESSED) {
+		if (event == GEvent.PRESSED && ((MainApp) ref.app).mode == Mode.PREGAME) {
+			System.out.println(((MainApp) ref.app).mode);
 			for (int i = 0; i < nationButtons.length; i++) {
 				// System.out.println(nationButtons[i] == button);
 				if (nationButtons[i] == button) {
@@ -105,14 +105,18 @@ public class PreGameNormalDisplay {
 	}
 
 	public void handleSelectMap(GDropList list, GEvent event) {
-		if (event == GEvent.SELECTED) {
+		if (event == GEvent.SELECTED
+				&& ((MainApp) ref.app).mode == Mode.PREGAME) {
 			ClientHandler.send("<setMap " + ref.player.ip + " "
 					+ intNames[list.getSelectedIndex()]);
 		}
 	}
 
 	public void handleStartEvents(GButton button, GEvent event) {
-		preGame.tryStart();
+		System.out.println(event);
+		if (event == GEvent.CLICKED && ((MainApp) ref.app).mode == Mode.PREGAME) {
+			preGame.tryStart();
+		}
 	}
 
 	private String[] getNationImages(int i) {

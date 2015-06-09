@@ -112,14 +112,16 @@ public class ComHandler {
 			// before game
 			case "<identify":
 				if (c[1].equals("reconnect")) {
-					// ((MainPreGame) ref.preGame).display.dispose();
+					while (((MainPreGame) ref.preGame).display == null) {
+					}
+					ref.app.delay(10);
+					((MainPreGame) ref.preGame).display.dispose();
 					ref.loader = new MainLoader();
 					System.out.println("reconnect");
 					((MainLoader) ref.loader).isReconnectLoad = true;
 					((MainApp) ref.app).mode = Mode.LADESCREEN;
 				} else {
 					if (c[1].equals("server")) {
-						((MainPreGame) ref.preGame).setup();
 						((MainApp) ref.app).mode = Mode.PREGAME;
 					}
 					System.out.println("identifying " + ref.player.name);
@@ -143,6 +145,7 @@ public class ComHandler {
 				ref.preGame.addPlayer(c[1], c[2]);
 				break;
 			case "<setNation":
+				//System.out.println(c[2]);
 				ref.preGame.player.get(c[1]).nation = Nation.fromString(c[2]);
 				break;
 			case "<setMap":

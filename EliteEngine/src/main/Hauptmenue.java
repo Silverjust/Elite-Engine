@@ -89,11 +89,11 @@ public class Hauptmenue {
 				((MainPreGame) ref.preGame).closeBecauseServer();
 				return;
 			}
+			((MainPreGame) ref.preGame).setup();
+			
 			if (ClientHandler.singlePlayer) {
-				((MainPreGame) ref.preGame).setup();
 				((MainApp) ref.app).mode = Mode.PREGAME;
 			}
-
 			dispose();
 
 		}
