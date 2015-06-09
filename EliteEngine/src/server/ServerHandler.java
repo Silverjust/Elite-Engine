@@ -1,7 +1,7 @@
 package server;
 
-import processing.net.Client;
-import processing.net.Server;
+import shared.Client;
+import shared.Server;
 import shared.ComHandler;
 import shared.Mode;
 import shared.Player;
@@ -66,5 +66,11 @@ public class ServerHandler {
 		if (app.gui.displayCommands.isSelected())
 			app.gui.addChatText("out " + out + endSymbol);
 		server.write(out + endSymbol);
+	}
+
+	public void disconnectEvent(Client client) {
+		app.gui.addChatText(ref.updater.player.get(client.ip())
+				+ " disconnected");
+		send("<pause true");
 	}
 }

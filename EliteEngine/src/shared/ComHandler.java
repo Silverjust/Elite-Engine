@@ -145,7 +145,7 @@ public class ComHandler {
 				ref.preGame.addPlayer(c[1], c[2]);
 				break;
 			case "<setNation":
-				//System.out.println(c[2]);
+				// System.out.println(c[2]);
 				ref.preGame.player.get(c[1]).nation = Nation.fromString(c[2]);
 				break;
 			case "<setMap":
@@ -153,6 +153,7 @@ public class ComHandler {
 				break;
 			case "<load":
 				ref.preGame.startLoading();
+				break;
 			case "<reconnect":
 				((ServerUpdater) ref.updater).reconnect();
 				break;

@@ -86,6 +86,7 @@ public class ServerUpdater extends Updater {
 		for (String com : spawns) {
 			ref.updater.send(com);
 		}
+		System.out.println("finished reconnect, restart game");
 		ref.updater.send("<pause false");
 	}
 }

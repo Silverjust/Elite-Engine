@@ -3,8 +3,8 @@ package server;
 import g4p_controls.G4P;
 import processing.core.PApplet;
 import processing.core.PConstants;
-import processing.net.Client;
-import processing.net.Server;
+import shared.Client;
+import shared.Server;
 import shared.Mode;
 import shared.ref;
 
@@ -62,6 +62,10 @@ public class ServerApp extends PApplet {
 	public void serverUpdate() {
 		ref.updater.update();
 
+	}
+
+	public void disconnectEvent(Client client) {
+		serverHandler.disconnectEvent( client); 
 	}
 
 	public void serverEvent(Server server, Client someClient) {

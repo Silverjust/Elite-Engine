@@ -1,5 +1,3 @@
-package main;
-
 /* -*- mode: java; c-basic-offset: 2; indent-tabs-mode: nil -*- */
 
 /*
@@ -20,6 +18,9 @@ package main;
  Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  Boston, MA  02111-1307  USA
  */
+
+package shared;
+
 import processing.core.*;
 
 import java.io.*;
@@ -287,17 +288,6 @@ public class Client implements Runnable {
 		return null;
 	}
 
-	/**
-	 * ( begin auto-generated from Client_ip.xml )
-	 * 
-	 * Returns the IP address of the Client.
-	 * 
-	 * ( end auto-generated )
-	 * 
-	 * @webref client:client
-	 * @usage application
-	 * @brief Returns the IP address of the client as a String
-	 */
 	public String myIp() {
 		if (socket != null) {
 			return socket.getLocalAddress().toString().substring(1);

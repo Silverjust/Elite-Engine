@@ -1,5 +1,6 @@
 package main;
 
+import shared.Client;
 import shared.ComHandler;
 import shared.ref;
 

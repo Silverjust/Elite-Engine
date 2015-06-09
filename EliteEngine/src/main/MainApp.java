@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
+import shared.Client;
 import shared.CommandHandler;
 import shared.Helper;
 import shared.Mode;
