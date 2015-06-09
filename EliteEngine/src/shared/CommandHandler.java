@@ -4,6 +4,7 @@ import javax.naming.NoInitialContextException;
 
 import main.ClientHandler;
 import processing.core.PApplet;
+import shared.Updater.GameState;
 import entity.Entity;
 import g4p_controls.GCScheme;
 import game.Chat;
@@ -104,6 +105,13 @@ public class CommandHandler {
 				int g = Integer.parseInt(c[3]);
 				int b = Integer.parseInt(c[4]);
 				GCScheme.setScheme(8, i, ref.app.color(r, g, b));
+				break;
+			case "/pause":
+				if (ref.updater.gameState == GameState.PAUSE) {
+					ref.updater.send("<pause false");
+				} else {
+					ref.updater.send("<pause true");
+				}
 				break;
 			case "/gamerule":
 				if (c[1].equals("commandoutput")) {

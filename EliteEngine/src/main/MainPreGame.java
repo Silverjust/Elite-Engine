@@ -9,12 +9,13 @@ import shared.ref;
 
 public class MainPreGame extends PreGame {
 
-	PreGameNormalDisplay display;
+	public PreGameNormalDisplay display;
 
 	private String name;
 
 	public MainPreGame(String name) {
 		this.name = name;
+		ContentListHandler.load();
 	}
 
 	public void closeBecauseServer() {
@@ -85,7 +86,8 @@ public class MainPreGame extends PreGame {
 			return;
 		}
 		map = string;
-		display.maps.setSelected(index);
+		if (display != null)
+			display.maps.setSelected(index);
 	}
 
 	@Override

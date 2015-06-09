@@ -8,8 +8,10 @@ import javax.naming.NoInitialContextException;
 import main.ClientHandler;
 import main.MainApp;
 import main.MainLoader;
+import main.MainPreGame;
 import processing.core.PApplet;
 import server.ServerApp;
+import server.ServerUpdater;
 import shared.Updater.GameState;
 import entity.Entity;
 import entity.Unit;
@@ -109,24 +111,32 @@ public class ComHandler {
 
 			// before game
 			case "<identify":
-				if (c[1].equals("reload")) {
+				if (c[1].equals("reconnect")) {
+					// ((MainPreGame) ref.preGame).display.dispose();
 					ref.loader = new MainLoader();
+					System.out.println("reconnect");
+					((MainLoader) ref.loader).isReconnectLoad = true;
 					((MainApp) ref.app).mode = Mode.LADESCREEN;
-					ClientHandler.send("<reload");
 				} else {
+					if (c[1].equals("server")) {
+						((MainPreGame) ref.preGame).setup();
+						((MainApp) ref.app).mode = Mode.PREGAME;
+					}
 					System.out.println("identifying " + ref.player.name);
-					System.out.println(ref.player + " " + ref.player.nation);
 					ClientHandler.send("<identifying "
 							+ ClientHandler.identification + " "
 							+ ref.player.name);
-					ClientHandler.send("<setNation "
-							+ ClientHandler.identification + " "
-							+ ref.player.nation.toString());
-					ClientHandler.send("<setMap "
-							+ ClientHandler.identification + " "
-							+ ref.preGame.map);
+					if (ref.player.nation != null)
+						ClientHandler.send("<setNation "
+								+ ClientHandler.identification + " "
+								+ ref.player.nation.toString());
+					if (ref.preGame.map != null)
+						ClientHandler.send("<setMap "
+								+ ClientHandler.identification + " "
+								+ ref.preGame.map);
 					// TODO send color
 					// nur an clienthandler
+
 				}
 				break;
 			case "<identifying":
@@ -140,6 +150,8 @@ public class ComHandler {
 				break;
 			case "<load":
 				ref.preGame.startLoading();
+			case "<reconnect":
+				((ServerUpdater) ref.updater).reconnect();
 				break;
 			case "<ready":
 				ref.preGame.player.get(c[1]).isReady = true;
@@ -177,6 +189,7 @@ public class ComHandler {
 			// e.printStackTrace();
 			// can be ignored
 		} catch (InvocationTargetException e) {
+			System.err.println("com error in " + com);
 			e.printStackTrace();
 			// can be ignored
 		} catch (Exception e) {

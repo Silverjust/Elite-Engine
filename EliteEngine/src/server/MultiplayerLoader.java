@@ -79,6 +79,8 @@ public class MultiplayerLoader extends Loader {
 	public void tryStartGame() {
 		if (state == State.WAIT && ref.updater.arePlayerReady()) {
 			state = State.ENTITIES;
+		} else if (app.mode == Mode.GAME) {
+			app.serverHandler.send("<startGame");
 		}
 	}
 }

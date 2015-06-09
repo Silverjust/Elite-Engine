@@ -2,6 +2,9 @@ package server;
 
 import entity.Entity;
 import game.Map;
+
+import java.util.ArrayList;
+
 import shared.ComHandler;
 import shared.Player;
 import shared.Updater;
@@ -17,35 +20,37 @@ public class ServerUpdater extends Updater {
 
 	@Override
 	public void update() {
-		for (int i = 0; i < toAdd.size(); i++) {
-			Entity.entityCounter += 1;
-			entities.add(toAdd.get(i));
-			namedEntities.put(Entity.entityCounter, toAdd.get(i));
-			toAdd.get(i).number = Entity.entityCounter;
-			toAdd.remove(i);
-		}
-		for (int i = 0; i < toRemove.size(); i++) {
-			if (toRemove.get(i) != null) {
-				int n = toRemove.get(i).number;
-				namedEntities.remove(n);
-				selected.remove(toRemove.get(i));
-				entities.remove(toRemove.get(i));
-				toRemove.remove(i);
-				// System.out.println("removed " + n);
+		if (gameState == GameState.PLAY) {
+			for (int i = 0; i < toAdd.size(); i++) {
+				Entity.entityCounter += 1;
+				entities.add(toAdd.get(i));
+				namedEntities.put(Entity.entityCounter, toAdd.get(i));
+				toAdd.get(i).number = Entity.entityCounter;
+				toAdd.remove(i);
 			}
-		}
-		for (String key : player.keySet()) {
-			player.get(key).visibleEntities.clear();
-			for (Entity e : entities) {
-				if (e.isVisibleTo(player.get(key))) {
-					player.get(key).visibleEntities.add(e);
+			for (int i = 0; i < toRemove.size(); i++) {
+				if (toRemove.get(i) != null) {
+					int n = toRemove.get(i).number;
+					namedEntities.remove(n);
+					selected.remove(toRemove.get(i));
+					entities.remove(toRemove.get(i));
+					toRemove.remove(i);
+					// System.out.println("removed " + n);
 				}
 			}
-		}
-		for (Entity e : entities) {
-			e.updateAnimation();
-			e.updateDecisions();
-			e.updateMovement();
+			for (String key : player.keySet()) {
+				player.get(key).visibleEntities.clear();
+				for (Entity e : entities) {
+					if (e.isVisibleTo(player.get(key))) {
+						player.get(key).visibleEntities.add(e);
+					}
+				}
+			}
+			for (Entity e : entities) {
+				e.updateAnimation();
+				e.updateDecisions();
+				e.updateMovement();
+			}
 		}
 	}
 
@@ -66,5 +71,21 @@ public class ServerUpdater extends Updater {
 	public void send(String string) {
 		ComHandler.executeCom(string);
 		((ServerApp) ref.app).serverHandler.send(string);
+	}
+
+	public void reconnect() {
+		ref.updater.send("<pause true");
+		ArrayList<String> spawns = new ArrayList<String>();
+		for (Entity entity : entities) {
+			spawns.add("<spawn " + entity.getClass().getSimpleName() + " "
+					+ entity.player.ip + " " + entity.x + " " + entity.y);
+		}
+		for (Entity entity : entities) {
+			ref.updater.send("<remove " + entity.number);
+		}
+		for (String com : spawns) {
+			ref.updater.send(com);
+		}
+		ref.updater.send("<pause false");
 	}
 }

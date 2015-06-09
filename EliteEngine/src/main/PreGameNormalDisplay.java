@@ -47,7 +47,6 @@ public class PreGameNormalDisplay {
 			nationButtons[i].addEventHandler(this, "handleSelectNation");
 		}
 		{
-			ContentListHandler.load();
 			int i = ContentListHandler.getMapContent().size();
 			maps = new GDropList(ref.app, ref.app.width - 320,
 					ref.app.height - 450, 300, 200, 5);

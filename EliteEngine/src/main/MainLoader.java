@@ -11,6 +11,8 @@ import game.MapHandler;
 public class MainLoader extends Loader {
 	// TODO Alle daten laden
 
+	public boolean isReconnectLoad;
+
 	public void update() {
 		switch (state) {
 
@@ -75,10 +77,12 @@ public class MainLoader extends Loader {
 				GameDrawer.godhand = true;
 				GameDrawer.nocosts = true;
 			}
+			if (isReconnectLoad)
+				ref.updater.send("<reconnect");
 			state = State.WAIT;
 			break;
 		case WAIT:
-			ref.updater.send("<ready " + ClientHandler.identification);
+				ref.updater.send("<ready " + ClientHandler.identification);
 			break;
 		case END:
 			state = State.NEWGAME;
