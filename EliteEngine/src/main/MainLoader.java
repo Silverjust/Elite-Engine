@@ -87,6 +87,7 @@ public class MainLoader extends Loader {
 		case END:
 			state = State.NEWGAME;
 			((MainApp) ref.app).mode = Mode.GAME;
+			//System.out.println(ref.updater);
 			System.out.println("Game Start");
 			break;
 		case ERROR:

@@ -110,9 +110,9 @@ public class SandboxBuilding extends Building implements Commander {
 
 	}
 
-	public static class ChangePlayerActive extends Active {
+	public static class ChangeSide extends Active {
 
-		public ChangePlayerActive(int x, int y, char n) {
+		public ChangeSide(int x, int y, char n) {
 			super(x, y, n, standImg);
 			clazz = SandboxBuilding.class;
 		}
@@ -126,8 +126,6 @@ public class SandboxBuilding extends Building implements Commander {
 							.indexOf(e.player.ip) + 1;
 				}
 			}
-
-			System.out.println(21543 + " " + i);
 			if (i >= ref.updater.player.keySet().size())
 				i = 0;
 			for (Entity e : ref.updater.entities) {

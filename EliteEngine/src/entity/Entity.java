@@ -219,10 +219,16 @@ public abstract class Entity implements Informing {
 	public String getStatistics() {
 		String stats = "";
 		if (kerit == 0 && pax == 0 && arcanum == 0 && prunam == 0)
-			stats += "§§§§§";
+			stats += "§§§§";
 		else
 			stats += "kerit: " + kerit + "§pax: " + pax + "§arcanum: "
-					+ arcanum + "§prunam: " + prunam + "§§";
+					+ arcanum + "§prunam: " + prunam + "§";
+		if (this instanceof Building && ((Building) this).build != null)
+			stats += "time: " + ((Building) this).build.cooldown / 1000.0 + "§§";
+		else if (this instanceof Unit)
+			stats += "time: " + ((Unit) this).trainTime / 1000.0 + "§§";
+		else
+			stats += "§§";
 		if (death != null)
 			stats += "hp: " + hp_max + " (" + armor + ")§";
 		else

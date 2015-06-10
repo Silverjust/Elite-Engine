@@ -74,6 +74,7 @@ public class ServerUpdater extends Updater {
 	}
 
 	public void reconnect() {
+		gameState = GameState.PAUSE;
 		ref.updater.send("<pause true");
 		ArrayList<String> spawns = new ArrayList<String>();
 		for (Entity entity : entities) {
@@ -88,5 +89,6 @@ public class ServerUpdater extends Updater {
 		}
 		System.out.println("finished reconnect, restart game");
 		ref.updater.send("<pause false");
+		gameState = GameState.PLAY;
 	}
 }

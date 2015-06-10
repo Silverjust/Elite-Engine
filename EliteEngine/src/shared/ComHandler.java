@@ -38,7 +38,7 @@ public class ComHandler {
 				x = Float.parseFloat(c[2]);
 				y = Float.parseFloat(c[3]);
 				if (e != null) {
-					System.out.println("remove move");
+					System.err.println("remove move");
 					// ((Unit) e).move(x, y);
 				} else {
 					throw new IllegalArgumentException("no entity found");
@@ -112,14 +112,20 @@ public class ComHandler {
 			// before game
 			case "<identify":
 				if (c[1].equals("reconnect")) {
-					while (((MainPreGame) ref.preGame).display == null) {
+					if (((MainApp) ref.app).mode == Mode.HAUPTMENUE) {
+						while (((MainPreGame) ref.preGame).display == null) {
+						}
+						ref.app.delay(10);
+						((MainPreGame) ref.preGame).display.dispose();
+						ref.loader = new MainLoader();
+						System.out.println("reconnect");
+						((MainLoader) ref.loader).isReconnectLoad = true;
+						((MainApp) ref.app).mode = Mode.LADESCREEN;
+					}else {//other player identify
+						ClientHandler.send("<identifying "
+								+ ClientHandler.identification + " "
+								+ ref.player.name);
 					}
-					ref.app.delay(10);
-					((MainPreGame) ref.preGame).display.dispose();
-					ref.loader = new MainLoader();
-					System.out.println("reconnect");
-					((MainLoader) ref.loader).isReconnectLoad = true;
-					((MainApp) ref.app).mode = Mode.LADESCREEN;
 				} else {
 					if (c[1].equals("server")) {
 						((MainApp) ref.app).mode = Mode.PREGAME;
@@ -158,6 +164,7 @@ public class ComHandler {
 				((ServerUpdater) ref.updater).reconnect();
 				break;
 			case "<ready":
+				//System.out.println(ref.preGame.player);
 				ref.preGame.player.get(c[1]).isReady = true;
 				ref.loader.tryStartGame();
 				break;
