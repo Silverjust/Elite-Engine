@@ -1,3 +1,4 @@
+added shoot attack
 added buildtime info
 reconnect
 ------------------------
