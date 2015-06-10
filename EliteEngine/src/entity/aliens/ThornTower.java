@@ -1,5 +1,6 @@
 package entity.aliens;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
@@ -7,17 +8,19 @@ import entity.Attacker;
 import entity.Building;
 import entity.Commander;
 import entity.Entity;
+import entity.Shooter;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Build;
 import entity.animation.Death;
-import entity.animation.TargetAttack;
+import entity.animation.ShootAttack;
 import game.ImageHandler;
 
-public class ThornTower extends Building implements Attacker, Commander {
+public class ThornTower extends Building implements Attacker, Shooter,
+		Commander {
 	private int commandingRange;
 
-	TargetAttack basicAttack;
+	ShootAttack basicAttack;
 
 	private static PImage standImg;
 	private static PImage previewImg;
@@ -35,7 +38,7 @@ public class ThornTower extends Building implements Attacker, Commander {
 		stand = new Animation(standImg, 1000);
 		build = new Build(standImg, 1000);
 		death = new Death(standImg, 100);
-		basicAttack = new TargetAttack(standImg, 800);
+		basicAttack = new ShootAttack(standImg, 800);
 
 		animation = nextAnimation = build;
 		// ************************************
@@ -56,7 +59,8 @@ public class ThornTower extends Building implements Attacker, Commander {
 		basicAttack.range = 70;
 		basicAttack.damage = 55;
 		basicAttack.cooldown = 2000;
-		basicAttack.eventTime = 500;
+		basicAttack.eventTime = 1000;
+		basicAttack.speed = 0.1f;
 
 		commandingRange = 250;
 
@@ -108,14 +112,17 @@ public class ThornTower extends Building implements Attacker, Commander {
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
 		if (basicAttack.getTarget() != null) {
-			ref.app.stroke(100, 100, 0);
-			ref.app.line(
-					xToGrid(x),
-					yToGrid(y - ySize),
-					basicAttack.getTarget().x,
-					(basicAttack.getTarget().y - basicAttack.getTarget().height) / 2);
-			ref.app.stroke(0);
+
 		}
+	}
+
+	@Override
+	public void drawShot(Entity target, float progress) {
+		float x = PApplet.lerp(this.x, target.x, progress);
+		float y = PApplet.lerp(this.y, target.y , progress);
+		ref.app.stroke(100, 100, 0);
+		ref.app.line(xToGrid(this.x), yToGrid(this.y - ySize), x, y / 2- target.height);
+		ref.app.stroke(0);
 	}
 
 	public PImage preview() {

@@ -33,6 +33,10 @@ public class Attack extends Ability {
 				float x = Float.parseFloat(c[3]);
 				float y = Float.parseFloat(c[4]);
 				((AreaAttack) a).setPosition(x, y);
+			} else if (a instanceof ShootAttack) {
+				int n = Integer.parseInt(c[3]);
+				Entity e = ref.updater.namedEntities.get(n);
+				((ShootAttack) a).setTargetFrom(attacker, e);
 			}
 			attacker.setAnimation(a);
 		}

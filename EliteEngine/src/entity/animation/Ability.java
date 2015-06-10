@@ -64,6 +64,12 @@ public class Ability extends Animation {
 		return f > 1 || f < 0 ? 1 : f;
 	}
 
+	public float getProgress() {
+		float f = 1 - (float) (start + eventTime - ref.app.millis())
+				/ eventTime;
+		return f > 1 || f < 0 ? 1 : f;
+	}
+
 	private void consumeCosts() {
 
 	}
