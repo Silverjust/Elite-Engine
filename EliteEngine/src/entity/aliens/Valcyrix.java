@@ -1,23 +1,25 @@
 package entity.aliens;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
 import entity.Attacker;
 import entity.Entity;
+import entity.Shooter;
 import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.TargetAttack;
+import entity.animation.ShootAttack;
 
-public class Valcyrix extends Unit implements Attacker {
+public class Valcyrix extends Unit implements Attacker, Shooter {
 
 	private static PImage standingImg;
 
 	byte aggroRange;
 
-	TargetAttack basicAttack;
+	ShootAttack basicAttack;
 
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
@@ -32,7 +34,7 @@ public class Valcyrix extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new TargetAttack(standingImg, 800);
+		basicAttack = new ShootAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************
@@ -57,7 +59,9 @@ public class Valcyrix extends Unit implements Attacker {
 		basicAttack.damage = 50;
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 1500;
-		basicAttack.eventTime = 500;
+		basicAttack.range = 15;
+		basicAttack.beginTime = 100;// eventtime is defined by target distance
+		basicAttack.speed = 0.1f;
 
 		descr = " ";
 		stats = " ";
@@ -116,6 +120,19 @@ public class Valcyrix extends Unit implements Attacker {
 		drawSelected();
 		animation.draw(this, direction, currentFrame);
 		drawTaged();
+	}
+
+	@Override
+	public void drawShot(Entity target, float progress) {
+		float x = PApplet.lerp(this.x, target.x, progress);
+		float y = PApplet.lerp(this.y - height, target.y - target.height,
+				progress);
+		ref.app.stroke(100, 100, 0);
+		ref.app.strokeWeight(3);
+		ref.app.line(xToGrid(this.x), yToGrid(this.y - height), x, y / 2);
+		ref.app.strokeWeight(1);
+		ref.app.stroke(0);
+
 	}
 
 	@Override

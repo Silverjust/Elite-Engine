@@ -33,7 +33,7 @@ public class ShootAttack extends Attack {
 	@Override
 	public void updateAbility(Entity e) {
 		if (target != null && isEvent() && isNotOnCooldown()) {
-			System.out.println("now");
+			// System.out.println("now");
 			((Attacker) e).calculateDamage(this);
 			target = null;
 			startCooldown();
@@ -47,14 +47,18 @@ public class ShootAttack extends Attack {
 	@Override
 	public void draw(Entity e, byte d, byte f) {
 		super.draw(e, d, f);
-		if (e instanceof Shooter && target != null
-				&& start + beginTime <= Updater.Time.getMillis()
-				&& isNotOnCooldown()) {
-			System.out.println("before "
-					+ (start + eventTime - Updater.Time.getMillis()) + " "
-					+ (start + beginTime <= Updater.Time.getMillis()) + " "
-					+ isNotOnCooldown());
-			((Shooter) e).drawShot(target, getProgressPercent());
+		if (e instanceof Shooter) {
+			if (target != null && start + beginTime <= Updater.Time.getMillis()
+					&& isNotOnCooldown()) {
+				// System.out.println("before "
+				// + (start + eventTime - Updater.Time.getMillis()) + " "
+				// + (start + beginTime <= Updater.Time.getMillis()) + " "
+				// + isNotOnCooldown());
+				((Shooter) e).drawShot(target, getProgressPercent());
+			}
+		} else {
+			System.err.println(e.getClass().getSimpleName()
+					+ " should be shooter");
 		}
 	}
 

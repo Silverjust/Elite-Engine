@@ -3,10 +3,8 @@ package entity;
 import processing.core.PApplet;
 import shared.Helper;
 import shared.ref;
-import entity.animation.Ability;
 import entity.animation.Animation;
-import entity.animation.AreaAttack;
-import entity.animation.TargetAttack;
+import entity.animation.Attack;
 import game.Chat;
 
 public abstract class Unit extends Entity {
@@ -92,33 +90,14 @@ public abstract class Unit extends Entity {
 	public void exec(String[] c) {
 		// PApplet.printArray(c);
 		super.exec(c);
-		switch (c[2]) {
-		case "walk":
+		String string = c[2];
+		if ("walk".equals(string)) {
 			xTarget = Float.parseFloat(c[3]);
 			yTarget = Float.parseFloat(c[4]);
 			isMoving = true;
 			setAnimation(walk);
-			break;
-		case "basicAttack":
-			if (this instanceof Attacker) {
-
-				Ability a = ((Attacker) this).getBasicAttack();
-				if (a instanceof TargetAttack) {
-					int n = Integer.parseInt(c[3]);
-					Entity e = ref.updater.namedEntities.get(n);
-					((TargetAttack) a).setTarget(e);
-				} else if (a instanceof AreaAttack) {
-					float x = Float.parseFloat(c[3]);
-					float y = Float.parseFloat(c[4]);
-					((AreaAttack) a).setPosition(x, y);
-				}
-				isMoving = false;
-				setAnimation(a);
-			}
-			break;
-		default:
-			break;
 		}
+		Attack.updateExecAttack(c, this);
 	}
 
 	@Deprecated
