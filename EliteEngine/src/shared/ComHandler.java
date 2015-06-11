@@ -121,7 +121,7 @@ public class ComHandler {
 						System.out.println("reconnect");
 						((MainLoader) ref.loader).isReconnectLoad = true;
 						((MainApp) ref.app).mode = Mode.LADESCREEN;
-					}else {//other player identify
+					} else {// other player identify
 						ClientHandler.send("<identifying "
 								+ ClientHandler.identification + " "
 								+ ref.player.name);
@@ -164,7 +164,7 @@ public class ComHandler {
 				((ServerUpdater) ref.updater).reconnect();
 				break;
 			case "<ready":
-				//System.out.println(ref.preGame.player);
+				// System.out.println(ref.preGame.player);
 				ref.preGame.player.get(c[1]).isReady = true;
 				ref.loader.tryStartGame();
 				break;
@@ -173,9 +173,9 @@ public class ComHandler {
 				break;
 			case "<pause":
 				if (Boolean.valueOf(c[1])) {
-					ref.updater.gameState = GameState.PAUSE;
+					Updater.Time.startPause();
 				} else {
-					ref.updater.gameState = GameState.PLAY;
+					Updater.Time.endPause();
 				}
 				break;
 			case "<lost":

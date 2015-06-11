@@ -1,6 +1,7 @@
 package entity.animation;
 
 import processing.core.PImage;
+import shared.Updater;
 import shared.ref;
 import entity.Entity;
 
@@ -45,7 +46,7 @@ public class Animation {
 
 	public void setup(Entity e) {
 		e.currentFrame = 0;
-		start = ref.app.millis();
+		start = Updater.Time.getMillis();
 	}
 
 	public void update(Entity e) {
@@ -55,8 +56,8 @@ public class Animation {
 	}
 
 	public void draw(Entity e, byte d, byte f) {
-		if (ref.app.millis() - start >= speed() * e.currentFrame) {
-			e.currentFrame = (byte) ((ref.app.millis() - start) / speed());
+		if (Updater.Time.getMillis() - start >= speed() * e.currentFrame) {
+			e.currentFrame = (byte) ((Updater.Time.getMillis() - start) / speed());
 			if (e.currentFrame > frames - 1) {
 				e.currentFrame = (byte) (frames - 1);
 			}
@@ -79,7 +80,7 @@ public class Animation {
 	}
 
 	public boolean isFinished() {
-		return ref.app.millis() - start >= duration;
+		return Updater.Time.getMillis() - start >= duration;
 
 	}
 }

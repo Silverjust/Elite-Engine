@@ -38,4 +38,33 @@ public abstract class Updater {
 	public enum GameState {
 		PLAY, PAUSE, LOST, WON
 	}
+
+	public static class Time {
+
+		private static int pauseStart;
+		private static int pauseTime;
+
+		public static void startPause() {
+			if (ref.updater.gameState != GameState.PAUSE) {
+				ref.updater.gameState = GameState.PAUSE;
+				pauseStart = ref.app.millis();
+			}
+		}
+
+		public static void endPause() {
+			if (ref.updater.gameState != GameState.PLAY) {
+				ref.updater.gameState = GameState.PLAY;
+				pauseTime += ref.app.millis() - pauseStart;
+				pauseStart = 0;
+			}
+		}
+
+		public static int getMillis() {
+			if (pauseStart == 0)
+				return ref.app.millis() - pauseTime;
+			else
+				return ref.app.millis()
+						- (pauseTime + ref.app.millis() - pauseStart);
+		}
+	}
 }

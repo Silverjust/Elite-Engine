@@ -1,7 +1,7 @@
 package entity.animation;
 
 import processing.core.PImage;
-import shared.ref;
+import shared.Updater;
 import entity.Entity;
 
 public class Ability extends Animation {
@@ -40,11 +40,11 @@ public class Ability extends Animation {
 	}
 
 	public boolean isNotOnCooldown() {
-		return cooldownTimer <= ref.app.millis();
+		return cooldownTimer <= Updater.Time.getMillis();
 	}
 
 	public boolean isEvent() {
-		return start + eventTime <= ref.app.millis();
+		return start + eventTime <= Updater.Time.getMillis();
 	}
 
 	public void updateAbility(Entity e) {
@@ -56,16 +56,17 @@ public class Ability extends Animation {
 	}
 
 	protected void startCooldown() {
-		cooldownTimer = ref.app.millis() + cooldown;
+		cooldownTimer = Updater.Time.getMillis() + cooldown;
 	}
 
 	public float getCooldownPercent() {
-		float f = 1 - (float) (cooldownTimer - ref.app.millis()) / cooldown;
+		float f = 1 - (float) (cooldownTimer - Updater.Time.getMillis())
+				/ cooldown;
 		return f > 1 || f < 0 ? 1 : f;
 	}
 
-	public float getProgress() {
-		float f = 1 - (float) (start + eventTime - ref.app.millis())
+	public float getProgressPercent() {
+		float f = 1 - (float) (start + eventTime - Updater.Time.getMillis())
 				/ eventTime;
 		return f > 1 || f < 0 ? 1 : f;
 	}

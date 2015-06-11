@@ -3,6 +3,8 @@ package entity;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
+import shared.Updater;
+import shared.Updater.GameState;
 import shared.ref;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
@@ -45,7 +47,8 @@ public abstract class Active implements Informing {
 	public void handleActiveEvents(GGameButton gamebutton, GEvent event) {
 		if (ref.app.keyPressed || ref.app.mouseButton != PConstants.RIGHT) {
 			if (event == GEvent.PRESSED && gamebutton.isVisible()
-					&& isNotOnCooldown()) {
+					&& isNotOnCooldown()
+					&& ref.updater.gameState == GameState.PLAY) {
 				onButtonPressed(gamebutton, event);
 				startCooldown();
 			}
@@ -66,16 +69,17 @@ public abstract class Active implements Informing {
 	}
 
 	protected void startCooldown() {
-		cooldownTimer = ref.app.millis() + cooldown;
+		cooldownTimer = Updater.Time.getMillis() + cooldown;
 		button.setThisEnabled(false);
 	}
 
 	public boolean isNotOnCooldown() {
-		return cooldownTimer <= ref.app.millis();
+		return cooldownTimer <= Updater.Time.getMillis();
 	}
 
 	public float getCooldownPercent() {
-		float f = 1 - (float) (cooldownTimer - ref.app.millis()) / cooldown;
+		float f = 1 - (float) (cooldownTimer - Updater.Time.getMillis())
+				/ cooldown;
 		return f > 1 || f < 0 ? 1 : f;
 	}
 
@@ -86,9 +90,9 @@ public abstract class Active implements Informing {
 
 	@Override
 	public String getStatistics() {
-		if (cooldown != 0) 
+		if (cooldown != 0)
 			return "cooldown: " + cooldown;
 		return " ";
-		
+
 	}
 }

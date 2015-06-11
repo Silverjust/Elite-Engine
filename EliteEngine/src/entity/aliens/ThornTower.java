@@ -59,7 +59,7 @@ public class ThornTower extends Building implements Attacker, Shooter,
 		basicAttack.range = 70;
 		basicAttack.damage = 55;
 		basicAttack.cooldown = 2000;
-		basicAttack.eventTime = 1000;
+		basicAttack.beginTime = 500;//eventtime is defined by target distance
 		basicAttack.speed = 0.1f;
 
 		commandingRange = 250;
@@ -119,9 +119,9 @@ public class ThornTower extends Building implements Attacker, Shooter,
 	@Override
 	public void drawShot(Entity target, float progress) {
 		float x = PApplet.lerp(this.x, target.x, progress);
-		float y = PApplet.lerp(this.y, target.y , progress);
+		float y = PApplet.lerp(this.y, target.y, progress);
 		ref.app.stroke(100, 100, 0);
-		ref.app.line(xToGrid(this.x), yToGrid(this.y - ySize), x, y / 2- target.height);
+		ref.app.line(xToGrid(this.x), yToGrid(this.y), x, y / 2);
 		ref.app.stroke(0);
 	}
 

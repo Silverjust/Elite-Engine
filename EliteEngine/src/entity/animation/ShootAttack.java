@@ -2,12 +2,14 @@ package entity.animation;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import shared.Updater;
 import entity.Attacker;
 import entity.Entity;
 import entity.Shooter;
 
 public class ShootAttack extends Attack {
 	private Entity target;
+	public int beginTime;
 	public float speed;
 
 	public ShootAttack(PImage[][] IMG, int duration) {
@@ -24,12 +26,14 @@ public class ShootAttack extends Attack {
 
 	public void setTargetFrom(Entity from, Entity to) {
 		target = to;
-		eventTime = (int) (PApplet.dist(from.x, from.y, to.x, to.y) / speed);
+		eventTime = beginTime
+				+ (int) (PApplet.dist(from.x, from.y, to.x, to.y) / speed);
 	}
 
 	@Override
 	public void updateAbility(Entity e) {
 		if (target != null && isEvent() && isNotOnCooldown()) {
+			System.out.println("now");
 			((Attacker) e).calculateDamage(this);
 			target = null;
 			startCooldown();
@@ -43,8 +47,14 @@ public class ShootAttack extends Attack {
 	@Override
 	public void draw(Entity e, byte d, byte f) {
 		super.draw(e, d, f);
-		if (e instanceof Shooter && target != null) {
-			((Shooter) e).drawShot(target, getProgress());
+		if (e instanceof Shooter && target != null
+				&& start + beginTime <= Updater.Time.getMillis()
+				&& isNotOnCooldown()) {
+			System.out.println("before "
+					+ (start + eventTime - Updater.Time.getMillis()) + " "
+					+ (start + beginTime <= Updater.Time.getMillis()) + " "
+					+ isNotOnCooldown());
+			((Shooter) e).drawShot(target, getProgressPercent());
 		}
 	}
 

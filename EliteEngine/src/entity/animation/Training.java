@@ -6,6 +6,7 @@ import entity.Unit;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ContentListHandler;
+import shared.Updater;
 import shared.ref;
 
 public class Training extends Ability {
@@ -65,7 +66,8 @@ public class Training extends Ability {
 
 	@Override
 	public float getCooldownPercent() {
-		float f = 1 - (float) (cooldownTimer - ref.app.millis()) / cooldown;
+		float f = 1 - (float) (cooldownTimer - Updater.Time.getMillis())
+				/ cooldown;
 		return f > 1 || f < 0 ? 1 : f;
 	}
 
