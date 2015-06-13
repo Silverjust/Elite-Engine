@@ -64,7 +64,6 @@ public class MainApp extends PApplet {
 	}
 
 	public void draw() {
-
 		switch (mode) {
 		case HAUPTLADESCREEN:
 			break;
