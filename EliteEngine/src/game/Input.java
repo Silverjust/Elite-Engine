@@ -91,7 +91,7 @@ public class Input {
 			if (app.key == Settings.togglePause) {
 				if (ref.updater.gameState == GameState.PAUSE) {
 					ref.updater.send("<pause false");
-				} else {
+				} else if (ref.updater.gameState == GameState.PLAY) {
 					ref.updater.send("<pause true");
 				}
 			}

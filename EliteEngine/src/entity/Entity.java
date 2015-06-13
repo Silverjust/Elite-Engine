@@ -356,13 +356,13 @@ public abstract class Entity implements Informing {
 	public boolean canBeBought(Player player) {
 		boolean buyable = true;
 		if (!GameDrawer.nocosts) {
-			if (kerit > player.kerit)
+			if (kerit != 0 && kerit > player.kerit)
 				buyable = false;
-			if (pax > player.pax)
+			if (pax != 0 && pax > player.pax)
 				buyable = false;
-			if (arcanum > player.arcanum)
+			if (arcanum != 0 && arcanum > player.arcanum)
 				buyable = false;
-			if (prunam > player.prunam)
+			if (prunam != 0 && prunam > player.prunam)
 				buyable = false;
 		}
 		return buyable;
