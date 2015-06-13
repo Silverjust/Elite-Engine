@@ -66,7 +66,7 @@ public class PreGameNormalDisplay {
 				}
 			}
 			maps.setItems(names, 0);
-			preGame.map = intNames[0];
+			preGame.map = ContentListHandler.getMapContent().getString(intNames[0]);
 			maps.addEventHandler(this, "handleSelectMap");
 		}
 	}
