@@ -27,10 +27,18 @@ public class MouseSelection {
 	public void endSelection(float X2, float Y2) {
 		x2 = Helper.gridToX(X2);
 		y2 = Helper.gridToY(Y2);
-		for (Entity e : ref.updater.entities) {
-			e.isSelected = false;
-		}
 		boolean containsUnits = false;
+		if (!((GameUpdater) ref.updater).input.shiftMode) {
+			for (Entity e : ref.updater.entities) {
+				e.isSelected = false;
+			}
+		} else {
+			for (Entity e : ref.updater.selected) {
+				if (e instanceof Unit)
+					containsUnits = true;
+			}
+		}
+
 		for (Entity e : ref.updater.entities) {
 			if (GameDrawer.godhand || e.isAllyTo(ref.player)) {
 				if (shared.Helper.isBetween(e.x, e.y, x1, y1, x2, y2)) {

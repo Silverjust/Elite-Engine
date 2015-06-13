@@ -1,3 +1,7 @@
+
+shift select
+watch out! valcyrix shoots now
+--------------------------------
 fixed pause (thanks to Ingolf)
 added shoot attack
 added buildtime info

@@ -74,4 +74,7 @@ public class Ability extends Animation {
 	private void consumeCosts() {
 
 	}
+
+	public void drawAbility(Entity e, byte d) {
+	}
 }

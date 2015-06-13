@@ -59,7 +59,7 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 		basicAttack.damage = 50;
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 1500;
-		basicAttack.range = 15;
+		basicAttack.range = 70;// 15
 		basicAttack.beginTime = 100;// eventtime is defined by target distance
 		basicAttack.speed = 0.1f;
 
@@ -119,6 +119,7 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 	public void renderGround() {
 		drawSelected();
 		animation.draw(this, direction, currentFrame);
+		basicAttack.drawAbility(this, direction);
 		drawTaged();
 	}
 

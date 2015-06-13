@@ -224,7 +224,8 @@ public abstract class Entity implements Informing {
 			stats += "kerit: " + kerit + "§pax: " + pax + "§arcanum: "
 					+ arcanum + "§prunam: " + prunam + "§";
 		if (this instanceof Building && ((Building) this).build != null)
-			stats += "time: " + ((Building) this).build.cooldown / 1000.0 + "§§";
+			stats += "time: " + ((Building) this).build.cooldown / 1000.0
+					+ "§§";
 		else if (this instanceof Unit)
 			stats += "time: " + ((Unit) this).trainTime / 1000.0 + "§§";
 		else
@@ -254,7 +255,8 @@ public abstract class Entity implements Informing {
 	}
 
 	public void setAnimation(Animation a) {
-		if (animation.getClass() != death.getClass() && animation != a) {// tut
+		if (a != null && animation.getClass() != death.getClass()
+				&& animation != a) {// tut
 			nextAnimation = a;
 			a.setup(this);
 		}

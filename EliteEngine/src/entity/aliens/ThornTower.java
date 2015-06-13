@@ -59,7 +59,7 @@ public class ThornTower extends Building implements Attacker, Shooter,
 		basicAttack.range = 70;
 		basicAttack.damage = 55;
 		basicAttack.cooldown = 2000;
-		basicAttack.beginTime = 500;//eventtime is defined by target distance
+		basicAttack.beginTime = 500;// eventtime is defined by target distance
 		basicAttack.speed = 0.1f;
 
 		commandingRange = 250;
@@ -111,9 +111,7 @@ public class ThornTower extends Building implements Attacker, Shooter,
 	public void renderGround() {
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
-		if (basicAttack.getTarget() != null) {
-
-		}
+		basicAttack.drawAbility(this, (byte) 0);
 	}
 
 	@Override
