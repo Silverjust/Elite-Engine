@@ -18,6 +18,8 @@ public class MainLoader extends Loader {
 
 		case NEWGAME:// create players
 			LoadingScreen.setup();
+			if (ClientHandler.tutorial)
+				ref.preGame.map = "maps/TutorialMap/TutorialMap";
 			ref.updater = new GameUpdater();
 			state = State.STARTIMAGES;
 			break;
@@ -48,6 +50,8 @@ public class MainLoader extends Loader {
 			if (ClientHandler.singlePlayer) {
 				if (ClientHandler.sandbox)
 					ref.updater.send("<spawn SandboxBuilding 0 20 20");
+				if (ClientHandler.tutorial)
+					ref.updater.send("<spawn Tutorial 0 20 20");
 				MapHandler.setupEntities(ref.updater.map.mapData);
 				/*
 				 * int i = 0; for (String key : ref.updater.player.keySet()) {
@@ -82,12 +86,12 @@ public class MainLoader extends Loader {
 			state = State.WAIT;
 			break;
 		case WAIT:
-				ref.updater.send("<ready " + ClientHandler.identification);
+			ref.updater.send("<ready " + ClientHandler.identification);
 			break;
 		case END:
 			state = State.NEWGAME;
 			((MainApp) ref.app).mode = Mode.GAME;
-			//System.out.println(ref.updater);
+			// System.out.println(ref.updater);
 			System.out.println("Game Start");
 			break;
 		case ERROR:

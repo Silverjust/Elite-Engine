@@ -4,6 +4,7 @@ import shared.ref;
 import entity.Building;
 import entity.Entity;
 import entity.Commander;
+import entity.Entity.GroundPosition;
 import game.AimHandler.Cursor;
 
 public class BuildAim extends Aim {
@@ -13,7 +14,7 @@ public class BuildAim extends Aim {
 	public BuildAim(Entity builder, Entity building) {
 		try {
 			this.builder = builder;
-			this.buildable =  (Building) building;
+			this.buildable = (Building) building;
 		} catch (ClassCastException e) {
 			System.err.println(building + " is not buildable \n");
 		}
@@ -21,14 +22,12 @@ public class BuildAim extends Aim {
 	}
 
 	@Override
-	public
-	Cursor getCursor() {
+	public Cursor getCursor() {
 		return Cursor.BUILD;
 	}
 
 	@Override
-	public
-	void update() {
+	public void update() {
 		float x, y;
 		x = Building.xToGrid(Building.gridToX());
 		y = Building.xToGrid(Building.gridToY());
@@ -46,7 +45,8 @@ public class BuildAim extends Aim {
 		boolean placeFree = true;
 		boolean inCommanderRange = false;
 		for (Entity e : ref.updater.entities) {
-			if (e.isInRange(x, y, ((Entity) buildable).radius + e.radius))
+			if (e.isInRange(x, y, ((Entity) buildable).radius + e.radius)
+					&& e.groundPosition == GroundPosition.GROUND)
 				placeFree = false;
 			if (isInCommandingRange(e, x, y))
 				inCommanderRange = true;
@@ -65,8 +65,7 @@ public class BuildAim extends Aim {
 	}
 
 	@Override
-	public
-	void execute() {
+	public void execute() {
 		float x, y;
 		x = Entity.xToGrid(Entity.gridToX());
 		y = Entity.xToGrid(Entity.gridToY());

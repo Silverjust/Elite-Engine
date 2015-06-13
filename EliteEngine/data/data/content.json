@@ -23,6 +23,7 @@
     "Prunam": "entity.neutral.Prunam",
 	"Rock": "entity.neutral.Rock",
 	"SandboxBuilding": "entity.neutral.SandboxBuilding",
+	"Tutorial": "entity.neutral.Tutorial",
     "TestLab": "entity.neutral.TestLab"
   },
   "maps": {

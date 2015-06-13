@@ -8,6 +8,7 @@ public class ClientHandler {
 
 	public static boolean singlePlayer = false;
 	public static boolean sandbox = false;
+	public static boolean tutorial = false;
 
 	public static String identification;
 
@@ -42,7 +43,7 @@ public class ClientHandler {
 				System.out.println(identification);
 			}
 		}
-		((MainPreGame)ref.preGame).setupPlayer();
+		((MainPreGame) ref.preGame).setupPlayer();
 	}
 
 	public static void update() {

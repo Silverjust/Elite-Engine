@@ -16,8 +16,8 @@ public class Hauptmenue {
 
 	GTextField playerName, serverIp;
 	GPassword password;
-	GButton multiplayerButton, singleplayerButton, sandboxButton, localhost,
-			startServer;
+	GButton multiplayerButton, singleplayerButton, sandboxButton,
+			tutorialButton, localhost, startServer;
 	GTextArea changes;
 
 	public Hauptmenue() {
@@ -46,6 +46,10 @@ public class Hauptmenue {
 		sandboxButton = new GButton(ref.app, 300, 490, 300, 40);
 		sandboxButton.setText("sandbox");
 		sandboxButton.addEventHandler(this, "handleAcceptEvents");
+
+		tutorialButton = new GButton(ref.app, 300, 540, 300, 40);
+		tutorialButton.setText("tutorial");
+		tutorialButton.addEventHandler(this, "handleAcceptEvents");
 
 		changes = new GTextArea(ref.app, 800, 100, 600, 700,
 				G4P.SCROLLBARS_VERTICAL_ONLY | G4P.SCROLLBARS_AUTOHIDE);
@@ -80,6 +84,9 @@ public class Hauptmenue {
 			} else if (button == sandboxButton) {
 				ClientHandler.singlePlayer = true;
 				ClientHandler.sandbox = true;
+			} else if (button == tutorialButton) {
+				ClientHandler.singlePlayer = true;
+				ClientHandler.tutorial = true;
 			}
 
 			ref.preGame = new MainPreGame(name);
@@ -90,7 +97,7 @@ public class Hauptmenue {
 				return;
 			}
 			((MainPreGame) ref.preGame).setup();
-			
+
 			if (ClientHandler.singlePlayer) {
 				((MainApp) ref.app).mode = Mode.PREGAME;
 			}
@@ -107,6 +114,7 @@ public class Hauptmenue {
 		multiplayerButton.dispose();
 		singleplayerButton.dispose();
 		sandboxButton.dispose();
+		tutorialButton.dispose();
 		changes.dispose();
 	}
 

@@ -23,9 +23,9 @@ public class GameUpdater extends Updater {
 	}
 
 	public void update() {
+		input.update();
 
 		if (gameState == GameState.PLAY) {
-			input.update();
 			for (int i = 0; i < toAdd.size(); i++) {
 				Entity.entityCounter += 1;
 				entities.add(toAdd.get(i));

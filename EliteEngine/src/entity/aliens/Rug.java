@@ -70,7 +70,7 @@ public class Rug extends Unit implements Attacker {
 		spawn.eventTime = 500;
 
 		descr = " ";
-		stats = "spawns/s: " + 2 + "/" + spawn.cooldown / 1000.0;
+		stats = "spawns/s: " + 1 + "/" + spawn.cooldown / 1000.0;
 		// ************************************
 	}
 

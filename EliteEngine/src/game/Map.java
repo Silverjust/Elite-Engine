@@ -6,7 +6,6 @@ import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
 import processing.data.JSONObject;
-import shared.ContentListHandler;
 import shared.Player;
 import shared.ref;
 
@@ -25,9 +24,7 @@ public class Map {
 	public Map(String map) {
 
 		try {
-			mapData = ref.app.loadJSONObject("data/"
-					+ ContentListHandler.getMapContent().getString(map)
-					+ ".json");
+			mapData = ref.app.loadJSONObject("data/" + map + ".json");
 			width = mapData.getInt("w");
 			height = mapData.getInt("h");
 		} catch (Exception e) {

@@ -85,7 +85,7 @@ public class MainPreGame extends PreGame {
 			System.err.println(string + " not found");
 			return;
 		}
-		map = string;
+		map = ContentListHandler.getMapContent().getString(ref.preGame.map);
 		if (display != null)
 			display.maps.setSelected(index);
 	}
