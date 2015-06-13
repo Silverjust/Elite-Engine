@@ -43,7 +43,8 @@ public class ServerPreGame extends PreGame {
 	@Override
 	public void setMap(String string) {
 		if (ContentListHandler.getMapContent().keys().contains(string))
-			map = string;
+			map = ContentListHandler.getMapContent().getString(string);
+
 	}
 
 }
