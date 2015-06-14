@@ -57,7 +57,7 @@ public class Ticul extends Unit implements Attacker {
 		xSize = 20;
 		ySize = 20;
 
-		kerit = 35;
+		kerit = 28;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
@@ -72,7 +72,7 @@ public class Ticul extends Unit implements Attacker {
 		aggroRange = (byte) (radius + 50);
 		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 8;
-		basicAttack.cooldown = 800;
+		basicAttack.cooldown = 600;
 		basicAttack.eventTime = 500;
 
 		descr = " ";

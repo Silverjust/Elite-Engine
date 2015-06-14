@@ -43,7 +43,7 @@ public class Colum extends Unit implements Attacker {
 		hp = hp_max = 300;
 		speed = 0.9f;
 		radius = 7;
-		sight = 70;
+		sight = (byte) 127;
 		groundPosition = Entity.GroundPosition.AIR;
 		height = 50;
 

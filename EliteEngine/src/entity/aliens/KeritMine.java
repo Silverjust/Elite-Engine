@@ -44,7 +44,7 @@ public class KeritMine extends Building   {
 
 		((Extract) stand).cooldown = 1000;
 		((Extract) stand).ressource = "kerit";
-		((Extract) stand).efficenty = 10;
+		((Extract) stand).efficenty = 17;
 
 		descr = " ";
 		stats = "ressource/s: "

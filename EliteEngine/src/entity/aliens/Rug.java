@@ -24,7 +24,7 @@ public class Rug extends Unit implements Attacker {
 
 	Rugling[] children = new Rugling[10];
 
-	private byte spawnRange;
+	private int spawnRange;
 
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
@@ -47,16 +47,16 @@ public class Rug extends Unit implements Attacker {
 		xSize = 35;
 		ySize = 35;
 
-		kerit = 480;
-		pax = 300;
+		kerit = 230;
+		pax = 400;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 5000;
 
 		hp = hp_max = 120;
-		speed = 0.5f;
+		speed = 0.7f;
 		radius = 8;
-		sight = 70;
+		sight = 90;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 10);
@@ -65,8 +65,8 @@ public class Rug extends Unit implements Attacker {
 		basicAttack.cooldown = 1500;
 		basicAttack.eventTime = 100;
 
-		spawnRange = (byte) (radius + 100);
-		spawn.cooldown = 5000;
+		spawnRange = 150;
+		spawn.cooldown = 4000;
 		spawn.eventTime = 500;
 
 		descr = " ";
