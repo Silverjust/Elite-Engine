@@ -39,7 +39,7 @@ public class KeritMine extends Building   {
 		build.setBuildTime(10000);
 
 		hp = hp_max = 500;
-		radius = 15;
+		radius = 10;
 		sight = 50;
 
 		((Extract) stand).cooldown = 1000;

@@ -18,11 +18,13 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 
 	private static PImage standImg;
 	private static PImage previewImg;
+	private static PImage groundImg;
 
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
 		});
 		previewImg = standImg = ImageHandler.load(path, "AlienMainBuilding");
+		groundImg = ImageHandler.load(path, "AlienGround");
 	}
 
 	public AlienMainBuilding(String[] c) {
@@ -35,13 +37,13 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 60;
-		ySize = 60;
+		xSize = 55;
+		ySize = 55;
 
 		sight = 50;
 
 		hp = hp_max = 1000;
-		radius = 15;
+		radius = 25;
 
 		commandingRange = 250;
 
@@ -67,6 +69,12 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 				testLab = null;
 			}
 		}
+	}
+
+	@Override
+	public void renderUnder() {
+		ref.app.image(groundImg, xToGrid(x), yToGrid(y), commandingRange * 2,
+				commandingRange);
 	}
 
 	@Override

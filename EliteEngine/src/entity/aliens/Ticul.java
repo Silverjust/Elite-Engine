@@ -50,7 +50,7 @@ public class Ticul extends Unit implements Attacker {
 		stand = new Animation(standingImg, 100);
 		walk = new Animation(walkingImg, 800);
 		death = new Death(attackImg, 500);
-		basicAttack = new TargetAttack(attackImg, 800);
+		basicAttack = new TargetAttack(attackImg, 600);
 
 		animation = nextAnimation = walk;
 		// ************************************
