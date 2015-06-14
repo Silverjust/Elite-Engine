@@ -152,7 +152,7 @@ public class Tutorial extends Unit {
 			xTarget = 460;
 			yTarget = 140;
 			isMoving = true;
-			Chat.println(tut, "defeat your enemy");
+			Chat.println(tut, "destroy  the enemy mainbuilding to win");
 			i++;
 			break;
 		default:
