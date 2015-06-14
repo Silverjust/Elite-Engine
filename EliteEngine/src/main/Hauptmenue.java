@@ -24,6 +24,7 @@ public class Hauptmenue {
 		playerName = new GTextField(ref.app, 300, 300, 300, 20);
 		playerName.setText(UUID.randomUUID().toString().substring(0, 8));
 		playerName.setPromptText("your name");
+		playerName.addEventHandler(this, "handleNameEvents");
 
 		password = new GPassword(ref.app, 300, 330, 300, 20);
 		// password.
@@ -124,5 +125,11 @@ public class Hauptmenue {
 
 	public void handleLocalhostEvents(GButton button, GEvent event) {
 		serverIp.setText("127.0.0.1");
+	}
+
+	public void handleNameEvents(GTextField textfield, GEvent event) {
+		if (event == GEvent.CHANGED) {
+			
+		}
 	}
 }
