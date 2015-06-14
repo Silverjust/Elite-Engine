@@ -48,7 +48,7 @@ public class ServerDisplay extends PApplet {
 		imageMode(PConstants.CENTER);
 		rectMode(PConstants.CENTER);
 		for (Entity e : ref.player.visibleEntities) {
-			e.renderUnder();
+			e.renderTerrain();
 		}
 		for (Entity e : ref.player.visibleEntities) {
 			e.renderGround();

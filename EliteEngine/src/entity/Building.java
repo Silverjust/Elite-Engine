@@ -71,8 +71,8 @@ public abstract class Building extends Entity {
 
 	@Override
 	public void drawOnMinimap(PGraphics graphics) {
-		ref.app.fill(player.color);
-		ref.app.rect(x, y, radius * 2, radius * 2);
+		graphics.fill(player.color);
+		graphics.rect(x, y, radius * 2, radius * 2);
 	}
 
 	@Override

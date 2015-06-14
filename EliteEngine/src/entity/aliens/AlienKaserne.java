@@ -74,9 +74,13 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 	}
 
 	@Override
-	public void renderUnder() {
+	public void renderTerrain() {
 		ref.app.image(AlienMainBuilding.groundImg, xToGrid(x), yToGrid(y),
 				commandingRange * 2, commandingRange);
+	}
+
+	@Override
+	public void renderUnder() {
 		if (isSelected) {
 			ref.app.stroke(player.color);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget),
@@ -87,7 +91,7 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 
 	@Override
 	public void drawOnMinimapUnder(PGraphics graphics) {
-		ref.app.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
+		graphics.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
 				commandingRange * 2);
 	}
 

@@ -42,14 +42,14 @@ public class Pax extends Building {
 	}
 
 	@Override
-	public void renderUnder() {
+	public void renderTerrain() {
 		animation.draw(this, (byte) 0, currentFrame);
 	}
 
 	@Override
 	public void drawOnMinimap(PGraphics graphics) {
-		ref.app.fill(player.color);
-		ref.app.rect(x, y, 15 * 2, 15 * 2);
+		graphics.fill(player.color);
+		graphics.rect(x, y, 15 * 2, 15 * 2);
 	}
 
 	@Override

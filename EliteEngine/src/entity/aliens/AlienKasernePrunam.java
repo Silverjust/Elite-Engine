@@ -22,6 +22,7 @@ public class AlienKasernePrunam extends Building implements Commander, Trainer {
 	private Training training;
 
 	private static PImage standImg;
+
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
 		});
@@ -74,9 +75,13 @@ public class AlienKasernePrunam extends Building implements Commander, Trainer {
 	}
 
 	@Override
-	public void renderUnder() {
+	public void renderTerrain() {
 		ref.app.image(AlienMainBuilding.groundImg, xToGrid(x), yToGrid(y),
 				commanderRange * 2, commanderRange);
+	}
+
+	@Override
+	public void renderUnder() {
 		if (isSelected) {
 			ref.app.stroke(player.color);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget),
@@ -87,7 +92,7 @@ public class AlienKasernePrunam extends Building implements Commander, Trainer {
 
 	@Override
 	public void drawOnMinimapUnder(PGraphics graphics) {
-		ref.app.image(AlienMainBuilding.groundImg, x, y, commanderRange * 2,
+		graphics.image(AlienMainBuilding.groundImg, x, y, commanderRange * 2,
 				commanderRange * 2);
 	}
 

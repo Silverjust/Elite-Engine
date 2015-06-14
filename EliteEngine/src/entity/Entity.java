@@ -67,6 +67,9 @@ public abstract class Entity implements Informing {
 	public void updateMovement() {
 	}
 
+	public void renderTerrain() {
+	}
+
 	public void renderUnder() {
 	}
 

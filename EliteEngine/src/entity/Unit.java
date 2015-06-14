@@ -84,8 +84,8 @@ public abstract class Unit extends Entity {
 
 	@Override
 	public void drawOnMinimap(PGraphics graphics) {
-		ref.app.fill(player.color);
-		ref.app.ellipse(x, y, radius * 2, radius * 2);
+		graphics.fill(player.color);
+		graphics.ellipse(x, y, radius * 2, radius * 2);
 	}
 
 	@Override

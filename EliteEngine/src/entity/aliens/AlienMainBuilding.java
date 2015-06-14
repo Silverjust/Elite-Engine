@@ -56,14 +56,14 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	}
 
 	@Override
-	public void renderUnder() {
+	public void renderTerrain() {
 		ref.app.image(groundImg, xToGrid(x), yToGrid(y), commandingRange * 2,
 				commandingRange);
 	}
 
 	@Override
 	public void drawOnMinimapUnder(PGraphics graphics) {
-		ref.app.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
+		graphics.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
 				commandingRange * 2);
 	}
 
