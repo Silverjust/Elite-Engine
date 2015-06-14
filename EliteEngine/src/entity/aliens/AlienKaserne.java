@@ -1,5 +1,6 @@
 package entity.aliens;
 
+import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
@@ -13,8 +14,7 @@ import entity.animation.Death;
 import entity.animation.Training;
 import game.ImageHandler;
 
-public class AlienKaserne extends Building implements  Commander,
-		Trainer {
+public class AlienKaserne extends Building implements Commander, Trainer {
 	private int commandingRange;
 	protected float xTarget;
 	protected float yTarget;
@@ -75,13 +75,20 @@ public class AlienKaserne extends Building implements  Commander,
 
 	@Override
 	public void renderUnder() {
-		super.renderUnder();
+		ref.app.image(AlienMainBuilding.groundImg, xToGrid(x), yToGrid(y),
+				commandingRange * 2, commandingRange);
 		if (isSelected) {
 			ref.app.stroke(player.color);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget),
 					yToGrid(yTarget));
 			ref.app.stroke(0);
 		}
+	}
+
+	@Override
+	public void drawOnMinimapUnder(PGraphics graphics) {
+		ref.app.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
+				commandingRange * 2);
 	}
 
 	@Override

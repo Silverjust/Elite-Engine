@@ -1,5 +1,6 @@
 package entity;
 
+import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
@@ -68,7 +69,8 @@ public abstract class Building extends Entity {
 		return Math.round(y / 20) * 10;
 	}
 
-	public void drawOnMinimap() {
+	@Override
+	public void drawOnMinimap(PGraphics graphics) {
 		ref.app.fill(player.color);
 		ref.app.rect(x, y, radius * 2, radius * 2);
 	}

@@ -191,11 +191,12 @@ public abstract class Entity implements Informing {
 
 	void drawLine(float tx, float ty) {
 		ref.app.line(xToGrid(x), yToGrid(y), tx, ty / 2);
-
 	}
 
-	public void drawOnMinimap() {
+	public void drawOnMinimap(PGraphics graphics) {
+	}
 
+	public void drawOnMinimapUnder(PGraphics graphics) {
 	}
 
 	public void drawSight(Updater updater) {

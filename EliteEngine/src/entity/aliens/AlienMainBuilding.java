@@ -1,24 +1,21 @@
 package entity.aliens;
 
+import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
-import entity.Entity;
 import entity.Commander;
 import entity.MainBuilding;
 import entity.animation.Animation;
 import entity.animation.Death;
-import entity.neutral.TestLab;
 import game.ImageHandler;
 
 public class AlienMainBuilding extends MainBuilding implements Commander {
-	TestLab testLab;
-
 	private int commandingRange;
 
 	private static PImage standImg;
 	private static PImage previewImg;
-	private static PImage groundImg;
+	static PImage groundImg;
 
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
@@ -55,20 +52,7 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	@Override
 	public void updateDecisions() {
 		super.updateDecisions();
-		if (animation == stand) {
-			for (Entity e : player.visibleEntities) {
-				if (e.isInRange(x, y, 100)) {
-					try {
-						testLab = (TestLab) e;
-					} catch (Exception e1) {
-					}
-				}
-			}
-			if (testLab != null && testLab.isInRange(x, y, 100)) {
-			} else {
-				testLab = null;
-			}
-		}
+		
 	}
 
 	@Override
@@ -78,15 +62,15 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	}
 
 	@Override
+	public void drawOnMinimapUnder(PGraphics graphics) {
+		ref.app.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
+				commandingRange * 2);
+	}
+
+	@Override
 	public void renderGround() {
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
-		if (testLab != null) {
-			ref.app.stroke(100);
-			ref.app.line(xToGrid(x), yToGrid(y - ySize), testLab.x,
-					(testLab.y - testLab.height) / 2);
-			ref.app.stroke(0);
-		}
 	}
 
 	public PImage preview() {
@@ -96,6 +80,10 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	@Override
 	public int commandRange() {
 		return commandingRange;
+	}
+
+	static PImage getGround() {
+		return groundImg;
 	}
 
 }

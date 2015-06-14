@@ -1,6 +1,7 @@
 package entity;
 
 import processing.core.PApplet;
+import processing.core.PGraphics;
 import shared.Helper;
 import shared.ref;
 import entity.animation.Animation;
@@ -81,7 +82,8 @@ public abstract class Unit extends Entity {
 		return y + (Y - y) / PApplet.dist(x, y, X, Y) * speed;
 	}
 
-	public void drawOnMinimap() {
+	@Override
+	public void drawOnMinimap(PGraphics graphics) {
 		ref.app.fill(player.color);
 		ref.app.ellipse(x, y, radius * 2, radius * 2);
 	}

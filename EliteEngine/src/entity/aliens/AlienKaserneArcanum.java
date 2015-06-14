@@ -1,5 +1,6 @@
 package entity.aliens;
 
+import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
@@ -13,8 +14,7 @@ import entity.animation.Death;
 import entity.animation.Training;
 import game.ImageHandler;
 
-public class AlienKaserneArcanum extends Building implements 
-		Commander, Trainer {
+public class AlienKaserneArcanum extends Building implements Commander, Trainer {
 	private int commandRange;
 	protected float xTarget;
 	protected float yTarget;
@@ -22,15 +22,16 @@ public class AlienKaserneArcanum extends Building implements
 	private Training training;
 
 	private static PImage standImg;
-
 	public static void loadImages() {
 		String path = path(Nation.ALIENS, new Object() {
 		});
 		standImg = ImageHandler.load(path, "AlienKaserneArcanum");
+
 	}
 
 	public AlienKaserneArcanum(String[] c) {
 		super(c);
+		AlienMainBuilding.getGround();
 
 		iconImg = standImg;
 		stand = new Animation(standImg, 1000);
@@ -75,13 +76,20 @@ public class AlienKaserneArcanum extends Building implements
 
 	@Override
 	public void renderUnder() {
-		super.renderUnder();
+		ref.app.image(AlienMainBuilding.groundImg, xToGrid(x), yToGrid(y),
+				commandRange * 2, commandRange);
 		if (isSelected) {
 			ref.app.stroke(player.color);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget),
 					yToGrid(yTarget));
 			ref.app.stroke(0);
 		}
+	}
+
+	@Override
+	public void drawOnMinimapUnder(PGraphics graphics) {
+		ref.app.image(AlienMainBuilding.groundImg, x, y, commandRange * 2,
+				commandRange * 2);
 	}
 
 	@Override

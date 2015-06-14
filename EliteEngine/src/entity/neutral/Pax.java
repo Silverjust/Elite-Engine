@@ -1,5 +1,6 @@
 package entity.neutral;
 
+import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
@@ -46,7 +47,7 @@ public class Pax extends Building {
 	}
 
 	@Override
-	public void drawOnMinimap() {
+	public void drawOnMinimap(PGraphics graphics) {
 		ref.app.fill(player.color);
 		ref.app.rect(x, y, 15 * 2, 15 * 2);
 	}

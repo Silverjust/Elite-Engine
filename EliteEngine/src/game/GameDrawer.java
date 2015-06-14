@@ -40,6 +40,13 @@ public class GameDrawer {
 
 		ref.app.image(ref.updater.map.textur, 0, 0, ref.updater.map.width,
 				ref.updater.map.height / 2);
+		ref.app.imageMode(PConstants.CENTER);
+		ref.app.rectMode(PConstants.CENTER);
+		for (Entity e : ref.updater.entities) {
+			e.renderUnder();
+		}
+		ref.app.imageMode(PConstants.CORNER);
+		ref.app.rectMode(PConstants.CORNER);
 		ref.updater.map.updateFogofWar(ref.player);
 		ref.app.blendMode(PConstants.MULTIPLY);
 		ref.app.image(ref.updater.map.fogOfWar, 0, 0, ref.updater.map.width,
@@ -47,9 +54,7 @@ public class GameDrawer {
 		ref.app.blendMode(PConstants.BLEND);
 		ref.app.imageMode(PConstants.CENTER);
 		ref.app.rectMode(PConstants.CENTER);
-		for (Entity e : ref.player.visibleEntities) {
-			e.renderUnder();
-		}
+
 		for (Entity e : ref.player.visibleEntities) {
 			e.renderGround();
 		}
