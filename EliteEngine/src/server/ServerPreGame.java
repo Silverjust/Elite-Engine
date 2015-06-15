@@ -43,10 +43,9 @@ public class ServerPreGame extends PreGame {
 
 	@Override
 	public void setMap(String string) {
-		System.out.println(string);
-		if (ContentListHandler.getMapContent().keys().contains(string))
+		if (ContentListHandler.getModeMaps().keys().contains(string))
 			map = ContentListHandler.getModeMaps().getString(string);
-		System.out.println(map);
+		((ServerApp) ref.app).gui.addChatText("map set to " + string);
 
 	}
 
