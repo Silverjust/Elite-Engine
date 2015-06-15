@@ -108,7 +108,7 @@ public class PreGameNormalDisplay {
 	public void handleSelectMap(GDropList list, GEvent event) {
 		if (event == GEvent.SELECTED
 				&& ((MainApp) ref.app).mode == Mode.PREGAME) {
-			JSONObject mapData = null;
+			/*JSONObject mapData = null;
 			try {
 				mapData = ref.app.loadJSONObject("data/"
 						+ ContentListHandler.getModeMaps().getString(
@@ -117,7 +117,7 @@ public class PreGameNormalDisplay {
 				System.err.println(mapData);
 				e.printStackTrace();
 				return;
-			}
+			}*/
 			ClientHandler.send("<setMap " + ref.player.ip + " "
 					+ intNames[list.getSelectedIndex()]);
 		}
