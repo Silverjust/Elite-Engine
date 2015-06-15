@@ -72,10 +72,10 @@ public class MainPreGame extends PreGame {
 	@Override
 	public void setMap(String string) {
 		// TODO stop broken maps from lockin
-		int size = ContentListHandler.getMapContent().keys().size();
+		int size = ContentListHandler.getModeMaps().keys().size();
 		@SuppressWarnings("unchecked")
-		String[] mapArray = (String[]) ContentListHandler.getMapContent()
-				.keys().toArray(new String[size]);
+		String[] mapArray = (String[]) ContentListHandler.getModeMaps().keys()
+				.toArray(new String[size]);
 		int index = -1;
 		for (int i = 0; i < mapArray.length; i++) {
 			if (mapArray[i].equals(string))
@@ -85,7 +85,7 @@ public class MainPreGame extends PreGame {
 			System.err.println(string + " not found");
 			return;
 		}
-		map = ContentListHandler.getMapContent().getString(mapArray[index]);
+		map = ContentListHandler.getModeMaps().getString(mapArray[index]);
 		if (display != null)
 			display.maps.setSelected(index);
 	}

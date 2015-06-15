@@ -16,8 +16,8 @@ public class ServerPreGame extends PreGame {
 		String[] intNames = (String[]) ContentListHandler.getModeMaps().keys()
 				.toArray(new String[i]);
 		map = ContentListHandler.getModeMaps().getString(intNames[0]);
-		//PApplet.printArray(intNames);
-		//System.out.println(map);
+		// PApplet.printArray(intNames);
+		// System.out.println(map);
 	}
 
 	@Override
@@ -43,8 +43,10 @@ public class ServerPreGame extends PreGame {
 
 	@Override
 	public void setMap(String string) {
+		System.out.println(string);
 		if (ContentListHandler.getMapContent().keys().contains(string))
 			map = ContentListHandler.getModeMaps().getString(string);
+		System.out.println(map);
 
 	}
 
