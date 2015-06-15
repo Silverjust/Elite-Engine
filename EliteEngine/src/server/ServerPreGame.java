@@ -10,7 +10,7 @@ public class ServerPreGame extends PreGame {
 
 	public ServerPreGame() {
 		ContentListHandler.load();
-		int i = ContentListHandler.getMapContent().size();
+		int i = ContentListHandler.getModeMaps().size();
 
 		@SuppressWarnings("unchecked")
 		String[] intNames = (String[]) ContentListHandler.getModeMaps().keys()
