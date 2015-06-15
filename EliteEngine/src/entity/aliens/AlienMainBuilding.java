@@ -34,13 +34,13 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 55;
-		ySize = 55;
+		xSize = 60;
+		ySize = 60;
 
 		sight = 50;
 
-		hp = hp_max = 1000;
-		radius = 25;
+		hp = hp_max = 1500;
+		radius = 27;
 
 		commandingRange = 250;
 
