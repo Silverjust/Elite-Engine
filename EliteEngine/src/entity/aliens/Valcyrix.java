@@ -41,16 +41,16 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 160;
+		kerit = 60;
 		pax = 0;
 		arcanum = 0;
-		prunam = 4;
+		prunam = 11;
 		trainTime = 3000;
 
 		hp = hp_max = 60;
-		speed = 1.0f;
+		speed = 1.8f;
 		radius = 7;
-		sight = 70;
+		sight = 90;
 		groundPosition = Entity.GroundPosition.AIR;
 		height = 20;
 

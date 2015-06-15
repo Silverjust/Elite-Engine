@@ -45,7 +45,7 @@ public class ThornTower extends Building implements Attacker, Shooter,
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 250;
+		kerit = 450;
 		pax = 100;
 		arcanum = 0;
 		prunam = 0;
@@ -53,7 +53,7 @@ public class ThornTower extends Building implements Attacker, Shooter,
 
 		sight = 70;
 
-		hp = hp_max = 1500;
+		hp = hp_max = 800;
 		radius = 15;
 
 		basicAttack.range = 70;
