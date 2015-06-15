@@ -1,6 +1,7 @@
 package entity.aliens;
 
 import processing.core.PApplet;
+import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
@@ -105,6 +106,18 @@ public class ThornTower extends Building implements Attacker, Shooter,
 		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
 				+ a.damage + " " + a.pirce);
 
+	}
+
+	@Override
+	public void renderTerrain() {
+		ref.app.image(AlienMainBuilding.groundImg, xToGrid(x), yToGrid(y),
+				commandingRange * 2, commandingRange);
+	}
+
+	@Override
+	public void drawOnMinimapUnder(PGraphics graphics) {
+		graphics.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
+				commandingRange * 2);
 	}
 
 	@Override

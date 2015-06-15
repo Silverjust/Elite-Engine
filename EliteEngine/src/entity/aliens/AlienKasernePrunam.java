@@ -81,6 +81,12 @@ public class AlienKasernePrunam extends Building implements Commander, Trainer {
 	}
 
 	@Override
+	public void drawOnMinimapUnder(PGraphics graphics) {
+		graphics.image(AlienMainBuilding.groundImg, x, y, commanderRange * 2,
+				commanderRange * 2);
+	}
+
+	@Override
 	public void renderUnder() {
 		if (isSelected) {
 			ref.app.stroke(player.color);
@@ -88,12 +94,6 @@ public class AlienKasernePrunam extends Building implements Commander, Trainer {
 					yToGrid(yTarget));
 			ref.app.stroke(0);
 		}
-	}
-
-	@Override
-	public void drawOnMinimapUnder(PGraphics graphics) {
-		graphics.image(AlienMainBuilding.groundImg, x, y, commanderRange * 2,
-				commanderRange * 2);
 	}
 
 	@Override

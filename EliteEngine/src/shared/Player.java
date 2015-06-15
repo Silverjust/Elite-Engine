@@ -30,7 +30,7 @@ public class Player {
 		Player p = new Player();
 		p.ip = ip;
 		p.name = name;
-		p.kerit = 300;
+		p.kerit = 200;
 		p.online = true;
 		return p;
 	}
