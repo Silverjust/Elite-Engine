@@ -17,6 +17,7 @@
     "PaxDrillTower": "entity.aliens.PaxDrillTower",
     "ArcanumMine": "entity.aliens.ArcanumMine",
     "PrunamHarvester": "entity.aliens.PrunamHarvester",
+	
     "Kerit": "entity.neutral.Kerit",
     "Pax": "entity.neutral.Pax",
     "Arcanum": "entity.neutral.Arcanum",
@@ -24,7 +25,8 @@
     "Rock": "entity.neutral.Rock",
     "SandboxBuilding": "entity.neutral.SandboxBuilding",
     "Tutorial": "entity.neutral.Tutorial",
-    "TestLab": "entity.neutral.TestLab"
+	
+	"HumanMainBuilding": "entity.humans.HumanMainBuilding"
   },
   "maps": {
     "standard": {

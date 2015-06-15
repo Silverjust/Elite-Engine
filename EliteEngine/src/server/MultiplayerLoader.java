@@ -20,10 +20,7 @@ public class MultiplayerLoader extends Loader {
 		switch (state) {
 
 		case NEWGAME:
-			// TODO remove, when all nations are stable
-			for (String key : ref.preGame.player.keySet()) {
-				ref.preGame.player.get(key).nation = Nation.ALIENS;
-			}
+			Nation.setNationsToPlayableNations();
 			ref.updater = new ServerUpdater();
 			state = State.STARTIMAGES;// map
 			break;

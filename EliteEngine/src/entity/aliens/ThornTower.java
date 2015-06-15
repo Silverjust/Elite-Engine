@@ -27,7 +27,7 @@ public class ThornTower extends Building implements Attacker, Shooter,
 	private static PImage previewImg;
 
 	public static void loadImages() {
-		String path = path(Nation.ALIENS, new Object() {
+		String path = path(new Object() {
 		});
 		previewImg = standImg = ImageHandler.load(path, "ThornTower");
 	}

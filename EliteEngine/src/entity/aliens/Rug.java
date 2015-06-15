@@ -27,7 +27,7 @@ public class Rug extends Unit implements Attacker {
 	private int spawnRange;
 
 	public static void loadImages() {
-		String path = path(Nation.ALIENS, new Object() {
+		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Rug");
 	}

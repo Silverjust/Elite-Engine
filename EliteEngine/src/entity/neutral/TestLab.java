@@ -1,7 +1,6 @@
 package entity.neutral;
 
 import processing.core.PImage;
-import shared.Nation;
 import entity.Entity;
 import entity.Unit;
 import entity.animation.Animation;
@@ -14,7 +13,7 @@ public class TestLab extends Unit {
 	byte aggroRange;
 
 	public static void loadImages() {
-		String path = path(Nation.SCIENTISTS, new Object() {
+		String path = path( new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "TestLab");
 

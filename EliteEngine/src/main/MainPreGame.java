@@ -92,10 +92,7 @@ public class MainPreGame extends PreGame {
 
 	@Override
 	public void startLoading() {
-		// TODO remove, when all nations are stable
-		for (String key : player.keySet()) {
-			player.get(key).nation = Nation.ALIENS;
-		}
+		Nation.setNationsToPlayableNations();
 		ref.loader = new MainLoader();
 
 		display.dispose();

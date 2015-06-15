@@ -21,7 +21,7 @@ public class Tutorial extends Unit {
 	int i = 0;
 
 	public static void loadImages() {
-		String path = path(Nation.NEUTRAL, new Object() {
+		String path = path( new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Tutorial");
 	}

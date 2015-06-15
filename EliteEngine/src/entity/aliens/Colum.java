@@ -17,7 +17,7 @@ public class Colum extends Unit implements Attacker {
 	AreaAttack heal;
 
 	public static void loadImages() {
-		String path = path(Nation.ALIENS, new Object() {
+		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Colum");
 	}

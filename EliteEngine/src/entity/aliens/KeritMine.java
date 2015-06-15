@@ -14,7 +14,7 @@ public class KeritMine extends Building   {
 	private static PImage previewImg;
 
 	public static void loadImages() {
-		String path = path(Nation.ALIENS, new Object() {
+		String path = path(new Object() {
 		});
 		previewImg = standImg = game.ImageHandler.load(path, "KeritMine");
 	}

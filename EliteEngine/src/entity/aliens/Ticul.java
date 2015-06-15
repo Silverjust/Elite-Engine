@@ -30,7 +30,7 @@ public class Ticul extends Unit implements Attacker {
 	TargetAttack basicAttack;
 
 	public static void loadImages() {
-		String path = path(Nation.ALIENS, new Object() {
+		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Ticul", 's', (byte) 8,
 				(byte) 1);

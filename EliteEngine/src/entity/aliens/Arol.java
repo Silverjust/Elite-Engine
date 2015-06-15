@@ -23,7 +23,7 @@ public class Arol extends Unit implements Attacker {
 	byte attackDistance;
 
 	public static void loadImages() {
-		String path = path(Nation.ALIENS, new Object() {
+		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Arol");
 	}

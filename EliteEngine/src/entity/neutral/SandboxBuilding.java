@@ -21,7 +21,7 @@ public class SandboxBuilding extends Building implements Commander {
 	private static PImage standImg;
 
 	public static void loadImages() {
-		String path = path(Nation.NEUTRAL, new Object() {
+		String path = path( new Object() {
 		});
 		standImg = game.ImageHandler.load(path, "SandboxBuilding");
 	}

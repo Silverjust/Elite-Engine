@@ -2,7 +2,6 @@ package entity;
 
 import processing.core.PGraphics;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 import entity.animation.Build;
 import g4p_controls.GEvent;
@@ -18,7 +17,7 @@ public abstract class Building extends Entity {
 	public Build build;
 
 	public static void loadImages() {
-		String path = path(Nation.NEUTRAL, new Object() {
+		String path = path(new Object() {
 		});
 		setTarget = ImageHandler.load(path, "setTarget");
 	}

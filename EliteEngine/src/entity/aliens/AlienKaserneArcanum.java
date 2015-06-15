@@ -23,7 +23,7 @@ public class AlienKaserneArcanum extends Building implements Commander, Trainer 
 
 	private static PImage standImg;
 	public static void loadImages() {
-		String path = path(Nation.ALIENS, new Object() {
+		String path = path(new Object() {
 		});
 		standImg = ImageHandler.load(path, "AlienKaserneArcanum");
 

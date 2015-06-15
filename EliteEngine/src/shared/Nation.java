@@ -2,6 +2,7 @@ package shared;
 
 import entity.MainBuilding;
 import entity.aliens.AlienMainBuilding;
+import entity.humans.HumanMainBuilding;
 
 public enum Nation {
 
@@ -82,30 +83,39 @@ public enum Nation {
 	}
 
 	public Class<? extends MainBuilding> getMainBuilding() {
-		//Class<? extends MainBuilding> t = null;
-		return AlienMainBuilding.class;
-		
-		/*switch (this) {
+		Class<? extends MainBuilding> t = null;
+
+		switch (this) {
 		case AHNEN:
-			t = AhnenMainBuilding.class;
+			// t = AhnenMainBuilding.class;
 			break;
 		case ALIENS:
-			t = AliensMainBuilding.class;
+			t = AlienMainBuilding.class;
 			break;
 		case ROBOTS:
-			t = RobotsMainBuilding.class;
+			// t = RobotsMainBuilding.class;
 			break;
 		case SCIENTISTS:
-			t = ScientistsMainBuilding.class;
+			// t = ScientistsMainBuilding.class;
 			break;
 		case HUMANS:
-			t = HumansMainBuilding.class;
+			t = HumanMainBuilding.class;
 			break;
 		case NEUTRAL:
-			t = NeutralMainBuilding.class;
+			// t = NeutralMainBuilding.class;
 			break;
 		}
-		return t;*/
+		return t;
+
+	}
+
+	// TODO remove, when all nations are stable
+	public static void setNationsToPlayableNations() {
+		for (String key : ref.preGame.player.keySet()) {
+			if (ref.preGame.player.get(key).nation != Nation.ALIENS
+					&& ref.preGame.player.get(key).nation != Nation.HUMANS)
+				ref.preGame.player.get(key).nation = Nation.ALIENS;
+		}
 	}
 
 }

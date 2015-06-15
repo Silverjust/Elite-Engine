@@ -21,7 +21,7 @@ public class Brux extends Unit implements Attacker {
 	Jump jump;
 
 	public static void loadImages() {
-		String path = path(Nation.ALIENS, new Object() {
+		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Brux");
 	}

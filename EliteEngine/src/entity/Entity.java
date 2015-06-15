@@ -3,7 +3,6 @@ package entity;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
-import shared.Nation;
 import shared.Player;
 import shared.Updater;
 import shared.ref;
@@ -49,7 +48,7 @@ public abstract class Entity implements Informing {
 	protected Animation nextAnimation;
 
 	public static void loadImages() {
-		String path = path(Nation.NEUTRAL, new Object() {
+		String path = path(new Object() {
 		});
 		shadowImg = ImageHandler.load(path, "shadow");
 		selectedImg = ImageHandler.load(path, "selected");
@@ -386,8 +385,17 @@ public abstract class Entity implements Informing {
 		}
 	}
 
-	protected static String path(Nation nation, Object object) {
-		String path = nation.toString() + "/"
+	protected static String path(Object object) {
+		String pack = object.getClass().getEnclosingClass().getPackage()
+				.getName();
+		System.out.println(pack);
+		if (pack.equals("entity"))
+			pack = "neutral";
+		else
+			pack = pack.substring(pack.lastIndexOf('.') + 1, pack.length());
+		System.out.println(pack);
+
+		String path = pack + "/"
 				+ object.getClass().getEnclosingClass().getSimpleName() + "/";
 		return path;
 	}

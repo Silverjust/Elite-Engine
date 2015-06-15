@@ -18,7 +18,7 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	static PImage groundImg;
 
 	public static void loadImages() {
-		String path = path(Nation.ALIENS, new Object() {
+		String path = path(new Object() {
 		});
 		previewImg = standImg = ImageHandler.load(path, "AlienMainBuilding");
 		groundImg = ImageHandler.load(path, "AlienGround");
