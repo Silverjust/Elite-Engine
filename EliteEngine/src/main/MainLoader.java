@@ -18,8 +18,6 @@ public class MainLoader extends Loader {
 
 		case NEWGAME:// create players
 			LoadingScreen.setup();
-			if (ClientHandler.tutorial)
-				ref.preGame.map = "maps/TutorialMap/TutorialMap";
 			ref.updater = new GameUpdater();
 			state = State.STARTIMAGES;
 			break;

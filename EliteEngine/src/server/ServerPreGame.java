@@ -13,9 +13,9 @@ public class ServerPreGame extends PreGame {
 		int i = ContentListHandler.getMapContent().size();
 
 		@SuppressWarnings("unchecked")
-		String[] intNames = (String[]) ContentListHandler.getMapContent()
-				.keys().toArray(new String[i]);
-		map = ContentListHandler.getMapContent().getString(intNames[0]);
+		String[] intNames = (String[]) ContentListHandler.getModeMaps().keys()
+				.toArray(new String[i]);
+		map = ContentListHandler.getModeMaps().getString(intNames[0]);
 
 	}
 

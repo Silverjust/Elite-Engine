@@ -42,7 +42,7 @@ public class Pax extends Building {
 	}
 
 	@Override
-	public void renderTerrain() {
+	public void renderUnder() {
 		animation.draw(this, (byte) 0, currentFrame);
 	}
 

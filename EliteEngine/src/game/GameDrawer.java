@@ -54,7 +54,7 @@ public class GameDrawer {
 		ref.app.blendMode(PConstants.BLEND);
 		ref.app.imageMode(PConstants.CENTER);
 		ref.app.rectMode(PConstants.CENTER);
-		for (Entity e : ref.updater.entities) {
+		for (Entity e : ref.player.visibleEntities) {
 			e.renderUnder();
 		}
 		for (Entity e : ref.player.visibleEntities) {

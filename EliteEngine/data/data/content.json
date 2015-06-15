@@ -21,14 +21,19 @@
     "Pax": "entity.neutral.Pax",
     "Arcanum": "entity.neutral.Arcanum",
     "Prunam": "entity.neutral.Prunam",
-	"Rock": "entity.neutral.Rock",
-	"SandboxBuilding": "entity.neutral.SandboxBuilding",
-	"Tutorial": "entity.neutral.Tutorial",
+    "Rock": "entity.neutral.Rock",
+    "SandboxBuilding": "entity.neutral.SandboxBuilding",
+    "Tutorial": "entity.neutral.Tutorial",
     "TestLab": "entity.neutral.TestLab"
   },
   "maps": {
-	"fernisland" : "maps/fernisland/fernisland",
-	"firstTestMap" : "maps/firstTestMap/firstTestMap",
-	"newMap" : "maps/newMap/newMap"
+    "standard": {
+      "fernisland": "maps/fernisland/fernisland",
+      "firstTestMap": "maps/firstTestMap/firstTestMap",
+      "newMap": "maps/newMap/newMap"
+    },
+    "tutorial": {
+      "tutorial": "maps/TutorialMap/TutorialMap"
+    }
   }
 }
