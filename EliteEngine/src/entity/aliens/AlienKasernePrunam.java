@@ -42,8 +42,8 @@ public class AlienKasernePrunam extends Building implements Commander, Trainer {
 		animation = nextAnimation = build;
 		setupTarget();
 		// ************************************
-		xSize = 50;
-		ySize = 50;
+		xSize = 40;
+		ySize = 40;
 
 		kerit = 600;
 		pax = 0;
@@ -54,7 +54,7 @@ public class AlienKasernePrunam extends Building implements Commander, Trainer {
 		sight = 50;
 
 		hp = hp_max = 1000;
-		radius = 10;
+		radius = 18;
 
 		commanderRange = 250;
 
