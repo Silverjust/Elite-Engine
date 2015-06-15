@@ -54,8 +54,8 @@ public class Ticul extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 20;
-		ySize = 20;
+		xSize = 15;
+		ySize = 15;
 
 		kerit = 28;
 		pax = 0;

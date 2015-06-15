@@ -41,8 +41,8 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 		animation = nextAnimation = build;
 		setupTarget();
 		// ************************************
-		xSize = 50;
-		ySize = 50;
+		xSize = 30;
+		ySize = 30;
 
 		kerit = 500;
 		pax = 0;
@@ -53,7 +53,7 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 		sight = 50;
 
 		hp = hp_max = 1000;
-		radius = 10;
+		radius = 15;
 
 		commandingRange = 250;
 
