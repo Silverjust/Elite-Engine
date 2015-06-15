@@ -9,7 +9,6 @@ import entity.aliens.Ticul;
 import entity.animation.Animation;
 import game.Chat;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 
 public class Tutorial extends Unit {

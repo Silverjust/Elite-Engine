@@ -32,7 +32,8 @@
     "standard": {
       "fernisland": "maps/fernisland/fernisland",
       "firstTestMap": "maps/firstTestMap/firstTestMap",
-      "newMap": "maps/newMap/newMap"
+      "newMap": "maps/newMap/newMap",
+	  "4player" : "maps/4player/4player"
     },
     "tutorial": {
       "tutorial": "maps/TutorialMap/TutorialMap"

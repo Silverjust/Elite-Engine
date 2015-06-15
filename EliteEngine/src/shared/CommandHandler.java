@@ -141,7 +141,7 @@ public class CommandHandler {
 			Chat.println("Chat", "command was not found");
 		} catch (Exception e) {
 			System.err.println("command error in " + command);
-			// e.printStackTrace();
+			 e.printStackTrace();
 			Chat.println("Chat", "command error");
 		}
 

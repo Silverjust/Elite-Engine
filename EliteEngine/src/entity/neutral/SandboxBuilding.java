@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import entity.Active;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 import entity.Building;
 import entity.Commander;
@@ -21,7 +20,7 @@ public class SandboxBuilding extends Building implements Commander {
 	private static PImage standImg;
 
 	public static void loadImages() {
-		String path = path( new Object() {
+		String path = path(new Object() {
 		});
 		standImg = game.ImageHandler.load(path, "SandboxBuilding");
 	}
@@ -140,6 +139,27 @@ public class SandboxBuilding extends Building implements Commander {
 		@Override
 		public String getDesription() {
 			return "switch player";
+		}
+
+	}
+
+	public static class AddPlayer extends Active {
+
+		public AddPlayer(int x, int y, char n) {
+			super(x, y, n, standImg);
+			clazz = SandboxBuilding.class;
+		}
+
+		@Override
+		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+			ref.preGame.addPlayer((ref.updater.player.size() + 1) + "",
+					"player" + (ref.updater.player.size() + 1));
+
+		}
+
+		@Override
+		public String getDesription() {
+			return "add player";
 		}
 
 	}

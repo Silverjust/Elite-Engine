@@ -28,6 +28,7 @@ import entity.neutral.SandboxBuilding;
 import main.ClientHandler;
 import main.Settings;
 import shared.Helper;
+import shared.Nation;
 import shared.ref;
 
 public class ActivesGrid {
@@ -42,35 +43,49 @@ public class ActivesGrid {
 	public ActivesGrid() {
 		Active.x = x;
 		Active.y = y;
-		addActive(3, 2, Ticul.Flash.class, true);
-
-		addActive(1, 1, Building.SetTargetActive.class, false);
-		addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class, false);
-		addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class, false);
-		addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class,
-				false);
-		addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
-				false);
-		addUpgradeActive(5, 2, AlienMainBuilding.class, KeritMine.class,
-				Kerit.class, false);
-		addUpgradeActive(6, 2, AlienMainBuilding.class, PaxDrillTower.class,
-				Pax.class, false);
-		addUpgradeActive(5, 3, AlienMainBuilding.class, ArcanumMine.class,
-				Arcanum.class, false);
-		addUpgradeActive(6, 3, AlienMainBuilding.class, PrunamHarvester.class,
-				Prunam.class, false);
-
-		addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
-		addTrainActive(2, 3, AlienKaserne.class, Brux.class, false);
-		addTrainActive(3, 3, AlienKaserne.class, Valcyrix.class, false);
-		addTrainActive(2, 2, AlienKaserneArcanum.class, Colum.class, false);
-		addTrainActive(3, 2, AlienKaserneArcanum.class, Arol.class, false);
-		addTrainActive(2, 1, AlienKasernePrunam.class, Rug.class, false);
-		addTrainActive(3, 1, AlienKasernePrunam.class, Ker.class, false);
-
+		setup(ref.player.nation);
 		if (ClientHandler.sandbox) {
 			addActive(7, 1, SandboxBuilding.BuildSetup.class, false);
 		}
+	}
+
+	void setup(Nation nation) {
+		switch (nation) {
+		case ALIENS:
+			addActive(3, 2, Ticul.Flash.class, true);
+
+			addActive(1, 1, Building.SetTargetActive.class, false);
+			addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class,
+					false);
+			addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class,
+					false);
+			addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class,
+					false);
+			addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
+					false);
+			addUpgradeActive(5, 2, AlienMainBuilding.class, KeritMine.class,
+					Kerit.class, false);
+			addUpgradeActive(6, 2, AlienMainBuilding.class,
+					PaxDrillTower.class, Pax.class, false);
+			addUpgradeActive(5, 3, AlienMainBuilding.class, ArcanumMine.class,
+					Arcanum.class, false);
+			addUpgradeActive(6, 3, AlienMainBuilding.class,
+					PrunamHarvester.class, Prunam.class, false);
+
+			addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
+			addTrainActive(2, 3, AlienKaserne.class, Brux.class, false);
+			addTrainActive(3, 3, AlienKaserne.class, Valcyrix.class, false);
+			addTrainActive(2, 2, AlienKaserneArcanum.class, Colum.class, false);
+			addTrainActive(3, 2, AlienKaserneArcanum.class, Arol.class, false);
+			addTrainActive(2, 1, AlienKasernePrunam.class, Rug.class, false);
+			addTrainActive(3, 1, AlienKasernePrunam.class, Ker.class, false);
+			break;
+		case HUMANS:
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	public void update() {
@@ -204,5 +219,6 @@ public class ActivesGrid {
 		addBuildActive(2, 3, SandboxBuilding.class, Prunam.class, true);
 		addBuildActive(3, 2, SandboxBuilding.class, Rock.class, true);
 		addActive(3, 1, SandboxBuilding.ChangeSide.class, true);
+		addActive(4, 1, SandboxBuilding.AddPlayer.class, true);
 	}
 }

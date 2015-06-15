@@ -65,7 +65,7 @@ public class MainPreGame extends PreGame {
 		} else {
 			addThisPlayer(name);
 			addPlayer("" + 2, "n000bBot");
-			player.get("2").nation = Nation.HUMANS;
+			player.get("2").nation = Nation.ALIENS;
 		}
 	}
 

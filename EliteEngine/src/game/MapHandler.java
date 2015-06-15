@@ -7,7 +7,6 @@ import entity.Entity;
 import entity.MainBuilding;
 import entity.neutral.SandboxBuilding;
 import processing.data.JSONObject;
-import shared.ContentListHandler;
 import shared.ref;
 
 public class MapHandler {
@@ -47,8 +46,7 @@ public class MapHandler {
 	}
 
 	public static void saveMap(String intName, String name) {
-		JSONObject oldMap = ref.app.loadJSONObject("data/"
-				+ ContentListHandler.getMapContent().getString(ref.preGame.map)
+		JSONObject oldMap = ref.app.loadJSONObject("data/" + ref.preGame.map
 				+ ".json");
 		JSONObject map = new JSONObject();
 		map.setString("name", name);

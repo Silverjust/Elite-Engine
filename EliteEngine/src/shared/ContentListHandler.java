@@ -17,12 +17,8 @@ public class ContentListHandler {
 		return entityList;
 	}
 
-	public static JSONObject getMapContent() {
-		return contentList.getJSONObject("maps");
-	}
-
 	public static JSONObject getModeMaps() {
-		return ContentListHandler.getMapContent().getJSONObject(
+		return contentList.getJSONObject("maps").getJSONObject(
 				ClientHandler.tutorial ? "tutorial" : "standard");
 
 	}
