@@ -9,8 +9,6 @@ import game.ImageHandler;
 import game.MapHandler;
 
 public class MainLoader extends Loader {
-	// TODO Alle daten laden
-
 	public boolean isReconnectLoad;
 
 	public void update() {

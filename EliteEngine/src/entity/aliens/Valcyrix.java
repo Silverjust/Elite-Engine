@@ -2,7 +2,6 @@ package entity.aliens;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 import entity.Attacker;
 import entity.Entity;
@@ -60,7 +59,7 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 1500;
 		basicAttack.range = 70;// 15
-		basicAttack.beginTime = 100;// eventtime is defined by target distance
+		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.1f;
 
 		descr = " ";

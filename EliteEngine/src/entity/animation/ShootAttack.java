@@ -9,7 +9,7 @@ import entity.Shooter;
 
 public class ShootAttack extends Attack {
 	private Entity target;
-	public int beginTime;
+	private int beginTime;
 	public float speed;
 
 	public ShootAttack(PImage[][] IMG, int duration) {
@@ -31,6 +31,11 @@ public class ShootAttack extends Attack {
 	}
 
 	@Override
+	public void setCastTime(int castTime) {
+		beginTime = castTime;
+	}
+
+	@Override
 	public void updateAbility(Entity e) {
 		if (target != null && isEvent() && isNotOnCooldown()) {
 			((Attacker) e).calculateDamage(this);
@@ -44,7 +49,7 @@ public class ShootAttack extends Attack {
 	}
 
 	@Override
-	public void drawAbility(Entity e, byte d) { 
+	public void drawAbility(Entity e, byte d) {
 		if (e instanceof Shooter) {
 			if (target != null && start + beginTime <= Updater.Time.getMillis()
 					&& isNotOnCooldown()) {

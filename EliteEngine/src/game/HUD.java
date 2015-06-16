@@ -31,19 +31,22 @@ public class HUD {
 	}
 
 	public static void setup() {
-		G4P.setGlobalColorScheme(8);// TODO GUI setup muss woanders hin
-		G4P.changeCursor(false);
+		setupG4P();
 		Chat.setup();
 		SelectionDisplay.setup();
 		Minimap.setup();
 		GroupHandler.setup();
 		activesGrid = new ActivesGrid();
 
+	}
+
+	static void setupG4P() {
+		G4P.setGlobalColorScheme(8);
+		G4P.changeCursor(false);
 		GCScheme.setScheme(8, 0, ref.app.color(0));
 		GCScheme.setScheme(8, 6, ref.app.color(0, 100));
 		GCScheme.setScheme(8, 7, ref.app.color(0, 50));
 		GCScheme.setScheme(8, 12, ref.app.color(255));
-
 	}
 
 	public static void update() {

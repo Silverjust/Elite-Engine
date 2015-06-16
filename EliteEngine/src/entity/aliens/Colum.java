@@ -48,10 +48,10 @@ public class Colum extends Unit implements Attacker {
 		height = 50;
 
 		heal.range = (byte) (radius + 25);
-		heal.damage = 25;//heal
-		heal.pirce = -1;//heal
+		heal.damage = 25;// heal
+		heal.pirce = -1;// heal
 		heal.cooldown = 5000;
-		heal.eventTime = 100;
+		heal.setCastTime(100);
 
 		descr = " ";
 		stats = "heal/s: " + (heal.damage) + "/" + heal.cooldown / 1000.0;

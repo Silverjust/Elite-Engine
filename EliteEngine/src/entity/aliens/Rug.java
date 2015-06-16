@@ -63,11 +63,11 @@ public class Rug extends Unit implements Attacker {
 		basicAttack.range = (byte) (radius + 5);
 		basicAttack.damage = 20;
 		basicAttack.cooldown = 1500;
-		basicAttack.eventTime = 100;
+		basicAttack.setCastTime(100);
 
 		spawnRange = 150;
 		spawn.cooldown = 4000;
-		spawn.eventTime = 500;
+		spawn.setCastTime(500);
 
 		descr = " ";
 		stats = "spawns/s: " + 1 + "/" + spawn.cooldown / 1000.0;

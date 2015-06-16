@@ -6,7 +6,7 @@ import entity.Entity;
 
 public class Ability extends Animation {
 
-	public int eventTime;
+	protected int eventTime;
 	public int cooldown;
 	int cooldownTimer;
 
@@ -53,6 +53,10 @@ public class Ability extends Animation {
 			/** do smthing */
 			startCooldown();
 		}
+	}
+
+	public void setCastTime(int castTime) {
+		eventTime = castTime;
 	}
 
 	protected void startCooldown() {

@@ -3,7 +3,6 @@ package entity.aliens;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 import entity.Attacker;
 import entity.Building;
@@ -60,7 +59,7 @@ public class ThornTower extends Building implements Attacker, Shooter,
 		basicAttack.range = 70;
 		basicAttack.damage = 55;
 		basicAttack.cooldown = 2000;
-		basicAttack.beginTime = 500;// eventtime is defined by target distance
+		basicAttack.setCastTime(500);// eventtime is defined by target distance
 		basicAttack.speed = 0.1f;
 
 		commandingRange = 250;

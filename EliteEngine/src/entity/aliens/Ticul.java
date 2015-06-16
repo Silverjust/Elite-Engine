@@ -74,7 +74,7 @@ public class Ticul extends Unit implements Attacker {
 		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 8;
 		basicAttack.cooldown = 600;
-		basicAttack.eventTime = 500;
+		basicAttack.setCastTime( 500);
 
 		descr = " ";
 		stats = " ";

@@ -49,4 +49,6 @@ public class AreaAttack extends Attack {
 			attacker.setAnimation(a);
 		}
 	}
+
+	
 }

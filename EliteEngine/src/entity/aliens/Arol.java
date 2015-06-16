@@ -59,7 +59,7 @@ public class Arol extends Unit implements Attacker {
 		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 40;
 		basicAttack.cooldown = 5000;
-		basicAttack.eventTime = 100;
+		basicAttack.setCastTime(100);
 		attackDistance = 10;
 
 		descr = " ";
@@ -108,9 +108,11 @@ public class Arol extends Unit implements Attacker {
 	public void calculateDamage(Attack a) {
 		float x, y;
 		x = (this.x + (xTarget - this.x)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget) * (attackDistance));
+				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+				* (attackDistance));
 		y = (this.y + (yTarget - this.y)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget) * (attackDistance));
+				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+				* (attackDistance));
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
 					&& e.isInRange(x, y, e.radius + a.range)

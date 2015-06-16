@@ -8,7 +8,6 @@ import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.TargetAttack;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 
 public class Rugling extends Unit implements Attacker {
@@ -52,7 +51,7 @@ public class Rugling extends Unit implements Attacker {
 		basicAttack.range = (byte) (radius + 7);
 		basicAttack.damage = 10;
 		basicAttack.cooldown = 1500;
-		basicAttack.eventTime = 500;
+		basicAttack.setCastTime(500);
 		// ************************************
 	}
 
