@@ -37,9 +37,9 @@ public class ShootAttack extends Attack {
 
 	@Override
 	public void updateAbility(Entity e) {
-		if (target != null && getProgressPercent() == 1) {
+		/*if (target != null && getProgressPercent() == 1) {
 			System.out.println("target");
-		}
+		}*/
 		if (target != null && isEvent() && isNotOnCooldown()) {
 			((Attacker) e).calculateDamage(this);
 			target = null;

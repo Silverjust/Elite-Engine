@@ -19,12 +19,14 @@ public class PreGameNormalDisplay {
 	GButton startButton;
 	GGameButton[] nationButtons = new GGameButton[5];
 	GSlider playerSlider;
-	GDropList maps;
+	GDropList mapSelector;
 	String[] intNames;
 
 	PGraphics playerList;
 
 	private MainPreGame preGame;
+	private int startMap = 0;
+	private int previousMap = startMap;
 
 	public PreGameNormalDisplay() {
 		preGame = (MainPreGame) ref.preGame;
@@ -47,7 +49,7 @@ public class PreGameNormalDisplay {
 		}
 		{
 			int size = ContentListHandler.getModeMaps().size();
-			maps = new GDropList(ref.app, ref.app.width - 320,
+			mapSelector = new GDropList(ref.app, ref.app.width - 320,
 					ref.app.height - 450, 300, 200, 5);
 			@SuppressWarnings("unchecked")
 			String[] intNames = (String[]) ContentListHandler.getModeMaps()
@@ -65,10 +67,10 @@ public class PreGameNormalDisplay {
 					e.printStackTrace();
 				}
 			}
-			maps.setItems(names, 0);
+			mapSelector.setItems(names, startMap);
 			preGame.map = ContentListHandler.getModeMaps().getString(
-					intNames[0]);
-			maps.addEventHandler(this, "handleSelectMap");
+					intNames[startMap]);
+			mapSelector.addEventHandler(this, "handleSelectMap");
 		}
 	}
 
@@ -108,18 +110,21 @@ public class PreGameNormalDisplay {
 	public void handleSelectMap(GDropList list, GEvent event) {
 		if (event == GEvent.SELECTED
 				&& ((MainApp) ref.app).mode == Mode.PREGAME) {
-			/*JSONObject mapData = null;
+			String file = "";
 			try {
-				mapData = ref.app.loadJSONObject("data/"
+				file = "data/"
 						+ ContentListHandler.getModeMaps().getString(
-								intNames[list.getSelectedIndex()]) + ".json");
+								intNames[list.getSelectedIndex()]) + ".json";
+				@SuppressWarnings("unused")
+				JSONObject mapData = ref.app.loadJSONObject(file);
+				previousMap = list.getSelectedIndex();
+				ClientHandler.send("<setMap " + ref.player.ip + " "
+						+ intNames[list.getSelectedIndex()]);
 			} catch (Exception e) {
-				System.err.println(mapData);
-				e.printStackTrace();
-				return;
-			}*/
-			ClientHandler.send("<setMap " + ref.player.ip + " "
-					+ intNames[list.getSelectedIndex()]);
+				System.err.println(file
+						+ " does not exist or could not be read");
+				mapSelector.setSelected(previousMap);
+			}
 		}
 	}
 
@@ -143,7 +148,7 @@ public class PreGameNormalDisplay {
 	public void dispose() {
 		startButton.dispose();
 		playerSlider.dispose();
-		maps.dispose();
+		mapSelector.dispose();
 		for (int i = 0; i < nationButtons.length; i++) {
 			nationButtons[i].dispose();
 		}

@@ -1,5 +1,6 @@
 package main;
 
+import processing.data.JSONObject;
 import shared.ContentListHandler;
 import shared.Mode;
 import shared.Nation;
@@ -78,8 +79,18 @@ public class MainPreGame extends PreGame {
 				.toArray(new String[size]);
 		int index = -1;
 		for (int i = 0; i < mapArray.length; i++) {
-			if (mapArray[i].equals(string))
-				index = i;
+			try {
+				if (mapArray[i].equals(string)) {
+					@SuppressWarnings("unused")
+					JSONObject mapData = ref.app.loadJSONObject("data/"
+							+ ContentListHandler.getModeMaps().getString(
+									mapArray[i]) + ".json");
+					index = i;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 		if (index < 0) {
 			System.err.println(string + " not found");
@@ -87,7 +98,7 @@ public class MainPreGame extends PreGame {
 		}
 		map = ContentListHandler.getModeMaps().getString(mapArray[index]);
 		if (display != null)
-			display.maps.setSelected(index);
+			display.mapSelector.setSelected(index);
 	}
 
 	@Override

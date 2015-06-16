@@ -56,9 +56,9 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 		aggroRange = (byte) (radius + 50);
 		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 50;
-		basicAttack.pirce = 5;
+		basicAttack.pirce = 3;
 		basicAttack.cooldown = 1500;
-		basicAttack.range = 70;// 15
+		basicAttack.range = 50;// 15
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.1f;
 
@@ -69,28 +69,23 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-
-		// isTaged = false;
-		if (animation == stand) {// ****************************************************
-			String s = "";
-			for (Entity e : player.visibleEntities) {
-				if (e != this) {
-					if (e.isEnemyTo(this)) {// server
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
-							s = ("walk " + e.x + " " + e.y);
-						}
-					}
-				}
-			}
-			sendAnimation(s);
-		}
-		if (animation == walk) {// ****************************************************
+		if (animation == walk || animation == stand) {// ****************************************************
+			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)) {
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
+						}
+						if (e.isInRange(x, y, basicAttack.range + e.radius)
+								&& e.groundPosition == GroundPosition.GROUND) {
+							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -100,9 +95,11 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 					}
 				}
 			}
-			if (importantEntity != null && getBasicAttack().isNotOnCooldown()) {
-				// System.out.println(thread);
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
+			} else if (importantEntity != null && !isEnemyInHitRange) {
+				sendAnimation("walk " + importantEntity.x + " "
+						+ importantEntity.y);
 			}
 		}
 		basicAttack.updateAbility(this);
@@ -128,9 +125,10 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 		float y = PApplet.lerp(this.y - height, target.y - target.height,
 				progress);
 		ref.app.fill(100, 100, 0);
-		ref.app.noStroke();
+		ref.app.strokeWeight(0);
 		ref.app.ellipse(xToGrid(x), yToGrid(y), 3, 3);
-		ref.app.strokeWeight(1);	}
+		ref.app.strokeWeight(1);
+	}
 
 	@Override
 	public Attack getBasicAttack() {

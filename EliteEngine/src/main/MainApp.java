@@ -31,10 +31,6 @@ public class MainApp extends PApplet {
 	}
 
 	PFont font;
-	float xc = (float) (width / 2.0), yc = (float) (height / 2.0);
-
-	public float s = ((width / 1600.0F) < (height / 900.0F)) ? (width / 1600.0F)
-			: (height / 900.0F);
 
 	public Mode mode;
 
@@ -58,6 +54,7 @@ public class MainApp extends PApplet {
 		G4P.messagesEnabled(false);
 
 		ref.setApp(this);
+		FrameInfo.setup();
 
 		hauptmenue = new Hauptmenue();
 	}

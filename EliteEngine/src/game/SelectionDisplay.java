@@ -78,8 +78,8 @@ public class SelectionDisplay {
 				int xe = ref.updater.selected.indexOf(e) % c;
 				int ye = (ref.updater.selected.indexOf(e) - xe) / c;
 				graphic.fill(255);
-				graphic.rect((iconSize + 10) * xe, -yOffset + (iconSize + 10)
-						* ye, iconSize, iconSize);
+				/*graphic.rect((iconSize + 10) * xe, -yOffset + (iconSize + 10)
+						* ye, iconSize, iconSize);*/
 				e.drawIcon(graphic, (iconSize + 10) * xe, -yOffset
 						+ (iconSize + 10) * ye, iconSize);
 				graphic.fill(col);

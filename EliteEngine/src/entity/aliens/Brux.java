@@ -8,7 +8,6 @@ import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.TargetAttack;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 
 public class Brux extends Unit implements Attacker {

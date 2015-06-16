@@ -2,6 +2,7 @@ package main;
 
 import java.util.UUID;
 
+import processing.core.PApplet;
 import shared.Helper;
 import shared.Mode;
 import shared.ref;
@@ -57,9 +58,9 @@ public class Hauptmenue {
 		changes.setTextEditEnabled(false);
 		changes.setText(ref.app.loadStrings("data/changelog.txt"));
 
-		// startServer = new GButton(ref.app, 300, 440, 300, 40);
-		// startServer.setText("start a Server");
-		// startServer.addEventHandler(this, "handleStartServerEvents");
+		startServer = new GButton(ref.app, 650, 300, 100, 60);
+		startServer.setText("make to Server");
+		startServer.addEventHandler(this, "handleStartServerEvents");
 	}
 
 	public void handleAcceptEvents(GButton button, GEvent event) {
@@ -117,10 +118,15 @@ public class Hauptmenue {
 		sandboxButton.dispose();
 		tutorialButton.dispose();
 		changes.dispose();
+		startServer.dispose();
 	}
 
 	public void handleStartServerEvents(GButton button, GEvent event) {
-		// server.ServerApp.main(new String[] { "server.ServerApp" });
+		PApplet mainApp = ref.app;
+		server.ServerApp.main(new String[] { "server.ServerApp" });
+		dispose();
+		mainApp.frame.setVisible(false);
+		mainApp.dispose();
 	}
 
 	public void handleLocalhostEvents(GButton button, GEvent event) {
@@ -129,7 +135,7 @@ public class Hauptmenue {
 
 	public void handleNameEvents(GTextField textfield, GEvent event) {
 		if (event == GEvent.CHANGED) {
-			
+
 		}
 	}
 }
