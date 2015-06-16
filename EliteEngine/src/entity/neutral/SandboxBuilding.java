@@ -152,9 +152,8 @@ public class SandboxBuilding extends Building implements Commander {
 
 		@Override
 		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
-			ref.preGame.addPlayer((ref.updater.player.size() + 1) + "",
+			ref.preGame.addPlayer((ref.updater.player.size() + 1) + "", 
 					"player" + (ref.updater.player.size() + 1));
-
 		}
 
 		@Override

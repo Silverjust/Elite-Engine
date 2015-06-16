@@ -88,6 +88,10 @@ public class Input {
 		}
 
 		if (isKeyFocusInGame()) {
+				if (app.key == Settings.escape) {
+					//app.key = 0;
+				}
+			
 			if (app.key == Settings.togglePause) {
 				if (ref.updater.gameState == GameState.PAUSE) {
 					ref.updater.send("<pause false");

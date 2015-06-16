@@ -41,7 +41,6 @@ public class ServerApp extends PApplet {
 		background(240);
 		gui.update();
 		serverHandler.update();
-
 		switch (mode) {
 		case PREGAME:
 			ref.preGame.update();
@@ -61,7 +60,6 @@ public class ServerApp extends PApplet {
 
 	public void serverUpdate() {
 		ref.updater.update();
-
 	}
 
 	public void disconnectEvent(Client client) {

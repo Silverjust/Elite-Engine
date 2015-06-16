@@ -3,6 +3,7 @@ package entity;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
+import shared.Nation;
 import shared.Player;
 import shared.Updater;
 import shared.ref;
@@ -396,6 +397,12 @@ public abstract class Entity implements Informing {
 		System.out.println(pack);
 
 		String path = pack + "/"
+				+ object.getClass().getEnclosingClass().getSimpleName() + "/";
+		return path;
+	}
+
+	protected static String path(Nation nation, Object object) {
+		String path = nation.toString() + "/"
 				+ object.getClass().getEnclosingClass().getSimpleName() + "/";
 		return path;
 	}

@@ -10,7 +10,8 @@ public class Settings {
 	public static int shift = PConstants.SHIFT;
 	public static int changeAbilityMode = PConstants.TAB;
 
-	public static int togglePause = 'p';
+	public static char togglePause = 'p';
+	public static char escape = PConstants.ESC;
 	public static char buildTestBuilding = 'b';
 	public static char upgradeTestBuilding = 'v';
 	public static char[][] unitsShortcuts = new char[][] {

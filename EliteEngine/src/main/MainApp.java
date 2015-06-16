@@ -52,7 +52,7 @@ public class MainApp extends PApplet {
 		font = createFont("Aharoni Fett", 40);
 		ref.setTextScale(0.5F);// so ungefär
 		ref.setFont(font);
-		//System.out.println(font.ascent());
+		// System.out.println(font.ascent());
 		textFont(font);
 		noSmooth();
 		mode = Mode.HAUPTMENUE;
@@ -129,13 +129,6 @@ public class MainApp extends PApplet {
 
 	public void clientEvent(Client someClient) {
 		ClientHandler.clientEvent(someClient);
-	}
-
-	@Override
-	public void keyPressed() {
-		if (key == PConstants.ESC) {
-
-		}
 	}
 
 }
