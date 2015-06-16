@@ -1,22 +1,21 @@
 package entity.aliens;
 
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 import entity.Building;
 import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
 
-public class KeritMine extends Building   {
+public class KeritMine extends Building {
+	// TODO easy production system
 
 	private static PImage standImg;
-	private static PImage previewImg;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		previewImg = standImg = game.ImageHandler.load(path, "KeritMine");
+		standImg = game.ImageHandler.load(path, "KeritMine");
 	}
 
 	public KeritMine(String[] c) {
@@ -71,7 +70,7 @@ public class KeritMine extends Building   {
 	}
 
 	public PImage preview() {
-		return previewImg;
+		return standImg;
 	}
 
 }

@@ -20,7 +20,7 @@ public class Tutorial extends Unit {
 	int i = 0;
 
 	public static void loadImages() {
-		String path = path( new Object() {
+		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Tutorial");
 	}
@@ -70,6 +70,7 @@ public class Tutorial extends Unit {
 
 			break;
 		case 2:
+			ref.updater.send("<give " + ref.player.ip + " kerit " + 100);
 			for (Entity e : ref.updater.entities) {
 				if (e.getClass().equals(Kerit.class)) {
 					x = e.x;

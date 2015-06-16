@@ -389,12 +389,10 @@ public abstract class Entity implements Informing {
 	protected static String path(Object object) {
 		String pack = object.getClass().getEnclosingClass().getPackage()
 				.getName();
-		System.out.println(pack);
 		if (pack.equals("entity"))
 			pack = "neutral";
 		else
 			pack = pack.substring(pack.lastIndexOf('.') + 1, pack.length());
-		System.out.println(pack);
 
 		String path = pack + "/"
 				+ object.getClass().getEnclosingClass().getSimpleName() + "/";

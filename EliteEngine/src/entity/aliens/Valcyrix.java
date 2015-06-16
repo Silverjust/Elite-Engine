@@ -127,13 +127,10 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 		float x = PApplet.lerp(this.x, target.x, progress);
 		float y = PApplet.lerp(this.y - height, target.y - target.height,
 				progress);
-		ref.app.stroke(100, 100, 0);
-		ref.app.strokeWeight(3);
-		ref.app.line(xToGrid(this.x), yToGrid(this.y - height), x, y / 2);
-		ref.app.strokeWeight(1);
-		ref.app.stroke(0);
-
-	}
+		ref.app.fill(100, 100, 0);
+		ref.app.noStroke();
+		ref.app.ellipse(xToGrid(x), yToGrid(y), 3, 3);
+		ref.app.strokeWeight(1);	}
 
 	@Override
 	public Attack getBasicAttack() {
