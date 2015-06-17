@@ -7,8 +7,7 @@ import entity.Attacker;
 import entity.Entity;
 import entity.Shooter;
 
-public class ShootAttack extends Attack {
-	private Entity target;
+public class ShootAttack extends MeleeAttack {
 	private int beginTime;
 	public float speed;
 
@@ -24,6 +23,7 @@ public class ShootAttack extends Attack {
 		super(IMG, duration);
 	}
 
+	@Override
 	public void setTargetFrom(Entity from, Entity to) {
 		target = to;
 		eventTime = beginTime
@@ -46,10 +46,6 @@ public class ShootAttack extends Attack {
 			target = null;
 			startCooldown();
 		}
-	}
-
-	public Entity getTarget() {
-		return target;
 	}
 
 	@Override

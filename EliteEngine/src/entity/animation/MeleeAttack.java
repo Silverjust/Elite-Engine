@@ -4,23 +4,23 @@ import processing.core.PImage;
 import entity.Attacker;
 import entity.Entity;
 
-public class TargetAttack extends Attack {
-	private Entity target;
+public class MeleeAttack extends Attack {
+	protected Entity target;
 
-	public TargetAttack(PImage[][] IMG, int duration) {
+	public MeleeAttack(PImage[][] IMG, int duration) {
 		super(IMG, duration);
 	}
 
-	public TargetAttack(PImage[] IMG, int duration) {
+	public MeleeAttack(PImage[] IMG, int duration) {
 		super(IMG, duration);
 	}
 
-	public TargetAttack(PImage IMG, int duration) {
+	public MeleeAttack(PImage IMG, int duration) {
 		super(IMG, duration);
 	}
 
-	public void setTarget(Entity e) {
-		target = e;
+	public void setTargetFrom(Entity from, Entity to) {
+		target = to;
 	}
 
 	@Override

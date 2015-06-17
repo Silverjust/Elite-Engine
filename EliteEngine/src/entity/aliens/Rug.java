@@ -1,16 +1,15 @@
 package entity.aliens;
 
+import processing.core.PImage;
+import shared.ref;
 import entity.Attacker;
-import entity.Building;
 import entity.Entity;
 import entity.Unit;
 import entity.animation.Ability;
 import entity.animation.Animation;
-import entity.animation.AreaAttack;
 import entity.animation.Attack;
 import entity.animation.Death;
-import processing.core.PImage;
-import shared.ref;
+import entity.animation.MeleeAttack;
 
 public class Rug extends Unit implements Attacker {
 
@@ -18,7 +17,7 @@ public class Rug extends Unit implements Attacker {
 
 	byte aggroRange;
 
-	AreaAttack basicAttack;
+	MeleeAttack basicAttack;
 	RuglingSpawn spawn;
 
 	Rugling[] children = new Rugling[10];
@@ -38,7 +37,7 @@ public class Rug extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new AreaAttack(standingImg, 500);
+		basicAttack = new MeleeAttack(standingImg, 500);
 		spawn = new RuglingSpawn(standingImg, 800);
 
 		animation = nextAnimation = walk;
@@ -107,7 +106,7 @@ public class Rug extends Unit implements Attacker {
 				}
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
-				sendAnimation("basicAttack " + x + " " + y);
+				sendAnimation("basicAttack " + number);
 			} else if (isEnemyTooClose && importantEntity != null) {
 				sendAnimation("walk " + importantEntity.x + " "
 						+ importantEntity.y);
@@ -136,9 +135,8 @@ public class Rug extends Unit implements Attacker {
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
 					&& e.isInRange(x, y, e.radius + a.range)) {
-				ref.updater.send("<hit " + e.number + " "
-						+ (e instanceof Building ? a.damage * 2 : a.damage)
-						+ " " + a.pirce);
+				ref.updater.send("<hit " + e.number + " " + a.damage + " "
+						+ a.pirce);
 			}
 		}
 	}

@@ -8,7 +8,7 @@ import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.TargetAttack;
+import entity.animation.MeleeAttack;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import game.ImageHandler;
@@ -28,7 +28,7 @@ public class Ticul extends Unit implements Attacker {
 
 	byte aggroRange;
 
-	TargetAttack basicAttack;
+	MeleeAttack basicAttack;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -51,7 +51,7 @@ public class Ticul extends Unit implements Attacker {
 		stand = new Animation(standingImg, 100);
 		walk = new Animation(walkingImg, 800);
 		death = new Death(attackImg, 500);
-		basicAttack = new TargetAttack(attackImg, 600);
+		basicAttack = new MeleeAttack(attackImg, 600);
 
 		animation = nextAnimation = walk;
 		// ************************************

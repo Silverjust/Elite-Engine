@@ -9,7 +9,7 @@ import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.TargetAttack;
+import entity.animation.MeleeAttack;
 
 public class Ker extends Unit implements Attacker {
 
@@ -17,7 +17,7 @@ public class Ker extends Unit implements Attacker {
 
 	byte aggroRange;
 
-	TargetAttack basicAttack;
+	MeleeAttack basicAttack;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -32,7 +32,7 @@ public class Ker extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new TargetAttack(standingImg, 800);
+		basicAttack = new MeleeAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************

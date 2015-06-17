@@ -7,7 +7,7 @@ import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.TargetAttack;
+import entity.animation.MeleeAttack;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
@@ -18,7 +18,7 @@ public class Arol extends Unit implements Attacker {
 
 	byte aggroRange;
 
-	TargetAttack basicAttack;
+	MeleeAttack basicAttack;
 	byte attackDistance;
 
 	public static void loadImages() {
@@ -34,7 +34,7 @@ public class Arol extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new TargetAttack(standingImg, 800);
+		basicAttack = new MeleeAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************

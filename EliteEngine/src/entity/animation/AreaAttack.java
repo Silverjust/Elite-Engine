@@ -4,6 +4,7 @@ import processing.core.PImage;
 import entity.Attacker;
 import entity.Entity;
 
+@Deprecated
 public class AreaAttack extends Attack {
 	public float x, y;
 	private boolean isSetup;

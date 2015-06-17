@@ -3,9 +3,9 @@ package entity.aliens;
 import entity.Attacker;
 import entity.Entity;
 import entity.Unit;
-import entity.animation.AreaAttack;
 import entity.animation.Attack;
 import entity.animation.Death;
+import entity.animation.MeleeAttack;
 import processing.core.PImage;
 import shared.ref;
 
@@ -13,7 +13,7 @@ public class Colum extends Unit implements Attacker {
 
 	private static PImage standingImg;
 
-	AreaAttack heal;
+	MeleeAttack heal;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -25,7 +25,7 @@ public class Colum extends Unit implements Attacker {
 		super(c);
 		iconImg = standingImg;
 
-		stand = walk = heal = new AreaAttack(standingImg, 500);
+		stand = walk = heal = new MeleeAttack(standingImg, 500);
 		death = new Death(standingImg, 500);
 
 		animation = nextAnimation = walk;
@@ -59,7 +59,8 @@ public class Colum extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		heal.setPosition(x, y);
+		// colum: no info to client
+		heal.setTargetFrom(this, this);
 		heal.updateAbility(this);
 	}
 
@@ -77,8 +78,6 @@ public class Colum extends Unit implements Attacker {
 	public void renderAir() {
 		drawSelected();
 		animation.draw(this, direction, currentFrame);
-		drawCircle(heal.range);
-		drawCircle((int) (heal.range * heal.getCooldownPercent()));
 		drawTaged();
 	}
 

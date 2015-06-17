@@ -6,7 +6,7 @@ import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.TargetAttack;
+import entity.animation.MeleeAttack;
 import processing.core.PImage;
 import shared.ref;
 
@@ -16,7 +16,7 @@ public class Rugling extends Unit implements Attacker {
 
 	byte aggroRange;
 
-	TargetAttack basicAttack;
+	MeleeAttack basicAttack;
 
 	private Death splashDeath;
 
@@ -34,7 +34,7 @@ public class Rugling extends Unit implements Attacker {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		splashDeath = new Death(standingImg, 500);
-		basicAttack = new TargetAttack(standingImg, 800);
+		basicAttack = new MeleeAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************

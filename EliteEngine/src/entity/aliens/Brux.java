@@ -6,7 +6,7 @@ import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.TargetAttack;
+import entity.animation.MeleeAttack;
 import processing.core.PImage;
 import shared.ref;
 
@@ -16,7 +16,7 @@ public class Brux extends Unit implements Attacker {
 
 	byte aggroRange;
 
-	TargetAttack basicAttack;
+	MeleeAttack basicAttack;
 	Jump jump;
 
 	public static void loadImages() {
@@ -32,7 +32,7 @@ public class Brux extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new TargetAttack(standingImg, 800);
+		basicAttack = new MeleeAttack(standingImg, 800);
 		jump = new Jump(standingImg, 800);
 
 		animation = nextAnimation = walk;
@@ -160,7 +160,7 @@ public class Brux extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	public static class Jump extends TargetAttack {
+	public static class Jump extends MeleeAttack {
 
 		public float speed;
 		private Entity target;
