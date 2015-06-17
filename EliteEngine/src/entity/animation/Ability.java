@@ -36,9 +36,6 @@ public class Ability extends Animation {
 		}
 	}
 
-	public void start() {
-	}
-
 	public boolean isNotOnCooldown() {
 		return cooldownTimer <= Updater.Time.getMillis();
 	}
@@ -85,4 +82,6 @@ public class Ability extends Animation {
 	public boolean isSetup() {
 		return true;
 	}
+
+	
 }

@@ -22,15 +22,19 @@ public class Attack extends Ability {
 		super(IMG, duration);
 	}
 
+	private void setTargetFrom(Entity attacker, Entity e) {
+	}
+
 	public static void updateExecAttack(String[] c, Entity attacker) {
 		if (c[2].equals("basicAttack") && attacker instanceof Attacker) {
-			Ability a = ((Attacker) attacker).getBasicAttack();
+			Attack a = ((Attacker) attacker).getBasicAttack();
 			if (a.isNotOnCooldown() && !a.isSetup()) {
 				int n = Integer.parseInt(c[3]);
 				Entity e = ref.updater.namedEntities.get(n);
-				((ShootAttack) a).setTargetFrom(attacker, e);
+				a.setTargetFrom(attacker, e);
 				attacker.setAnimation(a);
 			}
 		}
 	}
+
 }
