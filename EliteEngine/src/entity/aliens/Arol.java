@@ -5,12 +5,11 @@ import entity.Building;
 import entity.Entity;
 import entity.Unit;
 import entity.animation.Animation;
-import entity.animation.AreaAttack;
 import entity.animation.Attack;
 import entity.animation.Death;
+import entity.animation.TargetAttack;
 import processing.core.PApplet;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 
 public class Arol extends Unit implements Attacker {
@@ -19,7 +18,7 @@ public class Arol extends Unit implements Attacker {
 
 	byte aggroRange;
 
-	AreaAttack basicAttack;
+	TargetAttack basicAttack;
 	byte attackDistance;
 
 	public static void loadImages() {
@@ -35,7 +34,7 @@ public class Arol extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new AreaAttack(standingImg, 800);
+		basicAttack = new TargetAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************
@@ -56,7 +55,7 @@ public class Arol extends Unit implements Attacker {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.range = (byte) (radius + 10);
+		basicAttack.range = 10;
 		basicAttack.damage = 40;
 		basicAttack.cooldown = 5000;
 		basicAttack.setCastTime(100);
@@ -69,39 +68,50 @@ public class Arol extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-
-		// isTaged = false;
-		if (animation == stand) {// ****************************************************
-			String s = "";
-			for (Entity e : player.visibleEntities) {
-				if (e != this) {
-					if (e.isEnemyTo(this)) {// server
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
-							s = ("walk " + e.x + " " + e.y);
-						}
-					}
-				}
-			}
-			sendAnimation(s);
-		}
-		if (animation == walk) {// ****************************************************
-			boolean isEnemyInRange = false;
+		if (animation == walk || animation == stand) {// ****************************************************
+			boolean isEnemyInHitRange = false;
+			float importance = 0;
+			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)) {
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
+						}
 						if (e.isInRange(x, y, basicAttack.range + e.radius)
 								&& e.groundPosition == GroundPosition.GROUND) {
-							isEnemyInRange = true;
+							isEnemyInHitRange = true;
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
 						}
 					}
 				}
 			}
-			if (isEnemyInRange && getBasicAttack().isNotOnCooldown()) {
-				// System.out.println(thread);
-				sendAnimation("basicAttack " + x + " " + y);
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
+				sendAnimation("basicAttack " + importantEntity.number);
+			} else if (importantEntity != null && !isEnemyInHitRange) {
+				sendAnimation("walk " + importantEntity.x + " "
+						+ importantEntity.y);
 			}
 		}
 		basicAttack.updateAbility(this);
+	}
+
+	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if (c[2].equals("basicAttack") && basicAttack.isNotOnCooldown()
+				&& !basicAttack.isSetup()) {
+			xTarget = basicAttack.getTarget().x;
+			yTarget = basicAttack.getTarget().y;
+		}
 	}
 
 	@Override
@@ -127,6 +137,14 @@ public class Arol extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
+		float x, y;
+		x = (this.x + (xTarget - this.x)
+				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+				* (attackDistance));
+		y = (this.y + (yTarget - this.y)
+				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+				* (attackDistance));
+		drawCircle(x, y, basicAttack.range);
 		animation.draw(this, direction, currentFrame);
 		drawTaged();
 	}

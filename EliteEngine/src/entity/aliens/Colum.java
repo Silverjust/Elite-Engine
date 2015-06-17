@@ -7,7 +7,6 @@ import entity.animation.AreaAttack;
 import entity.animation.Attack;
 import entity.animation.Death;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 
 public class Colum extends Unit implements Attacker {

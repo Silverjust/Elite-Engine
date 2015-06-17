@@ -31,7 +31,7 @@ public class SelectionDisplay {
 		font = ref.app.createFont("Aharoni Fett", 40);
 		graphic.textFont(font);
 		graphic.textSize(20);
-		//graphic.textLeading(100);
+		// graphic.textLeading(100);
 		selectedEntitiesSlider = new GCustomSlider(ref.app, x + w + 20, y + 10,
 				h - 20, 20, ref.player.nation.toString());
 		selectedEntitiesSlider.setRotation(PConstants.TAU / 4,
@@ -77,14 +77,14 @@ public class SelectionDisplay {
 			for (Entity e : ref.updater.selected) {
 				int xe = ref.updater.selected.indexOf(e) % c;
 				int ye = (ref.updater.selected.indexOf(e) - xe) / c;
-				graphic.fill(255);
-				/*graphic.rect((iconSize + 10) * xe, -yOffset + (iconSize + 10)
-						* ye, iconSize, iconSize);*/
+				graphic.fill(150);
+				graphic.rect((iconSize + 10) * xe, -yOffset + (iconSize + 10)
+						* ye, iconSize, iconSize);
 				e.drawIcon(graphic, (iconSize + 10) * xe, -yOffset
 						+ (iconSize + 10) * ye, iconSize);
-				graphic.fill(col);
-				graphic.text(e.number, 5 + (iconSize + 10) * xe, 30 - yOffset
-						+ (iconSize + 10) * ye);
+				graphic.fill(0);
+				graphic.text(e.number, 2 + (iconSize + 10) * xe, iconSize - 2
+						- yOffset + (iconSize + 10) * ye);
 			}
 
 		}

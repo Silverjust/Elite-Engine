@@ -59,10 +59,12 @@ public abstract class Unit extends Entity {
 			sendAnimation("stand");
 		}
 
-		if (isMoving && !hasColided) {
+		if (isMoving
+				&& !hasColided
+				&& PApplet.dist(x, y, xTarget + xDeglich, yTarget + yDeglich) > speed) {
 			x = xNext(xTarget + xDeglich, yTarget + yDeglich);
 			y = yNext(xTarget + xDeglich, yTarget + yDeglich);
-		} else if (PApplet.dist(x, y, x + xDeglich, y + yDeglich) > 0.1) {
+		} else if (PApplet.dist(x, y, x + xDeglich, y + yDeglich) > speed) {
 			x = xNext(x + xDeglich, y + yDeglich);
 			y = yNext(x + xDeglich, y + yDeglich);
 		}

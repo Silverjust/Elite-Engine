@@ -25,33 +25,22 @@ public class Attack extends Ability {
 	public static void updateExecAttack(String[] c, Entity attacker) {
 		if (c[2].equals("basicAttack") && attacker instanceof Attacker) {
 			Ability a = ((Attacker) attacker).getBasicAttack();
-			if (a instanceof TargetAttack) {
-				if (a.isNotOnCooldown()) {
+			if (a.isNotOnCooldown() && !a.isSetup()) {
+				if (a instanceof TargetAttack) {
 					int n = Integer.parseInt(c[3]);
 					Entity e = ref.updater.namedEntities.get(n);
 					((TargetAttack) a).setTarget(e);
-				} else {
-					a = null;
-				}
-			} else if (a instanceof AreaAttack) {
-				if (a.isNotOnCooldown()) {
+				} else if (a instanceof AreaAttack) {
 					float x = Float.parseFloat(c[3]);
 					float y = Float.parseFloat(c[4]);
 					((AreaAttack) a).setPosition(x, y);
-				} else {
-					a = null;
-				}
-			} else if (a instanceof ShootAttack) {
-				if (a.isNotOnCooldown()
-						&& ((ShootAttack) a).getTarget() == null) {
+				} else if (a instanceof ShootAttack) {
 					int n = Integer.parseInt(c[3]);
 					Entity e = ref.updater.namedEntities.get(n);
 					((ShootAttack) a).setTargetFrom(attacker, e);
-				} else {
-					a = null;
 				}
+				attacker.setAnimation(a);
 			}
-			attacker.setAnimation(a);
 		}
 	}
 }

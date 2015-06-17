@@ -81,4 +81,8 @@ public class Ability extends Animation {
 
 	public void drawAbility(Entity e, byte d) {
 	}
+
+	public boolean isSetup() {
+		return true;
+	}
 }

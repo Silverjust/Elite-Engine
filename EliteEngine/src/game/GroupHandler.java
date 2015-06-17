@@ -3,7 +3,7 @@ package game;
 import main.Settings;
 import shared.ref;
 
-public class GroupHandler {//FIXME group 6 tut nicht
+public class GroupHandler {
 	public static Group[] groups;
 	public static Group recentGroup;
 
@@ -11,7 +11,7 @@ public class GroupHandler {//FIXME group 6 tut nicht
 		groups = new Group[10];
 		for (int i = 0; i < groups.length; i++) {
 			groups[i] = new Group(300 + (Group.w + 30) * i, ref.app.height
-					- HUD.height + 5, Settings.hotKeys[i]); 
+					- HUD.height + 5, Settings.hotKeys[i]);
 		}
 		recentGroup = groups[0];
 	}

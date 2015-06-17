@@ -1,3 +1,7 @@
+Arols attackradius is smaller
+Valcyrix shot is faster
+changed attack system
+------------------
 Ticul is faster
 Main Building HP buff
 ----------------------

@@ -189,7 +189,10 @@ public abstract class Entity implements Informing {
 
 	protected void drawCircle(int r) {
 		ref.app.image(selectedImg, xToGrid(x), yToGrid(y), r * 2, r);
+	}
 
+	protected void drawCircle(float x, float y, byte range) {
+		ref.app.image(selectedImg, xToGrid(x), yToGrid(y), range * 2, range);
 	}
 
 	void drawLine(float tx, float ty) {

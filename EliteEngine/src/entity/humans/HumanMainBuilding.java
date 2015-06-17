@@ -2,7 +2,6 @@ package entity.humans;
 
 import processing.core.PGraphics;
 import processing.core.PImage;
-import shared.Nation;
 import entity.Commander;
 import entity.MainBuilding;
 import entity.animation.Animation;

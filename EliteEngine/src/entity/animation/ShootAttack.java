@@ -37,9 +37,10 @@ public class ShootAttack extends Attack {
 
 	@Override
 	public void updateAbility(Entity e) {
-		/*if (target != null && getProgressPercent() == 1) {
-			System.out.println("target");
-		}*/
+		/*
+		 * if (target != null && getProgressPercent() == 1) {
+		 * System.out.println("target"); }
+		 */
 		if (target != null && isEvent() && isNotOnCooldown()) {
 			((Attacker) e).calculateDamage(this);
 			target = null;
@@ -64,6 +65,10 @@ public class ShootAttack extends Attack {
 		}
 	}
 
+	@Override
+	public boolean isSetup() {
+		return getTarget() != null;
+	}
 }
 /*
  * float importance = 0; Entity importantEntity = null; for (Entity e :

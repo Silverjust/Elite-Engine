@@ -36,7 +36,11 @@ public class TargetAttack extends Attack {
 		return target;
 	}
 
-	
+	@Override
+	public boolean isSetup() {
+		return getTarget() != null;
+	}
+
 }
 /*
  * float importance = 0; Entity importantEntity = null; for (Entity e :

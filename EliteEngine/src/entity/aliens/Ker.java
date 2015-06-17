@@ -1,7 +1,6 @@
 package entity.aliens;
 
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 import entity.Attacker;
 import entity.Building;

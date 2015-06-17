@@ -2,7 +2,6 @@ package entity.aliens;
 
 import processing.core.PGraphics;
 import processing.core.PImage;
-import shared.Nation;
 import shared.ref;
 import entity.Commander;
 import entity.MainBuilding;

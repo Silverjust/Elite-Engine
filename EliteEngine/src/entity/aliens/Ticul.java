@@ -19,6 +19,7 @@ import shared.Nation;
 import shared.ref;
 
 public class Ticul extends Unit implements Attacker {
+	// TODO animations are displayed wrong
 
 	private static PImage[][] standingImg;
 	private static PImage[][] walkingImg;
@@ -64,8 +65,7 @@ public class Ticul extends Unit implements Attacker {
 		trainTime = 1500;
 
 		hp = hp_max = 50;
-		speed = 
-				1.2f;
+		speed = 1.2f;
 		radius = 5;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
@@ -74,7 +74,7 @@ public class Ticul extends Unit implements Attacker {
 		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 8;
 		basicAttack.cooldown = 600;
-		basicAttack.setCastTime( 500);
+		basicAttack.setCastTime(500);
 
 		descr = " ";
 		stats = " ";
