@@ -1,5 +1,6 @@
 package shared;
 
+import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PFont;
 import game.GameDrawer;
@@ -14,6 +15,7 @@ public class ref {
 
 	public static GameDrawer drawer;
 	public static Player player;
+	public static Minim minim;
 
 	/**
 	 * @param app
@@ -69,6 +71,13 @@ public class ref {
 	 */
 	public static void setFont(PFont font) {
 		ref.font = font;
+	}
+
+	/**
+	 * @param minim the minim to set
+	 */
+	public static void setMinim(Minim minim) {
+		ref.minim = minim;
 	}
 
 }

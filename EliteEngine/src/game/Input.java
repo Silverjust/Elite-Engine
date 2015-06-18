@@ -57,16 +57,16 @@ public class Input {
 				GameDrawer.xMapOffset += screenSpeed;
 			if (Helper.isMouseOver(ref.app.width - rimSize, 0, ref.app.width,
 					ref.app.height)
-					&& GameDrawer.xMapOffset - app.width
-							+ ref.updater.map.width * GameDrawer.zoom > 0)
+					&& -GameDrawer.xMapOffset + app.width <= ref.updater.map.width
+							* GameDrawer.zoom)
 				GameDrawer.xMapOffset -= screenSpeed;
 			if (Helper.isMouseOver(0, 0, ref.app.width, rimSize)
 					&& GameDrawer.yMapOffset < 0)
 				GameDrawer.yMapOffset += screenSpeed;
 			if (Helper.isMouseOver(0, ref.app.height - rimSize, ref.app.width,
 					ref.app.height)
-					&& GameDrawer.yMapOffset - app.height + HUD.height
-							+ ref.updater.map.height / 2 * GameDrawer.zoom > 0)
+					&& -GameDrawer.yMapOffset + app.height - HUD.height <= ref.updater.map.height
+							/ 2 * GameDrawer.zoom)
 				GameDrawer.yMapOffset -= screenSpeed;
 		}
 	}
@@ -88,10 +88,10 @@ public class Input {
 		}
 
 		if (isKeyFocusInGame()) {
-				if (app.key == Settings.escape) {
-					//app.key = 0;
-				}
-			
+			if (app.key == Settings.escape) {
+				// app.key = 0;
+			}
+
 			if (app.key == Settings.togglePause) {
 				if (ref.updater.gameState == GameState.PAUSE) {
 					ref.updater.send("<pause false");
@@ -149,7 +149,6 @@ public class Input {
 	}
 
 	public void mouseClicked() {// ********************************************************
-
 	}
 
 	public void mousePressed() {// ********************************************************

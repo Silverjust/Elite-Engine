@@ -7,9 +7,11 @@ import g4p_controls.GTextField;
 import g4p_controls.GValueControl;
 import game.Chat;
 import game.GameDrawer;
+import game.HUD;
 
 import javax.swing.JFrame;
 
+import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PFont;
 import shared.Client;
@@ -22,7 +24,7 @@ import shared.ref;
 public class MainApp extends PApplet {
 	public static void main(String args[]) {
 		boolean fullscreen = false;
-		fullscreen = true;
+		// fullscreen = true;
 		if (fullscreen) {
 			PApplet.main(new String[] { "--present", "main.MainApp" });
 		} else {
@@ -55,6 +57,7 @@ public class MainApp extends PApplet {
 
 		ref.setApp(this);
 		FrameInfo.setup();
+		ref.setMinim(new Minim(this));
 
 		hauptmenue = new Hauptmenue();
 	}
@@ -125,6 +128,15 @@ public class MainApp extends PApplet {
 
 	public void clientEvent(Client someClient) {
 		ClientHandler.clientEvent(someClient);
+	}
+
+	public void stop() {
+		// Player in schlieﬂen
+		HUD.sound.close();
+		// Minim Object stoppen
+		ref.minim.stop();
+
+		super.stop();
 	}
 
 }

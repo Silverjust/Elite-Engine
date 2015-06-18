@@ -1,5 +1,6 @@
 package game;
 
+import ddf.minim.AudioPlayer;
 import g4p_controls.G4P;
 import g4p_controls.GCScheme;
 import processing.core.PImage;
@@ -18,6 +19,7 @@ public class HUD {
 			ref.player.nation.toString() + "/button_mouseover.png",
 			ref.player.nation.toString() + "/button_clicked.png" }
 			: null;
+	public static AudioPlayer sound;
 
 	public static void loadImages() {
 		keritImg = ImageHandler.load("", "Kerit");
@@ -27,6 +29,9 @@ public class HUD {
 		if (ref.player != null) {
 			overlay = ImageHandler.load(ref.player.nation.toString() + "/",
 					"overlay");
+			sound = ref.minim.loadFile(ref.player.nation.toString() + "/"
+					+ ref.player.nation.toString() + ".mp3");
+			/** soundfiles are only tests and wil be removed */
 		}
 	}
 
@@ -37,7 +42,8 @@ public class HUD {
 		Minimap.setup();
 		GroupHandler.setup();
 		activesGrid = new ActivesGrid();
-
+		// sound.loop();
+		// sound.play();
 	}
 
 	static void setupG4P() {
@@ -50,6 +56,7 @@ public class HUD {
 	}
 
 	public static void update() {
+		SoundHandler.update();
 		ref.app.textSize(40);
 		ref.app.fill(255);
 		ref.app.image(keritImg, ref.app.width - 100, 10);
