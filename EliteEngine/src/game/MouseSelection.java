@@ -50,8 +50,11 @@ public class MouseSelection {
 					e.isSelected = true;
 					if (e instanceof Unit)
 						containsUnits = true;
+					if (e.player.nation != HUD.activesGrid.nation) {
+						System.out.println(e.getClass().getSimpleName());
+						HUD.activesGrid.setup(e.player.nation);
+					}
 				}
-
 			}
 		}
 		ActivesGrid.showUnitActives = containsUnits;

@@ -21,7 +21,6 @@ public class MeleeAttack extends Attack {
 
 	@Override
 	public void setTargetFrom(Entity from, Entity to) {
-		System.out.println(2);
 		target = to;
 	}
 
