@@ -1,3 +1,5 @@
+added scout
+---------------------
 Arols attackradius is smaller
 Valcyrix shot is faster
 changed attack system

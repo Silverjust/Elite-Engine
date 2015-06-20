@@ -83,8 +83,7 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 								importantEntity = e;
 							}
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {

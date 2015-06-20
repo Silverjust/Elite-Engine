@@ -101,8 +101,9 @@ public class ActivesGrid {
 	}
 
 	public void setupHumans() {
+		addActive(1, 1, Building.SetTargetActive.class, false);
 		addBuildActive(5, 1, HumanMainBuilding.class, HumanKaserne.class, false);
-		addTrainActive(1, 2, HumanKaserne.class, Scout.class, false);
+		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 	}
 
 	public void update() {
