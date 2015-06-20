@@ -11,7 +11,7 @@ import entity.animation.Death;
 import entity.animation.MeleeAttack;
 
 public class HeavyAssault extends Unit implements Attacker {
-	//FIXME schﬂt nicht immer
+	// FIXME schﬂt nicht immer
 
 	private static PImage standingImg;
 
@@ -32,7 +32,7 @@ public class HeavyAssault extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new MeleeAttack(standingImg, 1000);
+		basicAttack = new MeleeAttack(standingImg, 500);// 1000
 
 		animation = nextAnimation = walk;
 		// ************************************
@@ -55,9 +55,9 @@ public class HeavyAssault extends Unit implements Attacker {
 		aggroRange = (byte) (radius + 50);
 		basicAttack.damage = 10;
 		basicAttack.pirce = 0;
-		basicAttack.cooldown = 1000;
+		basicAttack.cooldown = 500;
 		basicAttack.range = 30;
-		basicAttack.setCastTime(1000);// eventtime is defined by target distance
+		basicAttack.setCastTime(500);// eventtime is defined by target distance
 
 		descr = "scout zum scouten";
 		stats = " ";
@@ -102,20 +102,10 @@ public class HeavyAssault extends Unit implements Attacker {
 		basicAttack.updateAbility(this);
 	}
 
-	/*
-	 * @Override public void sendDefaultAnimation(Animation oldAnimation) { /if
-	 * (oldAnimation == basicAttack) { Entity target = ((MeleeAttack)
-	 * oldAnimation).getTarget(); if (target != null && target .isInRange(x, y,
-	 * target.radius + basicAttack.range)) { sendAnimation("basicAttack " +
-	 * target.number); } else { sendAnimation("walk " + xTarget + " " +
-	 * yTarget); } } else { sendAnimation("walk " + xTarget + " " + yTarget); }
-	 * }
-	 */
-
 	@Override
 	public void calculateDamage(Attack a) {
 		System.out.println(3);
-
+		isTaged = true;
 		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
 				+ a.damage + " " + a.pirce);
 		// SoundHandler.startIngameSound(HUD.hm, x, y);

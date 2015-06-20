@@ -164,6 +164,7 @@ public abstract class Entity implements Informing {
 					radius * 2, radius * 1.5f);
 			ref.app.stroke(0);
 		}
+		isTaged=false;
 	}
 
 	void drawHpBar() {
