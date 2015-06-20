@@ -40,6 +40,7 @@ public abstract class Entity implements Informing {
 	private static PImage selectedImg;
 	private static PImage hpImg;
 	public PImage iconImg;
+	//private static AudioSnippet hit;
 	protected String descr = " ", stats = " ";
 
 	public Death death;
@@ -54,6 +55,8 @@ public abstract class Entity implements Informing {
 		shadowImg = ImageHandler.load(path, "shadow");
 		selectedImg = ImageHandler.load(path, "selected");
 		hpImg = ImageHandler.load(path, "hp");
+
+		//hit = ref.minim.loadSnippet("test.mp3");
 	}
 
 	public void updateAnimation() {
@@ -100,7 +103,7 @@ public abstract class Entity implements Informing {
 				break;
 			}
 		} catch (Exception e) {
-			System.out.println(animation + " " + nextAnimation);
+			System.err.println(animation + " " + nextAnimation);
 			PApplet.printArray(c);
 			e.printStackTrace();
 		}
@@ -109,7 +112,7 @@ public abstract class Entity implements Informing {
 	public void hit(int damage, byte pirce) {
 
 		if (isMortal()) {// only for nonimmortal objects
-			//SoundHandler.startIngameSound(HUD.hm, x, y);
+			//SoundHandler.startIngameSound(hit, x, y);
 
 			hp -= damage
 					* (1.0 - ((armor - pirce > 0) ? armor - pirce : 0) * 0.05);

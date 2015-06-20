@@ -19,6 +19,9 @@ import entity.aliens.Rug;
 import entity.aliens.ThornTower;
 import entity.aliens.Ticul;
 import entity.aliens.Valcyrix;
+import entity.humans.HumanKaserne;
+import entity.humans.HumanMainBuilding;
+import entity.humans.Scout;
 import entity.neutral.Arcanum;
 import entity.neutral.Kerit;
 import entity.neutral.Pax;
@@ -32,13 +35,16 @@ import shared.Nation;
 import shared.ref;
 
 public class ActivesGrid {
+	private static final int gridHeight = 3;
+	private static final int gridWidth = 7;
 	public static boolean showUnitActives;
 	public int x = ref.app.width - 420;
 	public int y = ref.app.height - HUD.height + 10;
 	int w = 60;
 
-	Active[][] unitGrid = new Active[7][3];
-	Active[][] buildingGrid = new Active[7][3];
+	Active[][] unitGrid = new Active[gridWidth][gridHeight];
+	Active[][] buildingGrid = new Active[gridWidth][gridHeight];
+	public Nation nation;
 
 	public ActivesGrid() {
 		Active.x = x;
@@ -50,37 +56,15 @@ public class ActivesGrid {
 	}
 
 	void setup(Nation nation) {
+		removeActives();
+		this.nation = nation;
+
 		switch (nation) {
 		case ALIENS:
-			addActive(3, 2, Ticul.Flash.class, true);
-
-			addActive(1, 1, Building.SetTargetActive.class, false);
-			addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class,
-					false);
-			addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class,
-					false);
-			addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class,
-					false);
-			addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
-					false);
-			addUpgradeActive(5, 2, AlienMainBuilding.class, KeritMine.class,
-					Kerit.class, false);
-			addUpgradeActive(6, 2, AlienMainBuilding.class,
-					PaxDrillTower.class, Pax.class, false);
-			addUpgradeActive(5, 3, AlienMainBuilding.class, ArcanumMine.class,
-					Arcanum.class, false);
-			addUpgradeActive(6, 3, AlienMainBuilding.class,
-					PrunamHarvester.class, Prunam.class, false);
-
-			addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
-			addTrainActive(2, 3, AlienKaserne.class, Brux.class, false);
-			addTrainActive(3, 3, AlienKaserne.class, Valcyrix.class, false);
-			addTrainActive(2, 2, AlienKaserneArcanum.class, Colum.class, false);
-			addTrainActive(3, 2, AlienKaserneArcanum.class, Arol.class, false);
-			addTrainActive(2, 1, AlienKasernePrunam.class, Rug.class, false);
-			addTrainActive(3, 1, AlienKasernePrunam.class, Ker.class, false);
+			setupAliens();
 			break;
 		case HUMANS:
+			setupHumans();
 			break;
 		default:
 			break;
@@ -88,10 +72,43 @@ public class ActivesGrid {
 
 	}
 
+	public void setupAliens() {
+		addActive(3, 2, Ticul.Flash.class, true);
+
+		addActive(1, 1, Building.SetTargetActive.class, false);
+		addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class, false);
+		addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class, false);
+		addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class,
+				false);
+		addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
+				false);
+		addUpgradeActive(5, 2, AlienMainBuilding.class, KeritMine.class,
+				Kerit.class, false);
+		addUpgradeActive(6, 2, AlienMainBuilding.class, PaxDrillTower.class,
+				Pax.class, false);
+		addUpgradeActive(5, 3, AlienMainBuilding.class, ArcanumMine.class,
+				Arcanum.class, false);
+		addUpgradeActive(6, 3, AlienMainBuilding.class, PrunamHarvester.class,
+				Prunam.class, false);
+
+		addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
+		addTrainActive(2, 3, AlienKaserne.class, Brux.class, false);
+		addTrainActive(3, 3, AlienKaserne.class, Valcyrix.class, false);
+		addTrainActive(2, 2, AlienKaserneArcanum.class, Colum.class, false);
+		addTrainActive(3, 2, AlienKaserneArcanum.class, Arol.class, false);
+		addTrainActive(2, 1, AlienKasernePrunam.class, Rug.class, false);
+		addTrainActive(3, 1, AlienKasernePrunam.class, Ker.class, false);
+	}
+
+	public void setupHumans() {
+		addBuildActive(5, 1, HumanMainBuilding.class, HumanKaserne.class, false);
+		addTrainActive(1, 2, HumanKaserne.class, Scout.class, false);
+	}
+
 	public void update() {
 		if (showUnitActives) {
-			for (int x = 0; x < 7; x++) {
-				for (int y = 0; y < 3; y++) {
+			for (int x = 0; x < gridWidth; x++) {
+				for (int y = 0; y < gridHeight; y++) {
 					if (unitGrid[x][y] != null)
 						if (Helper.listContainsInstanceOf(unitGrid[x][y].clazz,
 								ref.updater.selected)) {
@@ -104,8 +121,8 @@ public class ActivesGrid {
 				}
 			}
 		} else {
-			for (int x = 0; x < 7; x++) {
-				for (int y = 0; y < 3; y++) {
+			for (int x = 0; x < gridWidth; x++) {
+				for (int y = 0; y < gridHeight; y++) {
 					if (unitGrid[x][y] != null)
 						unitGrid[x][y].setVisible(false);
 					if (buildingGrid[x][y] != null)
@@ -220,5 +237,21 @@ public class ActivesGrid {
 		addBuildActive(3, 2, SandboxBuilding.class, Rock.class, true);
 		addActive(3, 1, SandboxBuilding.ChangeSide.class, true);
 		addActive(4, 1, SandboxBuilding.AddPlayer.class, true);
+	}
+
+	private void removeActives() {
+		System.out.println("remove");
+		for (int x = 0; x < gridWidth; x++) {
+			for (int y = 0; y < gridHeight; y++) {
+				if (unitGrid[x][y] != null) {
+					unitGrid[x][y].button.dispose();
+					unitGrid[x][y] = null;
+				}
+				if (buildingGrid[x][y] != null) {
+					buildingGrid[x][y].button.dispose();
+					buildingGrid[x][y] = null;
+				}
+			}
+		}
 	}
 }

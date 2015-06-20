@@ -23,7 +23,6 @@ public class Attack extends Ability {
 	}
 
 	public void setTargetFrom(Entity attacker, Entity e) {
-		System.out.println(1);
 	}
 
 	public static void updateExecAttack(String[] c, Entity attacker) {
