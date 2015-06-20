@@ -1,4 +1,4 @@
-added scout
+added scout, heavy assault
 ---------------------
 Arols attackradius is smaller
 Valcyrix shot is faster

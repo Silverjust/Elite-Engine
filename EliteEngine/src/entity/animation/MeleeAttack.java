@@ -26,7 +26,12 @@ public class MeleeAttack extends Attack {
 
 	@Override
 	public void updateAbility(Entity e) {
-		if (target != null && isEvent() && isNotOnCooldown()) {
+		/*if (isSetup())System.out.println("setup");
+		if (isEvent())System.out.println("event");
+		if (isNotOnCooldown())System.out.println("ncool");*/
+
+		if (isSetup() && isEvent() && isNotOnCooldown()) {
+			System.out.println(2);
 			((Attacker) e).calculateDamage(this);
 			target = null;
 			startCooldown();

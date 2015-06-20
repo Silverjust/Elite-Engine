@@ -28,7 +28,7 @@
 	"HumanMainBuilding": "entity.humans.HumanMainBuilding",
 	"HumanKaserne": "entity.humans.HumanKaserne",
 	"Scout": "entity.humans.Scout",
-	
+	"HeavyAssault": "entity.humans.HeavyAssault",
   },
   "maps": {
     "standard": {

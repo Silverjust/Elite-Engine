@@ -19,6 +19,7 @@ import entity.aliens.Rug;
 import entity.aliens.ThornTower;
 import entity.aliens.Ticul;
 import entity.aliens.Valcyrix;
+import entity.humans.HeavyAssault;
 import entity.humans.HumanKaserne;
 import entity.humans.HumanMainBuilding;
 import entity.humans.Scout;
@@ -104,6 +105,7 @@ public class ActivesGrid {
 		addActive(1, 1, Building.SetTargetActive.class, false);
 		addBuildActive(5, 1, HumanMainBuilding.class, HumanKaserne.class, false);
 		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
+		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
 	}
 
 	public void update() {

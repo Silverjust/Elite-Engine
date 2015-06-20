@@ -1,65 +1,63 @@
 package entity.humans;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 import entity.Attacker;
 import entity.Entity;
-import entity.Shooter;
 import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.ShootAttack;
+import entity.animation.MeleeAttack;
 
-public class Scout extends Unit implements Attacker, Shooter {
+public class HeavyAssault extends Unit implements Attacker {
+	//FIXME schﬂt nicht immer
 
 	private static PImage standingImg;
 
 	byte aggroRange;
 
-	ShootAttack basicAttack;
+	MeleeAttack basicAttack;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "Scout");
+		standingImg = game.ImageHandler.load(path, "HeavyAssault");
 	}
 
-	public Scout(String[] c) {
+	public HeavyAssault(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new ShootAttack(standingImg, 800);
+		basicAttack = new MeleeAttack(standingImg, 1000);
 
 		animation = nextAnimation = walk;
 		// ************************************
 		xSize = 10;
 		ySize = 10;
 
-		kerit = 28;
+		kerit = 180;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 1500;
 
-		hp = hp_max = 30;
-		armor = 1;
+		hp = hp_max = 120;
+		armor = 2;
 		speed = 0.9f;
 		radius = 5;
-		sight = 120;
+		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
 		basicAttack.damage = 10;
 		basicAttack.pirce = 0;
-		basicAttack.cooldown = 1500;
-		basicAttack.range = 40;
-		basicAttack.setCastTime(100);// eventtime is defined by target distance
-		basicAttack.speed = 0.6f;
+		basicAttack.cooldown = 1000;
+		basicAttack.range = 30;
+		basicAttack.setCastTime(1000);// eventtime is defined by target distance
 
 		descr = "scout zum scouten";
 		stats = " ";
@@ -93,7 +91,8 @@ public class Scout extends Unit implements Attacker, Shooter {
 					}
 				}
 			}
-			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()
+					&& !basicAttack.isSetup()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null && !isEnemyInHitRange) {
 				sendAnimation("walk " + importantEntity.x + " "
@@ -103,8 +102,20 @@ public class Scout extends Unit implements Attacker, Shooter {
 		basicAttack.updateAbility(this);
 	}
 
+	/*
+	 * @Override public void sendDefaultAnimation(Animation oldAnimation) { /if
+	 * (oldAnimation == basicAttack) { Entity target = ((MeleeAttack)
+	 * oldAnimation).getTarget(); if (target != null && target .isInRange(x, y,
+	 * target.radius + basicAttack.range)) { sendAnimation("basicAttack " +
+	 * target.number); } else { sendAnimation("walk " + xTarget + " " +
+	 * yTarget); } } else { sendAnimation("walk " + xTarget + " " + yTarget); }
+	 * }
+	 */
+
 	@Override
 	public void calculateDamage(Attack a) {
+		System.out.println(3);
+
 		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
 				+ a.damage + " " + a.pirce);
 		// SoundHandler.startIngameSound(HUD.hm, x, y);
@@ -114,19 +125,17 @@ public class Scout extends Unit implements Attacker, Shooter {
 	public void renderGround() {
 		drawSelected();
 		animation.draw(this, direction, currentFrame);
-		basicAttack.drawAbility(this, direction);
+		drawShot();
 		drawTaged();
 	}
 
-	@Override
-	public void drawShot(Entity target, float progress) {
-		float x = PApplet.lerp(this.x, target.x, progress);
-		float y = PApplet.lerp(this.y - height, target.y - target.height,
-				progress);
-		ref.app.fill(255, 100, 0);
-		ref.app.strokeWeight(0);
-		ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
-		ref.app.strokeWeight(1);
+	public void drawShot() {
+		if (basicAttack.getTarget() != null) {
+			Entity e = basicAttack.getTarget();
+			ref.app.stroke(255, 100, 0);
+			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(e.x), yToGrid(e.y));
+			ref.app.stroke(0);
+		}
 	}
 
 	@Override
