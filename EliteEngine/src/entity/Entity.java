@@ -40,7 +40,7 @@ public abstract class Entity implements Informing {
 	private static PImage selectedImg;
 	private static PImage hpImg;
 	public PImage iconImg;
-	//private static AudioSnippet hit;
+	// private static AudioSnippet hit;
 	protected String descr = " ", stats = " ";
 
 	public Death death;
@@ -56,7 +56,7 @@ public abstract class Entity implements Informing {
 		selectedImg = ImageHandler.load(path, "selected");
 		hpImg = ImageHandler.load(path, "hp");
 
-		//hit = ref.minim.loadSnippet("test.mp3");
+		// hit = ref.minim.loadSnippet("test.mp3");
 	}
 
 	public void updateAnimation() {
@@ -112,7 +112,7 @@ public abstract class Entity implements Informing {
 	public void hit(int damage, byte pirce) {
 
 		if (isMortal()) {// only for nonimmortal objects
-			//SoundHandler.startIngameSound(hit, x, y);
+			// SoundHandler.startIngameSound(hit, x, y);
 
 			hp -= damage
 					* (1.0 - ((armor - pirce > 0) ? armor - pirce : 0) * 0.05);
@@ -164,7 +164,7 @@ public abstract class Entity implements Informing {
 					radius * 2, radius * 1.5f);
 			ref.app.stroke(0);
 		}
-		isTaged=false;
+		isTaged = false;
 	}
 
 	void drawHpBar() {
@@ -248,12 +248,17 @@ public abstract class Entity implements Informing {
 		else
 			stats += "hp: Immortal Object§";
 
-		if (this instanceof Attacker
-				&& ((Attacker) this).getBasicAttack().pirce >= 0) {
-			stats += "dps: " + ((Attacker) this).getBasicAttack().damage + "/"
-					+ ((Attacker) this).getBasicAttack().cooldown / 1000.0
-					+ " (" + ((Attacker) this).getBasicAttack().pirce + ")§";
-		}
+		if (this instanceof Attacker)
+			if (((Attacker) this).getBasicAttack().pirce >= 0) {
+				stats += "dps: " + ((Attacker) this).getBasicAttack().damage
+						+ "/" + ((Attacker) this).getBasicAttack().cooldown
+						/ 1000.0 + " ("
+						+ ((Attacker) this).getBasicAttack().pirce + ")§";
+			} else {
+				stats += "heal/s: " + ((Attacker) this).getBasicAttack().damage
+						+ "/" + ((Attacker) this).getBasicAttack().cooldown
+						/ 1000.0 + "§";
+			}
 		return stats + this.stats;
 	}
 

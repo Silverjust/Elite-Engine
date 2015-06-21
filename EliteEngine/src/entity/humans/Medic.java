@@ -11,7 +11,7 @@ import entity.animation.Death;
 import entity.animation.MeleeAttack;
 import game.ImageHandler;
 
-public class HeavyAssault extends Unit implements Attacker {
+public class Medic extends Unit implements Attacker {
 	// FIXME schßt nicht immer
 
 	private static PImage standingImg;
@@ -23,10 +23,10 @@ public class HeavyAssault extends Unit implements Attacker {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = ImageHandler.load(path, "HeavyAussault");
+		standingImg = ImageHandler.load(path, "Medic");
 	}
 
-	public HeavyAssault(String[] c) {
+	public Medic(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
@@ -47,20 +47,20 @@ public class HeavyAssault extends Unit implements Attacker {
 		trainTime = 1500;
 
 		hp = hp_max = 120;
-		armor = 2;
+		armor = 1;
 		speed = 0.9f;
 		radius = 5;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 10;
-		basicAttack.pirce = 0;
+		basicAttack.damage = 5;// heal
+		basicAttack.pirce = -1;// heal
 		basicAttack.cooldown = 500;
-		basicAttack.range = 30;
+		basicAttack.range = 15;
 		basicAttack.setCastTime(500);// eventtime is defined by target distance
 
-		descr = "heavy assault";
+		descr = "medic heals";
 		stats = " ";
 		// ************************************
 	}
@@ -72,25 +72,20 @@ public class HeavyAssault extends Unit implements Attacker {
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
-				if (e != this) {
-					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
-							float newImportance = calcImportanceOf(e);
-							if (newImportance > importance) {
-								importance = newImportance;
-								importantEntity = e;
-							}
-						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
-							isEnemyInHitRange = true;
-							float newImportance = calcImportanceOf(e);
-							if (newImportance > importance) {
-								importance = newImportance;
-								importantEntity = e;
+				if (e.isAllyTo(this)) {
+					if (e.isInRange(x, y, aggroRange + e.radius)) {
+						float newImportance = calcImportanceOf(e);
+						if (newImportance > importance && e.hp < e.hp_max) {
+							importance = newImportance;
+							importantEntity = e;
+							if (e.isInRange(x, y, basicAttack.range + e.radius)) {
+								isEnemyInHitRange = true;
 							}
 						}
 					}
+
 				}
+
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()
 					&& !basicAttack.isSetup()) {
@@ -105,10 +100,9 @@ public class HeavyAssault extends Unit implements Attacker {
 
 	@Override
 	public void calculateDamage(Attack a) {
-		System.out.println(3);
 		isTaged = true;
-		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
-				+ a.damage + " " + a.pirce);
+		ref.updater.send("<heal " + basicAttack.getTarget().number + " "
+				+ a.damage);
 		// SoundHandler.startIngameSound(HUD.hm, x, y);
 	}
 
@@ -123,7 +117,7 @@ public class HeavyAssault extends Unit implements Attacker {
 	public void drawShot() {
 		if (basicAttack.getTarget() != null) {
 			Entity e = basicAttack.getTarget();
-			ref.app.stroke(255, 100, 0);
+			ref.app.stroke(0, 255, 0);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(e.x), yToGrid(e.y));
 			ref.app.stroke(0);
 		}

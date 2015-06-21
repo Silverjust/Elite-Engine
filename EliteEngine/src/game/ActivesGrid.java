@@ -22,6 +22,7 @@ import entity.aliens.Valcyrix;
 import entity.humans.HeavyAssault;
 import entity.humans.HumanKaserne;
 import entity.humans.HumanMainBuilding;
+import entity.humans.Medic;
 import entity.humans.Scout;
 import entity.neutral.Arcanum;
 import entity.neutral.Kerit;
@@ -103,9 +104,10 @@ public class ActivesGrid {
 
 	public void setupHumans() {
 		addActive(1, 1, Building.SetTargetActive.class, false);
-		addBuildActive(5, 1, HumanMainBuilding.class, HumanKaserne.class, false);
+		addBuildActive(5, 3, HumanMainBuilding.class, HumanKaserne.class, false);
 		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
+		addTrainActive(1, 2, HumanKaserne.class, Medic.class, false);
 	}
 
 	public void update() {
@@ -232,7 +234,7 @@ public class ActivesGrid {
 		System.out.println("setupSandbox");
 		addActive(1, 1, SandboxBuilding.DeleteActive.class, true);
 		addBuildActive(2, 1, SandboxBuilding.class,
-				ref.player.nation.getMainBuilding(), true);
+				ref.player.nation.getNationInfo().getMainBuilding(), true);
 		addBuildActive(1, 2, SandboxBuilding.class, Kerit.class, true);
 		addBuildActive(2, 2, SandboxBuilding.class, Pax.class, true);
 		addBuildActive(1, 3, SandboxBuilding.class, Arcanum.class, true);
@@ -243,7 +245,6 @@ public class ActivesGrid {
 	}
 
 	private void removeActives() {
-		System.out.println("remove");
 		for (int x = 0; x < gridWidth; x++) {
 			for (int y = 0; y < gridHeight; y++) {
 				if (unitGrid[x][y] != null) {

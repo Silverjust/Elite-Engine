@@ -31,6 +31,7 @@
 	"HumanKaserne": "entity.humans.HumanKaserne",
 	"Scout": "entity.humans.Scout",
 	"HeavyAssault": "entity.humans.HeavyAssault",
+	"Medic": "entity.humans.Medic",
   },
   "maps": {
     "standard": {

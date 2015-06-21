@@ -53,7 +53,6 @@ public class Colum extends Unit implements Attacker {
 		heal.setCastTime(100);
 
 		descr = " ";
-		stats = "heal/s: " + (heal.damage) + "/" + heal.cooldown / 1000.0;
 		// ************************************
 	}
 
