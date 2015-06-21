@@ -1,7 +1,9 @@
 package shared;
 
 import entity.MainBuilding;
+import entity.aliens.AlienInfo;
 import entity.aliens.AlienMainBuilding;
+import entity.humans.HumanInfo;
 import entity.humans.HumanMainBuilding;
 
 public enum Nation {
@@ -82,6 +84,7 @@ public enum Nation {
 		return nation;
 	}
 
+	@Deprecated
 	public Class<? extends MainBuilding> getMainBuilding() {
 		Class<? extends MainBuilding> t = null;
 
@@ -116,6 +119,38 @@ public enum Nation {
 					&& ref.preGame.player.get(key).nation != Nation.HUMANS)
 				ref.preGame.player.get(key).nation = Nation.ALIENS;
 		}
+	}
+
+	public NationInfo getNationInfo() {
+		Class<? extends NationInfo> t = null;
+
+		switch (this) {
+		case AHNEN:
+			// t = AhnenMainBuilding.class;
+			break;
+		case ALIENS:
+			t = AlienInfo.class;
+			break;
+		case ROBOTS:
+			// t = RobotsMainBuilding.class;
+			break;
+		case SCIENTISTS:
+			// t = ScientistsMainBuilding.class;
+			break;
+		case HUMANS:
+			t = HumanInfo.class;
+			break;
+		case NEUTRAL:
+			// t = NeutralMainBuilding.class;
+			break;
+		}
+		try {
+			return t.getConstructor().newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 }

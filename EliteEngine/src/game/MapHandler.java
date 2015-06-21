@@ -5,6 +5,7 @@ import java.util.Set;
 
 import entity.Entity;
 import entity.MainBuilding;
+import entity.neutral.KeritMine;
 import entity.neutral.SandboxBuilding;
 import processing.data.JSONObject;
 import shared.ref;
@@ -30,8 +31,23 @@ public class MapHandler {
 					String type = entity.getString("type");
 					if (type.equals("MainBuilding")) {
 						type = ref.updater.player.get(player).nation
-								.getMainBuilding().getSimpleName();
+								.getNationInfo().getMainBuilding()
+								.getSimpleName();
+					} else if (type.equals("KeritMine")) {
+						type = ref.updater.player.get(player).nation
+								.getNationInfo().getKeritMine().getSimpleName();
 					}
+					/*
+					 * if (type.equals("MainBuilding")) { type =
+					 * ref.updater.player.get(player).nation
+					 * .getMainBuilding().getSimpleName(); } if
+					 * (type.equals("MainBuilding")) { type =
+					 * ref.updater.player.get(player).nation
+					 * .getMainBuilding().getSimpleName(); } if
+					 * (type.equals("MainBuilding")) { type =
+					 * ref.updater.player.get(player).nation
+					 * .getMainBuilding().getSimpleName(); }
+					 */
 					float x = entity.getFloat("x");
 					float y = entity.getFloat("y");
 					ref.updater.send("<spawn " + type + " " + player + " " + x
@@ -63,11 +79,12 @@ public class MapHandler {
 				i++;
 				JSONObject atributes = new JSONObject();
 				String type;
-				if (e instanceof MainBuilding) {
+				if (e instanceof MainBuilding)
 					type = "MainBuilding";
-				} else {
-					type = e.getClass().getSimpleName().toString();
-				}
+				else if (e instanceof KeritMine)
+					type = "KeritMine";
+				type = e.getClass().getSimpleName().toString();
+
 				atributes.setString("type", type);
 				int playerNumber = new ArrayList<String>(
 						ref.updater.player.keySet()).indexOf(e.player.ip);

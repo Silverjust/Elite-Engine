@@ -4,7 +4,7 @@ import main.Settings;
 import entity.Entity;
 import entity.Unit;
 import entity.aliens.AlienKaserne;
-import entity.aliens.KeritMine;
+import entity.aliens.AlienKeritMine;
 import entity.aliens.Ticul;
 import entity.animation.Animation;
 import game.Chat;
@@ -88,7 +88,7 @@ public class Tutorial extends Unit {
 			break;
 		case 3:
 			for (Entity e : ref.updater.entities) {
-				if (e.getClass().equals(KeritMine.class)
+				if (e.getClass().equals(AlienKeritMine.class)
 						&& e.player == ref.player)
 					i = 4;
 			}

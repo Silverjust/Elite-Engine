@@ -9,6 +9,7 @@ import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.MeleeAttack;
+import game.ImageHandler;
 
 public class HeavyAssault extends Unit implements Attacker {
 	// FIXME schﬂt nicht immer
@@ -22,7 +23,7 @@ public class HeavyAssault extends Unit implements Attacker {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "HeavyAssault");
+		standingImg = ImageHandler.load(path, "HeavyAussault");
 	}
 
 	public HeavyAssault(String[] c) {
@@ -36,8 +37,8 @@ public class HeavyAssault extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 10;
-		ySize = 10;
+		xSize = 20;
+		ySize = 20;
 
 		kerit = 180;
 		pax = 0;

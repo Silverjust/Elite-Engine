@@ -12,7 +12,7 @@ import entity.aliens.Arol;
 import entity.aliens.Brux;
 import entity.aliens.Colum;
 import entity.aliens.Ker;
-import entity.aliens.KeritMine;
+import entity.aliens.AlienKeritMine;
 import entity.aliens.PaxDrillTower;
 import entity.aliens.PrunamHarvester;
 import entity.aliens.Rug;
@@ -83,7 +83,7 @@ public class ActivesGrid {
 				false);
 		addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
 				false);
-		addUpgradeActive(5, 2, AlienMainBuilding.class, KeritMine.class,
+		addUpgradeActive(5, 2, AlienMainBuilding.class, AlienKeritMine.class,
 				Kerit.class, false);
 		addUpgradeActive(6, 2, AlienMainBuilding.class, PaxDrillTower.class,
 				Pax.class, false);

@@ -37,8 +37,8 @@ public class Scout extends Unit implements Attacker, Shooter {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 10;
-		ySize = 10;
+		xSize = 20;
+		ySize = 20;
 
 		kerit = 28;
 		pax = 0;
