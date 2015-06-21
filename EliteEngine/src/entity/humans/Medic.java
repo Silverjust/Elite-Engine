@@ -40,11 +40,11 @@ public class Medic extends Unit implements Attacker {
 		xSize = 20;
 		ySize = 20;
 
-		kerit = 180;
-		pax = 0;
+		kerit = 20;
+		pax = 50;
 		arcanum = 0;
 		prunam = 0;
-		trainTime = 1500;
+		trainTime = 1000;
 
 		hp = hp_max = 120;
 		armor = 1;
@@ -54,9 +54,9 @@ public class Medic extends Unit implements Attacker {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 5;// heal
+		basicAttack.damage = 3;// heal
 		basicAttack.pirce = -1;// heal
-		basicAttack.cooldown = 500;
+		basicAttack.cooldown = 300;
 		basicAttack.range = 15;
 		basicAttack.setCastTime(500);// eventtime is defined by target distance
 

@@ -40,13 +40,13 @@ public class HeavyAssault extends Unit implements Attacker {
 		xSize = 20;
 		ySize = 20;
 
-		kerit = 180;
+		kerit = 160;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 1500;
 
-		hp = hp_max = 120;
+		hp = hp_max = 90;
 		armor = 2;
 		speed = 0.9f;
 		radius = 5;
