@@ -1,4 +1,4 @@
-package entity.aliens;
+package entity.humans;
 
 import entity.Attacker;
 import entity.Entity;
@@ -10,22 +10,23 @@ import entity.animation.MeleeAttack;
 import processing.core.PImage;
 import shared.ref;
 
-public class Brux extends Unit implements Attacker {
+public class Exo extends Unit implements Attacker {
 
 	private static PImage standingImg;
 
 	byte aggroRange;
 
 	MeleeAttack basicAttack;
-	Jump jump;
+	MeleeAttack instaAttack;
+	Hook hook;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "Brux");
+		standingImg = game.ImageHandler.load(path, "Exo");
 	}
 
-	public Brux(String[] c) {
+	public Exo(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
@@ -33,12 +34,13 @@ public class Brux extends Unit implements Attacker {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new MeleeAttack(standingImg, 800);
-		jump = new Jump(standingImg, 800);
+		instaAttack = new MeleeAttack(standingImg, 800);
+		hook = new Hook(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 20;
+		ySize = 20;
 
 		kerit = 180;
 		pax = 0;
@@ -56,13 +58,18 @@ public class Brux extends Unit implements Attacker {
 		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 10;
 		basicAttack.cooldown = 1200;
-		basicAttack.setCastTime( 500);
+		basicAttack.setCastTime(500);
 
-		jump.range = (byte) (radius + 10);
-		jump.damage = 55;
-		jump.pirce = 2;
-		jump.cooldown = 5000;
-		jump.speed = 2.2f;
+		instaAttack.range = (byte) (radius + 10);
+		instaAttack.damage = 50;
+		instaAttack.cooldown = 4000;
+		instaAttack.setCastTime(100);
+
+		hook.range = (byte) (radius + 10);
+		hook.damage = 55;
+		hook.pirce = 2;
+		hook.cooldown = 5000;
+		hook.speed = 2.2f;
 
 		descr = " ";
 		stats = " ";
@@ -100,59 +107,85 @@ public class Brux extends Unit implements Attacker {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null && !isEnemyInHitRange
-					&& jump.isNotOnCooldown()) {
-				sendAnimation("jump " + importantEntity.number);
+					&& hook.isNotOnCooldown()) {
+				sendAnimation("hook " + importantEntity.number);
 			} else if (importantEntity != null && !isEnemyInHitRange) {
 				sendAnimation("walk " + importantEntity.x + " "
 						+ importantEntity.y);
 			}
 		}
 		basicAttack.updateAbility(this);
-		jump.updateAbility(this);
+		instaAttack.updateAbility(this);
+		hook.updateAbility(this);
 	}
 
 	@Override
 	public void updateMovement() {
-		if (animation == jump) {
-			speed += jump.speed;
+		if (animation == hook) {
+			speed += hook.speed;
 		}
 		super.updateMovement();
-		if (animation == jump) {
-			speed -= jump.speed;
+		if (animation == hook) {
+			speed -= hook.speed;
 		}
 	}
 
 	@Override
 	public boolean isCollision(Entity e) {
-		boolean b = !(animation == jump && e != jump.getTarget());
+		boolean b = !(animation == hook && e != hook.getTarget());
 		return super.isCollision(e) && b;
 	}
 
 	@Override
 	public void exec(String[] c) {
 		super.exec(c);
-		if (c[2].equals("jump")) {
+		if (c[2].equals("hook")) {
 			int n = Integer.parseInt(c[3]);
 			Entity e = ref.updater.namedEntities.get(n);
-			jump.setTarget(e);
+			hook.setTargetFrom(this, e);
 			xTarget = e.x;
 			yTarget = e.y;
-			setAnimation(jump);
+			setAnimation(hook);
+		} else if (c[2].equals("instaAttack")) {
+			int n = Integer.parseInt(c[3]);
+			Entity e = ref.updater.namedEntities.get(n);
+			instaAttack.setTargetFrom(this, e);
+			setAnimation(instaAttack);
+		}
+	}
+
+	@Override
+	public void sendDefaultAnimation(Animation oldAnimation) {
+		if (oldAnimation == hook && ((Hook) oldAnimation).getTarget() != null) {
+			sendAnimation("instaAttack "
+					+ ((MeleeAttack) oldAnimation).getTarget().number);
+		} else {
+			sendAnimation("walk " + xTarget + " " + yTarget);
 		}
 	}
 
 	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
+		ref.updater.send("<hit " + ((MeleeAttack) a).getTarget().number + " "
 				+ a.damage + " " + a.pirce);
-
 	}
 
 	@Override
 	public void renderGround() {
 		drawSelected();
 		animation.draw(this, direction, currentFrame);
+		if (animation == hook)
+			drawShot();
 		drawTaged();
+	}
+
+	public void drawShot() {
+		if (hook.getTarget() != null) {
+			Entity e = hook.getTarget();
+			ref.app.stroke(150);
+			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(e.x), yToGrid(e.y));
+			ref.app.stroke(0);
+		}
 	}
 
 	@Override
@@ -160,28 +193,38 @@ public class Brux extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	public static class Jump extends MeleeAttack {
+	public static class Hook extends MeleeAttack {
 
 		public float speed;
-		
-		public Jump(PImage IMG, int duration) {
+		private boolean isSetup;
+
+		public Hook(PImage IMG, int duration) {
 			super(IMG, duration);
 		}
 
 		@Override
 		public void updateAbility(Entity e) {
-			if (target != null && isNotOnCooldown()
+			if (isSetup() && isNotOnCooldown()
 					&& target.isInRange(e.x, e.y, e.radius + target.radius)) {
-				ref.updater.send("<hit " + target.number + " " + damage + " "
-						+ pirce);
 				e.sendDefaultAnimation(this);
-				target = null;
+				isSetup = false;
 				startCooldown();
 			}
 		}
 
-		public void setTarget(Entity e) {
-			target = e;
+		@Override
+		public Entity getTarget() {
+			return target;
+		}
+
+		@Override
+		public boolean isSetup() {
+			return isSetup;
+		}
+
+		@Override
+		public void setTargetFrom(Entity from, Entity to) {
+			target = to;
 		}
 
 	}

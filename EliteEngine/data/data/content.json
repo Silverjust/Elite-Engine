@@ -32,6 +32,7 @@
 	"Scout": "entity.humans.Scout",
 	"HeavyAssault": "entity.humans.HeavyAssault",
 	"Medic": "entity.humans.Medic",
+	"Exo": "entity.humans.Exo",
   },
   "maps": {
     "standard": {

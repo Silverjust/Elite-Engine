@@ -2,34 +2,16 @@ package game;
 
 import java.lang.reflect.Constructor;
 
-import entity.*;
-import entity.aliens.AlienKaserne;
-import entity.aliens.AlienKaserneArcanum;
-import entity.aliens.AlienKasernePrunam;
-import entity.aliens.AlienMainBuilding;
-import entity.aliens.ArcanumMine;
-import entity.aliens.Arol;
-import entity.aliens.Brux;
-import entity.aliens.Colum;
-import entity.aliens.Ker;
-import entity.aliens.AlienKeritMine;
-import entity.aliens.PaxDrillTower;
-import entity.aliens.PrunamHarvester;
-import entity.aliens.Rug;
-import entity.aliens.ThornTower;
-import entity.aliens.Ticul;
-import entity.aliens.Valcyrix;
-import entity.humans.HeavyAssault;
-import entity.humans.HumanKaserne;
-import entity.humans.HumanMainBuilding;
-import entity.humans.Medic;
-import entity.humans.Scout;
-import entity.neutral.Arcanum;
-import entity.neutral.Kerit;
-import entity.neutral.Pax;
-import entity.neutral.Prunam;
-import entity.neutral.Rock;
-import entity.neutral.SandboxBuilding;
+import entity.Active;
+import entity.BuildActive;
+import entity.Building;
+import entity.Entity;
+import entity.TrainActive;
+import entity.Unit;
+import entity.UpgradeActive;
+import entity.neutral.*;
+import entity.aliens.*;
+import entity.humans.*;
 import main.ClientHandler;
 import main.Settings;
 import shared.Helper;
@@ -108,6 +90,7 @@ public class ActivesGrid {
 		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
 		addTrainActive(1, 2, HumanKaserne.class, Medic.class, false);
+		addTrainActive(3, 3, HumanKaserne.class, Exo.class, false);
 	}
 
 	public void update() {
@@ -233,8 +216,8 @@ public class ActivesGrid {
 	public void setupSandbox() {
 		System.out.println("setupSandbox");
 		addActive(1, 1, SandboxBuilding.DeleteActive.class, true);
-		addBuildActive(2, 1, SandboxBuilding.class,
-				ref.player.nation.getNationInfo().getMainBuilding(), true);
+		addBuildActive(2, 1, SandboxBuilding.class, ref.player.nation
+				.getNationInfo().getMainBuilding(), true);
 		addBuildActive(1, 2, SandboxBuilding.class, Kerit.class, true);
 		addBuildActive(2, 2, SandboxBuilding.class, Pax.class, true);
 		addBuildActive(1, 3, SandboxBuilding.class, Arcanum.class, true);
