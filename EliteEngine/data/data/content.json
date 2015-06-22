@@ -35,6 +35,7 @@
 	"Medic": "entity.humans.Medic",
 	"Exo": "entity.humans.Exo",
 	"SmallTank": "entity.humans.SmallTank",
+	"Tank": "entity.humans.Tank",
   },
   "maps": {
     "standard": {

@@ -1,5 +1,5 @@
 added scout, heavy assault,
- medic, exo, small Tank
+ medic, exo, small Tank, Tank
 ---------------------
 Arols attackradius is smaller
 Valcyrix shot is faster

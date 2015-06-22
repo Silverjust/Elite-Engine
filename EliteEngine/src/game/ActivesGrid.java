@@ -94,6 +94,7 @@ public class ActivesGrid {
 		addTrainActive(1, 2, HumanKaserne.class, Medic.class, false);
 		addTrainActive(3, 3, HumanKaserne.class, Exo.class, false);
 		addTrainActive(2, 2, HumanMechKaserne.class, SmallTank.class, false);
+		addTrainActive(3, 2, HumanMechKaserne.class, Tank.class, false);
 	}
 
 	public void update() {

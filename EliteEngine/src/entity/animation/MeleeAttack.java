@@ -6,6 +6,7 @@ import entity.Entity;
 
 public class MeleeAttack extends Attack {
 	protected Entity target;
+	protected boolean isSetup;
 
 	public MeleeAttack(PImage[][] IMG, int duration) {
 		super(IMG, duration);
@@ -22,18 +23,21 @@ public class MeleeAttack extends Attack {
 	@Override
 	public void setTargetFrom(Entity from, Entity to) {
 		target = to;
+		isSetup = true;
 	}
 
 	@Override
 	public void updateAbility(Entity e) {
-		/*if (isSetup())System.out.println("setup");
-		if (isEvent())System.out.println("event");
-		if (isNotOnCooldown())System.out.println("ncool");*/
+		/*
+		 * if (isSetup())System.out.println("setup"); if
+		 * (isEvent())System.out.println("event"); if
+		 * (isNotOnCooldown())System.out.println("ncool");
+		 */
 
 		if (isSetup() && isEvent() && isNotOnCooldown()) {
-			//System.out.println(2);
+			// System.out.println(2);
 			((Attacker) e).calculateDamage(this);
-			target = null;
+			isSetup = false;
 			startCooldown();
 		}
 	}
@@ -44,7 +48,7 @@ public class MeleeAttack extends Attack {
 
 	@Override
 	public boolean isSetup() {
-		return getTarget() != null;
+		return getTarget() != null && isSetup;
 	}
 
 }

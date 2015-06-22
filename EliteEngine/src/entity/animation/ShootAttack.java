@@ -26,6 +26,7 @@ public class ShootAttack extends MeleeAttack {
 	@Override
 	public void setTargetFrom(Entity from, Entity to) {
 		target = to;
+		isSetup = true;
 		eventTime = beginTime
 				+ (int) (PApplet.dist(from.x, from.y, to.x, to.y) / speed);
 	}
@@ -41,9 +42,9 @@ public class ShootAttack extends MeleeAttack {
 		 * if (target != null && getProgressPercent() == 1) {
 		 * System.out.println("target"); }
 		 */
-		if (target != null && isEvent() && isNotOnCooldown()) {
+		if (isSetup() && isEvent() && isNotOnCooldown()) {
 			((Attacker) e).calculateDamage(this);
-			target = null;
+			isSetup = false;
 			startCooldown();
 		}
 	}
@@ -51,7 +52,8 @@ public class ShootAttack extends MeleeAttack {
 	@Override
 	public void drawAbility(Entity e, byte d) {
 		if (e instanceof Shooter) {
-			if (target != null && start + beginTime <= Updater.Time.getMillis()
+			if (target != null && isSetup()//ändern,dass explosion angezeigt werden kann
+					&& start + beginTime <= Updater.Time.getMillis()
 					&& isNotOnCooldown()) {
 				((Shooter) e).drawShot(target, getProgressPercent());
 			}
@@ -59,11 +61,6 @@ public class ShootAttack extends MeleeAttack {
 			System.err.println(e.getClass().getSimpleName()
 					+ " should be shooter");
 		}
-	}
-
-	@Override
-	public boolean isSetup() {
-		return getTarget() != null;
 	}
 }
 /*
