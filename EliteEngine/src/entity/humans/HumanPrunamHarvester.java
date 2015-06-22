@@ -1,7 +1,6 @@
 package entity.humans;
 
 import processing.core.PImage;
-import shared.ref;
 import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
@@ -22,50 +21,24 @@ public class HumanPrunamHarvester extends PrunamHarvester   {
 
 		iconImg = standImg;
 		stand = new Extract(standImg, 1000);
-		build = new Build(standImg, 4000);
-		death = new Death(standImg, 100);
+		build = new Build(standImg, 1000);
+		death = new Death(standImg, 1000);
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 50;
+		ySize = 50;
 
-		kerit = 500;
-		pax = 0;
-		arcanum = 0;
-		prunam = 0;
-		build.setBuildTime(10000);
-
-		hp = hp_max = 500;
-		radius = 15;
-		sight = 50;
-
-		((Extract) stand).cooldown = 10000;
-		((Extract) stand).ressource = "prunam";
-		((Extract) stand).efficenty = 10;
+		build.setBuildTime(buildTime);
+		
+		((Extract) stand).cooldown = cooldown;
+		((Extract) stand).ressource = ressource;
+		((Extract) stand).efficenty = efficenty;
 
 		descr = " ";
 		stats = "ressource/s: "
 				+ (((Extract) stand).efficenty / ((Extract) stand).cooldown * 1000);
 		// ************************************
-	}
-
-	@Override
-	public void updateDecisions() {
-		super.updateDecisions();
-		((Extract) stand).updateAbility(this);
-	}
-
-	@Override
-	protected void onDeath() {
-		super.onDeath();
-		ref.updater.send("<spawn Prunam 0 " + x + " " + y);
-	}
-
-	@Override
-	public void renderGround() {
-		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
 	}
 
 	public PImage preview() {

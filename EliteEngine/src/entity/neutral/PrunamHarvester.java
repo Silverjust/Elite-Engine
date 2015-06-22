@@ -1,31 +1,18 @@
 package entity.neutral;
 
-import processing.core.PImage;
 import shared.ref;
 import entity.Building;
-import entity.animation.Build;
-import entity.animation.Death;
 import entity.animation.Extract;
 
-public class PrunamHarvester extends Building   {
+public abstract class PrunamHarvester extends Building   {
 
-	private static PImage standImg;
-
-	public static void loadImages() {
-		String path = path(new Object() {
-		});
-		standImg = game.ImageHandler.load(path, "PrunamHarvester");
-	}
+	protected static final int efficenty = 10;
+	protected static final String ressource = "prunam";
+	protected static final int cooldown = 10000;
+	protected static final int buildTime = 10000;
 
 	public PrunamHarvester(String[] c) {
 		super(c);
-
-		iconImg = standImg;
-		stand = new Extract(standImg, 1000);
-		build = new Build(standImg, 4000);
-		death = new Death(standImg, 100);
-
-		animation = nextAnimation = stand;
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -34,19 +21,10 @@ public class PrunamHarvester extends Building   {
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		build.setBuildTime(10000);
 
 		hp = hp_max = 500;
 		radius = 15;
 		sight = 50;
-
-		((Extract) stand).cooldown = 10000;
-		((Extract) stand).ressource = "prunam";
-		((Extract) stand).efficenty = 10;
-
-		descr = " ";
-		stats = "ressource/s: "
-				+ (((Extract) stand).efficenty / ((Extract) stand).cooldown * 1000);
 		// ************************************
 	}
 
@@ -67,9 +45,4 @@ public class PrunamHarvester extends Building   {
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
 	}
-
-	public PImage preview() {
-		return standImg;
-	}
-
 }

@@ -1,13 +1,12 @@
 package entity.aliens;
 
 import processing.core.PImage;
-import shared.ref;
-import entity.Building;
 import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
+import entity.neutral.PaxDrillTower;
 
-public class AlienPaxDrillTower extends Building   {
+public class AlienPaxDrillTower extends PaxDrillTower   {
 
 	private static PImage standImg;
 	private static PImage previewImg;
@@ -24,49 +23,23 @@ public class AlienPaxDrillTower extends Building   {
 		iconImg = standImg;
 		stand = new Extract(standImg, 1000);
 		build = new Build(standImg, 1000);
-		death = new Death(standImg, 100);
+		death = new Death(standImg, 1000);
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 40;
-		ySize = 40;
+		xSize = 50;
+		ySize = 50;
 
-		kerit = 500;
-		pax = 0;
-		arcanum = 0;
-		prunam = 0;
-		build.setBuildTime(10000);
-
-		hp = hp_max = 500;
-		radius = 15;
-		sight = 50;
-
-		((Extract) stand).cooldown = 1000;
-		((Extract) stand).ressource = "pax";
-		((Extract) stand).efficenty = 14;
+		build.setBuildTime(buildTime);
+		
+		((Extract) stand).cooldown = cooldown;
+		((Extract) stand).ressource = ressource;
+		((Extract) stand).efficenty = efficenty;
 
 		descr = " ";
 		stats = "ressource/s: "
 				+ (((Extract) stand).efficenty / ((Extract) stand).cooldown * 1000);
 		// ************************************
-	}
-
-	@Override
-	public void updateDecisions() {
-		super.updateDecisions();
-		((Extract) stand).updateAbility(this);
-	}
-
-	@Override
-	protected void onDeath() {
-		super.onDeath();
-		ref.updater.send("<spawn Pax 0 " + x + " " + y);
-	}
-
-	@Override
-	public void renderGround() {
-		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
 	}
 
 	public PImage preview() {

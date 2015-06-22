@@ -21,20 +21,17 @@ public class AlienInfo extends NationInfo {
 
 	@Override
 	public Class<? extends PaxDrillTower> getPaxDrillTower() {
-		// TODO Auto-generated method stub
-		return null;
+		return AlienPaxDrillTower.class;
 	}
 
 	@Override
 	public Class<? extends ArcanumMine> getArcanumMine() {
-		// TODO Auto-generated method stub
-		return null;
+		return AlienArcanumMine.class;
 	}
 
 	@Override
 	public Class<? extends PrunamHarvester> getPrunamHarvester() {
-		// TODO Auto-generated method stub
-		return null;
+		return AlienPrunamHarvester.class;
 	}
 
 }
