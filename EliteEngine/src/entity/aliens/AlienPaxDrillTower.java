@@ -7,28 +7,29 @@ import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
 
-public class PrunamHarvester extends Building   {
+public class AlienPaxDrillTower extends Building   {
 
 	private static PImage standImg;
+	private static PImage previewImg;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standImg = game.ImageHandler.load(path, "PrunamHarvester");
+		previewImg = standImg = game.ImageHandler.load(path, "AlienPaxDrillTower");
 	}
 
-	public PrunamHarvester(String[] c) {
+	public AlienPaxDrillTower(String[] c) {
 		super(c);
 
 		iconImg = standImg;
 		stand = new Extract(standImg, 1000);
-		build = new Build(standImg, 4000);
+		build = new Build(standImg, 1000);
 		death = new Death(standImg, 100);
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 40;
+		ySize = 40;
 
 		kerit = 500;
 		pax = 0;
@@ -40,9 +41,9 @@ public class PrunamHarvester extends Building   {
 		radius = 15;
 		sight = 50;
 
-		((Extract) stand).cooldown = 10000;
-		((Extract) stand).ressource = "prunam";
-		((Extract) stand).efficenty = 10;
+		((Extract) stand).cooldown = 1000;
+		((Extract) stand).ressource = "pax";
+		((Extract) stand).efficenty = 14;
 
 		descr = " ";
 		stats = "ressource/s: "
@@ -59,7 +60,7 @@ public class PrunamHarvester extends Building   {
 	@Override
 	protected void onDeath() {
 		super.onDeath();
-		ref.updater.send("<spawn Prunam 0 " + x + " " + y);
+		ref.updater.send("<spawn Pax 0 " + x + " " + y);
 	}
 
 	@Override
@@ -69,7 +70,7 @@ public class PrunamHarvester extends Building   {
 	}
 
 	public PImage preview() {
-		return standImg;
+		return previewImg;
 	}
 
 }

@@ -1,6 +1,9 @@
 package entity.humans;
 
 import entity.MainBuilding;
+import entity.aliens.AlienArcanumMine;
+import entity.aliens.AlienPaxDrillTower;
+import entity.aliens.AlienPrunamHarvester;
 import entity.neutral.KeritMine;
 import shared.NationInfo;
 
@@ -17,21 +20,17 @@ public class HumanInfo extends NationInfo {
 	}
 
 	@Override
-	public Class<? extends MainBuilding> getPaxDrillTower() {
-		// TODO Auto-generated method stub
-		return null;
+	public Class<? extends AlienPaxDrillTower> getPaxDrillTower() {return HumanPaxDrillTower.class;
 	}
 
 	@Override
-	public Class<? extends MainBuilding> getArcanumMine() {
-		// TODO Auto-generated method stub
-		return null;
+	public Class<? extends AlienArcanumMine> getArcanumMine() {
+		return HumanArcanumMine.class;
 	}
 
 	@Override
-	public Class<? extends MainBuilding> getPrunamHarvester() {
-		// TODO Auto-generated method stub
-		return null;
+	public Class<? extends AlienPrunamHarvester> getPrunamHarvester() {
+		return HumanPrunamHarvester.class;
 	}
 
 }

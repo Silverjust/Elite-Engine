@@ -68,11 +68,11 @@ public class ActivesGrid {
 				false);
 		addUpgradeActive(5, 2, AlienMainBuilding.class, AlienKeritMine.class,
 				Kerit.class, false);
-		addUpgradeActive(6, 2, AlienMainBuilding.class, PaxDrillTower.class,
+		addUpgradeActive(6, 2, AlienMainBuilding.class, AlienPaxDrillTower.class,
 				Pax.class, false);
-		addUpgradeActive(5, 3, AlienMainBuilding.class, ArcanumMine.class,
+		addUpgradeActive(5, 3, AlienMainBuilding.class, AlienArcanumMine.class,
 				Arcanum.class, false);
-		addUpgradeActive(6, 3, AlienMainBuilding.class, PrunamHarvester.class,
+		addUpgradeActive(6, 3, AlienMainBuilding.class, AlienPrunamHarvester.class,
 				Prunam.class, false);
 
 		addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
@@ -88,7 +88,16 @@ public class ActivesGrid {
 		addActive(1, 1, Building.SetTargetActive.class, false);
 		addBuildActive(4, 3, HumanMainBuilding.class, HumanKaserne.class, false);
 		addBuildActive(4, 2, HumanMainBuilding.class, HumanMechKaserne.class,
-				false);
+				false);addBuildActive(4, 1, HumanMainBuilding.class, HumanDepot.class,
+						false);
+		addUpgradeActive(5, 2, HumanMainBuilding.class, HumanKeritMine.class,
+				Kerit.class, false);
+		addUpgradeActive(6, 2, HumanMainBuilding.class, HumanPaxDrillTower.class,
+				Pax.class, false);
+		addUpgradeActive(5, 3, HumanMainBuilding.class, HumanArcanumMine.class,
+				Arcanum.class, false);
+		addUpgradeActive(6, 3, HumanMainBuilding.class, HumanPrunamHarvester.class,
+				Prunam.class, false);
 		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
 		addTrainActive(1, 2, HumanKaserne.class, Medic.class, false);

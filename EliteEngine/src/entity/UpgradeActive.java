@@ -1,7 +1,6 @@
 package entity;
 
 import shared.ref;
-import entity.aliens.AlienMainBuilding;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 import game.AimHandler;
@@ -19,7 +18,7 @@ public class UpgradeActive extends Active {
 		this.oldBuilding = oldBuilding;
 		descr = b.getDesription();
 		stats = b.getStatistics();
-		clazz = AlienMainBuilding.class;
+		clazz = builder;
 	}
 
 	@Override

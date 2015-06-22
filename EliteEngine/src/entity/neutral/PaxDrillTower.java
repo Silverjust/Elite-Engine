@@ -1,4 +1,4 @@
-package entity.aliens;
+package entity.neutral;
 
 import processing.core.PImage;
 import shared.ref;

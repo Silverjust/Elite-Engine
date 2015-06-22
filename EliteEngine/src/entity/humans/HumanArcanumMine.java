@@ -1,13 +1,13 @@
-package entity.aliens;
+package entity.humans;
 
 import processing.core.PImage;
 import shared.ref;
-import entity.Building;
+import entity.aliens.AlienArcanumMine;
 import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
 
-public class ArcanumMine extends Building   {
+public class HumanArcanumMine extends AlienArcanumMine   {
 
 	private static PImage standImg;
 	private static PImage previewImg;
@@ -15,10 +15,10 @@ public class ArcanumMine extends Building   {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		previewImg = standImg = game.ImageHandler.load(path, "ArcanumMine");
+		previewImg = standImg = game.ImageHandler.load(path, "HumanArcanumMine");
 	}
 
-	public ArcanumMine(String[] c) {
+	public HumanArcanumMine(String[] c) {
 		super(c);
 
 		iconImg = standImg;
