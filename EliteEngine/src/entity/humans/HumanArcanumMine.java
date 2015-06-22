@@ -1,13 +1,12 @@
 package entity.humans;
 
 import processing.core.PImage;
-import shared.ref;
-import entity.aliens.AlienArcanumMine;
 import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
+import entity.neutral.ArcanumMine;
 
-public class HumanArcanumMine extends AlienArcanumMine   {
+public class HumanArcanumMine extends ArcanumMine {
 
 	private static PImage standImg;
 	private static PImage previewImg;
@@ -15,7 +14,8 @@ public class HumanArcanumMine extends AlienArcanumMine   {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		previewImg = standImg = game.ImageHandler.load(path, "HumanArcanumMine");
+		previewImg = standImg = game.ImageHandler
+				.load(path, "HumanArcanumMine");
 	}
 
 	public HumanArcanumMine(String[] c) {
@@ -31,19 +31,11 @@ public class HumanArcanumMine extends AlienArcanumMine   {
 		xSize = 50;
 		ySize = 50;
 
-		kerit = 500;
-		pax = 0;
-		arcanum = 0;
-		prunam = 0;
-		build.setBuildTime(10000);
+		build.setBuildTime(buildTime);
 
-		hp = hp_max = 500;
-		radius = 15;
-		sight = 50;
-
-		((Extract) stand).cooldown = 5000;
-		((Extract) stand).ressource = "arcanum";
-		((Extract) stand).efficenty = 20;
+		((Extract) stand).cooldown = cooldown;
+		((Extract) stand).ressource = ressource;
+		((Extract) stand).efficenty = efficenty;
 
 		descr = " ";
 		stats = "ressource/s: "
@@ -51,26 +43,7 @@ public class HumanArcanumMine extends AlienArcanumMine   {
 		// ************************************
 	}
 
-	@Override
-	public void updateDecisions() {
-		super.updateDecisions();
-		((Extract) stand).updateAbility(this);
-	}
-
-	@Override
-	protected void onDeath() {
-		super.onDeath();
-		ref.updater.send("<spawn Arcanum 0 " + x + " " + y);
-	}
-
-	@Override
-	public void renderGround() {
-		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
-	}
-
 	public PImage preview() {
 		return previewImg;
 	}
-
 }

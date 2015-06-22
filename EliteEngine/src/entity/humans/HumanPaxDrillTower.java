@@ -2,12 +2,12 @@ package entity.humans;
 
 import processing.core.PImage;
 import shared.ref;
-import entity.aliens.AlienPaxDrillTower;
 import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
+import entity.neutral.PaxDrillTower;
 
-public class HumanPaxDrillTower extends AlienPaxDrillTower   {
+public class HumanPaxDrillTower extends PaxDrillTower   {
 
 	private static PImage standImg;
 	private static PImage previewImg;

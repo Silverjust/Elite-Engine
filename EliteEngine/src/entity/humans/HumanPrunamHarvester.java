@@ -2,12 +2,12 @@ package entity.humans;
 
 import processing.core.PImage;
 import shared.ref;
-import entity.aliens.AlienPrunamHarvester;
 import entity.animation.Build;
 import entity.animation.Death;
 import entity.animation.Extract;
+import entity.neutral.PrunamHarvester;
 
-public class HumanPrunamHarvester extends AlienPrunamHarvester   {
+public class HumanPrunamHarvester extends PrunamHarvester   {
 
 	private static PImage standImg;
 

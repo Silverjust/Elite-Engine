@@ -1,19 +1,19 @@
 package shared;
 
 import entity.MainBuilding;
-import entity.aliens.AlienArcanumMine;
-import entity.aliens.AlienPaxDrillTower;
-import entity.aliens.AlienPrunamHarvester;
+import entity.neutral.ArcanumMine;
 import entity.neutral.KeritMine;
+import entity.neutral.PaxDrillTower;
+import entity.neutral.PrunamHarvester;
 
 public abstract class NationInfo {
 	public abstract Class<? extends MainBuilding> getMainBuilding();
 
 	public abstract Class<? extends KeritMine> getKeritMine();
 
-	public abstract Class<? extends AlienPaxDrillTower> getPaxDrillTower();
+	public abstract Class<? extends PaxDrillTower> getPaxDrillTower();
 
-	public abstract Class<? extends AlienArcanumMine> getArcanumMine();
+	public abstract Class<? extends ArcanumMine> getArcanumMine();
 
-	public abstract Class<? extends AlienPrunamHarvester> getPrunamHarvester();
+	public abstract Class<? extends PrunamHarvester> getPrunamHarvester();
 }
