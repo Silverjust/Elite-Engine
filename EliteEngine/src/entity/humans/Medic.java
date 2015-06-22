@@ -72,7 +72,9 @@ public class Medic extends Unit implements Attacker {
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
-				if (e.isAllyTo(this)) {
+				if (e.isAllyTo(this) && e instanceof Scout
+						|| e instanceof HeavyAssault || e instanceof Exo
+						|| e instanceof Medic) {
 					if (e.isInRange(x, y, aggroRange + e.radius)) {
 						float newImportance = calcImportanceOf(e);
 						if (newImportance > importance && e.hp < e.hp_max) {

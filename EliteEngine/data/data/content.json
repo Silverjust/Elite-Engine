@@ -36,6 +36,8 @@
 	"Exo": "entity.humans.Exo",
 	"SmallTank": "entity.humans.SmallTank",
 	"Tank": "entity.humans.Tank",
+	"Drone": "entity.humans.Drone",
+	"Helicopter": "entity.humans.Helicopter",
   },
   "maps": {
     "standard": {

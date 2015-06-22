@@ -86,8 +86,8 @@ public class ActivesGrid {
 
 	public void setupHumans() {
 		addActive(1, 1, Building.SetTargetActive.class, false);
-		addBuildActive(5, 3, HumanMainBuilding.class, HumanKaserne.class, false);
-		addBuildActive(5, 2, HumanMainBuilding.class, HumanMechKaserne.class,
+		addBuildActive(4, 3, HumanMainBuilding.class, HumanKaserne.class, false);
+		addBuildActive(4, 2, HumanMainBuilding.class, HumanMechKaserne.class,
 				false);
 		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
@@ -95,6 +95,8 @@ public class ActivesGrid {
 		addTrainActive(3, 3, HumanKaserne.class, Exo.class, false);
 		addTrainActive(2, 2, HumanMechKaserne.class, SmallTank.class, false);
 		addTrainActive(3, 2, HumanMechKaserne.class, Tank.class, false);
+		addTrainActive(2, 1, HumanMechKaserne.class, Drone.class, false);
+		addTrainActive(3, 1, HumanMechKaserne.class, Helicopter.class, false);
 	}
 
 	public void update() {
