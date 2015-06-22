@@ -44,11 +44,11 @@ public class Tank extends Unit implements Attacker, Shooter {
 
 		kerit = 1000;
 		pax = 0;
-		arcanum = 0;
+		arcanum = 60;
 		prunam = 0;
 		trainTime = 1500;
 
-		hp = hp_max = 600;
+		hp = hp_max = 400;
 		armor = 5;
 		speed = 0.5f;
 		radius = 13;
@@ -57,7 +57,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 
 		aggroRange = (byte) (radius + 50);
 		splashrange = 10;
-		basicAttack.damage = 100;
+		basicAttack.damage = 40;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 3000;
 		basicAttack.range = 90;
