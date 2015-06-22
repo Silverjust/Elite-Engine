@@ -87,10 +87,13 @@ public class ActivesGrid {
 	public void setupHumans() {
 		addActive(1, 1, Building.SetTargetActive.class, false);
 		addBuildActive(5, 3, HumanMainBuilding.class, HumanKaserne.class, false);
+		addBuildActive(5, 2, HumanMainBuilding.class, HumanMechKaserne.class,
+				false);
 		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
 		addTrainActive(1, 2, HumanKaserne.class, Medic.class, false);
 		addTrainActive(3, 3, HumanKaserne.class, Exo.class, false);
+		addTrainActive(2, 2, HumanMechKaserne.class, SmallTank.class, false);
 	}
 
 	public void update() {

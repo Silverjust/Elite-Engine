@@ -29,10 +29,12 @@
 	"HumanMainBuilding": "entity.humans.HumanMainBuilding",	
 	"HumanKeritMine": "entity.humans.HumanKeritMine",
 	"HumanKaserne": "entity.humans.HumanKaserne",
+	"HumanMechKaserne": "entity.humans.HumanMechKaserne",
 	"Scout": "entity.humans.Scout",
 	"HeavyAssault": "entity.humans.HeavyAssault",
 	"Medic": "entity.humans.Medic",
 	"Exo": "entity.humans.Exo",
+	"SmallTank": "entity.humans.SmallTank",
   },
   "maps": {
     "standard": {

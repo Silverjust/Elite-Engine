@@ -42,9 +42,9 @@ public class Exo extends Unit implements Attacker {
 		xSize = 20;
 		ySize = 20;
 
-		kerit = 180;
+		kerit = 127;
 		pax = 0;
-		arcanum = 0;
+		arcanum = 40;
 		prunam = 0;
 		trainTime = 3000;
 
@@ -56,12 +56,12 @@ public class Exo extends Unit implements Attacker {
 
 		aggroRange = (byte) (radius + 50);
 		basicAttack.range = (byte) (radius + 10);
-		basicAttack.damage = 10;
+		basicAttack.damage = 30;
 		basicAttack.cooldown = 1200;
 		basicAttack.setCastTime(500);
 
 		instaAttack.range = (byte) (radius + 10);
-		instaAttack.damage = 50;
+		instaAttack.damage = 30;
 		instaAttack.cooldown = 4000;
 		instaAttack.setCastTime(100);
 

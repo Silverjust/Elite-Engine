@@ -59,9 +59,9 @@ public class Brux extends Unit implements Attacker {
 		basicAttack.setCastTime( 500);
 
 		jump.range = (byte) (radius + 10);
-		jump.damage = 55;
+		jump.damage = 38;
 		jump.pirce = 2;
-		jump.cooldown = 5000;
+		jump.cooldown = 7000;
 		jump.speed = 2.2f;
 
 		descr = " ";

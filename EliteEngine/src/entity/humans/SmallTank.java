@@ -1,66 +1,67 @@
 package entity.humans;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 import entity.Attacker;
 import entity.Entity;
+import entity.Shooter;
 import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.MeleeAttack;
-import game.ImageHandler;
+import entity.animation.ShootAttack;
 
-public class HeavyAssault extends Unit implements Attacker {
-	// FIXME schßt nicht immer
+public class SmallTank extends Unit implements Attacker, Shooter {
 
 	private static PImage standingImg;
 
 	byte aggroRange;
 
-	MeleeAttack basicAttack;
+	ShootAttack basicAttack;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = ImageHandler.load(path, "HeavyAussault");
+		standingImg = game.ImageHandler.load(path, "SmallTank");
 	}
 
-	public HeavyAssault(String[] c) {
+	public SmallTank(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new MeleeAttack(standingImg, 500);// 1000
+		basicAttack = new ShootAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 20;
-		ySize = 20;
+		xSize = 30;
+		ySize = 30;
 
-		kerit = 160;
+		kerit = 500;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 1500;
 
-		hp = hp_max = 120;
-		armor = 2;
+		hp = hp_max = 500;
+		armor = 3;
 		speed = 0.9f;
-		radius = 5;
+		radius =10;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 13;
-		basicAttack.pirce = 0;
-		basicAttack.cooldown = 500;
-		basicAttack.range = 30;
-		basicAttack.setCastTime(500);// eventtime is defined by target distance
+		basicAttack.damage = 100;
+		basicAttack.pirce = 5;
+		basicAttack.cooldown = 3000;
+		basicAttack.range = 90;
+		basicAttack.setCastTime(100);// eventtime is defined by target distance
+		basicAttack.speed = 0.6f;
 
-		descr = "heavy assault";
+		descr = "kleiner panzer";
 		stats = " ";
 		// ************************************
 	}
@@ -74,24 +75,25 @@ public class HeavyAssault extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& e.groundPosition == groundPosition) {
+						if (e.isInRange(x, y, aggroRange + e.radius)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
-								if (e.isInRange(x, y, basicAttack.range
-										+ e.radius)) {
-									isEnemyInHitRange = true;
-								}
 							}
 						}
-
+						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
+							isEnemyInHitRange = true;
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
+						}
 					}
 				}
 			}
-			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()
-					&& !basicAttack.isSetup()) {
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null && !isEnemyInHitRange) {
 				sendAnimation("walk " + importantEntity.x + " "
@@ -103,7 +105,6 @@ public class HeavyAssault extends Unit implements Attacker {
 
 	@Override
 	public void calculateDamage(Attack a) {
-		//isTaged = true;
 		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
 				+ a.damage + " " + a.pirce);
 		// SoundHandler.startIngameSound(HUD.hm, x, y);
@@ -113,17 +114,19 @@ public class HeavyAssault extends Unit implements Attacker {
 	public void renderGround() {
 		drawSelected();
 		animation.draw(this, direction, currentFrame);
-		drawShot();
+		basicAttack.drawAbility(this, direction);
 		drawTaged();
 	}
 
-	public void drawShot() {
-		if (basicAttack.getTarget() != null) {
-			Entity e = basicAttack.getTarget();
-			ref.app.stroke(255, 100, 0);
-			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(e.x), yToGrid(e.y));
-			ref.app.stroke(0);
-		}
+	@Override
+	public void drawShot(Entity target, float progress) {
+		float x = PApplet.lerp(this.x, target.x, progress);
+		float y = PApplet.lerp(this.y - height, target.y - target.height,
+				progress);
+		ref.app.fill(255, 100, 0);
+		ref.app.strokeWeight(0);
+		ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
+		ref.app.strokeWeight(1);
 	}
 
 	@Override
