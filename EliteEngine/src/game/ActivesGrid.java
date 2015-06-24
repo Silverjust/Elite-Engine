@@ -12,6 +12,7 @@ import entity.UpgradeActive;
 import entity.neutral.*;
 import entity.aliens.*;
 import entity.humans.*;
+import game.aim.MineAim;
 import main.ClientHandler;
 import main.Settings;
 import shared.Helper;
@@ -66,14 +67,7 @@ public class ActivesGrid {
 				false);
 		addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
 				false);
-		addUpgradeActive(5, 2, AlienMainBuilding.class, AlienKeritMine.class,
-				Kerit.class, false);
-		addUpgradeActive(6, 2, AlienMainBuilding.class, AlienPaxDrillTower.class,
-				Pax.class, false);
-		addUpgradeActive(5, 3, AlienMainBuilding.class, AlienArcanumMine.class,
-				Arcanum.class, false);
-		addUpgradeActive(6, 3, AlienMainBuilding.class, AlienPrunamHarvester.class,
-				Prunam.class, false);
+		addBuildMineActive(5, 2, AlienMainBuilding.class, false);
 
 		addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
 		addTrainActive(2, 3, AlienKaserne.class, Brux.class, false);
@@ -88,16 +82,10 @@ public class ActivesGrid {
 		addActive(1, 1, Building.SetTargetActive.class, false);
 		addBuildActive(4, 3, HumanMainBuilding.class, HumanKaserne.class, false);
 		addBuildActive(4, 2, HumanMainBuilding.class, HumanMechKaserne.class,
-				false);addBuildActive(4, 1, HumanMainBuilding.class, HumanDepot.class,
-						false);
-		addUpgradeActive(5, 2, HumanMainBuilding.class, HumanKeritMine.class,
-				Kerit.class, false);
-		addUpgradeActive(6, 2, HumanMainBuilding.class, HumanPaxDrillTower.class,
-				Pax.class, false);
-		addUpgradeActive(5, 3, HumanMainBuilding.class, HumanArcanumMine.class,
-				Arcanum.class, false);
-		addUpgradeActive(6, 3, HumanMainBuilding.class, HumanPrunamHarvester.class,
-				Prunam.class, false);
+				false);
+		addBuildActive(4, 1, HumanMainBuilding.class, HumanDepot.class, false);
+		addBuildMineActive(5, 2, HumanMainBuilding.class, false);
+		
 		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
 		addTrainActive(1, 2, HumanKaserne.class, Medic.class, false);
@@ -223,6 +211,29 @@ public class ActivesGrid {
 						Settings.buildingsShortcuts[y][x], b, oldBuilding,
 						builder);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	void addBuildMineActive(int x, int y, Class<? extends Entity> builder,
+			boolean isUnitActive) {
+		x--;
+		y--;
+		try {
+			Building b = nation.getNationInfo().getKeritMine()
+					.getConstructor(String[].class)
+					.newInstance(new Object[] { null });
+
+			if (isUnitActive) {
+				unitGrid[x][y] = new MineAim.BuildMineActive(x, y,
+						Settings.unitsShortcuts[y][x], b, Kerit.class, builder);
+			} else {
+				buildingGrid[x][y] = new MineAim.BuildMineActive(x, y,
+						Settings.buildingsShortcuts[y][x], b, Kerit.class,
+						builder);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

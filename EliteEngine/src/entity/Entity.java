@@ -168,7 +168,7 @@ public abstract class Entity implements Informing {
 	}
 
 	void drawHpBar() {
-		int h = 2;
+		int h = 1;
 		if (isAlive() && isMortal()) {//
 			ref.app.fill(0, 150);
 			ref.app.rect(xToGrid(x), yToGrid(y - height) - radius * 1.5f,
@@ -181,7 +181,7 @@ public abstract class Entity implements Informing {
 	}
 
 	public void drawBar(float f) {
-		int h = 2;
+		int h = 1;
 		if (isAlive() && isMortal()) {//
 			ref.app.fill(0, 150);
 			ref.app.rect(xToGrid(x), yToGrid(y - height - h * 3) - radius

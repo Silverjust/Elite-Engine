@@ -6,7 +6,7 @@ import entity.animation.Death;
 import entity.animation.Extract;
 import entity.neutral.PrunamHarvester;
 
-public class HumanPrunamHarvester extends PrunamHarvester   {
+public class HumanPrunamHarvester extends PrunamHarvester {
 
 	private static PImage standImg;
 
@@ -24,13 +24,10 @@ public class HumanPrunamHarvester extends PrunamHarvester   {
 		build = new Build(standImg, 1000);
 		death = new Death(standImg, 1000);
 
-		animation = nextAnimation = stand;
+		animation = nextAnimation = build;
 		// ************************************
-		xSize = 50;
-		ySize = 50;
-
 		build.setBuildTime(buildTime);
-		
+
 		((Extract) stand).cooldown = cooldown;
 		((Extract) stand).ressource = ressource;
 		((Extract) stand).efficenty = efficenty;

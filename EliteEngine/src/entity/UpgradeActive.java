@@ -7,7 +7,8 @@ import game.AimHandler;
 import game.aim.UpgradeAim;
 
 public class UpgradeActive extends Active {
-	Class<? extends Building> newBuilding, oldBuilding;
+	protected Class<? extends Building> newBuilding;
+	protected Class<? extends Building> oldBuilding;
 	String descr = " ", stats = " ";
 
 	public UpgradeActive(int x, int y, char n, Building b,

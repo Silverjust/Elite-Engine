@@ -10,18 +10,20 @@ public abstract class KeritMine extends Building {
 	protected static final int efficenty = 17;
 	protected static final String ressource = "kerit";
 	protected static final int cooldown = 1000;
-	protected static final int buildTime = 10000;
+	protected static final int buildTime = 5000;
 
 	public KeritMine(String[] c) {
 		super(c);
 
 		// ************************************
+		xSize = 30;
+		ySize = 30;
 
 		kerit = 250;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		//buildtime in child
+		// buildtime in child
 
 		hp = hp_max = 500;
 		radius = 10;
@@ -31,8 +33,8 @@ public abstract class KeritMine extends Building {
 
 	@Override
 	public void updateDecisions() {
-		super.updateDecisions();
-		((Extract) stand).updateAbility(this);
+		if (animation == stand)
+			((Extract) stand).updateAbility(this);
 	}
 
 	@Override

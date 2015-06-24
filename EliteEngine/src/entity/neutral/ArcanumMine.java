@@ -4,16 +4,19 @@ import shared.ref;
 import entity.Building;
 import entity.animation.Extract;
 
-public abstract class ArcanumMine extends Building   {
+public abstract class ArcanumMine extends Building {
 
 	protected static final int efficenty = 20;
 	protected static final String ressource = "arcanum";
 	protected static final int cooldown = 5000;
-	protected static final int buildTime = 10000;
+	protected static final int buildTime = 8000;
 
 	public ArcanumMine(String[] c) {
 		super(c);
 		// ************************************
+		xSize = 50;
+		ySize = 50;
+
 		kerit = 500;
 		pax = 0;
 		arcanum = 0;
@@ -23,14 +26,13 @@ public abstract class ArcanumMine extends Building   {
 		radius = 15;
 		sight = 50;
 
-		
 		// ************************************
 	}
 
 	@Override
 	public void updateDecisions() {
-		super.updateDecisions();
-		((Extract) stand).updateAbility(this);
+		if (animation == stand)
+			((Extract) stand).updateAbility(this);
 	}
 
 	@Override
@@ -44,6 +46,5 @@ public abstract class ArcanumMine extends Building   {
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
 	}
-
 
 }

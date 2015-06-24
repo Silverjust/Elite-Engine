@@ -22,10 +22,8 @@ public class AlienKeritMine extends entity.neutral.KeritMine {
 		build = new Build(standImg, 1000);
 		death = new Death(standImg, 100);
 
-		animation = nextAnimation = stand;
+		animation = nextAnimation = build;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
 		build.setBuildTime(buildTime);
 		((Extract) stand).cooldown = cooldown;
 		((Extract) stand).ressource = ressource;

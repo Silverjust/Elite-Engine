@@ -26,11 +26,8 @@ public class HumanArcanumMine extends ArcanumMine {
 		build = new Build(standImg, 1000);
 		death = new Death(standImg, 1000);
 
-		animation = nextAnimation = stand;
+		animation = nextAnimation = build;
 		// ************************************
-		xSize = 50;
-		ySize = 50;
-
 		build.setBuildTime(buildTime);
 
 		((Extract) stand).cooldown = cooldown;

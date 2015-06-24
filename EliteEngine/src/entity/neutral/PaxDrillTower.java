@@ -4,17 +4,15 @@ import shared.ref;
 import entity.Building;
 import entity.animation.Extract;
 
-public abstract class PaxDrillTower extends Building   {
+public abstract class PaxDrillTower extends Building {
 
 	protected static final int efficenty = 14;
 	protected static final String ressource = "pax";
 	protected static final int cooldown = 1000;
-	protected static final int buildTime = 10000;
+	protected static final int buildTime = 7000;
 
 	public PaxDrillTower(String[] c) {
 		super(c);
-
-		animation = nextAnimation = stand;
 		// ************************************
 		xSize = 40;
 		ySize = 40;
@@ -28,14 +26,13 @@ public abstract class PaxDrillTower extends Building   {
 		radius = 15;
 		sight = 50;
 
-		
 		// ************************************
 	}
 
 	@Override
 	public void updateDecisions() {
-		super.updateDecisions();
-		((Extract) stand).updateAbility(this);
+		if (animation == stand)
+			((Extract) stand).updateAbility(this);
 	}
 
 	@Override

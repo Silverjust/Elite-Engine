@@ -28,7 +28,7 @@ public class Kerit extends Building {
 		// ************************************
 		xSize = 30;
 		ySize = 30;
-
+		
 		radius = 15;
 
 		descr = "Kerit";

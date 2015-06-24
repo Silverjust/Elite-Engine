@@ -4,12 +4,12 @@ import shared.ref;
 import entity.Building;
 import entity.animation.Extract;
 
-public abstract class PrunamHarvester extends Building   {
+public abstract class PrunamHarvester extends Building {
 
 	protected static final int efficenty = 10;
 	protected static final String ressource = "prunam";
 	protected static final int cooldown = 10000;
-	protected static final int buildTime = 10000;
+	protected static final int buildTime = 8000;
 
 	public PrunamHarvester(String[] c) {
 		super(c);
@@ -30,8 +30,8 @@ public abstract class PrunamHarvester extends Building   {
 
 	@Override
 	public void updateDecisions() {
-		super.updateDecisions();
-		((Extract) stand).updateAbility(this);
+		if (animation == stand)
+			((Extract) stand).updateAbility(this);
 	}
 
 	@Override
