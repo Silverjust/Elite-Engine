@@ -11,6 +11,7 @@ public class ShootAttack extends MeleeAttack {
 	private int beginTime;
 	public float speed;
 	public Explosion explosion;
+	private boolean isExploding;
 
 	public ShootAttack(PImage[][] IMG, int duration) {
 		super(IMG, duration);
@@ -28,6 +29,7 @@ public class ShootAttack extends MeleeAttack {
 	public void setTargetFrom(Entity from, Entity to) {
 		target = to;
 		isSetup = true;
+		isExploding = false;
 		eventTime = beginTime
 				+ (int) (PApplet.dist(from.x, from.y, to.x, to.y) / speed);
 	}
@@ -53,21 +55,23 @@ public class ShootAttack extends MeleeAttack {
 	@Override
 	public void drawAbility(Entity e, byte d) {
 		if (e instanceof Shooter) {
-			if (isSetup()  && getProgressPercent() < 1
+			if (isSetup() && getProgressPercent() < 1
 					// TODO ändern,dass explosion angezeigt werden kann
 					&& start + beginTime <= Updater.Time.getMillis()
 					&& isNotOnCooldown()) {
 				((Shooter) e).drawShot(target, getProgressPercent());
 			}
-			if (explosion != null && getProgressPercent() > 1
-					&& explosion.isFinished()) {
+			if (explosion != null && getProgressPercent() >= 1 && !isSetup
+					&& !isExploding) {
+				isExploding = true;
 				explosion.setup(null);
 			}
 		} else {
 			System.err.println(e.getClass().getSimpleName()
 					+ " should be shooter");
 		}
-		if (explosion != null &&/* !explosion.isFinished() &&*/ target != null) {
+		if (explosion != null && isExploding && !explosion.isFinished()
+				&& target != null) {
 			explosion.draw(target.x, target.y);
 		}
 	}

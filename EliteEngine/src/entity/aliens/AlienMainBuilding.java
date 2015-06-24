@@ -39,7 +39,7 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 		sight = 50;
 
 		hp = hp_max = 1500;
-		radius = 35;
+		radius = RADIUS;
 
 		commandingRange = 250;
 

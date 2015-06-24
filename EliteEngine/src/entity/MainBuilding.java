@@ -3,6 +3,7 @@ package entity;
 import shared.ref;
 
 public abstract class MainBuilding extends Building {
+	protected static final int RADIUS = 27;
 
 	public MainBuilding(String[] c) {
 		super(c);

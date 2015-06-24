@@ -37,7 +37,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
-		basicAttack.explosion = new Explosion(standingImg, 500);
+		basicAttack.explosion = new Explosion(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************
@@ -52,7 +52,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 
 		hp = hp_max = 400;
 		armor = 5;
-		speed = 0.5f;
+		speed = 0.3f;
 		radius = 13;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;

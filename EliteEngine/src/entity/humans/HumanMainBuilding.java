@@ -9,17 +9,19 @@ import entity.animation.Death;
 import game.ImageHandler;
 
 public class HumanMainBuilding extends MainBuilding implements Commander {
+
 	private int commandingRange;
 
 	private static PImage standImg;
 	private static PImage previewImg;
-	//static PImage groundImg;
+
+	// static PImage groundImg;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
 		previewImg = standImg = ImageHandler.load(path, "HumanMainBuilding");
-		//groundImg = ImageHandler.load(path, "AlienGround");
+		// groundImg = ImageHandler.load(path, "AlienGround");
 	}
 
 	public HumanMainBuilding(String[] c) {
@@ -38,7 +40,7 @@ public class HumanMainBuilding extends MainBuilding implements Commander {
 		sight = 50;
 
 		hp = hp_max = 1500;
-		radius = 27;
+		radius = RADIUS;
 
 		commandingRange = 250;
 
@@ -50,19 +52,20 @@ public class HumanMainBuilding extends MainBuilding implements Commander {
 	@Override
 	public void updateDecisions() {
 		super.updateDecisions();
-		
+
 	}
 
 	@Override
 	public void renderTerrain() {
-	//	ref.app.image(groundImg, xToGrid(x), yToGrid(y), commandingRange * 2,
-	//			commandingRange);
+		// ref.app.image(groundImg, xToGrid(x), yToGrid(y), commandingRange * 2,
+		// commandingRange);
 	}
 
 	@Override
 	public void drawOnMinimapUnder(PGraphics graphics) {
-	//	graphics.image(HumanMainBuilding.groundImg, x, y, commandingRange * 2,
-	//			commandingRange * 2);
+		// graphics.image(HumanMainBuilding.groundImg, x, y, commandingRange *
+		// 2,
+		// commandingRange * 2);
 	}
 
 	@Override
