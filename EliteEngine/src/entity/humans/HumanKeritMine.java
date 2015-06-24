@@ -6,7 +6,6 @@ import entity.animation.Death;
 import entity.animation.Extract;
 
 public class HumanKeritMine extends entity.neutral.KeritMine {
-	// TODO easy production system
 
 	private static PImage standImg;
 

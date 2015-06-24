@@ -12,7 +12,6 @@ import entity.animation.MeleeAttack;
 import game.ImageHandler;
 
 public class HeavyAssault extends Unit implements Attacker {
-	// FIXME schﬂt nicht immer
 
 	private static PImage standingImg;
 

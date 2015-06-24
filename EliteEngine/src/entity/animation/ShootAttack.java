@@ -56,7 +56,6 @@ public class ShootAttack extends MeleeAttack {
 	public void drawAbility(Entity e, byte d) {
 		if (e instanceof Shooter) {
 			if (isSetup() && getProgressPercent() < 1
-					// TODO ändern,dass explosion angezeigt werden kann
 					&& start + beginTime <= Updater.Time.getMillis()
 					&& isNotOnCooldown()) {
 				((Shooter) e).drawShot(target, getProgressPercent());

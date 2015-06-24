@@ -72,7 +72,6 @@ public class MainPreGame extends PreGame {
 
 	@Override
 	public void setMap(String string) {
-		// TODO stop broken maps from lockin
 		int size = ContentListHandler.getModeMaps().keys().size();
 		@SuppressWarnings("unchecked")
 		String[] mapArray = (String[]) ContentListHandler.getModeMaps().keys()
