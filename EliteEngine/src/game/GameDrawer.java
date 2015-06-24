@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 import processing.core.PConstants;
 import shared.Updater.GameState;
 import shared.ref;
@@ -42,7 +44,9 @@ public class GameDrawer {
 				ref.updater.map.height / 2);
 		ref.app.imageMode(PConstants.CENTER);
 		ref.app.rectMode(PConstants.CENTER);
-		for (Entity e : ref.updater.entities) {
+		ArrayList<Entity> entities = ref.updater.entities;
+		for (int i = entities.size() - 1; i >= 0; i--) {
+			Entity e = entities.get(i);
 			e.renderTerrain();
 		}
 		ref.app.imageMode(PConstants.CORNER);

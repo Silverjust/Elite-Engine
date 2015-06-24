@@ -10,6 +10,7 @@ import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
+import entity.animation.Explosion;
 import entity.animation.ShootAttack;
 
 public class Tank extends Unit implements Attacker, Shooter {
@@ -36,11 +37,12 @@ public class Tank extends Unit implements Attacker, Shooter {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
+		basicAttack.explosion = new Explosion(standingImg, 500);
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 40;
+		ySize = 40;
 
 		kerit = 1000;
 		pax = 0;
@@ -138,8 +140,9 @@ public class Tank extends Unit implements Attacker, Shooter {
 		ref.app.strokeWeight(0);
 		if (progress < 0.9) {
 			ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
-		}else {
-			ref.app.ellipse(xToGrid(x), yToGrid(y), splashrange*2, splashrange);
+		} else {
+			ref.app.ellipse(xToGrid(x), yToGrid(y), splashrange * 2,
+					splashrange);
 		}
 		ref.app.strokeWeight(1);
 	}

@@ -10,6 +10,7 @@ import entity.Shooter;
 public class ShootAttack extends MeleeAttack {
 	private int beginTime;
 	public float speed;
+	public Explosion explosion;
 
 	public ShootAttack(PImage[][] IMG, int duration) {
 		super(IMG, duration);
@@ -52,15 +53,31 @@ public class ShootAttack extends MeleeAttack {
 	@Override
 	public void drawAbility(Entity e, byte d) {
 		if (e instanceof Shooter) {
-			if (target != null && isSetup()//ändern,dass explosion angezeigt werden kann
+			if (isSetup()  && getProgressPercent() < 1
+					// TODO ändern,dass explosion angezeigt werden kann
 					&& start + beginTime <= Updater.Time.getMillis()
 					&& isNotOnCooldown()) {
 				((Shooter) e).drawShot(target, getProgressPercent());
+			}
+			if (explosion != null && getProgressPercent() > 1
+					&& explosion.isFinished()) {
+				explosion.setup(null);
 			}
 		} else {
 			System.err.println(e.getClass().getSimpleName()
 					+ " should be shooter");
 		}
+		if (explosion != null &&/* !explosion.isFinished() &&*/ target != null) {
+			explosion.draw(target.x, target.y);
+		}
+	}
+
+	@Override
+	public float getProgressPercent() {
+		float f = 1
+				- (float) (start + beginTime + eventTime - Updater.Time
+						.getMillis()) / eventTime;
+		return f > 1 || f < 0 ? 1 : f;
 	}
 }
 /*
