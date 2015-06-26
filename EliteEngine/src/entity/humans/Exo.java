@@ -49,7 +49,7 @@ public class Exo extends Unit implements Attacker {
 		trainTime = 3000;
 
 		hp = hp_max = 160;
-		speed = 0.8f;
+		speed = 0.7f;
 		radius = 8;
 		sight = 80;
 		groundPosition = Entity.GroundPosition.GROUND;

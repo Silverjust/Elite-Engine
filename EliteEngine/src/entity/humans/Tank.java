@@ -48,11 +48,11 @@ public class Tank extends Unit implements Attacker, Shooter {
 		pax = 0;
 		arcanum = 60;
 		prunam = 0;
-		trainTime = 1500;
+		trainTime = 5000;
 
 		hp = hp_max = 400;
 		armor = 5;
-		speed = 0.3f;
+		speed = 0.2f;
 		radius = 13;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;

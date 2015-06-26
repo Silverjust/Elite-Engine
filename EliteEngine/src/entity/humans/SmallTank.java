@@ -48,7 +48,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 
 		hp = hp_max = 500;
 		armor = 3;
-		speed = 0.9f;
+		speed = 0.6f;
 		radius =10;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
