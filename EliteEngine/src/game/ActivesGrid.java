@@ -6,6 +6,7 @@ import entity.Active;
 import entity.BuildActive;
 import entity.BuildWallActive;
 import entity.Building;
+import entity.Commander;
 import entity.Entity;
 import entity.TrainActive;
 import entity.Unit;
@@ -68,7 +69,7 @@ public class ActivesGrid {
 				false);
 		addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
 				false);
-		addBuildMineActive(5, 2, AlienMainBuilding.class, false);
+		addBuildMineActive(5, 3, AlienMainBuilding.class, false);
 
 		addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
 		addTrainActive(2, 3, AlienKaserne.class, Brux.class, false);
@@ -81,12 +82,11 @@ public class ActivesGrid {
 
 	public void setupHumans() {
 		addActive(1, 1, Building.SetTargetActive.class, false);
-		addBuildActive(4, 3, HumanMainBuilding.class, HumanKaserne.class, false);
-		addBuildActive(4, 2, HumanMainBuilding.class, HumanMechKaserne.class,
-				false);
-		addBuildWallActive(4, 1, HumanMainBuilding.class, HumanDepot.class,
-				false);
-		addBuildMineActive(5, 2, HumanMainBuilding.class, false);
+		addBuildActive(4, 3, Commander.class, HumanKaserne.class, false);
+		addBuildActive(4, 2, Commander.class, HumanMechKaserne.class, false);
+		addBuildActive(4, 1, Commander.class, HumanDepot.class, false);
+		addBuildWallActive(5, 2, Commander.class, HumanWall.class, false);
+		addBuildMineActive(5, 3, Commander.class, false);
 
 		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
@@ -208,7 +208,7 @@ public class ActivesGrid {
 		}
 	}
 
-	void addBuildActive(int x, int y, Class<? extends Entity> builder,
+	void addBuildActive(int x, int y, Class<?> builder,
 			Class<? extends Building> building, boolean isUnitActive) {
 		x--;
 		y--;
@@ -248,8 +248,7 @@ public class ActivesGrid {
 		}
 	}
 
-	void addBuildMineActive(int x, int y, Class<? extends Entity> builder,
-			boolean isUnitActive) {
+	void addBuildMineActive(int x, int y, Class<?> builder, boolean isUnitActive) {
 		x--;
 		y--;
 		try {
@@ -271,7 +270,7 @@ public class ActivesGrid {
 		}
 	}
 
-	void addBuildWallActive(int x, int y, Class<? extends Entity> builder,
+	void addBuildWallActive(int x, int y, Class<?> builder,
 			Class<? extends Building> building, boolean isUnitActive) {
 		x--;
 		y--;

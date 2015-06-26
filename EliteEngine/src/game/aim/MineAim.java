@@ -72,8 +72,7 @@ public class MineAim extends UpgradeAim {
 	public static class BuildMineActive extends UpgradeActive {
 
 		public BuildMineActive(int x, int y, char n, Building b,
-				Class<? extends Building> oldBuilding,
-				Class<? extends Entity> builder) {
+				Class<? extends Building> oldBuilding, Class<?> builder) {
 			super(x, y, n, b, oldBuilding, builder);
 			clazz = builder;
 		}

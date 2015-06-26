@@ -11,7 +11,7 @@ public class BuildWallActive extends Active {
 	String descr = " ", stats = " ";
 
 	public BuildWallActive(int x, int y, char n, Building b,
-			Class<? extends Entity> builder) {
+			Class<?> builder) {
 		super(x, y, n, b.iconImg);
 		building = b.getClass();
 		descr = b.getDesription();

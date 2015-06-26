@@ -13,7 +13,7 @@ public class UpgradeActive extends Active {
 
 	public UpgradeActive(int x, int y, char n, Building b,
 			Class<? extends Building> oldBuilding,
-			Class<? extends Entity> builder) {
+			Class<?> builder) {
 		super(x, y, n, b.iconImg);
 		this.newBuilding = b.getClass();
 		this.oldBuilding = oldBuilding;

@@ -30,6 +30,7 @@
 	"HumanKaserne": "entity.humans.HumanKaserne",
 	"HumanMechKaserne": "entity.humans.HumanMechKaserne",	
 	"HumanDepot": "entity.humans.HumanDepot",	
+	"HumanWall": "entity.humans.HumanWall",	
 	"HumanKeritMine": "entity.humans.HumanKeritMine",
     "HumanPaxDrillTower": "entity.humans.HumanPaxDrillTower",
     "HumanArcanumMine": "entity.humans.HumanArcanumMine",

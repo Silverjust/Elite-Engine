@@ -2,25 +2,26 @@ package entity.humans;
 
 import processing.core.PImage;
 import entity.Building;
-import entity.Commander;
 import entity.animation.Animation;
 import entity.animation.Build;
 import entity.animation.Death;
 import game.ImageHandler;
+import game.aim.BuildWallAim;
 
-public class HumanDepot extends Building implements Commander {
-	private int commandingRange;
+public class HumanWall extends Building {
 
 	private static PImage standImg;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standImg = ImageHandler.load(path, "HumanDepot");
+		standImg = ImageHandler.load(path, "HumanWall");
 	}
 
-	public HumanDepot(String[] c) {
+	public HumanWall(String[] c) {
 		super(c);
+		BuildWallAim.setupWall(this, c);
+		// TODO für wall
 
 		iconImg = standImg;
 		stand = new Animation(standImg, 1000);
@@ -30,22 +31,21 @@ public class HumanDepot extends Building implements Commander {
 		animation = nextAnimation = build;
 		// ************************************
 		xSize = 20;
-		ySize = 20;
+		ySize = 25;
 
-		kerit = 500;
+		kerit = 300;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
 		build.setBuildTime(5000);
 
-		sight = 50;
+		sight = 20;
 
-		hp = hp_max = 1000;
-		radius = 13;
+		hp = hp_max = 500;
+		armor = 2;
+		radius = 10;
 
-		commandingRange = 250;
-
-		descr = " ";
+		descr = "wall ";
 		stats = " ";
 		// ************************************
 	}
@@ -58,11 +58,6 @@ public class HumanDepot extends Building implements Commander {
 
 	public PImage preview() {
 		return standImg;
-	}
-
-	@Override
-	public int commandRange() {
-		return commandingRange;
 	}
 
 }
