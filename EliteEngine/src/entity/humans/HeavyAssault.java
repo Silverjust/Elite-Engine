@@ -117,7 +117,7 @@ public class HeavyAssault extends Unit implements Attacker {
 	}
 
 	public void drawShot() {
-		if (basicAttack.getTarget() != null) {
+		if (basicAttack.getTarget() != null && animation == basicAttack) {
 			Entity e = basicAttack.getTarget();
 			ref.app.stroke(255, 100, 0);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(e.x), yToGrid(e.y));

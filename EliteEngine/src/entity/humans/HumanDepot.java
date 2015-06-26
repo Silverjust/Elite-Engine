@@ -6,9 +6,11 @@ import entity.Commander;
 import entity.animation.Animation;
 import entity.animation.Build;
 import entity.animation.Death;
+import game.AimHandler;
 import game.ImageHandler;
+import game.aim.BuildWallAim;
 
-public class HumanDepot extends Building implements Commander{
+public class HumanDepot extends Building implements Commander {
 	private int commandingRange;
 
 	private static PImage standImg;
@@ -21,6 +23,15 @@ public class HumanDepot extends Building implements Commander{
 
 	public HumanDepot(String[] c) {
 		super(c);
+		if (c != null && c[5].equals("start")
+				&& AimHandler.getAim() instanceof BuildWallAim)
+			((BuildWallAim) AimHandler.getAim()).startedAt(x, y);
+		else if (c != null && c[5].equals("part")
+				&& AimHandler.getAim() instanceof BuildWallAim) {
+			x = Float.parseFloat(c[3]);
+			y = Float.parseFloat(c[4]);
+		}
+		// TODO für wall
 
 		iconImg = standImg;
 		stand = new Animation(standImg, 1000);
@@ -29,7 +40,7 @@ public class HumanDepot extends Building implements Commander{
 
 		animation = nextAnimation = build;
 		// ************************************
-		xSize = 30;
+		xSize = 15;
 		ySize = 30;
 
 		kerit = 500;
@@ -41,7 +52,7 @@ public class HumanDepot extends Building implements Commander{
 		sight = 50;
 
 		hp = hp_max = 1000;
-		radius = 15;
+		radius = 7;
 
 		commandingRange = 250;
 

@@ -39,6 +39,9 @@ public class AimHandler {
 	}
 
 	public static void end() {
+		if (aim != null) {
+			aim.end();
+		}
 		aim = null;
 		setCursor(Cursor.ARROW);
 	}
@@ -68,5 +71,9 @@ public class AimHandler {
 
 	public enum Cursor {
 		ARROW, BUILD, SHOOT, SELECT
+	}
+
+	public static Aim getAim() {
+		return aim;
 	}
 }

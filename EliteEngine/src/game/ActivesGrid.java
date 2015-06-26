@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 
 import entity.Active;
 import entity.BuildActive;
+import entity.BuildWallActive;
 import entity.Building;
 import entity.Entity;
 import entity.TrainActive;
@@ -83,9 +84,10 @@ public class ActivesGrid {
 		addBuildActive(4, 3, HumanMainBuilding.class, HumanKaserne.class, false);
 		addBuildActive(4, 2, HumanMainBuilding.class, HumanMechKaserne.class,
 				false);
-		addBuildActive(4, 1, HumanMainBuilding.class, HumanDepot.class, false);
+		addBuildWallActive(4, 1, HumanMainBuilding.class, HumanDepot.class,
+				false);
 		addBuildMineActive(5, 2, HumanMainBuilding.class, false);
-		
+
 		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
 		addTrainActive(1, 2, HumanKaserne.class, Medic.class, false);
@@ -136,6 +138,36 @@ public class ActivesGrid {
 				buildingGrid[x][y].pressManually();
 			}
 		} catch (NullPointerException e) {
+		}
+	}
+
+	public void setupSandbox() {
+		System.out.println("setupSandbox");
+		SandboxBuilding.commandRange = Integer.MAX_VALUE;
+		addActive(1, 1, SandboxBuilding.DeleteActive.class, true);
+		addBuildActive(2, 1, SandboxBuilding.class, ref.player.nation
+				.getNationInfo().getMainBuilding(), true);
+		addBuildActive(1, 2, SandboxBuilding.class, Kerit.class, true);
+		addBuildActive(2, 2, SandboxBuilding.class, Pax.class, true);
+		addBuildActive(1, 3, SandboxBuilding.class, Arcanum.class, true);
+		addBuildActive(2, 3, SandboxBuilding.class, Prunam.class, true);
+		addBuildActive(3, 2, SandboxBuilding.class, Rock.class, true);
+		addActive(3, 1, SandboxBuilding.ChangeSide.class, true);
+		addActive(4, 1, SandboxBuilding.AddPlayer.class, true);
+	}
+
+	private void removeActives() {
+		for (int x = 0; x < gridWidth; x++) {
+			for (int y = 0; y < gridHeight; y++) {
+				if (unitGrid[x][y] != null) {
+					unitGrid[x][y].button.dispose();
+					unitGrid[x][y] = null;
+				}
+				if (buildingGrid[x][y] != null) {
+					buildingGrid[x][y].button.dispose();
+					buildingGrid[x][y] = null;
+				}
+			}
 		}
 	}
 
@@ -239,32 +271,22 @@ public class ActivesGrid {
 		}
 	}
 
-	public void setupSandbox() {
-		System.out.println("setupSandbox");
-		addActive(1, 1, SandboxBuilding.DeleteActive.class, true);
-		addBuildActive(2, 1, SandboxBuilding.class, ref.player.nation
-				.getNationInfo().getMainBuilding(), true);
-		addBuildActive(1, 2, SandboxBuilding.class, Kerit.class, true);
-		addBuildActive(2, 2, SandboxBuilding.class, Pax.class, true);
-		addBuildActive(1, 3, SandboxBuilding.class, Arcanum.class, true);
-		addBuildActive(2, 3, SandboxBuilding.class, Prunam.class, true);
-		addBuildActive(3, 2, SandboxBuilding.class, Rock.class, true);
-		addActive(3, 1, SandboxBuilding.ChangeSide.class, true);
-		addActive(4, 1, SandboxBuilding.AddPlayer.class, true);
-	}
-
-	private void removeActives() {
-		for (int x = 0; x < gridWidth; x++) {
-			for (int y = 0; y < gridHeight; y++) {
-				if (unitGrid[x][y] != null) {
-					unitGrid[x][y].button.dispose();
-					unitGrid[x][y] = null;
-				}
-				if (buildingGrid[x][y] != null) {
-					buildingGrid[x][y].button.dispose();
-					buildingGrid[x][y] = null;
-				}
+	void addBuildWallActive(int x, int y, Class<? extends Entity> builder,
+			Class<? extends Building> building, boolean isUnitActive) {
+		x--;
+		y--;
+		try {
+			Building b = building.getConstructor(String[].class).newInstance(
+					new Object[] { null });
+			if (isUnitActive) {
+				unitGrid[x][y] = new BuildWallActive(x, y,
+						Settings.unitsShortcuts[y][x], b, builder);
+			} else {
+				buildingGrid[x][y] = new BuildWallActive(x, y,
+						Settings.buildingsShortcuts[y][x], b, builder);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

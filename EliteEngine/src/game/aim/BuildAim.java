@@ -37,7 +37,7 @@ public class BuildAim extends Aim {
 			ref.app.tint(255, 100, 100, 150);
 		}
 		ref.app.image(buildable.preview(), x, y / 2,
-				((Entity) buildable).xSize, ((Entity) buildable).ySize);
+				buildable.xSize, buildable.ySize);
 		ref.app.tint(255);
 	}
 
@@ -45,7 +45,7 @@ public class BuildAim extends Aim {
 		boolean placeFree = true;
 		boolean inCommanderRange = false;
 		for (Entity e : ref.updater.entities) {
-			if (e.isInRange(x, y, ((Entity) buildable).radius + e.radius)
+			if (e.isInRange(x, y, buildable.radius + e.radius)
 					&& e.groundPosition == GroundPosition.GROUND)
 				placeFree = false;
 			if (isInCommandingRange(e, x, y))
@@ -53,7 +53,7 @@ public class BuildAim extends Aim {
 		}
 
 		return placeFree && inCommanderRange
-				&& ((Entity) buildable).canBeBought(builder.player);
+				&& buildable.canBeBought(builder.player);
 	}
 
 	public boolean isInCommandingRange(Entity e, float x, float y) {
@@ -72,7 +72,7 @@ public class BuildAim extends Aim {
 		if (canPlaceAt(x, y)) {
 			ref.updater.send("<spawn " + buildable.getClass().getSimpleName()
 					+ " " + builder.player.ip + " " + x + " " + y);
-			((Entity) buildable).buyFrom(builder.player);
+			buildable.buyFrom(builder.player);
 		}
 	}
 }

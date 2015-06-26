@@ -25,6 +25,8 @@ public class SandboxBuilding extends Building implements Commander {
 		standImg = game.ImageHandler.load(path, "SandboxBuilding");
 	}
 
+	public static int commandRange = 0;
+
 	public SandboxBuilding(String[] c) {
 		super(c);
 		player = ref.player;// neutral
@@ -68,7 +70,7 @@ public class SandboxBuilding extends Building implements Commander {
 
 	@Override
 	public int commandRange() {
-		return Integer.MAX_VALUE;
+		return commandRange;
 	}
 
 	public static class BuildSetup extends Active {
@@ -152,7 +154,7 @@ public class SandboxBuilding extends Building implements Commander {
 
 		@Override
 		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
-			ref.preGame.addPlayer((ref.updater.player.size() + 1) + "", 
+			ref.preGame.addPlayer((ref.updater.player.size() + 1) + "",
 					"player" + (ref.updater.player.size() + 1));
 		}
 

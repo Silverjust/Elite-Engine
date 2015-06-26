@@ -176,6 +176,10 @@ public class Input {
 					&& app.mouseButton == Settings.mouseSelect) {
 				AimHandler.end();
 			}
+			if (AimHandler.isAiming()
+					&& app.mouseButton == Settings.mouseCommand) {
+				AimHandler.execute();
+			}
 			if (!AimHandler.isAiming()
 					&& app.mouseButton == Settings.mouseCommand) {
 				for (Entity entity : ref.updater.selected) {
@@ -183,11 +187,6 @@ public class Input {
 							+ Helper.gridToX(app.mouseX) + " "
 							+ Helper.gridToY(app.mouseY));
 				}// TODO Pfeil anzeigen
-			}
-
-			if (AimHandler.isAiming()
-					&& app.mouseButton == Settings.mouseCommand) {
-				AimHandler.execute();
 			}
 
 		}// unabhängig von mouse fokus

@@ -13,6 +13,8 @@ public class Aim {
 	}
 
 	public void execute() {
+	}
 
+	public void end() {
 	}
 }
