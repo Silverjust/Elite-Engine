@@ -6,14 +6,12 @@ import entity.Active;
 import entity.BuildActive;
 import entity.BuildWallActive;
 import entity.Building;
-import entity.Commander;
 import entity.Entity;
 import entity.TrainActive;
 import entity.Unit;
 import entity.UpgradeActive;
 import entity.neutral.*;
-import entity.aliens.*;
-import entity.humans.*;
+
 import game.aim.MineAim;
 import main.ClientHandler;
 import main.Settings;
@@ -29,8 +27,8 @@ public class ActivesGrid {
 	public int y = ref.app.height - HUD.height + 10;
 	int w = 60;
 
-	Active[][] unitGrid = new Active[gridWidth][gridHeight];
-	Active[][] buildingGrid = new Active[gridWidth][gridHeight];
+	public Active[][] unitGrid = new Active[gridWidth][gridHeight];
+	public Active[][] buildingGrid = new Active[gridWidth][gridHeight];
 	public Nation nation;
 
 	public ActivesGrid() {
@@ -45,57 +43,7 @@ public class ActivesGrid {
 	void setup(Nation nation) {
 		removeActives();
 		this.nation = nation;
-
-		switch (nation) {
-		case ALIENS:
-			setupAliens();
-			break;
-		case HUMANS:
-			setupHumans();
-			break;
-		default:
-			break;
-		}
-
-	}
-
-	public void setupAliens() {
-		addActive(3, 2, Ticul.Flash.class, true);
-
-		addActive(1, 1, Building.SetTargetActive.class, false);
-		addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class, false);
-		addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class, false);
-		addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class,
-				false);
-		addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
-				false);
-		addBuildMineActive(5, 3, AlienMainBuilding.class, false);
-
-		addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
-		addTrainActive(2, 3, AlienKaserne.class, Brux.class, false);
-		addTrainActive(3, 3, AlienKaserne.class, Valcyrix.class, false);
-		addTrainActive(2, 2, AlienKaserneArcanum.class, Colum.class, false);
-		addTrainActive(3, 2, AlienKaserneArcanum.class, Arol.class, false);
-		addTrainActive(2, 1, AlienKasernePrunam.class, Rug.class, false);
-		addTrainActive(3, 1, AlienKasernePrunam.class, Ker.class, false);
-	}
-
-	public void setupHumans() {
-		addActive(1, 1, Building.SetTargetActive.class, false);
-		addBuildActive(4, 3, Commander.class, HumanKaserne.class, false);
-		addBuildActive(4, 2, Commander.class, HumanMechKaserne.class, false);
-		addBuildActive(4, 1, Commander.class, HumanDepot.class, false);
-		addBuildWallActive(5, 2, Commander.class, HumanWall.class, false);
-		addBuildMineActive(5, 3, Commander.class, false);
-
-		addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
-		addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
-		addTrainActive(1, 2, HumanKaserne.class, Medic.class, false);
-		addTrainActive(3, 3, HumanKaserne.class, Exo.class, false);
-		addTrainActive(2, 2, HumanMechKaserne.class, SmallTank.class, false);
-		addTrainActive(3, 2, HumanMechKaserne.class, Tank.class, false);
-		addTrainActive(2, 1, HumanMechKaserne.class, Drone.class, false);
-		addTrainActive(3, 1, HumanMechKaserne.class, Helicopter.class, false);
+		nation.getNationInfo().setupActives(this);
 	}
 
 	public void update() {
@@ -171,7 +119,8 @@ public class ActivesGrid {
 		}
 	}
 
-	void addActive(int x, int y, Class<? extends Active> a, boolean isUnitActive) {
+	public void addActive(int x, int y, Class<? extends Active> a,
+			boolean isUnitActive) {
 		x--;
 		y--;
 		try {
@@ -189,7 +138,7 @@ public class ActivesGrid {
 		}
 	}
 
-	void addTrainActive(int x, int y, Class<? extends Entity> trainer,
+	public void addTrainActive(int x, int y, Class<? extends Entity> trainer,
 			Class<? extends Unit> toTrain, boolean isUnitActive) {
 		x--;
 		y--;
@@ -208,7 +157,7 @@ public class ActivesGrid {
 		}
 	}
 
-	void addBuildActive(int x, int y, Class<?> builder,
+	public void addBuildActive(int x, int y, Class<?> builder,
 			Class<? extends Building> building, boolean isUnitActive) {
 		x--;
 		y--;
@@ -248,7 +197,8 @@ public class ActivesGrid {
 		}
 	}
 
-	void addBuildMineActive(int x, int y, Class<?> builder, boolean isUnitActive) {
+	public void addBuildMineActive(int x, int y, Class<?> builder,
+			boolean isUnitActive) {
 		x--;
 		y--;
 		try {
@@ -270,7 +220,7 @@ public class ActivesGrid {
 		}
 	}
 
-	void addBuildWallActive(int x, int y, Class<?> builder,
+	public void addBuildWallActive(int x, int y, Class<?> builder,
 			Class<? extends Building> building, boolean isUnitActive) {
 		x--;
 		y--;

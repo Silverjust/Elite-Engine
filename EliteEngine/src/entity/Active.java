@@ -18,6 +18,7 @@ public abstract class Active implements Informing {
 	public GGameButton button;
 
 	public Class<?> clazz;
+	public char n;
 
 	protected int cooldown;
 	protected int cooldownTimer;
@@ -36,6 +37,7 @@ public abstract class Active implements Informing {
 		button.setSymbol(symbol);
 		button.addEventHandler(this, "handleActiveEvents");
 		this.symbol = symbol;
+		this.n = n;
 	}
 
 	public void update() {

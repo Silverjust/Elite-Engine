@@ -43,6 +43,12 @@
 	"Tank": "entity.humans.Tank",
 	"Drone": "entity.humans.Drone",
 	"Helicopter": "entity.humans.Helicopter",
+	
+	"ScientistMainBuilding": "entity.scientists.ScientistMainBuilding",
+	"ScientistKeritMine": "entity.scientists.ScientistKeritMine",
+    "ScientistPaxDrillTower": "entity.scientists.ScientistPaxDrillTower",
+    "ScientistArcanumMine": "entity.scientists.ScientistArcanumMine",
+    "ScientistPrunamHarvester": "entity.scientists.ScientistPrunamHarvester",
   },
   "maps": {
     "standard": {

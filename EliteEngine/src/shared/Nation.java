@@ -5,6 +5,7 @@ import entity.aliens.AlienInfo;
 import entity.aliens.AlienMainBuilding;
 import entity.humans.HumanInfo;
 import entity.humans.HumanMainBuilding;
+import entity.scientists.ScientistInfo;
 
 public enum Nation {
 
@@ -115,42 +116,37 @@ public enum Nation {
 	// TODO remove, when all nations are stable
 	public static void setNationsToPlayableNations() {
 		for (String key : ref.preGame.player.keySet()) {
-			if (ref.preGame.player.get(key).nation != Nation.ALIENS
-					&& ref.preGame.player.get(key).nation != Nation.HUMANS)
-				ref.preGame.player.get(key).nation = Nation.ALIENS;
+			Nation n = ref.preGame.player.get(key).nation;
+			if (n != Nation.ALIENS && n != Nation.HUMANS
+					&& n != Nation.SCIENTISTS)
+				n = Nation.ALIENS;
 		}
 	}
 
 	public NationInfo getNationInfo() {
-		Class<? extends NationInfo> t = null;
+		NationInfo info = null;
 
 		switch (this) {
 		case AHNEN:
 			// t = AhnenMainBuilding.class;
 			break;
 		case ALIENS:
-			t = AlienInfo.class;
+			info = new AlienInfo();
 			break;
 		case ROBOTS:
 			// t = RobotsMainBuilding.class;
 			break;
 		case SCIENTISTS:
-			// t = ScientistsMainBuilding.class;
+			info = new ScientistInfo();
 			break;
 		case HUMANS:
-			t = HumanInfo.class;
+			info = new HumanInfo();
 			break;
 		case NEUTRAL:
 			// t = NeutralMainBuilding.class;
 			break;
 		}
-		try {
-			return t.getConstructor().newInstance();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-
+		return info;
 	}
 
 }

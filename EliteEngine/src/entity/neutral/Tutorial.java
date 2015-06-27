@@ -1,6 +1,6 @@
 package entity.neutral;
 
-import main.Settings;
+import entity.Active;
 import entity.Entity;
 import entity.Unit;
 import entity.aliens.AlienKaserne;
@@ -8,6 +8,7 @@ import entity.aliens.AlienKeritMine;
 import entity.aliens.Ticul;
 import entity.animation.Animation;
 import game.Chat;
+import game.HUD;
 import processing.core.PImage;
 import shared.ref;
 
@@ -52,6 +53,7 @@ public class Tutorial extends Unit {
 	@Override
 	public void updateDecisions() {
 		float x = 0, y = 0;
+		Active[][] bActives = HUD.activesGrid.buildingGrid;
 		// System.out.println(xTarget + " " + yTarget);
 		switch (i) {
 		case 0:
@@ -81,8 +83,8 @@ public class Tutorial extends Unit {
 			yTarget = y;
 			isMoving = true;
 			Chat.println(tut, "this is your mainbuilding");
-			Chat.println(tut, "press \"" + Settings.buildingsShortcuts[1][4]
-					+ "\" or the " + Settings.buildingsShortcuts[1][4]
+			Chat.println(tut, "press \"" + bActives[2][4].n + "\" or the "
+					+ bActives[2][4].n
 					+ "-button and place the building here with rightclick");
 			i++;
 			break;
@@ -99,8 +101,7 @@ public class Tutorial extends Unit {
 			ref.updater.send("<give " + ref.player.ip + " kerit " + 400);
 			Chat.println(tut, "you are producing kerit now");
 			Chat.println(tut, "wait until you have 500 kerit and then press \""
-					+ Settings.buildingsShortcuts[2][3] + "\" or the "
-					+ Settings.buildingsShortcuts[2][3]
+					+ bActives[2][3].n + "\" or the " + bActives[2][3].n
 					+ "-button and place the building here");
 			i++;
 			break;
@@ -116,8 +117,8 @@ public class Tutorial extends Unit {
 			Chat.println(tut, "you have a kaserne");
 			Chat.println(tut,
 					"wait until it is built, select the building and then press \""
-							+ Settings.buildingsShortcuts[2][0] + "\" or the "
-							+ Settings.buildingsShortcuts[2][0] + "-button ");
+							+ bActives[2][0].n + "\" or the "
+							+ bActives[2][0].n + "-button ");
 			i++;
 			break;
 		case 7:
@@ -130,11 +131,13 @@ public class Tutorial extends Unit {
 			xTarget = 470;
 			yTarget = 480;
 			isMoving = true;
-			Chat.println(tut, "you trained a ticul");
-			Chat.println(tut, "train some brux with \""
-					+ Settings.buildingsShortcuts[2][1] + "\" or the "
-					+ Settings.buildingsShortcuts[2][1]
-					+ "-button and select them with leftdrag");
+			Chat.println(tut,
+					"you trained a " + bActives[2][0].clazz.getSimpleName());
+			Chat.println(tut,
+					"train some " + bActives[2][1].clazz.getSimpleName()
+							+ " with \"" + bActives[2][1].n + "\" or the "
+							+ bActives[2][1].n
+							+ "-button and select them with leftdrag");
 			Chat.println(tut, "move the camera here and rightclick to attack");
 			Chat.println(tut, "defeat them");
 			i++;
