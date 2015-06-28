@@ -41,9 +41,11 @@ public class ActivesGrid {
 	}
 
 	void setup(Nation nation) {
-		removeActives();
-		this.nation = nation;
-		nation.getNationInfo().setupActives(this);
+		if (nation != null) {
+			removeActives();
+			this.nation = nation;
+			nation.getNationInfo().setupActives(this);
+		}
 	}
 
 	public void update() {
@@ -138,6 +140,34 @@ public class ActivesGrid {
 		}
 	}
 
+	public void addActive(int x, int y, Class<? extends Active> a,
+			Class<?> builder, Class<? extends Entity> building,
+			boolean isUnitActive) {
+		x--;
+		y--;
+		try {
+			Constructor<?> ctor = a.getConstructor(int.class, int.class,
+					char.class, Entity.class, Class.class);
+			Entity b = building.getConstructor(String[].class).newInstance(
+					new Object[] { null });
+			if (isUnitActive) {
+				unitGrid[x][y] = (Active) ctor.newInstance(//
+						new Object[] { x, y, Settings.unitsShortcuts[y][x], b,
+								builder });
+			} else {
+				buildingGrid[x][y] = (Active) ctor.newInstance(//
+						new Object[] { x, y, Settings.buildingsShortcuts[y][x],
+								b, builder });
+			}
+
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+			System.out.println(a.getConstructors());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void addTrainActive(int x, int y, Class<? extends Entity> trainer,
 			Class<? extends Unit> toTrain, boolean isUnitActive) {
 		x--;
@@ -197,6 +227,7 @@ public class ActivesGrid {
 		}
 	}
 
+	@Deprecated
 	public void addBuildMineActive(int x, int y, Class<?> builder,
 			boolean isUnitActive) {
 		x--;
@@ -208,11 +239,10 @@ public class ActivesGrid {
 
 			if (isUnitActive) {
 				unitGrid[x][y] = new MineAim.BuildMineActive(x, y,
-						Settings.unitsShortcuts[y][x], b, Kerit.class, builder);
+						Settings.unitsShortcuts[y][x], b, builder);
 			} else {
 				buildingGrid[x][y] = new MineAim.BuildMineActive(x, y,
-						Settings.buildingsShortcuts[y][x], b, Kerit.class,
-						builder);
+						Settings.buildingsShortcuts[y][x], b, builder);
 			}
 
 		} catch (Exception e) {
@@ -220,6 +250,7 @@ public class ActivesGrid {
 		}
 	}
 
+	@Deprecated
 	public void addBuildWallActive(int x, int y, Class<?> builder,
 			Class<? extends Building> building, boolean isUnitActive) {
 		x--;

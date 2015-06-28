@@ -49,6 +49,10 @@
     "ScientistPaxDrillTower": "entity.scientists.ScientistPaxDrillTower",
     "ScientistArcanumMine": "entity.scientists.ScientistArcanumMine",
     "ScientistPrunamHarvester": "entity.scientists.ScientistPrunamHarvester",
+	"ScientistKaserne": "entity.scientists.ScientistKaserne",
+	"GuineaPig": "entity.scientists.GuineaPig",
+    "ShieldGuineaPig": "entity.scientists.ShieldGuineaPig",
+    "RailgunGuineaPig": "entity.scientists.RailgunGuineaPig",
   },
   "maps": {
     "standard": {
@@ -58,6 +62,9 @@
 	  "4player" : "maps/4player/4player"
     },
     "tutorial": {
+      "tutorial": "maps/TutorialMap/TutorialMap"
+    },
+     "campain": {
       "tutorial": "maps/TutorialMap/TutorialMap"
     }
   }

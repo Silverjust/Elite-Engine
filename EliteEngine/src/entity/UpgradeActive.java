@@ -11,11 +11,10 @@ public class UpgradeActive extends Active {
 	protected Class<? extends Building> oldBuilding;
 	String descr = " ", stats = " ";
 
-	public UpgradeActive(int x, int y, char n, Building b,
-			Class<? extends Building> oldBuilding,
-			Class<?> builder) {
+	public UpgradeActive(int x, int y, char n, Entity b,
+			Class<? extends Building> oldBuilding, Class<?> builder) {
 		super(x, y, n, b.iconImg);
-		this.newBuilding = b.getClass();
+		this.newBuilding = ((Building) b).getClass();
 		this.oldBuilding = oldBuilding;
 		descr = b.getDesription();
 		stats = b.getStatistics();

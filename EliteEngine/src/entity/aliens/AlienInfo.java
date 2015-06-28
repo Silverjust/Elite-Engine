@@ -1,12 +1,14 @@
 package entity.aliens;
 
 import entity.Building;
+import entity.Commander;
 import entity.MainBuilding;
 import entity.neutral.ArcanumMine;
 import entity.neutral.KeritMine;
 import entity.neutral.PaxDrillTower;
 import entity.neutral.PrunamHarvester;
 import game.ActivesGrid;
+import game.aim.MineAim.BuildMineActive;
 import shared.NationInfo;
 
 public class AlienInfo extends NationInfo {
@@ -46,7 +48,8 @@ public class AlienInfo extends NationInfo {
 				false);
 		grid.addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
 				false);
-		grid.addBuildMineActive(5, 3, AlienMainBuilding.class, false);
+		grid.addActive(5, 3, BuildMineActive.class, Commander.class,
+				getKeritMine(), false);
 
 		grid.addTrainActive(1, 3, AlienKaserne.class, Ticul.class, false);
 		grid.addTrainActive(2, 3, AlienKaserne.class, Brux.class, false);

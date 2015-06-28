@@ -3,7 +3,6 @@ package entity.humans;
 import processing.core.PImage;
 import shared.ref;
 import entity.Building;
-import entity.Commander;
 import entity.Trainer;
 import entity.animation.Ability;
 import entity.animation.Animation;
@@ -12,8 +11,7 @@ import entity.animation.Death;
 import entity.animation.Training;
 import game.ImageHandler;
 
-public class HumanKaserne extends Building implements Commander, Trainer {
-	private int commandingRange;
+public class HumanKaserne extends Building implements  Trainer {
 	protected float xTarget;
 	protected float yTarget;
 
@@ -52,8 +50,6 @@ public class HumanKaserne extends Building implements Commander, Trainer {
 
 		hp = hp_max = 1000;
 		radius = 15;
-
-		commandingRange = 250;
 
 		descr = " ";
 		stats = " ";
@@ -96,11 +92,6 @@ public class HumanKaserne extends Building implements Commander, Trainer {
 
 	public PImage preview() {
 		return standImg;
-	}
-
-	@Override
-	public int commandRange() {
-		return commandingRange;
 	}
 
 	@Override

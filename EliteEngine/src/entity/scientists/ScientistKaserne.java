@@ -1,8 +1,9 @@
-package entity.humans;
+package entity.scientists;
 
 import processing.core.PImage;
 import shared.ref;
 import entity.Building;
+import entity.Commander;
 import entity.Trainer;
 import entity.animation.Ability;
 import entity.animation.Animation;
@@ -11,7 +12,8 @@ import entity.animation.Death;
 import entity.animation.Training;
 import game.ImageHandler;
 
-public class HumanMechKaserne extends Building implements  Trainer {
+public class ScientistKaserne extends Building implements Commander, Trainer {
+	private int commandingRange;
 	protected float xTarget;
 	protected float yTarget;
 
@@ -22,10 +24,10 @@ public class HumanMechKaserne extends Building implements  Trainer {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standImg = ImageHandler.load(path, "HumanMechKaserne");
+		standImg = ImageHandler.load(path, "ScientistKaserne");
 	}
 
-	public HumanMechKaserne(String[] c) {
+	public ScientistKaserne(String[] c) {
 		super(c);
  
 		iconImg = standImg;
@@ -50,6 +52,8 @@ public class HumanMechKaserne extends Building implements  Trainer {
 
 		hp = hp_max = 1000;
 		radius = 15;
+
+		commandingRange = 250;
 
 		descr = " ";
 		stats = " ";
@@ -92,6 +96,11 @@ public class HumanMechKaserne extends Building implements  Trainer {
 
 	public PImage preview() {
 		return standImg;
+	}
+
+	@Override
+	public int commandRange() {
+		return commandingRange;
 	}
 
 	@Override

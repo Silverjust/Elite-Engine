@@ -10,10 +10,9 @@ public class BuildWallActive extends Active {
 	Class<? extends Building> building;
 	String descr = " ", stats = " ";
 
-	public BuildWallActive(int x, int y, char n, Building b,
-			Class<?> builder) {
+	public BuildWallActive(int x, int y, char n, Entity b, Class<?> builder) {
 		super(x, y, n, b.iconImg);
-		building = b.getClass();
+		building = ((Building) b).getClass();
 		descr = b.getDesription();
 		stats = b.getStatistics();
 		clazz = builder;

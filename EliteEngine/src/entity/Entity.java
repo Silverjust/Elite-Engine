@@ -193,6 +193,19 @@ public abstract class Entity implements Informing {
 		}
 	}
 
+	public void drawBar(float f, int c) {
+		int h = 1;
+		if (isAlive() && isMortal()) {//
+			ref.app.fill(0, 150);
+			ref.app.rect(xToGrid(x), yToGrid(y - height - h * 3) - radius
+					* 1.5f, radius * 2, h);
+			ref.app.tint(c);
+			ref.app.image(hpImg, xToGrid(x), yToGrid(y - height - h * 3)
+					- radius * 1.5f, radius * 2 * f, h);
+			ref.app.tint(255);
+		}
+	}
+
 	protected void drawCircle(int r) {
 		ref.app.image(selectedImg, xToGrid(x), yToGrid(y), r * 2, r);
 	}
@@ -225,6 +238,8 @@ public abstract class Entity implements Informing {
 
 	@Override
 	public String getDesription() {
+		if (descr.equals(" "))
+			return this.getClass().getSimpleName();
 		return descr;
 	}
 

@@ -7,7 +7,9 @@ import entity.neutral.ArcanumMine;
 import entity.neutral.KeritMine;
 import entity.neutral.PaxDrillTower;
 import entity.neutral.PrunamHarvester;
+import entity.scientists.GuineaPig.EquipActive;
 import game.ActivesGrid;
+import game.aim.MineAim.BuildMineActive;
 import shared.NationInfo;
 
 public class ScientistInfo extends NationInfo {
@@ -40,7 +42,16 @@ public class ScientistInfo extends NationInfo {
 	@Override
 	public void setupActives(ActivesGrid grid) {
 		grid.addActive(1, 1, Building.SetTargetActive.class, false);
-		grid.addBuildMineActive(5, 3, Commander.class, false);
+		grid.addActive(5, 3, BuildMineActive.class, Commander.class,
+				getKeritMine(), false);
+		grid.addBuildActive(4, 3, Commander.class, ScientistKaserne.class,
+				false);
+		grid.addTrainActive(1, 3, ScientistKaserne.class, GuineaPig.class,
+				false);
+		grid.addActive(2, 3, EquipActive.class, GuineaPig.class,
+				ShieldGuineaPig.class, true);
+		grid.addActive(3, 3, EquipActive.class, GuineaPig.class,
+				RailgunGuineaPig.class, true);
 	}
 
 }

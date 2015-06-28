@@ -1,5 +1,6 @@
 package entity.humans;
 
+import entity.BuildWallActive;
 import entity.Building;
 import entity.Commander;
 import entity.MainBuilding;
@@ -8,6 +9,7 @@ import entity.neutral.KeritMine;
 import entity.neutral.PaxDrillTower;
 import entity.neutral.PrunamHarvester;
 import game.ActivesGrid;
+import game.aim.MineAim.BuildMineActive;
 import shared.NationInfo;
 
 public class HumanInfo extends NationInfo {
@@ -44,8 +46,10 @@ public class HumanInfo extends NationInfo {
 		grid.addBuildActive(4, 2, Commander.class, HumanMechKaserne.class,
 				false);
 		grid.addBuildActive(4, 1, Commander.class, HumanDepot.class, false);
-		grid.addBuildWallActive(5, 2, Commander.class, HumanWall.class, false);
-		grid.addBuildMineActive(5, 3, Commander.class, false);
+		grid.addActive(5, 2, BuildWallActive.class, Commander.class,
+				HumanWall.class, false);
+		grid.addActive(5, 3, BuildMineActive.class, Commander.class,
+				getKeritMine(), false);
 
 		grid.addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
 		grid.addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);

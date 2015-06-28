@@ -71,9 +71,8 @@ public class MineAim extends UpgradeAim {
 
 	public static class BuildMineActive extends UpgradeActive {
 
-		public BuildMineActive(int x, int y, char n, Building b,
-				Class<? extends Building> oldBuilding, Class<?> builder) {
-			super(x, y, n, b, oldBuilding, builder);
+		public BuildMineActive(int x, int y, char n, Entity b, Class<?> builder) {
+			super(x, y, n, b, Kerit.class, builder);
 			clazz = builder;
 		}
 
