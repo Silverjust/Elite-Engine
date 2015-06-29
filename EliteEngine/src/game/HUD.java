@@ -14,11 +14,6 @@ public class HUD {
 	public static int height = 200;
 	public static ActivesGrid activesGrid;
 
-	public static String[] buttonImageFilename = ref.player != null ? new String[] {
-			ref.player.nation.toString() + "/button_normal.png",
-			ref.player.nation.toString() + "/button_mouseover.png",
-			ref.player.nation.toString() + "/button_clicked.png" }
-			: null;
 	public static AudioPlayer sound;
 
 	public static void loadImages() {
@@ -85,6 +80,23 @@ public class HUD {
 		Minimap.update();
 		GroupHandler.update();
 		activesGrid.update();
+	}
+
+	public static String[] buttonImageFilename() {
+		if (ref.player == null || ref.player.nation == null)
+			return null;
+		return new String[] {
+				ref.player.nation.toString() + "/button_normal.png",
+				ref.player.nation.toString() + "/button_mouseover.png",
+				ref.player.nation.toString() + "/button_clicked.png" };
+	}
+
+	public static void dispose() {
+		try {
+			sound.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

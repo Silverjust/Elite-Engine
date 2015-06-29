@@ -18,7 +18,7 @@ public class Group {
 	public Group(int x, int y, char n) {
 		this.x = x;
 		this.y = y;
-		button = new GGameButton(ref.app, x, y, w, h, HUD.buttonImageFilename);
+		button = new GGameButton(ref.app, x, y, w, h, HUD.buttonImageFilename());
 		button.setText(n + "");
 		button.addEventHandler(this, "handleClickEvent");
 	}

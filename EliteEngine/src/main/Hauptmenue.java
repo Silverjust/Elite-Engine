@@ -2,7 +2,6 @@ package main;
 
 import java.util.UUID;
 
-import processing.core.PApplet;
 import shared.Helper;
 import shared.Mode;
 import shared.ref;
@@ -109,24 +108,25 @@ public class Hauptmenue {
 	}
 
 	void dispose() {
-		playerName.dispose();
-		password.dispose();
-		serverIp.dispose();
-		localhost.dispose();
-		multiplayerButton.dispose();
-		singleplayerButton.dispose();
-		sandboxButton.dispose();
-		tutorialButton.dispose();
-		changes.dispose();
-		startServer.dispose();
+		try {
+			playerName.dispose();
+			password.dispose();
+			serverIp.dispose();
+			localhost.dispose();
+			multiplayerButton.dispose();
+			singleplayerButton.dispose();
+			sandboxButton.dispose();
+			tutorialButton.dispose();
+			changes.dispose();
+			startServer.dispose();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void handleStartServerEvents(GButton button, GEvent event) {
-		PApplet mainApp = ref.app;
 		server.ServerApp.main(new String[] { "server.ServerApp" });
-		dispose();
-		mainApp.frame.setVisible(false);
-		mainApp.dispose();
+		ref.app.dispose();
 	}
 
 	public void handleLocalhostEvents(GButton button, GEvent event) {

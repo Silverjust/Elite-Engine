@@ -47,6 +47,14 @@ public class PreGameNormalDisplay {
 					200, 500, getNationImages(i));// change buttons
 			nationButtons[i].addEventHandler(this, "handleSelectNation");
 		}
+		setupMapSelection();
+	}
+
+	protected PreGameNormalDisplay(byte b) {
+		preGame = (MainPreGame) ref.preGame;
+	}
+
+	protected void setupMapSelection() {
 		{
 			int size = ContentListHandler.getModeMaps().size();
 			mapSelector = new GDropList(ref.app, ref.app.width - 320,
@@ -149,8 +157,10 @@ public class PreGameNormalDisplay {
 		startButton.dispose();
 		playerSlider.dispose();
 		mapSelector.dispose();
-		for (int i = 0; i < nationButtons.length; i++) {
-			nationButtons[i].dispose();
+		if (nationButtons[0] != null) {
+			for (int i = 0; i < nationButtons.length; i++) {
+				nationButtons[i].dispose();
+			}
 		}
 	}
 }

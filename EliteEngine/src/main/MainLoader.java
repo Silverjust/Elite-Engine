@@ -1,6 +1,5 @@
 package main;
 
-import processing.core.PApplet;
 import shared.Loader;
 import shared.Mode;
 import shared.ref;
@@ -93,9 +92,7 @@ public class MainLoader extends Loader {
 			break;
 		case ERROR:
 			System.out.println("error");
-			PApplet mainApp = ref.app;
-			mainApp.frame.setVisible(false);
-			mainApp.dispose();
+			ref.app.dispose();
 			break;
 		default:
 			break;

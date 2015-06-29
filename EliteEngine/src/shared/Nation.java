@@ -119,7 +119,7 @@ public enum Nation {
 			Nation n = ref.preGame.player.get(key).nation;
 			if (n != Nation.ALIENS && n != Nation.HUMANS
 					&& n != Nation.SCIENTISTS)
-				n = Nation.ALIENS;
+				ref.preGame.player.get(key).nation = Nation.ALIENS;
 		}
 	}
 

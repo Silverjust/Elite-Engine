@@ -14,4 +14,7 @@ public abstract class PreGame {
 	public abstract void update();
 
 	public abstract void setMap(String string);
+
+	public void dispose() {
+	}
 }

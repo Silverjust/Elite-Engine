@@ -32,7 +32,7 @@ public abstract class Active implements Informing {
 	@SuppressWarnings("static-access")
 	public Active(int x, int y, char n, PImage symbol) {
 		button = new GGameButton(ref.app, this.x + x * (w + 10), this.y + y
-				* (w + 10), w, w, HUD.buttonImageFilename);
+				* (w + 10), w, w, HUD.buttonImageFilename());
 		button.setText(n + "");
 		button.setSymbol(symbol);
 		button.addEventHandler(this, "handleActiveEvents");

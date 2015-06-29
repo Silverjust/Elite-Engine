@@ -24,7 +24,7 @@ import shared.ref;
 public class MainApp extends PApplet {
 	public static void main(String args[]) {
 		boolean fullscreen = false;
-		 fullscreen = true;
+		fullscreen = true;
 		if (fullscreen) {
 			PApplet.main(new String[] { "--present", "main.MainApp" });
 		} else {
@@ -43,6 +43,7 @@ public class MainApp extends PApplet {
 		frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		frame.setResizable(true);
 		frame.setTitle("Battle of Orion");
+		frame.addWindowListener(new Listener());
 		// frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		// frame.setVisible(true);
 		frameRate(60);
@@ -130,13 +131,19 @@ public class MainApp extends PApplet {
 		ClientHandler.clientEvent(someClient);
 	}
 
-	public void stop() {
-		// Player in schlieﬂen
-		HUD.sound.close();
-		// Minim Object stoppen
-		ref.minim.stop();
-
-		super.stop();
+	@Override
+	public void dispose() {// Player in schlieﬂen
+		try {
+			hauptmenue.dispose();
+			ref.preGame.dispose();
+			HUD.dispose();
+			// TODO close all ingame sounds
+			ref.minim.stop();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		frame.setVisible(false);
+		super.dispose();
 	}
 
 }

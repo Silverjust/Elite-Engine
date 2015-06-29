@@ -113,4 +113,10 @@ public class MainPreGame extends PreGame {
 		((MainApp) ref.app).mode = Mode.LADESCREEN;
 	}
 
+	@Override
+	public void dispose() {
+		if (display != null) {
+			display.dispose();
+		}
+	}
 }
