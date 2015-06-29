@@ -53,6 +53,7 @@
 	"GuineaPig": "entity.scientists.GuineaPig",
     "ShieldGuineaPig": "entity.scientists.ShieldGuineaPig",
     "RailgunGuineaPig": "entity.scientists.RailgunGuineaPig",
+    "Cell": "entity.scientists.Cell",
   },
   "maps": {
     "standard": {

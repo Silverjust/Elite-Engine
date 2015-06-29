@@ -52,6 +52,8 @@ public class ScientistInfo extends NationInfo {
 				ShieldGuineaPig.class, true);
 		grid.addActive(3, 3, EquipActive.class, GuineaPig.class,
 				RailgunGuineaPig.class, true);
+		grid.addActive(2, 2, EquipActive.class, GuineaPig.class, Cell.class,
+				true);
 	}
 
 }

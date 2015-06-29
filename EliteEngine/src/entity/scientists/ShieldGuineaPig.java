@@ -43,7 +43,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		regenerate = new MeleeAttack(shieldImg, 800);// shield regeneration
 
 		animation = nextAnimation = walk;
-		isSelected = true;
+		isSelected = true;//previus unit was selected
 		// ************************************
 		xSize = 15;
 		ySize = 15;

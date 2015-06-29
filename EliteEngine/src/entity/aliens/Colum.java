@@ -66,7 +66,7 @@ public class Colum extends Unit implements Attacker {
 	@Override
 	public void calculateDamage(Attack a) {
 		for (Entity e : ref.updater.entities) {
-			if (e != null & e.isAllyTo(this)
+			if (e != null && e.isAllyTo(this)
 					&& e.isInRange(x, y, e.radius + a.range)) {
 				ref.updater.send("<heal " + e.number + " " + heal.damage);
 			}
