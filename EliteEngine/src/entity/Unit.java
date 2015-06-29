@@ -19,7 +19,7 @@ public abstract class Unit extends Entity {
 	protected boolean isMoving;
 	public int trainTime;
 
-	protected Animation walk;
+	public Animation walk;
 
 	public Unit(String[] c) {
 		if (c != null) {

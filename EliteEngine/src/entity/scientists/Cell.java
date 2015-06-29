@@ -23,6 +23,8 @@ public class Cell extends Unit implements Attacker, Shooter {
 
 	private int damage;
 
+	private byte aggroRange;
+
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
@@ -57,6 +59,7 @@ public class Cell extends Unit implements Attacker, Shooter {
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
+		aggroRange = 60;
 		damage = 5;
 		heal.damage = 10;
 		heal.pirce = 0;
@@ -71,7 +74,27 @@ public class Cell extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		// no info to client
+		if (animation == walk || animation == stand) {// ****************************************************
+			float importance = 0;
+			Entity importantEntity = null;
+			for (Entity e : player.visibleEntities) {
+				if (e.isAllyTo(this)) {
+					if (e.isInRange(x, y, aggroRange + e.radius)) {
+						float newImportance = calcImportanceOf(e);
+						if (newImportance > importance && e.hp < e.hp_max) {
+							importance = newImportance;
+							importantEntity = e;
+						}
+					}
+
+				}
+
+			}
+			if (importantEntity != null) {
+				sendAnimation("walk " + importantEntity.x + " "
+						+ importantEntity.y);
+			}
+		}
 		heal.setTargetFrom(this, this);
 		heal.updateAbility(this);
 	}

@@ -32,7 +32,7 @@ public class ScientistKaserne extends Building implements Commander, Trainer {
  
 		iconImg = standImg;
 		stand = new Animation(standImg, 1000);
-		build = new Build(standImg, 5000);
+		build = new Build(standImg, 2000);
 		death = new Death(standImg, 1000);
 		training = new Training(standImg, 100);
 

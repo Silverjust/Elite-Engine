@@ -25,7 +25,10 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void setup() {
-		display = new PreGameNormalDisplay();
+		if (ClientHandler.sandbox)
+			display = new PreGameSandboxDisplay();
+		else
+			display = new PreGameNormalDisplay();
 	}
 
 	public void update() {

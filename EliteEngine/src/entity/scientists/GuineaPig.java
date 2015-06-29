@@ -2,12 +2,14 @@ package entity.scientists;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import shared.ContentListHandler;
 import shared.ref;
 import entity.Active;
 import entity.Attacker;
 import entity.Entity;
 import entity.Shooter;
 import entity.Unit;
+import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
@@ -22,6 +24,8 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 	byte aggroRange;
 
 	ShootAttack basicAttack;
+	Equip equip;
+	String EquipedUnit;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -37,6 +41,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
+		equip = new Equip(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************
@@ -104,6 +109,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 			}
 		}
 		basicAttack.updateAbility(this);
+		equip.updateAbility(this);
 	}
 
 	@Override
@@ -111,6 +117,30 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
 				+ a.damage + " " + a.pirce);
 		// SoundHandler.startIngameSound(HUD.hm, x, y);
+	}
+
+	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if (c[2].equals("equip")) {
+			Unit unit = null;
+			try {
+				String name = ContentListHandler.getEntityContent().getString(
+						c[3]);
+				unit = (Unit) Class.forName(name)
+						.getConstructor(String[].class)
+						.newInstance(new Object[] { null });
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (unit != null && unit.canBeBought(player)) {
+				unit.buyFrom(player);
+				isMoving = false;
+				setAnimation(equip);
+				equip.setUnit(unit);
+			}
+
+		}
 	}
 
 	@Override
@@ -133,8 +163,53 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
+	public void display() {
+		super.display();
+		if (animation == equip)
+			drawBar(equip.getCooldownPercent());
+	}
+
+	@Override
 	public Attack getBasicAttack() {
 		return basicAttack;
+	}
+
+	public static class Equip extends Ability {
+
+		private String unit;
+
+		public Equip(PImage IMG, int duration) {
+			super(IMG, duration);
+		}
+
+		public void setUnit(Unit unit) {
+
+			this.unit = unit.getClass().getSimpleName();
+			cooldown = unit.trainTime;
+			startCooldown();
+		}
+
+		@Override
+		public void update(Entity e) {
+			if (isFinished()) {
+				setup(e);
+			}
+		}
+
+		@Override
+		public void updateAbility(Entity e) {
+			if (isSetup() && isEvent() && isNotOnCooldown()) {
+				ref.updater.send("<remove " + e.number);
+				ref.updater.send(//
+						"<spawn " + unit + " " + e.player.ip + " " + e.x + " "
+								+ e.y);
+			}
+		}
+
+		@Override
+		public boolean isSetup() {
+			return unit != "" && unit != null;
+		}
 	}
 
 	public static class EquipActive extends Active {
@@ -153,15 +228,13 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
 			Entity trainer = null;
 			for (Entity e : ref.updater.selected) {
-				if (clazz.isAssignableFrom(e.getClass())) {
+				if (clazz.isAssignableFrom(e.getClass())
+						&& (e.getAnimation() == e.stand || e.getAnimation() == ((Unit) e).walk)) {
 					trainer = e;
 				}
 			}
 			if (trainer != null) {
-				ref.updater.send("<remove " + trainer.number);
-				ref.updater.send("<spawn " + unit.getSimpleName()
-						+ " " + trainer.player.ip + " " + trainer.x + " "
-						+ trainer.y);
+				trainer.sendAnimation("equip " + unit.getSimpleName());
 			}
 		}
 

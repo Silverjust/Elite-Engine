@@ -24,7 +24,7 @@ public class PreGameNormalDisplay {
 
 	PGraphics playerList;
 
-	private MainPreGame preGame;
+	protected MainPreGame preGame;
 	private int startMap = 0;
 	private int previousMap = startMap;
 
