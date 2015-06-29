@@ -1,12 +1,10 @@
 package entity.scientists;
 
-import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 import entity.Active;
 import entity.Attacker;
 import entity.Entity;
-import entity.Shooter;
 import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
@@ -15,7 +13,7 @@ import entity.animation.MeleeAttack;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 
-public class Cell extends Unit implements Attacker, Shooter {
+public class Cell extends Unit implements Attacker {
 
 	private static PImage standingImg;
 
@@ -117,17 +115,6 @@ public class Cell extends Unit implements Attacker, Shooter {
 		animation.draw(this, direction, currentFrame);
 		heal.drawAbility(this, direction);
 		drawTaged();
-	}
-
-	@Override
-	public void drawShot(Entity target, float progress) {
-		float x = PApplet.lerp(this.x, target.x, progress);
-		float y = PApplet.lerp(this.y - height, target.y - target.height,
-				progress);
-		ref.app.fill(255, 100, 0);
-		ref.app.strokeWeight(0);
-		ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
-		ref.app.strokeWeight(1);
 	}
 
 	@Override

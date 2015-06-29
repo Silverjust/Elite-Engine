@@ -288,9 +288,7 @@ public abstract class Entity implements Informing {
 	}
 
 	public void setAnimation(Animation a) {
-		if (a != null
-				&& (death != null ? animation.getClass() != death.getClass()
-						: true) && animation != a) {// tut
+		if (a != null && animation.isInterruptable() && animation != a) {// tut
 			nextAnimation = a;
 			a.setup(this);
 		}

@@ -12,7 +12,7 @@ import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.ShootAttack;
 
-public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
+public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 
 	private static PImage standingImg;
 
@@ -23,10 +23,10 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "RailgunGuineaPig");
+		standingImg = game.ImageHandler.load(path, "AirshipGuineaPig");
 	}
 
-	public RailgunGuineaPig(String[] c) {
+	public AirshipGuineaPig(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
@@ -39,24 +39,25 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 		isSelected = true;// previus unit was selected
 
 		// ************************************
-		xSize = 15;
-		ySize = 15;
+		xSize = 20;
+		ySize = 20;
 
-		kerit = 28;
+		kerit = 800;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 1500;
 
-		hp = hp_max = 30;
-		armor = 1;
-		speed = 0.9f;
-		radius = 6;
+		hp = hp_max = 700;
+		armor = 4;
+		speed = 0.7f;
+		radius = 9;
 		sight = 70;
-		groundPosition = Entity.GroundPosition.GROUND;
+		height = 25;
+		groundPosition = Entity.GroundPosition.AIR;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 90;
+		basicAttack.damage = 50;
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 5000;
 		basicAttack.range = 120;
@@ -77,20 +78,15 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)
+								&& e.groundPosition == GroundPosition.AIR) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
-						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
-							isEnemyInHitRange = true;
-							float newImportance = calcImportanceOf(e);
-							if (newImportance > importance) {
-								importance = newImportance;
-								importantEntity = e;
-							}
+							if (e.isInRange(x, y, basicAttack.range + e.radius))
+								isEnemyInHitRange = true;
 						}
 					}
 				}
@@ -113,7 +109,7 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
-	public void renderGround() {
+	public void renderAir() {
 		drawSelected();
 		animation.draw(this, direction, currentFrame);
 		basicAttack.drawAbility(this, direction);
@@ -135,4 +131,5 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 	public Attack getBasicAttack() {
 		return basicAttack;
 	}
+
 }

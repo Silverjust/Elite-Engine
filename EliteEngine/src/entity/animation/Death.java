@@ -28,5 +28,9 @@ public class Death extends Animation {
 
 	}
 
+	@Override
+	public boolean isInterruptable() {
+		return false;
+	}
 
 }

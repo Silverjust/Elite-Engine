@@ -11,7 +11,6 @@ import entity.TrainActive;
 import entity.Unit;
 import entity.UpgradeActive;
 import entity.neutral.*;
-
 import game.aim.MineAim;
 import main.ClientHandler;
 import main.Settings;
@@ -44,6 +43,7 @@ public class ActivesGrid {
 		if (nation != null) {
 			removeActives();
 			this.nation = nation;
+			System.out.println(nation+" "+nation.getNationInfo());
 			nation.getNationInfo().setupActives(this);
 		}
 	}

@@ -202,7 +202,8 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 				ref.updater.send("<remove " + e.number);
 				ref.updater.send(//
 						"<spawn " + unit + " " + e.player.ip + " " + e.x + " "
-								+ e.y);
+								+ e.y + " " + ((Unit) e).xTarget + " "
+								+ ((Unit) e).yTarget);
 			}
 		}
 
@@ -210,15 +211,22 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		public boolean isSetup() {
 			return unit != "" && unit != null;
 		}
+
+		@Override
+		public boolean isInterruptable() {
+			return false;
+		}
 	}
 
 	public static class EquipActive extends Active {
 		Class<? extends Unit> unit;
+		Class<?> lab;
 		String descr = " ", stats = " ";
 
 		public EquipActive(int x, int y, char n, Entity u, Class<?> trainer) {
 			super(x, y, n, u.iconImg);
-			clazz = trainer;
+			clazz = GuineaPig.class;
+			lab = trainer;
 			unit = ((Unit) u).getClass();
 			descr = u.getDesription();
 			stats = u.getStatistics();
@@ -229,9 +237,15 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 			Entity trainer = null;
 			for (Entity e : ref.updater.selected) {
 				if (clazz.isAssignableFrom(e.getClass())
-						&& (e.getAnimation() == e.stand || e.getAnimation() == ((Unit) e).walk)) {
-					trainer = e;
-				}
+						&& (e.getAnimation() == e.stand || e.getAnimation() == ((Unit) e).walk))
+					for (Entity e2 : ref.player.visibleEntities) {
+						if (e2.player == e.player
+								&& e2.getClass().equals(lab)
+								&& e.isInRange(e2.x, e2.y, e.radius
+										+ ((Lab) e2).equipRange)) {
+							trainer = e;
+						}
+					}
 			}
 			if (trainer != null) {
 				trainer.sendAnimation("equip " + unit.getSimpleName());

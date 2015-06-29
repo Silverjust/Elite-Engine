@@ -12,8 +12,8 @@ public abstract class Unit extends Entity {
 	// TODO Flocking einfügen
 	// FIXME ADD Verhalten der Einheiten
 	// TODO deglich verbessern
-	protected float xTarget;
-	protected float yTarget;
+	public float xTarget;
+	public float yTarget;
 	protected byte direction;
 	protected float speed;
 	protected boolean isMoving;
@@ -95,7 +95,7 @@ public abstract class Unit extends Entity {
 		// PApplet.printArray(c);
 		super.exec(c);
 		String string = c[2];
-		if ("walk".equals(string)) {
+		if ("walk".equals(string) && animation.isInterruptable()) {
 			xTarget = Float.parseFloat(c[3]);
 			yTarget = Float.parseFloat(c[4]);
 			isMoving = true;

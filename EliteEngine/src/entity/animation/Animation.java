@@ -83,4 +83,8 @@ public class Animation {
 		return Updater.Time.getMillis() - start >= duration;
 
 	}
+
+	public boolean isInterruptable() {
+		return true;
+	}
 }
