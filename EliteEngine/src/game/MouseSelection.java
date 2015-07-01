@@ -4,6 +4,7 @@ import entity.Entity;
 import entity.Unit;
 import processing.core.PApplet;
 import shared.Helper;
+import shared.Nation;
 import shared.ref;
 
 public class MouseSelection {
@@ -50,7 +51,7 @@ public class MouseSelection {
 					e.isSelected = true;
 					if (e instanceof Unit)
 						containsUnits = true;
-					if (e.player.nation != HUD.activesGrid.nation) {
+					if (e.player.nation != HUD.activesGrid.nation&&e.player.nation !=Nation.NEUTRAL) {
 						//for commanding other nations
 						HUD.activesGrid.setup(e.player.nation);
 					}

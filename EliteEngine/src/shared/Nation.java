@@ -5,6 +5,7 @@ import entity.aliens.AlienInfo;
 import entity.aliens.AlienMainBuilding;
 import entity.humans.HumanInfo;
 import entity.humans.HumanMainBuilding;
+import entity.neutral.NeutralInfo;
 import entity.scientists.ScientistInfo;
 
 public enum Nation {
@@ -143,7 +144,7 @@ public enum Nation {
 			info = new HumanInfo();
 			break;
 		case NEUTRAL:
-			// t = NeutralMainBuilding.class;
+			info = new NeutralInfo();
 			break;
 		}
 		return info;

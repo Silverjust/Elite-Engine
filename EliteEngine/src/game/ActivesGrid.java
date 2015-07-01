@@ -43,7 +43,7 @@ public class ActivesGrid {
 		if (nation != null) {
 			removeActives();
 			this.nation = nation;
-			System.out.println(nation+" "+nation.getNationInfo());
+			System.out.println(nation + " " + nation.getNationInfo());
 			nation.getNationInfo().setupActives(this);
 		}
 	}
@@ -102,6 +102,8 @@ public class ActivesGrid {
 		addBuildActive(1, 3, SandboxBuilding.class, Arcanum.class, true);
 		addBuildActive(2, 3, SandboxBuilding.class, Prunam.class, true);
 		addBuildActive(3, 2, SandboxBuilding.class, Rock.class, true);
+		addActive(3, 3, BuildWallActive.class, SandboxBuilding.class,
+				Rock.class, true);
 		addActive(3, 1, SandboxBuilding.ChangeSide.class, true);
 		addActive(4, 1, SandboxBuilding.AddPlayer.class, true);
 	}

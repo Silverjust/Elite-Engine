@@ -134,16 +134,20 @@ public class MainApp extends PApplet {
 	@Override
 	public void dispose() {// Player in schlieﬂen
 		try {
-			hauptmenue.dispose();
-			ref.preGame.dispose();
+			if (hauptmenue != null)
+				hauptmenue.dispose();
+			if (ref.preGame != null)
+				ref.preGame.dispose();
 			HUD.dispose();
 			// TODO close all ingame sounds
-			ref.minim.stop();
+			if (ref.minim != null)
+				ref.minim.stop();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		frame.setVisible(false);
 		super.dispose();
+		System.exit(0);
 	}
 
 }
