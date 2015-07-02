@@ -57,7 +57,9 @@
     "ShieldGuineaPig": "entity.scientists.ShieldGuineaPig",
     "RailgunGuineaPig": "entity.scientists.RailgunGuineaPig",
     "Cell": "entity.scientists.Cell", 
+    "SpawnerGuineaPig": "entity.scientists.SpawnerGuineaPig",
     "AirshipGuineaPig": "entity.scientists.AirshipGuineaPig",
+    "RocketGuineaPig": "entity.scientists.RocketGuineaPig", 
   },
   "maps": {
     "standard": {

@@ -11,6 +11,7 @@ import g4p_controls.GEvent;
 import g4p_controls.GPassword;
 import g4p_controls.GTextArea;
 import g4p_controls.GTextField;
+import game.SettingHandler;
 
 public class Hauptmenue {
 
@@ -60,6 +61,8 @@ public class Hauptmenue {
 		startServer = new GButton(ref.app, 650, 300, 100, 60);
 		startServer.setText("make to Server");
 		startServer.addEventHandler(this, "handleStartServerEvents");
+		
+		SettingHandler.setup();
 	}
 
 	public void handleAcceptEvents(GButton button, GEvent event) {

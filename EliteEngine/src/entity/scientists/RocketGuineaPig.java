@@ -10,10 +10,9 @@ import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.MeleeAttack;
 import entity.animation.ShootAttack;
 
-public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
+public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 
 	private static PImage standingImg;
 
@@ -24,10 +23,10 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "AirshipGuineaPig");
+		standingImg = game.ImageHandler.load(path, "RocketGuineaPig");
 	}
 
-	public AirshipGuineaPig(String[] c) {
+	public RocketGuineaPig(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
@@ -40,28 +39,28 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		isSelected = true;// previus unit was selected
 
 		// ************************************
-		xSize = 20;
-		ySize = 20;
+		xSize = 15;
+		ySize = 15;
 
-		kerit = 800;
+		kerit = 28;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 1500;
 
-		hp = hp_max = 700;
-		armor = 4;
-		speed = 0.7f;
-		radius = 9;
+		hp = hp_max = 30;
+		armor = 1;
+		speed = 0.9f;
+		radius = 6;
 		sight = 70;
-		height = 25;
-		groundPosition = Entity.GroundPosition.AIR;
+		height=25;
+		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 50;
-		basicAttack.pirce = 3;
-		basicAttack.cooldown = 5000;
-		basicAttack.range = 120;
+		basicAttack.damage = 10;
+		basicAttack.pirce = 1;
+		basicAttack.cooldown = 1000;
+		basicAttack.range = 50;
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
 		basicAttack.speed = 1f;
 
@@ -80,7 +79,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-						/* && e.groundPosition == GroundPosition.AIR */) {
+								&& e.groundPosition == GroundPosition.GROUND) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -104,12 +103,8 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater
-				.send("<hit "
-						+ basicAttack.getTarget().number
-						+ " "
-						+ (((MeleeAttack) a).getTarget().groundPosition == GroundPosition.AIR ? a.damage
-								: a.damage / 2) + " " + a.pirce);
+		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
+				+ a.damage + " " + a.pirce);
 		// SoundHandler.startIngameSound(HUD.hm, x, y);
 	}
 
@@ -136,5 +131,4 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 	public Attack getBasicAttack() {
 		return basicAttack;
 	}
-
 }

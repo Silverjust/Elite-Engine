@@ -1,23 +1,17 @@
-package entity.aliens;
+package entity.scientists;
 
 import processing.core.PImage;
 import shared.ref;
-import entity.Attacker;
 import entity.Entity;
 import entity.Unit;
 import entity.animation.Ability;
 import entity.animation.Animation;
-import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.MeleeAttack;
 
-public class Rug extends Unit implements Attacker {
+public class SpawnerGuineaPig extends Unit {
 
 	private static PImage standingImg;
 
-	byte aggroRange;
-
-	MeleeAttack basicAttack;
 	RuglingSpawn spawn;
 
 	private int spawnRange;
@@ -25,23 +19,22 @@ public class Rug extends Unit implements Attacker {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "Rug");
+		standingImg = game.ImageHandler.load(path, "SpawnerGuineaPig");
 	}
 
-	public Rug(String[] c) {
+	public SpawnerGuineaPig(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new MeleeAttack(standingImg, 500);
 		spawn = new RuglingSpawn(standingImg, 800);
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 35;
-		ySize = 35;
+		xSize = 25;
+		ySize = 25;
 
 		kerit = 230;
 		pax = 400;
@@ -51,18 +44,12 @@ public class Rug extends Unit implements Attacker {
 
 		hp = hp_max = 120;
 		speed = 0.7f;
-		radius = 8;
-		sight = 90;
+		radius = 7;
+		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = (byte) (radius + 10);
-		basicAttack.range = (byte) (radius + 5);
-		basicAttack.damage = 20;
-		basicAttack.cooldown = 1500;
-		basicAttack.setCastTime(100);
-
-		spawnRange = 150;
-		spawn.cooldown = 4000;
+		spawnRange = 90;
+		spawn.cooldown = 10000;
 		spawn.setCastTime(500);
 
 		descr = " ";
@@ -74,24 +61,11 @@ public class Rug extends Unit implements Attacker {
 	public void updateDecisions() {
 		// isTaged = false;
 		if (animation == walk || animation == stand) {// ****************************************************
-			boolean isEnemyTooClose = false;
-			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
-							isEnemyTooClose = true;
-							float newImportance = calcImportanceOf(e);
-							if (newImportance > importance) {
-								importance = newImportance;
-								importantEntity = e;
-							}
-						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
-							isEnemyInHitRange = true;
-						}
 						if (e.isInRange(x, y, spawnRange + e.radius)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -103,16 +77,10 @@ public class Rug extends Unit implements Attacker {
 					}
 				}
 			}
-			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
-				sendAnimation("basicAttack " + number);
-			} else if (isEnemyTooClose && importantEntity != null) {
-				sendAnimation("walk " + importantEntity.x + " "
-						+ importantEntity.y);
-			} else if (importantEntity != null && spawn.isNotOnCooldown()) {
+			if (importantEntity != null && spawn.isNotOnCooldown()) {
 				sendAnimation("spawn " + importantEntity.number);
 			}
 		}
-		basicAttack.updateAbility(this);
 		spawn.updateAbility(this);
 	}
 
@@ -129,27 +97,11 @@ public class Rug extends Unit implements Attacker {
 	}
 
 	@Override
-	public void calculateDamage(Attack a) {
-		for (Entity e : ref.updater.entities) {
-			if (e != null & e.isEnemyTo(this)
-					&& e.isInRange(x, y, e.radius + a.range)) {
-				ref.updater.send("<hit " + e.number + " " + a.damage + " "
-						+ a.pirce);
-			}
-		}
-	}
-
-	@Override
 	public void renderGround() {
 		drawSelected();
 		// drawCircle(spawnRange);
 		animation.draw(this, direction, currentFrame);
 		drawTaged();
-	}
-
-	@Override
-	public Attack getBasicAttack() {
-		return basicAttack;
 	}
 
 	static class RuglingSpawn extends Ability {
@@ -167,7 +119,7 @@ public class Rug extends Unit implements Attacker {
 		@Override
 		public void updateAbility(Entity e) {
 			if (target != null && isEvent() && isNotOnCooldown()) {
-				ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
+				ref.updater.send("<spawn GuineaPig " + e.player.ip + " " + e.x
 						+ " " + (e.y + e.radius + 8) + " " + target.x + " "
 						+ target.y);
 				/*

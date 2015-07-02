@@ -5,7 +5,6 @@ import java.awt.event.MouseWheelEvent;
 
 import main.ClientHandler;
 import main.MainApp;
-import main.Settings;
 import processing.core.PConstants;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
@@ -72,10 +71,10 @@ public class Input {
 	}
 
 	public void keyPressed() {// ********************************************************
-		if (!isChatVisible && app.keyCode == Settings.toggleChat) {
+		if (!isChatVisible && app.keyCode == SettingHandler.setting.toggleChat) {
 			isOpeningChat = true;
 		}
-		if (isChatVisible && app.keyCode == Settings.toggleChat
+		if (isChatVisible && app.keyCode == SettingHandler.setting.toggleChat
 				&& !Chat.chatLine.hasFocus()) {
 			Chat.hide();
 			isChatVisible = false;
@@ -88,18 +87,15 @@ public class Input {
 		}
 
 		if (isKeyFocusInGame()) {
-			if (app.key == Settings.escape) {
-				// app.key = 0;
-			}
 
-			if (app.key == Settings.togglePause) {
+			if (app.key == SettingHandler.setting.togglePause) {
 				if (ref.updater.gameState == GameState.PAUSE) {
 					ref.updater.send("<pause false");
 				} else if (ref.updater.gameState == GameState.PLAY) {
 					ref.updater.send("<pause true");
 				}
 			}
-			if (app.keyCode == Settings.changeAbilityMode) {
+			if (app.keyCode == SettingHandler.setting.changeAbilityMode) {
 				if (GroupHandler.recentGroup != null) {
 					GroupHandler.recentGroup.unitActives = !GroupHandler.recentGroup.unitActives;
 					ActivesGrid.showUnitActives = GroupHandler.recentGroup.unitActives;
@@ -107,29 +103,33 @@ public class Input {
 					ActivesGrid.showUnitActives = !ActivesGrid.showUnitActives;
 				}
 			}
-			if (app.keyCode == Settings.strg) {
+			if (app.keyCode == SettingHandler.setting.strg) {
 				strgMode = true;
 			}
-			if (app.keyCode == Settings.shift) {
+			if (app.keyCode == SettingHandler.setting.shift) {
 				shiftMode = true;
 			}
 
 			// System.out.println(app.key);
-			for (int i = 0; i < Settings.hotKeys.length; i++) {
-				if (app.keyCode == Settings.hotKeys[i]) {
+			for (int i = 0; i < SettingHandler.setting.hotKeys.length; i++) {
+				if (app.keyCode == SettingHandler.setting.hotKeys[i]) {
 					GroupHandler.fireGroup(i);
 
 				}
 			}
 			for (int x = 0; x < 7; x++) {
 				for (int y = 0; y < 3; y++) {
-					if (app.key == Settings.unitsShortcuts[y][x]) {
+					if (app.key == SettingHandler.setting.unitsShortcuts[y][x]) {
 						HUD.activesGrid.fire(x, y);
-					} else if (app.key == Settings.unitsShortcuts[y][x]) {
+					} else if (app.key == SettingHandler.setting.unitsShortcuts[y][x]) {
 						HUD.activesGrid.fire(x, y);
 					}
 				}
 			}
+
+		}
+		if (app.key == PConstants.ESC) {
+			app.key = 0;
 		}
 
 	}
@@ -140,10 +140,10 @@ public class Input {
 			Chat.show();
 			isChatVisible = true;
 		}
-		if (app.keyCode == Settings.strg) {
+		if (app.keyCode == SettingHandler.setting.strg) {
 			strgMode = false;
 		}
-		if (app.keyCode == Settings.shift) {
+		if (app.keyCode == SettingHandler.setting.shift) {
 			shiftMode = false;
 		}
 	}
@@ -157,7 +157,7 @@ public class Input {
 		if (doubleClickStart + doubleClickIntervall > ref.app.millis()) {
 			if (isMouseFocusInGame()) {
 				if (!AimHandler.isAiming()
-						&& app.mouseButton == Settings.mouseSelect) {
+						&& app.mouseButton == SettingHandler.setting.mouseSelect) {
 					MouseSelection.selectDoubleClick(app.mouseX, app.mouseY);
 				}
 			}
@@ -165,7 +165,7 @@ public class Input {
 			doubleClickStart = ref.app.millis();
 			if (isMouseFocusInGame()) {
 				if (!AimHandler.isAiming()
-						&& app.mouseButton == Settings.mouseSelect) {
+						&& app.mouseButton == SettingHandler.setting.mouseSelect) {
 					GameDrawer.mouseSelection = new game.MouseSelection(
 							app.mouseX, app.mouseY);
 				}
@@ -173,15 +173,15 @@ public class Input {
 		}
 		if (isMouseFocusInGame()) {
 			if (AimHandler.isAiming()
-					&& app.mouseButton == Settings.mouseSelect) {
+					&& app.mouseButton == SettingHandler.setting.mouseSelect) {
 				AimHandler.end();
 			}
 			if (AimHandler.isAiming()
-					&& app.mouseButton == Settings.mouseCommand) {
+					&& app.mouseButton == SettingHandler.setting.mouseCommand) {
 				AimHandler.execute();
 			}
 			if (!AimHandler.isAiming()
-					&& app.mouseButton == Settings.mouseCommand) {
+					&& app.mouseButton == SettingHandler.setting.mouseCommand) {
 				for (Entity entity : ref.updater.selected) {
 					ClientHandler.send("<execute " + entity.number + " walk "
 							+ Helper.gridToX(app.mouseX) + " "

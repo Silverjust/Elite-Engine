@@ -1,6 +1,5 @@
 package game;
 
-import main.Settings;
 import shared.ref;
 
 public class GroupHandler {
@@ -11,7 +10,7 @@ public class GroupHandler {
 		groups = new Group[10];
 		for (int i = 0; i < groups.length; i++) {
 			groups[i] = new Group(300 + (Group.w + 30) * i, ref.app.height
-					- HUD.height + 5, Settings.hotKeys[i]);
+					- HUD.height + 5, SettingHandler.setting.hotKeys[i]);
 		}
 		recentGroup = groups[0];
 	}

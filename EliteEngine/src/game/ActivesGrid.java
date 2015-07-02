@@ -13,7 +13,6 @@ import entity.UpgradeActive;
 import entity.neutral.*;
 import game.aim.MineAim;
 import main.ClientHandler;
-import main.Settings;
 import shared.Helper;
 import shared.Nation;
 import shared.ref;
@@ -132,10 +131,10 @@ public class ActivesGrid {
 					char.class);
 			if (isUnitActive) {
 				unitGrid[x][y] = (Active) ctor.newInstance(//
-						new Object[] { x, y, Settings.unitsShortcuts[y][x] });
+						new Object[] { x, y, SettingHandler.setting.unitsShortcuts[y][x] });
 			} else {
 				buildingGrid[x][y] = (Active) ctor.newInstance(//
-						new Object[] { x, y, Settings.buildingsShortcuts[y][x] });
+						new Object[] { x, y, SettingHandler.setting.buildingsShortcuts[y][x] });
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -154,11 +153,11 @@ public class ActivesGrid {
 					new Object[] { null });
 			if (isUnitActive) {
 				unitGrid[x][y] = (Active) ctor.newInstance(//
-						new Object[] { x, y, Settings.unitsShortcuts[y][x], b,
+						new Object[] { x, y, SettingHandler.setting.unitsShortcuts[y][x], b,
 								builder });
 			} else {
 				buildingGrid[x][y] = (Active) ctor.newInstance(//
-						new Object[] { x, y, Settings.buildingsShortcuts[y][x],
+						new Object[] { x, y, SettingHandler.setting.buildingsShortcuts[y][x],
 								b, builder });
 			}
 
@@ -179,10 +178,10 @@ public class ActivesGrid {
 					new Object[] { null });
 			if (isUnitActive) {
 				unitGrid[x][y] = new TrainActive(x, y,
-						Settings.unitsShortcuts[y][x], u, trainer);
+						SettingHandler.setting.unitsShortcuts[y][x], u, trainer);
 			} else {
 				buildingGrid[x][y] = new TrainActive(x, y,
-						Settings.buildingsShortcuts[y][x], u, trainer);
+						SettingHandler.setting.buildingsShortcuts[y][x], u, trainer);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -198,10 +197,10 @@ public class ActivesGrid {
 					new Object[] { null });
 			if (isUnitActive) {
 				unitGrid[x][y] = new BuildActive(x, y,
-						Settings.unitsShortcuts[y][x], b, builder);
+						SettingHandler.setting.unitsShortcuts[y][x], b, builder);
 			} else {
 				buildingGrid[x][y] = new BuildActive(x, y,
-						Settings.buildingsShortcuts[y][x], b, builder);
+						SettingHandler.setting.buildingsShortcuts[y][x], b, builder);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -218,10 +217,10 @@ public class ActivesGrid {
 					.newInstance(new Object[] { null });
 			if (isUnitActive) {
 				unitGrid[x][y] = new UpgradeActive(x, y,
-						Settings.unitsShortcuts[y][x], b, oldBuilding, builder);
+						SettingHandler.setting.unitsShortcuts[y][x], b, oldBuilding, builder);
 			} else {
 				buildingGrid[x][y] = new UpgradeActive(x, y,
-						Settings.buildingsShortcuts[y][x], b, oldBuilding,
+						SettingHandler.setting.buildingsShortcuts[y][x], b, oldBuilding,
 						builder);
 			}
 		} catch (Exception e) {
@@ -241,10 +240,10 @@ public class ActivesGrid {
 
 			if (isUnitActive) {
 				unitGrid[x][y] = new MineAim.BuildMineActive(x, y,
-						Settings.unitsShortcuts[y][x], b, builder);
+						SettingHandler.setting.unitsShortcuts[y][x], b, builder);
 			} else {
 				buildingGrid[x][y] = new MineAim.BuildMineActive(x, y,
-						Settings.buildingsShortcuts[y][x], b, builder);
+						SettingHandler.setting.buildingsShortcuts[y][x], b, builder);
 			}
 
 		} catch (Exception e) {
@@ -262,10 +261,10 @@ public class ActivesGrid {
 					new Object[] { null });
 			if (isUnitActive) {
 				unitGrid[x][y] = new BuildWallActive(x, y,
-						Settings.unitsShortcuts[y][x], b, builder);
+						SettingHandler.setting.unitsShortcuts[y][x], b, builder);
 			} else {
 				buildingGrid[x][y] = new BuildWallActive(x, y,
-						Settings.buildingsShortcuts[y][x], b, builder);
+						SettingHandler.setting.buildingsShortcuts[y][x], b, builder);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

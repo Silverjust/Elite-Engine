@@ -45,7 +45,7 @@ public abstract class Updater {
 		private static int pauseTime;
 
 		public static void startPause() {
-			if (ref.updater.gameState != GameState.PAUSE) {
+			if (ref.updater.gameState == GameState.PLAY) {
 				ref.updater.gameState = GameState.PAUSE;
 				pauseStart = ref.app.millis();
 			}

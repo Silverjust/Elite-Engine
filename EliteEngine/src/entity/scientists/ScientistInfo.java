@@ -57,8 +57,11 @@ public class ScientistInfo extends NationInfo {
 		grid.addActive(3, 3, EquipActive.class, PhysicsLab.class,
 				RailgunGuineaPig.class, true);
 		grid.addActive(2, 2, EquipActive.class, BioLab.class, Cell.class, true);
+		grid.addActive(3, 2, EquipActive.class, BioLab.class, SpawnerGuineaPig.class, true);
 		grid.addActive(2, 1, EquipActive.class, ChemLab.class,
 				AirshipGuineaPig.class, true);
+		grid.addActive(3, 1, EquipActive.class, ChemLab.class,
+				RocketGuineaPig.class, true);
 	}
 
 }

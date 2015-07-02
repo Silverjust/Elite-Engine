@@ -2,6 +2,7 @@ package entity.neutral;
 
 import entity.Active;
 import entity.Entity;
+import entity.TrainActive;
 import entity.Unit;
 import entity.aliens.AlienKaserne;
 import entity.aliens.AlienKeritMine;
@@ -83,8 +84,8 @@ public class Tutorial extends Unit {
 			yTarget = y;
 			isMoving = true;
 			Chat.println(tut, "this is your mainbuilding");
-			Chat.println(tut, "press \"" + bActives[2][4].n + "\" or the "
-					+ bActives[2][4].n
+			Chat.println(tut, "press \"" + bActives[4][2].n + "\" or the "
+					+ bActives[4][2].n
 					+ "-button and place the building here with rightclick");
 			i++;
 			break;
@@ -101,7 +102,7 @@ public class Tutorial extends Unit {
 			ref.updater.send("<give " + ref.player.ip + " kerit " + 400);
 			Chat.println(tut, "you are producing kerit now");
 			Chat.println(tut, "wait until you have 500 kerit and then press \""
-					+ bActives[2][3].n + "\" or the " + bActives[2][3].n
+					+ bActives[3][2].n + "\" or the " + bActives[3][2].n
 					+ "-button and place the building here");
 			i++;
 			break;
@@ -117,8 +118,8 @@ public class Tutorial extends Unit {
 			Chat.println(tut, "you have a kaserne");
 			Chat.println(tut,
 					"wait until it is built, select the building and then press \""
-							+ bActives[2][0].n + "\" or the "
-							+ bActives[2][0].n + "-button ");
+							+ bActives[0][2].n + "\" or the "
+							+ bActives[0][2].n + "-button ");
 			i++;
 			break;
 		case 7:
@@ -132,11 +133,11 @@ public class Tutorial extends Unit {
 			yTarget = 480;
 			isMoving = true;
 			Chat.println(tut,
-					"you trained a " + bActives[2][0].clazz.getSimpleName());
+					"you trained a " + ((TrainActive)bActives[0][2]).unit.getSimpleName());
 			Chat.println(tut,
-					"train some " + bActives[2][1].clazz.getSimpleName()
-							+ " with \"" + bActives[2][1].n + "\" or the "
-							+ bActives[2][1].n
+					"train some " + ((TrainActive)bActives[1][2]).unit.getSimpleName()
+							+ " with \"" + bActives[1][2].n + "\" or the "
+							+ bActives[1][2].n
 							+ "-button and select them with leftdrag");
 			Chat.println(tut, "move the camera here and rightclick to attack");
 			Chat.println(tut, "defeat them");

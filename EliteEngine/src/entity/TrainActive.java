@@ -8,7 +8,7 @@ import g4p_controls.GGameButton;
 import shared.ref;
 
 public class TrainActive extends Active {
-	Class<? extends Unit> unit;
+	public Class<? extends Unit> unit;
 	String descr = " ", stats = " ";
 
 	public TrainActive(int x, int y, char n, Unit u,
