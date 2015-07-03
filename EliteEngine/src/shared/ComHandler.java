@@ -17,7 +17,7 @@ import entity.Entity;
 import entity.Unit;
 import game.GameUpdater;
 import game.HUD;
-//import game.endGameMenu;
+import game.endGameMenu;
 
 public class ComHandler {
 
@@ -192,7 +192,7 @@ public class ComHandler {
 				if (ref.app instanceof ServerApp) {
 					((ServerApp) ref.app).gui.addChatText(p.name + " has lost");
 				}else{
-					//HUD.menue=new endGameMenu();
+					HUD.menue=new endGameMenu();
 				}
 				break;
 			default:
