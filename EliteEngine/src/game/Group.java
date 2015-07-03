@@ -9,7 +9,7 @@ import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 
 public class Group {
-	private ArrayList<Entity> groupEntities = new ArrayList<Entity>();
+	ArrayList<Entity> groupEntities = new ArrayList<Entity>();
 	GGameButton button;
 	int x, y;
 	static int w = 50, h = 20;

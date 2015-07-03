@@ -1,15 +1,11 @@
 package main;
 
+import main.MainPreGame.GameSettings;
 import shared.Client;
 import shared.ComHandler;
 import shared.ref;
 
 public class ClientHandler {
-
-	public static boolean singlePlayer = false;
-	public static boolean sandbox = false;
-	public static boolean tutorial = false;
-
 	public static String identification;
 
 	public static Client client;
@@ -21,7 +17,7 @@ public class ClientHandler {
 
 	public static void setup(String ip) {
 
-		if (singlePlayer) {
+		if (GameSettings.singlePlayer) {
 			System.out.println("SinglePlayer");
 			identification = "1";
 		} else {
@@ -59,7 +55,7 @@ public class ClientHandler {
 
 	public static void send(String s) {
 		if (s != null) {
-			if (singlePlayer) {
+			if (GameSettings.singlePlayer) {
 				ComHandler.executeCom(s);
 			} else {
 				if (client != null && client.active()) {

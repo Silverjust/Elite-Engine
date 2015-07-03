@@ -2,6 +2,7 @@ package main;
 
 import java.util.UUID;
 
+import main.MainPreGame.GameSettings;
 import shared.Helper;
 import shared.Mode;
 import shared.ref;
@@ -61,8 +62,11 @@ public class Hauptmenue {
 		startServer = new GButton(ref.app, 650, 300, 100, 60);
 		startServer.setText("make to Server");
 		startServer.addEventHandler(this, "handleStartServerEvents");
-		
+
 		SettingHandler.setup();
+		main.MainPreGame.GameSettings.setupGameSettings();
+		ref.app.clear();
+		ref.app.background(200);
 	}
 
 	public void handleAcceptEvents(GButton button, GEvent event) {
@@ -84,25 +88,26 @@ public class Hauptmenue {
 					return;
 				}
 			} else if (button == singleplayerButton) {
-				ClientHandler.singlePlayer = true;
+				GameSettings.singlePlayer = true;
 			} else if (button == sandboxButton) {
-				ClientHandler.singlePlayer = true;
-				ClientHandler.sandbox = true;
+				GameSettings.singlePlayer = true;
+				GameSettings.sandbox = true;
 			} else if (button == tutorialButton) {
-				ClientHandler.singlePlayer = true;
-				ClientHandler.tutorial = true;
+				GameSettings.singlePlayer = true;
+				GameSettings.tutorial = true;
 			}
+			System.out.println(GameSettings.singlePlayer);
 
 			ref.preGame = new MainPreGame(name);
 			ClientHandler.setup(ip);
-			if (!ClientHandler.singlePlayer && ClientHandler.client == null) {
+			if (!GameSettings.singlePlayer && ClientHandler.client == null) {
 				serverIp.setFocus(true);
 				((MainPreGame) ref.preGame).closeBecauseServer();
 				return;
 			}
 			((MainPreGame) ref.preGame).setup();
 
-			if (ClientHandler.singlePlayer) {
+			if (GameSettings.singlePlayer) {
 				((MainApp) ref.app).mode = Mode.PREGAME;
 			}
 			dispose();

@@ -18,13 +18,15 @@ public class Chat {
 
 	protected static void setup() {// public?
 
-		chatLine = new GTextField(ref.app, 10, ref.app.height - HUD.height-20, 500, 20);
+		chatLine = new GTextField(ref.app, 10,
+				ref.app.height - HUD.height - 20, 500, 20);
 		chatLine.setPromptText("chat");
 		chatLine.setFont(new Font("PLAIN", Font.BOLD, 15));
 		chatLine.addEventHandler(ref.app, "chatEvents");
 
-		chatHistory = new GTextArea(ref.app, 10, ref.app.height - HUD.height- 220, 500,
-				200, G4P.SCROLLBARS_VERTICAL_ONLY | G4P.SCROLLBARS_AUTOHIDE);
+		chatHistory = new GTextArea(ref.app, 10, ref.app.height - HUD.height
+				- 220, 500, 200, G4P.SCROLLBARS_VERTICAL_ONLY
+				| G4P.SCROLLBARS_AUTOHIDE);
 		chatHistory.setTextEditEnabled(false);
 		chatHistory.setOpaque(false);
 		chatHistory.setFont(new Font("PLAIN", Font.BOLD, 17));
@@ -50,5 +52,10 @@ public class Chat {
 			// chatHistory.setText((String[]) chatText.toArray());
 			chatHistory.appendText(name + ">>" + s + "\n");
 		}
+	}
+
+	public static void dispose() {
+		chatLine.dispose();
+		chatHistory.dispose();
 	}
 }

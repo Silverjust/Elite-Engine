@@ -95,7 +95,8 @@ public class HUD {
 	}
 
 	public static void dispose() {
-		try {
+		try {activesGrid.dispose();
+		GroupHandler.dispose();
 			sound.close();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -2,6 +2,7 @@ package game;
 
 import java.lang.reflect.Constructor;
 
+import main.MainPreGame.GameSettings;
 import entity.Active;
 import entity.BuildActive;
 import entity.BuildWallActive;
@@ -12,7 +13,6 @@ import entity.Unit;
 import entity.UpgradeActive;
 import entity.neutral.*;
 import game.aim.MineAim;
-import main.ClientHandler;
 import shared.Helper;
 import shared.Nation;
 import shared.ref;
@@ -33,7 +33,7 @@ public class ActivesGrid {
 		Active.x = x;
 		Active.y = y;
 		setup(ref.player.nation);
-		if (ClientHandler.sandbox) {
+		if (GameSettings.sandbox) {
 			addActive(7, 1, SandboxBuilding.BuildSetup.class, false);
 		}
 	}
@@ -269,5 +269,9 @@ public class ActivesGrid {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void dispose() {
+		removeActives();
 	}
 }

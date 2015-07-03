@@ -73,4 +73,13 @@ public abstract class Updater {
 
 	public void endPause() {
 	}
+
+	public void dispose() {
+		Entity.entityCounter = 0;
+		namedEntities.clear();
+		entities.clear();
+		toAdd.clear();
+		toRemove.clear();
+		selected.clear();
+	}
 }

@@ -10,6 +10,7 @@ public class Listener implements WindowListener {
 	public void windowClosing(WindowEvent e) {
 		System.out.println("dispose");
 		ref.app.dispose();
+		System.exit(0);
 	}
 
 	@Override

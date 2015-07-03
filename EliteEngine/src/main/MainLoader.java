@@ -1,5 +1,6 @@
 package main;
 
+import main.MainPreGame.GameSettings;
 import shared.Loader;
 import shared.Mode;
 import shared.ref;
@@ -20,12 +21,13 @@ public class MainLoader extends Loader {
 			state = State.STARTIMAGES;
 			break;
 		case STARTIMAGES:
-			boolean b = ImageHandler.requestAllImages();
-			if (b) {
-				state = State.IMAGES;
-			} else {
-				state = State.ERROR;
-			}
+		
+				boolean b = ImageHandler.requestAllImages();
+				if (b) {
+					state = State.IMAGES;
+				} else {
+					state = State.ERROR;
+				}
 			break;
 		case IMAGES:
 			float f = game.ImageHandler.stateOfLoading();
@@ -43,10 +45,10 @@ public class MainLoader extends Loader {
 			break;
 		case ENTITIES:// spawn entity-setup
 
-			if (ClientHandler.singlePlayer) {
-				if (ClientHandler.sandbox)
+			if (GameSettings.singlePlayer) {
+				if (GameSettings.sandbox)
 					ref.updater.send("<spawn SandboxBuilding 0 20 20");
-				if (ClientHandler.tutorial)
+				if (GameSettings.tutorial)
 					ref.updater.send("<spawn Tutorial 0 20 20");
 				MapHandler.setupEntities(ref.updater.map.mapData);
 				/*
@@ -72,7 +74,7 @@ public class MainLoader extends Loader {
 
 			}
 			GameDrawer.setup();
-			if (ClientHandler.sandbox) {
+			if (GameSettings.sandbox) {
 				GameDrawer.godeye = true;
 				GameDrawer.godhand = true;
 				GameDrawer.nocosts = true;
@@ -112,7 +114,7 @@ public class MainLoader extends Loader {
 	@Override
 	public void tryStartGame() {
 		// do nothing when multiplayer
-		if (ClientHandler.singlePlayer)
+		if (GameSettings.singlePlayer)
 			startGame();
 	}
 }

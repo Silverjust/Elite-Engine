@@ -25,7 +25,7 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void setup() {
-		if (ClientHandler.sandbox)
+		if (GameSettings.sandbox)
 			display = new PreGameSandboxDisplay();
 		else
 			display = new PreGameNormalDisplay();
@@ -64,7 +64,9 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void setupPlayer() {
-		if (!ClientHandler.singlePlayer) {
+
+		if (!GameSettings.singlePlayer) {
+			System.out.println(GameSettings.singlePlayer);
 			addThisPlayer(name);
 		} else {
 			addThisPlayer(name);
@@ -117,6 +119,17 @@ public class MainPreGame extends PreGame {
 	public void dispose() {
 		if (display != null) {
 			display.dispose();
+		}
+	}
+
+	public static class GameSettings {
+		public static boolean singlePlayer;
+		public static boolean sandbox;
+		public static boolean tutorial;
+		public static void setupGameSettings() {
+			singlePlayer = false;
+			sandbox = false;
+			tutorial = false;
 		}
 	}
 }

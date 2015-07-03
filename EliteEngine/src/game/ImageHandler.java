@@ -11,7 +11,6 @@ import shared.ref;
 import entity.Entity;
 
 public class ImageHandler {
-
 	static String dataPath;
 	public static ArrayList<PImage> imagesToLoad = new ArrayList<PImage>();
 
@@ -155,5 +154,12 @@ public class ImageHandler {
 				.getContextClassLoader();
 		File classpathRoot = new File(classLoader.getResource("").getPath());
 		return classpathRoot.getPath() + "\\";
+	}
+
+	public static void dispose() {
+		
+		// for (int i = 0; i < imagesToLoad.size(); i++) { imagesToLoad }
+		 
+		imagesToLoad.clear();
 	}
 }

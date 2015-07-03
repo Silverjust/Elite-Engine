@@ -3,6 +3,7 @@ package game;
 import java.util.Collections;
 
 import main.ClientHandler;
+import main.MainPreGame.GameSettings;
 import shared.Helper;
 import shared.Player;
 import shared.Updater;
@@ -64,7 +65,7 @@ public class GameUpdater extends Updater {
 			// sortierfunktion
 			Collections.sort(ref.player.visibleEntities,
 					new EntityHeightComparator());
-			if (ClientHandler.singlePlayer) {
+			if (GameSettings.singlePlayer) {
 				for (Entity e : entities) {
 					e.updateAnimation();
 					e.updateDecisions();

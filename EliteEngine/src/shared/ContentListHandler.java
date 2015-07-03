@@ -1,6 +1,6 @@
 package shared;
 
-import main.ClientHandler;
+import main.MainPreGame.GameSettings;
 import processing.data.JSONObject;
 
 public class ContentListHandler {
@@ -19,7 +19,7 @@ public class ContentListHandler {
 
 	public static JSONObject getModeMaps() {
 		return contentList.getJSONObject("maps").getJSONObject(
-				ClientHandler.tutorial ? "tutorial" : "standard");
+				GameSettings.tutorial ? "tutorial" : "standard");
 
 	}
 }

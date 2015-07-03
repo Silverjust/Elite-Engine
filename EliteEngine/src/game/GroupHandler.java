@@ -26,4 +26,12 @@ public class GroupHandler {
 	public static void fireGroup(int i) {
 		groups[i].button.pressManually();
 	}
+
+	public static void dispose() {
+		for (int i = 0; i < groups.length; i++) {
+			groups[i].button.dispose();
+			groups[i].groupEntities.clear();
+		}
+		groups = null;
+	}
 }

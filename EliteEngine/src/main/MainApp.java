@@ -36,7 +36,7 @@ public class MainApp extends PApplet {
 
 	public Mode mode;
 
-	Hauptmenue hauptmenue;
+	public Hauptmenue hauptmenue;
 
 	public void setup() {
 		size(displayWidth, displayHeight, P2D);
@@ -147,7 +147,6 @@ public class MainApp extends PApplet {
 		}
 		frame.setVisible(false);
 		super.dispose();
-		System.exit(0);
 	}
 
 }
