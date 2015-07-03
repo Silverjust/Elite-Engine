@@ -13,6 +13,7 @@ import entity.Unit;
 import entity.UpgradeActive;
 import entity.neutral.*;
 import game.aim.MineAim;
+import main.ClientHandler;
 import shared.Helper;
 import shared.Nation;
 import shared.ref;
@@ -42,7 +43,6 @@ public class ActivesGrid {
 		if (nation != null) {
 			removeActives();
 			this.nation = nation;
-			System.out.println(nation + " " + nation.getNationInfo());
 			nation.getNationInfo().setupActives(this);
 		}
 	}

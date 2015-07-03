@@ -48,7 +48,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		xSize = 15;
 		ySize = 15;
 
-		kerit = 28;
+		kerit = 40;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;

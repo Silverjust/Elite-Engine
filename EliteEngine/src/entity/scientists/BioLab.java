@@ -26,7 +26,7 @@ public class BioLab extends Lab {
 		animation = nextAnimation = walk;
 		// ************************************
 		kerit = 600;
-		pax = 0;
+		pax = 50;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 1000;

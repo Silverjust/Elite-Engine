@@ -28,7 +28,7 @@ public class PhysicsLab extends Lab {
 
 		kerit = 600;
 		pax = 0;
-		arcanum = 0;
+		arcanum = 30;
 		prunam = 0;
 		trainTime = 1000;
 
