@@ -230,9 +230,9 @@ public class Input {
 			default:
 				break;
 			}
-		}
-		if (event.getAction() == KeyEvent.PRESS && app.key == PConstants.ESC) {
-			app.key = 0;
+			if (app.key == PConstants.ESC) {
+				app.key = 0;
+			}
 		}
 	}
 

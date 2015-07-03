@@ -121,6 +121,12 @@ public class MainPreGame extends PreGame {
 			display.dispose();
 		}
 	}
+	@Override
+	public void setActive(boolean b) {
+		if (display != null) {
+			display.setActive( b);
+		}
+	}
 
 	public static class GameSettings {
 		public static boolean singlePlayer;

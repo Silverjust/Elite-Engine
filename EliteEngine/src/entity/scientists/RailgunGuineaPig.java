@@ -44,8 +44,8 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 
 		kerit = 100;
 		pax = 0;
-		arcanum = 7;
-		prunam = 4;
+		arcanum = 0;
+		prunam = 10;
 		trainTime = 1500;
 
 		hp = hp_max = 60;

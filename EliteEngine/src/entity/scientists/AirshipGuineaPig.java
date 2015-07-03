@@ -18,7 +18,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 	private static PImage standingImg;
 
 	byte aggroRange;
-
+	boolean isAnchored;
 	ShootAttack basicAttack;
 
 	public static void loadImages() {
@@ -46,7 +46,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		kerit = 800;
 		pax = 0;
 		arcanum = 150;
-		prunam = 80;
+		prunam = 0;
 		trainTime = 1500;
 
 		hp = hp_max = 700;
@@ -80,7 +80,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-						/* && e.groundPosition == GroundPosition.AIR */) {
+								/*&& (e.groundPosition == GroundPosition.AIR || isAnchored)*/) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;

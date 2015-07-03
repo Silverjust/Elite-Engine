@@ -12,9 +12,8 @@ import g4p_controls.GEvent;
 import g4p_controls.GPassword;
 import g4p_controls.GTextArea;
 import g4p_controls.GTextField;
-import game.SettingHandler;
 
-public class Hauptmenue {
+public class StartPage {
 
 	GTextField playerName, serverIp;
 	GPassword password;
@@ -22,7 +21,7 @@ public class Hauptmenue {
 			tutorialButton, localhost, startServer;
 	GTextArea changes;
 
-	public Hauptmenue() {
+	public StartPage() {
 		playerName = new GTextField(ref.app, 300, 300, 300, 20);
 		playerName.setText(UUID.randomUUID().toString().substring(0, 8));
 		playerName.setPromptText("your name");
@@ -63,9 +62,12 @@ public class Hauptmenue {
 		startServer.setText("make to Server");
 		startServer.addEventHandler(this, "handleStartServerEvents");
 
-		SettingHandler.setup();
 		main.MainPreGame.GameSettings.setupGameSettings();
 		ref.app.clear();
+		ref.app.background(200);
+	}
+
+	public void update() {
 		ref.app.background(200);
 	}
 
@@ -146,4 +148,23 @@ public class Hauptmenue {
 
 		}
 	}
+
+	public void setActive(boolean b) {
+		try {
+		
+			playerName.setEnabled(b);
+			password.setEnabled(b);
+			serverIp.setEnabled(b);
+			localhost.setEnabled(b);
+			multiplayerButton.setEnabled(b);
+			singleplayerButton.setEnabled(b);
+			sandboxButton.setEnabled(b);
+			tutorialButton.setEnabled(b);
+			changes.setEnabled(b);
+			startServer.setEnabled(b);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

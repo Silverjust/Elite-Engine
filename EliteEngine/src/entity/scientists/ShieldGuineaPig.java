@@ -49,9 +49,9 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		ySize = 15;
 
 		kerit = 120;
-		pax = 0;
-		arcanum = 15;
-		prunam = 0;
+		pax = 20;
+		arcanum = 0;
+		prunam = 4;
 		trainTime = 1500;
 
 		shield_max = 40;

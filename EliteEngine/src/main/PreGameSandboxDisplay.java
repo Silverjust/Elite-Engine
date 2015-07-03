@@ -132,4 +132,11 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 		playerDroplistNation.dispose();
 		addPlayer.dispose();
 	}
+	@Override
+	public void setActive(boolean b) {
+		super.setActive(b);
+		playerDroplist.setEnabled(b);
+		playerDroplistNation.setEnabled(b);
+		addPlayer.setEnabled(b);
+	}
 }

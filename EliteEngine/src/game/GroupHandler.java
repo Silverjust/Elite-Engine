@@ -28,10 +28,12 @@ public class GroupHandler {
 	}
 
 	public static void dispose() {
-		for (int i = 0; i < groups.length; i++) {
-			groups[i].button.dispose();
-			groups[i].groupEntities.clear();
+		if (groups != null) {
+			for (int i = 0; i < groups.length; i++) {
+				groups[i].button.dispose();
+				groups[i].groupEntities.clear();
+			}
+			groups = null;
 		}
-		groups = null;
 	}
 }

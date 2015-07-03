@@ -38,7 +38,7 @@ public class SpawnerGuineaPig extends Unit {
 
 		kerit = 230;
 		pax = 400;
-		arcanum = 0;
+		arcanum = 20;
 		prunam = 0;
 		trainTime = 5000;
 

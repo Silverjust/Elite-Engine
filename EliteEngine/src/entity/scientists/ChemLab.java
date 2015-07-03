@@ -27,8 +27,8 @@ public class ChemLab extends Lab {
 		// ************************************
 		kerit = 600;
 		pax = 0;
-		arcanum = 0;
-		prunam = 10;
+		arcanum = 30;
+		prunam = 0;
 		trainTime = 1000;
 
 		descr = " ";

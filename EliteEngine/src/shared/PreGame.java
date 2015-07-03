@@ -17,4 +17,7 @@ public abstract class PreGame {
 
 	public void dispose() {
 	}
+
+	public void setActive(boolean b) {		
+	}
 }

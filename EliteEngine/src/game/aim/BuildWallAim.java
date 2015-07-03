@@ -106,10 +106,10 @@ public class BuildWallAim extends BuildAim {
 	}
 
 	public static void setupWall(Entity e, String[] c) {
-		if (c != null && c[5].equals("start")
+		if (c != null && c[5] != null && c[5].equals("start")
 				&& AimHandler.getAim() instanceof BuildWallAim)
 			((BuildWallAim) AimHandler.getAim()).startedAt(e.x, e.y);
-		else if (c != null && c[5].equals("part")
+		else if (c != null && c[5] != null && c[5].equals("part")
 				&& AimHandler.getAim() instanceof BuildWallAim) {
 			e.x = Float.parseFloat(c[3]);
 			e.y = Float.parseFloat(c[4]);

@@ -4,19 +4,21 @@ import g4p_controls.G4P;
 import g4p_controls.GEditableTextControl;
 import g4p_controls.GEvent;
 import g4p_controls.GTextField;
-import g4p_controls.GValueControl;
 import game.Chat;
 import game.GameDrawer;
 import game.HUD;
+import game.SettingHandler;
 
 import javax.swing.JFrame;
 
 import ddf.minim.Minim;
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PFont;
 import shared.Client;
 import shared.CommandHandler;
 import shared.Helper;
+import shared.Menu;
 import shared.Mode;
 import shared.ref;
 
@@ -36,7 +38,9 @@ public class MainApp extends PApplet {
 
 	public Mode mode;
 
-	public Hauptmenue hauptmenue;
+	public StartPage startPage;
+
+	public Menu menu;
 
 	public void setup() {
 		size(displayWidth, displayHeight, P2D);
@@ -60,7 +64,8 @@ public class MainApp extends PApplet {
 		FrameInfo.setup();
 		ref.setMinim(new Minim(this));
 
-		hauptmenue = new Hauptmenue();
+		SettingHandler.setup();
+		startPage = new StartPage();
 	}
 
 	public void draw() {
@@ -68,6 +73,7 @@ public class MainApp extends PApplet {
 		case HAUPTLADESCREEN:
 			break;
 		case HAUPTMENUE:
+			startPage.update();
 			break;
 		case PREGAME:
 			ref.preGame.update();
@@ -124,7 +130,19 @@ public class MainApp extends PApplet {
 		}
 	}
 
-	public void handleSliderEvents(GValueControl slider, GEvent event) { /* code */
+	@Override
+	public void keyPressed() {
+		if (mode != Mode.GAME && key == SettingHandler.setting.togglePause) {
+			if (menu == null) {
+				menu = new PreGameMenu();
+			} else {
+				menu.dispose();
+				menu = null;
+			}
+		}
+		if (mode != Mode.GAME && key == PConstants.ESC) {
+			key = 0;
+		}
 	}
 
 	public void clientEvent(Client someClient) {
@@ -134,8 +152,8 @@ public class MainApp extends PApplet {
 	@Override
 	public void dispose() {// Player in schlieﬂen
 		try {
-			if (hauptmenue != null)
-				hauptmenue.dispose();
+			if (startPage != null)
+				startPage.dispose();
 			if (ref.preGame != null)
 				ref.preGame.dispose();
 			HUD.dispose();

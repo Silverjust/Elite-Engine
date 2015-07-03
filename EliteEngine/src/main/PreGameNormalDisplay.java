@@ -163,4 +163,15 @@ public class PreGameNormalDisplay {
 			}
 		}
 	}
+
+	public void setActive(boolean b) {
+		startButton.setEnabled(b);
+		playerSlider.setEnabled(b);
+		mapSelector.setEnabled(b);
+		if (nationButtons[0] != null) {
+			for (int i = 0; i < nationButtons.length; i++) {
+				nationButtons[i].setVisible(b);
+			}
+		}
+	}
 }

@@ -1,8 +1,8 @@
 package game;
 
 import shared.Menu;
-
 import main.FrameInfo;
+import main.OptionsMenu;
 import shared.ref;
 import g4p_controls.G4P;
 import g4p_controls.GButton;
@@ -38,6 +38,7 @@ public class IngameMenu extends Menu {
 				dispose();
 			} else if (button == options) {
 				dispose();
+				HUD.menue=new OptionsMenu();
 			} else if (button == returnToGame) {
 				ref.updater.send("<pause false");
 			}
