@@ -42,10 +42,10 @@ public class SpawnerGuineaPig extends Unit {
 		prunam = 0;
 		trainTime = 5000;
 
-		hp = hp_max = 120;
+		hp = hp_max = 400;
 		speed = 0.9f;
 		radius = 7;
-		sight = 70;
+		sight = 90;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		spawnRange = 90;

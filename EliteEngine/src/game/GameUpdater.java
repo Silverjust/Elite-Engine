@@ -97,13 +97,13 @@ public class GameUpdater extends Updater {
 
 	@Override
 	public void startPause() {
-		HUD.menue = new IngameMenu();
+		//HUD.menue = new IngameMenu();
 	}
 
 	@Override
 	public void endPause() {
-		HUD.menue.dispose();
-		HUD.menue = null;
+		//HUD.menue.dispose();
+		//HUD.menue = null;
 	}
 
 }

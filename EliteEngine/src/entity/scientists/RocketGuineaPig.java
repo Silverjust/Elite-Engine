@@ -45,7 +45,7 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 		kerit = 28;
 		pax = 0;
 		arcanum = 0;
-		prunam = 0;
+		prunam = 3;
 		trainTime = 1500;
 
 		hp = hp_max = 30;
@@ -54,7 +54,7 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 		radius = 6;
 		sight = 70;
 		height=25;
-		groundPosition = Entity.GroundPosition.GROUND;
+		groundPosition = Entity.GroundPosition.AIR;
 
 		aggroRange = (byte) (radius + 50);
 		basicAttack.damage = 10;

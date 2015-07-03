@@ -48,14 +48,14 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		xSize = 15;
 		ySize = 15;
 
-		kerit = 28;
+		kerit = 120;
 		pax = 0;
-		arcanum = 0;
+		arcanum = 15;
 		prunam = 0;
 		trainTime = 1500;
 
 		shield_max = 40;
-		hp = hp_max = 60;
+		hp = hp_max = 100;
 		armor = 1;
 		speed = 0.9f;
 		radius = 7;
@@ -63,7 +63,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 10;
+		basicAttack.damage = 3;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 1500;
 		basicAttack.range = 40;

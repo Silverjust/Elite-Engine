@@ -45,7 +45,7 @@ public class Cell extends Unit implements Attacker {
 		ySize = 15;
 
 		kerit = 28;
-		pax = 0;
+		pax = 20;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 1500;
