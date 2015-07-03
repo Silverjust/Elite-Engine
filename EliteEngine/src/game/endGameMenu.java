@@ -1,9 +1,7 @@
 package game;
 
 import shared.Menu;
-import shared.Mode;
 import main.FrameInfo;
-import main.Hauptmenue;
 import main.MainApp;
 import shared.ref;
 import g4p_controls.G4P;
@@ -25,17 +23,17 @@ public class endGameMenu extends Menu {
 	}
 
 	public void handleButtonEvents(GButton button, GEvent event) {
+		System.out.println(event);
 		if (event == GEvent.CLICKED) {
-			ref.app.clear();
-			ref.app.background(200);
-			dispose();
+			/*
+			 * ref.app.clear(); ref.app.background(200); dispose();
+			 * ref.updater.dispose(); ImageHandler.dispose(); HUD.dispose();
+			 * Chat.dispose(); ((MainApp) ref.app).hauptmenue = new
+			 * Hauptmenue(); ((MainApp) ref.app).mode = Mode.HAUPTMENUE;
+			 */
 			G4P.setGlobalColorScheme(G4P.BLUE_SCHEME);
-			ref.updater.dispose();
-			ImageHandler.dispose();
-			HUD.dispose();
-			Chat.dispose();
-			((MainApp) ref.app).hauptmenue = new Hauptmenue();
-			((MainApp) ref.app).mode = Mode.HAUPTMENUE;
+			MainApp.main(new String[] { "main.MainApp" });
+			ref.app.dispose();
 		}
 	}
 
