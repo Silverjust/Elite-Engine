@@ -15,7 +15,7 @@ public abstract class Lab extends Unit {
 
 		hp = hp_max = 700;
 		armor = 1;
-		speed = 0.9f;
+		speed = 0.7f;
 		radius = 12;
 		height = 20;
 		sight = 70;

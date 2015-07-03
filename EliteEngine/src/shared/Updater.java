@@ -67,4 +67,10 @@ public abstract class Updater {
 						- (pauseTime + ref.app.millis() - pauseStart);
 		}
 	}
+
+	public void startPause() {
+	}
+
+	public void endPause() {
+	}
 }

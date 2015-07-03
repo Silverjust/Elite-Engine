@@ -128,10 +128,6 @@ public class Input {
 			}
 
 		}
-		if (app.key == PConstants.ESC) {
-			app.key = 0;
-		}
-
 	}
 
 	public void keyReleased() {// ********************************************************
@@ -234,6 +230,9 @@ public class Input {
 			default:
 				break;
 			}
+		}
+		if (event.getAction() == KeyEvent.PRESS && app.key == PConstants.ESC) {
+			app.key = 0;
 		}
 	}
 

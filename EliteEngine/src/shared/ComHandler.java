@@ -16,6 +16,8 @@ import shared.Updater.GameState;
 import entity.Entity;
 import entity.Unit;
 import game.GameUpdater;
+import game.HUD;
+import game.endGameMenu;
 
 public class ComHandler {
 
@@ -174,8 +176,10 @@ public class ComHandler {
 			case "<pause":
 				if (Boolean.valueOf(c[1])) {
 					Updater.Time.startPause();
+					ref.updater.startPause();
 				} else {
 					Updater.Time.endPause();
+					ref.updater.endPause();
 				}
 				break;
 			case "<lost":
@@ -187,6 +191,8 @@ public class ComHandler {
 				}
 				if (ref.app instanceof ServerApp) {
 					((ServerApp) ref.app).gui.addChatText(p.name + " has lost");
+				}else{
+					HUD.menue=new endGameMenu();
 				}
 				break;
 			default:

@@ -1,6 +1,8 @@
 added scientists 
 added guineapig, 
- shield-unit,railgun-unit
+ shield-unit, railgun-unit,
+ heal-unit, spawn-unit,
+ air-tank, air-unit
 -------------------------
 added wall for humans
 ------------------------

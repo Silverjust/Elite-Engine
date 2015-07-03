@@ -43,7 +43,7 @@ public class SpawnerGuineaPig extends Unit {
 		trainTime = 5000;
 
 		hp = hp_max = 120;
-		speed = 0.7f;
+		speed = 0.9f;
 		radius = 7;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;

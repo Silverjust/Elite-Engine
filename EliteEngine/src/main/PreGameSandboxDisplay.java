@@ -13,6 +13,7 @@ import g4p_controls.GSlider;
 public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 	GDropList playerDroplist;
 	GDropList playerDroplistNation;
+	int previousNation;
 	GButton addPlayer;
 
 	public PreGameSandboxDisplay() {
@@ -35,9 +36,15 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 
 		playerDroplistNation = new GDropList(ref.app, 420, 200, 100, 200, 5);
 		String[] nations = new String[Nation.values().length];
-		for (int i = 0; i < nations.length; i++)
+		int neutralIndex = -1;
+		for (int i = 0; i < nations.length; i++) {
 			nations[i] = Nation.values()[i].toString();
-		playerDroplistNation.setItems(nations, 0);
+			if (nations[i].equals("neutral")) {
+				nations[i] = " ";
+				neutralIndex = i;
+			}
+		}
+		playerDroplistNation.setItems(nations, neutralIndex);
 		playerDroplistNation
 				.addEventHandler(this, "handleDroplistSelectNation");
 
@@ -71,7 +78,7 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 			Nation n = preGame.player
 					.get(enemyArr[droplist.getSelectedIndex()]).nation;
 			byte b = -1;
-			if (n!=null) {
+			if (n != null) {
 				for (byte j = 0; j < Nation.values().length; j++) {
 					if (Nation.values()[j].toString().equals(n.toString()))
 						b = j;
@@ -79,6 +86,7 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 			}
 			System.out.println(b);
 			playerDroplistNation.setSelected(b);
+			previousNation = b;
 		}
 	}
 
@@ -91,6 +99,17 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 				enemyArr[i] = preGame.player.get(key).ip;
 				i++;
 			}
+			int neutralIndex = -1;
+			for (int j = 0; j < Nation.values().length; j++) {
+				if (Nation.values()[j] == Nation.NEUTRAL) {
+					neutralIndex = j;
+				}
+			}
+			if (droplist.getSelectedIndex() == neutralIndex) {
+				droplist.setSelected(previousNation);
+				return;
+			}
+			previousNation = droplist.getSelectedIndex();
 			ClientHandler.send("<setNation "
 					+ enemyArr[playerDroplist.getSelectedIndex()] + " "
 					+ droplist.getSelectedText());

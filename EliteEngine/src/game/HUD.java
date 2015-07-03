@@ -4,6 +4,7 @@ import ddf.minim.AudioPlayer;
 import g4p_controls.G4P;
 import g4p_controls.GCScheme;
 import processing.core.PImage;
+import shared.Menu;
 import shared.ref;
 
 public class HUD {
@@ -15,6 +16,8 @@ public class HUD {
 	public static ActivesGrid activesGrid;
 
 	public static AudioPlayer sound;
+	
+	public static Menu menue;
 
 	public static void loadImages() {
 		keritImg = ImageHandler.load("", "Kerit");
