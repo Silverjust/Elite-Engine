@@ -16,6 +16,8 @@ public class ServerHandler {
 
 	char endSymbol = '>';
 
+	private boolean doProtocol = true;
+
 	ServerHandler() {
 		app = (ServerApp) ref.app;
 
@@ -27,6 +29,9 @@ public class ServerHandler {
 	}
 
 	void update() {
+		if (doProtocol && ref.app.frameCount % 100 == 0) 
+			 Protocol.collectInfos();
+		
 		if (server != null) {
 			while (server.available() != null) {
 				Client client = server.available();
@@ -36,6 +41,9 @@ public class ServerHandler {
 
 						if (app.gui.displayCommands.isSelected())
 							app.gui.addChatText("in  " + input);
+
+						if (doProtocol)
+							Protocol.filterComs("< ", input);
 
 						if (input.charAt(0) == '<')
 							ComHandler.executeCom(input);
@@ -65,6 +73,8 @@ public class ServerHandler {
 	public void send(String out) {
 		if (app.gui.displayCommands.isSelected())
 			app.gui.addChatText("out " + out + endSymbol);
+		if (doProtocol)
+			Protocol.filterComs("> ", out);
 		server.write(out + endSymbol);
 	}
 
