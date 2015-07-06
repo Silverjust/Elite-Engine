@@ -2,6 +2,7 @@ package entity.scientists;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import server.ServerApp;
 import shared.ContentListHandler;
 import shared.ref;
 import entity.Active;
@@ -133,8 +134,14 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if (unit != null && unit.canBeBought(player)) {
-				unit.buyFrom(player);
+			if (ref.app instanceof ServerApp) {
+				if (unit != null && unit.canBeBought(player)) {
+					unit.buyFrom(player);
+					isMoving = false;
+					setAnimation(equip);
+					equip.setUnit(unit);
+				}
+			} else {
 				isMoving = false;
 				setAnimation(equip);
 				equip.setUnit(unit);

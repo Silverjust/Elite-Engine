@@ -5,6 +5,7 @@ import entity.Trainer;
 import entity.Unit;
 import processing.core.PApplet;
 import processing.core.PImage;
+import server.ServerApp;
 import shared.ContentListHandler;
 import shared.Updater;
 import shared.ref;
@@ -83,10 +84,17 @@ public class Training extends Ability {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if (toTrain != null && toTrain.canBeBought(trainer.player)) {
-				toTrain.buyFrom(trainer.player);
-				Training a = (Training) ((Trainer) trainer).getTraining();
+			if (ref.app instanceof ServerApp) {
+				if (toTrain != null && toTrain.canBeBought(trainer.player)) {
+					toTrain.buyFrom(trainer.player);
+					Training a = (Training) ((Trainer) trainer).getTraining();
 
+					a.cooldown = ((Unit) toTrain).trainTime;// cooldown=traintime
+					a.setEntity(toTrain);
+					trainer.setAnimation(a);
+				}
+			} else {
+				Training a = (Training) ((Trainer) trainer).getTraining();
 				a.cooldown = ((Unit) toTrain).trainTime;// cooldown=traintime
 				a.setEntity(toTrain);
 				trainer.setAnimation(a);
