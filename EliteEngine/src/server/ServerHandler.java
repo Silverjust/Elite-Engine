@@ -16,7 +16,7 @@ public class ServerHandler {
 
 	char endSymbol = '>';
 
-	private boolean doProtocol = true;
+	private boolean doProtocol = false;
 
 	ServerHandler() {
 		app = (ServerApp) ref.app;
