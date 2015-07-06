@@ -24,6 +24,8 @@ public class SpawnerGuineaPig extends Unit {
 
 	public SpawnerGuineaPig(String[] c) {
 		super(c);
+		GuineaPig.setupEquip(this, c);
+
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);

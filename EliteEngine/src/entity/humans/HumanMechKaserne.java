@@ -12,6 +12,7 @@ import entity.animation.Training;
 import game.ImageHandler;
 
 public class HumanMechKaserne extends Building implements  Trainer {
+	//TODO animation richtig anzeigen
 	protected float xTarget;
 	protected float yTarget;
 

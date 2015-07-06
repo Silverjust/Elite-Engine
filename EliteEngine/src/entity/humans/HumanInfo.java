@@ -45,7 +45,7 @@ public class HumanInfo extends NationInfo {
 		grid.addBuildActive(4, 3, Commander.class, HumanKaserne.class, false);
 		grid.addBuildActive(4, 2, Commander.class, HumanMechKaserne.class,
 				false);
-		grid.addBuildActive(4, 1, Commander.class, HumanDepot.class, false);
+		grid.addBuildActive(5, 1, Commander.class, HumanDepot.class, false);
 		grid.addActive(5, 2, BuildWallActive.class, Commander.class,
 				HumanWall.class, false);
 		grid.addActive(5, 3, BuildMineActive.class, Commander.class,

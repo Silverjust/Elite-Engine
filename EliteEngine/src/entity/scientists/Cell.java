@@ -30,7 +30,8 @@ public class Cell extends Unit implements Attacker {
 	}
 
 	public Cell(String[] c) {
-		super(c);
+		super(c);		GuineaPig.setupEquip(this, c);
+
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
@@ -39,7 +40,6 @@ public class Cell extends Unit implements Attacker {
 		heal = new MeleeAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
-		isSelected = true;// previus unit was selected
 		// ************************************
 		xSize = 15;
 		ySize = 15;

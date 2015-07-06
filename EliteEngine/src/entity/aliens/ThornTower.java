@@ -4,7 +4,6 @@ import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.ref;
-import entity.Attacker;
 import entity.Building;
 import entity.Commander;
 import entity.Entity;
@@ -16,7 +15,7 @@ import entity.animation.Death;
 import entity.animation.ShootAttack;
 import game.ImageHandler;
 
-public class ThornTower extends Building implements Attacker, Shooter,
+public class ThornTower extends Building implements  Shooter,
 		Commander {
 	private int commandingRange;
 

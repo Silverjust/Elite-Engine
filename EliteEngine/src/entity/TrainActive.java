@@ -29,8 +29,21 @@ public class TrainActive extends Active {
 				trainer = e;
 			}
 		}
-		if (trainer != null)
+
+		Entity toTrain = null;
+		try {
+			toTrain = unit.getConstructor(String[].class).newInstance(
+					new Object[] { null });
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (trainer != null && toTrain != null
+				&& toTrain.canBeBought(trainer.player)) {
+			toTrain.buyFrom(trainer.player);
 			trainer.sendAnimation("train " + unit.getSimpleName());
+		}
+
 	}
 
 	@Override

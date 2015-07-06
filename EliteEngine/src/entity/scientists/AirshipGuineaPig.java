@@ -29,6 +29,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 
 	public AirshipGuineaPig(String[] c) {
 		super(c);
+		GuineaPig.setupEquip(this, c);
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
@@ -37,8 +38,6 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
-		isSelected = true;// previus unit was selected
-
 		// ************************************
 		xSize = 20;
 		ySize = 20;

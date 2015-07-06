@@ -27,7 +27,8 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	public RailgunGuineaPig(String[] c) {
-		super(c);
+		super(c);		GuineaPig.setupEquip(this, c);
+
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
@@ -36,8 +37,6 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		animation = nextAnimation = walk;
-		isSelected = true;// previus unit was selected
-
 		// ************************************
 		xSize = 15;
 		ySize = 15;

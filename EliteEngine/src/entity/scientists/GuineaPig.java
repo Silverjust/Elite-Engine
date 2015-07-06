@@ -2,7 +2,6 @@ package entity.scientists;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import server.ServerApp;
 import shared.ContentListHandler;
 import shared.ref;
 import entity.Active;
@@ -19,7 +18,7 @@ import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 
 public class GuineaPig extends Unit implements Attacker, Shooter {
-
+	// TODO bugg bei dem einheiten stehenbleiben, instaselect überarbeiten
 	private static PImage standingImg;
 
 	byte aggroRange;
@@ -134,14 +133,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if (ref.app instanceof ServerApp) {
-				if (unit != null && unit.canBeBought(player)) {
-					unit.buyFrom(player);
-					isMoving = false;
-					setAnimation(equip);
-					equip.setUnit(unit);
-				}
-			} else {
+			if (unit != null) {
 				isMoving = false;
 				setAnimation(equip);
 				equip.setUnit(unit);
@@ -181,6 +173,12 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
+	static void setupEquip(Entity e, String[] c) {
+		if (c != null && c[7] != null && c[7].equals("select"))
+			e.isSelected = true;
+
+	}
+
 	public static class Equip extends Ability {
 
 		private String unit;
@@ -210,7 +208,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 				ref.updater.send(//
 						"<spawn " + unit + " " + e.player.ip + " " + e.x + " "
 								+ e.y + " " + ((Unit) e).xTarget + " "
-								+ ((Unit) e).yTarget);
+								+ ((Unit) e).yTarget + " select");
 			}
 		}
 
@@ -254,7 +252,18 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 						}
 					}
 			}
-			if (trainer != null) {
+			Unit newUnit = null;
+			try {
+				newUnit = unit.getConstructor(String[].class).newInstance(
+						new Object[] { null });
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			if (trainer != null && newUnit != null
+					&& newUnit.canBeBought(trainer.player)) {
+				newUnit.buyFrom(trainer.player);
+
 				trainer.sendAnimation("equip " + unit.getSimpleName());
 			}
 		}

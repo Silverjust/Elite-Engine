@@ -34,6 +34,8 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 
 	public ShieldGuineaPig(String[] c) {
 		super(c);
+		GuineaPig.setupEquip(this, c);
+
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
@@ -43,7 +45,6 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		regenerate = new MeleeAttack(shieldImg, 800);// shield regeneration
 
 		animation = nextAnimation = walk;
-		isSelected = true;//previus unit was selected
 		// ************************************
 		xSize = 15;
 		ySize = 15;
