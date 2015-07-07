@@ -62,7 +62,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 		basicAttack.damage = 40;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 3000;
-		basicAttack.range = 90;
+		basicAttack.range = 100;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
 
@@ -110,8 +110,8 @@ public class Tank extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
-				+ a.damage + " " + a.pirce);
+		//ref.updater.send("<hit " + basicAttack.getTarget().number + " "
+		//		+ a.damage + " " + a.pirce);
 		Entity target = ((ShootAttack) a).getTarget();
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
@@ -138,12 +138,12 @@ public class Tank extends Unit implements Attacker, Shooter {
 				progress);
 		ref.app.fill(255, 100, 0);
 		ref.app.strokeWeight(0);
-		if (progress < 0.9) {
-			ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
-		} else {
-			ref.app.ellipse(xToGrid(x), yToGrid(y), splashrange * 2,
-					splashrange);
-		}
+		// if (progress < 0.9) {
+		ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
+		// } else {
+		// ref.app.ellipse(xToGrid(x), yToGrid(y), splashrange * 2,
+		// splashrange);
+		// }
 		ref.app.strokeWeight(1);
 	}
 

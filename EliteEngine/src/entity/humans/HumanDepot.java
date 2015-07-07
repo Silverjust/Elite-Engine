@@ -11,12 +11,14 @@ import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Build;
 import entity.animation.Death;
+import entity.animation.Explosion;
 import entity.animation.ShootAttack;
 import game.ImageHandler;
 
 public class HumanDepot extends Building implements Commander, Shooter {
 	private int commandingRange;
 	ShootAttack basicAttack;
+	private byte splashrange;
 	private static PImage standImg;
 
 	public static void loadImages() {
@@ -33,6 +35,7 @@ public class HumanDepot extends Building implements Commander, Shooter {
 		build = new Build(standImg, 5000);
 		death = new Death(standImg, 1000);
 		basicAttack = new ShootAttack(standImg, 1000);
+		basicAttack.explosion = new Explosion(standImg, 800);
 
 		animation = nextAnimation = build;
 		// ************************************
@@ -50,11 +53,12 @@ public class HumanDepot extends Building implements Commander, Shooter {
 		hp = hp_max = 1000;
 		radius = 13;
 
+		splashrange = 10;
 		basicAttack.range = 70;
-		basicAttack.damage = 55;
-		basicAttack.cooldown = 2000;
+		basicAttack.damage = 13;
+		basicAttack.cooldown = 1500;
 		basicAttack.setCastTime(500);// eventtime is defined by target distance
-		basicAttack.speed = 0.1f;
+		basicAttack.speed = 0.5f;
 
 		commandingRange = 250;
 
@@ -95,9 +99,14 @@ public class HumanDepot extends Building implements Commander, Shooter {
 
 	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
-				+ a.damage + " " + a.pirce);
-
+		Entity target = ((ShootAttack) a).getTarget();
+		for (Entity e : ref.updater.entities) {
+			if (e != null & e.isEnemyTo(this)
+					&& e.isInRange(target.x, target.y, e.radius + splashrange)) {
+				ref.updater.send("<hit " + e.number + " " + a.damage + " "
+						+ a.pirce);
+			}
+		}
 	}
 
 	@Override

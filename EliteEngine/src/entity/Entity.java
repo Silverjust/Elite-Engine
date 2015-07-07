@@ -328,9 +328,14 @@ public abstract class Entity implements Informing {
 		if (radius == 0 || e.radius == 0)
 			return false;
 		float f = PApplet.dist(x, y, e.x, e.y);
-		boolean b = f < radius + e.radius && e.groundPosition == groundPosition;
+		boolean b = f < radius + e.radius && e.groundPosition == groundPosition
+				&& e.isCollidable(this);
 		// if(b)System.out.println(number + "/" + e.number + ":" + f + b);
 		return b;
+	}
+
+	public boolean isCollidable(Entity entity) {
+		return true;
 	}
 
 	public boolean isInRange(float X, float Y, int R) {

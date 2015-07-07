@@ -21,7 +21,8 @@ public class Explosion extends Animation {
 	public void setup(Entity e) {
 		start = Updater.Time.getMillis();
 	}
-
+	
+	@Override
 	@Deprecated
 	public void update(Entity e) {
 		if (isFinished()) {

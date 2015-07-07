@@ -99,6 +99,13 @@ public class SpawnerGuineaPig extends Unit {
 	}
 
 	@Override
+	public boolean isCollidable(Entity entity) {
+		if (entity.getClass() == GuineaPig.class)
+			return false;
+		return true;
+	}
+
+	@Override
 	public void renderGround() {
 		drawSelected();
 		// drawCircle(spawnRange);
