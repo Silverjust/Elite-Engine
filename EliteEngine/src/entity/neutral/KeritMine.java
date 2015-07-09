@@ -5,7 +5,6 @@ import entity.Building;
 import entity.animation.Extract;
 
 public abstract class KeritMine extends Building {
-	// TODO easy production system
 
 	protected static final int efficenty = 17;
 	protected static final String ressource = "kerit";

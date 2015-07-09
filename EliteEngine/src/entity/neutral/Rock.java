@@ -19,7 +19,6 @@ public class Rock extends Building {
 	public Rock(String[] c) {
 		super(c);
 		BuildWallAim.setupWall(this, c);
-		// TODO für wall
 		player = ref.updater.neutral;// neutral
 
 		iconImg = standImg;

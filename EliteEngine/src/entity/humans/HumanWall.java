@@ -21,7 +21,6 @@ public class HumanWall extends Building {
 	public HumanWall(String[] c) {
 		super(c);
 		BuildWallAim.setupWall(this, c);
-		// TODO für wall
 
 		iconImg = standImg;
 		stand = new Animation(standImg, 1000);

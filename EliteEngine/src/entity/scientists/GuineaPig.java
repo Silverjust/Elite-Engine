@@ -18,7 +18,6 @@ import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
 
 public class GuineaPig extends Unit implements Attacker, Shooter {
-	// TODO bugg bei dem einheiten stehenbleiben, instaselect überarbeiten
 	private static PImage standingImg;
 
 	byte aggroRange;
@@ -48,14 +47,14 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		xSize = 15;
 		ySize = 15;
 
-		kerit = 40;
+		kerit = 50;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		trainTime = 1500;
+		trainTime = 1200;
 
 		hp = hp_max = 30;
-		armor = 1;
+		armor = 2;
 		speed = 0.9f;
 		radius = 5;
 		sight = 70;
