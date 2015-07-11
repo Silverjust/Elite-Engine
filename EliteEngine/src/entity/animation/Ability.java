@@ -56,13 +56,14 @@ public class Ability extends Animation {
 		eventTime = castTime;
 	}
 
-	protected void startCooldown() {
+	public void startCooldown() {
 		cooldownTimer = Updater.Time.getMillis() + cooldown;
 	}
 
 	public float getCooldownPercent() {
 		float f = 1 - (float) (cooldownTimer - Updater.Time.getMillis())
 				/ cooldown;
+		System.out.println("Ability.getCooldownPercent()" + f);
 		return f > 1 || f < 0 ? 1 : f;
 	}
 
@@ -83,5 +84,4 @@ public class Ability extends Animation {
 		return true;
 	}
 
-	
 }

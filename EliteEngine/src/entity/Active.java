@@ -52,7 +52,7 @@ public abstract class Active implements Informing {
 					&& isNotOnCooldown()
 					&& ref.updater.gameState == GameState.PLAY) {
 				onButtonPressed(gamebutton, event);
-				//startCooldown();
+				// startCooldown();
 			}
 		} else {
 			SelectionDisplay.setIforming(this);

@@ -7,6 +7,7 @@ import entity.Unit;
 import entity.scientists.Lab;
 import entity.scientists.PhysicsLab;
 import entity.scientists.PhysicsLab.TeleportActive;
+import game.AimHandler;
 import game.AimHandler.Cursor;
 
 public class TeleportAim extends Aim {
@@ -17,6 +18,7 @@ public class TeleportAim extends Aim {
 	public TeleportAim(PhysicsLab origin, TeleportActive active) {
 		this.origin = origin;
 		this.active = active;
+		System.out.println("TeleportAim.TeleportAim()");
 	}
 
 	@Override
@@ -40,6 +42,9 @@ public class TeleportAim extends Aim {
 				target = e;
 		}
 		if (target != null) {
+			System.out.println("TeleportAim.execute()");
+			origin.getTeleport().startCooldown(); 
+			target.sendAnimation("recieveTeleport");
 			for (Entity e : ref.updater.entities) {
 				if (e.isAllyTo(ref.player) && e instanceof Unit
 						&& !(e instanceof Lab)
@@ -49,6 +54,7 @@ public class TeleportAim extends Aim {
 							+ (e.y + target.y - origin.y));
 			}
 			active.startCooldown();
+			AimHandler.end();
 		}
 	}
 }
