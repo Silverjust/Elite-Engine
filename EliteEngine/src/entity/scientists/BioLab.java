@@ -29,7 +29,7 @@ public class BioLab extends Lab {
 		pax = 50;
 		arcanum = 0;
 		prunam = 0;
-		trainTime = 1000;
+		trainTime = TRAINTIME;
 
 		descr = " ";
 		stats = " ";

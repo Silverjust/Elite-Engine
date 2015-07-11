@@ -63,6 +63,8 @@ public class ScientistInfo extends NationInfo {
 				AirshipGuineaPig.class, true);
 		grid.addActive(6, 1, EquipActive.class, ChemLab.class,
 				RocketGuineaPig.class, true);
+
+		grid.addActive(1, 3, PhysicsLab.TeleportActive.class, true);
 	}
 
 }

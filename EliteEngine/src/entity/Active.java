@@ -21,7 +21,7 @@ public abstract class Active implements Informing {
 	public char n;
 
 	protected int cooldown;
-	protected int cooldownTimer;
+	private int cooldownTimer;
 
 	private PImage symbol;
 
@@ -52,7 +52,7 @@ public abstract class Active implements Informing {
 					&& isNotOnCooldown()
 					&& ref.updater.gameState == GameState.PLAY) {
 				onButtonPressed(gamebutton, event);
-				startCooldown();
+				//startCooldown();
 			}
 		} else {
 			SelectionDisplay.setIforming(this);
@@ -70,7 +70,7 @@ public abstract class Active implements Informing {
 			button.pressManually();
 	}
 
-	protected void startCooldown() {
+	public void startCooldown() {
 		cooldownTimer = Updater.Time.getMillis() + cooldown;
 		button.setThisEnabled(false);
 	}

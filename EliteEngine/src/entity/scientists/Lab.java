@@ -4,7 +4,7 @@ import entity.Entity;
 import entity.Unit;
 
 public abstract class Lab extends Unit {
-
+	protected static final int TRAINTIME = 3000;
 	public byte equipRange;
 
 	public Lab(String[] c) {

@@ -9,11 +9,14 @@ import entity.animation.Animation;
 import entity.animation.Death;
 import g4p_controls.GEvent;
 import g4p_controls.GGameButton;
+import game.AimHandler;
 import game.ImageHandler;
+import game.aim.TeleportAim;
 
 public class PhysicsLab extends Lab {
 
 	private static PImage standingImg;
+	public static PImage teleportImg;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -36,54 +39,37 @@ public class PhysicsLab extends Lab {
 		pax = 0;
 		arcanum = 0;
 		prunam = 10;
-		trainTime = 1000;
+		trainTime = TRAINTIME;
 
 		descr = " ";
 		stats = " ";
 		// ************************************
 	}
-	public static class EquipActive extends Active {
-		Class<? extends Unit> unit;
-		Class<?> lab;
-		String descr = " ", stats = " ";
 
-		public EquipActive(int x, int y, char n, Entity u, Class<?> trainer) {
-			super(x, y, n, u.iconImg);
-			clazz = GuineaPig.class;
-			lab = trainer;
-			unit = ((Unit) u).getClass();
-			descr = u.getDesription();
-			stats = u.getStatistics();
+	public static class TeleportActive extends Active {
+
+		public TeleportActive(int x, int y, char n) {
+			super(x, y, n, teleportImg);
+			cooldown = 60000;
+			clazz = PhysicsLab.class;
 		}
 
 		@Override
 		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
-			Entity trainer = null;
+			PhysicsLab trainer = null;
 			for (Entity e : ref.updater.selected) {
-				if (clazz.isAssignableFrom(e.getClass())
+				if (e instanceof PhysicsLab
 						&& (e.getAnimation() == e.stand || e.getAnimation() == ((Unit) e).walk))
-					for (Entity e2 : ref.player.visibleEntities) {
-						if (e2.player == e.player
-								&& e2.getClass().equals(lab)
-								&& e.isInRange(e2.x, e2.y, e.radius
-										+ ((Lab) e2).equipRange)) {
-							trainer = e;
-						}
-					}
+					trainer = (PhysicsLab) e;
 			}
 			if (trainer != null) {
-				trainer.sendAnimation("equip " + unit.getSimpleName());
+				AimHandler.setAim(new TeleportAim(trainer, this));
 			}
 		}
 
 		@Override
 		public String getDesription() {
-			return descr;
-		}
-
-		@Override
-		public String getStatistics() {
-			return stats;
+			return "teleports units  from §physicslab to physicslab";
 		}
 	}
 

@@ -29,7 +29,7 @@ public class ChemLab extends Lab {
 		pax = 0;
 		arcanum = 30;
 		prunam = 0;
-		trainTime = 1000;
+		trainTime = TRAINTIME;
 
 		descr = " ";
 		stats = " ";

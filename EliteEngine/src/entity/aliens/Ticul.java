@@ -161,7 +161,7 @@ public class Ticul extends Unit implements Attacker {
 						* range;
 				ClientHandler.send("<tp " + e.number + " " + x + " " + y);
 			}
-
+			startCooldown();
 		}
 
 		@Override
