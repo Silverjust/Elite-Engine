@@ -168,14 +168,6 @@ public class Input {
 			}
 		}
 		if (isMouseFocusInGame()) {
-			if (AimHandler.isAiming()
-					&& app.mouseButton == SettingHandler.setting.mouseSelect) {
-				AimHandler.end();
-			}
-			if (AimHandler.isAiming()
-					&& app.mouseButton == SettingHandler.setting.mouseCommand) {
-				AimHandler.execute();
-			}
 			if (!AimHandler.isAiming()
 					&& app.mouseButton == SettingHandler.setting.mouseCommand) {
 				for (Entity entity : ref.updater.selected) {
@@ -184,7 +176,14 @@ public class Input {
 							+ Helper.gridToY(app.mouseY));
 				}// TODO Pfeil anzeigen
 			}
-
+			if (AimHandler.isAiming()
+					&& app.mouseButton == SettingHandler.setting.mouseSelect) {
+				AimHandler.end();
+			}
+			if (AimHandler.isAiming()
+					&& app.mouseButton == SettingHandler.setting.mouseCommand) {
+				AimHandler.execute();
+			}
 		}// unabhängig von mouse fokus
 	}
 

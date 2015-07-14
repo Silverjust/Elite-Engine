@@ -18,7 +18,6 @@ public class TeleportAim extends Aim {
 	public TeleportAim(PhysicsLab origin, TeleportActive active) {
 		this.origin = origin;
 		this.active = active;
-		System.out.println("TeleportAim.TeleportAim()");
 	}
 
 	@Override
@@ -42,7 +41,6 @@ public class TeleportAim extends Aim {
 				target = e;
 		}
 		if (target != null) {
-			System.out.println("TeleportAim.execute()");
 			origin.getTeleport().startCooldown(); 
 			target.sendAnimation("recieveTeleport");
 			for (Entity e : ref.updater.entities) {

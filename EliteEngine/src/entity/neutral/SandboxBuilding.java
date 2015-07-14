@@ -9,8 +9,6 @@ import entity.Building;
 import entity.Commander;
 import entity.Entity;
 import entity.animation.Animation;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
 import game.AimHandler;
 import game.HUD;
 import game.aim.DeleteAim;
@@ -81,7 +79,7 @@ public class SandboxBuilding extends Building implements Commander {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 			HUD.activesGrid.setupSandbox();
 		}
 
@@ -100,7 +98,7 @@ public class SandboxBuilding extends Building implements Commander {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 			AimHandler.setAim(new DeleteAim());
 		}
 
@@ -119,7 +117,7 @@ public class SandboxBuilding extends Building implements Commander {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 			int i = 0;
 			for (Entity e : ref.updater.entities) {
 				if (e instanceof SandboxBuilding) {
@@ -153,7 +151,7 @@ public class SandboxBuilding extends Building implements Commander {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 			ref.preGame.addPlayer((ref.updater.player.size() + 1) + "",
 					"player" + (ref.updater.player.size() + 1));
 		}

@@ -33,6 +33,7 @@ public class MouseSelection {
 			for (Entity e : ref.updater.entities) {
 				e.isSelected = false;
 			}
+			ref.updater.selected.clear();
 		} else {
 			for (Entity e : ref.updater.selected) {
 				if (e instanceof Unit)
@@ -44,21 +45,24 @@ public class MouseSelection {
 			if (GameDrawer.godhand || e.isAllyTo(ref.player)) {
 				if (shared.Helper.isBetween(e.x, e.y, x1, y1, x2, y2)) {
 					e.isSelected = true;
+					ref.updater.selected.add(e);
 					if (e instanceof Unit)
 						containsUnits = true;
 				}
 				if (PApplet.dist(x1, y1, e.x, e.y - e.height) <= e.radius) {
 					e.isSelected = true;
+					ref.updater.selected.add(e);
 					if (e instanceof Unit)
 						containsUnits = true;
-					if (e.player.nation != HUD.activesGrid.nation&&e.player.nation !=Nation.NEUTRAL) {
-						//for commanding other nations
+					if (e.player.nation != HUD.activesGrid.nation
+							&& e.player.nation != Nation.NEUTRAL) {
+						// for commanding other nations
 						HUD.activesGrid.setup(e.player.nation);
 					}
 				}
 			}
 		}
-		ActivesGrid.showUnitActives = containsUnits;
+		HUD.activesGrid.selectionChange(containsUnits);
 		GroupHandler.recentGroup = null;
 	}
 
@@ -79,13 +83,13 @@ public class MouseSelection {
 				if (GameDrawer.godhand || e.isAllyTo(ref.player)) {
 					if (e.getClass().equals(type)) {
 						e.isSelected = true;
+						ref.updater.selected.add(e);
 						if (e instanceof Unit)
 							containsUnits = true;
 					}
-
 				}
 			}
-			ActivesGrid.showUnitActives = containsUnits;
+			HUD.activesGrid.selectionChange(containsUnits);
 			GroupHandler.recentGroup = null;
 		}
 	}

@@ -9,8 +9,6 @@ import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.MeleeAttack;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
 import game.ImageHandler;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -151,7 +149,7 @@ public class Ticul extends Unit implements Attacker {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 			for (Entity e : ref.updater.selected) {
 				float tx = Helper.gridToX(ref.app.mouseX);
 				float ty = Helper.gridToY(ref.app.mouseY);

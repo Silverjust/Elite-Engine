@@ -4,8 +4,6 @@ import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.ref;
 import entity.animation.Build;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
 import game.AimHandler;
 import game.Chat;
 import game.ImageHandler;
@@ -92,7 +90,7 @@ public abstract class Building extends Entity {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 
 			AimHandler.setAim(new SetTargetAim(clazz));
 

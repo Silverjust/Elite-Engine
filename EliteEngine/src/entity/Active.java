@@ -51,7 +51,7 @@ public abstract class Active implements Informing {
 			if (event == GEvent.PRESSED && gamebutton.isVisible()
 					&& isNotOnCooldown()
 					&& ref.updater.gameState == GameState.PLAY) {
-				onButtonPressed(gamebutton, event);
+				onActivation();
 				// startCooldown();
 			}
 		} else {
@@ -59,7 +59,7 @@ public abstract class Active implements Informing {
 		}
 	}
 
-	public abstract void onButtonPressed(GGameButton gamebutton, GEvent event);
+	public abstract void onActivation();
 
 	public void setVisible(boolean b) {
 		button.setVisible(b);

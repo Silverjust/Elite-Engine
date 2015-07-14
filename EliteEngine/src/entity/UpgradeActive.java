@@ -1,8 +1,6 @@
 package entity;
 
 import shared.ref;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
 import game.AimHandler;
 import game.aim.UpgradeAim;
 
@@ -22,7 +20,7 @@ public class UpgradeActive extends Active {
 	}
 
 	@Override
-	public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+	public void onActivation() {
 		Entity builder = null;
 		for (Entity e : ref.updater.selected) {
 			if (clazz.isAssignableFrom(e.getClass())) {

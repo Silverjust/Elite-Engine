@@ -14,8 +14,6 @@ import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.ShootAttack;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
 
 public class GuineaPig extends Unit implements Attacker, Shooter {
 	private static PImage standingImg;
@@ -237,7 +235,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 			Entity trainer = null;
 			for (Entity e : ref.updater.selected) {
 				if (clazz.isAssignableFrom(e.getClass())

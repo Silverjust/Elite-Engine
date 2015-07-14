@@ -3,8 +3,6 @@ package entity;
 import entity.Active;
 import entity.Entity;
 import entity.Unit;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
 import shared.ref;
 
 public class TrainActive extends Active {
@@ -21,7 +19,7 @@ public class TrainActive extends Active {
 	}
 
 	@Override
-	public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+	public void onActivation() {
 		Entity trainer = null;
 		for (Entity e : ref.updater.selected) {
 			if (clazz.isAssignableFrom(e.getClass())

@@ -9,8 +9,6 @@ import entity.neutral.Arcanum;
 import entity.neutral.Kerit;
 import entity.neutral.Pax;
 import entity.neutral.Prunam;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
 import game.AimHandler;
 
 public class MineAim extends UpgradeAim {
@@ -77,7 +75,7 @@ public class MineAim extends UpgradeAim {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 			Entity builder = null;
 			for (Entity e : ref.updater.selected) {
 				if (clazz.isAssignableFrom(e.getClass())) {

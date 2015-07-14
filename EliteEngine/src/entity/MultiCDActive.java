@@ -51,9 +51,8 @@ public abstract class MultiCDActive extends Active {
 		for (Entity e : ref.updater.selected) {
 			if (clazz.isAssignableFrom(e.getClass())) {
 				try {
-					Ability ability1 = (Ability) abilityGetter
-							.invoke(lowestCDEntity);
-					float f1 = ability1.getCooldownPercent();
+					float f1 = ((Ability) abilityGetter.invoke(lowestCDEntity))
+							.getCooldownPercent();
 					float f2 = ((Ability) abilityGetter.invoke(e))
 							.getCooldownPercent();
 					if (f2 > f1) {
@@ -70,10 +69,10 @@ public abstract class MultiCDActive extends Active {
 
 	@Override
 	public boolean isNotOnCooldown() {
-		boolean b = true;
+		boolean b = false;
 		if (lowestCDEntity == null)
 			searchEntity();
-		if (abilityGetter != null) {
+		if (abilityGetter != null && lowestCDEntity != null) {
 			try {
 				b = ((Ability) abilityGetter.invoke(lowestCDEntity))
 						.isNotOnCooldown();
@@ -95,7 +94,14 @@ public abstract class MultiCDActive extends Active {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(f);
 		return f > 1 || f < 0 ? 1 : f;
+	}
+
+	@Override
+	public void setVisible(boolean b) {
+		super.setVisible(b);
+		if (!ref.updater.selected.contains(lowestCDEntity))
+			lowestCDEntity = null;
+		searchEntity();
 	}
 }

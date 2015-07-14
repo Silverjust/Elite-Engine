@@ -8,8 +8,6 @@ import entity.Unit;
 import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.Death;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
 import game.AimHandler;
 import game.ImageHandler;
 import game.aim.TeleportAim;
@@ -78,7 +76,7 @@ public class PhysicsLab extends Lab {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 			PhysicsLab trainer = null;
 			for (Entity e : ref.updater.selected) {
 				if (e instanceof PhysicsLab
@@ -86,8 +84,6 @@ public class PhysicsLab extends Lab {
 					trainer = (PhysicsLab) e;
 			}
 			if (trainer != null) {
-				System.out
-						.println("PhysicsLab.TeleportActive.onButtonPressed()");
 				trainer.sendAnimation("sendTeleport");
 				AimHandler.setAim(new TeleportAim(trainer, this));
 			}

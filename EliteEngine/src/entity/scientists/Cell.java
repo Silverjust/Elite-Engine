@@ -10,8 +10,6 @@ import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.MeleeAttack;
-import g4p_controls.GEvent;
-import g4p_controls.GGameButton;
 
 public class Cell extends Unit implements Attacker {
 
@@ -135,7 +133,7 @@ public class Cell extends Unit implements Attacker {
 		}
 
 		@Override
-		public void onButtonPressed(GGameButton gamebutton, GEvent event) {
+		public void onActivation() {
 			Entity trainer = null;
 			for (Entity e : ref.updater.selected) {
 				if (clazz.isAssignableFrom(e.getClass())) {

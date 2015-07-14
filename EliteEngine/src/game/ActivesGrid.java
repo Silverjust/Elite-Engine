@@ -36,6 +36,7 @@ public class ActivesGrid {
 		if (GameSettings.sandbox) {
 			addActive(7, 1, SandboxBuilding.BuildSetup.class, false);
 		}
+		selectionChange(false);
 	}
 
 	void setup(Nation nation) {
@@ -47,35 +48,15 @@ public class ActivesGrid {
 	}
 
 	public void update() {
-		if (showUnitActives) {
-			for (int x = 0; x < gridWidth; x++) {
-				for (int y = 0; y < gridHeight; y++) {
-					if (unitGrid[x][y] != null)
-						if (Helper.listContainsInstanceOf(unitGrid[x][y].clazz,
-								ref.updater.selected)) {
-							unitGrid[x][y].setVisible(true);
-							unitGrid[x][y].update();
-						} else
-							unitGrid[x][y].setVisible(false);
-					if (buildingGrid[x][y] != null)
-						buildingGrid[x][y].setVisible(false);
-				}
-			}
-		} else {
-			for (int x = 0; x < gridWidth; x++) {
-				for (int y = 0; y < gridHeight; y++) {
-					if (unitGrid[x][y] != null)
-						unitGrid[x][y].setVisible(false);
-					if (buildingGrid[x][y] != null)
-						if (Helper.listContainsInstanceOf(
-								buildingGrid[x][y].clazz, ref.updater.selected)) {
-							buildingGrid[x][y].setVisible(true);
-							buildingGrid[x][y].update();
-						} else
-							buildingGrid[x][y].setVisible(false);
-				}
-			}
-		}
+		for (int x = 0; x < gridWidth; x++)
+			for (int y = 0; y < gridHeight; y++)
+				if (unitGrid[x][y] != null)
+					unitGrid[x][y].update();
+
+		for (int x = 0; x < gridWidth; x++)
+			for (int y = 0; y < gridHeight; y++)
+				if (buildingGrid[x][y] != null)
+					buildingGrid[x][y].update();
 	}
 
 	public void fire(int x, int y) {
@@ -130,10 +111,12 @@ public class ActivesGrid {
 					char.class);
 			if (isUnitActive) {
 				unitGrid[x][y] = (Active) ctor.newInstance(//
-						new Object[] { x, y, SettingHandler.setting.unitsShortcuts[y][x] });
+						new Object[] { x, y,
+								SettingHandler.setting.unitsShortcuts[y][x] });
 			} else {
 				buildingGrid[x][y] = (Active) ctor.newInstance(//
-						new Object[] { x, y, SettingHandler.setting.buildingsShortcuts[y][x] });
+						new Object[] { x, y,
+								SettingHandler.setting.buildingsShortcuts[y][x] });
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,11 +135,15 @@ public class ActivesGrid {
 					new Object[] { null });
 			if (isUnitActive) {
 				unitGrid[x][y] = (Active) ctor.newInstance(//
-						new Object[] { x, y, SettingHandler.setting.unitsShortcuts[y][x], b,
+						new Object[] { x, y,
+								SettingHandler.setting.unitsShortcuts[y][x], b,
 								builder });
 			} else {
 				buildingGrid[x][y] = (Active) ctor.newInstance(//
-						new Object[] { x, y, SettingHandler.setting.buildingsShortcuts[y][x],
+						new Object[] {
+								x,
+								y,
+								SettingHandler.setting.buildingsShortcuts[y][x],
 								b, builder });
 			}
 
@@ -180,7 +167,8 @@ public class ActivesGrid {
 						SettingHandler.setting.unitsShortcuts[y][x], u, trainer);
 			} else {
 				buildingGrid[x][y] = new TrainActive(x, y,
-						SettingHandler.setting.buildingsShortcuts[y][x], u, trainer);
+						SettingHandler.setting.buildingsShortcuts[y][x], u,
+						trainer);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -199,7 +187,8 @@ public class ActivesGrid {
 						SettingHandler.setting.unitsShortcuts[y][x], b, builder);
 			} else {
 				buildingGrid[x][y] = new BuildActive(x, y,
-						SettingHandler.setting.buildingsShortcuts[y][x], b, builder);
+						SettingHandler.setting.buildingsShortcuts[y][x], b,
+						builder);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -216,11 +205,12 @@ public class ActivesGrid {
 					.newInstance(new Object[] { null });
 			if (isUnitActive) {
 				unitGrid[x][y] = new UpgradeActive(x, y,
-						SettingHandler.setting.unitsShortcuts[y][x], b, oldBuilding, builder);
+						SettingHandler.setting.unitsShortcuts[y][x], b,
+						oldBuilding, builder);
 			} else {
 				buildingGrid[x][y] = new UpgradeActive(x, y,
-						SettingHandler.setting.buildingsShortcuts[y][x], b, oldBuilding,
-						builder);
+						SettingHandler.setting.buildingsShortcuts[y][x], b,
+						oldBuilding, builder);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -242,7 +232,8 @@ public class ActivesGrid {
 						SettingHandler.setting.unitsShortcuts[y][x], b, builder);
 			} else {
 				buildingGrid[x][y] = new MineAim.BuildMineActive(x, y,
-						SettingHandler.setting.buildingsShortcuts[y][x], b, builder);
+						SettingHandler.setting.buildingsShortcuts[y][x], b,
+						builder);
 			}
 
 		} catch (Exception e) {
@@ -263,7 +254,8 @@ public class ActivesGrid {
 						SettingHandler.setting.unitsShortcuts[y][x], b, builder);
 			} else {
 				buildingGrid[x][y] = new BuildWallActive(x, y,
-						SettingHandler.setting.buildingsShortcuts[y][x], b, builder);
+						SettingHandler.setting.buildingsShortcuts[y][x], b,
+						builder);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -272,5 +264,36 @@ public class ActivesGrid {
 
 	public void dispose() {
 		removeActives();
+	}
+
+	public void selectionChange(boolean containsUnits) {
+		showUnitActives = containsUnits;
+		if (showUnitActives) {
+			for (int x = 0; x < gridWidth; x++) {
+				for (int y = 0; y < gridHeight; y++) {
+					if (unitGrid[x][y] != null)
+						if (Helper.listContainsInstanceOf(unitGrid[x][y].clazz,
+								ref.updater.selected)) {
+							unitGrid[x][y].setVisible(true);
+						} else
+							unitGrid[x][y].setVisible(false);
+					if (buildingGrid[x][y] != null)
+						buildingGrid[x][y].setVisible(false);
+				}
+			}
+		} else {
+			for (int x = 0; x < gridWidth; x++) {
+				for (int y = 0; y < gridHeight; y++) {
+					if (unitGrid[x][y] != null)
+						unitGrid[x][y].setVisible(false);
+					if (buildingGrid[x][y] != null)
+						if (Helper.listContainsInstanceOf(
+								buildingGrid[x][y].clazz, ref.updater.selected)) {
+							buildingGrid[x][y].setVisible(true);
+						} else
+							buildingGrid[x][y].setVisible(false);
+				}
+			}
+		}
 	}
 }
