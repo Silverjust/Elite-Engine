@@ -1,6 +1,7 @@
 package entity.scientists;
 
 import processing.core.PImage;
+import shared.Nation;
 import shared.ref;
 import entity.Entity;
 import entity.MultiCDActive;
@@ -24,6 +25,8 @@ public class PhysicsLab extends Lab {
 		String path = path(new Object() {
 		});
 		standingImg = ImageHandler.load(path, "PhysicsLab");
+		teleportImg = ImageHandler.load(Nation.SCIENTISTS.toString() + "/symbols/",
+				"teleport");
 	}
 
 	public PhysicsLab(String[] c) {

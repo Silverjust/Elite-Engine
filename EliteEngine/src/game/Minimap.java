@@ -1,6 +1,8 @@
 package game;
 
+import main.FrameInfo;
 import entity.Entity;
+import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import shared.Helper;
@@ -56,5 +58,24 @@ public class Minimap {
 		graphics.endDraw();
 		ref.app.image(graphics, 10 + dw, ref.app.height - HUD.height + 10 + dh);
 
+	}
+
+	public static void click(int x, int y, boolean doMouseCommands) {
+		if (Helper.isOver(x, y, 10 + dw, ref.app.height - HUD.height + 10 + dh,
+				10 + dw + (w * s), ref.app.height - HUD.height + 10 + dh
+						+ (h * s))) {
+			float xGrid = PApplet.map(x, 10 + dw, 10 + dw + (w * s), 0, w), yGrid = PApplet
+					.map(y, ref.app.height - HUD.height + 10 + dh,
+							ref.app.height - HUD.height + 10 + dh + (h * s), 0,
+							h);
+			if (doMouseCommands)
+				((GameUpdater) ref.updater).input.mouseCommands(xGrid, yGrid);
+			if (ref.app.mouseButton == SettingHandler.setting.mouseSelect) {
+				GameDrawer.xMapOffset = -xGrid * GameDrawer.zoom
+						+ FrameInfo.width / 2;
+				GameDrawer.yMapOffset = -yGrid * GameDrawer.zoom / 2
+						+ FrameInfo.height / 2;
+			}
+		}
 	}
 }

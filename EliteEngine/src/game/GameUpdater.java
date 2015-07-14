@@ -51,12 +51,10 @@ public class GameUpdater extends Updater {
 				player.get(key).visibleEntities.clear();
 				for (Entity e : entities) {
 
-					if (player.get(key) == ref.player) {
-						selected.remove(e);
-						if (e.isSelected) {
-							selected.add(e);
-						}
-					}
+					/*
+					 * if (player.get(key) == ref.player) { selected.remove(e);
+					 * if (e.isSelected) { selected.add(e); } }
+					 */
 					if (GameDrawer.godeye || e.isVisibleTo(player.get(key))) {
 						player.get(key).visibleEntities.add(e);
 					}

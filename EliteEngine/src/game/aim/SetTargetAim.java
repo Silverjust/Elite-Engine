@@ -21,10 +21,10 @@ public class SetTargetAim extends Aim {
 	}
 
 	@Override
-	public void execute() {
-		float x, y;
+	public void execute(float x, float y) {
+		/*float x, y;
 		x = Entity.xToGrid(Entity.gridToX());
-		y = Entity.xToGrid(Entity.gridToY());
+		y = Entity.xToGrid(Entity.gridToY());*/
 		for (Entity e : ref.updater.selected) {
 			if (trainerClass.isAssignableFrom(e.getClass())) {
 				e.sendAnimation("setTarget " + x + " " + y);

@@ -168,23 +168,12 @@ public class Input {
 			}
 		}
 		if (isMouseFocusInGame()) {
-			if (!AimHandler.isAiming()
-					&& app.mouseButton == SettingHandler.setting.mouseCommand) {
-				for (Entity entity : ref.updater.selected) {
-					ClientHandler.send("<execute " + entity.number + " walk "
-							+ Helper.gridToX(app.mouseX) + " "
-							+ Helper.gridToY(app.mouseY));
-				}// TODO Pfeil anzeigen
-			}
-			if (AimHandler.isAiming()
-					&& app.mouseButton == SettingHandler.setting.mouseSelect) {
-				AimHandler.end();
-			}
-			if (AimHandler.isAiming()
-					&& app.mouseButton == SettingHandler.setting.mouseCommand) {
-				AimHandler.execute();
-			}
-		}// unabhängig von mouse fokus
+			mouseCommands(Helper.gridToX(app.mouseX),
+					Helper.gridToY(app.mouseY));
+		} else {
+			Minimap.click(app.mouseX, app.mouseY,true);
+		}
+		// unabhängig von mouse fokus
 	}
 
 	public void mouseReleased() {// ********************************************************
@@ -197,17 +186,13 @@ public class Input {
 	}
 
 	public void mouseDragged() {// ********************************************************
-		if (Chat.chatLine.hasFocus()) {
-		} else {// chat out of focus
-		}// unabhängig von chat fokus
-
+		if (!isMouseFocusInGame()) {
+			Minimap.click(app.mouseX, app.mouseY,true);
+		}
 	}
 
 	public void mouseMoved() {// ********************************************************
-		if (Chat.chatLine.hasFocus()) {
-		} else {// chat out of focus
-		}// unabhängig von chat fokus
-
+		
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {// ********************************************************
@@ -253,6 +238,24 @@ public class Input {
 			default:
 				break;
 			}
+		}
+	}
+
+	void mouseCommands(float x, float y) {
+		if (!AimHandler.isAiming()
+				&& app.mouseButton == SettingHandler.setting.mouseCommand) {
+			for (Entity entity : ref.updater.selected) {
+				ClientHandler.send("<execute " + entity.number + " walk " + x
+						+ " " + y);
+			}// TODO Pfeil anzeigen
+		}
+		if (AimHandler.isAiming()
+				&& app.mouseButton == SettingHandler.setting.mouseSelect) {
+			AimHandler.end();
+		}
+		if (AimHandler.isAiming()
+				&& app.mouseButton == SettingHandler.setting.mouseCommand) {
+			AimHandler.execute(x,y);
 		}
 	}
 }

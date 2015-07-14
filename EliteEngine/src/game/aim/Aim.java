@@ -12,7 +12,7 @@ public class Aim {
 
 	}
 
-	public void execute() {
+	public void execute(float x, float y) {
 	}
 
 	public void end() {

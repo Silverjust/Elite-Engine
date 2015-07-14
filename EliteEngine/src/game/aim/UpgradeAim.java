@@ -17,10 +17,10 @@ public class UpgradeAim extends BuildAim {
 
 	@Override
 	public
-	void execute() {
-		float x, y;
+	void execute(float x, float y) {
+		/*float x, y;
 		x = Building.xToGrid(Building.gridToX());
-		y = Building.xToGrid(Building.gridToY());
+		y = Building.xToGrid(Building.gridToY());*/
 		if (canPlaceAt(x, y)) {
 			ref.updater.send("<remove " + replaced.number);
 			ref.updater.send("<spawn " + buildable.getClass().getSimpleName()

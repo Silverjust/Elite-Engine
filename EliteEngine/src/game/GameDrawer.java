@@ -34,7 +34,8 @@ public class GameDrawer {
 	}
 
 	public static void update() {
-		ref.app.background(255);
+		ref.app.clear();
+		ref.app.background(0);
 		ref.app.pushMatrix();
 		ref.app.translate(xMapOffset, yMapOffset);
 		ref.app.scale(zoom);

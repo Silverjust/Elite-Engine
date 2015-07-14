@@ -25,10 +25,9 @@ public class AimHandler {
 		}
 	}
 
-	public static void execute() {
+	public static void execute(float x, float y) {
 		if (aim != null) {
-			aim.execute();
-			// abort();
+			aim.execute( x,  y);
 		}
 	}
 

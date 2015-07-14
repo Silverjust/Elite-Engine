@@ -65,11 +65,12 @@ public class BuildWallAim extends BuildAim {
 	}
 
 	@Override
-	public void execute() {
+	public void execute(float x, float y) {
 		if (isStartWall) {
-			float x, y;
-			x = Entity.xToGrid(Entity.gridToX());
-			y = Entity.xToGrid(Entity.gridToY());
+			/*
+			 * float x, y; x = Entity.xToGrid(Entity.gridToX()); y =
+			 * Entity.xToGrid(Entity.gridToY());
+			 */
 			if (canPlaceAt(x, y)) {
 				ref.updater.send("<spawn "
 						+ buildable.getClass().getSimpleName() + " "
@@ -79,8 +80,11 @@ public class BuildWallAim extends BuildAim {
 			}
 		} else {
 			float x1 = xStartWall, y1 = yStartWall;
-			float x2 = Building.xToGrid(Building.gridToX()), y2 = Building
-					.xToGrid(Building.gridToY());
+			/*
+			 * float x2 = Building.xToGrid(Building.gridToX()), y2 = Building
+			 * .xToGrid(Building.gridToY());
+			 */
+			float x2 = x, y2 = y;
 			float speed = buildable.radius * 2;
 			while (PApplet.dist(x1, y1, x2, y2) > speed) {
 				x1 = (x1 + (x2 - x1) / PApplet.dist(x1, y1, x2, y2) * (speed));

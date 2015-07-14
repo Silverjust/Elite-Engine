@@ -12,10 +12,10 @@ public class DeleteAim extends Aim {
 	}
 
 	@Override
-	public void execute() {
-		float x, y;
+	public void execute(float x, float y) {
+		/*float x, y;
 		x = Entity.xToGrid(Entity.gridToX());
-		y = Entity.xToGrid(Entity.gridToY());
+		y = Entity.xToGrid(Entity.gridToY());*/
 		for (Entity e2 : ref.updater.entities) {
 			if (e2 != null && e2.isInRange(x, y, e2.radius + 10)) {
 				ref.updater.send("<remove " + e2.number);

@@ -30,11 +30,11 @@ public class TeleportAim extends Aim {
 	}
 
 	@Override
-	public void execute() {
-		float x, y;
+	public void execute(float x, float y) {
+		//float x, y;
 		Entity target = null;
-		x = Entity.xToGrid(Entity.gridToX());
-		y = Entity.xToGrid(Entity.gridToY());
+		//x = Entity.xToGrid(Entity.gridToX());
+		//y = Entity.xToGrid(Entity.gridToY());
 		for (Entity e : ref.updater.entities) {
 			if (e.isAllyTo(ref.player) && e instanceof PhysicsLab
 					&& PApplet.dist(x, y, e.x, e.y - e.height) <= e.radius)

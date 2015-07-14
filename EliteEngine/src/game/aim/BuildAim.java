@@ -65,10 +65,10 @@ public class BuildAim extends Aim {
 	}
 
 	@Override
-	public void execute() {
-		float x, y;
+	public void execute(float x, float y) {
+		/*float x, y;
 		x = Entity.xToGrid(Entity.gridToX());
-		y = Entity.xToGrid(Entity.gridToY());
+		y = Entity.xToGrid(Entity.gridToY());*/
 		if (canPlaceAt(x, y)) {
 			ref.updater.send("<spawn " + buildable.getClass().getSimpleName()
 					+ " " + builder.player.ip + " " + x + " " + y);
