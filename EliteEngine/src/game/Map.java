@@ -21,12 +21,18 @@ public class Map {
 
 	public JSONObject mapData;
 
+	public MapCode mapCode;
+
 	public Map(String map) {
 
 		try {
 			mapData = ref.app.loadJSONObject("data/" + map + ".json");
 			width = mapData.getInt("w");
 			height = mapData.getInt("h");
+			if (mapData.hasKey("MapCode")) {
+				mapCode = (MapCode) Class.forName(mapData.getString("MapCode"))
+						.getConstructor().newInstance(new Object[] {});
+			}
 		} catch (Exception e) {
 			System.err.println(map + " could not be loaded");
 			e.printStackTrace();
@@ -62,5 +68,10 @@ public class Map {
 			}
 		}
 		fogOfWar.endDraw();
+	}
+
+	public void mapCodeUpdate() {
+		if (mapCode != null)
+			mapCode.update();
 	}
 }

@@ -46,6 +46,7 @@ public class ServerUpdater extends Updater {
 					}
 				}
 			}
+			map.mapCode.update();
 			for (Entity e : entities) {
 				e.updateAnimation();
 				e.updateDecisions();

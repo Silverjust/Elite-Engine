@@ -64,6 +64,7 @@ public class GameUpdater extends Updater {
 			Collections.sort(ref.player.visibleEntities,
 					new EntityHeightComparator());
 			if (GameSettings.singlePlayer) {
+				map.mapCodeUpdate();
 				for (Entity e : entities) {
 					e.updateAnimation();
 					e.updateDecisions();
