@@ -25,7 +25,7 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void setup() {
-		if (GameSettings.sandbox)
+		if (GameSettings.singlePlayer&&!GameSettings.tutorial)
 			display = new PreGameSandboxDisplay();
 		else
 			display = new PreGameNormalDisplay();
