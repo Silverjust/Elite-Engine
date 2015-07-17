@@ -69,7 +69,7 @@ public class Drone extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro|| animation == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -131,6 +131,9 @@ public class Drone extends Unit implements Attacker, Shooter {
 	@Override
 	public Attack getBasicAttack() {
 		return basicAttack;
+	}
+
+	protected void sendWalkToEnemy(Entity e, Entity target) {
 	}
 
 }

@@ -73,7 +73,7 @@ public class Rug extends Unit implements Attacker {
 	@Override
 	public void updateDecisions() {
 		// isTaged = false;
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
 			boolean isEnemyTooClose = false;
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -106,8 +106,7 @@ public class Rug extends Unit implements Attacker {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + number);
 			} else if (isEnemyTooClose && importantEntity != null) {
-				sendAnimation("walk " + importantEntity.x + " "
-						+ importantEntity.y);
+				Attack.sendWalkToEnemy(this,importantEntity);
 			} else if (importantEntity != null && spawn.isNotOnCooldown()) {
 				sendAnimation("spawn " + importantEntity.number);
 			}
@@ -150,6 +149,9 @@ public class Rug extends Unit implements Attacker {
 	@Override
 	public Attack getBasicAttack() {
 		return basicAttack;
+	}
+
+	protected void sendWalkToEnemy(Entity e, Entity target) {
 	}
 
 	static class RuglingSpawn extends Ability {

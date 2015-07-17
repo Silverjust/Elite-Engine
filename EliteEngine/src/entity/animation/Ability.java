@@ -43,7 +43,9 @@ public class Ability extends Animation {
 	public boolean isEvent() {
 		return start + eventTime <= Updater.Time.getMillis();
 	}
-
+	public boolean isExecutable() {
+		return isNotOnCooldown();
+	}
 	public void updateAbility(Entity e) {
 		if (/** security */
 		isEvent() && isNotOnCooldown()) {

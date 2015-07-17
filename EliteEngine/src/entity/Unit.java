@@ -6,7 +6,11 @@ import shared.Helper;
 import shared.ref;
 import entity.animation.Animation;
 import entity.animation.Attack;
+import game.AimHandler;
 import game.Chat;
+import game.AimHandler.Cursor;
+import game.aim.CustomAim;
+import game.aim.MoveAim;
 
 public abstract class Unit extends Entity {
 	// TODO Flocking einfügen
@@ -17,6 +21,7 @@ public abstract class Unit extends Entity {
 	protected byte direction;
 	protected float speed;
 	protected boolean isMoving;
+	protected boolean isAggro;
 	public int trainTime;
 
 	public Animation walk;
@@ -99,7 +104,10 @@ public abstract class Unit extends Entity {
 			xTarget = Float.parseFloat(c[3]);
 			yTarget = Float.parseFloat(c[4]);
 			isMoving = true;
+			isAggro = false;
 			setAnimation(walk);
+		} else if (c[2].equals("setAggro") && this instanceof Attacker) {
+			isAggro = true;
 		}
 		Attack.updateExecAttack(c, this);
 	}
@@ -129,4 +137,84 @@ public abstract class Unit extends Entity {
 		sendAnimation("walk " + xTarget + " " + yTarget);
 	}
 
+	public static class AttackActive extends Active implements AimingActive {
+
+		public AttackActive(int x, int y, char n) {
+			super(x, y, n, null);
+			clazz = Attacker.class;
+		}
+
+		@Override
+		public void onActivation() {
+			AimHandler.setAim(new CustomAim(this, Cursor.SHOOT));
+		}
+
+		@Override
+		public String getDesription() {
+			return "attack unit or to position";
+		}
+
+		@Override
+		public void execute(float x, float y) {
+			Entity target = null;
+			for (Entity e : ref.updater.entities) {
+				if (PApplet.dist(x, y, e.x, e.y - e.height) <= e.radius)
+					target = e;
+			}
+			for (Entity e : ref.updater.selected) {
+				if (clazz.isAssignableFrom(e.getClass())) {
+					if (target != null) {
+						e.sendAnimation("setTarget " + target.number);
+					} else {
+						e.sendAnimation("walk " + x + " " + y);
+						e.sendAnimation("setAggro");
+					}
+				}
+			}
+			AimHandler.end();
+		}
+
+	}
+
+	public static class WalkActive extends Active {
+
+		public WalkActive(int x, int y, char n) {
+			super(x, y, n, null);
+			clazz = Unit.class;
+		}
+
+		@Override
+		public void onActivation() {
+			AimHandler.setAim(new MoveAim());
+		}
+
+		@Override
+		public String getDesription() {
+			return "move units";
+		}
+
+	}
+
+	public static class StopActive extends Active {
+
+		public StopActive(int x, int y, char n) {
+			super(x, y, n, null);
+			clazz = Unit.class;
+		}
+
+		@Override
+		public void onActivation() {
+			for (Entity e : ref.updater.selected) {
+				if (clazz.isAssignableFrom(e.getClass())) {
+					e.sendAnimation("walk " + e.x + " " + e.y);
+				}
+			}
+		}
+
+		@Override
+		public String getDesription() {
+			return "stop units";
+		}
+
+	}
 }

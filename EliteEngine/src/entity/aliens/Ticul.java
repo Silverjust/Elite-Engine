@@ -81,41 +81,32 @@ public class Ticul extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-
-		// isTaged = false;
-		if (animation == stand) {// ****************************************************
-			String s = "";
-			for (Entity e : player.visibleEntities) {
-				if (e != this) {
-					if (e.isEnemyTo(this)) {// server
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
-							s = ("walk " + e.x + " " + e.y);
-						}
-					}
-				}
-			}
-			sendAnimation(s);
-		}
-		if (animation == walk) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
+			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, basicAttack.range + e.radius)
+						if (e.isInRange(x, y, aggroRange + e.radius)
 								&& e.groundPosition == GroundPosition.GROUND) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
+							if (e.isInRange(x, y, basicAttack.range + e.radius))
+								isEnemyInHitRange = true;
 						}
+
 					}
 				}
 			}
-			if (importantEntity != null && getBasicAttack().isNotOnCooldown()) {
-				// System.out.println(thread);
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
+			} else if (importantEntity != null && !isEnemyInHitRange) {
+				sendAnimation("walk " + importantEntity.x + " "
+						+ importantEntity.y);
 			}
 		}
 		basicAttack.updateAbility(this);
@@ -137,6 +128,9 @@ public class Ticul extends Unit implements Attacker {
 	@Override
 	public Attack getBasicAttack() {
 		return basicAttack;
+	}
+
+	protected void sendWalkToEnemy(Entity e, Entity target) {
 	}
 
 	static public class Flash extends Active {// ******************************************************

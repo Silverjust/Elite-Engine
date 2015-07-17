@@ -49,7 +49,7 @@ public class Helicopter extends Unit implements Attacker, Shooter {
 		hp = hp_max = 200;
 		armor = 1;
 		speed = 1.5f;
-		radius =10;
+		radius = 10;
 		sight = 120;
 		height = 20;
 		groundPosition = Entity.GroundPosition.AIR;
@@ -69,7 +69,7 @@ public class Helicopter extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -134,6 +134,9 @@ public class Helicopter extends Unit implements Attacker, Shooter {
 	@Override
 	public Attack getBasicAttack() {
 		return basicAttack;
+	}
+
+	protected void sendWalkToEnemy(Entity e, Entity target) {
 	}
 
 }

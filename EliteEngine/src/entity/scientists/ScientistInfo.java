@@ -3,6 +3,7 @@ package entity.scientists;
 import entity.Building;
 import entity.Commander;
 import entity.MainBuilding;
+import entity.Unit;
 import entity.neutral.ArcanumMine;
 import entity.neutral.KeritMine;
 import entity.neutral.PaxDrillTower;
@@ -41,6 +42,10 @@ public class ScientistInfo extends NationInfo {
 
 	@Override
 	public void setupActives(ActivesGrid grid) {
+		grid.addActive(1, 1, Unit.AttackActive.class, true);
+		grid.addActive(2, 1, Unit.WalkActive.class, true);
+		grid.addActive(3, 1, Unit.StopActive.class, true);
+		
 		grid.addActive(1, 1, Building.SetTargetActive.class, false);
 		grid.addActive(5, 3, BuildMineActive.class, Commander.class,
 				getKeritMine(), false);

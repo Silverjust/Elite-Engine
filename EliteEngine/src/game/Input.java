@@ -3,7 +3,6 @@ package game;
 import java.awt.Toolkit;
 import java.awt.event.MouseWheelEvent;
 
-import main.ClientHandler;
 import main.MainApp;
 import processing.core.PConstants;
 import processing.event.KeyEvent;
@@ -12,7 +11,6 @@ import shared.Helper;
 import shared.Mode;
 import shared.Updater.GameState;
 import shared.ref;
-import entity.Entity;
 
 public class Input {
 
@@ -98,9 +96,11 @@ public class Input {
 			if (app.keyCode == SettingHandler.setting.changeAbilityMode) {
 				if (GroupHandler.recentGroup != null) {
 					GroupHandler.recentGroup.unitActives = !GroupHandler.recentGroup.unitActives;
-					ActivesGrid.showUnitActives = GroupHandler.recentGroup.unitActives;
+					HUD.activesGrid
+							.selectionChange(GroupHandler.recentGroup.unitActives);
 				} else {
-					ActivesGrid.showUnitActives = !ActivesGrid.showUnitActives;
+					HUD.activesGrid
+							.selectionChange(!ActivesGrid.showUnitActives);
 				}
 			}
 			if (app.keyCode == SettingHandler.setting.strg) {
@@ -152,7 +152,7 @@ public class Input {
 		// Chat.println("", "" + isMPressedOutOfFocus);
 		if (doubleClickStart + doubleClickIntervall > ref.app.millis()) {
 			if (isMouseFocusInGame()) {
-				if (!AimHandler.isAiming()
+				if (AimHandler.isDefault()
 						&& app.mouseButton == SettingHandler.setting.mouseSelect) {
 					MouseSelection.selectDoubleClick(app.mouseX, app.mouseY);
 				}
@@ -160,7 +160,7 @@ public class Input {
 		} else {
 			doubleClickStart = ref.app.millis();
 			if (isMouseFocusInGame()) {
-				if (!AimHandler.isAiming()
+				if (AimHandler.isDefault()
 						&& app.mouseButton == SettingHandler.setting.mouseSelect) {
 					GameDrawer.mouseSelection = new game.MouseSelection(
 							app.mouseX, app.mouseY);
@@ -171,7 +171,7 @@ public class Input {
 			mouseCommands(Helper.gridToX(app.mouseX),
 					Helper.gridToY(app.mouseY));
 		} else {
-			Minimap.click(app.mouseX, app.mouseY,true);
+			Minimap.click(app.mouseX, app.mouseY, true);
 		}
 		// unabhängig von mouse fokus
 	}
@@ -187,12 +187,12 @@ public class Input {
 
 	public void mouseDragged() {// ********************************************************
 		if (!isMouseFocusInGame()) {
-			Minimap.click(app.mouseX, app.mouseY,true);
+			Minimap.click(app.mouseX, app.mouseY, true);
 		}
 	}
 
 	public void mouseMoved() {// ********************************************************
-		
+
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {// ********************************************************
@@ -242,20 +242,10 @@ public class Input {
 	}
 
 	void mouseCommands(float x, float y) {
-		if (!AimHandler.isAiming()
-				&& app.mouseButton == SettingHandler.setting.mouseCommand) {
-			for (Entity entity : ref.updater.selected) {
-				ClientHandler.send("<execute " + entity.number + " walk " + x
-						+ " " + y);
-			}// TODO Pfeil anzeigen
-		}
-		if (AimHandler.isAiming()
-				&& app.mouseButton == SettingHandler.setting.mouseSelect) {
+		if (app.mouseButton == SettingHandler.setting.mouseSelect) {
 			AimHandler.end();
-		}
-		if (AimHandler.isAiming()
-				&& app.mouseButton == SettingHandler.setting.mouseCommand) {
-			AimHandler.execute(x,y);
+		} else if (app.mouseButton == SettingHandler.setting.mouseCommand) {
+			AimHandler.execute(x, y);
 		}
 	}
 }

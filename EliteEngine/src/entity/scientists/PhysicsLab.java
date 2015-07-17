@@ -1,8 +1,10 @@
 package entity.scientists;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.Nation;
 import shared.ref;
+import entity.AimingActive;
 import entity.Entity;
 import entity.MultiCDActive;
 import entity.Unit;
@@ -10,8 +12,9 @@ import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.Death;
 import game.AimHandler;
+import game.AimHandler.Cursor;
 import game.ImageHandler;
-import game.aim.TeleportAim;
+import game.aim.CustomAim;
 
 public class PhysicsLab extends Lab {
 
@@ -25,8 +28,8 @@ public class PhysicsLab extends Lab {
 		String path = path(new Object() {
 		});
 		standingImg = ImageHandler.load(path, "PhysicsLab");
-		teleportImg = ImageHandler.load(Nation.SCIENTISTS.toString() + "/symbols/",
-				"teleport");
+		teleportImg = ImageHandler.load(Nation.SCIENTISTS.toString()
+				+ "/symbols/", "teleport");
 	}
 
 	public PhysicsLab(String[] c) {
@@ -69,7 +72,10 @@ public class PhysicsLab extends Lab {
 		return sendTeleport;
 	}
 
-	public static class TeleportActive extends MultiCDActive {
+	public static class TeleportActive extends MultiCDActive implements
+			AimingActive {
+
+		private PhysicsLab origin;
 
 		public TeleportActive(int x, int y, char n) {
 			super(x, y, n, teleportImg);
@@ -80,21 +86,51 @@ public class PhysicsLab extends Lab {
 
 		@Override
 		public void onActivation() {
-			PhysicsLab trainer = null;
+			origin = null;
 			for (Entity e : ref.updater.selected) {
 				if (e instanceof PhysicsLab
 						&& (e.getAnimation() == e.stand || e.getAnimation() == ((Unit) e).walk))
-					trainer = (PhysicsLab) e;
+					origin = (PhysicsLab) e;
 			}
-			if (trainer != null) {
-				trainer.sendAnimation("sendTeleport");
-				AimHandler.setAim(new TeleportAim(trainer, this));
+			if (origin != null) {
+				origin.sendAnimation("sendTeleport");
+				AimHandler.setAim(new CustomAim(this, Cursor.SELECT));
 			}
 		}
 
 		@Override
 		public String getDesription() {
 			return "teleports units  from §physicslab to physicslab";
+		}
+
+		@Override
+		public void execute(float x, float y) {
+			// float x, y;
+			Entity target = null;
+			// x = Entity.xToGrid(Entity.gridToX());
+			// y = Entity.xToGrid(Entity.gridToY());
+			for (Entity e : ref.updater.entities) {
+				if (e.isAllyTo(ref.player) && e instanceof PhysicsLab
+						&& PApplet.dist(x, y, e.x, e.y - e.height) <= e.radius)
+					target = e;
+			}
+			if (target != null) {
+				PhysicsLab origin = this.origin;
+				origin.getTeleport().startCooldown();
+				target.sendAnimation("recieveTeleport");
+				for (Entity e : ref.updater.entities) {
+					if (e.isAllyTo(ref.player)
+							&& e instanceof Unit
+							&& !(e instanceof Lab)
+							&& e.isInRange(origin.x, origin.y,
+									origin.equipRange))
+						ref.updater.send("<tp " + e.number + " "
+								+ (e.x + target.x - origin.x) + " "
+								+ (e.y + target.y - origin.y));
+				}
+				startCooldown();
+				AimHandler.end();
+			}
 		}
 	}
 

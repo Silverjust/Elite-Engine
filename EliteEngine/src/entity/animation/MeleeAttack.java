@@ -5,7 +5,6 @@ import entity.Attacker;
 import entity.Entity;
 
 public class MeleeAttack extends Attack {
-	protected Entity target;
 	protected boolean isSetup;
 
 	public MeleeAttack(PImage[][] IMG, int duration) {
@@ -40,10 +39,6 @@ public class MeleeAttack extends Attack {
 			isSetup = false;
 			startCooldown();
 		}
-	}
-
-	public Entity getTarget() {
-		return target;
 	}
 
 	@Override

@@ -7,5 +7,5 @@ public interface Attacker {
 	Attack getBasicAttack();
 	
 	void calculateDamage(Attack a);
-
+	
 }

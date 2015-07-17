@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import entity.Active;
 import processing.core.PImage;
 import shared.ref;
+import entity.AimingActive;
 import entity.Building;
 import entity.Commander;
 import entity.Entity;
 import entity.animation.Animation;
 import game.AimHandler;
+import game.AimHandler.Cursor;
 import game.HUD;
-import game.aim.DeleteAim;
+import game.aim.CustomAim;
 
 public class SandboxBuilding extends Building implements Commander {
 
@@ -90,7 +92,7 @@ public class SandboxBuilding extends Building implements Commander {
 
 	}
 
-	public static class DeleteActive extends Active {
+	public static class DeleteActive extends Active implements AimingActive{
 
 		public DeleteActive(int x, int y, char n) {
 			super(x, y, n, standImg);
@@ -99,12 +101,21 @@ public class SandboxBuilding extends Building implements Commander {
 
 		@Override
 		public void onActivation() {
-			AimHandler.setAim(new DeleteAim());
+			AimHandler.setAim(new CustomAim(this,Cursor.SHOOT));
 		}
 
 		@Override
 		public String getDesription() {
 			return "delete";
+		}
+
+		@Override
+		public void execute(float x, float y) {
+			for (Entity e2 : ref.updater.entities) {
+				if (e2 != null && e2.isInRange(x, y, e2.radius + 10)) {
+					ref.updater.send("<remove " + e2.number);
+				}
+			}
 		}
 
 	}

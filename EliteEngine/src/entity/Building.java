@@ -5,9 +5,10 @@ import processing.core.PImage;
 import shared.ref;
 import entity.animation.Build;
 import game.AimHandler;
+import game.AimHandler.Cursor;
 import game.Chat;
 import game.ImageHandler;
-import game.aim.SetTargetAim;
+import game.aim.CustomAim;
 
 public abstract class Building extends Entity {
 
@@ -82,7 +83,7 @@ public abstract class Building extends Entity {
 
 	public abstract PImage preview();
 
-	public static class SetTargetActive extends Active {
+	public static class SetTargetActive extends Active implements AimingActive{
 
 		public SetTargetActive(int x, int y, char n) {
 			super(x, y, n, setTarget);
@@ -92,13 +93,22 @@ public abstract class Building extends Entity {
 		@Override
 		public void onActivation() {
 
-			AimHandler.setAim(new SetTargetAim(clazz));
+			AimHandler.setAim(new CustomAim(this, Cursor.SHOOT));
 
 		}
 
 		@Override
 		public String getDesription() {
 			return "sets the Target,§where new units walk to";
+		}
+
+		@Override
+		public void execute(float x, float y) {
+			for (Entity e : ref.updater.selected) {
+				if (clazz.isAssignableFrom(e.getClass())) {
+					e.sendAnimation("setTarget " + x + " " + y);
+				}
+			}
 		}
 
 	}

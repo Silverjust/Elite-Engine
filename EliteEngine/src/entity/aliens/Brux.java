@@ -56,7 +56,7 @@ public class Brux extends Unit implements Attacker {
 		basicAttack.range = (byte) (radius + 10);
 		basicAttack.damage = 10;
 		basicAttack.cooldown = 1200;
-		basicAttack.setCastTime( 500);
+		basicAttack.setCastTime(500);
 
 		jump.range = (byte) (radius + 10);
 		jump.damage = 38;
@@ -71,7 +71,7 @@ public class Brux extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -103,13 +103,14 @@ public class Brux extends Unit implements Attacker {
 					&& jump.isNotOnCooldown()) {
 				sendAnimation("jump " + importantEntity.number);
 			} else if (importantEntity != null && !isEnemyInHitRange) {
-				sendAnimation("walk " + importantEntity.x + " "
-						+ importantEntity.y);
+				Attack.sendWalkToEnemy(this,importantEntity);
 			}
 		}
 		basicAttack.updateAbility(this);
 		jump.updateAbility(this);
 	}
+
+	
 
 	@Override
 	public void updateMovement() {
@@ -163,7 +164,7 @@ public class Brux extends Unit implements Attacker {
 	public static class Jump extends MeleeAttack {
 
 		public float speed;
-		
+
 		public Jump(PImage IMG, int duration) {
 			super(IMG, duration);
 		}

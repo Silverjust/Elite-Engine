@@ -70,7 +70,7 @@ public class Cell extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro|| animation == stand) {// ****************************************************
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
@@ -118,6 +118,9 @@ public class Cell extends Unit implements Attacker {
 	@Override
 	public Attack getBasicAttack() {
 		return heal;
+	}
+
+	protected void sendWalkToEnemy(Entity e, Entity target) {
 	}
 
 	public static class EquipActive extends Active {

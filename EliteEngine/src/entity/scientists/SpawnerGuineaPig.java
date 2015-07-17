@@ -62,7 +62,7 @@ public class SpawnerGuineaPig extends Unit {
 	@Override
 	public void updateDecisions() {
 		// isTaged = false;
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (animation == walk&& isAggro || animation == stand) {// ****************************************************
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {

@@ -1,6 +1,7 @@
 package game;
 
 import game.aim.Aim;
+import game.aim.MoveAim;
 import processing.core.PConstants;
 import processing.core.PImage;
 import shared.ref;
@@ -17,6 +18,7 @@ public class AimHandler {
 	}
 
 	public static void setup() {
+		aim = new MoveAim();
 	}
 
 	public static void update() {
@@ -27,7 +29,7 @@ public class AimHandler {
 
 	public static void execute(float x, float y) {
 		if (aim != null) {
-			aim.execute( x,  y);
+			aim.execute(x, y);
 		}
 	}
 
@@ -41,10 +43,11 @@ public class AimHandler {
 		if (aim != null) {
 			aim.end();
 		}
-		aim = null;
+		aim = new MoveAim();
 		setCursor(Cursor.ARROW);
 	}
 
+	@Deprecated
 	public static boolean isAiming() {
 		return aim != null;
 	}
@@ -74,5 +77,9 @@ public class AimHandler {
 
 	public static Aim getAim() {
 		return aim;
+	}
+
+	public static boolean isDefault() {
+		return aim instanceof MoveAim;
 	}
 }

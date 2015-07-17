@@ -3,6 +3,7 @@ package entity.aliens;
 import entity.Building;
 import entity.Commander;
 import entity.MainBuilding;
+import entity.Unit;
 import entity.neutral.ArcanumMine;
 import entity.neutral.KeritMine;
 import entity.neutral.PaxDrillTower;
@@ -39,13 +40,19 @@ public class AlienInfo extends NationInfo {
 	}
 
 	public void setupActives(ActivesGrid grid) {
+		grid.addActive(1, 1, Unit.AttackActive.class, true);
+		grid.addActive(2, 1, Unit.WalkActive.class, true);
+		grid.addActive(3, 1, Unit.StopActive.class, true);
+
 		grid.addActive(3, 2, Ticul.Flash.class, true);
 
 		grid.addActive(1, 1, Building.SetTargetActive.class, false);
-		grid.addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class, false);
-		grid.addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class, false);
-		grid.addBuildActive(4, 2, AlienKaserne.class, AlienKaserneArcanum.class,
+		grid.addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class,
 				false);
+		grid.addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class,
+				false);
+		grid.addBuildActive(4, 2, AlienKaserne.class,
+				AlienKaserneArcanum.class, false);
 		grid.addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,
 				false);
 		grid.addActive(5, 3, BuildMineActive.class, Commander.class,

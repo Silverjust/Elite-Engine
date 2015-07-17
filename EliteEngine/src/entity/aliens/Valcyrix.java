@@ -69,7 +69,7 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -82,15 +82,10 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 								importance = newImportance;
 								importantEntity = e;
 							}
+							if (e.isInRange(x, y, basicAttack.range + e.radius))
+								isEnemyInHitRange = true;
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
-							isEnemyInHitRange = true;
-							float newImportance = calcImportanceOf(e);
-							if (newImportance > importance) {
-								importance = newImportance;
-								importantEntity = e;
-							}
-						}
+
 					}
 				}
 			}
@@ -108,7 +103,7 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 	public void calculateDamage(Attack a) {
 		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
 				+ a.damage + " " + a.pirce);
-		//SoundHandler.startIngameSound(HUD.hm, x, y);
+		// SoundHandler.startIngameSound(HUD.hm, x, y);
 	}
 
 	@Override
@@ -133,6 +128,9 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 	@Override
 	public Attack getBasicAttack() {
 		return basicAttack;
+	}
+
+	protected void sendWalkToEnemy(Entity e, Entity target) {
 	}
 
 }

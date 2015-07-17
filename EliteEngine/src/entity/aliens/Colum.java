@@ -85,4 +85,7 @@ public class Colum extends Unit implements Attacker {
 		return heal;
 	}
 
+	protected void sendWalkToEnemy(Entity e, Entity target) {
+	}
+
 }
