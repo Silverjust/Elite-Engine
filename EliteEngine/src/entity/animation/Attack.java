@@ -33,7 +33,6 @@ public class Attack extends Ability {
 	}
 
 	public Entity getTarget() {
-		System.out.println("Attack.getTarget()" + target);
 		return target;
 	}
 
@@ -41,7 +40,6 @@ public class Attack extends Ability {
 		if (c[2].equals("basicAttack") && attacker instanceof Attacker) {
 			Attack a = ((Attacker) attacker).getBasicAttack();
 			if (a.isNotOnCooldown() && !a.isSetup()) {
-				System.out.println("Attack.updateExecAttack()");
 				int n = Integer.parseInt(c[3]);
 				Entity e = ref.updater.namedEntities.get(n);
 				a.setTargetFrom(attacker, e);
@@ -51,7 +49,7 @@ public class Attack extends Ability {
 			// Attack a = ((Attacker) attacker).getBasicAttack();
 			int n = Integer.parseInt(c[3]);
 			Entity e = ref.updater.namedEntities.get(n);
-			attacker.sendAnimation("walk " + e.x + " " + e.y);
+			attacker.sendAnimation("walk " + e.x + " " + e.y+" true");
 			// a.setTargetFrom(attacker, e);
 
 			// walk to target and attack
@@ -67,7 +65,7 @@ public class Attack extends Ability {
 					+ " "
 					+ (target.y + (e.y - target.y)
 							/ PApplet.dist(target.x, target.y, e.x, e.y)
-							* ((Attacker) e).getBasicAttack().range));
+							* ((Attacker) e).getBasicAttack().range)+" true");
 		}
 	}
 }

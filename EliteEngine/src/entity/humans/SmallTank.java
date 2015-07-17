@@ -96,8 +96,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null && !isEnemyInHitRange) {
-				sendAnimation("walk " + importantEntity.x + " "
-						+ importantEntity.y);
+				Attack.sendWalkToEnemy(this,importantEntity);
 			}
 		}
 		basicAttack.updateAbility(this);

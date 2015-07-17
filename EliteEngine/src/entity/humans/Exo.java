@@ -110,8 +110,7 @@ public class Exo extends Unit implements Attacker {
 					&& hook.isNotOnCooldown()) {
 				sendAnimation("hook " + importantEntity.number);
 			} else if (importantEntity != null && !isEnemyInHitRange) {
-				sendAnimation("walk " + importantEntity.x + " "
-						+ importantEntity.y);
+				Attack.sendWalkToEnemy(this,importantEntity);
 			}
 		}
 		basicAttack.updateAbility(this);
@@ -160,7 +159,7 @@ public class Exo extends Unit implements Attacker {
 			sendAnimation("instaAttack "
 					+ ((MeleeAttack) oldAnimation).getTarget().number);
 		} else {
-			sendAnimation("walk " + xTarget + " " + yTarget);
+			sendAnimation("walk " + xTarget + " " + yTarget+" true");
 		}
 	}
 

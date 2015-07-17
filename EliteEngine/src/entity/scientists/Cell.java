@@ -87,8 +87,7 @@ public class Cell extends Unit implements Attacker {
 
 			}
 			if (importantEntity != null) {
-				sendAnimation("walk " + importantEntity.x + " "
-						+ importantEntity.y);
+				Attack.sendWalkToEnemy(this,importantEntity);
 			}
 		}
 		heal.setTargetFrom(this, this);

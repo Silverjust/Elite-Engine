@@ -104,10 +104,9 @@ public abstract class Unit extends Entity {
 			xTarget = Float.parseFloat(c[3]);
 			yTarget = Float.parseFloat(c[4]);
 			isMoving = true;
-			isAggro = false;
+			isAggro = Boolean.valueOf(c[5]);
+			;
 			setAnimation(walk);
-		} else if (c[2].equals("setAggro") && this instanceof Attacker) {
-			isAggro = true;
 		}
 		Attack.updateExecAttack(c, this);
 	}
@@ -134,7 +133,7 @@ public abstract class Unit extends Entity {
 
 	@Override
 	public void sendDefaultAnimation(Animation oldAnimation) {
-		sendAnimation("walk " + xTarget + " " + yTarget);
+		sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
 	}
 
 	public static class AttackActive extends Active implements AimingActive {
@@ -166,8 +165,7 @@ public abstract class Unit extends Entity {
 					if (target != null) {
 						e.sendAnimation("setTarget " + target.number);
 					} else {
-						e.sendAnimation("walk " + x + " " + y);
-						e.sendAnimation("setAggro");
+						e.sendAnimation("walk " + x + " " + y + " true");
 					}
 				}
 			}
@@ -206,7 +204,7 @@ public abstract class Unit extends Entity {
 		public void onActivation() {
 			for (Entity e : ref.updater.selected) {
 				if (clazz.isAssignableFrom(e.getClass())) {
-					e.sendAnimation("walk " + e.x + " " + e.y);
+					e.sendAnimation("walk " + e.x + " " + e.y + " false");
 				}
 			}
 		}
