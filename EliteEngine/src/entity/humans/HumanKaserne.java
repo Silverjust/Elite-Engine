@@ -1,7 +1,6 @@
 package entity.humans;
 
 import processing.core.PImage;
-import shared.ref;
 import entity.Building;
 import entity.Trainer;
 import entity.animation.Ability;
@@ -66,16 +65,6 @@ public class HumanKaserne extends Building implements  Trainer {
 		super.exec(c);
 		Training.updateExecTraining(c, this);
 	}	
-
-	@Override
-	public void renderUnder() {
-		if (isSelected) {
-			ref.app.stroke(player.color);
-			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget),
-					yToGrid(yTarget));
-			ref.app.stroke(0);
-		}
-	}
 
 	@Override
 	public void renderGround() {

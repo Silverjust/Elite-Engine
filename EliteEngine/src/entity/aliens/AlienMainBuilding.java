@@ -51,7 +51,7 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	@Override
 	public void updateDecisions() {
 		super.updateDecisions();
-		
+
 	}
 
 	@Override
@@ -64,6 +64,10 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	public void drawOnMinimapUnder(PGraphics graphics) {
 		graphics.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
 				commandingRange * 2);
+	}
+
+	@Override
+	public void renderUnder() {
 	}
 
 	@Override

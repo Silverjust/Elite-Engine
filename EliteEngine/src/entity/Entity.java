@@ -37,7 +37,7 @@ public abstract class Entity implements Informing {
 	public int xSize, ySize;
 
 	private static PImage shadowImg;
-	private static PImage selectedImg;
+	protected static PImage selectedImg;
 	private static PImage hpImg;
 	public PImage iconImg;
 	// private static AudioSnippet hit;

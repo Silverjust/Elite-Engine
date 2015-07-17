@@ -8,6 +8,7 @@ import game.AimHandler;
 import game.AimHandler.Cursor;
 import game.Chat;
 import game.ImageHandler;
+import game.aim.BuildAim;
 import game.aim.CustomAim;
 
 public abstract class Building extends Entity {
@@ -45,7 +46,23 @@ public abstract class Building extends Entity {
 			break;
 		}
 	}
-
+	@Override
+	public void renderUnder() {
+		if (this instanceof Trainer && isSelected && isAlive()) {
+			Trainer t = (Trainer) this;
+			ref.app.stroke(player.color);
+			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(t.getXTarget()),
+					yToGrid(t.getYTarget()));
+			ref.app.stroke(0);
+		}
+		if (this instanceof Commander && isAlive()&&AimHandler.getAim() instanceof BuildAim) {
+			Commander c = (Commander) this;
+			ref.app.tint(player.color);
+			ref.app.image(selectedImg, xToGrid(x), yToGrid(y), c.commandRange() * 2,
+					c.commandRange());
+			ref.app.tint(255);
+		}
+	}
 	@Override
 	public void renderGround() {
 		drawSelected();
@@ -56,7 +73,6 @@ public abstract class Building extends Entity {
 		super.display();
 		if (animation == build)
 			drawBar(build.getCooldownPercent());
-
 	}
 
 	public static float xToGrid(float x) {
@@ -83,7 +99,7 @@ public abstract class Building extends Entity {
 
 	public abstract PImage preview();
 
-	public static class SetTargetActive extends Active implements AimingActive{
+	public static class SetTargetActive extends Active implements AimingActive {
 
 		public SetTargetActive(int x, int y, char n) {
 			super(x, y, n, setTarget);

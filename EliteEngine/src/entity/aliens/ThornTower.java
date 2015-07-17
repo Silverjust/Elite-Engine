@@ -15,8 +15,7 @@ import entity.animation.Death;
 import entity.animation.ShootAttack;
 import game.ImageHandler;
 
-public class ThornTower extends Building implements  Shooter,
-		Commander {
+public class ThornTower extends Building implements Shooter, Commander {
 	private int commandingRange;
 
 	ShootAttack basicAttack;
@@ -116,6 +115,10 @@ public class ThornTower extends Building implements  Shooter,
 	public void drawOnMinimapUnder(PGraphics graphics) {
 		graphics.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
 				commandingRange * 2);
+	}
+
+	@Override
+	public void renderUnder() {
 	}
 
 	@Override

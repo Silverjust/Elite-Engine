@@ -87,7 +87,7 @@ public class AlienKasernePrunam extends Building implements Commander, Trainer {
 
 	@Override
 	public void renderUnder() {
-		if (isSelected) {
+		if (isSelected && isAlive()) {
 			ref.app.stroke(player.color);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget),
 					yToGrid(yTarget));
