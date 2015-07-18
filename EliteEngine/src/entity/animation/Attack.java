@@ -62,14 +62,20 @@ public class Attack extends Ability {
 
 	public static void sendWalkToEnemy(Entity e, Entity target) {
 		if (e instanceof Attacker) {
-			e.sendAnimation("walk "
-					+ (target.x + (e.x - target.x)
-							/ PApplet.dist(target.x, target.y, e.x, e.y)
-							* ((Attacker) e).getBasicAttack().range)
-					+ " "
-					+ (target.y + (e.y - target.y)
-							/ PApplet.dist(target.x, target.y, e.x, e.y)
-							* ((Attacker) e).getBasicAttack().range) + " true");
+			if (((Attacker) e).getBasicAttack().range < PApplet.dist(target.x,
+					target.y, e.x, e.y)) {
+				e.sendAnimation("walk "
+						+ (target.x + (e.x - target.x)
+								/ PApplet.dist(target.x, target.y, e.x, e.y)
+								* ((Attacker) e).getBasicAttack().range)
+						+ " "
+						+ (target.y + (e.y - target.y)
+								/ PApplet.dist(target.x, target.y, e.x, e.y)
+								* ((Attacker) e).getBasicAttack().range)
+						+ " true");
+			} else {
+				e.sendAnimation("stand");
+			}
 		}
 	}
 }
