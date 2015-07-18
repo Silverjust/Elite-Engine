@@ -2,6 +2,7 @@ package entity.animation;
 
 import entity.Attacker;
 import entity.Entity;
+import entity.Unit;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
@@ -44,12 +45,15 @@ public class Attack extends Ability {
 				Entity e = ref.updater.namedEntities.get(n);
 				a.setTargetFrom(attacker, e);
 				attacker.setAnimation(a);
+				if (attacker instanceof Unit) {
+					((Unit) attacker).isMoving = false;
+				}
 			}
 		} else if (c[2].equals("setTarget") && attacker instanceof Attacker) {
 			// Attack a = ((Attacker) attacker).getBasicAttack();
 			int n = Integer.parseInt(c[3]);
 			Entity e = ref.updater.namedEntities.get(n);
-			attacker.sendAnimation("walk " + e.x + " " + e.y+" true");
+			attacker.sendAnimation("walk " + e.x + " " + e.y + " true");
 			// a.setTargetFrom(attacker, e);
 
 			// walk to target and attack
@@ -65,7 +69,7 @@ public class Attack extends Ability {
 					+ " "
 					+ (target.y + (e.y - target.y)
 							/ PApplet.dist(target.x, target.y, e.x, e.y)
-							* ((Attacker) e).getBasicAttack().range)+" true");
+							* ((Attacker) e).getBasicAttack().range) + " true");
 		}
 	}
 }

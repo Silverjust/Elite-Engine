@@ -53,7 +53,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = (byte) (radius + 50);
+		aggroRange = 110;
 		basicAttack.damage = 100;
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 3000;
@@ -95,7 +95,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && !isEnemyInHitRange) {
+			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this,importantEntity);
 			}
 		}

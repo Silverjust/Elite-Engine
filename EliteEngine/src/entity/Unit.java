@@ -20,7 +20,7 @@ public abstract class Unit extends Entity {
 	public float yTarget;
 	protected byte direction;
 	protected float speed;
-	protected boolean isMoving;
+	public boolean isMoving;
 	protected boolean isAggro;
 	public int trainTime;
 
@@ -105,7 +105,6 @@ public abstract class Unit extends Entity {
 			yTarget = Float.parseFloat(c[4]);
 			isMoving = true;
 			isAggro = Boolean.valueOf(c[5]);
-			;
 			setAnimation(walk);
 		}
 		Attack.updateExecAttack(c, this);
@@ -133,7 +132,11 @@ public abstract class Unit extends Entity {
 
 	@Override
 	public void sendDefaultAnimation(Animation oldAnimation) {
-		sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
+		if (oldAnimation instanceof Attack) {
+			sendAnimation("stand");
+		} else {
+			sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
+		}
 	}
 
 	public static class AttackActive extends Active implements AimingActive {

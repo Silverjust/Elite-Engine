@@ -73,7 +73,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk&& isAggro || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -100,8 +100,8 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && !isEnemyInHitRange) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+			} else if (importantEntity != null) {
+				Attack.sendWalkToEnemy(this, importantEntity);
 			}
 		}
 		basicAttack.updateAbility(this);
@@ -173,9 +173,10 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	static void setupEquip(Entity e, String[] c) {
-		if (c != null && c[7] != null && c[7].equals("select"))
+		if (c != null && c[7] != null && c[7].equals("select")) {
 			e.isSelected = true;
-
+			ref.updater.selected.add(e);
+		}
 	}
 
 	public static class Equip extends Ability {

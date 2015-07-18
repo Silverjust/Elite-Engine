@@ -100,7 +100,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && !isEnemyInHitRange) {
+			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this,importantEntity);
 			}
 		}

@@ -96,7 +96,7 @@ public class Arol extends Unit implements Attacker {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && !isEnemyInHitRange) {
+			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this,importantEntity);
 			}
 		}

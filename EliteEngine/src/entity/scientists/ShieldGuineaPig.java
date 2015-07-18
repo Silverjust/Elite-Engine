@@ -55,7 +55,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		prunam = 4;
 		trainTime = 1500;
 
-		shield_max = 40;
+		shield_max = 60;
 		hp = hp_max = 100;
 		armor = 1;
 		speed = 0.9f;
@@ -64,14 +64,14 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 3;
+		basicAttack.damage = 7;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 1500;
 		basicAttack.range = 40;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
 
-		regenerate.damage = 5;
+		regenerate.damage = 6;
 		regenerate.pirce = -2;
 		regenerate.cooldown = 1500;
 		regenerate.range = 1;
@@ -86,7 +86,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk&& isAggro || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -113,8 +113,8 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && !isEnemyInHitRange) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+			} else if (importantEntity != null) {
+				Attack.sendWalkToEnemy(this, importantEntity);
 			}
 		}
 		basicAttack.updateAbility(this);
@@ -139,9 +139,10 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 					shield = shield_max;
 			} else if (shield > 0) {
 				shield -= damage;
-				if (shield < 0)
+				if (shield < 0) {
+					hp += shield * 2;
 					shield = 0;
-
+				}
 			} else {
 				hp -= damage
 						* (1.0 - ((armor - pirce > 0) ? armor - pirce : 0) * 0.05);

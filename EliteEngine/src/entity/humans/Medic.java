@@ -91,7 +91,7 @@ public class Medic extends Unit implements Attacker {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()
 					&& !basicAttack.isSetup()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && !isEnemyInHitRange) {
+			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this,importantEntity);
 			}
 		}

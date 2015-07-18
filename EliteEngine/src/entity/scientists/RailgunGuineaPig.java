@@ -27,7 +27,8 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	public RailgunGuineaPig(String[] c) {
-		super(c);		GuineaPig.setupEquip(this, c);
+		super(c);
+		GuineaPig.setupEquip(this, c);
 
 		iconImg = standingImg;
 
@@ -54,7 +55,7 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = (byte) (radius + 50);
+		aggroRange = 100;
 		basicAttack.damage = 90;
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 5000;
@@ -69,7 +70,7 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk&& isAggro|| animation == stand) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -96,8 +97,8 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && !isEnemyInHitRange) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+			} else if (importantEntity != null) {
+				Attack.sendWalkToEnemy(this, importantEntity);
 			}
 		}
 		basicAttack.updateAbility(this);
