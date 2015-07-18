@@ -47,10 +47,8 @@ public class AlienInfo extends NationInfo {
 		grid.addActive(3, 2, Ticul.Flash.class, true);
 
 		grid.addActive(1, 1, Building.SetTargetActive.class, false);
-		grid.addBuildActive(5, 1, AlienMainBuilding.class, ThornTower.class,
-				false);
-		grid.addBuildActive(4, 3, AlienMainBuilding.class, AlienKaserne.class,
-				false);
+		grid.addBuildActive(5, 1, Commander.class, ThornTower.class, false);
+		grid.addBuildActive(4, 3, Commander.class, AlienKaserne.class, false);
 		grid.addBuildActive(4, 2, AlienKaserne.class,
 				AlienKaserneArcanum.class, false);
 		grid.addBuildActive(4, 1, AlienKaserne.class, AlienKasernePrunam.class,

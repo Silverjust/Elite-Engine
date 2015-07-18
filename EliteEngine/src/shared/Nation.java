@@ -1,6 +1,7 @@
 package shared;
 
 import entity.MainBuilding;
+import entity.ahnen.AhnenInfo;
 import entity.aliens.AlienInfo;
 import entity.aliens.AlienMainBuilding;
 import entity.humans.HumanInfo;
@@ -118,7 +119,7 @@ public enum Nation {
 	public static void setNationsToPlayableNations() {
 		for (String key : ref.preGame.player.keySet()) {
 			Nation n = ref.preGame.player.get(key).nation;
-			if (n != Nation.ALIENS && n != Nation.HUMANS
+			if (n != Nation.AHNEN && n != Nation.ALIENS && n != Nation.HUMANS
 					&& n != Nation.SCIENTISTS)
 				ref.preGame.player.get(key).nation = Nation.ALIENS;
 		}
@@ -129,7 +130,7 @@ public enum Nation {
 
 		switch (this) {
 		case AHNEN:
-			// t = AhnenMainBuilding.class;
+			info = new AhnenInfo();
 			break;
 		case ALIENS:
 			info = new AlienInfo();

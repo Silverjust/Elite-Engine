@@ -60,6 +60,15 @@
     "SpawnerGuineaPig": "entity.scientists.SpawnerGuineaPig",
     "AirshipGuineaPig": "entity.scientists.AirshipGuineaPig",
     "RocketGuineaPig": "entity.scientists.RocketGuineaPig", 
+    
+    "AhnenMainBuilding": "entity.ahnen.AhnenMainBuilding",
+    "AhnenKeritMine": "entity.ahnen.AhnenKeritMine",
+    "AhnenPaxDrillTower": "entity.ahnen.AhnenPaxDrillTower",
+    "AhnenArcanumMine": "entity.ahnen.AhnenArcanumMine",
+    "AhnenPrunamHarvester": "entity.ahnen.AhnenPrunamHarvester",
+    "AhnenKaserne": "entity.ahnen.AhnenKaserne",
+    "Berserker": "entity.ahnen.Berserker",
+    "Witcher": "entity.ahnen.Witcher",
   },
   "maps": {
     "standard": {

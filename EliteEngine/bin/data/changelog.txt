@@ -1,3 +1,6 @@
+added ahnen
+added berserker, witcher
+--------------------------
 commands via minimap possible
 PhysicsLab can teleport
 Guineapig nerf

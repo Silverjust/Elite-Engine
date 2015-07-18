@@ -59,7 +59,7 @@ public class Group {
 
 			}
 			GroupHandler.recentGroup = this;
-			ActivesGrid.showUnitActives = unitActives;
+			HUD.activesGrid.selectionChange(unitActives);
 			for (Entity entity : ref.updater.selected) {
 				entity.isSelected = false;
 			}

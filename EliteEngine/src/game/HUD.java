@@ -17,7 +17,7 @@ public class HUD {
 	public static ActivesGrid activesGrid;
 
 	public static AudioPlayer sound;
-	
+
 	public static Menu menue;
 
 	public static void loadImages() {
@@ -30,7 +30,7 @@ public class HUD {
 					"overlay");
 			sound = ref.minim.loadFile(ref.player.nation.toString() + "/"
 					+ ref.player.nation.toString() + ".mp3");
-			/** soundfiles are only tests and wil be removed */
+			/** soundfiles are only tests and will be removed */
 		}
 	}
 
@@ -41,8 +41,11 @@ public class HUD {
 		Minimap.setup();
 		GroupHandler.setup();
 		activesGrid = new ActivesGrid();
-		// sound.loop();
-		// sound.play();
+		boolean b = false;
+		if (b) {
+			sound.loop();
+			sound.play();
+		}
 	}
 
 	static void setupG4P() {
@@ -96,8 +99,9 @@ public class HUD {
 	}
 
 	public static void dispose() {
-		try {activesGrid.dispose();
-		GroupHandler.dispose();
+		try {
+			activesGrid.dispose();
+			GroupHandler.dispose();
 			sound.close();
 		} catch (Exception e) {
 			e.printStackTrace();

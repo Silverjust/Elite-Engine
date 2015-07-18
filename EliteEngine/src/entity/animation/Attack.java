@@ -29,7 +29,7 @@ public class Attack extends Ability {
 	}
 
 	@Override
-	public boolean isExecutable() {
+	public boolean isReady() {
 		return isNotOnCooldown() && isSetup();
 	}
 

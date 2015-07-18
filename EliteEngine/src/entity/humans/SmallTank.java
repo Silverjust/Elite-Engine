@@ -49,7 +49,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 		hp = hp_max = 500;
 		armor = 3;
 		speed = 0.6f;
-		radius =10;
+		radius = 10;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
@@ -68,21 +68,23 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk&& isAggro || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)
+								&& e.groundPosition == GroundPosition.GROUND) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius)
+								&& e.groundPosition == GroundPosition.GROUND) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -96,7 +98,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+				Attack.sendWalkToEnemy(this, importantEntity);
 			}
 		}
 		basicAttack.updateAbility(this);

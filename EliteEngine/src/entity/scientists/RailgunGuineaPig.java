@@ -55,7 +55,7 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = 100;
+		aggroRange = 120;
 		basicAttack.damage = 90;
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 5000;
@@ -133,8 +133,5 @@ public class RailgunGuineaPig extends Unit implements Attacker, Shooter {
 	@Override
 	public Attack getBasicAttack() {
 		return basicAttack;
-	}
-
-	protected void sendWalkToEnemy(Entity e, Entity target) {
 	}
 }

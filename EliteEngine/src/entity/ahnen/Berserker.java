@@ -1,4 +1,4 @@
-package entity.aliens;
+package entity.ahnen;
 
 import entity.Attacker;
 import entity.Building;
@@ -12,7 +12,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 
-public class Arol extends Unit implements Attacker {
+public class Berserker extends Unit implements Attacker {
 
 	private static PImage standingImg;
 
@@ -24,10 +24,10 @@ public class Arol extends Unit implements Attacker {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "Arol");
+		standingImg = game.ImageHandler.load(path, "Berserker");
 	}
 
-	public Arol(String[] c) {
+	public Berserker(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
@@ -38,25 +38,25 @@ public class Arol extends Unit implements Attacker {
 
 		animation = nextAnimation = walk;
 		// ************************************
-		xSize = 50;
-		ySize = 35;
+		xSize = 15;
+		ySize = 15;
 
-		kerit = 700;
+		kerit = 300;
 		pax = 0;
-		arcanum = 130;
+		arcanum = 0;
 		prunam = 0;
-		trainTime = 10000;
+		trainTime = 3000;
 
-		hp = hp_max = 1900;
-		armor = 3;
-		speed = 0.4f;
-		radius = 10;
+		hp = hp_max = 250;
+		armor = 1;
+		speed = 0.9f;
+		radius = 7;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
 		basicAttack.range = 10;
-		basicAttack.damage = 40;
+		basicAttack.damage = 45;
 		basicAttack.cooldown = 2000;
 		basicAttack.setCastTime(100);
 		attackDistance = 10;
@@ -75,16 +75,14 @@ public class Arol extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+						if (e.isInRange(x, y, aggroRange + e.radius)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -125,10 +123,9 @@ public class Arol extends Unit implements Attacker {
 				* (attackDistance));
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
-					&& e.isInRange(x, y, e.radius + a.range)
-					&& e.groundPosition == GroundPosition.GROUND) {
+					&& e.isInRange(x, y, e.radius + a.range)) {
 				ref.updater.send("<hit " + e.number + " "
-						+ (e instanceof Building ? a.damage * 2 : a.damage)
+						+ (e instanceof Building ? a.damage / 4 : a.damage)
 						+ " " + a.pirce);
 			}
 		}

@@ -1,8 +1,6 @@
 package entity;
 
 import entity.animation.Ability;
-import entity.scientists.PhysicsLab;
-
 import java.lang.reflect.Method;
 
 import processing.core.PImage;
@@ -22,7 +20,7 @@ public abstract class MultiCDActive extends Active {
 
 	protected void setAbilityGetter(String name) {
 		try {
-			abilityGetter = PhysicsLab.class.getMethod(name, new Class[] {});
+			abilityGetter = clazz.getMethod(name, new Class[] {});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
