@@ -151,8 +151,7 @@ public class Rug extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	protected void sendWalkToEnemy(Entity e, Entity target) {
-	}
+	
 
 	static class RuglingSpawn extends Ability {
 

@@ -119,9 +119,7 @@ public class Cell extends Unit implements Attacker {
 		return heal;
 	}
 
-	protected void sendWalkToEnemy(Entity e, Entity target) {
-	}
-
+	
 	public static class EquipActive extends Active {
 		Class<? extends Unit> unit;
 		String descr = " ", stats = " ";

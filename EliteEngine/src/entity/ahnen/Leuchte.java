@@ -84,8 +84,6 @@ public class Leuchte extends Building implements Attacker {
 			buff.updateAbility(this);
 		}
 		timer.updateAbility(this);
-		timer.removeCooldown(0);
-
 		if (timer.isNotOnCooldown()) {
 			if (upgrade == Upgrade.STANDARD) {
 				sendAnimation("death");

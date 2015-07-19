@@ -129,8 +129,7 @@ public class Ticul extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	protected void sendWalkToEnemy(Entity e, Entity target) {
-	}
+	
 
 	static public class Flash extends Active {// ******************************************************
 		private int range = 100;

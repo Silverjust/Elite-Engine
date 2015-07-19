@@ -128,7 +128,5 @@ public class Medic extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	protected void sendWalkToEnemy(Entity e, Entity target) {
-	}
-
+	
 }

@@ -192,9 +192,7 @@ public class Exo extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	protected void sendWalkToEnemy(Entity e, Entity target) {
-	}
-
+	
 	public static class Hook extends MeleeAttack {
 
 		public float speed;

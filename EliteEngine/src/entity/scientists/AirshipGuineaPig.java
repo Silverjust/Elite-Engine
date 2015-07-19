@@ -3,6 +3,7 @@ package entity.scientists;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
+import entity.Active;
 import entity.Attacker;
 import entity.Entity;
 import entity.Shooter;
@@ -10,7 +11,6 @@ import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.MeleeAttack;
 import entity.animation.ShootAttack;
 
 public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
@@ -41,6 +41,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		// ************************************
 		xSize = 20;
 		ySize = 20;
+		height = 25;
 
 		kerit = 800;
 		pax = 0;
@@ -53,7 +54,6 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		speed = 0.7f;
 		radius = 9;
 		sight = 70;
-		height = 25;
 		groundPosition = Entity.GroundPosition.AIR;
 
 		aggroRange = (byte) (radius + 50);
@@ -71,7 +71,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk&& isAggro || animation == stand) {// ****************************************************
+		if (animation == walk && isAggro || animation == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -79,7 +79,8 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-								/*&& (e.groundPosition == GroundPosition.AIR || isAnchored)*/) {
+								&& ((!isAnchored && e.groundPosition == GroundPosition.AIR) || //
+								(isAnchored && e.groundPosition == GroundPosition.GROUND))) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -94,20 +95,41 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+				Attack.sendWalkToEnemy(this, importantEntity);
 			}
 		}
 		basicAttack.updateAbility(this);
 	}
 
 	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if (c[2].equals("anchor")) {
+			isAnchored = true;
+			height = 5;
+			isMoving = false;
+			groundPosition = GroundPosition.GROUND;
+			setAnimation(stand);
+		} else if (c[2].equals("walk")) {
+			isAnchored = false;
+			height = 25;
+			groundPosition = GroundPosition.AIR;
+		}
+	}
+
+	@Override
+	public void sendDefaultAnimation(Animation oldAnimation) {
+		if (isAnchored) {
+			sendAnimation("anchor");
+		} else {
+			sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
+		}
+	}
+
+	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater
-				.send("<hit "
-						+ basicAttack.getTarget().number
-						+ " "
-						+ (((MeleeAttack) a).getTarget().groundPosition == GroundPosition.AIR ? a.damage
-								: a.damage / 2) + " " + a.pirce);
+		ref.updater.send("<hit " + a.getTarget().number + " " + a.damage + " "
+				+ a.pirce);
 		// SoundHandler.startIngameSound(HUD.hm, x, y);
 	}
 
@@ -135,7 +157,24 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	protected void sendWalkToEnemy(Entity e, Entity target) {
-	}
+	public static class AnchorActive extends Active {
+		public AnchorActive(int x, int y, char n) {
+			super(x, y, n, standingImg);
+			clazz = AirshipGuineaPig.class;
+		}
 
+		@Override
+		public String getDesription() {
+			return "anchor";
+		}
+
+		@Override
+		public void onActivation() {
+			for (Entity e : ref.updater.selected) {
+				if (e instanceof AirshipGuineaPig) {
+					e.sendAnimation("anchor");
+				}
+			}
+		}
+	}
 }

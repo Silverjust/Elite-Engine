@@ -135,11 +135,12 @@ public abstract class Unit extends Entity {
 
 	@Override
 	public void sendDefaultAnimation(Animation oldAnimation) {
-		if (oldAnimation instanceof Attack) {
-			sendAnimation("stand");
-		} else {
-			sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
-		}
+		/*
+		 * if (oldAnimation instanceof Attack) { sendAnimation("stand"); } else
+		 * {
+		 */
+		sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
+		// }
 	}
 
 	public static class AttackActive extends Active implements AimingActive {

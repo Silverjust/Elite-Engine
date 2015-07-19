@@ -2,6 +2,7 @@ package entity.ahnen;
 
 import processing.core.PImage;
 import entity.Building;
+import entity.Commander;
 import entity.Trainer;
 import entity.animation.Ability;
 import entity.animation.Animation;
@@ -10,7 +11,7 @@ import entity.animation.Death;
 import entity.animation.Training;
 import game.ImageHandler;
 
-public class AhnenKaserne extends Building implements  Trainer {
+public class AhnenKaserne extends Building implements Trainer, Commander {
 	protected float xTarget;
 	protected float yTarget;
 
@@ -26,7 +27,7 @@ public class AhnenKaserne extends Building implements  Trainer {
 
 	public AhnenKaserne(String[] c) {
 		super(c);
- 
+
 		iconImg = standImg;
 		stand = new Animation(standImg, 1000);
 		build = new Build(standImg, 5000);
@@ -64,7 +65,7 @@ public class AhnenKaserne extends Building implements  Trainer {
 	public void exec(String[] c) {
 		super.exec(c);
 		Training.updateExecTraining(c, this);
-	}	
+	}
 
 	@Override
 	public void renderGround() {
@@ -103,5 +104,11 @@ public class AhnenKaserne extends Building implements  Trainer {
 		xTarget = x;
 		yTarget = y;
 
+	}
+
+	@Override
+	// TODO remove and add depot
+	public int commandRange() {
+		return 250;
 	}
 }

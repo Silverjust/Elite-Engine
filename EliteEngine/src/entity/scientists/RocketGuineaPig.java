@@ -131,6 +131,4 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	protected void sendWalkToEnemy(Entity e, Entity target) {
 	}
-}

@@ -169,9 +169,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	protected void sendWalkToEnemy(Entity e, Entity target) {
-	}
-
+	
 	static void setupEquip(Entity e, String[] c) {
 		if (c != null && c[7] != null && c[7].equals("select")) {
 			e.isSelected = true;

@@ -153,7 +153,4 @@ public class Tank extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	protected void sendWalkToEnemy(Entity e, Entity target) {
-	}
-
 }

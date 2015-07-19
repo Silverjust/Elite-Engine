@@ -71,6 +71,7 @@
     "Berserker": "entity.ahnen.Berserker",
     "Witcher": "entity.ahnen.Witcher",
     "Warrior": "entity.ahnen.Warrior",
+    "Angel": "entity.ahnen.Angel",
   },
   "maps": {
     "standard": {
