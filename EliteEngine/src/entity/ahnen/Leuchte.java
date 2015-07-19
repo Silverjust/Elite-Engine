@@ -5,6 +5,7 @@ import shared.ref;
 import entity.Attacker;
 import entity.Building;
 import entity.Entity;
+import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
@@ -18,7 +19,7 @@ public class Leuchte extends Building implements Attacker {
 
 	MeleeAttack heal;
 	MeleeAttack buff;
-
+	Ability timer;
 	Upgrade upgrade = Upgrade.STANDARD;
 
 	public static void loadImages() {
@@ -37,6 +38,7 @@ public class Leuchte extends Building implements Attacker {
 		heal = new MeleeAttack(healImg, 500);
 		buff = new MeleeAttack(buffImg, 500);
 		death = new Death(standingImg, 500);
+		timer = new Ability(standingImg, 100);
 
 		animation = nextAnimation = stand;
 		// ************************************
@@ -44,11 +46,13 @@ public class Leuchte extends Building implements Attacker {
 		ySize = 10;
 		height = 5;
 
-		kerit = 600;
-		pax = 300;
+		kerit = 0;
+		pax = 0;
 		arcanum = 0;
 		prunam = 0;
 
+		timer.cooldown = 30000;
+		timer.startCooldown();
 		hp = hp_max = 50;
 		radius = 3;
 		sight = 127;
@@ -79,14 +83,51 @@ public class Leuchte extends Building implements Attacker {
 			buff.setTargetFrom(this, this);
 			buff.updateAbility(this);
 		}
+		timer.updateAbility(this);
+		timer.removeCooldown(0);
+
+		if (timer.isNotOnCooldown()) {
+			if (upgrade == Upgrade.STANDARD) {
+				sendAnimation("death");
+			} else if (upgrade == Upgrade.HEAL) {
+				sendAnimation("stand");
+			} else if (upgrade == Upgrade.BUFF) {
+				sendAnimation("heal");
+			}
+		}
 	}
 
 	@Override
 	public void exec(String[] c) {
 		super.exec(c);
+		if (c[2].equals("stand")) {
+			if (upgrade != Upgrade.STANDARD) {
+				iconImg = standingImg;
+				timer.startCooldown();
+				hp_max = 50;
+				hp = hp_max;
+			}
+			upgrade = Upgrade.STANDARD;
+			setAnimation(stand);
+		}
 		if (c[2].equals("heal")) {
+			if (upgrade != Upgrade.HEAL) {
+				iconImg = healImg;
+				timer.startCooldown();
+				hp_max = 150;
+				hp = hp_max;
+			}
 			upgrade = Upgrade.HEAL;
-			iconImg = healImg;
+			setAnimation(heal);
+		}
+		if (c[2].equals("buff")) {
+			if (upgrade != Upgrade.BUFF) {
+				iconImg = buffImg;
+				timer.startCooldown();
+				hp_max = 300;
+				hp = hp_max;
+			}
+			upgrade = Upgrade.HEAL;
 			setAnimation(heal);
 		}
 	}
@@ -131,6 +172,12 @@ public class Leuchte extends Building implements Attacker {
 		drawSelected();
 		animation.draw(this, (byte) 0, currentFrame);
 		drawTaged();
+	}
+
+	@Override
+	public void display() {
+		super.display();
+		drawBar(1 - timer.getCooldownPercent());
 	}
 
 	@Override

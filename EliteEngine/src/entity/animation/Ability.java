@@ -88,4 +88,11 @@ public class Ability extends Animation {
 		return false;
 	}
 
+	public void removeCooldown(int time) {
+		System.out.println("Ability.removeCooldown()" + cooldownTimer);
+		cooldownTimer -= time;
+		float f = 1 - (float) (cooldownTimer - Updater.Time.getMillis())
+				/ cooldown;
+		System.out.println("Ability.removeCooldown()" + cooldownTimer+" "+f);
+	}
 }
