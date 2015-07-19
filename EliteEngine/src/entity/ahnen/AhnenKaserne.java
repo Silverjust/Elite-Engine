@@ -14,7 +14,7 @@ public class AhnenKaserne extends Building implements  Trainer {
 	protected float xTarget;
 	protected float yTarget;
 
-	private Ability training;
+	private Training training;
 
 	private static PImage standImg;
 

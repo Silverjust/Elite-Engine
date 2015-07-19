@@ -6,7 +6,6 @@ import shared.ref;
 import entity.animation.Build;
 import game.AimHandler;
 import game.AimHandler.Cursor;
-import game.Chat;
 import game.ImageHandler;
 import game.aim.BuildAim;
 import game.aim.CustomAim;
@@ -46,6 +45,7 @@ public abstract class Building extends Entity {
 			break;
 		}
 	}
+
 	@Override
 	public void renderUnder() {
 		if (this instanceof Trainer && isSelected && isAlive()) {
@@ -55,14 +55,16 @@ public abstract class Building extends Entity {
 					yToGrid(t.getYTarget()));
 			ref.app.stroke(0);
 		}
-		if (this instanceof Commander && isAlive()&&AimHandler.getAim() instanceof BuildAim) {
+		if (this instanceof Commander && isAlive()
+				&& AimHandler.getAim() instanceof BuildAim) {
 			Commander c = (Commander) this;
 			ref.app.tint(player.color);
-			ref.app.image(selectedImg, xToGrid(x), yToGrid(y), c.commandRange() * 2,
-					c.commandRange());
+			ref.app.image(selectedImg, xToGrid(x), yToGrid(y),
+					c.commandRange() * 2, c.commandRange());
 			ref.app.tint(255);
 		}
 	}
+
 	@Override
 	public void renderGround() {
 		drawSelected();
@@ -89,13 +91,13 @@ public abstract class Building extends Entity {
 		graphics.rect(x, y, radius * 2, radius * 2);
 	}
 
-	@Override
-	void drawShadow() {
+	/*@Override
+	protected void drawShadow() {
 		System.out.println(this.getClass().getSimpleName()
 				+ "should not have a shadow");
 		Chat.println(this.getClass().getSimpleName() + "",
 				"should not have a shadow");
-	}
+	}*/
 
 	public abstract PImage preview();
 

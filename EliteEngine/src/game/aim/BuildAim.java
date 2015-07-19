@@ -8,8 +8,8 @@ import entity.Entity.GroundPosition;
 import game.AimHandler.Cursor;
 
 public class BuildAim extends Aim {
-	Building buildable;
-	Entity builder;
+	protected Building buildable;
+	protected Entity builder;
 
 	public BuildAim(Entity builder, Entity building) {
 		try {
@@ -36,12 +36,12 @@ public class BuildAim extends Aim {
 		} else {
 			ref.app.tint(255, 100, 100, 150);
 		}
-		ref.app.image(buildable.preview(), x, y / 2,
-				buildable.xSize, buildable.ySize);
+		ref.app.image(buildable.preview(), x, y / 2, buildable.xSize,
+				buildable.ySize);
 		ref.app.tint(255);
 	}
 
-	boolean canPlaceAt(float x, float y) {
+	protected boolean canPlaceAt(float x, float y) {
 		boolean placeFree = true;
 		boolean inCommanderRange = false;
 		for (Entity e : ref.updater.entities) {
@@ -66,9 +66,10 @@ public class BuildAim extends Aim {
 
 	@Override
 	public void execute(float x, float y) {
-		/*float x, y;
-		x = Entity.xToGrid(Entity.gridToX());
-		y = Entity.xToGrid(Entity.gridToY());*/
+		/*
+		 * float x, y; x = Entity.xToGrid(Entity.gridToX()); y =
+		 * Entity.xToGrid(Entity.gridToY());
+		 */
 		if (canPlaceAt(x, y)) {
 			ref.updater.send("<spawn " + buildable.getClass().getSimpleName()
 					+ " " + builder.player.ip + " " + x + " " + y);

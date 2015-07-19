@@ -19,7 +19,7 @@ public class MineAim extends UpgradeAim {
 	}
 
 	@Override
-	boolean canPlaceAt(float x, float y) {
+	protected boolean canPlaceAt(float x, float y) {
 		boolean rightPlace = false;
 		boolean inCommanderRange = false;
 		for (Entity e : ref.updater.entities) {

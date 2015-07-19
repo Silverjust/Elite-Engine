@@ -1,5 +1,7 @@
 added ahnen
-added berserker, witcher
+added Leuchte
+added berserker, witcher, 
+ warrior
 --------------------------
 commands via minimap possible
 PhysicsLab can teleport

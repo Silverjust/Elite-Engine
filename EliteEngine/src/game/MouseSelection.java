@@ -49,7 +49,7 @@ public class MouseSelection {
 					if (e instanceof Unit)
 						containsUnits = true;
 				}
-				if (PApplet.dist(x1, y1, e.x, e.y - e.height) <= e.radius) {
+				if (PApplet.dist(x1, y1, e.x, e.y - e.flyHeight()) <= e.radius) {
 					e.isSelected = true;
 					ref.updater.selected.add(e);
 					if (e instanceof Unit)
@@ -72,7 +72,7 @@ public class MouseSelection {
 		Class<? extends Entity> type = null;
 		for (Entity e : ref.updater.entities) {
 			if (GameDrawer.godhand || e.isAllyTo(ref.player)) {
-				if (PApplet.dist(x, y, e.x, e.y - e.height) <= e.radius) {
+				if (PApplet.dist(x, y, e.x, e.y - e.flyHeight()) <= e.radius) {
 					type = e.getClass();
 				}
 			}

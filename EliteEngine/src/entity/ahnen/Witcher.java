@@ -3,6 +3,7 @@ package entity.ahnen;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
+import entity.Active;
 import entity.AimingActive;
 import entity.Attacker;
 import entity.Entity;
@@ -32,6 +33,8 @@ public class Witcher extends Unit implements Attacker, Shooter {
 
 	float burstX, burstY;
 
+	public byte upgradeRange;
+
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
@@ -53,9 +56,10 @@ public class Witcher extends Unit implements Attacker, Shooter {
 		// ************************************
 		xSize = 15;
 		ySize = 15;
+		height = 10;
 
-		kerit = 100;
-		pax = 100;
+		kerit = 300;
+		pax = 200;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 1500;
@@ -80,6 +84,8 @@ public class Witcher extends Unit implements Attacker, Shooter {
 		burst.cooldown = 20000;
 		burst.range = 60;
 		burst.setCastTime(1000);
+
+		upgradeRange = 100;
 
 		descr = " ";
 		stats = " ";
@@ -246,6 +252,33 @@ public class Witcher extends Unit implements Attacker, Shooter {
 				Witcher.displayBurstArea = false;
 				caster.sendAnimation("burst " + x + " " + y);
 				startCooldown();
+			}
+		}
+	}
+
+	public static class UpgradeActive extends Active {
+		public UpgradeActive(int x, int y, char n) {
+			super(x, y, n, Leuchte.healImg);
+			clazz = Witcher.class;
+		}
+
+		@Override
+		public String getDesription() {
+			return "upgrade lampe";
+		}
+
+		@Override
+		public void onActivation() {
+			for (Entity e : ref.updater.entities) {
+				if (e instanceof Leuchte) {
+					for (Entity e2 : ref.updater.selected) {
+						if (e2 instanceof Witcher
+								&& e.isInRange(e2.x, e2.y,
+										((Witcher) e2).upgradeRange)) {
+							e.sendAnimation("heal");
+						}
+					}
+				}
 			}
 		}
 	}

@@ -44,6 +44,9 @@ public class AhnenInfo extends NationInfo {
 		grid.addActive(2, 1, Unit.WalkActive.class, true);
 		grid.addActive(3, 1, Unit.StopActive.class, true);
 
+		grid.addActive(1, 3, Berserker.LeuchteActive.class, Berserker.class,
+				Leuchte.class, true);
+		grid.addActive(2, 3, Witcher.UpgradeActive.class, true);
 		grid.addActive(2, 2, Witcher.BurstActive.class, true);
 
 		grid.addActive(1, 1, Building.SetTargetActive.class, false);
@@ -53,6 +56,7 @@ public class AhnenInfo extends NationInfo {
 
 		grid.addTrainActive(1, 3, AhnenKaserne.class, Berserker.class, false);
 		grid.addTrainActive(2, 3, AhnenKaserne.class, Witcher.class, false);
+		grid.addTrainActive(3, 3, AhnenKaserne.class, Warrior.class, false);
 
 	}
 }

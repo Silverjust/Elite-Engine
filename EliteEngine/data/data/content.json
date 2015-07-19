@@ -67,8 +67,10 @@
     "AhnenArcanumMine": "entity.ahnen.AhnenArcanumMine",
     "AhnenPrunamHarvester": "entity.ahnen.AhnenPrunamHarvester",
     "AhnenKaserne": "entity.ahnen.AhnenKaserne",
+    "Leuchte": "entity.ahnen.Leuchte",  
     "Berserker": "entity.ahnen.Berserker",
     "Witcher": "entity.ahnen.Witcher",
+    "Warrior": "entity.ahnen.Warrior",
   },
   "maps": {
     "standard": {
