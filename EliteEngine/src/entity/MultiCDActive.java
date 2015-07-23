@@ -30,6 +30,7 @@ public abstract class MultiCDActive extends Active {
 	public void startCooldown() {
 		if (!isNotOnCooldown()) {
 			searchEntity();
+			button.setEnabled(false);
 		}
 	}
 

@@ -201,6 +201,12 @@ public class Berserker extends Unit implements Attacker {
 		}
 
 		@Override
+		public void update() {
+			System.out.println("Berserker.LeuchteActive.update()"+button.isEnabled());
+			super.update();
+		}
+
+		@Override
 		public void onActivation() {
 			Entity builder = null;
 			for (Entity e : ref.updater.selected) {

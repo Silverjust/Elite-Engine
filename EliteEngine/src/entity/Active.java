@@ -42,8 +42,8 @@ public abstract class Active implements Informing {
 
 	public void update() {
 		button.setCooldownState(1 - getCooldownPercent());
-		if (isNotOnCooldown())
-			button.setThisEnabled(true);
+		if (isNotOnCooldown() && button.isVisible())
+			button.setEnabled(true);
 	}
 
 	public void handleActiveEvents(GGameButton gamebutton, GEvent event) {
