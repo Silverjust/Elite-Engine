@@ -12,7 +12,6 @@ import entity.TrainActive;
 import entity.Unit;
 import entity.UpgradeActive;
 import entity.neutral.*;
-import game.aim.MineAim;
 import shared.Helper;
 import shared.Nation;
 import shared.ref;
@@ -211,51 +210,6 @@ public class ActivesGrid {
 				buildingGrid[x][y] = new UpgradeActive(x, y,
 						SettingHandler.setting.buildingsShortcuts[y][x], b,
 						oldBuilding, builder);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Deprecated
-	public void addBuildMineActive(int x, int y, Class<?> builder,
-			boolean isUnitActive) {
-		x--;
-		y--;
-		try {
-			Building b = nation.getNationInfo().getKeritMine()
-					.getConstructor(String[].class)
-					.newInstance(new Object[] { null });
-
-			if (isUnitActive) {
-				unitGrid[x][y] = new MineAim.BuildMineActive(x, y,
-						SettingHandler.setting.unitsShortcuts[y][x], b, builder);
-			} else {
-				buildingGrid[x][y] = new MineAim.BuildMineActive(x, y,
-						SettingHandler.setting.buildingsShortcuts[y][x], b,
-						builder);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Deprecated
-	public void addBuildWallActive(int x, int y, Class<?> builder,
-			Class<? extends Building> building, boolean isUnitActive) {
-		x--;
-		y--;
-		try {
-			Building b = building.getConstructor(String[].class).newInstance(
-					new Object[] { null });
-			if (isUnitActive) {
-				unitGrid[x][y] = new BuildWallActive(x, y,
-						SettingHandler.setting.unitsShortcuts[y][x], b, builder);
-			} else {
-				buildingGrid[x][y] = new BuildWallActive(x, y,
-						SettingHandler.setting.buildingsShortcuts[y][x], b,
-						builder);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

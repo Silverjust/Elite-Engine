@@ -27,13 +27,6 @@ public abstract class MultiCDActive extends Active {
 	}
 
 	@Override
-	public void update() {
-		button.setCooldownState(1 - getCooldownPercent());
-		if (isNotOnCooldown())
-			button.setThisEnabled(true);
-	}
-
-	@Override
 	public void startCooldown() {
 		if (!isNotOnCooldown()) {
 			searchEntity();

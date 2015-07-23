@@ -72,7 +72,7 @@ public abstract class Active implements Informing {
 
 	public void startCooldown() {
 		cooldownTimer = Updater.Time.getMillis() + cooldown;
-		button.setThisEnabled(false);
+		button.setEnabled(false);
 	}
 
 	public boolean isNotOnCooldown() {
