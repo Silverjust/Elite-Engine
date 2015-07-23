@@ -40,7 +40,7 @@ public abstract class Updater {
 	}
 
 	public static class Time {
-
+		// TODO pause not working
 		private static int pauseStart;
 		private static int pauseTime;
 

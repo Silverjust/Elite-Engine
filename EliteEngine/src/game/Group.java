@@ -58,14 +58,16 @@ public class Group {
 				unitActives = containsUnits;
 
 			}
-			GroupHandler.recentGroup = this;
-			HUD.activesGrid.selectionChange(unitActives);
 			for (Entity entity : ref.updater.selected) {
 				entity.isSelected = false;
 			}
+			ref.updater.selected.clear();
 			for (Entity entity : groupEntities) {
 				entity.isSelected = true;
+				ref.updater.selected.add(entity);
 			}
+			GroupHandler.recentGroup = this;
+			HUD.activesGrid.selectionChange(unitActives);
 		}
 	}
 }

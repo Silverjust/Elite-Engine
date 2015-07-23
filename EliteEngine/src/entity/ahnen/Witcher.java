@@ -181,7 +181,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void renderAir() {
-		if (burst.isSetup())
+		if (burst.isSetup() && burst.isNotOnCooldown())
 			burstplosion.draw(burstX, burstY);
 	}
 

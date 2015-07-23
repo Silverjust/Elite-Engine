@@ -22,7 +22,7 @@ public class MultiplayerLoader extends Loader {
 		case NEWGAME:
 			Nation.setNationsToPlayableNations();
 			ref.updater = new ServerUpdater();
-			state = State.STARTIMAGES;// map
+			state = State.MAP;// map
 			break;
 		case STARTIMAGES:
 			boolean b = ImageHandler.requestAllImages();
