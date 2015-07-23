@@ -86,6 +86,8 @@ public class Helper {
 	public static String secureInput(String in) {
 		in.replace('<', ' ');// gegen command injektion
 		in.replace('>', ' ');
+		if (in != "" && in.charAt(0) == ' ')
+			in = in.substring(1);
 		return in;
 	}
 

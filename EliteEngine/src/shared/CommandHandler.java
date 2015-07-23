@@ -7,8 +7,8 @@ import processing.core.PApplet;
 import shared.Updater.GameState;
 import entity.Entity;
 import g4p_controls.GCScheme;
-import game.Chat;
 import game.GameDrawer;
+import game.HUD;
 import game.ImageHandler;
 import game.MapHandler;
 
@@ -97,7 +97,7 @@ public class CommandHandler {
 				MapHandler.saveMap(c[1], c[2]);
 				break;
 			case "/fps":
-				Chat.println("fps", ref.app.frameRate + "");
+				HUD.chat.println("fps", ref.app.frameRate + "");
 				break;
 			case "/scheme":
 				i = Integer.parseInt(c[1]);
@@ -132,17 +132,17 @@ public class CommandHandler {
 			}
 		} catch (IllegalArgumentException e) {
 			System.err.println("no entity found " + command);
-			Chat.println("Chat", "no entity found ");
+			HUD.chat.println("Chat", "no entity found ");
 		} catch (ClassCastException e) {
 			System.err.println("wrong entity " + command);
-			Chat.println("Chat", "wrong entity ");
+			HUD.chat.println("Chat", "wrong entity ");
 		} catch (NoInitialContextException e) {
 			System.err.println(command + " was not found");
-			Chat.println("Chat", "command was not found");
+			HUD.chat.println("Chat", "command was not found");
 		} catch (Exception e) {
 			System.err.println("command error in " + command);
 			 e.printStackTrace();
-			Chat.println("Chat", "command error");
+			HUD.chat.println("Chat", "command error");
 		}
 
 	}

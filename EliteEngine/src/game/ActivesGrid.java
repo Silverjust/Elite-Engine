@@ -32,9 +32,6 @@ public class ActivesGrid {
 		Active.x = x;
 		Active.y = y;
 		setup(ref.player.nation);
-		if (GameSettings.sandbox) {
-			addActive(7, 1, SandboxBuilding.BuildSetup.class, false);
-		}
 		selectionChange(false);
 	}
 
@@ -43,6 +40,9 @@ public class ActivesGrid {
 			removeActives();
 			this.nation = nation;
 			nation.getNationInfo().setupActives(this);
+			if (GameSettings.sandbox) {
+				addActive(7, 1, SandboxBuilding.BuildSetup.class, false);
+			}
 		}
 	}
 

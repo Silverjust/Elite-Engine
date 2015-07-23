@@ -87,7 +87,7 @@ public class GameUpdater extends Updater {
 		for (int i = 2; i < text.length; i++) {// c[0] und c[1] auslassen
 			completeText = completeText.concat(" ").concat(text[i]);
 		}
-		Chat.println(name, completeText);
+		HUD.chat.println(name, completeText);
 	}
 
 	@Override

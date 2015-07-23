@@ -9,8 +9,8 @@ import shared.Updater;
 import shared.ref;
 import entity.animation.Animation;
 import entity.animation.Death;
-import game.Chat;
 import game.GameDrawer;
+import game.HUD;
 import game.ImageHandler;
 
 public abstract class Entity implements Informing {
@@ -138,7 +138,7 @@ public abstract class Entity implements Informing {
 	}
 
 	public void info() {
-		Chat.println(this.getClass().getSimpleName() + number, "(" + x + "|"
+		HUD.chat.println(this.getClass().getSimpleName() + number, "(" + x + "|"
 				+ y + ")" + "\nhp:" + hp);
 	}
 

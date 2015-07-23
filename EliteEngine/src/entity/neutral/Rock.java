@@ -28,10 +28,10 @@ public class Rock extends Building {
 
 		animation = nextAnimation = stand;
 		// ************************************
-		xSize = 30;
-		ySize = 30;
+		xSize = 40;
+		ySize = 40;
 
-		radius = 15;
+		radius = 20;
 
 		descr = "Rock";
 		// ************************************

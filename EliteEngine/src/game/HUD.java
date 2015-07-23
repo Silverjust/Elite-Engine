@@ -19,6 +19,7 @@ public class HUD {
 	public static AudioPlayer sound;
 
 	public static Menu menue;
+	public static Chat chat;
 
 	public static void loadImages() {
 		keritImg = ImageHandler.load("", "Kerit");
@@ -36,7 +37,7 @@ public class HUD {
 
 	public static void setup() {
 		setupG4P();
-		Chat.setup();
+		chat=new Chat();
 		SelectionDisplay.setup();
 		Minimap.setup();
 		GroupHandler.setup();

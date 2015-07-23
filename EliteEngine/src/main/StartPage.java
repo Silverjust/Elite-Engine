@@ -73,11 +73,7 @@ public class StartPage {
 
 	public void handleAcceptEvents(GButton button, GEvent event) {
 		String name = Helper.secureInput(playerName.getText());
-		if (name != "" && name.charAt(0) == ' ')
-			name = name.substring(1);
 		String ip = Helper.secureInput(serverIp.getText());
-		if (ip != "" && ip.charAt(0) == ' ')
-			ip = ip.substring(1);
 
 		if (event == GEvent.CLICKED) {
 			if (name.equals("")) {
@@ -151,7 +147,7 @@ public class StartPage {
 
 	public void setActive(boolean b) {
 		try {
-		
+
 			playerName.setEnabled(b);
 			password.setEnabled(b);
 			serverIp.setEnabled(b);

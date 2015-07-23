@@ -42,7 +42,7 @@ public class Input {
 	}
 
 	public boolean isKeyFocusInGame() {
-		return !Chat.chatLine.hasFocus();
+		return !HUD.chat.hasFocus();
 	}
 
 	public void update() {// ********************************************************
@@ -69,23 +69,8 @@ public class Input {
 	}
 
 	public void keyPressed() {// ********************************************************
-		if (!isChatVisible && app.keyCode == SettingHandler.setting.toggleChat) {
-			isOpeningChat = true;
-		}
-		if (isChatVisible && app.keyCode == SettingHandler.setting.toggleChat
-				&& !Chat.chatLine.hasFocus()) {
-			Chat.hide();
-			isChatVisible = false;
-		}
-
-		if (app.keyCode == PConstants.BACKSPACE
-				&& Chat.chatLine.getText().equals(" ")) {
-			Chat.hide();
-			isChatVisible = false;
-		}
-
+		HUD.chat.update();
 		if (isKeyFocusInGame()) {
-
 			if (app.key == SettingHandler.setting.togglePause) {
 				if (ref.updater.gameState == GameState.PAUSE) {
 					ref.updater.send("<pause false");
@@ -131,11 +116,7 @@ public class Input {
 	}
 
 	public void keyReleased() {// ********************************************************
-		if (isOpeningChat) {
-			isOpeningChat = false;
-			Chat.show();
-			isChatVisible = true;
-		}
+		HUD.chat.justOpened = false;
 		if (app.keyCode == SettingHandler.setting.strg) {
 			strgMode = false;
 		}
@@ -149,7 +130,7 @@ public class Input {
 
 	public void mousePressed() {// ********************************************************
 		isMPressedOutOfFocus = !isMouseFocusInGame();
-		// Chat.println("", "" + isMPressedOutOfFocus);
+		// HUD.chat.println("", "" + isMPressedOutOfFocus);
 		if (doubleClickStart + doubleClickIntervall > ref.app.millis()) {
 			if (isMouseFocusInGame()) {
 				if (AimHandler.isDefault()
@@ -196,7 +177,7 @@ public class Input {
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {// ********************************************************
-		if (Chat.chatLine.hasFocus()) {
+		if (HUD.chat.hasFocus()) {
 		} else {// chat out of focus
 		}// unabhängig von chat fokus
 

@@ -16,6 +16,7 @@ public class MapHandler {
 		try {
 			@SuppressWarnings("unchecked")
 			Set<String> entitySet = map.getJSONObject("entities").keys();
+			System.out.println("MapHandler.setupEntities() "+entitySet.size()+" Entities to spawn");
 			for (String string : entitySet) {
 				JSONObject entity = map.getJSONObject("entities")
 						.getJSONObject(string);
@@ -69,8 +70,8 @@ public class MapHandler {
 		map.setString("descr", " ");
 		map.setString("texture", oldMap.getString("texture"));
 		map.setString("coll", oldMap.getString("coll"));
-		map.setInt("w", 900);
-		map.setInt("h", 900);
+		map.setInt("w", ref.updater.map.width);
+		map.setInt("h",  ref.updater.map.height);
 
 		JSONObject entities = new JSONObject();
 		int i = 0;
@@ -78,12 +79,11 @@ public class MapHandler {
 			if (e.getClass() != SandboxBuilding.class) {
 				i++;
 				JSONObject atributes = new JSONObject();
-				String type;
+				String type = e.getClass().getSimpleName().toString();
 				if (e instanceof MainBuilding)
 					type = "MainBuilding";
 				else if (e instanceof KeritMine)
 					type = "KeritMine";
-				type = e.getClass().getSimpleName().toString();
 
 				atributes.setString("type", type);
 				int playerNumber = new ArrayList<String>(

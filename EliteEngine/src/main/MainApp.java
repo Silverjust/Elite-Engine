@@ -1,10 +1,6 @@
 package main;
 
 import g4p_controls.G4P;
-import g4p_controls.GEditableTextControl;
-import g4p_controls.GEvent;
-import g4p_controls.GTextField;
-import game.Chat;
 import game.GameDrawer;
 import game.HUD;
 import game.SettingHandler;
@@ -16,8 +12,6 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 import shared.Client;
-import shared.CommandHandler;
-import shared.Helper;
 import shared.Menu;
 import shared.Mode;
 import shared.ref;
@@ -95,39 +89,6 @@ public class MainApp extends PApplet {
 		}
 		// text("ccccccccccccccc", 100, 100);// habs gefunden, war zum test
 
-	}
-
-	public void chatEvents(GTextField textfield, GEvent event) {
-		// System.out.println(event);
-		switch (event) {
-		case ENTERED:
-			String s = textfield.getText().length() > 0 ? (textfield.getText()
-					.charAt(0) == ' ' ? (textfield.getText().substring(1))
-					: (textfield.getText())) : ("");
-			s = Helper.secureInput(s);
-			if (s.equals("") || s.equals(" ")) {
-				Chat.hide();
-			} else {
-				println(s);
-
-				if (s.length() > 0 && s.charAt(0) == '/') {
-					Chat.println(ref.player.name, s);
-					CommandHandler.executeCommands(s);
-				} else {
-					ClientHandler.send("<say " + ref.player.ip + " " + s);
-				}
-			}
-			textfield.setText("");
-			break;
-		default:
-			break;
-		}
-	}
-
-	public void handleTextEvents(GEditableTextControl textcontrol, GEvent event) {
-		if (event == GEvent.CHANGED) {
-			GameDrawer.mouseSelection = null;
-		}
 	}
 
 	@Override

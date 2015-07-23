@@ -7,8 +7,8 @@ import shared.ref;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import game.AimHandler;
-import game.Chat;
 import game.AimHandler.Cursor;
+import game.HUD;
 import game.aim.CustomAim;
 import game.aim.MoveAim;
 
@@ -129,7 +129,7 @@ public abstract class Unit extends Entity {
 	}
 
 	public void info() {
-		Chat.println(this.getClass().getSimpleName() + number, "(" + x + "|"
+		HUD.chat.println(this.getClass().getSimpleName() + number, "(" + x + "|"
 				+ y + ")->(" + xTarget + "|" + yTarget + ")\nhp:" + hp);
 	}
 
