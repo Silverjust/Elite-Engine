@@ -7,6 +7,7 @@ import shared.Nation;
 import shared.Player;
 import shared.Updater;
 import shared.ref;
+import entity.aliens.AlienKaserne;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
@@ -61,7 +62,7 @@ public abstract class Entity implements Informing {
 	}
 
 	public void updateAnimation() {
-		setAnimation(getNextAnimation());
+		animation=getNextAnimation();
 		getAnimation().update(this);
 	}
 
@@ -306,7 +307,8 @@ public abstract class Entity implements Informing {
 	public void setAnimation(Animation a) {
 		if ((a != null && animation == null)
 				|| (a != null && animation.isInterruptable() && animation != a)) {
-			System.out.println("Entity.setAnimation()" + a.getName(this));
+			if (this instanceof AlienKaserne)
+				System.out.println("Entity.setAnimation()" + a.getName(this));
 			if (animation == null)
 				animation = a;
 			nextAnimation = a;

@@ -64,7 +64,7 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 	@Override
 	public void updateDecisions() {
 		System.out.println("AlienKaserne.updateDecisions()"
-				+ getAnimation().getName(this) + training.getProgressPercent());
+				+ getAnimation().getName(this) + training.getCooldownPercent());
 		training.updateAbility(this);
 	}
 

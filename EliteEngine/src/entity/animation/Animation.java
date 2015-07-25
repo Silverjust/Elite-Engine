@@ -8,6 +8,7 @@ import entity.Building;
 import entity.Entity;
 import entity.Trainer;
 import entity.Unit;
+import entity.aliens.AlienKaserne;
 
 public class Animation {
 	byte directions;
@@ -49,7 +50,8 @@ public class Animation {
 	}
 
 	public void setup(Entity e) {
-		System.out.println("Animation.setup()" + this.getName(e));
+		if (e instanceof AlienKaserne)
+			System.out.println("Animation.setup()" + this.getName(e));
 		e.currentFrame = 0;
 		start = Updater.Time.getMillis();
 	}
@@ -102,6 +104,7 @@ public class Animation {
 	}
 
 	public boolean doRepeat() {
+		System.out.println("Animation.doRepeat()");
 		return true;
 	}
 

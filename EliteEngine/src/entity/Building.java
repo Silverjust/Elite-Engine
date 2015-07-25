@@ -77,7 +77,7 @@ public abstract class Building extends Entity {
 			drawBar(build.getCooldownPercent());
 		if (this instanceof Trainer
 				&& getAnimation() == ((Trainer) this).getTraining())
-			drawBar(((Trainer) this).getTraining().getProgressPercent());
+			drawBar(((Trainer) this).getTraining().getCooldownPercent());
 	}
 
 	public static float xToGrid(float x) {

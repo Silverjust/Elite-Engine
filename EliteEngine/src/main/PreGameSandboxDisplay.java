@@ -30,11 +30,11 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 
 		playerList = ref.app.createGraphics(281, 300);// 200 height?
 		// **************************************
-		playerDroplist = new GDropList(ref.app, 200, 200, 200, 200, 5);
+		playerDroplist = new GDropList(ref.app, 200, 200, 200, 200, 6);
 		playerDroplist.addEventHandler(this, "handleDroplistSelectPlayer");
 		updatePlayerDroplist();
 
-		playerDroplistNation = new GDropList(ref.app, 420, 200, 100, 200, 5);
+		playerDroplistNation = new GDropList(ref.app, 420, 200, 100, 200, 6);
 		String[] nations = new String[Nation.values().length];
 		int neutralIndex = -1;
 		for (int i = 0; i < nations.length; i++) {
