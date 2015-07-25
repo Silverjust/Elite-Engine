@@ -32,12 +32,9 @@ public class MeleeAttack extends Attack {
 		 * (isEvent())System.out.println("event"); if
 		 * (isNotOnCooldown())System.out.println("ncool");
 		 */
-
-		if (isSetup() && isEvent() && isNotOnCooldown()) {
-			// System.out.println(2);
+		if (isSetup() && isEvent()) {
 			((Attacker) e).calculateDamage(this);
 			isSetup = false;
-			startCooldown();
 		}
 	}
 

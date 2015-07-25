@@ -34,7 +34,7 @@ public class HumanMechKaserne extends Building implements  Trainer {
 		death = new Death(standImg, 1000);
 		training = new Training(standImg, 100);
 
-		animation = nextAnimation = build;
+		setAnimation(build);
 		setupTarget();
 		// ************************************
 		xSize = 30;
@@ -70,13 +70,13 @@ public class HumanMechKaserne extends Building implements  Trainer {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	@Override
 	public void display() {
 		super.display();
-		if (animation == training)
+		if (getAnimation() == training)
 			drawBar(training.getCooldownPercent());
 	}
 

@@ -73,8 +73,11 @@ public abstract class Building extends Entity {
 	@Override
 	public void display() {
 		super.display();
-		if (animation == build)
+		if (getAnimation() == build)
 			drawBar(build.getCooldownPercent());
+		if (this instanceof Trainer
+				&& getAnimation() == ((Trainer) this).getTraining())
+			drawBar(((Trainer) this).getTraining().getProgressPercent());
 	}
 
 	public static float xToGrid(float x) {
@@ -91,13 +94,12 @@ public abstract class Building extends Entity {
 		graphics.rect(x, y, radius * 2, radius * 2);
 	}
 
-	/*@Override
-	protected void drawShadow() {
-		System.out.println(this.getClass().getSimpleName()
-				+ "should not have a shadow");
-		Chat.println(this.getClass().getSimpleName() + "",
-				"should not have a shadow");
-	}*/
+	/*
+	 * @Override protected void drawShadow() {
+	 * System.out.println(this.getClass().getSimpleName() +
+	 * "should not have a shadow"); Chat.println(this.getClass().getSimpleName()
+	 * + "", "should not have a shadow"); }
+	 */
 
 	public abstract PImage preview();
 

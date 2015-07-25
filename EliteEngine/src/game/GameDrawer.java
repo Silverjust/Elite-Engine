@@ -17,6 +17,7 @@ public class GameDrawer {
 	public static boolean godeye;
 	public static boolean godhand;
 	public static boolean nocosts;
+	public static boolean showRanges;
 
 	public static MouseSelection mouseSelection;
 
@@ -61,6 +62,11 @@ public class GameDrawer {
 		ref.app.rectMode(PConstants.CENTER);
 		for (Entity e : ref.player.visibleEntities) {
 			e.renderUnder();
+		}
+		if (showRanges) {
+			for (Entity e : ref.player.visibleEntities) {
+				e.renderRange();
+			}
 		}
 		for (Entity e : ref.player.visibleEntities) {
 			e.renderGround();

@@ -25,7 +25,8 @@ public class Pax extends Building {
 		build = null;
 		death = null;
 
-		animation = nextAnimation = stand;
+		setAnimation(stand);
+		
 		// ************************************
 		xSize = 40;
 		ySize = 40;
@@ -42,7 +43,7 @@ public class Pax extends Building {
 
 	@Override
 	public void renderUnder() {
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	@Override

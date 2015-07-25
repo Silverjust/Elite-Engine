@@ -40,7 +40,8 @@ public class Leuchte extends Building implements Attacker {
 		death = new Death(standingImg, 500);
 		timer = new Ability(standingImg, 100);
 
-		animation = nextAnimation = stand;
+		setAnimation(stand);
+		
 		// ************************************
 		xSize = 10;
 		ySize = 10;
@@ -168,7 +169,7 @@ public class Leuchte extends Building implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 		drawTaged();
 	}
 

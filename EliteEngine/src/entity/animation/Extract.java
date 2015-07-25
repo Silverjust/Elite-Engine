@@ -8,6 +8,7 @@ public class Extract extends Ability {
 
 	public float efficenty;
 	public String ressource;
+	private boolean isSetup;
 
 	public Extract(PImage[][] IMG, int duration) {
 		super(IMG, duration);
@@ -25,10 +26,23 @@ public class Extract extends Ability {
 	public void updateAbility(Entity e) {
 		int amount = (int) (e.hp * 1.0 / e.hp_max * efficenty);
 		amount = amount < 0 ? 0 : amount;
-		if (isEvent() && isNotOnCooldown()) {
+		if (isSetup() && isEvent()) {
 			ref.updater.send("<give " + e.player.ip + " " + ressource + " "
 					+ amount);
+			isSetup = false;
+		}
+		if (isNotOnCooldown()) {
+			isSetup = true;
 			startCooldown();
 		}
+	}
+
+	@Override
+	public boolean isSetup() {
+		return isSetup;
+	}
+	@Override
+	public boolean doRepeat() {
+		return true;
 	}
 }

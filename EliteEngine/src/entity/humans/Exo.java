@@ -37,7 +37,8 @@ public class Exo extends Unit implements Attacker {
 		instaAttack = new MeleeAttack(standingImg, 800);
 		hook = new Hook(standingImg, 800);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -78,7 +79,7 @@ public class Exo extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk&& isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk&& isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -120,18 +121,18 @@ public class Exo extends Unit implements Attacker {
 
 	@Override
 	public void updateMovement() {
-		if (animation == hook) {
+		if (getAnimation() == hook) {
 			speed += hook.speed;
 		}
 		super.updateMovement();
-		if (animation == hook) {
+		if (getAnimation() == hook) {
 			speed -= hook.speed;
 		}
 	}
 
 	@Override
 	public boolean isCollision(Entity e) {
-		boolean b = !(animation == hook && e != hook.getTarget());
+		boolean b = !(getAnimation() == hook && e != hook.getTarget());
 		return super.isCollision(e) && b;
 	}
 
@@ -172,8 +173,8 @@ public class Exo extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
-		if (animation == hook)
+		getAnimation().draw(this, direction, currentFrame);
+		if (getAnimation() == hook)
 			drawShot();
 		drawTaged();
 	}

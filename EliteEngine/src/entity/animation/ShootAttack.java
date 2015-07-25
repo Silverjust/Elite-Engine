@@ -45,10 +45,9 @@ public class ShootAttack extends MeleeAttack {
 		 * if (target != null && getProgressPercent() == 1) {
 		 * System.out.println("target"); }
 		 */
-		if (isSetup() && isEvent() && isNotOnCooldown()) {
+		if (isSetup() && isEvent()) {
 			((Attacker) e).calculateDamage(this);
 			isSetup = false;
-			startCooldown();
 		}
 	}
 

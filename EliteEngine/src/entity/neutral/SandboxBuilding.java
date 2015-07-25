@@ -36,7 +36,8 @@ public class SandboxBuilding extends Building implements Commander {
 		build = null;
 		death = null;
 
-		animation = nextAnimation = stand;
+		setAnimation(stand);
+		
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -54,7 +55,7 @@ public class SandboxBuilding extends Building implements Commander {
 	@Override
 	public void renderGround() {
 		super.renderGround();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	@Override

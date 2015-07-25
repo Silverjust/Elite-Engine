@@ -24,7 +24,8 @@ public class Arcanum extends Building {
 		build = null;
 		death = null;
 
-		animation = nextAnimation = stand;
+		setAnimation(stand);
+		
 		// ************************************
 		xSize = 50;
 		ySize = 50;
@@ -41,7 +42,7 @@ public class Arcanum extends Building {
 
 	@Override
 	public void renderGround() {
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	@Override

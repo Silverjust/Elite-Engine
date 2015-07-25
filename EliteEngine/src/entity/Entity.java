@@ -8,6 +8,7 @@ import shared.Player;
 import shared.Updater;
 import shared.ref;
 import entity.animation.Animation;
+import entity.animation.Attack;
 import entity.animation.Death;
 import game.GameDrawer;
 import game.HUD;
@@ -46,8 +47,8 @@ public abstract class Entity implements Informing {
 	public Death death;
 	public Animation stand;
 
-	protected Animation animation;
-	protected Animation nextAnimation;
+	private Animation animation;
+	private Animation nextAnimation;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -60,8 +61,8 @@ public abstract class Entity implements Informing {
 	}
 
 	public void updateAnimation() {
-		animation = nextAnimation;
-		animation.update(this);
+		setAnimation(getNextAnimation());
+		getAnimation().update(this);
 	}
 
 	public void updateDecisions() {
@@ -86,6 +87,14 @@ public abstract class Entity implements Informing {
 		drawHpBar();
 	}
 
+	public void renderRange() {
+		if (this instanceof Attacker) {
+			Attack a = ((Attacker) this).getBasicAttack();
+			drawCircle(a.range);
+			drawCircle((int) (a.range * a.getCooldownPercent()));
+		}
+	}
+
 	public void exec(String[] c) {
 		try {
 			switch (c[2]) {
@@ -103,7 +112,7 @@ public abstract class Entity implements Informing {
 				break;
 			}
 		} catch (Exception e) {
-			System.err.println(animation + " " + nextAnimation);
+			System.err.println(getAnimation() + " " + getNextAnimation());
 			PApplet.printArray(c);
 			e.printStackTrace();
 		}
@@ -138,8 +147,8 @@ public abstract class Entity implements Informing {
 	}
 
 	public void info() {
-		HUD.chat.println(this.getClass().getSimpleName() + number, "(" + x + "|"
-				+ y + ")" + "\nhp:" + hp);
+		HUD.chat.println(this.getClass().getSimpleName() + number, "(" + x
+				+ "|" + y + ")" + "\nhp:" + hp);
 	}
 
 	protected void drawShadow() {
@@ -295,7 +304,11 @@ public abstract class Entity implements Informing {
 	}
 
 	public void setAnimation(Animation a) {
-		if (a != null && animation.isInterruptable() && animation != a) {// tut
+		if ((a != null && animation == null)
+				|| (a != null && animation.isInterruptable() && animation != a)) {
+			System.out.println("Entity.setAnimation()" + a.getName(this));
+			if (animation == null)
+				animation = a;
 			nextAnimation = a;
 			a.setup(this);
 		}
@@ -303,6 +316,10 @@ public abstract class Entity implements Informing {
 
 	public Animation getAnimation() {
 		return animation;
+	}
+
+	public Animation getNextAnimation() {
+		return nextAnimation;
 	}
 
 	public float calcImportanceOf(Entity e) {
@@ -376,7 +393,7 @@ public abstract class Entity implements Informing {
 
 	public boolean isAlive() {
 		if (isMortal())
-			return (animation.getClass() != death.getClass()) && hp > 0;
+			return (getAnimation().getClass() != death.getClass()) && hp > 0;
 		return true;
 	}
 
@@ -419,9 +436,8 @@ public abstract class Entity implements Informing {
 	}
 
 	public void setupTarget() {
-		try {
+		if (this instanceof Trainer) {
 			((Trainer) this).setTarget(x + radius + 50, y + radius + 50);
-		} catch (Exception e) {
 		}
 	}
 

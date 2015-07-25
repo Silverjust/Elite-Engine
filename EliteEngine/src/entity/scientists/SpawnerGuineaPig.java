@@ -33,7 +33,8 @@ public class SpawnerGuineaPig extends Unit {
 		death = new Death(standingImg, 500);
 		spawn = new RuglingSpawn(standingImg, 800);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 25;
 		ySize = 25;
@@ -62,7 +63,7 @@ public class SpawnerGuineaPig extends Unit {
 	@Override
 	public void updateDecisions() {
 		// isTaged = false;
-		if (animation == walk&& isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
@@ -109,7 +110,7 @@ public class SpawnerGuineaPig extends Unit {
 	public void renderGround() {
 		drawSelected();
 		// drawCircle(spawnRange);
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 

@@ -34,7 +34,7 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 		death = new Death(standImg, 1000);
 		training = new Training(standImg, 100);
 
-		animation = nextAnimation = build;
+		setAnimation(build);
 		setupTarget();
 		// ************************************
 		xSize = 30;
@@ -70,14 +70,7 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
-	}
-
-	@Override
-	public void display() {
-		super.display();
-		if (animation == training)
-			drawBar(training.getCooldownPercent());
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	public PImage preview() {

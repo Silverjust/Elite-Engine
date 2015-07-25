@@ -22,8 +22,8 @@ public class AhnenKeritMine extends entity.neutral.KeritMine {
 		build = new Build(standImg, 1000);
 		death = new Death(standImg, 100);
 
-		animation = nextAnimation = build;
-		// ************************************
+		setAnimation(build);
+				// ************************************
 		build.setBuildTime(buildTime);
 		((Extract) stand).cooldown = cooldown;
 		((Extract) stand).ressource = ressource;
@@ -37,7 +37,7 @@ public class AhnenKeritMine extends entity.neutral.KeritMine {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	public PImage preview() {

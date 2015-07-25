@@ -3,7 +3,11 @@ package entity.animation;
 import processing.core.PImage;
 import shared.Updater;
 import shared.ref;
+import entity.Attacker;
+import entity.Building;
 import entity.Entity;
+import entity.Trainer;
+import entity.Unit;
 
 public class Animation {
 	byte directions;
@@ -45,13 +49,22 @@ public class Animation {
 	}
 
 	public void setup(Entity e) {
+		System.out.println("Animation.setup()" + this.getName(e));
 		e.currentFrame = 0;
 		start = Updater.Time.getMillis();
 	}
 
 	public void update(Entity e) {
 		if (isFinished()) {
-			setup(e);
+			System.out.println("Animation.update()");
+			e.getNextAnimation().setup(e);
+			if (doRepeat()) {
+				e.setAnimation(this);
+			} else {
+				System.out
+						.println("Animation.update(#################################################");
+				e.sendDefaultAnimation(this);
+			}
 		}
 	}
 
@@ -86,5 +99,27 @@ public class Animation {
 
 	public boolean isInterruptable() {
 		return true;
+	}
+
+	public boolean doRepeat() {
+		return true;
+	}
+
+	public String getName(Entity e) {
+		if (this == e.stand)
+			return "stand";
+		if (e.death != null && this == e.death)
+			return "death";
+		if (e instanceof Building && this == ((Building) e).build)
+			return "build";
+		if (e instanceof Trainer && this == ((Trainer) e).getTraining())
+			return "train";
+		if (e instanceof Unit && this == ((Unit) e).walk)
+			return "walk";
+		if (e instanceof Attacker && this == ((Attacker) e).getBasicAttack())
+			return "asicAttack";
+		if (this instanceof Ability)
+			return "ability";
+		return super.toString();
 	}
 }

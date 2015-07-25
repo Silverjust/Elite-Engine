@@ -35,7 +35,8 @@ public class Brux extends Unit implements Attacker {
 		basicAttack = new MeleeAttack(standingImg, 800);
 		jump = new Jump(standingImg, 800);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -71,7 +72,7 @@ public class Brux extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk && isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -113,18 +114,18 @@ public class Brux extends Unit implements Attacker {
 
 	@Override
 	public void updateMovement() {
-		if (animation == jump) {
+		if (getAnimation() == jump) {
 			speed += jump.speed;
 		}
 		super.updateMovement();
-		if (animation == jump) {
+		if (getAnimation() == jump) {
 			speed -= jump.speed;
 		}
 	}
 
 	@Override
 	public boolean isCollision(Entity e) {
-		boolean b = !(animation == jump && e != jump.getTarget());
+		boolean b = !(getAnimation() == jump && e != jump.getTarget());
 		return super.isCollision(e) && b;
 	}
 
@@ -151,7 +152,7 @@ public class Brux extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 

@@ -34,7 +34,8 @@ public class Medic extends Unit implements Attacker {
 		death = new Death(standingImg, 500);
 		basicAttack = new MeleeAttack(standingImg, 500);// 1000
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -66,7 +67,7 @@ public class Medic extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (getAnimation() == walk || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -109,7 +110,7 @@ public class Medic extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawShot();
 		drawTaged();
 	}

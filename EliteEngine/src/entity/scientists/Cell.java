@@ -37,7 +37,8 @@ public class Cell extends Unit implements Attacker {
 		death = new Death(standingImg, 500);
 		heal = new MeleeAttack(standingImg, 800);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -70,7 +71,7 @@ public class Cell extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk && isAggro|| animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro|| getAnimation() == stand) {// ****************************************************
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
@@ -109,7 +110,7 @@ public class Cell extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		heal.drawAbility(this, direction);
 		drawTaged();
 	}

@@ -40,7 +40,8 @@ public class Angel extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 		cloak = new Animation(standingImg, 1000);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -75,7 +76,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk && isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -151,7 +152,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 		if (isCloaked) {
 			ref.app.tint(255, 150);
 		}
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		ref.app.tint(255);
 		basicAttack.drawAbility(this, direction);
 		drawTaged();

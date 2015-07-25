@@ -21,7 +21,7 @@ public class Explosion extends Animation {
 	public void setup(Entity e) {
 		start = Updater.Time.getMillis();
 	}
-	
+
 	@Override
 	@Deprecated
 	public void update(Entity e) {
@@ -51,5 +51,10 @@ public class Explosion extends Animation {
 			ref.app.image(img[currentFrame], Entity.xToGrid(x),
 					Entity.yToGrid(y), xSize, ySize);
 		}
+	}
+
+	@Override
+	public boolean doRepeat() {
+		return false;
 	}
 }

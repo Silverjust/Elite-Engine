@@ -38,7 +38,8 @@ public class Rug extends Unit implements Attacker {
 		basicAttack = new MeleeAttack(standingImg, 500);
 		spawn = new RuglingSpawn(standingImg, 800);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 35;
 		ySize = 35;
@@ -73,7 +74,7 @@ public class Rug extends Unit implements Attacker {
 	@Override
 	public void updateDecisions() {
 		// isTaged = false;
-		if (animation == walk && isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyTooClose = false;
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -142,7 +143,7 @@ public class Rug extends Unit implements Attacker {
 	public void renderGround() {
 		drawSelected();
 		// drawCircle(spawnRange);
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 

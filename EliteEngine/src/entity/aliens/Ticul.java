@@ -51,7 +51,8 @@ public class Ticul extends Unit implements Attacker {
 		death = new Death(attackImg, 500);
 		basicAttack = new MeleeAttack(attackImg, 600);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -70,8 +71,8 @@ public class Ticul extends Unit implements Attacker {
 
 		aggroRange = (byte) (radius + 50);
 		basicAttack.range = (byte) (radius + 10);
-		basicAttack.damage = 8;
-		basicAttack.cooldown = 600;
+		basicAttack.damage = 20;
+		basicAttack.cooldown = 2000;
 		basicAttack.setCastTime(500);
 
 		descr = " ";
@@ -81,7 +82,7 @@ public class Ticul extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk && isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -120,7 +121,7 @@ public class Ticul extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 

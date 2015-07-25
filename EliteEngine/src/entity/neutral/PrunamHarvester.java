@@ -30,7 +30,7 @@ public abstract class PrunamHarvester extends Building {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == stand)
+		if (getAnimation() == stand)
 			((Extract) stand).updateAbility(this);
 	}
 
@@ -43,6 +43,6 @@ public abstract class PrunamHarvester extends Building {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 }

@@ -35,7 +35,8 @@ public class Drone extends Unit implements Attacker, Shooter {
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 10;
 		ySize = 10;
@@ -69,7 +70,7 @@ public class Drone extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk && isAggro|| animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro|| getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -111,7 +112,7 @@ public class Drone extends Unit implements Attacker, Shooter {
 	@Override
 	public void renderAir() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		basicAttack.drawAbility(this, direction);
 		drawTaged();
 	}

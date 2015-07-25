@@ -42,7 +42,8 @@ public class PhysicsLab extends Lab {
 		sendTeleport = new Ability(standingImg, 800);
 		recievieTeleport = new Animation(standingImg, 800);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 
 		kerit = 600;

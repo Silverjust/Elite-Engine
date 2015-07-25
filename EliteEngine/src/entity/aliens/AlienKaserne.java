@@ -37,7 +37,7 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 		death = new Death(standImg, 1000);
 		training = new Training(standImg, 100);
 
-		animation = nextAnimation = build;
+		setAnimation(build);
 		setupTarget();
 		// ************************************
 		xSize = 30;
@@ -63,6 +63,8 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 
 	@Override
 	public void updateDecisions() {
+		System.out.println("AlienKaserne.updateDecisions()"
+				+ getAnimation().getName(this) + training.getProgressPercent());
 		training.updateAbility(this);
 	}
 
@@ -80,7 +82,7 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 
 	@Override
 	public void renderUnder() {
-		if (isSelected&& isAlive()) {
+		if (isSelected && isAlive()) {
 			ref.app.stroke(player.color);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(xTarget),
 					yToGrid(yTarget));
@@ -97,14 +99,7 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
-	}
-
-	@Override
-	public void display() {
-		super.display();
-		if (animation == training)
-			drawBar(training.getCooldownPercent());
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	public PImage preview() {

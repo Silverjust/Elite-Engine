@@ -44,7 +44,8 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 		regenerate = new MeleeAttack(shieldImg, 800);// shield regeneration
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -86,7 +87,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk && isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -159,7 +160,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		if (shield > 0) {
 			ref.app.tint(255, ((float) shield / shield_max * 255f));
 			regenerate.draw(this, direction, currentFrame);

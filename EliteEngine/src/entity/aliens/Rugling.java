@@ -36,7 +36,8 @@ public class Rugling extends Unit implements Attacker {
 		splashDeath = new Death(standingImg, 500);
 		basicAttack = new MeleeAttack(standingImg, 800);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 35;
 		ySize = 35;
@@ -58,7 +59,7 @@ public class Rugling extends Unit implements Attacker {
 	@Override
 	public void updateDecisions() {
 
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (getAnimation() == walk || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -120,7 +121,7 @@ public class Rugling extends Unit implements Attacker {
 	public void renderGround() {
 		isSelected = false;// cant be selected
 		// drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 

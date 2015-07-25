@@ -34,7 +34,8 @@ public class HeavyAssault extends Unit implements Attacker {
 		death = new Death(standingImg, 500);
 		basicAttack = new MeleeAttack(standingImg, 500);// 1000
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -66,7 +67,7 @@ public class HeavyAssault extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk && isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -110,13 +111,13 @@ public class HeavyAssault extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawShot();
 		drawTaged();
 	}
 
 	public void drawShot() {
-		if (basicAttack.getTarget() != null && animation == basicAttack) {
+		if (basicAttack.getTarget() != null && getAnimation() == basicAttack) {
 			Entity e = basicAttack.getTarget();
 			ref.app.stroke(255, 100, 0);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(e.x), yToGrid(e.y));

@@ -46,7 +46,7 @@ public abstract class Unit extends Entity {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (isCollision(e)) {
-						if (e instanceof Unit && e.animation == e.stand
+						if (e instanceof Unit && e.getAnimation() == e.stand
 								&& ((Unit) e).xTarget == xTarget
 								&& ((Unit) e).yTarget == yTarget && !isAggro)
 							sendAnimation("stand");
@@ -60,7 +60,7 @@ public abstract class Unit extends Entity {
 			// stand still
 		}
 
-		if (PApplet.dist(x, y, xTarget, yTarget) < 2 && animation == walk) {
+		if (PApplet.dist(x, y, xTarget, yTarget) < 2 && getAnimation() == walk) {
 			// System.out.println(1000000000+" "+(animation == walk));
 			isMoving = false;
 			setAnimation(stand);
@@ -103,7 +103,7 @@ public abstract class Unit extends Entity {
 		// PApplet.printArray(c);
 		super.exec(c);
 		String string = c[2];
-		if ("walk".equals(string) && animation.isInterruptable()) {
+		if ("walk".equals(string) && getAnimation().isInterruptable()) {
 			xTarget = Float.parseFloat(c[3]);
 			yTarget = Float.parseFloat(c[4]);
 			isMoving = true;

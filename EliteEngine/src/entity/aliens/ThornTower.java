@@ -38,7 +38,8 @@ public class ThornTower extends Building implements Shooter, Commander {
 		death = new Death(standImg, 100);
 		basicAttack = new ShootAttack(standImg, 800);
 
-		animation = nextAnimation = build;
+		setAnimation(build);
+		
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -71,7 +72,7 @@ public class ThornTower extends Building implements Shooter, Commander {
 	public void updateDecisions() {
 		float importance = 0;
 		Entity importantEntity = null;
-		if (animation == stand) {
+		if (getAnimation() == stand) {
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
 					if (e.isInRange(x, y, basicAttack.range + e.radius)
@@ -124,7 +125,7 @@ public class ThornTower extends Building implements Shooter, Commander {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 		basicAttack.drawAbility(this, (byte) 0);
 	}
 

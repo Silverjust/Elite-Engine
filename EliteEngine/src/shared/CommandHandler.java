@@ -126,6 +126,9 @@ public class CommandHandler {
 				if (c[1].equals("nocosts")) {
 					GameDrawer.nocosts = Boolean.valueOf(c[2]);
 				}
+				if (c[1].equals("showrange")) {
+					GameDrawer.showRanges = Boolean.valueOf(c[2]);
+				}
 				break;
 			default:
 				throw new NoInitialContextException("no command found");
@@ -141,7 +144,7 @@ public class CommandHandler {
 			HUD.chat.println("Chat", "command was not found");
 		} catch (Exception e) {
 			System.err.println("command error in " + command);
-			 e.printStackTrace();
+			e.printStackTrace();
 			HUD.chat.println("Chat", "command error");
 		}
 

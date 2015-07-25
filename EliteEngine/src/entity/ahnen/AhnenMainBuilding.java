@@ -32,7 +32,8 @@ public class AhnenMainBuilding extends MainBuilding implements Commander {
 		build = null;
 		death = new Death(standImg, 1000);
 
-		animation = nextAnimation = stand;
+		setAnimation(stand);
+		 
 		// ************************************
 		xSize = 60;
 		ySize = 60;
@@ -71,7 +72,7 @@ public class AhnenMainBuilding extends MainBuilding implements Commander {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	public PImage preview() {

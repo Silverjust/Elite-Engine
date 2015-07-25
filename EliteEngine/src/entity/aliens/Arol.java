@@ -36,7 +36,8 @@ public class Arol extends Unit implements Attacker {
 		death = new Death(standingImg, 500);
 		basicAttack = new MeleeAttack(standingImg, 800);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 50;
 		ySize = 35;
@@ -68,7 +69,7 @@ public class Arol extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk && isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -145,7 +146,7 @@ public class Arol extends Unit implements Attacker {
 				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
 				* (attackDistance));
 		drawCircle(x, y, basicAttack.range);
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 

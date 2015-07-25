@@ -27,7 +27,8 @@ public class HumanWall extends Building {
 		build = new Build(standImg, 5000);
 		death = new Death(standImg, 1000);
 
-		animation = nextAnimation = build;
+		setAnimation(build);
+		
 		// ************************************
 		xSize = 20;
 		ySize = 25;
@@ -52,7 +53,7 @@ public class HumanWall extends Building {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	public PImage preview() {

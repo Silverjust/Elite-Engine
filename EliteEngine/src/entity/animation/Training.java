@@ -6,7 +6,6 @@ import entity.Unit;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ContentListHandler;
-import shared.Updater;
 import shared.ref;
 
 public class Training extends Ability {
@@ -26,7 +25,7 @@ public class Training extends Ability {
 
 	@Override
 	public void updateAbility(Entity e) {
-		if (toTrain != null && isNotOnCooldown()) {
+		if (isSetup() && isNotOnCooldown()) {
 			float xt = ((Trainer) e).getXTarget();
 			float yt = ((Trainer) e).getYTarget();
 
@@ -45,9 +44,7 @@ public class Training extends Ability {
 					+ " " //
 					+ yt);
 			toTrain = null;
-
 		}
-
 	}
 
 	@Override
@@ -65,15 +62,26 @@ public class Training extends Ability {
 	}
 
 	@Override
-	public float getCooldownPercent() {
-		float f = 1 - (float) (cooldownTimer - Updater.Time.getMillis())
-				/ cooldown;
-		return f > 1 || f < 0 ? 1 : f;
+	public boolean isSetup() {
+		return toTrain != null;
+	}
+
+	@Override
+	public boolean doRepeat() {
+		if (isSetup()) {
+			System.out.println("Training.nextAnimation()this");
+			return true;
+		}
+		return false;
+	}@Override
+	public boolean isInterruptable() {
+		return false;
 	}
 
 	public static void updateExecTraining(String[] c, Entity trainer) {
 		if (c[2].equals("train") && trainer instanceof Trainer) {
 			Entity toTrain = null;
+			Training a = (Training) ((Trainer) trainer).getTraining();
 			try {
 				String name = ContentListHandler.getEntityContent().getString(
 						c[3]);
@@ -84,9 +92,8 @@ public class Training extends Ability {
 				e.printStackTrace();
 			}
 
-			if (toTrain != null) {
-				Training a = (Training) ((Trainer) trainer).getTraining();
-				a.cooldown = ((Unit) toTrain).trainTime;// cooldown=traintime
+			if (toTrain != null && a.isNotOnCooldown()) {
+				a.setCastTime(((Unit) toTrain).trainTime);
 				a.setEntity(toTrain);
 				trainer.setAnimation(a);
 			}

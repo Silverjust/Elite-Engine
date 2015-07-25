@@ -32,7 +32,7 @@ public abstract class KeritMine extends Building {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == stand)
+		if (getAnimation() == stand)
 			((Extract) stand).updateAbility(this);
 	}
 

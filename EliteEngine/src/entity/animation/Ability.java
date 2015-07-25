@@ -25,14 +25,24 @@ public class Ability extends Animation {
 	@Override
 	public void setup(Entity e) {
 		super.setup(e);
-		consumeCosts();
+		if (e.getAnimation() != this && isNotOnCooldown()) {
+			System.out.println("Ability.setup()is new");
+			consumeCosts();
+			startCooldown();
+		}
 	}
 
 	@Override
 	public void update(Entity e) {
 		if (isFinished()) {
-			setup(e);
-			e.sendDefaultAnimation(this);
+			e.getNextAnimation().setup(e);
+			if (doRepeat()) {
+				e.setAnimation(this);
+			} else {
+				System.out
+						.println("Ability.update(#################################################");
+				e.sendDefaultAnimation(this);
+			}
 		}
 	}
 
@@ -49,8 +59,7 @@ public class Ability extends Animation {
 	}
 
 	public void updateAbility(Entity e) {
-		if (/** security */
-		isSetup() && isEvent() && isNotOnCooldown()) {
+		if (isSetup() && isEvent()) {
 			/** do smthing */
 			startCooldown();
 		}
@@ -77,7 +86,7 @@ public class Ability extends Animation {
 		return f > 1 || f < 0 ? 1 : f;
 	}
 
-	private void consumeCosts() {
+	protected void consumeCosts() {
 
 	}
 
@@ -90,5 +99,10 @@ public class Ability extends Animation {
 
 	public void removeCooldown(int time) {
 		cooldownTimer -= time;
+	}
+
+	@Override
+	public boolean doRepeat() {
+		return false;
 	}
 }

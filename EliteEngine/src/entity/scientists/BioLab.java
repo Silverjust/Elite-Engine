@@ -23,7 +23,8 @@ public class BioLab extends Lab {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		kerit = 600;
 		pax = 50;

@@ -30,14 +30,14 @@ public abstract class Lab extends Unit {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk || animation == stand) {// ****************************************************
+		if (getAnimation() == walk || getAnimation() == stand) {// ****************************************************
 		}
 	}
 
 	@Override
 	public void renderAir() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 

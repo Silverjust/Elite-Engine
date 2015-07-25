@@ -32,7 +32,8 @@ public class Tutorial extends Unit {
 		stand = walk = new Animation(standingImg, 500);
 		death = null;
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 10;
 		ySize = 10;
@@ -167,7 +168,7 @@ public class Tutorial extends Unit {
 	@Override
 	public void renderAir() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 

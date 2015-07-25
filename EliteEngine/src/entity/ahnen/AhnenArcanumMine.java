@@ -6,7 +6,7 @@ import entity.animation.Death;
 import entity.animation.Extract;
 import entity.neutral.ArcanumMine;
 
-public class AhnenArcanumMine extends ArcanumMine   {
+public class AhnenArcanumMine extends ArcanumMine {
 
 	private static PImage standImg;
 	private static PImage previewImg;
@@ -14,7 +14,8 @@ public class AhnenArcanumMine extends ArcanumMine   {
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		previewImg = standImg = game.ImageHandler.load(path, "AhnenArcanumMine");
+		previewImg = standImg = game.ImageHandler
+				.load(path, "AhnenArcanumMine");
 	}
 
 	public AhnenArcanumMine(String[] c) {
@@ -25,10 +26,11 @@ public class AhnenArcanumMine extends ArcanumMine   {
 		build = new Build(standImg, 1000);
 		death = new Death(standImg, 1000);
 
-		animation = nextAnimation = build;
+		setAnimation(build);
+		
 		// ************************************
 		build.setBuildTime(buildTime);
-		
+
 		((Extract) stand).cooldown = cooldown;
 		((Extract) stand).ressource = ressource;
 		((Extract) stand).efficenty = efficenty;

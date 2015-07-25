@@ -37,7 +37,8 @@ public class HumanDepot extends Building implements Commander, Shooter {
 		basicAttack = new ShootAttack(standImg, 1000);
 		basicAttack.explosion = new Explosion(standImg, 800);
 
-		animation = nextAnimation = build;
+		setAnimation(build);
+		
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -71,7 +72,7 @@ public class HumanDepot extends Building implements Commander, Shooter {
 	public void updateDecisions() {
 		float importance = 0;
 		Entity importantEntity = null;
-		if (animation == stand) {
+		if (getAnimation() == stand) {
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
 					if (e.isInRange(x, y, basicAttack.range + e.radius)
@@ -112,7 +113,7 @@ public class HumanDepot extends Building implements Commander, Shooter {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 		basicAttack.drawAbility(this, (byte) 0);
 	}
 

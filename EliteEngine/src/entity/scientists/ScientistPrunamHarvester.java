@@ -24,7 +24,8 @@ public class ScientistPrunamHarvester extends PrunamHarvester {
 		build = new Build(standImg, 1000);
 		death = new Death(standImg, 1000);
 
-		animation = nextAnimation = build;
+		setAnimation(build);
+		
 		// ************************************
 		build.setBuildTime(buildTime);
 

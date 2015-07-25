@@ -23,8 +23,9 @@ public class AhnenPrunamHarvester extends PrunamHarvester   {
 		stand = new Extract(standImg, 1000);
 		build = new Build(standImg, 1000);
 		death = new Death(standImg, 1000);
-
-		animation = nextAnimation = build;
+		
+		setAnimation(build);
+		
 		// ************************************
 		build.setBuildTime(buildTime);
 		

@@ -46,7 +46,8 @@ public class Berserker extends Unit implements Attacker {
 		basicAttack = new MeleeAttack(standingImg, 800);
 		buildLeuchte = new Ability(standingImg, 500);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -82,7 +83,7 @@ public class Berserker extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions() {
-		if (animation == walk && isAggro || animation == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -173,7 +174,7 @@ public class Berserker extends Unit implements Attacker {
 				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
 				* (attackDistance));
 		drawCircle(x, y, basicAttack.range);
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 

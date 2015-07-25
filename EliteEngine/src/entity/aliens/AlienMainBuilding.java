@@ -31,7 +31,8 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 		build = null;
 		death = new Death(standImg, 1000);
 
-		animation = nextAnimation = stand;
+		setAnimation(stand);
+		
 		// ************************************
 		xSize = 85;
 		ySize = 85;
@@ -73,7 +74,7 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	public PImage preview() {

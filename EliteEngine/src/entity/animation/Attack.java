@@ -28,11 +28,6 @@ public class Attack extends Ability {
 	public void setTargetFrom(Entity attacker, Entity e) {
 	}
 
-	@Override
-	public boolean isReady() {
-		return isNotOnCooldown() && isSetup();
-	}
-
 	public Entity getTarget() {
 		return target;
 	}

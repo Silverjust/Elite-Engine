@@ -26,7 +26,8 @@ public class Rock extends Building {
 		build = null;
 		death = null;
 
-		animation = nextAnimation = stand;
+		setAnimation(stand);
+		
 		// ************************************
 		xSize = 40;
 		ySize = 40;
@@ -43,7 +44,7 @@ public class Rock extends Building {
 
 	@Override
 	public void renderGround() {
-		animation.draw(this, (byte) 0, currentFrame);
+		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	@Override

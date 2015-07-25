@@ -28,7 +28,8 @@ public class Colum extends Unit implements Attacker {
 		stand = walk = heal = new MeleeAttack(standingImg, 500);
 		death = new Death(standingImg, 500);
 
-		animation = nextAnimation = walk;
+		setAnimation(walk);
+		
 		// ************************************
 		xSize = 45;
 		ySize = 45;
@@ -76,7 +77,7 @@ public class Colum extends Unit implements Attacker {
 	@Override
 	public void renderAir() {
 		drawSelected();
-		animation.draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}
 
