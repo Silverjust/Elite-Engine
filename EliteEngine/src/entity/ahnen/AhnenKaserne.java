@@ -100,7 +100,7 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 	}
 
 	@Override
-	// TODO remove and add depot
+	// TODO remove this and add depot
 	public int commandRange() {
 		return 250;
 	}

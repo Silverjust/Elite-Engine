@@ -54,7 +54,7 @@ public class Explosion extends Animation {
 	}
 
 	@Override
-	public boolean doRepeat() {
+	public boolean doRepeat(Entity e) {
 		return false;
 	}
 }

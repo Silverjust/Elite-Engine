@@ -32,7 +32,7 @@ public class ScientistMainBuilding extends MainBuilding implements Commander {
 		build = null;
 		death = new Death(standImg, 1000);
 
-		setAnimation(build);
+		setAnimation(stand);
 		
 		// ************************************
 		xSize = 60;
@@ -45,7 +45,7 @@ public class ScientistMainBuilding extends MainBuilding implements Commander {
 
 		commandingRange = 250;
 
-		descr = "United Humans Main Building§when it dies, you loose";
+		descr = "Main Building of the scientists§when it dies, you loose";
 		stats = " ";
 		// ************************************
 	}

@@ -109,8 +109,7 @@ public class BuildWallAim extends BuildAim {
 		}
 	}
 
-	public static void setupWall(Entity e, String[] c) {// TODO controll if long
-														// enough
+	public static void setupWall(Entity e, String[] c) {
 		if (c != null && c.length > 5 && c[5] != null && c[5].equals("start")
 				&& AimHandler.getAim() instanceof BuildWallAim)
 			((BuildWallAim) AimHandler.getAim()).startedAt(e.x, e.y);

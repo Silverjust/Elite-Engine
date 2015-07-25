@@ -70,7 +70,7 @@ public class Ticul extends Unit implements Attacker {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.range = (byte) (radius + 10);
+		basicAttack.range = 9;
 		basicAttack.damage = 20;
 		basicAttack.cooldown = 2000;
 		basicAttack.setCastTime(500);

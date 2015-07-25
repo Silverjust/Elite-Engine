@@ -17,9 +17,9 @@ public class Cell extends Unit implements Attacker {
 
 	MeleeAttack heal;
 
-	private int damage;
-
 	private byte aggroRange;
+
+	private byte healAmount;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -28,7 +28,8 @@ public class Cell extends Unit implements Attacker {
 	}
 
 	public Cell(String[] c) {
-		super(c);		GuineaPig.setupEquip(this, c);
+		super(c);
+		GuineaPig.setupEquip(this, c);
 
 		iconImg = standingImg;
 
@@ -38,7 +39,7 @@ public class Cell extends Unit implements Attacker {
 		heal = new MeleeAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -57,21 +58,21 @@ public class Cell extends Unit implements Attacker {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = 60;
-		damage = 5;
-		heal.damage = 10;
+		healAmount = 10;
+		heal.damage = 5;
 		heal.pirce = 0;
 		heal.cooldown = 1500;
-		heal.range = 40;
+		heal.range = 30;
 		heal.setCastTime(100);
 
 		descr = " ";
-		stats = " ";
+		stats = "heal/s: " + healAmount + "/" + (heal.cooldown / 1000.0);
 		// ************************************
 	}
 
 	@Override
 	public void updateDecisions() {
-		if (getAnimation() == walk && isAggro|| getAnimation() == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
@@ -88,7 +89,7 @@ public class Cell extends Unit implements Attacker {
 
 			}
 			if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+				Attack.sendWalkToEnemy(this, importantEntity);
 			}
 		}
 		heal.setTargetFrom(this, this);
@@ -100,9 +101,10 @@ public class Cell extends Unit implements Attacker {
 		for (Entity e : ref.updater.entities) {
 			if (e != null && e.isInRange(x, y, e.radius + a.range))
 				if (e.isAllyTo(this)) {
-					ref.updater.send("<heal " + e.number + " " + heal.damage);
+					ref.updater.send("<heal " + e.number + " " + healAmount);
 				} else if (e.isEnemyTo(this)) {
-					ref.updater.send("<hit " + e.number + " " + damage + " 0");
+					ref.updater.send("<hit " + e.number + " " + heal.damage
+							+ " 0");
 				}
 		}
 	}
@@ -120,7 +122,6 @@ public class Cell extends Unit implements Attacker {
 		return heal;
 	}
 
-	
 	public static class EquipActive extends Active {
 		Class<? extends Unit> unit;
 		String descr = " ", stats = " ";

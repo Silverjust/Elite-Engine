@@ -24,11 +24,6 @@ public class Training extends Ability {
 	}
 
 	@Override
-	public void setup(Entity e) {
-		super.setup(e);
-	}
-
-	@Override
 	public void updateAbility(Entity e) {
 		if (isSetup() && isNotOnCooldown()) {
 			float xt = ((Trainer) e).getXTarget();
@@ -52,14 +47,11 @@ public class Training extends Ability {
 		}
 	}
 
-	@Override
-	public void update(Entity e) {
-		if (isFinished()) {
-			setup(e);
-			if (isNotOnCooldown())
-				e.sendDefaultAnimation(this);
-		}
-	}
+	/*
+	 * @Override public void update(Entity e) { if (isFinished()) { setup(e); }
+	 * if (isNotOnCooldown()) { System.out.println("Training.update()end");
+	 * e.sendDefaultAnimation(this); } }
+	 */
 
 	public void setEntity(Entity toTrain) {
 		startCooldown();
@@ -72,18 +64,13 @@ public class Training extends Ability {
 	}
 
 	@Override
-	public boolean doRepeat() {
-		System.out.println("Training.doRepeat()hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-		if (isSetup()) {
-			System.out.println("Training.nextAnimation()this");
-			return true;
-		}
-		return false;
+	public boolean doRepeat(Entity e) {
+		return !isNotOnCooldown();
 	}
 
 	@Override
 	public boolean isInterruptable() {
-		return false;
+		return isNotOnCooldown();
 	}
 
 	public static void updateExecTraining(String[] c, Entity trainer) {

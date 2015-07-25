@@ -21,7 +21,6 @@ public class MainLoader extends Loader {
 			state = State.STARTIMAGES;
 			break;
 		case STARTIMAGES:
-		
 				boolean b = ImageHandler.requestAllImages();
 				if (b) {
 					state = State.IMAGES;
@@ -71,13 +70,13 @@ public class MainLoader extends Loader {
 				 * ref.updater.send("<spawn Prunam " + p.ip + " " +
 				 * ref.app.random(200, 600) + " " + ref.app.random(200, 600)); }
 				 */
-
 			}
 			GameDrawer.setup();
 			if (GameSettings.sandbox) {
 				GameDrawer.godeye = true;
 				GameDrawer.godhand = true;
 				GameDrawer.nocosts = true;
+				GameDrawer.showRanges = true;
 			}
 			if (isReconnectLoad)
 				ref.updater.send("<reconnect");

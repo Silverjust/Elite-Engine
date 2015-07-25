@@ -55,12 +55,12 @@ public class Brux extends Unit implements Attacker {
 
 		aggroRange = (byte) (radius + 50);
 		basicAttack.range = (byte) (radius + 10);
-		basicAttack.damage = 10;
+		basicAttack.damage = 15;
 		basicAttack.cooldown = 1200;
 		basicAttack.setCastTime(500);
 
 		jump.range = (byte) (radius + 10);
-		jump.damage = 38;
+		jump.damage = 20;
 		jump.pirce = 2;
 		jump.cooldown = 7000;
 		jump.speed = 2.2f;
@@ -177,7 +177,7 @@ public class Brux extends Unit implements Attacker {
 						+ pirce);
 				e.sendDefaultAnimation(this);
 				target = null;
-				startCooldown();
+				//startCooldown();
 			}
 		}
 

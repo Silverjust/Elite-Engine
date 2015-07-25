@@ -7,7 +7,6 @@ import shared.Nation;
 import shared.Player;
 import shared.Updater;
 import shared.ref;
-import entity.aliens.AlienKaserne;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
@@ -62,8 +61,11 @@ public abstract class Entity implements Informing {
 	}
 
 	public void updateAnimation() {
-		animation=getNextAnimation();
-		getAnimation().update(this);
+		animation = getNextAnimation();
+		if (Animation.observe.isAssignableFrom(this.getClass())) {
+			System.out.println("Entity.updateAnimation()"+animation.getName(this));
+		}
+		animation.update(this);
 	}
 
 	public void updateDecisions() {
@@ -93,6 +95,10 @@ public abstract class Entity implements Informing {
 			Attack a = ((Attacker) this).getBasicAttack();
 			drawCircle(a.range);
 			drawCircle((int) (a.range * a.getCooldownPercent()));
+		}
+		if (this instanceof Unit) {
+			ref.app.line(x, y / 2, ((Unit) this).xTarget,
+					((Unit) this).yTarget / 2);
 		}
 	}
 
@@ -307,8 +313,9 @@ public abstract class Entity implements Informing {
 	public void setAnimation(Animation a) {
 		if ((a != null && animation == null)
 				|| (a != null && animation.isInterruptable() && animation != a)) {
-			if (this instanceof AlienKaserne)
+			if (Animation.observe.isAssignableFrom(this.getClass())) {
 				System.out.println("Entity.setAnimation()" + a.getName(this));
+			}
 			if (animation == null)
 				animation = a;
 			nextAnimation = a;

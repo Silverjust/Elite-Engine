@@ -17,23 +17,17 @@ public class Build extends Ability {
 		super(IMG, duration);
 	}
 
-	@Override
-	public void update(Entity e) {
-		if (isFinished()) {
-			setup(e);
-			if (isNotOnCooldown()) {
-				e.sendDefaultAnimation(this);
-			} else
-				// if (nextAnimation() != null)
-				e.setAnimation(this);
-			// else
-			// e.sendDefaultAnimation(this);
-		}
-	}
-
 	public void setBuildTime(int buildTime) {
 		cooldown = buildTime;
 		startCooldown();
+	}
 
+	@Override
+	public boolean doRepeat(Entity e) {
+		return !isNotOnCooldown();
+	}
+	@Override
+	public boolean isInterruptable() {
+		return isNotOnCooldown();
 	}
 }

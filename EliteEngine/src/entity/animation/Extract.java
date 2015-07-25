@@ -41,8 +41,9 @@ public class Extract extends Ability {
 	public boolean isSetup() {
 		return isSetup;
 	}
+
 	@Override
-	public boolean doRepeat() {
+	public boolean doRepeat(Entity e) {
 		return true;
 	}
 }

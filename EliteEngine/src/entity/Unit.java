@@ -46,9 +46,8 @@ public abstract class Unit extends Entity {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (isCollision(e)) {
-						if (e instanceof Unit && e.getAnimation() == e.stand
-								&& ((Unit) e).xTarget == xTarget
-								&& ((Unit) e).yTarget == yTarget && !isAggro)
+						if (e.getAnimation() == e.stand
+								&& e.isInRange(xTarget, yTarget, e.radius))
 							sendAnimation("stand");
 						hasColided = true;
 						xDeglich += x - e.x;
@@ -81,6 +80,12 @@ public abstract class Unit extends Entity {
 	@Override
 	public void renderUnder() {
 		direction = Helper.getDirection(x, y, xTarget, yTarget);
+		if (this instanceof Attacker
+				&& ((Attacker) this).getBasicAttack() == getAnimation()) {
+			Attack a = ((Attacker) this).getBasicAttack();
+			direction = Helper.getDirection(x, y, a.getTarget().x,
+					a.getTarget().y);
+		}
 		drawShadow();
 	}
 
@@ -100,15 +105,23 @@ public abstract class Unit extends Entity {
 
 	@Override
 	public void exec(String[] c) {
+		if (Animation.observe.isAssignableFrom(this.getClass())) {
+			System.out.println("Unit.exec()" + c[2]);
+		}
 		// PApplet.printArray(c);
 		super.exec(c);
 		String string = c[2];
 		if ("walk".equals(string) && getAnimation().isInterruptable()) {
 			xTarget = Float.parseFloat(c[3]);
 			yTarget = Float.parseFloat(c[4]);
-			isMoving = true;
-			isAggro = Boolean.valueOf(c[5]);
-			setAnimation(walk);
+			if (PApplet.dist(x, y, xTarget, yTarget) >= speed) {
+				isMoving = true;
+				isAggro = Boolean.valueOf(c[5]);
+				setAnimation(walk);
+			} else {
+				isMoving = false;
+				setAnimation(stand);
+			}
 		}
 		Attack.updateExecAttack(c, this);
 	}
@@ -129,8 +142,8 @@ public abstract class Unit extends Entity {
 	}
 
 	public void info() {
-		HUD.chat.println(this.getClass().getSimpleName() + number, "(" + x + "|"
-				+ y + ")->(" + xTarget + "|" + yTarget + ")\nhp:" + hp);
+		HUD.chat.println(this.getClass().getSimpleName() + number, "(" + x
+				+ "|" + y + ")->(" + xTarget + "|" + yTarget + ")\nhp:" + hp);
 	}
 
 	@Override

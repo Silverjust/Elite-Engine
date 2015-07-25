@@ -62,12 +62,13 @@ public class Attack extends Ability {
 				e.sendAnimation("walk "
 						+ (target.x + (e.x - target.x)
 								/ PApplet.dist(target.x, target.y, e.x, e.y)
-								* ((Attacker) e).getBasicAttack().range)
+								* (((Attacker) e).getBasicAttack().range
+										+ target.radius - 1))
 						+ " "
 						+ (target.y + (e.y - target.y)
 								/ PApplet.dist(target.x, target.y, e.x, e.y)
-								* ((Attacker) e).getBasicAttack().range)
-						+ " true");
+								* (((Attacker) e).getBasicAttack().range
+										+ target.radius - 1)) + " true");
 			} else {
 				e.sendAnimation("stand");
 			}

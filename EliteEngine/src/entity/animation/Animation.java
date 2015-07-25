@@ -8,9 +8,9 @@ import entity.Building;
 import entity.Entity;
 import entity.Trainer;
 import entity.Unit;
-import entity.aliens.AlienKaserne;
 
 public class Animation {
+	public static Class<?> observe=Animation.class;//not assignable class == off
 	byte directions;
 	private byte frames;
 	PImage[][] imgWD;
@@ -50,22 +50,21 @@ public class Animation {
 	}
 
 	public void setup(Entity e) {
-		if (e instanceof AlienKaserne)
-			System.out.println("Animation.setup()" + this.getName(e));
 		e.currentFrame = 0;
 		start = Updater.Time.getMillis();
 	}
 
 	public void update(Entity e) {
 		if (isFinished()) {
-			System.out.println("Animation.update()");
-			e.getNextAnimation().setup(e);
-			if (doRepeat()) {
+			if (doRepeat(e)) {
+				if (Animation.observe.isAssignableFrom(e.getClass())) {
+					System.out.println("Animation.update()" + getName(e));
+				}
 				e.setAnimation(this);
+				setup(e);
 			} else {
-				System.out
-						.println("Animation.update(#################################################");
 				e.sendDefaultAnimation(this);
+				setup(e);// continue until com sets default animation
 			}
 		}
 	}
@@ -103,8 +102,7 @@ public class Animation {
 		return true;
 	}
 
-	public boolean doRepeat() {
-		System.out.println("Animation.doRepeat()");
+	public boolean doRepeat(Entity e) {
 		return true;
 	}
 
@@ -120,7 +118,7 @@ public class Animation {
 		if (e instanceof Unit && this == ((Unit) e).walk)
 			return "walk";
 		if (e instanceof Attacker && this == ((Attacker) e).getBasicAttack())
-			return "asicAttack";
+			return "basicAttack";
 		if (this instanceof Ability)
 			return "ability";
 		return super.toString();

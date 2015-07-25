@@ -26,11 +26,8 @@ public class Ability extends Animation {
 	public void setup(Entity e) {
 		super.setup(e);
 		if (e.getAnimation() != this && isNotOnCooldown()) {
-			System.out.println("Ability.setup()is new" + getCooldownPercent());
 			consumeCosts();
 			startCooldown();
-			System.out.println("Ability.setup()is new2" + getCooldownPercent());
-
 		}
 	}
 
@@ -90,7 +87,7 @@ public class Ability extends Animation {
 	}
 
 	@Override
-	public boolean doRepeat() {//FIXME is not overriding
+	public boolean doRepeat(Entity e) {
 		return false;
 	}
 }
