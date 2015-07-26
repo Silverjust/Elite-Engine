@@ -42,7 +42,7 @@ public class Minimap {
 		graphics.imageMode(PConstants.CORNER);
 		graphics.rectMode(PConstants.CORNER);
 		graphics.blendMode(PConstants.MULTIPLY);
-		// graphics.image(ref.updater.map.fogOfWar, 0, 0, w, h);
+		//graphics.image(ref.updater.map.fogOfWar, 0, 0, w, h);
 		graphics.blendMode(PConstants.BLEND);
 		graphics.noStroke();
 		graphics.rectMode(PConstants.CENTER);

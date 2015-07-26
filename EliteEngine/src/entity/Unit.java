@@ -59,7 +59,8 @@ public abstract class Unit extends Entity {
 			// stand still
 		}
 
-		if (PApplet.dist(x, y, xTarget, yTarget) < 2 && getAnimation() == walk) {
+		if (PApplet.dist(x, y, xTarget, yTarget) < speed
+				&& getAnimation() == walk) {
 			// System.out.println(1000000000+" "+(animation == walk));
 			isMoving = false;
 			setAnimation(stand);
@@ -81,6 +82,7 @@ public abstract class Unit extends Entity {
 	public void renderUnder() {
 		direction = Helper.getDirection(x, y, xTarget, yTarget);
 		if (this instanceof Attacker
+				&& ((Attacker) this).getBasicAttack().getTarget() != null
 				&& ((Attacker) this).getBasicAttack() == getAnimation()) {
 			Attack a = ((Attacker) this).getBasicAttack();
 			direction = Helper.getDirection(x, y, a.getTarget().x,
@@ -148,12 +150,7 @@ public abstract class Unit extends Entity {
 
 	@Override
 	public void sendDefaultAnimation(Animation oldAnimation) {
-		/*
-		 * if (oldAnimation instanceof Attack) { sendAnimation("stand"); } else
-		 * {
-		 */
 		sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
-		// }
 	}
 
 	public static class AttackActive extends Active implements AimingActive {

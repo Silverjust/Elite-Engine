@@ -94,7 +94,7 @@ public class HeavyAssault extends Unit implements Attacker {
 					&& !basicAttack.isSetup()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this);

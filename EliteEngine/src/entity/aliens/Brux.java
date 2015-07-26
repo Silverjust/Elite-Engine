@@ -103,7 +103,7 @@ public class Brux extends Unit implements Attacker {
 					&& jump.isNotOnCooldown()) {
 				sendAnimation("jump " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this);

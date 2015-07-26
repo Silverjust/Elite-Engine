@@ -36,7 +36,7 @@ public class Helicopter extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -99,7 +99,11 @@ public class Helicopter extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+				Attack.sendWalkToEnemy(
+						this,
+						importantEntity,
+						(byte) (importantEntity.groundPosition == GroundPosition.GROUND ? basicAttack.range / 2
+								: basicAttack.range));
 			}
 		}
 		basicAttack.updateAbility(this);
@@ -136,5 +140,4 @@ public class Helicopter extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	
 }

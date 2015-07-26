@@ -32,6 +32,8 @@ public class ShootAttack extends MeleeAttack {
 		isExploding = false;
 		eventTime = beginTime
 				+ (int) (PApplet.dist(from.x, from.y, to.x, to.y) / speed);
+		System.out.println("ShootAttack.setTargetFrom()" + eventTime + " "
+				+ beginTime);
 	}
 
 	@Override

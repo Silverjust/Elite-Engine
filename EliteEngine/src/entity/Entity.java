@@ -63,7 +63,8 @@ public abstract class Entity implements Informing {
 	public void updateAnimation() {
 		animation = getNextAnimation();
 		if (Animation.observe.isAssignableFrom(this.getClass())) {
-			System.out.println("Entity.updateAnimation()"+animation.getName(this));
+			System.out.println("Entity.updateAnimation()"
+					+ animation.getName(this));
 		}
 		animation.update(this);
 	}
@@ -91,7 +92,8 @@ public abstract class Entity implements Informing {
 	}
 
 	public void renderRange() {
-		if (this instanceof Attacker) {
+		if (this instanceof Attacker
+				&& ((Attacker) this).getBasicAttack() != null) {
 			Attack a = ((Attacker) this).getBasicAttack();
 			drawCircle(a.range);
 			drawCircle((int) (a.range * a.getCooldownPercent()));
@@ -164,7 +166,7 @@ public abstract class Entity implements Informing {
 
 	public byte flyHeight() {
 		if (groundPosition == GroundPosition.AIR)
-			return 20;
+			return 30;
 		return 0;
 	}
 

@@ -19,7 +19,7 @@ public class Build extends Ability {
 
 	public void setBuildTime(int buildTime) {
 		cooldown = buildTime;
-		startCooldown();
+		startCooldown();//why not started with setup
 	}
 
 	@Override

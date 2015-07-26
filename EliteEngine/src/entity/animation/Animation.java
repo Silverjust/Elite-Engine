@@ -10,7 +10,7 @@ import entity.Trainer;
 import entity.Unit;
 
 public class Animation {
-	public static Class<?> observe=Animation.class;//not assignable class == off
+	public static Class<?> observe = Animation.class;// not assignable class == off
 	byte directions;
 	private byte frames;
 	PImage[][] imgWD;
@@ -58,11 +58,14 @@ public class Animation {
 		if (isFinished()) {
 			if (doRepeat(e)) {
 				if (Animation.observe.isAssignableFrom(e.getClass())) {
-					System.out.println("Animation.update()" + getName(e));
+					System.out.println("Animation.update()rep" + getName(e));
 				}
 				e.setAnimation(this);
 				setup(e);
 			} else {
+				if (Animation.observe.isAssignableFrom(e.getClass())) {
+					System.out.println("Animation.update()norep" + getName(e));
+				}
 				e.sendDefaultAnimation(this);
 				setup(e);// continue until com sets default animation
 			}

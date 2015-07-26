@@ -97,7 +97,7 @@ public class Scout extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this);

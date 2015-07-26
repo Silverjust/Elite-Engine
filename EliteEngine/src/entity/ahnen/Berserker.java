@@ -47,7 +47,7 @@ public class Berserker extends Unit implements Attacker {
 		buildLeuchte = new Ability(standingImg, 500);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -111,7 +111,7 @@ public class Berserker extends Unit implements Attacker {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this, importantEntity);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this);
@@ -166,6 +166,16 @@ public class Berserker extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
+		getAnimation().draw(this, direction, currentFrame);
+		drawTaged();
+	}
+
+	@Override
+	public void renderRange() {
+		if (this instanceof Unit) {
+			ref.app.line(x, y / 2, ((Unit) this).xTarget,
+					((Unit) this).yTarget / 2);
+		}
 		float x, y;
 		x = (this.x + (xTarget - this.x)
 				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
@@ -174,8 +184,8 @@ public class Berserker extends Unit implements Attacker {
 				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
 				* (attackDistance));
 		drawCircle(x, y, basicAttack.range);
-		getAnimation().draw(this, direction, currentFrame);
-		drawTaged();
+		drawCircle(x, y,
+				(byte) (basicAttack.range * basicAttack.getCooldownPercent()));
 	}
 
 	@Override

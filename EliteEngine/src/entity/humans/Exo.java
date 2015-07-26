@@ -111,7 +111,7 @@ public class Exo extends Unit implements Attacker {
 					&& hook.isNotOnCooldown()) {
 				sendAnimation("hook " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity);
+				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this);

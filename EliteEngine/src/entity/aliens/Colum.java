@@ -29,7 +29,7 @@ public class Colum extends Unit implements Attacker {
 		death = new Death(standingImg, 500);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 45;
 		ySize = 45;
@@ -58,9 +58,12 @@ public class Colum extends Unit implements Attacker {
 	}
 
 	@Override
-	public void updateDecisions() {
-		// colum: no info to client
-		heal.setTargetFrom(this, this);
+	public void updateDecisions() {// colum: no info to client
+		// TODO insta stand command
+		if (heal.isNotOnCooldown()) {
+			heal.startCooldown();
+			heal.setTargetFrom(this, this);
+		}
 		heal.updateAbility(this);
 	}
 

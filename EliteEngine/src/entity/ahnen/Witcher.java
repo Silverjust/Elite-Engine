@@ -50,7 +50,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
 		burst = new MeleeAttack(standingImg, 300);
-		burstplosion = new Explosion(standingImg, 1000);
+		burstplosion = new Explosion(selectedImg, 1000);
 
 		setAnimation(walk);
 		
@@ -123,7 +123,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this, importantEntity);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this);
@@ -182,7 +182,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void renderAir() {
-		if (burst.isSetup() && burst.isNotOnCooldown())
+		if (burst.isSetup())
 			burstplosion.draw(burstX, burstY);
 	}
 
