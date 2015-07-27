@@ -41,7 +41,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 		cloak = new Animation(standingImg, 1000);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -83,7 +83,8 @@ public class Angel extends Unit implements Attacker, Shooter {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;

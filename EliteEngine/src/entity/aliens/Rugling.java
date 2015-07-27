@@ -37,7 +37,7 @@ public class Rugling extends Unit implements Attacker {
 		basicAttack = new MeleeAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 35;
 		ySize = 35;
@@ -53,6 +53,7 @@ public class Rugling extends Unit implements Attacker {
 		basicAttack.damage = 10;
 		basicAttack.cooldown = 1500;
 		basicAttack.setCastTime(500);
+		basicAttack.targetable=groundPosition;
 		// ************************************
 	}
 
@@ -66,7 +67,8 @@ public class Rugling extends Unit implements Attacker {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -74,7 +76,7 @@ public class Rugling extends Unit implements Attacker {
 							}
 						}
 						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -88,7 +90,7 @@ public class Rugling extends Unit implements Attacker {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			} else if (importantEntity == null) {
 				sendAnimation("splashDeath");
 			}
@@ -129,7 +131,5 @@ public class Rugling extends Unit implements Attacker {
 	public Attack getBasicAttack() {
 		return basicAttack;
 	}
-
-	
 
 }

@@ -62,6 +62,7 @@ public class Ker extends Unit implements Shooter {
 		basicAttack.pirce = 5;
 		basicAttack.cooldown = 700;
 		basicAttack.setCastTime(500);
+		basicAttack.targetable = groundPosition;
 
 		shoot.range = 90;
 		shoot.damage = 120;
@@ -92,9 +93,10 @@ public class Ker extends Unit implements Shooter {
 								importantEntity = e;
 							}
 							if (e.isInRange(x, y, basicAttack.range + e.radius)
-									&& e.groundPosition == GroundPosition.GROUND)
+									&& basicAttack.canTargetable(e))
 								isEnemyInHitRange = true;
-							if (e.isInRange(x, y, shoot.range + e.radius))
+							if (e.isInRange(x, y, shoot.range + e.radius)
+									&& shoot.canTargetable(e))
 								isEnemyInShootRange = true;
 						}
 
@@ -140,7 +142,8 @@ public class Ker extends Unit implements Shooter {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		getAnimation().draw(this, direction, currentFrame);		basicAttack.drawAbility(this, direction);
+		getAnimation().draw(this, direction, currentFrame);
+		basicAttack.drawAbility(this, direction);
 
 		drawTaged();
 	}

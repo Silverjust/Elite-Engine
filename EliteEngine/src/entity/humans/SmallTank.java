@@ -36,7 +36,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -61,6 +61,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 		basicAttack.range = 90;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
+		basicAttack.targetable = groundPosition;
 
 		descr = "kleiner panzer";
 		stats = " ";
@@ -77,7 +78,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -85,7 +86,7 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 							}
 						}
 						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -135,7 +136,5 @@ public class SmallTank extends Unit implements Attacker, Shooter {
 	public Attack getBasicAttack() {
 		return basicAttack;
 	}
-
-	
 
 }

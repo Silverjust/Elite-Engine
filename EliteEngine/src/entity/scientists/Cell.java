@@ -77,7 +77,8 @@ public class Cell extends Unit implements Attacker {
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e.isAllyTo(this)) {
-					if (e.isInRange(x, y, aggroRange + e.radius)) {
+					if (e.isInRange(x, y, aggroRange + e.radius)
+							&& heal.canTargetable(e)) {
 						float newImportance = calcImportanceOf(e);
 						if (newImportance > importance && e.hp < e.hp_max) {
 							importance = newImportance;

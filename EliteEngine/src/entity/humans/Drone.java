@@ -62,6 +62,7 @@ public class Drone extends Unit implements Attacker, Shooter {
 		basicAttack.range = 90;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
+		basicAttack.targetable = GroundPosition.GROUND;
 
 		descr = "drone ";
 		stats = " ";
@@ -79,7 +80,7 @@ public class Drone extends Unit implements Attacker, Shooter {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;

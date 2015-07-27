@@ -38,7 +38,7 @@ public class HumanDepot extends Building implements Commander, Shooter {
 		basicAttack.explosion = new Explosion(standImg, 800);
 
 		setAnimation(build);
-		
+
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -76,6 +76,7 @@ public class HumanDepot extends Building implements Commander, Shooter {
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
 					if (e.isInRange(x, y, basicAttack.range + e.radius)
+							&& basicAttack.canTargetable(e)
 							&& !(e instanceof Building)) {
 						float newImportance = calcImportanceOf(e);
 						if (newImportance > importance) {

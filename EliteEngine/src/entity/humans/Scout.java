@@ -36,7 +36,7 @@ public class Scout extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -76,14 +76,16 @@ public class Scout extends Unit implements Attacker, Shooter {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius)
+								&& basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -97,7 +99,7 @@ public class Scout extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
@@ -134,5 +136,4 @@ public class Scout extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	
 }

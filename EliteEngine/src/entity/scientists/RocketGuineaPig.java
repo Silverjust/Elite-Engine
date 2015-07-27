@@ -38,7 +38,7 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -64,6 +64,7 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 		basicAttack.range = 50;
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
 		basicAttack.speed = 1f;
+		basicAttack.targetable = GroundPosition.GROUND;
 
 		descr = " ";
 		stats = " ";
@@ -72,7 +73,7 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (getAnimation() == walk&& isAggro || getAnimation() == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -80,7 +81,7 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -95,7 +96,7 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
@@ -132,4 +133,4 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	}
+}

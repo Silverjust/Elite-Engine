@@ -52,7 +52,7 @@ public class Ticul extends Unit implements Attacker {
 		basicAttack = new MeleeAttack(attackImg, 600);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -74,6 +74,7 @@ public class Ticul extends Unit implements Attacker {
 		basicAttack.damage = 20;
 		basicAttack.cooldown = 2000;
 		basicAttack.setCastTime(500);
+		basicAttack.targetable = groundPosition;
 
 		descr = " ";
 		stats = " ";
@@ -90,7 +91,7 @@ public class Ticul extends Unit implements Attacker {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -106,7 +107,7 @@ public class Ticul extends Unit implements Attacker {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
@@ -129,8 +130,6 @@ public class Ticul extends Unit implements Attacker {
 	public Attack getBasicAttack() {
 		return basicAttack;
 	}
-
-	
 
 	static public class Flash extends Active {// ******************************************************
 		private int range = 100;

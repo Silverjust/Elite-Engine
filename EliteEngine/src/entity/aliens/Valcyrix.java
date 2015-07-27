@@ -36,7 +36,7 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -77,7 +77,8 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -93,7 +94,7 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
@@ -129,7 +130,5 @@ public class Valcyrix extends Unit implements Attacker, Shooter {
 	public Attack getBasicAttack() {
 		return basicAttack;
 	}
-
-	
 
 }

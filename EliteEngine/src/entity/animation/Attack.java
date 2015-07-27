@@ -34,7 +34,7 @@ public abstract class Attack extends Ability {
 		return target;
 	}
 
-	boolean isTargetable(Entity e) {
+	public boolean canTargetable(Entity e) {
 		if (targetable == null)
 			return true;
 		if (targetable == e.groundPosition)

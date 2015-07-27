@@ -15,7 +15,7 @@ import game.HUD;
 import game.ImageHandler;
 
 public abstract class Entity implements Informing {
-	// TODO upgrades für einheiten
+	// TODO upgrades fÃ¼r einheiten
 	public static int entityCounter;
 	public int number;
 	public Player player;
@@ -271,34 +271,39 @@ public abstract class Entity implements Informing {
 	public String getStatistics() {
 		String stats = "";
 		if (kerit == 0 && pax == 0 && arcanum == 0 && prunam == 0)
-			stats += "§§§§";
+			stats += "Â§Â§Â§Â§";
 		else
-			stats += "kerit: " + kerit + "§pax: " + pax + "§arcanum: "
-					+ arcanum + "§prunam: " + prunam + "§";
+			stats += "kerit: " + kerit + "Â§pax: " + pax + "Â§arcanum: "
+					+ arcanum + "Â§prunam: " + prunam + "Â§";
 		if (this instanceof Building && ((Building) this).build != null)
 			stats += "time: " + ((Building) this).build.cooldown / 1000.0
-					+ "§§";
+					+ "Â§Â§";
 		else if (this instanceof Unit)
-			stats += "time: " + ((Unit) this).trainTime / 1000.0 + "§§";
+			stats += "time: " + ((Unit) this).trainTime / 1000.0 + "Â§Â§";
 		else
-			stats += "§§";
+			stats += "Â§Â§";
 		if (death != null)
-			stats += "hp: " + hp_max + " (" + armor + ")§";
+			stats += "hp: " + hp_max + " (" + armor + ")Â§";
 		else
-			stats += "hp: Immortal Object§";
+			stats += "hp: Immortal ObjectÂ§";
 
 		if (this instanceof Attacker
-				&& ((Attacker) this).getBasicAttack() != null)
-			if (((Attacker) this).getBasicAttack().pirce >= 0) {
-				stats += "dps: " + ((Attacker) this).getBasicAttack().damage
-						+ "/" + ((Attacker) this).getBasicAttack().cooldown
-						/ 1000.0 + " ("
-						+ ((Attacker) this).getBasicAttack().pirce + ")§";
+				&& ((Attacker) this).getBasicAttack() != null) {
+			Attack a = ((Attacker) this).getBasicAttack();
+			if (a.pirce >= 0) {
+				stats += "dps: " + a.damage + "/" + a.cooldown / 1000.0 + " ("
+						+ a.pirce + ")";
+				if (a.targetable == GroundPosition.GROUND)
+					stats += "vÂ§";
+				else if (a.targetable == GroundPosition.AIR)
+					stats += "^Â§";
+				else if (a.targetable == null)
+					stats += "XÂ§";
 			} else {
-				stats += "heal/s: " + ((Attacker) this).getBasicAttack().damage
-						+ "/" + ((Attacker) this).getBasicAttack().cooldown
-						/ 1000.0 + "§";
+				stats += "heal/s: " + a.damage + "/" + a.cooldown / 1000.0
+						+ "Â§";
 			}
+		}
 		return stats + this.stats;
 	}
 

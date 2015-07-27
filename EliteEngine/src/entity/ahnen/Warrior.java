@@ -37,7 +37,7 @@ public class Warrior extends Unit implements Attacker {
 		basicAttack = new MeleeAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -63,6 +63,7 @@ public class Warrior extends Unit implements Attacker {
 		basicAttack.pirce = 2;
 		basicAttack.cooldown = 800;
 		basicAttack.setCastTime(500);
+		basicAttack.targetable = groundPosition;
 
 		descr = " ";
 		stats = " ";
@@ -79,7 +80,7 @@ public class Warrior extends Unit implements Attacker {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -87,7 +88,7 @@ public class Warrior extends Unit implements Attacker {
 							}
 						}
 						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {

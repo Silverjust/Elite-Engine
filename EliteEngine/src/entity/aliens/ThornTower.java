@@ -39,7 +39,7 @@ public class ThornTower extends Building implements Shooter, Commander {
 		basicAttack = new ShootAttack(standImg, 800);
 
 		setAnimation(build);
-		
+
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -76,6 +76,7 @@ public class ThornTower extends Building implements Shooter, Commander {
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
 					if (e.isInRange(x, y, basicAttack.range + e.radius)
+							&& basicAttack.canTargetable(e)
 							&& !(e instanceof Building)) {
 						float newImportance = calcImportanceOf(e);
 						if (newImportance > importance) {

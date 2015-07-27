@@ -60,6 +60,7 @@ public class Arol extends Unit implements Attacker {
 		basicAttack.damage = 40;
 		basicAttack.cooldown = 2000;
 		basicAttack.setCastTime(100);
+		basicAttack.targetable = groundPosition;
 		attackDistance = 10;
 
 		descr = " ";
@@ -77,7 +78,7 @@ public class Arol extends Unit implements Attacker {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -127,7 +128,7 @@ public class Arol extends Unit implements Attacker {
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
 					&& e.isInRange(x, y, e.radius + a.range)
-					&& e.groundPosition == GroundPosition.GROUND) {
+					&& basicAttack.canTargetable(e)) {
 				ref.updater.send("<hit " + e.number + " "
 						+ (e instanceof Building ? a.damage * 2 : a.damage)
 						+ " " + a.pirce);

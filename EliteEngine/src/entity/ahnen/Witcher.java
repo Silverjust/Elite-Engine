@@ -102,14 +102,14 @@ public class Witcher extends Unit implements Attacker, Shooter {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius)&& basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {

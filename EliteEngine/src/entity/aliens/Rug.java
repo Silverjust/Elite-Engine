@@ -95,7 +95,8 @@ public class Rug extends Unit implements Shooter {
 								importantEntity = e;
 							}
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius)
+								&& basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {

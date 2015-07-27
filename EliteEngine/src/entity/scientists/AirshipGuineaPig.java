@@ -38,7 +38,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -64,7 +64,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		basicAttack.range = 120;
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
 		basicAttack.speed = 1f;
-
+		basicAttack.targetable = groundPosition;
 		descr = " ";
 		stats = " ";
 		// ************************************
@@ -80,8 +80,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& ((!isAnchored && e.groundPosition == GroundPosition.AIR) || //
-								(isAnchored && e.groundPosition == GroundPosition.GROUND))) {
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -110,11 +109,13 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 			height = 5;
 			isMoving = false;
 			groundPosition = GroundPosition.GROUND;
+			basicAttack.targetable = groundPosition;
 			setAnimation(stand);
 		} else if (c[2].equals("walk")) {
 			isAnchored = false;
 			height = 25;
 			groundPosition = GroundPosition.AIR;
+			basicAttack.targetable = groundPosition;
 		}
 	}
 

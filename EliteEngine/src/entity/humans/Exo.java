@@ -38,7 +38,7 @@ public class Exo extends Unit implements Attacker {
 		hook = new Hook(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -60,6 +60,7 @@ public class Exo extends Unit implements Attacker {
 		basicAttack.damage = 30;
 		basicAttack.cooldown = 1200;
 		basicAttack.setCastTime(500);
+		basicAttack.targetable=groundPosition;
 
 		instaAttack.range = (byte) (radius + 10);
 		instaAttack.damage = 30;
@@ -79,14 +80,15 @@ public class Exo extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (getAnimation() == walk&& isAggro || getAnimation() == stand) {// ****************************************************
+		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -94,7 +96,7 @@ public class Exo extends Unit implements Attacker {
 							}
 						}
 						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& e.groundPosition == GroundPosition.GROUND) {
+								&& basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -111,7 +113,7 @@ public class Exo extends Unit implements Attacker {
 					&& hook.isNotOnCooldown()) {
 				sendAnimation("hook " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
@@ -160,7 +162,7 @@ public class Exo extends Unit implements Attacker {
 			sendAnimation("instaAttack "
 					+ ((MeleeAttack) oldAnimation).getTarget().number);
 		} else {
-			sendAnimation("walk " + xTarget + " " + yTarget+" true");
+			sendAnimation("walk " + xTarget + " " + yTarget + " true");
 		}
 	}
 
@@ -193,7 +195,6 @@ public class Exo extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	
 	public static class Hook extends MeleeAttack {
 
 		public float speed;
@@ -210,7 +211,7 @@ public class Exo extends Unit implements Attacker {
 					e.sendDefaultAnimation(this);
 				}
 				isSetup = false;
-				//startCooldown();
+				// startCooldown();
 			}
 		}
 

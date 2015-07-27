@@ -60,6 +60,7 @@ public class HeavyAssault extends Unit implements Attacker {
 		basicAttack.range = 30;
 		basicAttack.setCastTime(400);// eventtime is defined by target distance
 		basicAttack.doRepeat = true;
+		//basicAttack.targetable = groundPosition;
 
 		descr = "heavy assault";
 		stats = " ";
@@ -76,7 +77,7 @@ public class HeavyAssault extends Unit implements Attacker {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
 						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& e.groundPosition == groundPosition) {
+								&& basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
