@@ -130,6 +130,11 @@ public class Leuchte extends Building implements Attacker {
 	}
 
 	@Override
+	public boolean isCollidable(Entity entity) {
+		return !entity.isAllyTo(this);
+	}
+
+	@Override
 	public void calculateDamage(Attack a) {
 		for (Entity e : ref.updater.entities) {
 			if (e != null && e.isAllyTo(this)

@@ -35,7 +35,7 @@ public class HeavyAssault extends Unit implements Attacker {
 		basicAttack = new MeleeAttack(standingImg, 500);// 1000
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -58,7 +58,8 @@ public class HeavyAssault extends Unit implements Attacker {
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 500;
 		basicAttack.range = 30;
-		basicAttack.setCastTime(500);// eventtime is defined by target distance
+		basicAttack.setCastTime(400);// eventtime is defined by target distance
+		basicAttack.doRepeat = true;
 
 		descr = "heavy assault";
 		stats = " ";
@@ -94,7 +95,7 @@ public class HeavyAssault extends Unit implements Attacker {
 					&& !basicAttack.isSetup()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
@@ -102,7 +103,7 @@ public class HeavyAssault extends Unit implements Attacker {
 
 	@Override
 	public void calculateDamage(Attack a) {
-		// isTaged = true;
+		isTaged = true;
 		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
 				+ a.damage + " " + a.pirce);
 		// SoundHandler.startIngameSound(HUD.hm, x, y);
@@ -117,7 +118,9 @@ public class HeavyAssault extends Unit implements Attacker {
 	}
 
 	public void drawShot() {
-		if (basicAttack.getTarget() != null && getAnimation() == basicAttack) {
+		if (basicAttack.getTarget() != null
+				&& basicAttack.getTarget().isAlive()
+				&& getAnimation() == basicAttack) {
 			Entity e = basicAttack.getTarget();
 			ref.app.stroke(255, 100, 0);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(e.x), yToGrid(e.y));
@@ -129,7 +132,5 @@ public class HeavyAssault extends Unit implements Attacker {
 	public Attack getBasicAttack() {
 		return basicAttack;
 	}
-
-	
 
 }

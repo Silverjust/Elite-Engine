@@ -35,7 +35,7 @@ public class Medic extends Unit implements Attacker {
 		basicAttack = new MeleeAttack(standingImg, 500);// 1000
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 20;
 		ySize = 20;
@@ -56,9 +56,10 @@ public class Medic extends Unit implements Attacker {
 		aggroRange = (byte) (radius + 50);
 		basicAttack.damage = 3;// heal
 		basicAttack.pirce = -1;// heal
-		basicAttack.cooldown = 300;
+		basicAttack.cooldown = 500;
 		basicAttack.range = 15;
-		basicAttack.setCastTime(500);// eventtime is defined by target distance
+		basicAttack.setCastTime(400);// eventtime is defined by target distance
+		basicAttack.doRepeat = true;
 
 		descr = "medic heals";
 		stats = " ";
@@ -93,7 +94,7 @@ public class Medic extends Unit implements Attacker {
 					&& !basicAttack.isSetup()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
@@ -116,7 +117,7 @@ public class Medic extends Unit implements Attacker {
 	}
 
 	public void drawShot() {
-		if (basicAttack.getTarget() != null) {
+		if (basicAttack.getTarget() != null&&basicAttack.getTarget().isAlive()) {
 			Entity e = basicAttack.getTarget();
 			ref.app.stroke(0, 255, 0);
 			ref.app.line(xToGrid(x), yToGrid(y), xToGrid(e.x), yToGrid(e.y));
@@ -129,5 +130,4 @@ public class Medic extends Unit implements Attacker {
 		return basicAttack;
 	}
 
-	
 }

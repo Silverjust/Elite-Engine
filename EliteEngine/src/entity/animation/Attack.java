@@ -2,6 +2,7 @@ package entity.animation;
 
 import entity.Attacker;
 import entity.Entity;
+import entity.Entity.GroundPosition;
 import entity.Unit;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -11,6 +12,7 @@ public abstract class Attack extends Ability {
 	public byte range;
 	public byte damage;
 	public byte pirce;
+	public GroundPosition targetable = null;// null = everything
 	protected Entity target;
 
 	public Attack(PImage[][] IMG, int duration) {
@@ -30,6 +32,14 @@ public abstract class Attack extends Ability {
 
 	public Entity getTarget() {
 		return target;
+	}
+
+	boolean isTargetable(Entity e) {
+		if (targetable == null)
+			return true;
+		if (targetable == e.groundPosition)
+			return true;
+		return false;
 	}
 
 	public static void updateExecAttack(String[] c, Entity attacker) {
