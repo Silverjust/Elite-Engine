@@ -36,7 +36,7 @@ public class Brux extends Unit implements Attacker {
 		jump = new Jump(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -71,7 +71,7 @@ public class Brux extends Unit implements Attacker {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -103,14 +103,12 @@ public class Brux extends Unit implements Attacker {
 					&& jump.isNotOnCooldown()) {
 				sendAnimation("jump " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
-		basicAttack.updateAbility(this);
-		jump.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
+		jump.updateAbility(this, isServer);
 	}
-
-	
 
 	@Override
 	public void updateMovement() {
@@ -135,7 +133,7 @@ public class Brux extends Unit implements Attacker {
 		if (c[2].equals("jump")) {
 			int n = Integer.parseInt(c[3]);
 			Entity e = ref.updater.namedEntities.get(n);
-			jump.setTarget(e);
+			jump.setTargetFrom(this, e);
 			xTarget = e.x;
 			yTarget = e.y;
 			setAnimation(jump);
@@ -170,19 +168,18 @@ public class Brux extends Unit implements Attacker {
 		}
 
 		@Override
-		public void updateAbility(Entity e) {
+		public void updateAbility(Entity e, boolean isServer) {
 			if (target != null && isNotOnCooldown()
 					&& target.isInRange(e.x, e.y, e.radius + target.radius)) {
-				ref.updater.send("<hit " + target.number + " " + damage + " "
-						+ pirce);
-				e.sendDefaultAnimation(this);
+				if (isServer) {
+					ref.updater.send("<hit " + target.number + " " + damage
+							+ " " + pirce);
+					e.sendDefaultAnimation(this);
+				}
 				target = null;
-				//startCooldown();
+				isSetup = false;
+				// startCooldown();
 			}
-		}
-
-		public void setTarget(Entity e) {
-			target = e;
 		}
 
 	}

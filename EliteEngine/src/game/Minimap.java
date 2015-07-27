@@ -41,8 +41,13 @@ public class Minimap {
 		}
 		graphics.imageMode(PConstants.CORNER);
 		graphics.rectMode(PConstants.CORNER);
+		graphics.blendMode(PConstants.ADD);
+		graphics.fill(20);
+		graphics.rect(0, 0, w, h);
 		graphics.blendMode(PConstants.MULTIPLY);
-		//graphics.image(ref.updater.map.fogOfWar, 0, 0, w, h);
+		graphics.image(ref.updater.map.fogOfWar.get(), 0, 0, w, h);
+		// get to convert to img
+		// else it would crash
 		graphics.blendMode(PConstants.BLEND);
 		graphics.noStroke();
 		graphics.rectMode(PConstants.CENTER);

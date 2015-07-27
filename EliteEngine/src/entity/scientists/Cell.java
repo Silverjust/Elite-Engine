@@ -71,7 +71,7 @@ public class Cell extends Unit implements Attacker {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			float importance = 0;
 			Entity importantEntity = null;
@@ -96,7 +96,7 @@ public class Cell extends Unit implements Attacker {
 			heal.startCooldown();
 			heal.setTargetFrom(this, this);
 		}
-		heal.updateAbility(this);
+		heal.updateAbility(this, isServer);
 	}
 
 	@Override

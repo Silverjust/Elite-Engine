@@ -24,25 +24,26 @@ public class Training extends Ability {
 	}
 
 	@Override
-	public void updateAbility(Entity e) {
+	public void updateAbility(Entity e, boolean isServer) {
 		if (isSetup() && isNotOnCooldown()) {
-			float xt = ((Trainer) e).getXTarget();
-			float yt = ((Trainer) e).getYTarget();
-
-			ref.updater.send("<spawn "
-					+ toTrain.getClass().getSimpleName()
-					+ " "
-					+ e.player.ip
-					+ " "
-					+ (e.x + (xt - e.x) / PApplet.dist(e.x, e.y, xt, yt)
-							* (e.radius + toTrain.radius))
-					+ " "
-					+ (e.y + (yt - e.y) / PApplet.dist(e.x, e.y, xt, yt)
-							* (e.radius + toTrain.radius))//
-					+ " " //
-					+ xt //
-					+ " " //
-					+ yt);
+			if (isServer) {
+				float xt = ((Trainer) e).getXTarget();
+				float yt = ((Trainer) e).getYTarget();
+				ref.updater.send("<spawn "
+						+ toTrain.getClass().getSimpleName()
+						+ " "
+						+ e.player.ip
+						+ " "
+						+ (e.x + (xt - e.x) / PApplet.dist(e.x, e.y, xt, yt)
+								* (e.radius + toTrain.radius))
+						+ " "
+						+ (e.y + (yt - e.y) / PApplet.dist(e.x, e.y, xt, yt)
+								* (e.radius + toTrain.radius))//
+						+ " " //
+						+ xt //
+						+ " " //
+						+ yt);
+			}
 			toTrain = null;
 		}
 	}

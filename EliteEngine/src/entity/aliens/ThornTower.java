@@ -69,7 +69,7 @@ public class ThornTower extends Building implements Shooter, Commander {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		float importance = 0;
 		Entity importantEntity = null;
 		if (getAnimation() == stand) {
@@ -89,7 +89,7 @@ public class ThornTower extends Building implements Shooter, Commander {
 				sendAnimation("basicAttack " + importantEntity.number);
 			}
 		}
-		basicAttack.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
 
 	}
 

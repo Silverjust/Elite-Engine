@@ -3,7 +3,6 @@ package entity.animation;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.Updater;
-import entity.Attacker;
 import entity.Entity;
 import entity.Shooter;
 
@@ -32,25 +31,11 @@ public class ShootAttack extends MeleeAttack {
 		isExploding = false;
 		eventTime = beginTime
 				+ (int) (PApplet.dist(from.x, from.y, to.x, to.y) / speed);
-		System.out.println("ShootAttack.setTargetFrom()" + eventTime + " "
-				+ beginTime);
 	}
 
 	@Override
 	public void setCastTime(int castTime) {
 		beginTime = castTime;
-	}
-
-	@Override
-	public void updateAbility(Entity e) {
-		/*
-		 * if (target != null && getProgressPercent() == 1) {
-		 * System.out.println("target"); }
-		 */
-		if (isSetup() && isEvent()) {
-			((Attacker) e).calculateDamage(this);
-			isSetup = false;
-		}
 	}
 
 	@Override

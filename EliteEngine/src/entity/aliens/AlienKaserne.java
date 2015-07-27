@@ -62,8 +62,8 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 	}
 
 	@Override
-	public void updateDecisions() {
-		training.updateAbility(this);
+	public void updateDecisions(boolean isServer) {
+		training.updateAbility(this, isServer);
 	}
 
 	@Override

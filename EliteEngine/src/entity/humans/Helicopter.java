@@ -69,7 +69,7 @@ public class Helicopter extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -106,7 +106,7 @@ public class Helicopter extends Unit implements Attacker, Shooter {
 								: basicAttack.range));
 			}
 		}
-		basicAttack.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
 	}
 
 	@Override

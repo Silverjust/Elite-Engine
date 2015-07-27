@@ -39,14 +39,10 @@ public class Ability extends Animation {
 		return start + eventTime <= Updater.Time.getMillis();
 	}
 
-	public boolean isReady() {
-		return isNotOnCooldown();
-	}
-
-	public void updateAbility(Entity e) {
+	public void updateAbility(Entity e, boolean isServer) {
 		if (isSetup() && isEvent()) {
 			/** do smthing */
-			startCooldown();
+			//startCooldown();
 		}
 	}
 

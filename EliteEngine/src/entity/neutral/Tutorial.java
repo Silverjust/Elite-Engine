@@ -50,7 +50,7 @@ public class Tutorial extends Unit {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		float x = 0, y = 0;
 		Active[][] bActives = HUD.activesGrid.buildingGrid;
 		// System.out.println(xTarget + " " + yTarget);

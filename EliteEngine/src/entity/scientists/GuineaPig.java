@@ -41,7 +41,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		equip = new Equip(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -73,7 +73,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -105,8 +105,8 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
-		basicAttack.updateAbility(this);
-		equip.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
+		equip.updateAbility(this, isServer);
 	}
 
 	@Override
@@ -170,7 +170,6 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	
 	static void setupEquip(Entity e, String[] c) {
 		if (c != null && c[7] != null && c[7].equals("select")) {
 			e.isSelected = true;
@@ -187,27 +186,22 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		}
 
 		public void setUnit(Unit unit) {
-
 			this.unit = unit.getClass().getSimpleName();
 			cooldown = unit.trainTime;
 			startCooldown();
 		}
 
 		@Override
-		public void update(Entity e) {
-			if (isFinished()) {
-				setup(e);
-			}
-		}
-
-		@Override
-		public void updateAbility(Entity e) {
-			if (isSetup() && isEvent() && isNotOnCooldown()) {
-				ref.updater.send("<remove " + e.number);
-				ref.updater.send(//
-						"<spawn " + unit + " " + e.player.ip + " " + e.x + " "
-								+ e.y + " " + ((Unit) e).xTarget + " "
-								+ ((Unit) e).yTarget + " select");
+		public void updateAbility(Entity e, boolean isServer) {
+			if (isSetup() && isEvent()) {
+				if (isServer) {
+					ref.updater.send("<remove " + e.number);
+					ref.updater.send(//
+							"<spawn " + unit + " " + e.player.ip + " " + e.x
+									+ " " + e.y + " " + ((Unit) e).xTarget
+									+ " " + ((Unit) e).yTarget + " select");
+				}
+				unit = null;
 			}
 		}
 

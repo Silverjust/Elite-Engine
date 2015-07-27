@@ -36,7 +36,7 @@ public class Drone extends Unit implements Attacker, Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 10;
 		ySize = 10;
@@ -52,7 +52,7 @@ public class Drone extends Unit implements Attacker, Shooter {
 		speed = 1.5f;
 		radius = 5;
 		sight = 70;
-		height=20;
+		height = 20;
 		groundPosition = Entity.GroundPosition.AIR;
 
 		aggroRange = (byte) (radius + 50);
@@ -69,8 +69,9 @@ public class Drone extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
-	public void updateDecisions() {
-		if (getAnimation() == walk && isAggro|| getAnimation() == stand) {// ****************************************************
+	public void updateDecisions(boolean isServer) {
+		if (isServer && getAnimation() == walk && isAggro
+				|| getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -96,10 +97,10 @@ public class Drone extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
-		basicAttack.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
 	}
 
 	@Override
@@ -132,7 +133,5 @@ public class Drone extends Unit implements Attacker, Shooter {
 	public Attack getBasicAttack() {
 		return basicAttack;
 	}
-
-	
 
 }

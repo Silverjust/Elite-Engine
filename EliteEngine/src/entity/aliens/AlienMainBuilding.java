@@ -50,8 +50,8 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	}
 
 	@Override
-	public void updateDecisions() {
-		super.updateDecisions();
+	public void updateDecisions(boolean isServer) {
+		super.updateDecisions(isServer);
 
 	}
 

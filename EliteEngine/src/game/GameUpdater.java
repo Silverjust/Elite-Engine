@@ -63,18 +63,11 @@ public class GameUpdater extends Updater {
 			// sortierfunktion
 			Collections.sort(ref.player.visibleEntities,
 					new EntityHeightComparator());
-			if (GameSettings.singlePlayer) {
-				map.mapCodeUpdate();
-				for (Entity e : entities) {
-					e.updateAnimation();
-					e.updateDecisions();
-					e.updateMovement();
-				}
-			} else {
-				for (Entity e : entities) {
-					e.updateAnimation();
-					e.updateMovement();
-				}
+			map.mapCodeUpdate();
+			for (Entity e : entities) {
+				e.updateAnimation();
+				e.updateDecisions(GameSettings.singlePlayer);
+				e.updateMovement();
 			}
 		}
 

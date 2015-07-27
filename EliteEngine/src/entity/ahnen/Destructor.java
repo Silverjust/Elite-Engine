@@ -1,32 +1,41 @@
-package entity.humans;
+package entity.ahnen;
 
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
-import entity.Attacker;
+import entity.Active;
 import entity.Entity;
 import entity.Shooter;
 import entity.Unit;
+import entity.ahnen.Leuchte.Upgrade;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
+import entity.animation.Explosion;
 import entity.animation.ShootAttack;
 
-public class Scout extends Unit implements Attacker, Shooter {
+public class Destructor extends Unit implements Shooter, Buffing {
 
 	private static PImage standingImg;
 
 	byte aggroRange;
 
 	ShootAttack basicAttack;
+	static boolean displayBurstArea = false;
+
+	float burstX, burstY;
+
+	public byte upgradeRange;
+
+	private byte splashrange;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "Scout");
+		standingImg = game.ImageHandler.load(path, "Destructor");
 	}
 
-	public Scout(String[] c) {
+	public Destructor(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
@@ -34,35 +43,40 @@ public class Scout extends Unit implements Attacker, Shooter {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
+		basicAttack.explosion = new Explosion(selectedImg, 1000);
 
 		setAnimation(walk);
-		
-		// ************************************
-		xSize = 20;
-		ySize = 20;
 
-		kerit = 28;
+		// ************************************
+		xSize = 15;
+		ySize = 15;
+		height = 10;
+
+		kerit = 200;
 		pax = 0;
 		arcanum = 0;
-		prunam = 0;
+		prunam = 10;
 		trainTime = 1500;
 
-		hp = hp_max = 30;
-		armor = 1;
+		hp = hp_max = 100;
+		armor = 3;
 		speed = 0.9f;
-		radius = 5;
-		sight = 120;
+		radius = 7;
+		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 10;
-		basicAttack.pirce = 0;
-		basicAttack.cooldown = 1500;
+		aggroRange = 110;
+		splashrange = 10;
+		basicAttack.damage = 50;// x2
+		basicAttack.pirce = 3;
+		basicAttack.cooldown = 1700;
 		basicAttack.range = 40;
-		basicAttack.setCastTime(100);// eventtime is defined by target distance
-		basicAttack.speed = 0.6f;
+		basicAttack.setCastTime(200);// eventtime is defined by target distance
+		basicAttack.speed = 1f;
 
-		descr = "scout zum scouten";
+		upgradeRange = 100;
+
+		descr = " ";
 		stats = " ";
 		// ************************************
 	}
@@ -97,17 +111,37 @@ public class Scout extends Unit implements Attacker, Shooter {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
-				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
+				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
 	}
 
 	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if (c[2].equals("burst")) {
+		}
+	}
+
+	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
-				+ a.damage + " " + a.pirce);
-		// SoundHandler.startIngameSound(HUD.hm, x, y);
+		boolean pirceboost = false;
+		for (Entity e : ref.updater.entities) {
+			if (e instanceof Leuchte
+					&& ((Leuchte) e).upgrade == Upgrade.BUFF
+					&& isInRange(e.x, e.y, ((Leuchte) e).getBasicAttack().range))
+				pirceboost = true;
+		}
+		Entity target = ((ShootAttack) a).getTarget();
+		for (Entity e : ref.updater.entities) {
+			if (e != null & e.isEnemyTo(this)
+					&& e.isInRange(target.x, target.y, e.radius + splashrange)
+					&& e.groundPosition == GroundPosition.GROUND) {
+				ref.updater.send("<hit " + e.number + " " + a.damage + " "
+						+ (pirceboost ? 5 : a.pirce));
+			}
+		}
 	}
 
 	@Override
@@ -123,7 +157,7 @@ public class Scout extends Unit implements Attacker, Shooter {
 		float x = PApplet.lerp(this.x, target.x, progress);
 		float y = PApplet.lerp(this.y - height, target.y - target.height,
 				progress);
-		ref.app.fill(255, 100, 0);
+		ref.app.fill(50, 255, 0);
 		ref.app.strokeWeight(0);
 		ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
 		ref.app.strokeWeight(1);
@@ -134,5 +168,36 @@ public class Scout extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	
+	@Override
+	public byte getUpgradeRange() {
+		return upgradeRange;
+	}
+
+	public static class UpgradeActive extends Active {
+		public UpgradeActive(int x, int y, char n) {
+			super(x, y, n, Leuchte.buffImg);
+			clazz = Buffing.class;
+		}
+
+		@Override
+		public String getDesription() {
+			return "upgrade lampe";
+		}
+
+		@Override
+		public void onActivation() {
+			for (Entity e : ref.updater.entities) {
+				if (e instanceof Leuchte) {
+					for (Entity e2 : ref.updater.selected) {
+						if (e2 instanceof Buffing
+								&& e.isInRange(e2.x, e2.y,
+										((Buffing) e2).getUpgradeRange())) {
+							e.sendAnimation("buff");
+						}
+					}
+				}
+			}
+		}
+	}
+
 }

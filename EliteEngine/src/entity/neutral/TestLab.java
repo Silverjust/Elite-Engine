@@ -44,8 +44,8 @@ public class TestLab extends Unit {
 	}
 
 	@Override
-	public void updateDecisions() {
-		super.updateDecisions();
+	public void updateDecisions(boolean isServer) {
+		super.updateDecisions(isServer);
 		isTaged = false;
 		// boolean hasColided = false;
 		// float xDeglich = 0;

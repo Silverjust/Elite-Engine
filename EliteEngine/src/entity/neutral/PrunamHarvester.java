@@ -29,9 +29,9 @@ public abstract class PrunamHarvester extends Building {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == stand)
-			((Extract) stand).updateAbility(this);
+			((Extract) stand).updateAbility(this, isServer);
 	}
 
 	@Override

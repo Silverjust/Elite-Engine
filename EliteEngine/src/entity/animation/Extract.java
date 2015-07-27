@@ -23,12 +23,14 @@ public class Extract extends Ability {
 	}
 
 	@Override
-	public void updateAbility(Entity e) {
-		int amount = (int) (e.hp * 1.0 / e.hp_max * efficenty);
-		amount = amount < 0 ? 0 : amount;
+	public void updateAbility(Entity e, boolean isServer) {
 		if (isSetup() && isEvent()) {
-			ref.updater.send("<give " + e.player.ip + " " + ressource + " "
-					+ amount);
+			int amount = (int) (e.hp * 1.0 / e.hp_max * efficenty);
+			amount = amount < 0 ? 0 : amount;
+			if (isServer) {
+				ref.updater.send("<give " + e.player.ip + " " + ressource + " "
+						+ amount);
+			}
 			isSetup = false;
 		}
 		if (isNotOnCooldown()) {

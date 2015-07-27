@@ -72,6 +72,7 @@
     "Witcher": "entity.ahnen.Witcher",
     "Warrior": "entity.ahnen.Warrior",
     "Angel": "entity.ahnen.Angel",
+    "Destructor": "entity.ahnen.Destructor",
   },
   "maps": {
     "standard": {

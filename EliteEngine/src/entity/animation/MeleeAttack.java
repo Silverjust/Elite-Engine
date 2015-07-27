@@ -26,14 +26,15 @@ public class MeleeAttack extends Attack {
 	}
 
 	@Override
-	public void updateAbility(Entity e) {
+	public void updateAbility(Entity e, boolean isServer) {
 		/*
 		 * if (isSetup())System.out.println("setup"); if
 		 * (isEvent())System.out.println("event"); if
 		 * (isNotOnCooldown())System.out.println("ncool");
 		 */
 		if (isSetup() && isEvent()) {
-			((Attacker) e).calculateDamage(this);
+			if (isServer)
+				((Attacker) e).calculateDamage(this);
 			isSetup = false;
 		}
 	}

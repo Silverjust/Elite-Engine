@@ -53,7 +53,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 		burstplosion = new Explosion(selectedImg, 1000);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -94,7 +94,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -126,8 +126,8 @@ public class Witcher extends Unit implements Attacker, Shooter {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
-		basicAttack.updateAbility(this);
-		burst.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
+		burst.updateAbility(this, isServer);
 	}
 
 	@Override

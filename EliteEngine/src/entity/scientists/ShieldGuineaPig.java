@@ -86,7 +86,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -118,10 +118,10 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
-		basicAttack.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
 		regenerate.setTargetFrom(this, this);
 		if (hp == hp_max)
-			regenerate.updateAbility(this);
+			regenerate.updateAbility(this, isServer);
 	}
 
 	@Override

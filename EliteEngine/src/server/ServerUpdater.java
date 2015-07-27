@@ -49,7 +49,7 @@ public class ServerUpdater extends Updater {
 			map.mapCodeUpdate();
 			for (Entity e : entities) {
 				e.updateAnimation();
-				e.updateDecisions();
+				e.updateDecisions(true);
 				e.updateMovement();
 			}
 		}

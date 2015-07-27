@@ -1,5 +1,6 @@
 package entity.aliens;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 import entity.Building;
@@ -65,7 +66,7 @@ public class Ker extends Unit implements Shooter {
 		shoot.range = 90;
 		shoot.damage = 120;
 		shoot.pirce = 3;
-		shoot.cooldown = 1500;
+		shoot.cooldown = 2000;
 		shoot.setCastTime(500);
 		shoot.speed = 1;
 
@@ -75,7 +76,7 @@ public class Ker extends Unit implements Shooter {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			boolean isEnemyInShootRange = false;
@@ -112,8 +113,8 @@ public class Ker extends Unit implements Shooter {
 								: basicAttack.range);
 			}
 		}
-		basicAttack.updateAbility(this);
-		shoot.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
+		shoot.updateAbility(this, isServer);
 	}
 
 	@Override
@@ -139,7 +140,8 @@ public class Ker extends Unit implements Shooter {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		getAnimation().draw(this, direction, currentFrame);
+		getAnimation().draw(this, direction, currentFrame);		basicAttack.drawAbility(this, direction);
+
 		drawTaged();
 	}
 
@@ -157,8 +159,13 @@ public class Ker extends Unit implements Shooter {
 
 	@Override
 	public void drawShot(Entity target, float progress) {
-		// TODO Auto-generated method stub
-
+		float x = PApplet.lerp(this.x, target.x, progress);
+		float y = PApplet.lerp(this.y - height, target.y - target.height,
+				progress);
+		ref.app.fill(200, 255, 0);
+		ref.app.strokeWeight(0);
+		ref.app.ellipse(xToGrid(x), yToGrid(y), 2, 2);
+		ref.app.strokeWeight(1);
 	}
 
 }

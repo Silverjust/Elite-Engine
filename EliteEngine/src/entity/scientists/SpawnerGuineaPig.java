@@ -34,7 +34,7 @@ public class SpawnerGuineaPig extends Unit {
 		spawn = new RuglingSpawn(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 25;
 		ySize = 25;
@@ -61,7 +61,7 @@ public class SpawnerGuineaPig extends Unit {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		// isTaged = false;
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			float importance = 0;
@@ -84,7 +84,7 @@ public class SpawnerGuineaPig extends Unit {
 				sendAnimation("spawn " + importantEntity.number);
 			}
 		}
-		spawn.updateAbility(this);
+		spawn.updateAbility(this, isServer);
 	}
 
 	@Override
@@ -114,6 +114,13 @@ public class SpawnerGuineaPig extends Unit {
 		drawTaged();
 	}
 
+	@Override
+	public void renderRange() {
+		super.renderRange();
+		drawCircle(spawnRange);
+		drawCircle((int) (spawnRange * spawn.getCooldownPercent()));
+	}
+
 	static class RuglingSpawn extends Ability {
 
 		private Entity target;
@@ -127,19 +134,26 @@ public class SpawnerGuineaPig extends Unit {
 		}
 
 		@Override
-		public void updateAbility(Entity e) {
-			if (target != null && isEvent() && isNotOnCooldown()) {
-				ref.updater.send("<spawn GuineaPig " + e.player.ip + " " + e.x
-						+ " " + (e.y + e.radius + 8) + " " + target.x + " "
-						+ target.y);
+		public void updateAbility(Entity e, boolean isServer) {
+			if (target != null && isEvent()) {
+				if (isServer) {
+					ref.updater.send("<spawn GuineaPig " + e.player.ip + " "
+							+ e.x + " " + (e.y + e.radius + 8) + " " + target.x
+							+ " " + target.y);
+				}
 				/*
 				 * ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
 				 * + " " + (e.y - e.radius - 8) + " " + target.x + " " +
 				 * target.y);
 				 */
 				target = null;
-				startCooldown();
+				// startCooldown();
 			}
+		}
+
+		@Override
+		public boolean isSetup() {
+			return target != null;
 		}
 	}
 

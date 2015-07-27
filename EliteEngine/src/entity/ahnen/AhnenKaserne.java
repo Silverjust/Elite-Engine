@@ -56,10 +56,7 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 		// ************************************
 	}
 
-	@Override
-	public void updateDecisions() {
-		training.updateAbility(this);
-	}
+	
 
 	@Override
 	public void exec(String[] c) {

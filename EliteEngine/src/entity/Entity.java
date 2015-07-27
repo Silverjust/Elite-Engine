@@ -69,7 +69,7 @@ public abstract class Entity implements Informing {
 		animation.update(this);
 	}
 
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 	}
 
 	public void updateMovement() {

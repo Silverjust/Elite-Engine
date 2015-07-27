@@ -41,7 +41,7 @@ public class Leuchte extends Building implements Attacker {
 		timer = new Ability(standingImg, 100);
 
 		setAnimation(stand);
-		
+
 		// ************************************
 		xSize = 10;
 		ySize = 10;
@@ -76,15 +76,15 @@ public class Leuchte extends Building implements Attacker {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (upgrade == Upgrade.HEAL) {
 			heal.setTargetFrom(this, this);
-			heal.updateAbility(this);
+			heal.updateAbility(this, isServer);
 		} else if (upgrade == Upgrade.BUFF) {
 			buff.setTargetFrom(this, this);
-			buff.updateAbility(this);
+			buff.updateAbility(this, isServer);
 		}
-		timer.updateAbility(this);
+		timer.updateAbility(this, isServer);
 		if (timer.isNotOnCooldown()) {
 			if (upgrade == Upgrade.STANDARD) {
 				sendAnimation("death");
@@ -108,8 +108,7 @@ public class Leuchte extends Building implements Attacker {
 			}
 			upgrade = Upgrade.STANDARD;
 			setAnimation(stand);
-		}
-		if (c[2].equals("heal")) {
+		} else if (c[2].equals("heal")) {
 			if (upgrade != Upgrade.HEAL) {
 				iconImg = healImg;
 				timer.startCooldown();
@@ -118,16 +117,15 @@ public class Leuchte extends Building implements Attacker {
 			}
 			upgrade = Upgrade.HEAL;
 			setAnimation(heal);
-		}
-		if (c[2].equals("buff")) {
+		} else if (c[2].equals("buff")) {
 			if (upgrade != Upgrade.BUFF) {
 				iconImg = buffImg;
 				timer.startCooldown();
 				hp_max = 300;
 				hp = hp_max;
 			}
-			upgrade = Upgrade.HEAL;
-			setAnimation(heal);
+			upgrade = Upgrade.BUFF;
+			setAnimation(buff);
 		}
 	}
 

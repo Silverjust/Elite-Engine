@@ -7,7 +7,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 
-public class Attack extends Ability {
+public abstract class Attack extends Ability {
 	public byte range;
 	public byte damage;
 	public byte pirce;

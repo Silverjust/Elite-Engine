@@ -35,6 +35,13 @@ public abstract class Building extends Entity {
 	}
 
 	@Override
+	public void updateDecisions(boolean isServer) {
+		if (this instanceof Trainer) {
+			((Trainer) this).getTraining().updateAbility(this, isServer);
+		}
+	}
+
+	@Override
 	public void exec(String[] c) {
 		super.exec(c);
 		switch (c[2]) {

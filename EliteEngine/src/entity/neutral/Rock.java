@@ -39,7 +39,7 @@ public class Rock extends Building {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 	}
 
 	@Override

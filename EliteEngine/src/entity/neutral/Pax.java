@@ -38,7 +38,7 @@ public class Pax extends Building {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 	}
 
 	@Override

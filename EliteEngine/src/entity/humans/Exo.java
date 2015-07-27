@@ -78,7 +78,7 @@ public class Exo extends Unit implements Attacker {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk&& isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -114,9 +114,9 @@ public class Exo extends Unit implements Attacker {
 				Attack.sendWalkToEnemy(this,importantEntity, basicAttack.range);
 			}
 		}
-		basicAttack.updateAbility(this);
-		instaAttack.updateAbility(this);
-		hook.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
+		instaAttack.updateAbility(this, isServer);
+		hook.updateAbility(this, isServer);
 	}
 
 	@Override
@@ -197,35 +197,21 @@ public class Exo extends Unit implements Attacker {
 	public static class Hook extends MeleeAttack {
 
 		public float speed;
-		private boolean isSetup;
 
 		public Hook(PImage IMG, int duration) {
 			super(IMG, duration);
 		}
 
 		@Override
-		public void updateAbility(Entity e) {
+		public void updateAbility(Entity e, boolean isServer) {
 			if (isSetup() && isNotOnCooldown()
 					&& target.isInRange(e.x, e.y, e.radius + target.radius)) {
-				e.sendDefaultAnimation(this);
+				if (isServer) {
+					e.sendDefaultAnimation(this);
+				}
 				isSetup = false;
-				startCooldown();
+				//startCooldown();
 			}
-		}
-
-		@Override
-		public Entity getTarget() {
-			return target;
-		}
-
-		@Override
-		public boolean isSetup() {
-			return isSetup;
-		}
-
-		@Override
-		public void setTargetFrom(Entity from, Entity to) {
-			target = to;
 		}
 
 	}

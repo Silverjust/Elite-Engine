@@ -49,7 +49,7 @@ public class SandboxBuilding extends Building implements Commander {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 	}
 
 	@Override

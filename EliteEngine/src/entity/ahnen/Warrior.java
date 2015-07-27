@@ -70,7 +70,7 @@ public class Warrior extends Unit implements Attacker {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -104,7 +104,7 @@ public class Warrior extends Unit implements Attacker {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
-		basicAttack.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
 	}
 
 	@Override

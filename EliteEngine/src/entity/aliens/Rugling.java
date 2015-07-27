@@ -57,7 +57,7 @@ public class Rugling extends Unit implements Attacker {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 
 		if (getAnimation() == walk || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
@@ -93,7 +93,7 @@ public class Rugling extends Unit implements Attacker {
 				sendAnimation("splashDeath");
 			}
 		}
-		basicAttack.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
 	}
 
 	@Override

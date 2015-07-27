@@ -1,9 +1,10 @@
 package entity.aliens;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
-import entity.Attacker;
 import entity.Entity;
+import entity.Shooter;
 import entity.Unit;
 import entity.animation.Ability;
 import entity.animation.Animation;
@@ -11,7 +12,7 @@ import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.ShootAttack;
 
-public class Rug extends Unit implements Attacker {
+public class Rug extends Unit implements Shooter {
 
 	private static PImage standingImg;
 
@@ -76,7 +77,7 @@ public class Rug extends Unit implements Attacker {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		// isTaged = false;
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyTooClose = false;
@@ -121,8 +122,8 @@ public class Rug extends Unit implements Attacker {
 				sendAnimation("spawn " + importantEntity.number);
 			}
 		}
-		basicAttack.updateAbility(this);
-		spawn.updateAbility(this);
+		basicAttack.updateAbility(this, isServer);
+		spawn.updateAbility(this, isServer);
 	}
 
 	@Override
@@ -152,9 +153,20 @@ public class Rug extends Unit implements Attacker {
 	@Override
 	public void renderGround() {
 		drawSelected();
-		// drawCircle(spawnRange);
 		getAnimation().draw(this, direction, currentFrame);
+		basicAttack.drawAbility(this, direction);
 		drawTaged();
+	}
+
+	@Override
+	public void drawShot(Entity target, float progress) {
+		float x = PApplet.lerp(this.x, target.x, progress);
+		float y = PApplet.lerp(this.y - height, target.y - target.height,
+				progress);
+		ref.app.fill(100, 100, 0);
+		ref.app.strokeWeight(0);
+		ref.app.ellipse(xToGrid(x), yToGrid(y), 3, 3);
+		ref.app.strokeWeight(1);
 	}
 
 	@Override
@@ -182,19 +194,26 @@ public class Rug extends Unit implements Attacker {
 		}
 
 		@Override
-		public void updateAbility(Entity e) {
-			if (target != null && isEvent() && isNotOnCooldown()) {
-				ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
-						+ " " + (e.y + e.radius + 8) + " " + target.x + " "
-						+ target.y);
-				/*
-				 * ref.updater.send("<spawn Rugling " + e.player.ip + " " + e.x
-				 * + " " + (e.y - e.radius - 8) + " " + target.x + " " +
-				 * target.y);
-				 */
+		public void updateAbility(Entity e, boolean isServer) {
+			if (target != null && isEvent()) {
+				if (isServer) {
+					ref.updater.send("<spawn Rugling " + e.player.ip + " "
+							+ e.x + " " + (e.y + e.radius + 8) + " " + target.x
+							+ " " + target.y);
+					/*
+					 * ref.updater.send("<spawn Rugling " + e.player.ip + " " +
+					 * e.x + " " + (e.y - e.radius - 8) + " " + target.x + " " +
+					 * target.y);
+					 */
+				}
 				target = null;
-				startCooldown();
+				// startCooldown();
 			}
+		}
+
+		@Override
+		public boolean isSetup() {
+			return target != null;
 		}
 	}
 

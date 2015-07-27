@@ -29,7 +29,7 @@ public abstract class Lab extends Unit {
 	}
 
 	@Override
-	public void updateDecisions() {
+	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk || getAnimation() == stand) {// ****************************************************
 		}
 	}
