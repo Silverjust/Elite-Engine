@@ -72,7 +72,8 @@ public class Ker extends Unit implements Shooter {
 		shoot.speed = 1;
 
 		descr = " ";
-		stats = " ";
+		stats = "dps: " + shoot.damage + "/" + shoot.cooldown / 1000.0
+				+ " (" + shoot.pirce + ")" + " _°§";
 		// ************************************
 	}
 

@@ -294,11 +294,11 @@ public abstract class Entity implements Informing {
 				stats += "dps: " + a.damage + "/" + a.cooldown / 1000.0 + " ("
 						+ a.pirce + ")";
 				if (a.targetable == GroundPosition.GROUND)
-					stats += "v§";
+					stats += " _§";
 				else if (a.targetable == GroundPosition.AIR)
-					stats += "^§";
+					stats += " °§";
 				else if (a.targetable == null)
-					stats += "X§";
+					stats += " _°§";
 			} else {
 				stats += "heal/s: " + a.damage + "/" + a.cooldown / 1000.0
 						+ "§";
