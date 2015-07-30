@@ -189,7 +189,8 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		@Override
 		public void onActivation() {
 			for (Entity e : ref.updater.entities) {
-				if (e instanceof Leuchte) {
+				if (e instanceof Leuchte
+						&& e.getAnimation() == ((Leuchte) e).heal) {
 					for (Entity e2 : ref.updater.selected) {
 						if (e2 instanceof Buffing
 								&& e.isInRange(e2.x, e2.y,

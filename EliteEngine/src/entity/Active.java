@@ -65,6 +65,10 @@ public abstract class Active implements Informing {
 		button.setVisible(b);
 	}
 
+	public boolean isVisible() {
+		return button.isVisible();
+	}
+
 	public void pressManually() {
 		if (isNotOnCooldown())
 			button.pressManually();
@@ -97,4 +101,5 @@ public abstract class Active implements Informing {
 		return " ";
 
 	}
+
 }

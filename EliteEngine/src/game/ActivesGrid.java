@@ -49,12 +49,14 @@ public class ActivesGrid {
 	public void update() {
 		for (int x = 0; x < gridWidth; x++)
 			for (int y = 0; y < gridHeight; y++)
-				if (unitGrid[x][y] != null)
+				if (unitGrid[x][y] != null && //
+						unitGrid[x][y].isVisible())
 					unitGrid[x][y].update();
 
 		for (int x = 0; x < gridWidth; x++)
 			for (int y = 0; y < gridHeight; y++)
-				if (buildingGrid[x][y] != null)
+				if (buildingGrid[x][y] != null && //
+						buildingGrid[x][y].isVisible())
 					buildingGrid[x][y].update();
 	}
 

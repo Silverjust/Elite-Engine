@@ -89,8 +89,8 @@ public class Witcher extends Unit implements Attacker, Shooter {
 		upgradeRange = 100;
 
 		descr = " ";
-		stats = "active: " + burst.damage + "/" + burst.cooldown / 1000.0 + " ("
-				+ burst.pirce + ")" + " _°§";
+		stats = "active: " + burst.damage + "/" + burst.cooldown / 1000.0
+				+ " (" + burst.pirce + ")" + " _°§";
 		// ************************************
 	}
 
@@ -274,7 +274,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 		@Override
 		public void onActivation() {
 			for (Entity e : ref.updater.entities) {
-				if (e instanceof Leuchte) {
+				if (e instanceof Leuchte && e.getAnimation() == e.stand) {
 					for (Entity e2 : ref.updater.selected) {
 						if (e2 instanceof Witcher
 								&& e.isInRange(e2.x, e2.y,

@@ -1,7 +1,12 @@
+buffed Tank damage
+small Tank can target air
+Heavy-Assault can attack air
+nerfed angel damage and costs
+------------------
 added ahnen
 added Leuchte
 added berserker, witcher, 
- warrior, angel
+ warrior, angel, destructor
 --------------------------
 commands via minimap possible
 PhysicsLab can teleport

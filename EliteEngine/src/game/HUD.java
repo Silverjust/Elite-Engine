@@ -37,15 +37,16 @@ public class HUD {
 
 	public static void setup() {
 		setupG4P();
-		chat=new Chat();
+		chat = new Chat();
 		SelectionDisplay.setup();
 		Minimap.setup();
 		GroupHandler.setup();
 		activesGrid = new ActivesGrid();
-		boolean b = false;
+		boolean b = true;
 		if (b) {
 			sound.loop();
 			sound.play();
+			sound.setGain(-15);
 		}
 	}
 

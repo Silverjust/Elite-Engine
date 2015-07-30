@@ -47,11 +47,11 @@ public class Angel extends Unit implements Attacker, Shooter {
 		ySize = 15;
 		height = 30;
 
-		kerit = 200;
+		kerit = 300;
 		pax = 0;
 		arcanum = 0;
 		prunam = 10;
-		trainTime = 3000;
+		trainTime = 4000;
 
 		hp = hp_max = 200;
 		armor = 1;
@@ -62,9 +62,9 @@ public class Angel extends Unit implements Attacker, Shooter {
 
 		aggroRange = (byte) (radius + 60);
 		basicAttack.range = (byte) (radius + 20);
-		basicAttack.damage = 120;
+		basicAttack.damage = 80;
 		basicAttack.pirce = 1;
-		basicAttack.cooldown = 4000;
+		basicAttack.cooldown = 3000;
 		basicAttack.range = 30;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;

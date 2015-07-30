@@ -40,7 +40,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 		basicAttack.explosion = new Explosion(standingImg, 800);
 
 		setAnimation(walk);
-		
+
 		// ************************************
 		xSize = 40;
 		ySize = 40;
@@ -60,7 +60,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 
 		aggroRange = (byte) (radius + 50);
 		splashrange = 10;
-		basicAttack.damage = 40;
+		basicAttack.damage = 60;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 3000;
 		basicAttack.range = 100;
