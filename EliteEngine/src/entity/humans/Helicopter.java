@@ -44,7 +44,7 @@ public class Helicopter extends Unit implements Attacker, Shooter {
 		kerit = 1000;
 		pax = 0;
 		arcanum = 0;
-		prunam = 100;
+		prunam = 50;
 		trainTime = 1500;
 
 		hp = hp_max = 200;

@@ -56,12 +56,19 @@ public class AhnenInfo extends NationInfo {
 		grid.addActive(5, 3, BuildMineActive.class, Commander.class,
 				getKeritMine(), false);
 
-		grid.addTrainActive(1, 3, AhnenKaserne.class, Berserker.class, false);
-		grid.addTrainActive(2, 3, AhnenKaserne.class, Witcher.class, false);
-		grid.addTrainActive(3, 3, AhnenKaserne.class, Warrior.class, false);
-		grid.addTrainActive(1, 2, AhnenKaserne.class, Angel.class, false);
+		grid.addActive(4, 2, AhnenKaserne.LevelActive.class, false);
 
-		grid.addTrainActive(3, 2, AhnenKaserne.class, Destructor.class, false);
+		grid.addActive(1, 3, AhnenKaserne.AhnenTrainActive.class,
+				AhnenKaserne.class, Berserker.class, false);
+		grid.addActive(2, 3, AhnenKaserne.AhnenTrainActive.class,
+				AhnenKaserne.class, Witcher.class, false);
+		grid.addActive(3, 3, AhnenKaserne.AhnenTrainActive.class,
+				AhnenKaserne.class, Warrior.class, false);
+		grid.addActive(1, 2, AhnenKaserne.AhnenTrainActive.class,
+				AhnenKaserne.class, Angel.class, false);
+
+		grid.addActive(3, 2, AhnenKaserne.AhnenTrainActive.class,
+				AhnenKaserne.class, Destructor.class, false);
 
 	}
 }

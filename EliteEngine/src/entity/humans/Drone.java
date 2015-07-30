@@ -45,7 +45,7 @@ public class Drone extends Unit implements Attacker, Shooter {
 		pax = 0;
 		arcanum = 0;
 		prunam = 15;
-		trainTime = 1500;
+		trainTime = 5000;
 
 		hp = hp_max = 50;
 		armor = 0;

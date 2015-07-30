@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import processing.core.PGraphics;
 import entity.Entity;
 import entity.MainBuilding;
+import game.GameDrawer;
 
 public class Player {
 	public String ip;
@@ -74,6 +75,21 @@ public class Player {
 			break;
 		}
 
+	}
+
+	public boolean canBy(int kerit, int pax, int arcanum, int prunam) {
+		boolean buyable = true;
+		if (!GameDrawer.nocosts) {
+			if (kerit != 0 && kerit > this.kerit)
+				buyable = false;
+			if (pax != 0 && pax > this.pax)
+				buyable = false;
+			if (arcanum != 0 && arcanum > this.arcanum)
+				buyable = false;
+			if (prunam != 0 && prunam > this.prunam)
+				buyable = false;
+		}
+		return buyable;
 	}
 
 }

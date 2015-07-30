@@ -430,21 +430,14 @@ public abstract class Entity implements Informing {
 	}
 
 	public boolean canBeBought(Player player) {
-		boolean buyable = true;
-		if (!GameDrawer.nocosts) {
-			if (kerit != 0 && kerit > player.kerit)
-				buyable = false;
-			if (pax != 0 && pax > player.pax)
-				buyable = false;
-			if (arcanum != 0 && arcanum > player.arcanum)
-				buyable = false;
-			if (prunam != 0 && prunam > player.prunam)
-				buyable = false;
-		}
-		return buyable;
+		return player.canBy(kerit, pax, arcanum, prunam);
 	}
 
 	public void buyFrom(Player p) {
+		buyFrom(p, kerit, pax, arcanum, prunam);
+	}
+
+	public void buyFrom(Player p, int kerit, int pax, int arcanum, int prunam) {
 		ref.updater.send("<give " + p.ip + " " + "kerit" + " -" + kerit);
 		ref.updater.send("<give " + p.ip + " " + "pax" + " -" + pax);
 		ref.updater.send("<give " + p.ip + " " + "arcanum" + " -" + arcanum);

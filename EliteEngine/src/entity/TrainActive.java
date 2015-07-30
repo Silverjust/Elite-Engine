@@ -41,7 +41,6 @@ public class TrainActive extends Active {
 			toTrain.buyFrom(trainer.player);
 			trainer.sendAnimation("train " + unit.getSimpleName());
 		}
-
 	}
 
 	@Override
