@@ -1,10 +1,14 @@
 package game;
 
+import java.awt.font.TextAttribute;
+
 import entity.Entity;
 import entity.Informing;
 import g4p_controls.G4P;
 import g4p_controls.GControlMode;
 import g4p_controls.GCustomSlider;
+import g4p_controls.GLabel;
+import g4p_controls.StyledString;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
@@ -21,6 +25,7 @@ public class SelectionDisplay {
 	static PFont font;
 	private static int col = ref.app.color(100, 255, 100);
 	static Informing informing;
+	static GLabel infoStats;
 
 	public static void setup() {
 		x = 300;
@@ -44,6 +49,9 @@ public class SelectionDisplay {
 		 * selectedEntitiesSlider.addEventHandler(ref.app,
 		 * "custom_slider1_change1");
 		 */
+		// infoStats = new GLabel(ref.app, x + iconSize * 10, y, w, h);
+		// infoStats.setFont(new Font("Aharoni Fett", Font.BOLD, 18));
+		// infoStats.setTextAlign(GAlign.LEFT, GAlign.TOP);
 	}
 
 	public static void update() {
@@ -54,12 +62,15 @@ public class SelectionDisplay {
 		if (informing != null) {
 			graphic.fill(col);
 			informing.drawIcon(graphic, 0, 0, iconSize * 4);
-			String descr = informing.getDesription().replaceAll("§", "\n");
+			String descr = informing.getDesription().replaceAll("§", " \n");
 			graphic.text(descr, iconSize * 5, ref.app.textAscent()
 					* ref.textScale + 10);
-			String stats = informing.getStatistics().replaceAll("§", "\n");
+			String stats = informing.getStatistics().replaceAll("§", " \n");
 			graphic.text(stats, iconSize * 10, ref.app.textAscent()
 					* ref.textScale + 10);
+
+			// StyledString styledStats = style(stats);
+			// infoStats.setStyledText(styledStats);
 		} else {
 			r = PApplet.ceil(ref.updater.selected.size() / c) + 1;
 			if (r - 3 <= 0) {
@@ -90,6 +101,28 @@ public class SelectionDisplay {
 		}
 		graphic.endDraw();
 		ref.app.image(graphic, x, y);
+	}
+
+	@SuppressWarnings("unused")
+	private static StyledString style(String stats) {
+		StyledString styledStats = new StyledString(stats);
+		int i = stats.indexOf("kerit");
+		if (i != -1)
+			styledStats.addAttribute(TextAttribute.FOREGROUND,
+					ref.app.color(50), i, i + 1);
+		i = stats.indexOf("pax");
+		if (i != -1)
+			styledStats.addAttribute(TextAttribute.FOREGROUND,
+					ref.app.color(255, 200, 0), i, i + 1);
+		i = stats.indexOf("arcanum");
+		if (i != -1)
+			styledStats.addAttribute(TextAttribute.FOREGROUND,
+					ref.app.color(0, 100, 255), i, i + 1);
+		i = stats.indexOf("prunam");
+		if (i != -1)
+			styledStats.addAttribute(TextAttribute.FOREGROUND,
+					ref.app.color(255, 100, 0), i, i + 1);
+		return styledStats;
 	}
 
 	public static void setIforming(Informing i) {

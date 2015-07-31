@@ -11,12 +11,14 @@ import shared.ref;
 import entity.Entity;
 
 public class ImageHandler {
+	// TODO dispose with load null
 	static String dataPath;
 	public static ArrayList<PImage> imagesToLoad = new ArrayList<PImage>();
 
 	public static int nImagesToLoad;
 
 	public static ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+	private static boolean dispose = false;
 
 	public static boolean requestAllImages() {
 		try {
@@ -74,6 +76,8 @@ public class ImageHandler {
 
 	public static PImage[][] load(String path, String name, char animation,
 			byte directions, byte iterations) {
+		if (dispose)
+			return null;
 		PImage[][] imageArray = new PImage[directions][iterations];
 		for (int d = 0; d < directions || directions == 0 && d == 0; d++) {
 			for (int i = 0; i < iterations || iterations == 0 && i == 0; i++) {
@@ -94,6 +98,8 @@ public class ImageHandler {
 
 	public static PImage[] load(String path, String name, char animation,
 			byte iterations) {
+		if (dispose)
+			return null;
 		PImage[] imageArray = new PImage[iterations];
 		for (int i = 0; i < iterations || iterations == 0 && i == 0; i++) {
 			nImagesToLoad++;
@@ -110,6 +116,8 @@ public class ImageHandler {
 	}
 
 	public static PImage load(String path, String name, char animation) {
+		if (dispose)
+			return null;
 		PImage image;
 		nImagesToLoad++;
 		String s = dataPath + path + name
@@ -122,6 +130,8 @@ public class ImageHandler {
 	}
 
 	public static PImage load(String path, String name) {
+		if (dispose)
+			return null;
 		PImage image;
 		nImagesToLoad++;
 		String s = dataPath + path + name + ".png";
@@ -157,9 +167,12 @@ public class ImageHandler {
 	}
 
 	public static void dispose() {
-		
+		dispose = true;
+		requestAllImages();
+		dispose = false;
+
 		// for (int i = 0; i < imagesToLoad.size(); i++) { imagesToLoad }
-		 
+
 		imagesToLoad.clear();
 	}
 }

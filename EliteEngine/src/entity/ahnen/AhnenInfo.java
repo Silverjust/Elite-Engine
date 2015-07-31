@@ -66,7 +66,8 @@ public class AhnenInfo extends NationInfo {
 				AhnenKaserne.class, Warrior.class, false);
 		grid.addActive(1, 2, AhnenKaserne.AhnenTrainActive.class,
 				AhnenKaserne.class, Angel.class, false);
-
+		grid.addActive(2, 2, AhnenKaserne.AhnenTrainActive.class,
+				AhnenKaserne.class, Astrator.class, false);
 		grid.addActive(3, 2, AhnenKaserne.AhnenTrainActive.class,
 				AhnenKaserne.class, Destructor.class, false);
 

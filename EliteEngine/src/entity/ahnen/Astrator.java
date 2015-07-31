@@ -1,70 +1,73 @@
-package entity.scientists;
+package entity.ahnen;
 
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
-import entity.Active;
-import entity.Attacker;
 import entity.Entity;
 import entity.Shooter;
 import entity.Unit;
+import entity.ahnen.Leuchte.Upgrade;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.ShootAttack;
 
-public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
+public class Astrator extends Unit implements Shooter, Buffing {
 
 	private static PImage standingImg;
 
 	byte aggroRange;
-	boolean isAnchored;
+
 	ShootAttack basicAttack;
+
+	public byte upgradeRange;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "AirshipGuineaPig");
+		standingImg = game.ImageHandler.load(path, "Astrator");
 	}
 
-	public AirshipGuineaPig(String[] c) {
+	public Astrator(String[] c) {
 		super(c);
-		GuineaPig.setupEquip(this, c);
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
+	//	basicAttack.explosion = new Explosion(selectedImg, 1000);
 
 		setAnimation(walk);
 
 		// ************************************
-		xSize = 20;
-		ySize = 20;
-		height = 25;
+		xSize = 15;
+		ySize = 15;
+		height = 10;
 
-		kerit = 800;
+		kerit = 400;
 		pax = 0;
-		arcanum = 150;
+		arcanum = 50;
 		prunam = 0;
-		trainTime = 1500;
+		trainTime = 3000;
 
-		hp = hp_max = 700;
-		armor = 4;
-		speed = 1.2f;
-		radius = 9;
+		hp = hp_max = 800;// buffed 1000
+		armor = 3;// buffed 5
+		speed = 0.9f;
+		radius = 7;
 		sight = 70;
-		groundPosition = Entity.GroundPosition.AIR;
+		groundPosition = Entity.GroundPosition.GROUND;
 
-		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 50;
+		aggroRange = 110;
+		basicAttack.damage = 20;
 		basicAttack.pirce = 3;
-		basicAttack.cooldown = 5000;
-		basicAttack.range = 120;
+		basicAttack.cooldown = 900;
+		basicAttack.range = 20;
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
 		basicAttack.speed = 1f;
-		basicAttack.targetable = groundPosition;
+
+		upgradeRange = 100;
+
 		descr = " ";
 		stats = " ";
 		// ************************************
@@ -86,8 +89,15 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 								importance = newImportance;
 								importantEntity = e;
 							}
-							if (e.isInRange(x, y, basicAttack.range + e.radius))
-								isEnemyInHitRange = true;
+						}
+						if (e.isInRange(x, y, basicAttack.range + e.radius)
+								&& basicAttack.canTargetable(e)) {
+							isEnemyInHitRange = true;
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
 						}
 					}
 				}
@@ -102,41 +112,40 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
-	public void exec(String[] c) {
-		super.exec(c);
-		if (c[2].equals("anchor")) {
-			isAnchored = true;
-			height = 5;
-			isMoving = false;
-			groundPosition = GroundPosition.GROUND;
-			basicAttack.targetable = groundPosition;
-			setAnimation(stand);
-		} else if (c[2].equals("walk")) {
-			isAnchored = false;
-			height = 25;
-			groundPosition = GroundPosition.AIR;
-			basicAttack.targetable = groundPosition;
+	public void hit(int damage, byte pirce) {
+		boolean isBuffed = false;
+		for (Entity e : ref.updater.entities) {
+			if (e instanceof Leuchte
+					&& ((Leuchte) e).upgrade == Upgrade.BUFF
+					&& isInRange(e.x, e.y, ((Leuchte) e).getBasicAttack().range))
+				isBuffed = true;
 		}
-	}
+		byte armor = this.armor;
+		if (isBuffed) {
+			armor = 5;
+		}
+		if (isMortal()) {// only for nonimmortal objects
+			hp -= damage
+					* (1.0 - ((armor - pirce > 0) ? armor - pirce : 0) * 0.05)
+					* (isBuffed ? 0.75 : 1);
+			/** check if it was lasthit */
+			if (hp <= 0 && hp != Integer.MAX_VALUE) {// marker
+				hp = -32768;
+				onDeath();
+			}
 
-	@Override
-	public void sendDefaultAnimation(Animation oldAnimation) {
-		if (isAnchored) {
-			sendAnimation("anchor");
-		} else {
-			sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
 		}
 	}
 
 	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater.send("<hit " + a.getTarget().number + " " + a.damage + " "
+		Entity target = a.getTarget();
+		ref.updater.send("<hit " + target.number + " " + a.damage + " "
 				+ a.pirce);
-		// SoundHandler.startIngameSound(HUD.hm, x, y);
 	}
 
 	@Override
-	public void renderAir() {
+	public void renderGround() {
 		drawSelected();
 		getAnimation().draw(this, direction, currentFrame);
 		basicAttack.drawAbility(this, direction);
@@ -148,7 +157,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		float x = PApplet.lerp(this.x, target.x, progress);
 		float y = PApplet.lerp(this.y - height, target.y - target.height,
 				progress);
-		ref.app.fill(255, 100, 0);
+		ref.app.fill(50, 0, 255);
 		ref.app.strokeWeight(0);
 		ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
 		ref.app.strokeWeight(1);
@@ -159,24 +168,9 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
-	public static class AnchorActive extends Active {
-		public AnchorActive(int x, int y, char n) {
-			super(x, y, n, standingImg);
-			clazz = AirshipGuineaPig.class;
-		}
-
-		@Override
-		public String getDesription() {
-			return "anchor";
-		}
-
-		@Override
-		public void onActivation() {
-			for (Entity e : ref.updater.selected) {
-				if (e instanceof AirshipGuineaPig) {
-					e.sendAnimation("anchor");
-				}
-			}
-		}
+	@Override
+	public byte getUpgradeRange() {
+		return upgradeRange;
 	}
+
 }

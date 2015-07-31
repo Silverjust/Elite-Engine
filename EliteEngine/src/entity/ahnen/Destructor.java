@@ -21,9 +21,6 @@ public class Destructor extends Unit implements Shooter, Buffing {
 	byte aggroRange;
 
 	ShootAttack basicAttack;
-	static boolean displayBurstArea = false;
-
-	float burstX, burstY;
 
 	public byte upgradeRange;
 
@@ -56,7 +53,7 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		pax = 0;
 		arcanum = 0;
 		prunam = 10;
-		trainTime = 1500;
+		trainTime = 3000;
 
 		hp = hp_max = 100;
 		armor = 3;
@@ -67,8 +64,8 @@ public class Destructor extends Unit implements Shooter, Buffing {
 
 		aggroRange = 110;
 		splashrange = 10;
-		basicAttack.damage = 50;// x2
-		basicAttack.pirce = 3;
+		basicAttack.damage = 35;// buffed *2
+		basicAttack.pirce = 3;// buffed 5
 		basicAttack.cooldown = 1700;
 		basicAttack.range = 40;
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
@@ -120,28 +117,22 @@ public class Destructor extends Unit implements Shooter, Buffing {
 	}
 
 	@Override
-	public void exec(String[] c) {
-		super.exec(c);
-		if (c[2].equals("burst")) {
-		}
-	}
-
-	@Override
 	public void calculateDamage(Attack a) {
-		boolean pirceboost = false;
+		boolean isBuffed = false;
 		for (Entity e : ref.updater.entities) {
 			if (e instanceof Leuchte
 					&& ((Leuchte) e).upgrade == Upgrade.BUFF
 					&& isInRange(e.x, e.y, ((Leuchte) e).getBasicAttack().range))
-				pirceboost = true;
+				isBuffed = true;
 		}
 		Entity target = ((ShootAttack) a).getTarget();
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
 					&& e.isInRange(target.x, target.y, e.radius + splashrange)
 					&& e.groundPosition == GroundPosition.GROUND) {
-				ref.updater.send("<hit " + e.number + " " + a.damage + " "
-						+ (pirceboost ? 5 : a.pirce));
+				ref.updater.send("<hit " + e.number + " "
+						+ (isBuffed ? a.damage * 2 : a.damage) + " "
+						+ (isBuffed ? 5 : a.pirce));
 			}
 		}
 	}

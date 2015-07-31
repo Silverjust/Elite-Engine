@@ -1,3 +1,6 @@
+added Astrator
+buffed Airship speed
+-------------------------------
 AhnenKaserne needs levelups
 buffed Heli costs
 nerfed drone traintime

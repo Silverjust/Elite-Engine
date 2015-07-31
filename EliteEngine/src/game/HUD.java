@@ -44,9 +44,9 @@ public class HUD {
 		activesGrid = new ActivesGrid();
 		boolean b = true;
 		if (b) {
-			sound.loop();
 			sound.play();
 			sound.setGain(-15);
+			sound.loop();
 		}
 	}
 
