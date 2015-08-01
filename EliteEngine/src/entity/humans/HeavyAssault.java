@@ -40,11 +40,11 @@ public class HeavyAssault extends Unit implements Attacker {
 		xSize = 20;
 		ySize = 20;
 
-		kerit = 160;
+		kerit = 200;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		trainTime = 1500;
+		trainTime = 2000;
 
 		hp = hp_max = 120;
 		armor = 2;
@@ -54,7 +54,7 @@ public class HeavyAssault extends Unit implements Attacker {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 13;
+		basicAttack.damage = 11;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 500;
 		basicAttack.range = 30;

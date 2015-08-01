@@ -74,6 +74,15 @@
     "Angel": "entity.ahnen.Angel",   
     "Astrator": "entity.ahnen.Astrator",
     "Destructor": "entity.ahnen.Destructor",
+    
+    "RobotsMainBuilding": "entity.robots.RobotsMainBuilding",
+	"RobotsKaserne": "entity.robots.RobotsKaserne",
+	"RobotsDepot": "entity.robots.RobotsDepot",	
+	"RobotsKeritMine": "entity.robots.RobotsKeritMine",
+    "RobotsPaxDrillTower": "entity.robots.RobotsPaxDrillTower",
+    "RobotsArcanumMine": "entity.robots.RobotsArcanumMine",
+    "RobotsPrunamHarvester": "entity.robots.RobotsPrunamHarvester",
+	
   },
   "maps": {
     "standard": {

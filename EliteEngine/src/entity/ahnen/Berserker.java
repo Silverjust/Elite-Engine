@@ -57,9 +57,9 @@ public class Berserker extends Unit implements Attacker {
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		trainTime = 3000;
+		trainTime = 4000;
 
-		hp = hp_max = 250;
+		hp = hp_max = 230;
 		armor = 1;
 		speed = 0.9f;
 		radius = 7;

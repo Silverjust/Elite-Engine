@@ -6,7 +6,6 @@ import entity.Entity;
 
 public class MeleeAttack extends Attack {
 	protected boolean isSetup;
-	public boolean doRepeat = false;
 
 	public MeleeAttack(PImage[][] IMG, int duration) {
 		super(IMG, duration);
@@ -56,11 +55,6 @@ public class MeleeAttack extends Attack {
 	@Override
 	public boolean isSetup() {
 		return getTarget() != null && isSetup;
-	}
-
-	@Override
-	public boolean doRepeat(Entity e) {
-		return doRepeat;
 	}
 
 }

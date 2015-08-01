@@ -9,6 +9,7 @@ import entity.Attacker;
 import entity.Entity;
 import entity.Shooter;
 import entity.Unit;
+import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
@@ -22,7 +23,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 	boolean isCloaked;
 
 	ShootAttack basicAttack;
-	Animation cloak;
+	Ability cloak;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -38,7 +39,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
-		cloak = new Animation(standingImg, 1000);
+		cloak = new Ability(standingImg, 1000);
 
 		setAnimation(walk);
 
@@ -68,6 +69,9 @@ public class Angel extends Unit implements Attacker, Shooter {
 		basicAttack.range = 30;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
+
+		cloak.cooldown = 40000;
+		cloak.doRepeat = true;
 
 		descr = " ";
 		stats = " ";
@@ -104,6 +108,9 @@ public class Angel extends Unit implements Attacker, Shooter {
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
+		if (isServer && isCloaked && cloak.isNotOnCooldown()) {
+			sendDefaultAnimation(getAnimation());
+		}
 	}
 
 	@Override
@@ -133,6 +140,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 			groundPosition = GroundPosition.GROUND;
 			setAnimation(cloak);
 		} else if (c[2].equals("stand") || c[2].equals("walk")) {
+			System.out.println("Angel.exec()");
 			isCloaked = false;
 			height = 30;
 			radius = 7;
@@ -157,6 +165,13 @@ public class Angel extends Unit implements Attacker, Shooter {
 		ref.app.tint(255);
 		basicAttack.drawAbility(this, direction);
 		drawTaged();
+	}
+
+	@Override
+	public void display() {
+		super.display();
+		if (isCloaked)
+			drawBar(cloak.getCooldownPercent());
 	}
 
 	@Override

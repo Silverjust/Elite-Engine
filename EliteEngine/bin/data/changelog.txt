@@ -1,3 +1,9 @@
+nerfed angle cloak duration
+ to 40sec
+nerfed heavyassault
+nerfed berserkers traintime
+buffed warrior and destructor
+------------------------------
 added Astrator
 buffed Airship speed
 -------------------------------

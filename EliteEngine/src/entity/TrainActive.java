@@ -9,7 +9,7 @@ public class TrainActive extends Active {
 	public Class<? extends Unit> unit;
 	String descr = " ", stats = " ";
 
-	public TrainActive(int x, int y, char n, Unit u,
+	public TrainActive(int x, int y, char n, Unit u, 
 			Class<? extends Entity> trainer) {
 		super(x, y, n, u.iconImg);
 		unit = u.getClass();

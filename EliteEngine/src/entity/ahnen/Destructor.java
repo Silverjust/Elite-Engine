@@ -49,7 +49,7 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		ySize = 15;
 		height = 10;
 
-		kerit = 200;
+		kerit = 250;
 		pax = 0;
 		arcanum = 0;
 		prunam = 10;
@@ -64,9 +64,9 @@ public class Destructor extends Unit implements Shooter, Buffing {
 
 		aggroRange = 110;
 		splashrange = 10;
-		basicAttack.damage = 35;// buffed *2
+		basicAttack.damage = 45;// buffed *2
 		basicAttack.pirce = 3;// buffed 5
-		basicAttack.cooldown = 1700;
+		basicAttack.cooldown = 1500;
 		basicAttack.range = 40;
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
 		basicAttack.speed = 1f;

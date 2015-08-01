@@ -43,9 +43,9 @@ public class Warrior extends Unit implements Attacker {
 		ySize = 15;
 		height = 10;
 
-		kerit = 200;
+		kerit = 250;
 		pax = 0;
-		arcanum = 30;
+		arcanum = 15;
 		prunam = 0;
 		trainTime = 3000;
 

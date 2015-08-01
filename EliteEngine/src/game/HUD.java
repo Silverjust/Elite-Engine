@@ -46,7 +46,7 @@ public class HUD {
 		if (b) {
 			sound.play();
 			sound.setGain(-15);
-			sound.loop();
+			//sound.loop();
 		}
 	}
 

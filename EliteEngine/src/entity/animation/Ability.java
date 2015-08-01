@@ -10,6 +10,8 @@ public class Ability extends Animation {
 	public int cooldown;
 	int cooldownTimer;
 
+	public boolean doRepeat = false;
+
 	public Ability(PImage[][] IMG, int duration) {
 		super(IMG, duration);
 	}
@@ -42,7 +44,7 @@ public class Ability extends Animation {
 	public void updateAbility(Entity e, boolean isServer) {
 		if (isSetup() && isEvent()) {
 			/** do smthing */
-			//startCooldown();
+			// startCooldown();
 		}
 	}
 
@@ -84,6 +86,6 @@ public class Ability extends Animation {
 
 	@Override
 	public boolean doRepeat(Entity e) {
-		return false;
+		return doRepeat;
 	}
 }

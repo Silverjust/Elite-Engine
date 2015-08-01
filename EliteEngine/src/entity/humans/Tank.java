@@ -66,6 +66,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 		basicAttack.range = 100;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
+		basicAttack.targetable=groundPosition;
 
 		descr = "panzer";
 		stats = " ";

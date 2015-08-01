@@ -7,6 +7,7 @@ import entity.aliens.AlienMainBuilding;
 import entity.humans.HumanInfo;
 import entity.humans.HumanMainBuilding;
 import entity.neutral.NeutralInfo;
+import entity.robots.RobotsInfo;
 import entity.scientists.ScientistInfo;
 
 public enum Nation {
@@ -119,8 +120,8 @@ public enum Nation {
 	public static void setNationsToPlayableNations() {
 		for (String key : ref.preGame.player.keySet()) {
 			Nation n = ref.preGame.player.get(key).nation;
-			if (n != Nation.AHNEN && n != Nation.ALIENS && n != Nation.HUMANS
-					&& n != Nation.SCIENTISTS)
+			if (n != Nation.AHNEN && n != Nation.ALIENS && n != Nation.ROBOTS
+					&& n != Nation.HUMANS && n != Nation.SCIENTISTS)
 				ref.preGame.player.get(key).nation = Nation.ALIENS;
 		}
 	}
@@ -136,7 +137,7 @@ public enum Nation {
 			info = new AlienInfo();
 			break;
 		case ROBOTS:
-			// t = RobotsMainBuilding.class;
+			 info=new RobotsInfo();
 			break;
 		case SCIENTISTS:
 			info = new ScientistInfo();
