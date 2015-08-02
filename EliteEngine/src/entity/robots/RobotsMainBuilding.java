@@ -43,7 +43,7 @@ public class RobotsMainBuilding extends MainBuilding implements Commander {
 		hp = hp_max = 1500;
 		radius = RADIUS;
 
-		commandingRange = 250;
+		commandingRange = 100;
 
 		descr = "United Robotss Main Building§when it dies, you loose";
 		stats = " ";

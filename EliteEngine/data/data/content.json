@@ -82,7 +82,13 @@
     "RobotsPaxDrillTower": "entity.robots.RobotsPaxDrillTower",
     "RobotsArcanumMine": "entity.robots.RobotsArcanumMine",
     "RobotsPrunamHarvester": "entity.robots.RobotsPrunamHarvester",
-	
+    "M1N1B0T": "entity.robots.M1N1B0T",
+    "B0T": "entity.robots.B0T",
+    "W4SP": "entity.robots.W4SP",
+    "ANT10N": "entity.robots.ANT10N",
+    "SN41L10N": "entity.robots.SN41L10N",
+    "KR4B1T": "entity.robots.KR4B1T",	
+    "F4CT0RY": "entity.robots.F4CT0RY",	
   },
   "maps": {
     "standard": {

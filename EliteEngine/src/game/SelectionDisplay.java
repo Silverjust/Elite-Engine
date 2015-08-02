@@ -60,8 +60,10 @@ public class SelectionDisplay {
 		if (informing == null && ref.updater.selected.size() == 1)
 			informing = ref.updater.selected.get(0);
 		if (informing != null) {
-			graphic.fill(col);
+			graphic.fill(200);
+			graphic.rect(0, 0, iconSize * 4, iconSize * 4);
 			informing.drawIcon(graphic, 0, 0, iconSize * 4);
+			graphic.fill(col);
 			String descr = informing.getDesription().replaceAll("§", " \n");
 			graphic.text(descr, iconSize * 5, ref.app.textAscent()
 					* ref.textScale + 10);
@@ -88,7 +90,7 @@ public class SelectionDisplay {
 			for (Entity e : ref.updater.selected) {
 				int xe = ref.updater.selected.indexOf(e) % c;
 				int ye = (ref.updater.selected.indexOf(e) - xe) / c;
-				graphic.fill(150);
+				graphic.fill(200);
 				graphic.rect((iconSize + 10) * xe, -yOffset + (iconSize + 10)
 						* ye, iconSize, iconSize);
 				e.drawIcon(graphic, (iconSize + 10) * xe, -yOffset

@@ -144,9 +144,25 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 				}
 			}
 			if (target != null) {
+				if (target.level == 4)
+					return "fully upgraded";
 				return "upgrade to level " + (target.level + 2);
 			}
 			return "upgrade level";
+		}
+
+		@Override
+		public String getStatistics() {
+			AhnenKaserne target = null;
+			for (Entity e : ref.updater.selected) {
+				if (e instanceof AhnenKaserne) {
+					target = (AhnenKaserne) e;
+				}
+			}
+			if (target != null) {
+				return "kerit: " + getCosts(target);
+			}
+			return " ";
 		}
 
 		@Override
@@ -159,10 +175,16 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 				}
 			}
 			if (target != null && target.level < 4
-					&& target.player.canBy(100 + target.level * 20, 0, 0, 0)) {
-				target.buyFrom(target.player, 100 + target.level * 20, 0, 0, 0);
+					&& target.player.canBy(getCosts(target), 0, 0, 0)) {
+				target.buyFrom(target.player, getCosts(target), 0, 0, 0);
 				target.sendAnimation("level " + (target.level + 1));
 			}
+		}
+
+		private int getCosts(AhnenKaserne target) {
+			if (target.level == 4)
+				return 0;
+			return 100 + target.level * 20;
 		}
 	}
 
@@ -178,7 +200,22 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 			for (Entity e : ref.updater.selected) {
 				if (clazz.isAssignableFrom(e.getClass())
 						&& e.getAnimation() == e.stand) {
-					trainer = (AhnenKaserne) e;
+					boolean b = false;
+					AhnenKaserne t = (AhnenKaserne) e;
+					if (t.level >= 0 && unit.equals(Berserker.class))
+						b = true;
+					if (t.level >= 1 && unit.equals(Witcher.class))
+						b = true;
+					if (t.level >= 2 && unit.equals(Warrior.class))
+						b = true;
+					if (t.level >= 3 && unit.equals(Angel.class))
+						b = true;
+					if (t.level >= 4
+							&& (unit.equals(Astrator.class) || unit
+									.equals(Destructor.class)))
+						b = true;
+					if (b)
+						trainer = t;
 				}
 			}
 
@@ -192,21 +229,9 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 
 			if (trainer != null && toTrain != null
 					&& toTrain.canBeBought(trainer.player)) {
-				boolean b = false;
-				if (trainer.level >= 0 && toTrain instanceof Berserker)
-					b = true;
-				if (trainer.level >= 1 && toTrain instanceof Witcher)
-					b = true;
-				if (trainer.level >= 2 && toTrain instanceof Warrior)
-					b = true;
-				if (trainer.level >= 3 && toTrain instanceof Angel)
-					b = true;
-				if (trainer.level >= 4 && toTrain instanceof Buffing)
-					b = true;
-				if (b) {
-					toTrain.buyFrom(trainer.player);
-					trainer.sendAnimation("train " + unit.getSimpleName());
-				}
+				toTrain.buyFrom(trainer.player);
+				trainer.sendAnimation("train " + unit.getSimpleName());
+
 			}
 		}
 	}
