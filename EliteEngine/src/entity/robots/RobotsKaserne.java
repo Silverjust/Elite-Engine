@@ -43,7 +43,7 @@ public class RobotsKaserne extends Building implements  Trainer {
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		build.setBuildTime(5000);
+		build.setBuildTime(4000);
 
 		sight = 50;
 

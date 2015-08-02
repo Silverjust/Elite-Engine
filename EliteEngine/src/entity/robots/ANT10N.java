@@ -38,8 +38,8 @@ public class ANT10N extends Unit implements Attacker {
 		setAnimation(walk);
 
 		// ************************************
-		xSize = 15;
-		ySize = 15;
+		xSize = 30;
+		ySize = 30;
 		height = 5;
 
 		kerit = 300;
@@ -51,7 +51,7 @@ public class ANT10N extends Unit implements Attacker {
 		hp = hp_max = 200;
 		armor = 1;
 		speed = 0.7f;
-		radius = 7;
+		radius = 10;
 		sight = 90;
 		groundPosition = Entity.GroundPosition.GROUND;
 

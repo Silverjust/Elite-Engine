@@ -91,7 +91,8 @@ public abstract class Active implements Informing {
 
 	public void drawIcon(PGraphics graphic, float x, float y, int size) {
 		// TODO gleich wie entity
-		graphic.image(symbol, x, y, size, size);
+		if (symbol != null)
+			graphic.image(symbol, x, y, size, size);
 	}
 
 	@Override

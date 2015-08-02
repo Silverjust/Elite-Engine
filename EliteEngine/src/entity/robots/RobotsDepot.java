@@ -35,11 +35,11 @@ public class RobotsDepot extends Building implements Commander{
 		xSize = 20;
 		ySize = 20;
 
-		kerit = 500;
+		kerit = 300;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		build.setBuildTime(5000);
+		build.setBuildTime(4000);
 
 		sight = 50;
 

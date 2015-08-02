@@ -36,9 +36,9 @@ public class KR4B1T extends Unit implements Attacker {
 		setAnimation(walk);
 
 		// ************************************
-		xSize = 15;
-		ySize = 15;
-		height = 10;
+		xSize = 20;
+		ySize = 20;
+		height = 0;
 
 		kerit = 100;
 		pax = 0;

@@ -257,7 +257,8 @@ public abstract class Entity implements Informing {
 	@Override
 	public void drawIcon(PGraphics graphic, float x, float y, int size) {
 		// TODO mit xsize,ysize verbinden
-		graphic.image(iconImg, x, y, size, size);
+		if (iconImg != null)
+			graphic.image(iconImg, x, y, size, size);
 	}
 
 	@Override

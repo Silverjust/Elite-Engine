@@ -69,7 +69,7 @@ public class F4CT0RY extends Unit implements Shooter {
 		basicAttack.targetable = groundPosition;
 
 		spawnRange = 150;
-		spawn.cooldown = 40000;
+		spawn.cooldown = 6000;
 		spawn.setCastTime(500);
 
 		descr = " ";

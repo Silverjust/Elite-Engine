@@ -44,7 +44,8 @@ public class Ticul extends Unit implements Attacker {
 
 	public Ticul(String[] c) {
 		super(c);
-		iconImg = walkingImg[0][0];
+		if (walkingImg != null)
+			iconImg = walkingImg[0][0];
 
 		stand = new Animation(standingImg, 100);
 		walk = new Animation(walkingImg, 800);

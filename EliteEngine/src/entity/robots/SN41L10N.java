@@ -43,8 +43,8 @@ public class SN41L10N extends Unit implements Shooter {
 		setAnimation(walk);
 
 		// ************************************
-		xSize = 15;
-		ySize = 15;
+		xSize = 30;
+		ySize = 30;
 		height = 5;
 
 		kerit = 700;
@@ -56,7 +56,7 @@ public class SN41L10N extends Unit implements Shooter {
 		hp = hp_max = 700;
 		armor = 3;
 		speed = 0.7f;
-		radius = 7;
+		radius = 8;
 		sight = 90;
 		groundPosition = Entity.GroundPosition.GROUND;
 
@@ -123,7 +123,6 @@ public class SN41L10N extends Unit implements Shooter {
 		if (c[2].equals("anchor")) {
 			isAnchored = true;
 			isMoving = false;
-			height = 0;
 			armor = 5;
 			setAnimation(anchored);// later anchor?
 		} else if (c[2].equals("anchored")) {
@@ -132,7 +131,6 @@ public class SN41L10N extends Unit implements Shooter {
 		} else if (c[2].equals("walk")) {
 			System.out.println("ANT10N.exec()");
 			isAnchored = false;
-			height = 5;
 			armor = 3;
 		}
 	}
