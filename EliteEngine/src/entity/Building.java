@@ -6,7 +6,6 @@ import shared.ref;
 import entity.animation.Build;
 import game.AimHandler;
 import game.AimHandler.Cursor;
-import game.ImageHandler;
 import game.aim.BuildAim;
 import game.aim.CustomAim;
 
@@ -16,9 +15,9 @@ public abstract class Building extends Entity {
 	public Build build;
 
 	public static void loadImages() {
-		String path = path(new Object() {
-		});
-		setTarget = ImageHandler.load(path, "setTarget");
+		//String path = path(new Object() {
+		//});
+		//setTarget = ImageHandler.load(path, "setTarget");
 	}
 
 	public Building(String[] c) {

@@ -2,6 +2,7 @@ package entity.ahnen;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import shared.Nation;
 import shared.Player;
 import shared.ref;
 import entity.Active;
@@ -14,10 +15,13 @@ import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.ShootAttack;
+import game.ImageHandler;
 
 public class Angel extends Unit implements Attacker, Shooter {
 
 	private static PImage standingImg;
+
+	private static PImage cloakSym;
 
 	byte aggroRange;
 	boolean isCloaked;
@@ -29,6 +33,8 @@ public class Angel extends Unit implements Attacker, Shooter {
 		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Angel");
+		cloakSym = ImageHandler.load(Nation.AHNEN.toString() + "/symbols/",
+				"cloak");
 	}
 
 	public Angel(String[] c) {
@@ -171,7 +177,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 	public void display() {
 		super.display();
 		if (isCloaked)
-			drawBar(cloak.getCooldownPercent());
+			drawBar(1-cloak.getCooldownPercent());
 	}
 
 	@Override
@@ -192,7 +198,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 
 	public static class CloakActive extends Active {
 		public CloakActive(int x, int y, char n) {
-			super(x, y, n, standingImg);
+			super(x, y, n, cloakSym);
 			clazz = Angel.class;
 		}
 

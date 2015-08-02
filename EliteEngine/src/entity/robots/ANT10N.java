@@ -1,6 +1,7 @@
 package entity.robots;
 
 import processing.core.PImage;
+import shared.Nation;
 import shared.ref;
 import entity.Active;
 import entity.Attacker;
@@ -10,10 +11,13 @@ import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.MeleeAttack;
+import game.ImageHandler;
 
 public class ANT10N extends Unit implements Attacker {
 
 	private static PImage standingImg;
+
+	private static PImage anchorSym;
 
 	byte aggroRange;
 	boolean isAnchored;
@@ -24,6 +28,8 @@ public class ANT10N extends Unit implements Attacker {
 		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "ANT10N");
+		anchorSym = ImageHandler.load(Nation.ROBOTS.toString() + "/symbols/",
+				"anchor");
 	}
 
 	public ANT10N(String[] c) {
@@ -116,7 +122,8 @@ public class ANT10N extends Unit implements Attacker {
 		for (Entity e : ref.updater.entities) {
 			if (e != null && e.isAllyTo(this)
 					&& e.isInRange(x, y, e.radius + a.range)) {
-				ref.updater.send("<heal " + e.number + " " + basicAttack.damage);
+				ref.updater
+						.send("<heal " + e.number + " " + basicAttack.damage);
 			}
 		}
 	}
@@ -136,7 +143,7 @@ public class ANT10N extends Unit implements Attacker {
 
 	public static class AnchorActive extends Active {
 		public AnchorActive(int x, int y, char n) {
-			super(x, y, n, standingImg);
+			super(x, y, n, anchorSym);
 			clazz = ANT10N.class;
 		}
 

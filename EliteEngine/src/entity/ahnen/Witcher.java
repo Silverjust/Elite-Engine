@@ -31,6 +31,8 @@ public class Witcher extends Unit implements Attacker, Shooter {
 	Explosion burstplosion;
 	static boolean displayBurstArea = false;
 
+	private static PImage burstImg;
+
 	float burstX, burstY;
 
 	public byte upgradeRange;
@@ -39,6 +41,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Witcher");
+		burstImg = game.ImageHandler.load(path, "burst");
 	}
 
 	public Witcher(String[] c) {
@@ -50,7 +53,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
 		burst = new MeleeAttack(standingImg, 300);
-		burstplosion = new Explosion(selectedImg, 1000);
+		burstplosion = new Explosion(burstImg, 1000);
 
 		setAnimation(walk);
 
@@ -213,7 +216,7 @@ public class Witcher extends Unit implements Attacker, Shooter {
 			AimingActive {
 
 		public BurstActive(int x, int y, char n) {
-			super(x, y, n, standingImg);
+			super(x, y, n, burstImg);
 			// cooldown = 60000;
 			clazz = Witcher.class;
 			setAbilityGetter("getBurst");

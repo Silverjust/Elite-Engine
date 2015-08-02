@@ -2,6 +2,7 @@ package entity.robots;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import shared.Nation;
 import shared.ref;
 import entity.Active;
 import entity.Entity;
@@ -11,11 +12,13 @@ import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.ShootAttack;
+import game.ImageHandler;
 
 public class SN41L10N extends Unit implements Shooter {
 
 	private static PImage standingImg;
 	private static PImage anchoredImg;
+	private static PImage anchorSym;
 
 	byte aggroRange;
 	boolean isAnchored;
@@ -28,6 +31,8 @@ public class SN41L10N extends Unit implements Shooter {
 		});
 		standingImg = game.ImageHandler.load(path, "SN41L10N");
 		anchoredImg = game.ImageHandler.load(path, "SN41L10N_c");
+		anchorSym = ImageHandler.load(Nation.ROBOTS.toString() + "/symbols/",
+				"anchor");
 	}
 
 	public SN41L10N(String[] c) {
@@ -168,7 +173,7 @@ public class SN41L10N extends Unit implements Shooter {
 
 	public static class AnchorActive extends Active {
 		public AnchorActive(int x, int y, char n) {
-			super(x, y, n, standingImg);
+			super(x, y, n, anchorSym);
 			clazz = SN41L10N.class;
 		}
 

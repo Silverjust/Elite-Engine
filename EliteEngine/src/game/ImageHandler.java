@@ -8,7 +8,9 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ContentListHandler;
 import shared.ref;
+import entity.Building;
 import entity.Entity;
+import entity.Unit;
 
 public class ImageHandler {
 	// TODO dispose with load null
@@ -31,6 +33,8 @@ public class ImageHandler {
 			 */
 
 			classes.add(Entity.class);
+			classes.add(Unit.class);
+			classes.add(Building.class);
 			classes.add(GameDrawer.class);
 			classes.add(HUD.class);
 			classes.add(AimHandler.class);

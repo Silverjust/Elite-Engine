@@ -2,17 +2,23 @@ package entity;
 
 import processing.core.PApplet;
 import processing.core.PGraphics;
+import processing.core.PImage;
 import shared.Helper;
+import shared.Nation;
 import shared.ref;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import game.AimHandler;
+import game.ImageHandler;
 import game.AimHandler.Cursor;
 import game.HUD;
 import game.aim.CustomAim;
 import game.aim.MoveAim;
 
 public abstract class Unit extends Entity {
+	private static PImage attackSym;
+	private static PImage walkSym;
+	private static PImage stopSym;
 	// TODO Flocking einfügen
 	// FIXME ADD Verhalten der Einheiten
 	// TODO deglich verbessern
@@ -25,6 +31,15 @@ public abstract class Unit extends Entity {
 	public int trainTime;
 
 	public Animation walk;
+
+	public static void loadImages() {
+		attackSym = ImageHandler.load(Nation.NEUTRAL.toString() + "/symbols/",
+				"attack");
+		walkSym = ImageHandler.load(Nation.NEUTRAL.toString() + "/symbols/",
+				"walk");
+		stopSym = ImageHandler.load(Nation.NEUTRAL.toString() + "/symbols/",
+				"stop");
+	}
 
 	public Unit(String[] c) {
 		if (c != null) {
@@ -156,7 +171,7 @@ public abstract class Unit extends Entity {
 	public static class AttackActive extends Active implements AimingActive {
 
 		public AttackActive(int x, int y, char n) {
-			super(x, y, n, null);
+			super(x, y, n, attackSym);
 			clazz = Attacker.class;
 		}
 
@@ -194,7 +209,7 @@ public abstract class Unit extends Entity {
 	public static class WalkActive extends Active {
 
 		public WalkActive(int x, int y, char n) {
-			super(x, y, n, null);
+			super(x, y, n, walkSym);
 			clazz = Unit.class;
 		}
 
@@ -213,7 +228,7 @@ public abstract class Unit extends Entity {
 	public static class StopActive extends Active {
 
 		public StopActive(int x, int y, char n) {
-			super(x, y, n, null);
+			super(x, y, n, stopSym);
 			clazz = Unit.class;
 		}
 
