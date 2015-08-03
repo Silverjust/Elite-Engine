@@ -451,6 +451,12 @@ public abstract class Entity implements Informing {
 		}
 	}
 
+	public void select() {
+		isSelected = true;
+		ref.updater.selected.add(this);
+		ref.updater.selectionChanged = true;
+	}
+
 	protected static String path(Object object) {
 		String pack = object.getClass().getEnclosingClass().getPackage()
 				.getName();

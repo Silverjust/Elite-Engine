@@ -19,6 +19,7 @@ public abstract class Updater {
 	public Player neutral;
 
 	public GameState gameState = GameState.PLAY;
+	public boolean selectionChanged;
 
 	public abstract void update();
 

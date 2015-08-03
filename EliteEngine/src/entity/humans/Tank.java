@@ -66,7 +66,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 		basicAttack.range = 100;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
-		basicAttack.targetable=groundPosition;
+		basicAttack.targetable = groundPosition;
 
 		descr = "panzer";
 		stats = " ";
@@ -119,7 +119,7 @@ public class Tank extends Unit implements Attacker, Shooter {
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
 					&& e.isInRange(target.x, target.y, e.radius + splashrange)
-					&& e.groundPosition == GroundPosition.GROUND) {
+					&& a.canTargetable(e)) {
 				ref.updater.send("<hit " + e.number + " " + a.damage + " "
 						+ a.pirce);
 			}

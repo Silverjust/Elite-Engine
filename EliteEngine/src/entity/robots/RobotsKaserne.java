@@ -29,7 +29,7 @@ public class RobotsKaserne extends Building implements  Trainer {
  
 		iconImg = standImg;
 		stand = new Animation(standImg, 1000);
-		build = new Build(standImg, 5000);
+		build = new Build(standImg, 1000);
 		death = new Death(standImg, 1000);
 		training = new Training(standImg, 100);
 
@@ -39,11 +39,11 @@ public class RobotsKaserne extends Building implements  Trainer {
 		xSize = 30;
 		ySize = 30;
 
-		kerit = 500;
+		kerit = 400;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		build.setBuildTime(4000);
+		build.setBuildTime(3000);
 
 		sight = 50;
 

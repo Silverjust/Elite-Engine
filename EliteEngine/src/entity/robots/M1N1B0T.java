@@ -46,11 +46,11 @@ public class M1N1B0T extends Unit implements Attacker, Shooter {
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		trainTime = 1500;
+		trainTime = 1000;
 
 		hp = hp_max = 30;
 		armor = 1;
-		speed = 0.9f;
+		speed = 1.05f;
 		radius = 4;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
@@ -154,12 +154,12 @@ public class M1N1B0T extends Unit implements Attacker, Shooter {
 					trainer = e;
 			}
 
-			RobotsDepot newUnit = new RobotsDepot(null);
+			Entity newUnit = new RobotsDepot(null);
 			if (trainer != null && newUnit != null
 					&& newUnit.canBeBought(trainer.player)) {
 				newUnit.buyFrom(trainer.player);
 				ref.updater.send("<spawn RobotsDepot " + trainer.player.ip
-						+ " " + trainer.x + " " + trainer.y);
+						+ " " + trainer.x + " " + trainer.y + " select");
 				ref.updater.send("<remove " + trainer.number);
 			}
 		}

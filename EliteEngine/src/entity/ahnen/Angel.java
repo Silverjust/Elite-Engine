@@ -139,18 +139,22 @@ public class Angel extends Unit implements Attacker, Shooter {
 	public void exec(String[] c) {
 		super.exec(c);
 		if (c[2].equals("cloak")) {
-			isCloaked = true;
-			height = 5;
-			radius = 5;
-			isMoving = false;
-			groundPosition = GroundPosition.GROUND;
-			setAnimation(cloak);
+			if (getAnimation() != cloak) {
+				isCloaked = true;
+				height = 5;
+				radius = 5;
+				isMoving = false;
+				groundPosition = GroundPosition.GROUND;
+				cloak.startCooldown();
+				setAnimation(cloak);
+			}
 		} else if (c[2].equals("stand") || c[2].equals("walk")) {
-			System.out.println("Angel.exec()");
-			isCloaked = false;
-			height = 30;
-			radius = 7;
-			groundPosition = GroundPosition.AIR;
+			if (getAnimation() == cloak) {
+				isCloaked = false;
+				height = 30;
+				radius = 7;
+				groundPosition = GroundPosition.AIR;
+			}
 		}
 	}
 
@@ -177,7 +181,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 	public void display() {
 		super.display();
 		if (isCloaked)
-			drawBar(1-cloak.getCooldownPercent());
+			drawBar(1 - cloak.getCooldownPercent());
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import shared.Updater;
 import shared.ref;
 import entity.Entity;
 import entity.EntityHeightComparator;
+import entity.Unit;
 
 public class GameUpdater extends Updater {
 	// FIXME einheiten vibrieren
@@ -37,10 +38,11 @@ public class GameUpdater extends Updater {
 			for (int i = 0; i < toRemove.size(); i++) {
 				if (toRemove.get(i) != null) {
 					int n = toRemove.get(i).number;
-					for (Group g : GroupHandler.groups) {
+					for (Group g : GroupHandler.groups) 
 						g.remove(toRemove.get(i));
-					}
 					namedEntities.remove(n);
+					if (toRemove.get(i).isSelected)
+						selectionChanged = true;
 					selected.remove(toRemove.get(i));
 					entities.remove(toRemove.get(i));
 					toRemove.remove(i);
@@ -50,7 +52,6 @@ public class GameUpdater extends Updater {
 			for (String key : player.keySet()) {
 				player.get(key).visibleEntities.clear();
 				for (Entity e : entities) {
-
 					/*
 					 * if (player.get(key) == ref.player) { selected.remove(e);
 					 * if (e.isSelected) { selected.add(e); } }
@@ -68,6 +69,19 @@ public class GameUpdater extends Updater {
 				e.updateAnimation();
 				e.updateDecisions(GameSettings.singlePlayer);
 				e.updateMovement();
+			}
+			if (selectionChanged) {
+				boolean containsUnits = false;
+				if (GroupHandler.recentGroup != null) {
+					containsUnits = GroupHandler.recentGroup.unitActives;
+				} else {
+					for (Entity entity : selected) {
+						if (entity instanceof Unit)
+							containsUnits = true;
+					}
+				}
+				HUD.activesGrid.selectionChange(containsUnits);
+				selectionChanged = false;
 			}
 		}
 

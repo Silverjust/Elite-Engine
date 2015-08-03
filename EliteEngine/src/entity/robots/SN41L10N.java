@@ -25,6 +25,7 @@ public class SN41L10N extends Unit implements Shooter {
 
 	ShootAttack basicAttack;
 	private Animation anchored;
+	private byte splashrange;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -66,10 +67,11 @@ public class SN41L10N extends Unit implements Shooter {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = 120;
-		basicAttack.damage = 90;
+		splashrange = 10;
+		basicAttack.damage = 40;
 		basicAttack.pirce = 5;
-		basicAttack.cooldown = 5000;
-		basicAttack.range = 120;
+		basicAttack.cooldown = 2000;
+		basicAttack.range = 40;
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
 		basicAttack.speed = 1f;
 
@@ -142,9 +144,15 @@ public class SN41L10N extends Unit implements Shooter {
 
 	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
-				+ a.damage + " " + a.pirce);
-		// SoundHandler.startIngameSound(HUD.hm, x, y);
+		Entity target = ((ShootAttack) a).getTarget();
+		for (Entity e : ref.updater.entities) {
+			if (e != null & e.isEnemyTo(this)
+					&& e.isInRange(target.x, target.y, e.radius + splashrange)
+					&& a.canTargetable(e)) {
+				ref.updater.send("<hit " + e.number + " " + a.damage + " "
+						+ a.pirce);
+			}
+		}
 	}
 
 	@Override

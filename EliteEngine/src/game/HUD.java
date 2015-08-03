@@ -45,7 +45,7 @@ public class HUD {
 		boolean b = true;
 		if (b) {
 			sound.play();
-			sound.setGain(-15);
+			sound.setGain(-25);
 			//sound.loop();
 		}
 	}

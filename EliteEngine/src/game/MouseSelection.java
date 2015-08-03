@@ -1,7 +1,6 @@
 package game;
 
 import entity.Entity;
-import entity.Unit;
 import processing.core.PApplet;
 import shared.Helper;
 import shared.Nation;
@@ -14,7 +13,6 @@ public class MouseSelection {
 	public MouseSelection(float X1, float Y1) {
 		x1 = Helper.gridToX(X1);
 		y1 = Helper.gridToY(Y1);
-		// System.out.println("mouseselection");
 	}
 
 	public void disp() {
@@ -28,41 +26,27 @@ public class MouseSelection {
 	public void endSelection(float X2, float Y2) {
 		x2 = Helper.gridToX(X2);
 		y2 = Helper.gridToY(Y2);
-		boolean containsUnits = false;
+		
 		if (!((GameUpdater) ref.updater).input.shiftMode) {
 			for (Entity e : ref.updater.entities) {
 				e.isSelected = false;
 			}
 			ref.updater.selected.clear();
-		} else {
-			for (Entity e : ref.updater.selected) {
-				if (e instanceof Unit)
-					containsUnits = true;
-			}
+			ref.updater.selectionChanged = true;
 		}
 
-		for (Entity e : ref.updater.entities) {
+		for (Entity e : ref.updater.entities)
 			if (GameDrawer.godhand || e.isAllyTo(ref.player)) {
-				if (shared.Helper.isBetween(e.x, e.y, x1, y1, x2, y2)) {
-					e.isSelected = true;
-					ref.updater.selected.add(e);
-					if (e instanceof Unit)
-						containsUnits = true;
-				}
+				if (shared.Helper.isBetween(e.x, e.y, x1, y1, x2, y2))
+					e.select();
 				if (PApplet.dist(x1, y1, e.x, e.y - e.flyHeight()) <= e.radius) {
-					e.isSelected = true;
-					ref.updater.selected.add(e);
-					if (e instanceof Unit)
-						containsUnits = true;
+					e.select();
 					if (e.player.nation != HUD.activesGrid.nation
-							&& e.player.nation != Nation.NEUTRAL) {
+							&& e.player.nation != Nation.NEUTRAL)
 						// for commanding other nations
 						HUD.activesGrid.setup(e.player.nation);
-					}
 				}
 			}
-		}
-		HUD.activesGrid.selectionChange(containsUnits);
 		GroupHandler.recentGroup = null;
 	}
 
@@ -71,25 +55,15 @@ public class MouseSelection {
 		int y = (int) Helper.gridToY(Y);
 		Class<? extends Entity> type = null;
 		for (Entity e : ref.updater.entities) {
-			if (GameDrawer.godhand || e.isAllyTo(ref.player)) {
-				if (PApplet.dist(x, y, e.x, e.y - e.flyHeight()) <= e.radius) {
+			if (GameDrawer.godhand || e.isAllyTo(ref.player))
+				if (PApplet.dist(x, y, e.x, e.y - e.flyHeight()) <= e.radius)
 					type = e.getClass();
-				}
-			}
 		}
 		if (type != null) {
-			boolean containsUnits = false;
-			for (Entity e : ref.updater.entities) {
-				if (GameDrawer.godhand || e.isAllyTo(ref.player)) {
-					if (e.getClass().equals(type)) {
-						e.isSelected = true;
-						ref.updater.selected.add(e);
-						if (e instanceof Unit)
-							containsUnits = true;
-					}
-				}
-			}
-			HUD.activesGrid.selectionChange(containsUnits);
+			for (Entity e : ref.updater.entities)
+				if (GameDrawer.godhand || e.isAllyTo(ref.player))
+					if (e.getClass().equals(type))
+						e.select();
 			GroupHandler.recentGroup = null;
 		}
 	}
