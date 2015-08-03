@@ -21,6 +21,8 @@ public class Arol extends Unit implements Attacker {
 	MeleeAttack basicAttack;
 	byte attackDistance;
 
+	private float xDirection, yDirection;
+
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
@@ -109,21 +111,20 @@ public class Arol extends Unit implements Attacker {
 	@Override
 	public void exec(String[] c) {
 		super.exec(c);
-		if (c[2].equals("basicAttack") && basicAttack.isNotOnCooldown()
-				&& !basicAttack.isSetup()) {
-			xTarget = basicAttack.getTarget().x;
-			yTarget = basicAttack.getTarget().y;
+		if (c[2].equals("basicAttack")) {
+			xDirection = basicAttack.getTarget().x;
+			yDirection = basicAttack.getTarget().y;
 		}
 	}
 
 	@Override
 	public void calculateDamage(Attack a) {
 		float x, y;
-		x = (this.x + (xTarget - this.x)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+		x = (this.x + (xDirection - this.x)
+				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));
-		y = (this.y + (yTarget - this.y)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+		y = (this.y + (yDirection - this.y)
+				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
@@ -150,11 +151,11 @@ public class Arol extends Unit implements Attacker {
 					((Unit) this).yTarget / 2);
 		}
 		float x, y;
-		x = (this.x + (xTarget - this.x)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+		x = (this.x + (xDirection - this.x)
+				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));
-		y = (this.y + (yTarget - this.y)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+		y = (this.y + (yDirection - this.y)
+				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));
 		drawCircle(x, y, basicAttack.range);
 		drawCircle(x, y,

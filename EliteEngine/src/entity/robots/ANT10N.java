@@ -118,7 +118,6 @@ public class ANT10N extends Unit implements Attacker, Shooter {
 				}
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
-				System.out.println("ANT10N.updateDecisions()"+basicAttack.isSetup());
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);

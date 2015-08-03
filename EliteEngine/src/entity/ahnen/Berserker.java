@@ -22,6 +22,7 @@ public class Berserker extends Unit implements Attacker {
 	private static PImage standingImg;
 
 	byte aggroRange;
+	private float xDirection, yDirection;
 
 	MeleeAttack basicAttack;
 	Ability buildLeuchte;
@@ -126,10 +127,9 @@ public class Berserker extends Unit implements Attacker {
 		if (c[2].equals("buildLeuchte")) {
 			buildLeuchte.startCooldown();
 			setAnimation(buildLeuchte);
-		} else if (c[2].equals("basicAttack") && basicAttack.isNotOnCooldown()
-				&& !basicAttack.isSetup()) {
-			xTarget = basicAttack.getTarget().x;
-			yTarget = basicAttack.getTarget().y;
+		} else if (c[2].equals("basicAttack")) {
+			xDirection = basicAttack.getTarget().x;
+			yDirection = basicAttack.getTarget().y;
 		}
 
 	}
@@ -137,11 +137,11 @@ public class Berserker extends Unit implements Attacker {
 	@Override
 	public void calculateDamage(Attack a) {
 		float x, y;
-		x = (this.x + (xTarget - this.x)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+		x = (this.x + (xDirection - this.x)
+				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));
-		y = (this.y + (yTarget - this.y)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+		y = (this.y + (yDirection - this.y)
+				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
@@ -179,11 +179,11 @@ public class Berserker extends Unit implements Attacker {
 					((Unit) this).yTarget / 2);
 		}
 		float x, y;
-		x = (this.x + (xTarget - this.x)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+		x = (this.x + (xDirection - this.x)
+				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));
-		y = (this.y + (yTarget - this.y)
-				/ PApplet.dist(this.x, this.y, xTarget, yTarget)
+		y = (this.y + (yDirection - this.y)
+				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));
 		drawCircle(x, y, basicAttack.range);
 		drawCircle(x, y,
