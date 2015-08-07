@@ -32,18 +32,20 @@ public class ImageHandler {
 			 * .getSubTypesOf(ImgLoading.class);
 			 */
 
-			classes.add(Entity.class);
-			classes.add(Unit.class);
-			classes.add(Building.class);
 			classes.add(GameDrawer.class);
 			classes.add(HUD.class);
-			classes.add(AimHandler.class);
 
-			ContentListHandler.getEntityContent().keys();
-			for (Object o : ContentListHandler.getEntityContent().keys()) {
-				String s = ContentListHandler.getEntityContent().getString(
-						(String) o);
-				classes.add(Class.forName(s));
+			if (stateOfLoading() != 1) {
+				classes.add(Entity.class);
+				classes.add(Unit.class);
+				classes.add(Building.class);
+				classes.add(AimHandler.class);
+				ContentListHandler.getEntityContent().keys();
+				for (Object o : ContentListHandler.getEntityContent().keys()) {
+					String s = ContentListHandler.getEntityContent().getString(
+							(String) o);
+					classes.add(Class.forName(s));
+				}
 			}
 
 			// PApplet.printArray(classes);

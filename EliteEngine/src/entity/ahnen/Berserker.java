@@ -131,7 +131,6 @@ public class Berserker extends Unit implements Attacker {
 			xDirection = basicAttack.getTarget().x;
 			yDirection = basicAttack.getTarget().y;
 		}
-
 	}
 
 	@Override

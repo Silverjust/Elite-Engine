@@ -44,9 +44,9 @@ public class Arol extends Unit implements Attacker {
 		xSize = 50;
 		ySize = 35;
 
-		kerit = 700;
+		kerit = 650;
 		pax = 0;
-		arcanum = 130;
+		arcanum = 100;
 		prunam = 0;
 		trainTime = 10000;
 

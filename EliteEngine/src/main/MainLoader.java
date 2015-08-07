@@ -29,7 +29,7 @@ public class MainLoader extends Loader {
 				}
 			break;
 		case IMAGES:
-			float f = game.ImageHandler.stateOfLoading();
+			float f = ImageHandler.stateOfLoading();
 			if (f < 0) {
 				state = State.ERROR;
 			} else if (f < 1) {

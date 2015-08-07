@@ -83,10 +83,10 @@ public class Witcher extends Unit implements Attacker, Shooter {
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
 		basicAttack.speed = 0.5f;
 
-		burst.damage = 30;
+		burst.damage = 25;
 		burst.pirce = 0;
 		burst.cooldown = 20000;
-		burst.range = 60;
+		burst.range = 30;
 		burst.setCastTime(1000);
 
 		upgradeRange = 100;

@@ -41,11 +41,11 @@ public class B0T extends Unit implements Attacker, Shooter {
 		xSize = 15;
 		ySize = 15;
 
-		kerit = 100;
+		kerit = 130;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		trainTime = 1500;
+		trainTime = 2500;
 
 		hp = hp_max = 70;
 		armor = 1;

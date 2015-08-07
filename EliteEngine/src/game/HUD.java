@@ -104,6 +104,7 @@ public class HUD {
 		try {
 			activesGrid.dispose();
 			GroupHandler.dispose();
+		//	ImageHandler.dispose();
 			sound.close();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -20,6 +20,5 @@ public class ContentListHandler {
 	public static JSONObject getModeMaps() {
 		return contentList.getJSONObject("maps").getJSONObject(
 				GameSettings.tutorial ? "tutorial" : "standard");
-
 	}
 }

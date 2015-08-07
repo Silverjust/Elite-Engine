@@ -47,7 +47,7 @@ public class Ker extends Unit implements Shooter {
 		kerit = 335;
 		pax = 0;
 		arcanum = 0;
-		prunam = 100;
+		prunam = 60;
 		trainTime = 10000;
 
 		hp = hp_max = 300;

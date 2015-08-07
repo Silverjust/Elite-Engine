@@ -1,5 +1,6 @@
 package server;
 
+import main.PreGameNormalDisplay;
 import shared.ContentListHandler;
 import shared.Mode;
 import shared.Player;
@@ -15,7 +16,7 @@ public class ServerPreGame extends PreGame {
 		@SuppressWarnings("unchecked")
 		String[] intNames = (String[]) ContentListHandler.getModeMaps().keys()
 				.toArray(new String[i]);
-		map = ContentListHandler.getModeMaps().getString(intNames[0]);
+		map = ContentListHandler.getModeMaps().getString(intNames[PreGameNormalDisplay.startMap]);
 		// PApplet.printArray(intNames);
 		// System.out.println(map);
 	}
