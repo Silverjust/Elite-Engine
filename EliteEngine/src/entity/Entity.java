@@ -155,6 +155,9 @@ public abstract class Entity implements Informing {
 		sendAnimation("death");
 	}
 
+	public void onStart() {
+	}
+
 	public void info() {
 		HUD.chat.println(this.getClass().getSimpleName() + number, "(" + x
 				+ "|" + y + ")" + "\nhp:" + hp);

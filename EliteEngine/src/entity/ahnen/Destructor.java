@@ -8,6 +8,7 @@ import entity.Entity;
 import entity.Shooter;
 import entity.Unit;
 import entity.ahnen.Leuchte.Upgrade;
+import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
@@ -26,6 +27,12 @@ public class Destructor extends Unit implements Shooter, Buffing {
 
 	private byte splashrange;
 
+	private byte spawnRange;
+
+	private RuglingSpawn spawn;
+
+	private int orb;
+
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
@@ -41,9 +48,9 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
 		basicAttack.explosion = new Explosion(selectedImg, 1000);
+		spawn = new RuglingSpawn(standingImg, 400);
 
 		setAnimation(walk);
-
 		// ************************************
 		xSize = 15;
 		ySize = 15;
@@ -71,11 +78,21 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
 		basicAttack.speed = 1f;
 
+		spawnRange = 50;
+		spawn.cooldown = 4000;
+		spawn.setCastTime(500);
+
 		upgradeRange = 100;
 
 		descr = " ";
 		stats = " ";
 		// ************************************
+	}
+
+	@Override
+	public void onStart() {
+		ref.updater.send("<spawn Orb " + player.ip + " " + x + " " + y + " "
+				+ xTarget + " " + yTarget + " " + number);
 	}
 
 	@Override
@@ -104,16 +121,54 @@ public class Destructor extends Unit implements Shooter, Buffing {
 								importantEntity = e;
 							}
 						}
+						if (e.isInRange(x, y, spawnRange + e.radius)) {
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
+
+						}
 					}
 				}
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
+			}
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
+				sendAnimation("basicAttack " + importantEntity.number);
+			} else if (importantEntity != null && spawn.isNotOnCooldown()
+					&& hasNoOrb()) {
+				sendAnimation("spawn " + importantEntity.number);
 			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
+		spawn.updateAbility(this, isServer);
+	}
+
+	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if (c[2].equals("spawn")) {
+			if (hasNoOrb()) {
+				isMoving = false;
+				int n = Integer.parseInt(c[3]);
+				Entity e = ref.updater.namedEntities.get(n);
+				spawn.setTarget(e);
+				setAnimation(spawn);
+			}
+		} else if (c[2].equals("spawned")) {
+			int n = Integer.parseInt(c[3]);
+			orb = n;
+		}
+	}
+
+	private boolean hasNoOrb() {
+		Entity e = ref.updater.namedEntities.get(orb);
+		System.out.println("Destructor.hasOrb()" + (e == null || !e.isAlive()));
+		return e == null || !e.isAlive();
 	}
 
 	@Override
@@ -164,6 +219,42 @@ public class Destructor extends Unit implements Shooter, Buffing {
 	@Override
 	public byte getUpgradeRange() {
 		return upgradeRange;
+	}
+
+	static class RuglingSpawn extends Ability {
+
+		private Entity target;
+
+		public RuglingSpawn(PImage IMG, int duration) {
+			super(IMG, duration);
+		}
+
+		public void setTarget(Entity e) {
+			target = e;
+		}
+
+		@Override
+		public void updateAbility(Entity e, boolean isServer) {
+			if (target != null && isEvent()) {
+				if (isServer) {
+					ref.updater.send("<spawn Orb " + e.player.ip + " " + e.x
+							+ " " + (e.y + e.radius + 8) + " " + target.x + " "
+							+ target.y + " " + e.number);
+					/*
+					 * ref.updater.send("<spawn Rugling " + e.player.ip + " " +
+					 * e.x + " " + (e.y - e.radius - 8) + " " + target.x + " " +
+					 * target.y);
+					 */
+				}
+				target = null;
+				// startCooldown();
+			}
+		}
+
+		@Override
+		public boolean isSetup() {
+			return target != null;
+		}
 	}
 
 	public static class UpgradeActive extends Active {

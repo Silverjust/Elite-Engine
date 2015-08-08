@@ -32,7 +32,7 @@ public class GameUpdater extends Updater {
 				Entity.entityCounter += 1;
 				entities.add(toAdd.get(i));
 				namedEntities.put(Entity.entityCounter, toAdd.get(i));
-				toAdd.get(i).number = Entity.entityCounter;
+				toAdd.get(i).number = Entity.entityCounter;toAdd.get(i).onStart();
 				toAdd.remove(i);
 			}
 			for (int i = 0; i < toRemove.size(); i++) {

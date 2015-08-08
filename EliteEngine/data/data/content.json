@@ -74,6 +74,7 @@
     "Angel": "entity.ahnen.Angel",   
     "Astrator": "entity.ahnen.Astrator",
     "Destructor": "entity.ahnen.Destructor",
+    "Orb": "entity.ahnen.Orb",
     
     "RobotsMainBuilding": "entity.robots.RobotsMainBuilding",
 	"RobotsKaserne": "entity.robots.RobotsKaserne",

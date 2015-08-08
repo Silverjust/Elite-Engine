@@ -1,69 +1,80 @@
-package entity.robots;
+package entity.ahnen;
 
-import processing.core.PApplet;
-import processing.core.PImage;
-import shared.ref;
 import entity.Attacker;
 import entity.Entity;
-import entity.Shooter;
 import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.ShootAttack;
+import entity.animation.MeleeAttack;
+import processing.core.PImage;
+import shared.ref;
 
-public class B0T extends Unit implements Attacker, Shooter {
+public class Orb extends Unit implements Attacker {
 
 	private static PImage standingImg;
 
 	byte aggroRange;
 
-	ShootAttack basicAttack;
+	MeleeAttack basicAttack;
+
+	private int parent;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "B0T");
+		standingImg = game.ImageHandler.load(path, "Orb");
 	}
 
-	public B0T(String[] c) {
+	public Orb(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new ShootAttack(standingImg, 800);
+		basicAttack = new MeleeAttack(standingImg, 800);
 
 		setAnimation(walk);
 
-		// ************************************
-		xSize = 15;
-		ySize = 15;
+		if (c != null && c.length > 7 && c[7] != null) {
+			parent = Integer.parseInt(c[7]);
 
-		kerit = 140;
+		}
+
+		// ************************************
+		xSize = 7;
+		ySize = 7;
+		height = 30;
+
+		kerit = 0;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		trainTime = 2500;
+		trainTime = 1500;
 
-		hp = hp_max = 70;
-		armor = 1;
-		speed = 0.9f;
+		hp = hp_max = 50;
+		speed = 1.2f;
 		radius = 5;
 		sight = 70;
-		groundPosition = Entity.GroundPosition.GROUND;
+		groundPosition = Entity.GroundPosition.AIR;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 30;
-		basicAttack.pirce = 0;
-		basicAttack.cooldown = 1000;
-		basicAttack.range = 40;
-		basicAttack.setCastTime(100);// eventtime is defined by target distance
-		basicAttack.speed = 0.6f;
+		basicAttack.range = 9;
+		basicAttack.damage = 40;
+		basicAttack.cooldown = 2000;
+		basicAttack.setCastTime(500);
 
+		descr = " ";
 		stats = " ";
 		// ************************************
+	}
+
+	@Override
+	public void onStart() {
+		Entity e;
+		e = ref.updater.namedEntities.get(parent);
+		e.sendAnimation("spawned " + number);
 	}
 
 	@Override
@@ -108,26 +119,13 @@ public class B0T extends Unit implements Attacker, Shooter {
 	public void calculateDamage(Attack a) {
 		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
 				+ a.damage + " " + a.pirce);
-		// SoundHandler.startIngameSound(HUD.hm, x, y);
 	}
 
 	@Override
 	public void renderGround() {
 		drawSelected();
 		getAnimation().draw(this, direction, currentFrame);
-		basicAttack.drawAbility(this, direction);
 		drawTaged();
-	}
-
-	@Override
-	public void drawShot(Entity target, float progress) {
-		float x = PApplet.lerp(this.x, target.x, progress);
-		float y = PApplet.lerp(this.y - height, target.y - target.height,
-				progress);
-		ref.app.fill(255, 100, 0);
-		ref.app.strokeWeight(0);
-		ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
-		ref.app.strokeWeight(1);
 	}
 
 	@Override
