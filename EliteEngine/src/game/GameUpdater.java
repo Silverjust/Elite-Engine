@@ -32,13 +32,14 @@ public class GameUpdater extends Updater {
 				Entity.entityCounter += 1;
 				entities.add(toAdd.get(i));
 				namedEntities.put(Entity.entityCounter, toAdd.get(i));
-				toAdd.get(i).number = Entity.entityCounter;toAdd.get(i).onStart();
+				toAdd.get(i).number = Entity.entityCounter;
+				toAdd.get(i).onStart(GameSettings.singlePlayer);
 				toAdd.remove(i);
 			}
 			for (int i = 0; i < toRemove.size(); i++) {
 				if (toRemove.get(i) != null) {
 					int n = toRemove.get(i).number;
-					for (Group g : GroupHandler.groups) 
+					for (Group g : GroupHandler.groups)
 						g.remove(toRemove.get(i));
 					namedEntities.remove(n);
 					if (toRemove.get(i).isSelected)

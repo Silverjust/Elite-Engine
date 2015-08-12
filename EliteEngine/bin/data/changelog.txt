@@ -1,3 +1,6 @@
+changed ThornTower to SpawnTower
+added Shootlings
+----------------------
 B0Ts costs nerfed
 added Orb
 ---------------------

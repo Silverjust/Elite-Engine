@@ -26,6 +26,7 @@ public class ServerUpdater extends Updater {
 				entities.add(toAdd.get(i));
 				namedEntities.put(Entity.entityCounter, toAdd.get(i));
 				toAdd.get(i).number = Entity.entityCounter;
+				toAdd.get(i).onStart(true);
 				toAdd.remove(i);
 			}
 			for (int i = 0; i < toRemove.size(); i++) {

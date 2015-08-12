@@ -1,87 +1,67 @@
-package entity.ahnen;
+package entity.aliens;
 
-import entity.Attacker;
 import entity.Entity;
+import entity.Shooter;
 import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
-import entity.animation.MeleeAttack;
+import entity.animation.ShootAttack;
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 
-public class Orb extends Unit implements Attacker {
+public class Shootling extends Unit implements Shooter {
 
 	private static PImage standingImg;
 
 	byte aggroRange;
 
-	MeleeAttack basicAttack;
+	ShootAttack basicAttack;
 
-	private int parent;
+	private Death splashDeath;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
-		standingImg = game.ImageHandler.load(path, "Orb");
+		standingImg = game.ImageHandler.load(path, "Shootling");
 	}
 
-	public Orb(String[] c) {
+	public Shootling(String[] c) {
 		super(c);
 		iconImg = standingImg;
 
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new MeleeAttack(standingImg, 800);
+		splashDeath = new Death(standingImg, 500);
+		basicAttack = new ShootAttack(standingImg, 800);
 
 		setAnimation(walk);
 
-		if (c != null && c.length > 7 && c[7] != null) {
-			parent = Integer.parseInt(c[7]);
-
-		}
-
 		// ************************************
-		xSize = 7;
-		ySize = 7;
-		height = 30;
+		xSize = 35;
+		ySize = 35;
 
-		kerit = 0;
-		pax = 0;
-		arcanum = 0;
-		prunam = 0;
-		trainTime = 1500;
+		hp = hp_max = 20;
+		speed = 2.2f;
+		radius = 4;
+		sight = 50;
+		groundPosition = Entity.GroundPosition.GROUND;
 
-		hp = hp_max = 50;
-		speed = 1.2f;
-		radius = 5;
-		sight = 70;
-		groundPosition = Entity.GroundPosition.AIR;
-
-		aggroRange = (byte) (radius + 50);
-		basicAttack.range = 9;
-		basicAttack.damage = 40;
-		basicAttack.cooldown = 2000;
+		aggroRange = (byte) (radius + 100);
+		basicAttack.range = (byte) (radius + 7);
+		basicAttack.damage = 10;
+		basicAttack.cooldown = 1500;
 		basicAttack.setCastTime(500);
-
-		descr = " ";
-		stats = " ";
+		basicAttack.speed = 1;
 		// ************************************
-	}
-
-	@Override
-	public void onStart(boolean isServer) {
-		if (isServer) {
-			Entity e;
-			e = ref.updater.namedEntities.get(parent);
-			e.sendAnimation("spawned " + number);
-		}
 	}
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
+
+		if (getAnimation() == walk || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -112,27 +92,57 @@ public class Orb extends Unit implements Attacker {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
+			} else if (importantEntity == null) {
+				sendAnimation("splashDeath");
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
 	}
 
 	@Override
+	public boolean isCollision(Entity e) {
+		boolean b = e.getClass() != Rug.class;
+		return super.isCollision(e) && b;
+	}
+
+	@Override
 	public void calculateDamage(Attack a) {
 		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
 				+ a.damage + " " + a.pirce);
+
+	}
+
+	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if (c[2].equals("splashDeath")) {
+			setAnimation(splashDeath);
+		}
 	}
 
 	@Override
 	public void renderGround() {
+		isSelected = false;
 		drawSelected();
 		getAnimation().draw(this, direction, currentFrame);
+		basicAttack.drawAbility(this, direction);
 		drawTaged();
 	}
 
 	@Override
 	public Attack getBasicAttack() {
 		return basicAttack;
+	}
+
+	@Override
+	public void drawShot(Entity target, float progress) {
+		float x = PApplet.lerp(this.x, target.x, progress);
+		float y = PApplet.lerp(this.y - height, target.y - target.height,
+				progress);
+		ref.app.fill(100, 100, 0);
+		ref.app.strokeWeight(0);
+		ref.app.ellipse(xToGrid(x), yToGrid(y), 3, 3);
+		ref.app.strokeWeight(1);
 	}
 
 }

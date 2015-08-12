@@ -90,9 +90,12 @@ public class Destructor extends Unit implements Shooter, Buffing {
 	}
 
 	@Override
-	public void onStart() {
-		ref.updater.send("<spawn Orb " + player.ip + " " + x + " " + y + " "
-				+ xTarget + " " + yTarget + " " + number);
+	public void onStart(boolean isServer) {
+		if (isServer) {
+			System.out.println("Destructor.onStart()server");
+			ref.updater.send("<spawn Orb " + player.ip + " " + x + " " + y
+					+ " " + xTarget + " " + yTarget + " " + number);
+		}
 	}
 
 	@Override
@@ -167,7 +170,6 @@ public class Destructor extends Unit implements Shooter, Buffing {
 
 	private boolean hasNoOrb() {
 		Entity e = ref.updater.namedEntities.get(orb);
-		System.out.println("Destructor.hasOrb()" + (e == null || !e.isAlive()));
 		return e == null || !e.isAlive();
 	}
 

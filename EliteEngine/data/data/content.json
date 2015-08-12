@@ -10,6 +10,8 @@
     "Ker": "entity.aliens.Ker",
     "AlienMainBuilding": "entity.aliens.AlienMainBuilding",
     "ThornTower": "entity.aliens.ThornTower",
+    "SpawnTower": "entity.aliens.SpawnTower",    
+    "Shootling": "entity.aliens.Shootling",
     "AlienKaserne": "entity.aliens.AlienKaserne",
     "AlienKaserneArcanum": "entity.aliens.AlienKaserneArcanum",
     "AlienKasernePrunam": "entity.aliens.AlienKasernePrunam",
@@ -89,7 +91,7 @@
     "ANT10N": "entity.robots.ANT10N",
     "SN41L10N": "entity.robots.SN41L10N",
     "KR4B1T": "entity.robots.KR4B1T",	
-    "F4CT0RY": "entity.robots.F4CT0RY",	
+    "F4CT0RY": "entity.robots.F4CT0RY"
   },
   "maps": {
     "standard": {
