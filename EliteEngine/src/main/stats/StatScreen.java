@@ -23,6 +23,7 @@ public class StatScreen {
 
 		stats.appendText("name: " + info.getString("name"));
 		stats.appendText(" ");
+		stats.appendText("plays: " + info.getInt("plays"));
 		stats.appendText("wins: " + info.getInt("wins"));
 		stats.appendText("aliens-wins: 		" + info.getInt("aliens-wins"));
 		stats.appendText("ahnen-wins: 		" + info.getInt("ahnen-wins"));

@@ -25,6 +25,9 @@ public class InfoDocHandler {
 			if (!oldInfo.hasKey("name")) {
 				oldInfo.setString("name", "unknown");
 			}
+			if (!oldInfo.hasKey("plays")) {
+				oldInfo.setInt("plays", 0);
+			}
 			if (!oldInfo.hasKey("wins")) {
 				oldInfo.setInt("wins", 0);
 			}
@@ -53,21 +56,34 @@ public class InfoDocHandler {
 		}
 	}
 
-	public static void addWin() {
-		if (ref.updater.gameState == GameState.WON
-				&& !GameSettings.singlePlayer) {
-			int wins = info.getInt("wins");
-			int nationWins = info
-					.getInt(ref.player.nation.toString() + "-wins");
-			wins++;
-			nationWins++;
-			info.setInt("wins", nationWins);
-			info.setInt(ref.player.nation.toString() + "-wins", wins);
-		}
-	}
+	public static void gameEndCalculations(float enemyRate) {
+		if (!GameSettings.singlePlayer || true) {
 
-	static public String getName() {
-		return info.getString("name");
+			float rate = info.getFloat("rate");
+			rate = rate
+					+ (ref.updater.gameState == GameState.WON ? enemyRate
+							/ rate : -rate / enemyRate);
+			System.out.println("InfoDocHandler.gameEndCalculations()"
+					+ (ref.updater.gameState == GameState.WON ? enemyRate
+							/ rate : -rate / enemyRate) + " " + rate);
+			info.setFloat("rate", rate);
+
+			int plays = info.getInt("plays");
+			plays++;
+			info.setInt("plays", plays);
+
+			if (ref.updater.gameState == GameState.WON) {
+				int wins = info.getInt("wins");
+				int nationWins = info.getInt(ref.player.nation.toString()
+						+ "-wins");
+				wins++;
+				nationWins++;
+
+				info.setInt("wins", wins);
+				info.setInt(ref.player.nation.toString() + "-wins", nationWins);
+			}
+		}
+
 	}
 
 	public static void saveName(String name) {
@@ -75,8 +91,20 @@ public class InfoDocHandler {
 		ref.app.saveJSONObject(info, path + "info.json");
 	}
 
+	static public String getName() {
+		return info.getString("name");
+	}
+
+	public static float getRate() {
+		try {
+			return info.getFloat("rate");
+		} catch (Exception e) {
+			return 10;
+		}
+	}
+
 	public static void dispose() {
 		ref.app.saveJSONObject(info, path + "info.json");
-		info = null;
+		// info = null;
 	}
 }

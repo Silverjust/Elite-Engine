@@ -114,11 +114,11 @@ public class MainApp extends PApplet {
 	@Override
 	public void dispose() {// Player in schlieﬂen
 		try {
-			InfoDocHandler.dispose();
 			if (startPage != null)
 				startPage.dispose();
 			if (ref.preGame != null)
 				ref.preGame.dispose();
+			InfoDocHandler.dispose();
 			HUD.dispose();
 			// TODO close all ingame sounds
 			if (ref.minim != null)

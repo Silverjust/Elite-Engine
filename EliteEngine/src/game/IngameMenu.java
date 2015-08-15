@@ -3,6 +3,7 @@ package game;
 import shared.Menu;
 import main.FrameInfo;
 import main.OptionsMenu;
+import main.stats.InfoDocHandler;
 import shared.ref;
 import g4p_controls.G4P;
 import g4p_controls.GButton;
@@ -34,11 +35,12 @@ public class IngameMenu extends Menu {
 	public void handleButtonEvents(GButton button, GEvent event) {
 		if (event == GEvent.CLICKED) {
 			if (button == surrender) {
-				ref.updater.send("<lost " + ref.player.ip);
+				ref.updater.send("<lost " + ref.player.ip + " "
+						+ InfoDocHandler.getRate());
 				dispose();
 			} else if (button == options) {
 				dispose();
-				HUD.menue=new OptionsMenu();
+				HUD.menue = new OptionsMenu();
 			} else if (button == returnToGame) {
 				ref.updater.send("<pause false");
 			}
