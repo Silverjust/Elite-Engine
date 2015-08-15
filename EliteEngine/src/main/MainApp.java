@@ -7,6 +7,7 @@ import game.SettingHandler;
 
 import javax.swing.JFrame;
 
+import main.stats.InfoDocHandler;
 import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -113,6 +114,7 @@ public class MainApp extends PApplet {
 	@Override
 	public void dispose() {// Player in schlieﬂen
 		try {
+			InfoDocHandler.dispose();
 			if (startPage != null)
 				startPage.dispose();
 			if (ref.preGame != null)

@@ -22,7 +22,6 @@ public class Berserker extends Unit implements Attacker {
 	private static PImage standingImg;
 
 	byte aggroRange;
-	private float xDirection, yDirection;
 
 	MeleeAttack basicAttack;
 	Ability buildLeuchte;
@@ -127,15 +126,12 @@ public class Berserker extends Unit implements Attacker {
 		if (c[2].equals("buildLeuchte")) {
 			buildLeuchte.startCooldown();
 			setAnimation(buildLeuchte);
-		} else if (c[2].equals("basicAttack")) {
-			xDirection = basicAttack.getTarget().x;
-			yDirection = basicAttack.getTarget().y;
 		}
 	}
 
 	@Override
 	public void calculateDamage(Attack a) {
-		float x, y;
+		float x, y, xDirection = a.getTarget().x, yDirection = a.getTarget().y;
 		x = (this.x + (xDirection - this.x)
 				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));
@@ -177,7 +173,8 @@ public class Berserker extends Unit implements Attacker {
 			ref.app.line(x, y / 2, ((Unit) this).xTarget,
 					((Unit) this).yTarget / 2);
 		}
-		float x, y;
+		float x, y, xDirection = basicAttack.getTarget().x, //
+		yDirection = basicAttack.getTarget().y;
 		x = (this.x + (xDirection - this.x)
 				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
 				* (attackDistance));

@@ -44,7 +44,7 @@ public class SpawnTower extends Building implements Commander {
 		ySize = 30;
 
 		kerit = 450;
-		pax = 100;
+		pax = 600;
 		arcanum = 0;
 		prunam = 0;
 		build.setBuildTime(10000);
@@ -55,7 +55,7 @@ public class SpawnTower extends Building implements Commander {
 		radius = 15;
 
 		spawnRange = 150;
-		spawn.cooldown = 2000;
+		spawn.cooldown = 1500;
 		spawn.setCastTime(500);
 
 		commandingRange = 250;

@@ -1,8 +1,8 @@
 package main;
 
-import java.util.UUID;
-
 import main.MainPreGame.GameSettings;
+import main.stats.InfoDocHandler;
+import main.stats.StatScreen;
 import shared.Helper;
 import shared.Mode;
 import shared.ref;
@@ -18,12 +18,13 @@ public class StartPage {
 	GTextField playerName, serverIp;
 	GPassword password;
 	GButton multiplayerButton, singleplayerButton, sandboxButton,
-			tutorialButton, localhost, startServer;
+			tutorialButton, statisticsButton, localhost, startServer;
 	GTextArea changes;
 
 	public StartPage() {
+		InfoDocHandler.loadInfoDoc();
 		playerName = new GTextField(ref.app, 300, 300, 300, 20);
-		playerName.setText(UUID.randomUUID().toString().substring(0, 8));
+		playerName.setText(InfoDocHandler.getName());
 		playerName.setPromptText("your name");
 		playerName.addEventHandler(this, "handleNameEvents");
 
@@ -52,6 +53,10 @@ public class StartPage {
 		tutorialButton = new GButton(ref.app, 300, 540, 300, 40);
 		tutorialButton.setText("tutorial");
 		tutorialButton.addEventHandler(this, "handleAcceptEvents");
+
+		statisticsButton = new GButton(ref.app, 300, 590, 300, 40);
+		statisticsButton.setText("statistics");
+		statisticsButton.addEventHandler(this, "handleAcceptEvents");
 
 		changes = new GTextArea(ref.app, 800, 100, 600, 700,
 				G4P.SCROLLBARS_VERTICAL_ONLY | G4P.SCROLLBARS_AUTOHIDE);
@@ -93,6 +98,9 @@ public class StartPage {
 			} else if (button == tutorialButton) {
 				GameSettings.singlePlayer = true;
 				GameSettings.tutorial = true;
+			} else if (button == statisticsButton) {
+				StatScreen.setup();
+				return;
 			}
 			System.out.println(GameSettings.singlePlayer);
 
@@ -115,6 +123,7 @@ public class StartPage {
 
 	void dispose() {
 		try {
+			InfoDocHandler.saveName(Helper.secureInput(playerName.getText()));
 			playerName.dispose();
 			password.dispose();
 			serverIp.dispose();
@@ -123,6 +132,7 @@ public class StartPage {
 			singleplayerButton.dispose();
 			sandboxButton.dispose();
 			tutorialButton.dispose();
+			statisticsButton.dispose();
 			changes.dispose();
 			startServer.dispose();
 		} catch (Exception e) {
@@ -147,7 +157,6 @@ public class StartPage {
 
 	public void setActive(boolean b) {
 		try {
-
 			playerName.setEnabled(b);
 			password.setEnabled(b);
 			serverIp.setEnabled(b);
@@ -156,6 +165,7 @@ public class StartPage {
 			singleplayerButton.setEnabled(b);
 			sandboxButton.setEnabled(b);
 			tutorialButton.setEnabled(b);
+			statisticsButton.setEnabled(b);
 			changes.setEnabled(b);
 			startServer.setEnabled(b);
 		} catch (Exception e) {

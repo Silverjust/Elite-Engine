@@ -2,8 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="data"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/JohannesHinze/Documents/Strategiespiel/Code/libraries/tritonus_share.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JohannesHinze/Documents/Strategiespiel/Code/libraries/tritonus_aos.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JohannesHinze/Documents/Strategiespiel/Code/libraries/serial.jar"/>
@@ -30,5 +28,6 @@
 	<classpathentry kind="lib" path="C:/Users/JohannesHinze/Documents/Strategiespiel/Code/libraries/gluegen-rt.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JohannesHinze/Documents/Strategiespiel/Code/libraries/G4P.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JohannesHinze/Documents/Strategiespiel/Code/libraries/core.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

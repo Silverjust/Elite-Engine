@@ -9,6 +9,7 @@ import main.ClientHandler;
 import main.MainApp;
 import main.MainLoader;
 import main.MainPreGame;
+import main.stats.InfoDocHandler;
 import processing.core.PApplet;
 import server.ServerApp;
 import server.ServerUpdater;
@@ -191,8 +192,11 @@ public class ComHandler {
 				}
 				if (ref.app instanceof ServerApp) {
 					((ServerApp) ref.app).gui.addChatText(p.name + " has lost");
-				}else{
-					HUD.menue=new endGameMenu();
+				} else {
+					HUD.menue = new endGameMenu();
+					if (ref.updater.gameState == GameState.WON) {
+						InfoDocHandler.addWin();
+					}
 				}
 				break;
 			default:

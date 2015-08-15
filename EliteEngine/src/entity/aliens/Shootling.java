@@ -40,11 +40,11 @@ public class Shootling extends Unit implements Shooter {
 		setAnimation(walk);
 
 		// ************************************
-		xSize = 35;
-		ySize = 35;
+		xSize = 30;
+		ySize = 30;
 
-		hp = hp_max = 20;
-		speed = 2.2f;
+		hp = hp_max = 80;
+		speed = 3.2f;
 		radius = 4;
 		sight = 50;
 		groundPosition = Entity.GroundPosition.GROUND;
