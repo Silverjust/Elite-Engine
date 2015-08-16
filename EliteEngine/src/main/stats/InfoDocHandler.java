@@ -58,9 +58,9 @@ public class InfoDocHandler {
 	}
 
 	public static void gameEndCalculations(float enemyRate) {
-		if (newGame && (!GameSettings.singlePlayer || true)) {
+		if (newGame && (!GameSettings.singlePlayer)) {
 			newGame = false;
-			
+
 			float rate = info.getFloat("rate");
 			rate = rate
 					+ (ref.updater.gameState == GameState.WON ? enemyRate

@@ -95,17 +95,17 @@
   },
   "maps": {
     "standard": {
-      	"alpha-Yang-Desert" : "maps/alpha_YangDesert/alpha_YangDesert",
-      	"fernisland": "maps/fernisland/fernisland",
-      	"firstTestMap": "maps/firstTestMap/firstTestMap",
-      	"newMap": "maps/newMap/newMap",
-	  	"4player" : "maps/4player/4player"
+      	"1" : "maps/alpha_YangDesert/alpha_YangDesert",
+      	"2": "maps/fernisland/fernisland",
+      	"3": "maps/firstTestMap/firstTestMap",
+      	"4": "maps/newMap/newMap",
+	  	"5" : "maps/4player/4player"
     },
     "tutorial": {
-      "tutorial": "maps/TutorialMap/TutorialMap"
+      "1": "maps/TutorialMap/TutorialMap"
     },
      "campain": {
-      "tutorial": "maps/TutorialMap/TutorialMap"
+      "1": "maps/TutorialMap/TutorialMap"
     }
   }
 }
