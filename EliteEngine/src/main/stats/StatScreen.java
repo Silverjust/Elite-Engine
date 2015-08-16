@@ -25,12 +25,13 @@ public class StatScreen {
 		stats.appendText(" ");
 		stats.appendText("plays: " + info.getInt("plays"));
 		stats.appendText("wins: " + info.getInt("wins"));
+		stats.appendText("ranking: " + info.getFloat("rate"));
+		stats.appendText(" ");
 		stats.appendText("aliens-wins: 		" + info.getInt("aliens-wins"));
 		stats.appendText("ahnen-wins: 		" + info.getInt("ahnen-wins"));
 		stats.appendText("robots-wins: 		" + info.getInt("robots-wins"));
 		stats.appendText("humans-wins: 		" + info.getInt("humans-wins"));
 		stats.appendText("scientists-wins: 	" + info.getInt("scientists-wins"));
-		stats.appendText("rate: " + info.getFloat("rate"));
 	}
 
 	static public void dispose() {

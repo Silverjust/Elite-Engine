@@ -11,9 +11,10 @@ public class InfoDocHandler {
 	static String path = System.getProperty("user.home").replace("\\", "/")
 			+ "/AppData/Roaming/" + nameOfFolder + "/";
 	static JSONObject info;
+	private static boolean newGame = false;
 
 	static public void loadInfoDoc() {
-
+		newGame = true;
 		JSONObject oldInfo;
 		try {
 			oldInfo = ref.app.loadJSONObject(path + "info.json");
@@ -57,8 +58,9 @@ public class InfoDocHandler {
 	}
 
 	public static void gameEndCalculations(float enemyRate) {
-		if (!GameSettings.singlePlayer || true) {
-
+		if (newGame && (!GameSettings.singlePlayer || true)) {
+			newGame = false;
+			
 			float rate = info.getFloat("rate");
 			rate = rate
 					+ (ref.updater.gameState == GameState.WON ? enemyRate
