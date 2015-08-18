@@ -3,11 +3,11 @@ package main;
 import g4p_controls.G4P;
 import game.GameDrawer;
 import game.HUD;
-import game.SettingHandler;
 
 import javax.swing.JFrame;
 
-import main.stats.InfoDocHandler;
+import main.appdata.ProfileHandler;
+import main.appdata.SettingHandler;
 import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -118,7 +118,7 @@ public class MainApp extends PApplet {
 				startPage.dispose();
 			if (ref.preGame != null)
 				ref.preGame.dispose();
-			InfoDocHandler.dispose();
+			ProfileHandler.dispose();
 			HUD.dispose();
 			// TODO close all ingame sounds
 			if (ref.minim != null)

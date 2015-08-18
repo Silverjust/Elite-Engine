@@ -3,6 +3,7 @@ package game;
 import java.lang.reflect.Constructor;
 
 import main.MainPreGame.GameSettings;
+import main.appdata.SettingHandler;
 import entity.Active;
 import entity.BuildActive;
 import entity.BuildWallActive;

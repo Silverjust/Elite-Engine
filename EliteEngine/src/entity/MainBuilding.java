@@ -1,6 +1,6 @@
 package entity;
 
-import main.stats.InfoDocHandler;
+import main.appdata.ProfileHandler;
 import shared.ref;
 
 public abstract class MainBuilding extends Building {
@@ -17,7 +17,7 @@ public abstract class MainBuilding extends Building {
 	@Override
 	protected void onDeath() {
 		super.onDeath();
-		ref.updater.send("<lost " + player.ip + " " + InfoDocHandler.getRate());
+		ref.updater.send("<lost " + player.ip + " " + ProfileHandler.getRate());
 	}
 
 }

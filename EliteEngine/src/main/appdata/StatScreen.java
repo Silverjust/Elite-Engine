@@ -1,4 +1,4 @@
-package main.stats;
+package main.appdata;
 
 import processing.core.PConstants;
 import processing.data.JSONObject;
@@ -17,7 +17,7 @@ public class StatScreen {
 				PConstants.JAVA2D);
 		window.setActionOnClose(G4P.CLOSE_WINDOW);
 
-		JSONObject info = InfoDocHandler.info;
+		JSONObject info = ProfileHandler.profile;
 		stats = new GTextArea(window.papplet, 0, 0, 200, 300);
 		stats.setTextEditEnabled(false);
 

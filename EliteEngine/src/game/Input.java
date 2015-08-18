@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseWheelEvent;
 
 import main.MainApp;
+import main.appdata.SettingHandler;
 import processing.core.PConstants;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;

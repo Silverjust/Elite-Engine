@@ -1,5 +1,6 @@
 package game;
 
+import main.appdata.SettingHandler;
 import shared.ref;
 
 public class GroupHandler {

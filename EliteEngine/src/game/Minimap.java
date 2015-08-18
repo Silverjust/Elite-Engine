@@ -1,6 +1,7 @@
 package game;
 
 import main.FrameInfo;
+import main.appdata.SettingHandler;
 import entity.Entity;
 import processing.core.PApplet;
 import processing.core.PConstants;

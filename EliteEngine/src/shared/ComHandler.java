@@ -9,7 +9,7 @@ import main.ClientHandler;
 import main.MainApp;
 import main.MainLoader;
 import main.MainPreGame;
-import main.stats.InfoDocHandler;
+import main.appdata.ProfileHandler;
 import processing.core.PApplet;
 import server.ServerApp;
 import server.ServerUpdater;
@@ -195,7 +195,7 @@ public class ComHandler {
 				} else {
 					HUD.menue = new endGameMenu();
 					float f = Float.parseFloat(c[2]);
-					InfoDocHandler.gameEndCalculations(f);
+					ProfileHandler.gameEndCalculations(f);
 				}
 				break;
 			default:

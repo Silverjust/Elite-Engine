@@ -1,8 +1,8 @@
 package main;
 
 import main.MainPreGame.GameSettings;
-import main.stats.InfoDocHandler;
-import main.stats.StatScreen;
+import main.appdata.ProfileHandler;
+import main.appdata.StatScreen;
 import shared.Helper;
 import shared.Mode;
 import shared.ref;
@@ -22,9 +22,9 @@ public class StartPage {
 	GTextArea changes;
 
 	public StartPage() {
-		InfoDocHandler.loadInfoDoc();
+		ProfileHandler.loadProfile();
 		playerName = new GTextField(ref.app, 300, 300, 300, 20);
-		playerName.setText(InfoDocHandler.getName());
+		playerName.setText(ProfileHandler.getName());
 		playerName.setPromptText("your name");
 		playerName.addEventHandler(this, "handleNameEvents");
 
@@ -123,7 +123,7 @@ public class StartPage {
 
 	void dispose() {
 		try {
-			InfoDocHandler.saveName(Helper.secureInput(playerName.getText()));
+			ProfileHandler.saveName(Helper.secureInput(playerName.getText()));
 			playerName.dispose();
 			password.dispose();
 			serverIp.dispose();

@@ -173,17 +173,21 @@ public class Berserker extends Unit implements Attacker {
 			ref.app.line(x, y / 2, ((Unit) this).xTarget,
 					((Unit) this).yTarget / 2);
 		}
-		float x, y, xDirection = basicAttack.getTarget().x, //
-		yDirection = basicAttack.getTarget().y;
-		x = (this.x + (xDirection - this.x)
-				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
-				* (attackDistance));
-		y = (this.y + (yDirection - this.y)
-				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
-				* (attackDistance));
-		drawCircle(x, y, basicAttack.range);
-		drawCircle(x, y,
-				(byte) (basicAttack.range * basicAttack.getCooldownPercent()));
+		if (basicAttack.getTarget() != null) {
+
+			float x, y, xDirection = basicAttack.getTarget().x, //
+			yDirection = basicAttack.getTarget().y;
+			x = (this.x + (xDirection - this.x)
+					/ PApplet.dist(this.x, this.y, xDirection, yDirection)
+					* (attackDistance));
+			y = (this.y + (yDirection - this.y)
+					/ PApplet.dist(this.x, this.y, xDirection, yDirection)
+					* (attackDistance));
+			drawCircle(x, y, basicAttack.range);
+			drawCircle(x, y,
+					(byte) (basicAttack.range * basicAttack
+							.getCooldownPercent()));
+		}
 	}
 
 	@Override
