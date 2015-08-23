@@ -1,3 +1,11 @@
+SCIENTISTS REWORK:
+ all units can be built in 
+ the barrack if the 
+ needed Lab is nearby
+
+orbs can only spawn 
+ near a buffed Leuchte
+---------------------
 changed ThornTower to SpawnTower
 added Shootlings
 ----------------------

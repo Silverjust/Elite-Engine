@@ -42,11 +42,11 @@ public class ShootAttack extends MeleeAttack {
 	public void drawAbility(Entity e, byte d) {
 		if (e instanceof Shooter) {
 			if (isSetup() && getProgressPercent() < 1
-					&& start + beginTime <= Updater.Time.getMillis()
-					&& isNotOnCooldown()) {
+			// && start + beginTime <= Updater.Time.getMillis()
+			) {
 				((Shooter) e).drawShot(target, getProgressPercent());
 			}
-			if (explosion != null && getProgressPercent() >= 1 && !isSetup
+			if (explosion != null && getProgressPercent() >= 1 && !isSetup()
 					&& !isExploding) {
 				isExploding = true;
 				explosion.setup(null);

@@ -173,7 +173,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	static void setupEquip(Entity e, String[] c) {
-		if (c != null && c.length >= 7 && c[7] != null && c[7].equals("select")) {
+		if (c != null && c.length > 7 && c[7] != null && c[7].equals("select")) {
 			e.select();
 		}
 	}

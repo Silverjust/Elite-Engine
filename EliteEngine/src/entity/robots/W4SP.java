@@ -69,7 +69,6 @@ public class W4SP extends Unit implements Attacker, Shooter {
 		basicAttack.speed = 0.6f;
 		basicAttack.targetable = GroundPosition.GROUND;
 
-		descr = "panzer";
 		stats = " ";
 		// ************************************
 	}

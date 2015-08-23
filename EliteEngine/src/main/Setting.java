@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.im.InputContext;
+
 import processing.core.PConstants;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
@@ -67,6 +69,7 @@ public class Setting {
 	}
 
 	private void fillEmptySettings(JSONObject o) {
+
 		if (!o.hasKey("mouseCommand"))
 			o.setInt("mouseCommand", mouseCommand = PConstants.RIGHT);
 		if (!o.hasKey("mouseSelect"))
@@ -82,20 +85,20 @@ public class Setting {
 
 		if (!o.hasKey("togglePause"))
 			o.setInt("togglePause", PConstants.ESC);
+
+		String standardGrid = "[  [ \"q\", \"w\", \"e\", \"r\", \"t\", \"y\", \"u\" ],"
+				+ "[ \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\" ], "
+				+ "[ \"z\", \"x\", \"c\", \"v\", \"b\", \"n\", \"m\" ] ]";
+		InputContext context = InputContext.getInstance();
+		if (context.getLocale().toString().equals("de_DE"))
+			standardGrid = "[  [ \"q\", \"w\", \"e\", \"r\", \"t\", \"z\", \"u\" ],"
+					+ "[ \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\" ], "
+					+ "[ \"y\", \"x\", \"c\", \"v\", \"b\", \"n\", \"m\" ] ]";
+
 		if (!o.hasKey("unitsShortcuts"))
-			o.setJSONArray(
-					"unitsShortcuts",
-					JSONArray
-							.parse("[  [ \"q\", \"w\", \"e\", \"r\", \"t\", \"y\", \"u\" ],"
-									+ "[ \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\" ], "
-									+ "[ \"z\", \"x\", \"c\", \"v\", \"b\", \"n\", \"m\" ] ]"));
+			o.setJSONArray("unitsShortcuts", JSONArray.parse(standardGrid));
 		if (!o.hasKey("buildingsShortcuts"))
-			o.setJSONArray(
-					"buildingsShortcuts",
-					JSONArray
-							.parse("[  [ \"q\", \"w\", \"e\", \"r\", \"t\", \"y\", \"u\" ],"
-									+ "[ \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\" ], "
-									+ "[ \"z\", \"x\", \"c\", \"v\", \"b\", \"n\", \"m\" ] ]"));
+			o.setJSONArray("buildingsShortcuts", JSONArray.parse(standardGrid));
 		if (!o.hasKey("hotKeys"))
 			o.setJSONArray(
 					"hotKeys",

@@ -90,15 +90,6 @@ public class Destructor extends Unit implements Shooter, Buffing {
 	}
 
 	@Override
-	public void onStart(boolean isServer) {
-		if (isServer) {
-			System.out.println("Destructor.onStart()server");
-			ref.updater.send("<spawn Orb " + player.ip + " " + x + " " + y
-					+ " " + xTarget + " " + yTarget + " " + number);
-		}
-	}
-
-	@Override
 	public void updateDecisions(boolean isServer) {
 		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
 			boolean isEnemyInHitRange = false;
@@ -141,7 +132,7 @@ public class Destructor extends Unit implements Shooter, Buffing {
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
 			} else if (importantEntity != null && spawn.isNotOnCooldown()
-					&& hasNoOrb()) {
+					&& hasNoOrb() && isBuffed()) {
 				sendAnimation("spawn " + importantEntity.number);
 			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
@@ -149,6 +140,17 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		}
 		basicAttack.updateAbility(this, isServer);
 		spawn.updateAbility(this, isServer);
+	}
+
+	private boolean isBuffed() {
+		boolean isBuffed = false;
+		for (Entity e : ref.updater.entities) {
+			if (e instanceof Leuchte
+					&& ((Leuchte) e).upgrade == Upgrade.BUFF
+					&& isInRange(e.x, e.y, ((Leuchte) e).getBasicAttack().range))
+				isBuffed = true;
+		}
+		return isBuffed;
 	}
 
 	@Override
@@ -175,13 +177,7 @@ public class Destructor extends Unit implements Shooter, Buffing {
 
 	@Override
 	public void calculateDamage(Attack a) {
-		boolean isBuffed = false;
-		for (Entity e : ref.updater.entities) {
-			if (e instanceof Leuchte
-					&& ((Leuchte) e).upgrade == Upgrade.BUFF
-					&& isInRange(e.x, e.y, ((Leuchte) e).getBasicAttack().range))
-				isBuffed = true;
-		}
+		boolean isBuffed = isBuffed();
 		Entity target = ((ShootAttack) a).getTarget();
 		for (Entity e : ref.updater.entities) {
 			if (e != null & e.isEnemyTo(this)
