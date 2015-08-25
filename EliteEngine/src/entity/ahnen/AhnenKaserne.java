@@ -69,6 +69,7 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 		if (c[2].equals("level")) {
 			level = (byte) Integer.parseInt(c[3]);
 			stats = "level " + (level + 1);
+			ref.updater.selectionChanged = true;
 			setAnimation(build);
 		} else if (c[2].equals("train")) {
 			boolean b = false;
@@ -168,7 +169,6 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 		@Override
 		public void onActivation() {
 			AhnenKaserne target = null;
-
 			for (Entity e : ref.updater.selected) {
 				if (e instanceof AhnenKaserne && e.getAnimation() == e.stand) {
 					target = (AhnenKaserne) e;
@@ -179,6 +179,17 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 				target.buyFrom(target.player, getCosts(target), 0, 0, 0);
 				target.sendAnimation("level " + (target.level + 1));
 			}
+		}
+
+		@Override
+		public boolean isActivateable() {
+			AhnenKaserne target = null;
+			for (Entity e : ref.updater.selected) {
+				if (e instanceof AhnenKaserne) {
+					target = (AhnenKaserne) e;
+				}
+			}
+			return target != null && target.level < 4;
 		}
 
 		private int getCosts(AhnenKaserne target) {
@@ -233,6 +244,32 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 				trainer.sendAnimation("train " + unit.getSimpleName());
 
 			}
+		}
+
+		@Override
+		public boolean isActivateable() {
+			boolean isActivateable = false;
+			for (Entity e : ref.updater.selected) {
+				if (clazz.isAssignableFrom(e.getClass())) {
+					boolean b = false;
+					AhnenKaserne t = (AhnenKaserne) e;
+					if (t.level >= 0 && unit.equals(Berserker.class))
+						b = true;
+					if (t.level >= 1 && unit.equals(Witcher.class))
+						b = true;
+					if (t.level >= 2 && unit.equals(Warrior.class))
+						b = true;
+					if (t.level >= 3 && unit.equals(Angel.class))
+						b = true;
+					if (t.level >= 4
+							&& (unit.equals(Astrator.class) || unit
+									.equals(Destructor.class)))
+						b = true;
+					if (b)
+						isActivateable = true;
+				}
+			}
+			return isActivateable;
 		}
 	}
 }

@@ -25,6 +25,8 @@ public abstract class Active implements Informing {
 
 	private PImage symbol;
 
+	private boolean isActivateable = true;
+
 	static int w = 50;
 	public static int x;
 	public static int y;
@@ -41,13 +43,29 @@ public abstract class Active implements Informing {
 	}
 
 	public void update() {
-		button.setCooldownState(1 - getCooldownPercent());
+		if (isActivateable) {
+			button.setCooldownState(1 - getCooldownPercent());
+			if (button.isVisible() && !button.isEnabled() && isNotOnCooldown())
+				button.setEnabled(true);
+			else if (button.isVisible() && button.isEnabled()
+					&& !isNotOnCooldown())
+				button.setEnabled(false);
+		} else {
+			if (button.isVisible()/* && button.isEnabled()*/) {
+				button.setEnabled(false);
+				button.setCooldownState(0.999f);
+			}
+		}
+	}
+
+	public void selectionUpdate() {
 		if (button.isVisible() && !button.isEnabled() && isNotOnCooldown()
-				&& isActivateable())
-			button.setEnabled(true);
-		else if (button.isVisible() && button.isEnabled()
-				&& (!isNotOnCooldown() || !isActivateable()))
-		button.setEnabled(true);
+				&& isActivateable()) {
+			isActivateable = true;
+		} else if (button.isVisible() && button.isEnabled()
+				&& (!isNotOnCooldown() || !isActivateable())) {
+			isActivateable = false;
+		}
 	}
 
 	public void handleActiveEvents(GGameButton gamebutton, GEvent event) {

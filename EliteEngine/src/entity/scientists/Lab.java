@@ -1,5 +1,6 @@
 package entity.scientists;
 
+import shared.ref;
 import entity.Entity;
 import entity.Unit;
 
@@ -26,6 +27,11 @@ public abstract class Lab extends Unit {
 		descr = " ";
 		stats = " ";
 		// ************************************
+	}
+
+	@Override
+	public void onStart(boolean isServer) {
+		ref.updater.selectionChanged = true;
 	}
 
 	@Override

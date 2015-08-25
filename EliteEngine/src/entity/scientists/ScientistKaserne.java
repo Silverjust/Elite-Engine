@@ -159,5 +159,23 @@ public class ScientistKaserne extends Building implements Commander, Trainer {
 
 			}
 		}
+
+		@Override
+		public boolean isActivateable() {
+			boolean isActivateable = false;
+			for (Entity e : ref.updater.selected) {
+				if (clazz.isAssignableFrom(e.getClass())) {
+					for (Entity e2 : ref.player.visibleEntities) {
+						if (e2.player == e.player
+								&& e2.getClass().equals(lab)
+								&& e.isInRange(e2.x, e2.y, e.radius
+										+ ((Lab) e2).equipRange)) {
+							isActivateable = true;
+						}
+					}
+				}
+			}
+			return isActivateable;
+		}
 	}
 }

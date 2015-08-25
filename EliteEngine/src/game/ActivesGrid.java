@@ -232,6 +232,7 @@ public class ActivesGrid {
 						if (Helper.listContainsInstanceOf(unitGrid[x][y].clazz,
 								ref.updater.selected)) {
 							unitGrid[x][y].setVisible(true);
+							unitGrid[x][y].selectionUpdate();
 						} else
 							unitGrid[x][y].setVisible(false);
 					if (buildingGrid[x][y] != null)
@@ -247,6 +248,7 @@ public class ActivesGrid {
 						if (Helper.listContainsInstanceOf(
 								buildingGrid[x][y].clazz, ref.updater.selected)) {
 							buildingGrid[x][y].setVisible(true);
+							buildingGrid[x][y].selectionUpdate();
 						} else
 							buildingGrid[x][y].setVisible(false);
 				}
