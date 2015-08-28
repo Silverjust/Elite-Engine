@@ -72,7 +72,8 @@ public class Cell extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
+		if (isServer
+				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {

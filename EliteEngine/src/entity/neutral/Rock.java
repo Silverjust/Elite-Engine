@@ -39,16 +39,8 @@ public class Rock extends Building {
 	}
 
 	@Override
-	public void updateDecisions(boolean isServer) {
-	}
-
-	@Override
 	public void renderGround() {
 		getAnimation().draw(this, (byte) 0, currentFrame);
-	}
-
-	@Override
-	public void updateAnimation() {
 	}
 
 	@Override

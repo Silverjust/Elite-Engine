@@ -60,8 +60,7 @@ public class Shootling extends Unit implements Shooter {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-
-		if (getAnimation() == walk || getAnimation() == stand) {// ****************************************************
+		if (isServer && (getAnimation() == walk || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;

@@ -53,14 +53,13 @@ public class Rugling extends Unit implements Attacker {
 		basicAttack.damage = 10;
 		basicAttack.cooldown = 1500;
 		basicAttack.setCastTime(500);
-		basicAttack.targetable=groundPosition;
+		basicAttack.targetable = groundPosition;
 		// ************************************
 	}
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-
-		if (getAnimation() == walk || getAnimation() == stand) {// ****************************************************
+		if (isServer && (getAnimation() == walk || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;

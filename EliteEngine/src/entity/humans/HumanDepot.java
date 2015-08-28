@@ -56,8 +56,8 @@ public class HumanDepot extends Building implements Commander, Shooter {
 
 		splashrange = 10;
 		basicAttack.range = 70;
-		basicAttack.damage = 13;
-		basicAttack.cooldown = 1500;
+		basicAttack.damage = 15;
+		basicAttack.cooldown = 2000;
 		basicAttack.setCastTime(500);// eventtime is defined by target distance
 		basicAttack.speed = 0.5f;
 
@@ -72,7 +72,7 @@ public class HumanDepot extends Building implements Commander, Shooter {
 	public void updateDecisions(boolean isServer) {
 		float importance = 0;
 		Entity importantEntity = null;
-		if (getAnimation() == stand) {
+		if (isServer && (getAnimation() == stand)) {// ****************************************************
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
 					if (e.isInRange(x, y, basicAttack.range + e.radius)

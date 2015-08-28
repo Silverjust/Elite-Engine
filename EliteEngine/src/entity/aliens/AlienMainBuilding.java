@@ -50,12 +50,6 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 	}
 
 	@Override
-	public void updateDecisions(boolean isServer) {
-		super.updateDecisions(isServer);
-
-	}
-
-	@Override
 	public void renderTerrain() {
 		ref.app.image(groundImg, xToGrid(x), yToGrid(y), commandingRange * 2,
 				commandingRange);

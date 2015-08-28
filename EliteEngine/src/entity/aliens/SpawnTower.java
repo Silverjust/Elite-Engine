@@ -69,7 +69,7 @@ public class SpawnTower extends Building implements Commander {
 	public void updateDecisions(boolean isServer) {
 		float importance = 0;
 		Entity importantEntity = null;
-		if (getAnimation() == stand) {
+		if (isServer && (getAnimation() == stand)) {// ****************************************************
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
 					if (e.isInRange(x, y, spawnRange + e.radius)
@@ -131,6 +131,7 @@ public class SpawnTower extends Building implements Commander {
 	public int commandRange() {
 		return commandingRange;
 	}
+
 	static class RuglingSpawn extends Ability {
 
 		private Entity target;

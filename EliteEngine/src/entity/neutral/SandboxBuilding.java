@@ -37,7 +37,7 @@ public class SandboxBuilding extends Building implements Commander {
 		death = null;
 
 		setAnimation(stand);
-		
+
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -49,17 +49,9 @@ public class SandboxBuilding extends Building implements Commander {
 	}
 
 	@Override
-	public void updateDecisions(boolean isServer) {
-	}
-
-	@Override
 	public void renderGround() {
 		super.renderGround();
 		getAnimation().draw(this, (byte) 0, currentFrame);
-	}
-
-	@Override
-	public void updateAnimation() {
 	}
 
 	@Override
@@ -93,7 +85,7 @@ public class SandboxBuilding extends Building implements Commander {
 
 	}
 
-	public static class DeleteActive extends Active implements AimingActive{
+	public static class DeleteActive extends Active implements AimingActive {
 
 		public DeleteActive(int x, int y, char n) {
 			super(x, y, n, standImg);
@@ -102,7 +94,7 @@ public class SandboxBuilding extends Building implements Commander {
 
 		@Override
 		public void onActivation() {
-			AimHandler.setAim(new CustomAim(this,Cursor.SHOOT));
+			AimHandler.setAim(new CustomAim(this, Cursor.SHOOT));
 		}
 
 		@Override

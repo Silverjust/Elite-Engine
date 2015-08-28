@@ -35,12 +35,6 @@ public abstract class Lab extends Unit {
 	}
 
 	@Override
-	public void updateDecisions(boolean isServer) {
-		if (getAnimation() == walk || getAnimation() == stand) {// ****************************************************
-		}
-	}
-
-	@Override
 	public void renderAir() {
 		drawSelected();
 		getAnimation().draw(this, direction, currentFrame);

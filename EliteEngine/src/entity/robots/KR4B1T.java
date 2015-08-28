@@ -68,7 +68,8 @@ public class KR4B1T extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
+		if (isServer
+				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;

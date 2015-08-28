@@ -10,7 +10,7 @@ public class Prunam extends Building {
 	private static PImage standImg;
 
 	public static void loadImages() {
-		String path = path( new Object() {
+		String path = path(new Object() {
 		});
 		standImg = game.ImageHandler.load(path, "Prunam");
 	}
@@ -20,12 +20,12 @@ public class Prunam extends Building {
 		player = ref.updater.neutral;// neutral
 
 		iconImg = standImg;
-		stand = new Animation(standImg,1000);
+		stand = new Animation(standImg, 1000);
 		build = null;
 		death = null;
 
 		setAnimation(stand);
-		
+
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -35,17 +35,11 @@ public class Prunam extends Building {
 	}
 
 	@Override
-	public void updateDecisions(boolean isServer) {
-	}
-
-	@Override
 	public void renderGround() {
 		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
 
 	@Override
-	public void updateAnimation() {
-	}@Override
 	public PImage preview() {
 		return standImg;
 	}

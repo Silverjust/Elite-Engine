@@ -63,11 +63,6 @@ public class AlienKaserneArcanum extends Building implements Commander, Trainer 
 	}
 
 	@Override
-	public void updateDecisions(boolean isServer) {
-		training.updateAbility(this, isServer);
-	}
-
-	@Override
 	public void exec(String[] c) {
 		super.exec(c);
 		Training.updateExecTraining(c, this);

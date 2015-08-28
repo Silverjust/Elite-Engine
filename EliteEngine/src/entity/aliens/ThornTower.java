@@ -72,7 +72,7 @@ public class ThornTower extends Building implements Shooter, Commander {
 	public void updateDecisions(boolean isServer) {
 		float importance = 0;
 		Entity importantEntity = null;
-		if (getAnimation() == stand) {
+		if (isServer && (getAnimation() == stand)) {// ****************************************************
 			for (Entity e : player.visibleEntities) {
 				if (e.isEnemyTo(this)) {
 					if (e.isInRange(x, y, basicAttack.range + e.radius)

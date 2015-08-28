@@ -38,10 +38,6 @@ public class Pax extends Building {
 	}
 
 	@Override
-	public void updateDecisions(boolean isServer) {
-	}
-
-	@Override
 	public void renderUnder() {
 		getAnimation().draw(this, (byte) 0, currentFrame);
 	}
@@ -50,10 +46,6 @@ public class Pax extends Building {
 	public void drawOnMinimap(PGraphics graphics) {
 		graphics.fill(player.color);
 		graphics.rect(x, y, 15 * 2, 15 * 2);
-	}
-
-	@Override
-	public void updateAnimation() {
 	}
 
 	@Override

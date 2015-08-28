@@ -89,7 +89,8 @@ public class ANT10N extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (!isAnchored
+		if (isServer
+				&& !isAnchored
 				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
@@ -122,7 +123,7 @@ public class ANT10N extends Unit implements Attacker, Shooter {
 			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
-		} else if (isAnchored) {// ****************************************************
+		} else if (isServer && isAnchored) {// ****************************************************
 			if (heal.isNotOnCooldown()) {
 				sendAnimation("heal");
 			}
@@ -184,6 +185,7 @@ public class ANT10N extends Unit implements Attacker, Shooter {
 	public Attack getBasicAttack() {
 		return basicAttack;
 	}
+
 	@Override
 	public void renderRange() {
 		super.renderRange();

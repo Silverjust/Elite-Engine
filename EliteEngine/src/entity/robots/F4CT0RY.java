@@ -80,7 +80,8 @@ public class F4CT0RY extends Unit implements Shooter {
 	@Override
 	public void updateDecisions(boolean isServer) {
 		// isTaged = false;
-		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
+		if (isServer
+				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyTooClose = false;
 			boolean isEnemyInHitRange = false;
 			float importance = 0;

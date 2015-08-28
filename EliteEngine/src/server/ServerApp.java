@@ -49,8 +49,8 @@ public class ServerApp extends PApplet {
 			ref.loader.update();
 			break;
 		case GAME:
-			if (frameCount % 2 == 0)
-				thread("serverUpdate");
+			// if (frameCount % 2 == 0)
+			thread("serverUpdate");
 			break;
 		default:
 			break;
@@ -63,7 +63,7 @@ public class ServerApp extends PApplet {
 	}
 
 	public void disconnectEvent(Client client) {
-		serverHandler.disconnectEvent( client); 
+		serverHandler.disconnectEvent(client);
 	}
 
 	public void serverEvent(Server server, Client someClient) {

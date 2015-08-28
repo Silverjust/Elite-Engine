@@ -10,7 +10,7 @@ public class Kerit extends Building {
 	private static PImage standImg;
 
 	public static void loadImages() {
-		String path = path( new Object() {
+		String path = path(new Object() {
 		});
 		standImg = game.ImageHandler.load(path, "Kerit");
 	}
@@ -25,19 +25,15 @@ public class Kerit extends Building {
 		death = null;
 
 		setAnimation(stand);
-		
+
 		// ************************************
 		xSize = 30;
 		ySize = 30;
-		
+
 		radius = 15;
 
 		descr = "Kerit";
 		// ************************************
-	}
-
-	@Override
-	public void updateDecisions(boolean isServer) {
 	}
 
 	@Override
@@ -46,8 +42,6 @@ public class Kerit extends Building {
 	}
 
 	@Override
-	public void updateAnimation() {
-	}@Override
 	public PImage preview() {
 		return standImg;
 	}

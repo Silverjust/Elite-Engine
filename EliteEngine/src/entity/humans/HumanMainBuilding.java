@@ -1,6 +1,5 @@
 package entity.humans;
 
-import processing.core.PGraphics;
 import processing.core.PImage;
 import entity.Commander;
 import entity.MainBuilding;
@@ -48,25 +47,6 @@ public class HumanMainBuilding extends MainBuilding implements Commander {
 		descr = "United Humans Main Building§when it dies, you loose";
 		stats = " ";
 		// ************************************
-	}
-
-	@Override
-	public void updateDecisions(boolean isServer) {
-		super.updateDecisions(isServer);
-
-	}
-
-	@Override
-	public void renderTerrain() {
-		// ref.app.image(groundImg, xToGrid(x), yToGrid(y), commandingRange * 2,
-		// commandingRange);
-	}
-
-	@Override
-	public void drawOnMinimapUnder(PGraphics graphics) {
-		// graphics.image(HumanMainBuilding.groundImg, x, y, commandingRange *
-		// 2,
-		// commandingRange * 2);
 	}
 
 	@Override

@@ -79,7 +79,8 @@ public class Ker extends Unit implements Shooter {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
+		if (isServer
+				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			boolean isEnemyInShootRange = false;
 			float importance = 0;

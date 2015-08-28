@@ -86,7 +86,8 @@ public class Angel extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (getAnimation() == walk && isAggro || getAnimation() == stand) {// ****************************************************
+		if (isServer
+				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;

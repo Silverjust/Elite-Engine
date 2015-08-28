@@ -40,13 +40,15 @@ public class ServerUpdater extends Updater {
 					// System.out.println("removed " + n);
 				}
 			}
-			if (ref.app.frameCount % 1000 == 0)
+			if (ref.app.frameCount % 1000 == 0) {
+				ref.updater.send("<say SERVER " + "sync");
 				for (Entity e : entities) {
 					if (e instanceof Unit) {
 						ref.updater.send("<tp " + e.number + " " + e.x + " "
 								+ e.y + " false");
 					}
 				}
+			}
 
 			for (String key : player.keySet()) {
 				player.get(key).visibleEntities.clear();
