@@ -149,11 +149,13 @@ public abstract class Unit extends Entity {
 		setAnimation(walk);
 	}
 
-	public void tp(float X, float Y) {
+	public void tp(float X, float Y, boolean changeTarget) {
 		x = X;
 		y = Y;
-		xTarget = X;
-		yTarget = Y;
+		if (changeTarget) {
+			xTarget = X;
+			yTarget = Y;
+		}
 	}
 
 	public void info() {

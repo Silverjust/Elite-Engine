@@ -1,6 +1,7 @@
 package server;
 
 import entity.Entity;
+import entity.Unit;
 import game.Map;
 
 import java.util.ArrayList;
@@ -39,6 +40,14 @@ public class ServerUpdater extends Updater {
 					// System.out.println("removed " + n);
 				}
 			}
+			if (ref.app.frameCount % 1000 == 0)
+				for (Entity e : entities) {
+					if (e instanceof Unit) {
+						ref.updater.send("<tp " + e.number + " " + e.x + " "
+								+ e.y + " false");
+					}
+				}
+
 			for (String key : player.keySet()) {
 				player.get(key).visibleEntities.clear();
 				for (Entity e : entities) {

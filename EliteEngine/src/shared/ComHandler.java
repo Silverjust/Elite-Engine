@@ -74,7 +74,10 @@ public class ComHandler {
 				x = Float.parseFloat(c[2]);
 				y = Float.parseFloat(c[3]);
 				if (e != null) {
-					((Unit) e).tp(x, y);
+					if (c.length > 4)
+						((Unit) e).tp(x, y, Boolean.valueOf(c[4]));
+					else
+						((Unit) e).tp(x, y, true);
 				} else {
 					throw new IllegalArgumentException("no entity found");
 				}
