@@ -10,9 +10,7 @@ import entity.animation.Animation;
 import entity.animation.Attack;
 import game.AimHandler;
 import game.ImageHandler;
-import game.AimHandler.Cursor;
 import game.HUD;
-import game.aim.CustomAim;
 import game.aim.MoveAim;
 
 public abstract class Unit extends Entity {
@@ -168,7 +166,7 @@ public abstract class Unit extends Entity {
 		sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
 	}
 
-	public static class AttackActive extends Active implements AimingActive {
+	public static class AttackActive extends Active  {
 
 		public AttackActive(int x, int y, char n) {
 			super(x, y, n, attackSym);
@@ -177,31 +175,12 @@ public abstract class Unit extends Entity {
 
 		@Override
 		public void onActivation() {
-			AimHandler.setAim(new CustomAim(this, Cursor.SHOOT));
+			AimHandler.setAim(new MoveAim(true));
 		}
 
 		@Override
 		public String getDesription() {
 			return "attack unit or to position";
-		}
-
-		@Override
-		public void execute(float x, float y) {
-			Entity target = null;
-			for (Entity e : ref.updater.entities) {
-				if (PApplet.dist(x, y, e.x, e.y - e.height) <= e.radius)
-					target = e;
-			}
-			for (Entity e : ref.updater.selected) {
-				if (clazz.isAssignableFrom(e.getClass())) {
-					if (target != null) {
-						e.sendAnimation("setTarget " + target.number);
-					} else {
-						e.sendAnimation("walk " + x + " " + y + " true");
-					}
-				}
-			}
-			AimHandler.end();
 		}
 
 	}
@@ -215,7 +194,7 @@ public abstract class Unit extends Entity {
 
 		@Override
 		public void onActivation() {
-			AimHandler.setAim(new MoveAim());
+			AimHandler.setAim(new MoveAim(false));
 		}
 
 		@Override

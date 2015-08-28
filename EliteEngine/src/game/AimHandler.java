@@ -8,17 +8,18 @@ import shared.ref;
 
 public class AimHandler {
 
-	private static PImage buildImg, selectImg, shootImg;
+	private static PImage buildImg, selectImg, shootImg, moveImg;
 	static Aim aim;
 
 	public static void loadImages() {
 		buildImg = ImageHandler.load("", "build");
 		selectImg = ImageHandler.load("", "select");
 		shootImg = ImageHandler.load("", "shoot");
+		moveImg = ImageHandler.load("", "move");
 	}
 
 	public static void setup() {
-		aim = new MoveAim();
+		aim = new MoveAim(true);
 	}
 
 	public static void update() {
@@ -43,13 +44,8 @@ public class AimHandler {
 		if (aim != null) {
 			aim.end();
 		}
-		aim = new MoveAim();
+		aim = new MoveAim(true);
 		setCursor(Cursor.ARROW);
-	}
-
-	@Deprecated
-	public static boolean isAiming() {
-		return aim != null;
 	}
 
 	public static void setCursor(Cursor c) {
@@ -66,13 +62,16 @@ public class AimHandler {
 		case SHOOT:
 			ref.app.cursor(shootImg, 15, 15);
 			break;
+		case MOVE:
+			ref.app.cursor(moveImg, 15, 31);
+			break;
 		default:
 			break;
 		}
 	}
 
 	public enum Cursor {
-		ARROW, BUILD, SHOOT, SELECT
+		ARROW, BUILD, SHOOT, SELECT, MOVE
 	}
 
 	public static Aim getAim() {

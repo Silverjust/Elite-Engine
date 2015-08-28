@@ -14,12 +14,16 @@ public class ProfileHandler implements appdataInfos {
 		newGame = true;
 		JSONObject oldProfile;
 		try {
-			oldProfile = ref.app.loadJSONObject(appdataInfos.path + "info.json");
+			oldProfile = ref.app
+					.loadJSONObject(appdataInfos.path + "info.json");
 		} catch (Exception e) {
-			ref.app.saveJSONObject(new JSONObject(), appdataInfos.path + "info.json");
-			oldProfile = ref.app.loadJSONObject(appdataInfos.path + "info.json");
+			ref.app.saveJSONObject(new JSONObject(), appdataInfos.path
+					+ "info.json");
+			oldProfile = ref.app
+					.loadJSONObject(appdataInfos.path + "info.json");
 		}
 		try {
+			versionUpdate(oldProfile);
 			if (!oldProfile.hasKey("name")) {
 				oldProfile.setString("name", "unknown");
 			}
@@ -45,12 +49,23 @@ public class ProfileHandler implements appdataInfos {
 				oldProfile.setInt("scientists-wins", 0);
 			}
 			if (!oldProfile.hasKey("rate")) {
-				oldProfile.setFloat("rate", 10);
+				oldProfile.setFloat("rate", 1000);
+			}
+			if (!oldProfile.hasKey("version")) {
+				oldProfile.setFloat("version", 1.5f);
 			}
 			profile = oldProfile;
 			ref.app.saveJSONObject(profile, appdataInfos.path + "info.json");
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	private static void versionUpdate(JSONObject oldProfile) {
+		if (oldProfile.hasKey("rate") && !oldProfile.hasKey("version")) {
+			float f = oldProfile.getFloat("rate");
+			oldProfile.setFloat("rate", f + 1000 - 10);
+
 		}
 	}
 
@@ -79,7 +94,8 @@ public class ProfileHandler implements appdataInfos {
 				nationWins++;
 
 				profile.setInt("wins", wins);
-				profile.setInt(ref.player.nation.toString() + "-wins", nationWins);
+				profile.setInt(ref.player.nation.toString() + "-wins",
+						nationWins);
 			}
 		}
 

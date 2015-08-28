@@ -60,7 +60,7 @@ public class MainApp extends PApplet {
 		ref.setMinim(new Minim(this));
 
 		SettingHandler.setup();
-		startPage = new StartPage();
+		startPage = new StartPage();	
 	}
 
 	public void draw() {

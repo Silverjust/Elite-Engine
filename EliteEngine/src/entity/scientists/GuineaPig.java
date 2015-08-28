@@ -46,13 +46,13 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		xSize = 15;
 		ySize = 15;
 
-		kerit = 50;
+		kerit = 130;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
-		trainTime = 1200;
+		trainTime = 2000;
 
-		hp = hp_max = 30;
+		hp = hp_max = 100;
 		armor = 2;
 		speed = 0.9f;
 		radius = 5;
@@ -60,7 +60,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 10;
+		basicAttack.damage = 20;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 1500;
 		basicAttack.range = 40;

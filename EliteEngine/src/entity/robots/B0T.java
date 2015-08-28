@@ -41,7 +41,7 @@ public class B0T extends Unit implements Attacker, Shooter {
 		xSize = 15;
 		ySize = 15;
 
-		kerit = 140;
+		kerit = 170;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
@@ -57,9 +57,9 @@ public class B0T extends Unit implements Attacker, Shooter {
 		aggroRange = (byte) (radius + 50);
 		basicAttack.damage = 30;
 		basicAttack.pirce = 0;
-		basicAttack.cooldown = 1000;
-		basicAttack.range = 40;
-		basicAttack.setCastTime(100);// eventtime is defined by target distance
+		basicAttack.cooldown = 1500;
+		basicAttack.range = 35;
+		basicAttack.setCastTime(500);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
 
 		stats = " ";

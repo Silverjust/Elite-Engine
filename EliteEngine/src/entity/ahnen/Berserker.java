@@ -59,7 +59,7 @@ public class Berserker extends Unit implements Attacker {
 		prunam = 0;
 		trainTime = 4000;
 
-		hp = hp_max = 230;
+		hp = hp_max = 250;
 		armor = 1;
 		speed = 0.9f;
 		radius = 7;
@@ -69,7 +69,7 @@ public class Berserker extends Unit implements Attacker {
 		aggroRange = (byte) (radius + 50);
 		basicAttack.range = 10;
 		basicAttack.damage = 45;
-		basicAttack.cooldown = 2000;
+		basicAttack.cooldown = 1500;
 		basicAttack.setCastTime(100);
 		attackDistance = 10;
 
