@@ -59,7 +59,7 @@ public class SpawnTower extends Building implements Commander {
 		radius = 15;
 
 		spawnRange = 150;
-		spawn.cooldown =2500;
+		spawn.cooldown = 2500;
 		spawn.setCastTime(500);
 
 		commandingRange = 250;
@@ -97,8 +97,8 @@ public class SpawnTower extends Building implements Commander {
 
 	private int getNumberOfSpawnlingsAlive() {
 		int n = 0;
-		for (Entity entity : spawnlings) {
-			if (entity.isAlive())
+		for (Entity e : player.visibleEntities) {
+			if (e instanceof Shootling && e.isAllyTo(this)&&e.isInRange(x, y, spawnRange))
 				n++;
 		}
 		System.out.println("SpawnTower.getNumberOfSpawnlingsAlive()" + n);
