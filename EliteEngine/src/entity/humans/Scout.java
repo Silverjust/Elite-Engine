@@ -41,13 +41,13 @@ public class Scout extends Unit implements Attacker, Shooter {
 		xSize = 20;
 		ySize = 20;
 
-		kerit = 28;
+		kerit = 60;
 		pax = 0;
 		arcanum = 0;
 		prunam = 0;
 		trainTime = 1500;
 
-		hp = hp_max = 30;
+		hp = hp_max = 50;
 		armor = 1;
 		speed = 0.9f;
 		radius = 5;
@@ -55,7 +55,7 @@ public class Scout extends Unit implements Attacker, Shooter {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 10;
+		basicAttack.damage = 15;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 1500;
 		basicAttack.range = 40;

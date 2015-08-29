@@ -1,5 +1,6 @@
 GuineaPig has more quality
 human-depot damage buffed
+nerfed scout costs
 --------------------------
 SCIENTISTS REWORK:
  all units can be built in 
