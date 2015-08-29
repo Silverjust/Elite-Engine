@@ -1,5 +1,7 @@
 package entity.aliens;
 
+import java.util.ArrayList;
+
 import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.ref;
@@ -18,6 +20,8 @@ public class SpawnTower extends Building implements Commander {
 	RuglingSpawn spawn;
 
 	private int spawnRange;
+
+	private ArrayList<Entity> spawnlings = new ArrayList<Entity>();
 
 	private static PImage standImg;
 	private static PImage previewImg;
@@ -55,7 +59,7 @@ public class SpawnTower extends Building implements Commander {
 		radius = 15;
 
 		spawnRange = 150;
-		spawn.cooldown = 1500;
+		spawn.cooldown =2500;
 		spawn.setCastTime(500);
 
 		commandingRange = 250;
@@ -82,12 +86,23 @@ public class SpawnTower extends Building implements Commander {
 					}
 				}
 			}
-			if (importantEntity != null && spawn.isNotOnCooldown()) {
+			if (importantEntity != null && spawn.isNotOnCooldown()
+					&& getNumberOfSpawnlingsAlive() < 4) {
 				sendAnimation("spawn " + importantEntity.number);
 			}
 		}
 		spawn.updateAbility(this, isServer);
 
+	}
+
+	private int getNumberOfSpawnlingsAlive() {
+		int n = 0;
+		for (Entity entity : spawnlings) {
+			if (entity.isAlive())
+				n++;
+		}
+		System.out.println("SpawnTower.getNumberOfSpawnlingsAlive()" + n);
+		return n;
 	}
 
 	@Override
@@ -98,6 +113,10 @@ public class SpawnTower extends Building implements Commander {
 			Entity e = ref.updater.namedEntities.get(n);
 			spawn.setTarget(e);
 			setAnimation(spawn);
+		} else if (c[2].equals("spawned")) {
+			int n = Integer.parseInt(c[3]);
+			Entity e = ref.updater.namedEntities.get(n);
+			spawnlings.add(e);
 		}
 	}
 
@@ -150,7 +169,7 @@ public class SpawnTower extends Building implements Commander {
 				if (isServer) {
 					ref.updater.send("<spawn Shootling " + e.player.ip + " "
 							+ e.x + " " + (e.y + e.radius + 8) + " " + target.x
-							+ " " + target.y);
+							+ " " + target.y + " " + e.number);
 					/*
 					 * ref.updater.send("<spawn Rugling " + e.player.ip + " " +
 					 * e.x + " " + (e.y - e.radius - 8) + " " + target.x + " " +

@@ -1,3 +1,5 @@
+Spawntower can only have 5 shootlings
+--------------------------
 GuineaPig has more quality
 human-depot damage buffed
 nerfed scout costs
