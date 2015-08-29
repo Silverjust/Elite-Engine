@@ -1,4 +1,5 @@
-Spawntower can only have 5 shootlings
+Spawntower can only have 
+ 12 shootlings arround
 --------------------------
 GuineaPig has more quality
 human-depot damage buffed

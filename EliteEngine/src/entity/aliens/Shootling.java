@@ -21,8 +21,6 @@ public class Shootling extends Unit implements Shooter {
 
 	private Death splashDeath;
 
-	private int parent;
-
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
@@ -40,9 +38,6 @@ public class Shootling extends Unit implements Shooter {
 		basicAttack = new ShootAttack(standingImg, 800);
 
 		setAnimation(walk);
-		if (c != null && c.length > 7 && c[7] != null) {
-			parent = Integer.parseInt(c[7]);
-		}
 		// ************************************
 		xSize = 30;
 		ySize = 30;
@@ -60,15 +55,6 @@ public class Shootling extends Unit implements Shooter {
 		basicAttack.setCastTime(500);
 		basicAttack.speed = 1;
 		// ************************************
-	}
-
-	@Override
-	public void onStart(boolean isServer) {
-		if (isServer) {
-			Entity e;
-			e = ref.updater.namedEntities.get(parent);
-			e.sendAnimation("spawned " + number);
-		}
 	}
 
 	@Override

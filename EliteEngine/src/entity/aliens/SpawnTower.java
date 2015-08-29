@@ -1,7 +1,6 @@
 package entity.aliens;
 
-import java.util.ArrayList;
-
+import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
 import shared.ref;
@@ -21,7 +20,7 @@ public class SpawnTower extends Building implements Commander {
 
 	private int spawnRange;
 
-	private ArrayList<Entity> spawnlings = new ArrayList<Entity>();
+	private byte maxShootlings;
 
 	private static PImage standImg;
 	private static PImage previewImg;
@@ -55,17 +54,18 @@ public class SpawnTower extends Building implements Commander {
 
 		sight = 70;
 
-		hp = hp_max = 800;
+		hp = hp_max = 200;
 		radius = 15;
 
 		spawnRange = 150;
-		spawn.cooldown = 2500;
+		maxShootlings = 12;
+		spawn.cooldown = 1800;
 		spawn.setCastTime(500);
 
 		commandingRange = 250;
 
 		descr = " ";
-		stats = " ";
+		stats = "spawns/s: " + 1 + "/" + spawn.cooldown / 1000.0;
 		// ************************************
 	}
 
@@ -87,7 +87,7 @@ public class SpawnTower extends Building implements Commander {
 				}
 			}
 			if (importantEntity != null && spawn.isNotOnCooldown()
-					&& getNumberOfSpawnlingsAlive() < 4) {
+					&& getShootlingsInRange() < maxShootlings) {
 				sendAnimation("spawn " + importantEntity.number);
 			}
 		}
@@ -95,13 +95,13 @@ public class SpawnTower extends Building implements Commander {
 
 	}
 
-	private int getNumberOfSpawnlingsAlive() {
+	private int getShootlingsInRange() {
 		int n = 0;
 		for (Entity e : player.visibleEntities) {
-			if (e instanceof Shootling && e.isAllyTo(this)&&e.isInRange(x, y, spawnRange))
+			if (e instanceof Shootling && e.isAllyTo(this)
+					&& e.isInRange(x, y, spawnRange))
 				n++;
 		}
-		System.out.println("SpawnTower.getNumberOfSpawnlingsAlive()" + n);
 		return n;
 	}
 
@@ -113,10 +113,6 @@ public class SpawnTower extends Building implements Commander {
 			Entity e = ref.updater.namedEntities.get(n);
 			spawn.setTarget(e);
 			setAnimation(spawn);
-		} else if (c[2].equals("spawned")) {
-			int n = Integer.parseInt(c[3]);
-			Entity e = ref.updater.namedEntities.get(n);
-			spawnlings.add(e);
 		}
 	}
 
@@ -131,9 +127,12 @@ public class SpawnTower extends Building implements Commander {
 		graphics.image(AlienMainBuilding.groundImg, x, y, commandingRange * 2,
 				commandingRange * 2);
 	}
-
 	@Override
-	public void renderUnder() {
+	public void renderUnder() {}//dont display buildrange
+	@Override
+	public void renderRange() {
+		drawCircle(spawnRange);
+		drawCircle((int) (spawnRange * spawn.getCooldownPercent()));
 	}
 
 	@Override
@@ -167,9 +166,20 @@ public class SpawnTower extends Building implements Commander {
 		public void updateAbility(Entity e, boolean isServer) {
 			if (target != null && isEvent()) {
 				if (isServer) {
-					ref.updater.send("<spawn Shootling " + e.player.ip + " "
-							+ e.x + " " + (e.y + e.radius + 8) + " " + target.x
-							+ " " + target.y + " " + e.number);
+					float yt = target.y;
+					float xt = target.x;
+					byte shootlingRadius = 5;
+					ref.updater.send("<spawn Shootling "
+							+ e.player.ip
+							+ " "
+							+ (e.x + (xt - e.x)
+									/ PApplet.dist(e.x, e.y, xt, yt)
+									* (e.radius + shootlingRadius))
+							+ " "
+							+ (e.y + (yt - e.y)
+									/ PApplet.dist(e.x, e.y, xt, yt)
+									* (e.radius + shootlingRadius)) + " " + xt
+							+ " " + yt + " " + e.number);
 					/*
 					 * ref.updater.send("<spawn Rugling " + e.player.ip + " " +
 					 * e.x + " " + (e.y - e.radius - 8) + " " + target.x + " " +
