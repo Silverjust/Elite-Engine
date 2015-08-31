@@ -112,7 +112,7 @@ public class PhysicsLab extends Lab {
 			// y = Entity.xToGrid(Entity.gridToY());
 			for (Entity e : ref.updater.entities) {
 				if (e.isAllyTo(ref.player) && e instanceof PhysicsLab
-						&& PApplet.dist(x, y, e.x, e.y - e.height) <= e.radius)
+						&& PApplet.dist(x, y, e.x, e.y - e.flyHeight()) <= e.radius)
 					target = e;
 			}
 			if (target != null) {

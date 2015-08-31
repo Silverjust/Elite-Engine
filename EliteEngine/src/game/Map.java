@@ -37,6 +37,9 @@ public class Map {
 			System.err.println(map + " could not be loaded");
 			e.printStackTrace();
 		}
+		if (mapCode == null)
+			mapCode = new MapCode() {
+			};
 	}
 
 	public void loadImages() {

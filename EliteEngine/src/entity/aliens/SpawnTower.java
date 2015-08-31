@@ -59,7 +59,7 @@ public class SpawnTower extends Building implements Commander {
 
 		spawnRange = 150;
 		maxShootlings = 12;
-		spawn.cooldown = 1800;
+		spawn.cooldown = 1900;
 		spawn.setCastTime(500);
 
 		commandingRange = 250;

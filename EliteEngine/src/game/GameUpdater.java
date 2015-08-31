@@ -34,18 +34,20 @@ public class GameUpdater extends Updater {
 				namedEntities.put(Entity.entityCounter, toAdd.get(i));
 				toAdd.get(i).number = Entity.entityCounter;
 				toAdd.get(i).onStart(GameSettings.singlePlayer);
+				map.mapCode.onEntitySpawn(toAdd.get(i));
 				toAdd.remove(i);
 			}
 			for (int i = 0; i < toRemove.size(); i++) {
-				if (toRemove.get(i) != null) {
-					int n = toRemove.get(i).number;
+				Entity entity = toRemove.get(i);
+				if (entity != null) {
+					int n = entity.number;
 					for (Group g : GroupHandler.groups)
-						g.remove(toRemove.get(i));
+						g.remove(entity);
 					namedEntities.remove(n);
-					if (toRemove.get(i).isSelected)
+					if (entity.isSelected)
 						selectionChanged = true;
-					selected.remove(toRemove.get(i));
-					entities.remove(toRemove.get(i));
+					selected.remove(entity);
+					entities.remove(entity);
 					toRemove.remove(i);
 					// System.out.println("removed " + n);
 				}

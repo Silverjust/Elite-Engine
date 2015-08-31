@@ -69,6 +69,7 @@
     "AhnenArcanumMine": "entity.ahnen.AhnenArcanumMine",
     "AhnenPrunamHarvester": "entity.ahnen.AhnenPrunamHarvester",
     "AhnenKaserne": "entity.ahnen.AhnenKaserne",
+    "AhnenTower": "entity.ahnen.AhnenTower",
     "Leuchte": "entity.ahnen.Leuchte",  
     "Berserker": "entity.ahnen.Berserker",
     "Witcher": "entity.ahnen.Witcher",

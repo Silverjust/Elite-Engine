@@ -53,10 +53,12 @@ public class AhnenInfo extends NationInfo {
 
 		grid.addActive(1, 1, Building.SetTargetActive.class, false);
 		grid.addBuildActive(4, 3, Commander.class, AhnenKaserne.class, false);
+		grid.addBuildActive(5, 1, Commander.class, AhnenTower.class, false);
 		grid.addActive(5, 3, BuildMineActive.class, Commander.class,
 				getKeritMine(), false);
 
 		grid.addActive(4, 2, AhnenKaserne.LevelActive.class, false);
+		grid.addActive(5, 2, AhnenTower.SelectActive.class, false);
 
 		grid.addActive(1, 3, AhnenKaserne.AhnenTrainActive.class,
 				AhnenKaserne.class, Berserker.class, false);

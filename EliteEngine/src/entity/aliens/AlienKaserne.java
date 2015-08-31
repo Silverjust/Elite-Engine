@@ -63,7 +63,6 @@ public class AlienKaserne extends Building implements Commander, Trainer {
 
 	@Override
 	public void exec(String[] c) {
-		
 		super.exec(c);
 		Training.updateExecTraining(c, this);
 	}

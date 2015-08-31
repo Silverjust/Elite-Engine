@@ -34,7 +34,7 @@ public class Warrior extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new MeleeAttack(standingImg, 800);
+		basicAttack = new MeleeAttack(standingImg, 500);
 
 		setAnimation(walk);
 
@@ -62,7 +62,7 @@ public class Warrior extends Unit implements Attacker {
 		basicAttack.damage = 30;
 		basicAttack.pirce = 2;
 		basicAttack.cooldown = 800;
-		basicAttack.setCastTime(500);
+		basicAttack.setCastTime(300);
 		basicAttack.targetable = groundPosition;
 
 		descr = " ";
