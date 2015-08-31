@@ -69,8 +69,10 @@ public class ServerUpdater extends Updater {
 
 	@Override
 	public void write(String ip, String[] text) {
-		String name = ref.updater.player.get(ip).name;
-		if (name != null)
+		String name = null;
+		if (ref.updater.player.get(ip) != null)
+			name = ref.updater.player.get(ip).name;
+		if (name == null)
 			name = ip;
 		String completeText = "";
 		for (int i = 2; i < text.length; i++) {// c[0] und c[1] auslassen
