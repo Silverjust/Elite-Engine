@@ -7,6 +7,7 @@ import processing.core.PGraphics;
 import processing.core.PImage;
 import processing.data.JSONObject;
 import shared.Player;
+import shared.VersionCombiner;
 import shared.ref;
 
 public class Map {
@@ -27,18 +28,21 @@ public class Map {
 
 		try {
 			mapData = ref.app.loadJSONObject("data/" + map + ".json");
+			VersionCombiner.objToArray(mapData, map);
 			width = mapData.getInt("w");
 			height = mapData.getInt("h");
 			if (mapData.hasKey("MapCode")) {
+				System.out.println("Map.Map()" + ref.updater);
 				mapCode = (MapCode) Class.forName(mapData.getString("MapCode"))
-						.getConstructor().newInstance(new Object[] {});
+						.getConstructor(Map.class)
+						.newInstance(new Object[] { this });
 			}
 		} catch (Exception e) {
 			System.err.println(map + " could not be loaded");
 			e.printStackTrace();
 		}
 		if (mapCode == null)
-			mapCode = new MapCode() {
+			mapCode = new MapCode(this) {
 			};
 	}
 
@@ -57,6 +61,7 @@ public class Map {
 
 	public void setup() {
 		// PathHandler.makeGraph(graph, collision, 20, 20);
+		mapCode.setup();
 	}
 
 	public void updateFogofWar(Player player) {

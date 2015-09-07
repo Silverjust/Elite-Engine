@@ -1,12 +1,12 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import entity.Entity;
 import entity.MainBuilding;
 import entity.neutral.KeritMine;
 import entity.neutral.SandboxBuilding;
+import processing.data.JSONArray;
 import processing.data.JSONObject;
 import shared.ref;
 
@@ -14,12 +14,11 @@ public class MapHandler {
 
 	public static void setupEntities(JSONObject map) {
 		try {
-			@SuppressWarnings("unchecked")
-			Set<String> entitySet = map.getJSONObject("entities").keys();
-			System.out.println("MapHandler.setupEntities() "+entitySet.size()+" Entities to spawn");
-			for (String string : entitySet) {
-				JSONObject entity = map.getJSONObject("entities")
-						.getJSONObject(string);
+			JSONArray entitys = map.getJSONArray("entities");
+			System.out.println("MapHandler.setupEntities() " + entitys.size()
+					+ " Entities to spawn");
+			for (int i = 0; i < entitys.size(); i++) {
+				JSONObject entity = entitys.getJSONObject(i);
 				int playerNumber = entity.getInt("player");
 				if (ref.updater.player.keySet().size() > playerNumber) {
 					String player;
@@ -71,13 +70,11 @@ public class MapHandler {
 		map.setString("texture", oldMap.getString("texture"));
 		map.setString("coll", oldMap.getString("coll"));
 		map.setInt("w", ref.updater.map.width);
-		map.setInt("h",  ref.updater.map.height);
+		map.setInt("h", ref.updater.map.height);
 
-		JSONObject entities = new JSONObject();
-		int i = 0;
+		JSONArray entities = new JSONArray();
 		for (Entity e : ref.updater.entities) {
 			if (e.getClass() != SandboxBuilding.class) {
-				i++;
 				JSONObject atributes = new JSONObject();
 				String type = e.getClass().getSimpleName().toString();
 				if (e instanceof MainBuilding)
@@ -91,10 +88,10 @@ public class MapHandler {
 				atributes.setInt("player", playerNumber);
 				atributes.setFloat("x", e.x);
 				atributes.setFloat("y", e.y);
-				entities.setJSONObject(i + "", atributes);
+				entities.append(atributes);
 			}
 		}
-		map.setJSONObject("entities", entities);
+		map.setJSONArray("entities", entities);
 
 		System.out.println("\"" + intName + "\" : \"maps/" + intName + "/"
 				+ intName + "\"");

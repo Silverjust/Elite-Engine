@@ -47,8 +47,8 @@ public class MainLoader extends Loader {
 			if (GameSettings.singlePlayer) {
 				if (GameSettings.sandbox)
 					ref.updater.send("<spawn SandboxBuilding 0 20 20");
-				if (GameSettings.tutorial)
-					ref.updater.send("<spawn Tutorial 0 20 20");
+				/*if (GameSettings.tutorial)
+					ref.updater.send("<spawn Tutorial 0 20 20");*/
 				MapHandler.setupEntities(ref.updater.map.mapData);
 				/*
 				 * int i = 0; for (String key : ref.updater.player.keySet()) {
@@ -87,6 +87,7 @@ public class MainLoader extends Loader {
 			break;
 		case END:
 			state = State.NEWGAME;
+			ref.updater.onGameStart();
 			((MainApp) ref.app).mode = Mode.GAME;
 			// System.out.println(ref.updater);
 			System.out.println("Game Start");

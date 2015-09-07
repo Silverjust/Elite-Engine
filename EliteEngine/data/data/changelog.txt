@@ -1,3 +1,9 @@
+buffed b0t (can move while shooting)
+buffed Leuchte
+nerfed ahnentower cost
+updated the ahnenMB and
+ AhnenTower images 
+-------------------------
 added AnenTower
 ---------------------------
 Spawntower can only have 

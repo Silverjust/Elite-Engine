@@ -62,7 +62,7 @@ public class B0T extends Unit implements Attacker, Shooter {
 		basicAttack.setCastTime(500);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
 
-		stats = " ";
+		descr = "B0T§can move while§attack";
 		// ************************************
 	}
 
@@ -98,11 +98,33 @@ public class B0T extends Unit implements Attacker, Shooter {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null) {
+			} else if (importantEntity != null && basicAttack.isNotOnCooldown()) {// änderung
+																					// wegen
+																					// kiter
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
+	}
+
+	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		// move while attack
+		if ("walk".equals(c[2])) {
+			xTarget = Float.parseFloat(c[3]);
+			yTarget = Float.parseFloat(c[4]);
+			if (PApplet.dist(x, y, xTarget, yTarget) >= speed) {
+				isMoving = true;
+				// isAggro = Boolean.valueOf(c[5]);
+				// setAnimation(walk);
+			} else {
+				isMoving = false;
+				// setAnimation(stand);
+			}
+		}
+		if (c[2].equals("basicAttack"))
+			isMoving = true;
 	}
 
 	@Override

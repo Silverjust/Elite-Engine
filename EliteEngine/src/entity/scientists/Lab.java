@@ -30,7 +30,7 @@ public abstract class Lab extends Unit {
 	}
 
 	@Override
-	public void onStart(boolean isServer) {
+	public void onSpawn(boolean isServer) {
 		ref.updater.selectionChanged = true;
 	}
 

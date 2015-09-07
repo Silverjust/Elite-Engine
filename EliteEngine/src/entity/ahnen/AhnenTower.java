@@ -5,11 +5,13 @@ import processing.core.PImage;
 import shared.ref;
 import entity.Active;
 import entity.AimingActive;
+import entity.Attacker;
 import entity.Building;
 import entity.Commander;
 import entity.Entity;
 import entity.Unit;
 import entity.animation.Animation;
+import entity.animation.Attack;
 import entity.animation.Build;
 import entity.animation.Death;
 import game.AimHandler;
@@ -18,6 +20,7 @@ import game.AimHandler.Cursor;
 import game.aim.CustomAim;
 
 public class AhnenTower extends Building implements Commander {
+	private byte unitHeight;
 	private int commandingRange;
 	private static PImage standImg;
 
@@ -42,12 +45,13 @@ public class AhnenTower extends Building implements Commander {
 		setAnimation(build);
 
 		// ************************************
-		xSize = 25;
-		ySize = 25;
-		height = 15;
+		xSize = 17;
+		ySize = 17;
+		height = 5;
+		unitHeight = 18;
 
-		kerit = 200;
-		pax = 0;
+		kerit = 400;
+		pax = 300;
 		arcanum = 0;
 		prunam = 0;
 		build.setBuildTime(2000);
@@ -55,14 +59,36 @@ public class AhnenTower extends Building implements Commander {
 		sight = 80;
 
 		hp = hp_max = 500;
-		radius = 10;
+		radius = 12;
 
 		commandingRange = 100;
 		selectRange = 30;
 
 		descr = " ";
-		stats = " ";
 		// ************************************
+	}
+
+	@Override
+	public String getStatistics() {
+		if (unit != null && unit instanceof Attacker
+				&& ((Attacker) unit).getBasicAttack() != null) {
+			stats = "";
+			Attack a = ((Attacker) unit).getBasicAttack();
+			if (a.pirce >= 0) {
+				stats += "dps: " + a.damage + "/" + a.cooldown / 1000.0 + " ("
+						+ a.pirce + ")";
+				if (a.targetable == GroundPosition.GROUND)
+					stats += " _§";
+				else if (a.targetable == GroundPosition.AIR)
+					stats += " °§";
+				else if (a.targetable == null)
+					stats += " _°§";
+			} else {
+				stats += "heal/s: " + a.damage + "/" + a.cooldown / 1000.0
+						+ "§";
+			}
+		}
+		return super.getStatistics();
 	}
 
 	@Override
@@ -90,33 +116,27 @@ public class AhnenTower extends Building implements Commander {
 			Entity e = ref.updater.namedEntities.get(n);
 			if (e.isAlive() && isAllyTo(player) && e instanceof Unit) {
 				if (unit != null) {
-					unit.x = x;
-					unit.y = y + radius + 10;
-					unit.height = 10;
-					if (unit instanceof Berserker)
-						((Berserker) unit).getBasicAttack().range = new Berserker(
-								null).getBasicAttack().range;
-					if (unit instanceof Warrior) {
-						armor = 3;
-						((Warrior) unit).getBasicAttack().cooldown = new Warrior(
-								null).getBasicAttack().cooldown;
+					Entity normalUnit = null;
+					try {
+						normalUnit = unit.getClass()
+								.getConstructor(String[].class)
+								.newInstance(new Object[] { null });
+					} catch (Exception e1) {
+						e1.printStackTrace();
 					}
-					if (unit instanceof Angel)
-						unit.height = new Angel(null).height;
-					if (unit instanceof Astrator) {
-						((Astrator) unit).getBasicAttack().range = new Astrator(
-								null).getBasicAttack().range;
-						armor = 5;
-					}
+					normalUnit.player = unit.player;
+					normalUnit.x = x;
+					normalUnit.y = y + radius + 10;
+					normalUnit.hp = unit.hp;
 					armor = 0;
-					ref.updater.toAdd.add(unit);
+					ref.updater.toAdd.add(normalUnit);
 				}
 				unit = (Unit) e;
 				unit.x = x;
 				unit.y = y;
 				unit.isMoving = false;
 				unit.isSelected = false;
-				unit.height = 30;
+				unit.height = unitHeight;
 				ref.updater.toRemove.add(unit);
 				if (unit instanceof Berserker)
 					((Berserker) unit).getBasicAttack().range = 20;
@@ -125,7 +145,7 @@ public class AhnenTower extends Building implements Commander {
 					((Warrior) unit).getBasicAttack().cooldown = 400;
 				}
 				if (unit instanceof Astrator) {
-					((Astrator) unit).getBasicAttack().range = 40;
+					((Astrator) unit).getBasicAttack().range = 30;
 					armor = 5;
 				}
 			}
@@ -185,7 +205,7 @@ public class AhnenTower extends Building implements Commander {
 
 		@Override
 		public String getDesription() {
-			return "select unit to stand in tower";
+			return "select unit to stand in tower§unit gets buffed";
 		}
 
 		@Override

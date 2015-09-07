@@ -35,8 +35,8 @@ public class AhnenMainBuilding extends MainBuilding implements Commander {
 		setAnimation(stand);
 		 
 		// ************************************
-		xSize = 60;
-		ySize = 60;
+		xSize = 65;
+		ySize = 65;
 
 		sight = 50;
 

@@ -165,10 +165,18 @@ public abstract class Unit extends Entity {
 
 	@Override
 	public void sendDefaultAnimation(Animation oldAnimation) {
-		sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
+		if (PApplet.dist(x, y, xTarget, yTarget) >= speed)
+			sendAnimation("walk " + xTarget + " " + yTarget + " " + isAggro);
+		else {
+			sendAnimation("stand");
+			if (Animation.observe.isAssignableFrom(this.getClass())) {
+				System.out.println("Unit.sendDefaultAnimation()send stand"
+						+ PApplet.dist(x, y, xTarget, yTarget));
+			}
+		}
 	}
 
-	public static class AttackActive extends Active  {
+	public static class AttackActive extends Active {
 
 		public AttackActive(int x, int y, char n) {
 			super(x, y, n, attackSym);

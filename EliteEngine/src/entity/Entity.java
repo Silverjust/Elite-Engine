@@ -155,7 +155,7 @@ public abstract class Entity implements Informing {
 		sendAnimation("death");
 	}
 
-	public void onStart(boolean isServer) {
+	public void onSpawn(boolean isServer) {
 	}
 
 	public void info() {

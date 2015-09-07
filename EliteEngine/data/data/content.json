@@ -26,7 +26,6 @@
     "Prunam": "entity.neutral.Prunam",
     "Rock": "entity.neutral.Rock",
     "SandboxBuilding": "entity.neutral.SandboxBuilding",
-    "Tutorial": "entity.neutral.Tutorial",
 	
 	"HumanMainBuilding": "entity.humans.HumanMainBuilding",
 	"HumanKaserne": "entity.humans.HumanKaserne",
@@ -94,16 +93,21 @@
     "KR4B1T": "entity.robots.KR4B1T",	
     "F4CT0RY": "entity.robots.F4CT0RY"
   },
+  "campainEntities": {    
+  	"Tutorial": "entity.neutral.Tutorial",
+  	"Asteroid": "entity.campain.Asteroid"
+  },
   "maps": {
     "standard": {
-      	"1" : "maps/alpha_YangDesert/alpha_YangDesert",
+      	"1": "maps/alpha_YangDesert/alpha_YangDesert",
       	"2": "maps/fernisland/fernisland",
       	"3": "maps/firstTestMap/firstTestMap",
       	"4": "maps/newMap/newMap",
-	  	"5" : "maps/4player/4player"
+	  	"5": "maps/4player/4player"
     },
     "tutorial": {
-      "1": "maps/TutorialMap/TutorialMap"
+      "1": "maps/campain/TutorialMap/TutorialMap",
+      "0": "maps/campain/testMacodeMap/testMacodeMap"
     },
      "campain": {
       "1": "maps/TutorialMap/TutorialMap"

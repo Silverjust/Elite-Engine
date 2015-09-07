@@ -10,7 +10,8 @@ import entity.Trainer;
 import entity.Unit;
 
 public class Animation {
-	public static Class<?> observe = Animation.class;// not assignable class == off
+	public static Class<?> observe = Animation.class;
+	// not assignable class == off
 	byte directions;
 	private byte frames;
 	PImage[][] imgWD;
@@ -90,6 +91,35 @@ public class Animation {
 			ref.app.image(img[f], Entity.xToGrid(e.x),
 					Entity.yToGrid(e.y - e.height), e.xSize, e.ySize);
 		}
+		if (Animation.observe.isAssignableFrom(e.getClass())) {
+			ref.app.text(getName(e), Entity.xToGrid(e.x),
+					Entity.yToGrid(e.y - e.height), 50, 50);
+		}
+	}
+
+	public void draw(Entity e, float x, float y, byte d, byte f) {
+		if (Updater.Time.getMillis() - start >= speed() * e.currentFrame) {
+			e.currentFrame = (byte) ((Updater.Time.getMillis() - start) / speed());
+			if (e.currentFrame > frames - 1) {
+				e.currentFrame = (byte) (frames - 1);
+			}
+			if (e.currentFrame < 0) {
+				e.currentFrame = 0;
+			}
+		}
+
+		if (imgWD != null && d < directions && f < frames) {
+			ref.app.image(imgWD[d][f], Entity.xToGrid(x), Entity.yToGrid(y),
+					e.xSize, e.ySize);
+		} else if (img != null && f < frames) {
+			ref.app.image(img[f], Entity.xToGrid(x),
+					Entity.yToGrid(y - e.height), e.xSize, e.ySize);
+		}
+		if (Animation.observe.isAssignableFrom(e.getClass())) {
+			ref.app.text(getName(e), Entity.xToGrid(e.x),
+					Entity.yToGrid(e.y - e.height), 50, 50);
+		}
+
 	}
 
 	public boolean isNotOnCooldown() {

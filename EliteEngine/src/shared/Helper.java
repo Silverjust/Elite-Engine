@@ -108,4 +108,35 @@ public class Helper {
 	public float fontHeight() {
 		return ref.app.textAscent() * ref.textScale;
 	}
+
+	static public class Timer {
+		int cooldown;
+		private int cooldownTimer;
+
+		public Timer() {
+		}
+
+		public Timer(int cooldown) {
+			this.cooldown = cooldown;
+		}
+
+		public void startCooldown() {
+			cooldownTimer = Updater.Time.getMillis() + cooldown;
+		}
+
+		public boolean isNotOnCooldown() {
+			return cooldownTimer <= Updater.Time.getMillis();
+		}
+
+		public float getCooldownPercent() {
+			float f = 1 - (float) (cooldownTimer - Updater.Time.getMillis())
+					/ cooldown;
+			return f > 1 || f < 0 ? 1 : f;
+		}
+
+		public float getTimeLeft() {
+			return (cooldownTimer - Updater.Time.getMillis());
+		}
+
+	}
 }

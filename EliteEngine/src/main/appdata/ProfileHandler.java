@@ -2,6 +2,7 @@ package main.appdata;
 
 import main.MainPreGame.GameSettings;
 import processing.data.JSONObject;
+import shared.VersionCombiner;
 import shared.ref;
 import shared.Updater.GameState;
 
@@ -23,7 +24,7 @@ public class ProfileHandler implements appdataInfos {
 					.loadJSONObject(appdataInfos.path + "info.json");
 		}
 		try {
-			versionUpdate(oldProfile);
+			VersionCombiner.rateChange(oldProfile);
 			if (!oldProfile.hasKey("name")) {
 				oldProfile.setString("name", "unknown");
 			}
@@ -58,14 +59,6 @@ public class ProfileHandler implements appdataInfos {
 			ref.app.saveJSONObject(profile, appdataInfos.path + "info.json");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-
-	private static void versionUpdate(JSONObject oldProfile) {
-		if (oldProfile.hasKey("rate") && !oldProfile.hasKey("version")) {
-			float f = oldProfile.getFloat("rate");
-			oldProfile.setFloat("rate", f + 1000 - 10);
-
 		}
 	}
 
@@ -114,12 +107,19 @@ public class ProfileHandler implements appdataInfos {
 		try {
 			return profile.getFloat("rate");
 		} catch (Exception e) {
-			return 10;
+			return 999;
 		}
 	}
 
 	public static void dispose() {
 		ref.app.saveJSONObject(profile, appdataInfos.path + "info.json");
 		// info = null;
+	}
+
+	public static boolean isDeveloper() {
+		if (!profile.hasKey("isDeveloper"))
+			return false;
+		return profile.getBoolean("isDeveloper");
+
 	}
 }

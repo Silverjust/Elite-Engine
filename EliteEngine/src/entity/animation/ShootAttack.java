@@ -9,8 +9,6 @@ import entity.Shooter;
 public class ShootAttack extends MeleeAttack {
 	private int beginTime;
 	public float speed;
-	public Explosion explosion;
-	private boolean isExploding;
 
 	public ShootAttack(PImage[][] IMG, int duration) {
 		super(IMG, duration);
@@ -41,24 +39,14 @@ public class ShootAttack extends MeleeAttack {
 	@Override
 	public void drawAbility(Entity e, byte d) {
 		if (e instanceof Shooter) {
-			if (isSetup() && getProgressPercent() < 1
-			// && start + beginTime <= Updater.Time.getMillis()
-			) {
+			if (isSetup() && getProgressPercent() < 1) {
 				((Shooter) e).drawShot(target, getProgressPercent());
-			}
-			if (explosion != null && getProgressPercent() >= 1 && !isSetup()
-					&& !isExploding) {
-				isExploding = true;
-				explosion.setup(null);
 			}
 		} else {
 			System.err.println(e.getClass().getSimpleName()
 					+ " should be shooter");
 		}
-		if (explosion != null && isExploding && !explosion.isFinished()
-				&& target != null) {
-			explosion.draw(target.x, target.y);
-		}
+		super.drawAbility(e, d);
 	}
 
 	@Override

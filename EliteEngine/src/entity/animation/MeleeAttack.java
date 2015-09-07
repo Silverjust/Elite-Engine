@@ -5,7 +5,9 @@ import entity.Attacker;
 import entity.Entity;
 
 public class MeleeAttack extends Attack {
+	public Explosion explosion;
 	protected boolean isSetup;
+	protected boolean isExploding;
 
 	public MeleeAttack(PImage[][] IMG, int duration) {
 		super(IMG, duration);
@@ -36,6 +38,7 @@ public class MeleeAttack extends Attack {
 	public void setTargetFrom(Entity from, Entity to) {
 		target = to;
 		isSetup = true;
+		isExploding = false;
 	}
 
 	@Override
@@ -55,6 +58,19 @@ public class MeleeAttack extends Attack {
 	@Override
 	public boolean isSetup() {
 		return getTarget() != null && isSetup;
+	}
+
+	@Override
+	public void drawAbility(Entity e, byte d) {
+		if (explosion != null && getProgressPercent() >= 1 && !isSetup()
+				&& !isExploding) {
+			isExploding = true;
+			explosion.setup(null);
+		}
+		if (explosion != null && isExploding && !explosion.isFinished()
+				&& target != null) {
+			explosion.draw(target.x, target.y);
+		}
 	}
 
 }

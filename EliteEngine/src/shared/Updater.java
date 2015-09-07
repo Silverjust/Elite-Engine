@@ -83,4 +83,8 @@ public abstract class Updater {
 		toRemove.clear();
 		selected.clear();
 	}
+
+	public void onGameStart() {
+		map.mapCode.onGameStart();
+	}
 }

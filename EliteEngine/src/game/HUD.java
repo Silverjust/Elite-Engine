@@ -102,9 +102,11 @@ public class HUD {
 
 	public static void dispose() {
 		try {
+			if(activesGrid != null)
 			activesGrid.dispose();
 			GroupHandler.dispose();
 		//	ImageHandler.dispose();
+			if(sound != null)
 			sound.close();
 		} catch (Exception e) {
 			e.printStackTrace();

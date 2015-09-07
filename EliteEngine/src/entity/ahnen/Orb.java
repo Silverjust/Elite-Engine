@@ -71,7 +71,7 @@ public class Orb extends Unit implements Attacker {
 	}
 
 	@Override
-	public void onStart(boolean isServer) {
+	public void onSpawn(boolean isServer) {
 		if (isServer) {
 			Entity e;
 			e = ref.updater.namedEntities.get(parent);

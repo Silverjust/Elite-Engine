@@ -33,7 +33,7 @@ public class GameUpdater extends Updater {
 				entities.add(toAdd.get(i));
 				namedEntities.put(Entity.entityCounter, toAdd.get(i));
 				toAdd.get(i).number = Entity.entityCounter;
-				toAdd.get(i).onStart(GameSettings.singlePlayer);
+				toAdd.get(i).onSpawn(GameSettings.singlePlayer);
 				map.mapCode.onEntitySpawn(toAdd.get(i));
 				toAdd.remove(i);
 			}

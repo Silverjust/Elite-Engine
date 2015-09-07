@@ -62,13 +62,13 @@ public class Leuchte extends Building implements Attacker {
 		heal.range = sight;
 		heal.damage = 2;// heal
 		heal.pirce = -1;// heal
-		heal.cooldown = 2000;
+		heal.cooldown = 2400;
 		heal.setCastTime(300);
 
 		buff.range = sight;
 		buff.damage = 3;// heal
 		buff.pirce = -1;// heal
-		buff.cooldown = 2000;
+		buff.cooldown = 2400;
 		buff.setCastTime(300);
 
 		descr = " ";
