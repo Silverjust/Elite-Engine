@@ -51,6 +51,7 @@
     "ScientistArcanumMine": "entity.scientists.ScientistArcanumMine",
     "ScientistPrunamHarvester": "entity.scientists.ScientistPrunamHarvester",
     "ScientistKaserne": "entity.scientists.ScientistKaserne",
+    "ScientistWall": "entity.scientists.ScientistWall",
 	"PhysicsLab": "entity.scientists.PhysicsLab",
 	"BioLab": "entity.scientists.BioLab",
 	"ChemLab": "entity.scientists.ChemLab",

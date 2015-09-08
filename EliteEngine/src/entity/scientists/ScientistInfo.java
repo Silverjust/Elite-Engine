@@ -46,8 +46,9 @@ public class ScientistInfo extends NationInfo {
 		grid.addActive(2, 1, Unit.WalkActive.class, true);
 		grid.addActive(3, 1, Unit.StopActive.class, true);
 
-		grid.addActive(4, 3, PhysicsLab.TeleportActive.class, true);
 		grid.addActive(1, 2, AirshipGuineaPig.AnchorActive.class, true);
+		grid.addActive(4, 3, PhysicsLab.TeleportActive.class, true);
+		grid.addActive(4, 1, ChemLab.ScientistWallActive.class, true);
 
 		grid.addActive(1, 1, Building.SetTargetActive.class, false);
 		grid.addActive(5, 3, BuildMineActive.class, Commander.class,
@@ -64,8 +65,7 @@ public class ScientistInfo extends NationInfo {
 				ShieldGuineaPig.class, false);
 		grid.addActive(3, 3, EquipActive.class, PhysicsLab.class,
 				RailgunGuineaPig.class, false);
-		grid.addActive(2, 2, EquipActive.class, BioLab.class,
-				Cell.class, false);
+		grid.addActive(2, 2, EquipActive.class, BioLab.class, Cell.class, false);
 		grid.addActive(3, 2, EquipActive.class, BioLab.class,
 				SpawnerGuineaPig.class, false);
 		grid.addActive(3, 1, EquipActive.class, ChemLab.class,

@@ -5,7 +5,7 @@ import game.AimHandler;
 import game.aim.BuildWallAim;
 
 public class BuildWallActive extends Active {
-	Class<? extends Building> building;
+	protected Class<? extends Building> building;
 	String descr = " ", stats = " ";
 
 	public BuildWallActive(int x, int y, char n, Entity b, Class<?> builder) {
