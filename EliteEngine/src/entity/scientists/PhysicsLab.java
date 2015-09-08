@@ -48,8 +48,8 @@ public class PhysicsLab extends Lab {
 
 		kerit = 600;
 		pax = 0;
-		arcanum = 0;
-		prunam = 10;
+		arcanum = 30;
+		prunam = 0;
 		trainTime = TRAINTIME;
 
 		sendTeleport.cooldown = 60000;

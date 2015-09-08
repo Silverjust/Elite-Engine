@@ -2,6 +2,7 @@ package entity.scientists;
 
 import processing.core.PImage;
 import shared.ref;
+import entity.Active;
 import entity.Building;
 import entity.Commander;
 import entity.Entity;
@@ -15,7 +16,8 @@ import entity.animation.Death;
 import entity.animation.Training;
 import game.ImageHandler;
 
-public class ScientistKaserne extends Building implements Commander, Trainer {
+public class ScientistKaserne extends Building implements Commander, Trainer,
+		Equiping {
 	private int commandingRange;
 	protected float xTarget;
 	protected float yTarget;
@@ -35,7 +37,7 @@ public class ScientistKaserne extends Building implements Commander, Trainer {
 
 		iconImg = standImg;
 		stand = new Animation(standImg, 1000);
-		build = new Build(standImg, 2000);
+		build = new Build(standImg, 1000);
 		death = new Death(standImg, 1000);
 		training = new Training(standImg, 100);
 
@@ -111,6 +113,64 @@ public class ScientistKaserne extends Building implements Commander, Trainer {
 		xTarget = x;
 		yTarget = y;
 
+	}
+
+	public static class EquipActive extends Active {
+		Class<? extends Unit> unit;
+		Class<?> lab;
+		String descr = " ", stats = " ";
+
+		public EquipActive(int x, int y, char n, Entity u,
+				Class<? extends Entity> trainerHeper) {
+
+			super(x, y, n, u.iconImg);
+			clazz = Equiping.class;
+			lab = trainerHeper;
+			unit = ((Unit) u).getClass();
+			descr = u.getDesription();
+			stats = u.getStatistics();
+		}
+
+		@Override
+		public void onActivation() {
+			Entity trainer = null;
+			for (Entity e : ref.player.visibleEntities) {
+				if (e instanceof GuineaPig
+						&& (e.getAnimation() == e.stand || e.getAnimation() == ((Unit) e).walk)) {
+					for (Entity e2 : ref.player.visibleEntities) {
+						if (e2.player == e.player
+								&& e2.getClass().equals(lab)
+								&& e.isInRange(e2.x, e2.y, e.radius
+										+ ((Lab) e2).equipRange)) {
+							trainer = e;
+						}
+					}
+				}
+			}
+			Unit newUnit = null;
+			try {
+				newUnit = unit.getConstructor(String[].class).newInstance(
+						new Object[] { null });
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			if (trainer != null && newUnit != null
+					&& newUnit.canBeBought(trainer.player)) {
+				newUnit.buyFrom(trainer.player);
+				trainer.sendAnimation("equip " + unit.getSimpleName());
+			}
+		}
+
+		@Override
+		public String getDesription() {
+			return descr;
+		}
+
+		@Override
+		public String getStatistics() {
+			return stats;
+		}
 	}
 
 	public static class ScientistTrainActive extends TrainActive {

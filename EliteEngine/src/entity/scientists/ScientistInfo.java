@@ -8,7 +8,7 @@ import entity.neutral.ArcanumMine;
 import entity.neutral.KeritMine;
 import entity.neutral.PaxDrillTower;
 import entity.neutral.PrunamHarvester;
-import entity.scientists.ScientistKaserne.ScientistTrainActive;
+import entity.scientists.ScientistKaserne.EquipActive;
 import game.ActivesGrid;
 import game.aim.MineAim.BuildMineActive;
 import shared.NationInfo;
@@ -60,19 +60,17 @@ public class ScientistInfo extends NationInfo {
 		grid.addTrainActive(4, 2, ScientistKaserne.class, BioLab.class, false);
 		grid.addTrainActive(4, 3, ScientistKaserne.class, PhysicsLab.class,
 				false);
-		grid.addActive(3, 3, ScientistTrainActive.class, PhysicsLab.class,
+		grid.addActive(2, 3, EquipActive.class, PhysicsLab.class,
 				ShieldGuineaPig.class, false);
-		grid.addActive(2, 3, ScientistTrainActive.class, PhysicsLab.class,
+		grid.addActive(3, 3, EquipActive.class, PhysicsLab.class,
 				RailgunGuineaPig.class, false);
-		grid.addActive(2, 2, ScientistTrainActive.class, BioLab.class,
+		grid.addActive(2, 2, EquipActive.class, BioLab.class,
 				Cell.class, false);
-		grid.addActive(3, 2, ScientistTrainActive.class, BioLab.class,
+		grid.addActive(3, 2, EquipActive.class, BioLab.class,
 				SpawnerGuineaPig.class, false);
-		grid.addActive(2, 1, ScientistTrainActive.class, ChemLab.class,
+		grid.addActive(3, 1, EquipActive.class, ChemLab.class,
 				AirshipGuineaPig.class, false);
-		grid.addActive(3, 1, ScientistTrainActive.class, ChemLab.class,
+		grid.addActive(2, 1, EquipActive.class, ChemLab.class,
 				RocketGuineaPig.class, false);
-
 	}
-
 }

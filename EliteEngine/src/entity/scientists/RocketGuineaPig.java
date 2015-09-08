@@ -43,15 +43,15 @@ public class RocketGuineaPig extends Unit implements Attacker, Shooter {
 		xSize = 15;
 		ySize = 15;
 
-		kerit = 28;
+		kerit = 50;
 		pax = 0;
-		arcanum = 10;
+		arcanum = 0;
 		prunam = 10;
 		trainTime = 1500;
 
-		hp = hp_max = 30;
+		hp = hp_max = 50;
 		armor = 1;
-		speed = 0.9f;
+		speed = 1.3f;
 		radius = 6;
 		sight = 70;
 		height = 25;

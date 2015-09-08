@@ -53,7 +53,7 @@ public class AirshipGuineaPig extends Unit implements Attacker, Shooter {
 		kerit = 800;
 		pax = 0;
 		arcanum = 150;
-		prunam = 0;
+		prunam = 1;
 		trainTime = 1500;
 
 		hp = hp_max = 700;

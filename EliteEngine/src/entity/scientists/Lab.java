@@ -4,7 +4,7 @@ import shared.ref;
 import entity.Entity;
 import entity.Unit;
 
-public abstract class Lab extends Unit {
+public abstract class Lab extends Unit implements Equiping {
 	protected static final int TRAINTIME = 3000;
 	public byte equipRange;
 
@@ -18,7 +18,7 @@ public abstract class Lab extends Unit {
 		armor = 1;
 		speed = 0.7f;
 		radius = 12;
-		height = 20;
+		height = 30;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.AIR;
 

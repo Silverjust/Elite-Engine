@@ -3,10 +3,20 @@ added W4SP active:
 buffed KR4B1T costs
 buffed b0t and m1n1b0t
  (can move while shooting)
+ 
 buffed Leuchte
 nerfed ahnentower cost
 updated the ahnenMB and
  AhnenTower images 
+ 
+changed Scientists costs
+ ChemLab needs prunam
+ BioLab needs pax
+ PhysicsLab needs Arcanum
+Scientists: building an advanced unit
+ converts a guineapig
+buffed RocketGuineaPig
+ costs and speed
 -------------------------
 added AnenTower
 ---------------------------

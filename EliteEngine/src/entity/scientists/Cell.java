@@ -2,7 +2,6 @@ package entity.scientists;
 
 import processing.core.PImage;
 import shared.ref;
-import entity.Active;
 import entity.Attacker;
 import entity.Entity;
 import entity.Unit;
@@ -125,45 +124,5 @@ public class Cell extends Unit implements Attacker {
 	@Override
 	public Attack getBasicAttack() {
 		return heal;
-	}
-
-	public static class EquipActive extends Active {
-		Class<? extends Unit> unit;
-		String descr = " ", stats = " ";
-
-		public EquipActive(int x, int y, char n, Entity u, Class<?> trainer) {
-			super(x, y, n, u.iconImg);
-			clazz = trainer;
-			unit = ((Unit) u).getClass();
-			descr = u.getDesription();
-			stats = u.getStatistics();
-		}
-
-		@Override
-		public void onActivation() {
-			Entity trainer = null;
-			for (Entity e : ref.updater.selected) {
-				if (clazz.isAssignableFrom(e.getClass())) {
-					trainer = e;
-				}
-			}
-			if (trainer != null) {
-				ref.updater.send("<remove " + trainer.number);
-				ref.updater
-						.send("<spawn " + unit.getSimpleName() + " "
-								+ trainer.player.ip + " " + trainer.x + " "
-								+ trainer.y);
-			}
-		}
-
-		@Override
-		public String getDesription() {
-			return descr;
-		}
-
-		@Override
-		public String getStatistics() {
-			return stats;
-		}
 	}
 }
