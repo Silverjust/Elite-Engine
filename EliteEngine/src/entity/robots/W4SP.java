@@ -5,12 +5,14 @@ import processing.core.PImage;
 import shared.ref;
 import entity.Attacker;
 import entity.Entity;
+import entity.MultiCDActive;
 import entity.Shooter;
 import entity.Unit;
 import entity.animation.Animation;
 import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.Explosion;
+import entity.animation.MeleeAttack;
 import entity.animation.ShootAttack;
 
 public class W4SP extends Unit implements Attacker, Shooter {
@@ -19,9 +21,11 @@ public class W4SP extends Unit implements Attacker, Shooter {
 
 	byte aggroRange;
 
-	ShootAttack basicAttack;
+	ShootAttack basicAttack, basicAttack2;
 
 	private byte splashrange;
+
+	private MeleeAttack speeding;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -33,10 +37,12 @@ public class W4SP extends Unit implements Attacker, Shooter {
 		super(c);
 		iconImg = standingImg;
 
-		stand = new Animation(standingImg, 1000);
-		walk = new Animation(standingImg, 800);
+		stand = walk = new Animation(standingImg, 1000);
+		// walk = new Animation(standingImg, 1000);
+		speeding = new MeleeAttack(standingImg, 1000);// for 2 cooldowns
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
+		basicAttack2 = new ShootAttack(standingImg, 800);
 		basicAttack.explosion = new Explosion(standingImg, 800);
 
 		setAnimation(walk);
@@ -53,21 +59,24 @@ public class W4SP extends Unit implements Attacker, Shooter {
 		trainTime = 5000;
 
 		hp = hp_max = 100;
-		armor = 5;
+		armor = 3;
 		speed = 1f;
 		radius = 5;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.AIR;
 
-		aggroRange = (byte) (radius + 50);
+		aggroRange = 60;
 		splashrange = 10;
 		basicAttack.damage = 60;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 3000;
-		basicAttack.range = 60;
+		basicAttack.range = 45;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
 		basicAttack.targetable = GroundPosition.GROUND;
+
+		speeding.setCastTime(2000);
+		speeding.cooldown = 20000;
 
 		stats = " ";
 		// ************************************
@@ -76,7 +85,8 @@ public class W4SP extends Unit implements Attacker, Shooter {
 	@Override
 	public void updateDecisions(boolean isServer) {
 		if (isServer
-				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
+				&& ((getAnimation() == walk && isMoving) && isAggro || (getAnimation() == stand && !isMoving))) {
+			// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
@@ -90,16 +100,10 @@ public class W4SP extends Unit implements Attacker, Shooter {
 								importance = newImportance;
 								importantEntity = e;
 							}
+							if (e.isInRange(x, y, basicAttack.range + e.radius))
+								isEnemyInHitRange = true;
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& basicAttack.canTargetable(e)) {
-							isEnemyInHitRange = true;
-							float newImportance = calcImportanceOf(e);
-							if (newImportance > importance) {
-								importance = newImportance;
-								importantEntity = e;
-							}
-						}
+
 					}
 				}
 			}
@@ -109,7 +113,29 @@ public class W4SP extends Unit implements Attacker, Shooter {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
+		if (speeding.isSetup() && speeding.isEvent()) {
+			System.out.println("W4SP.updateDecisions()");
+			speeding.setTargetFrom(null, null);
+			sendAnimation("speeddown");
+		}
 		basicAttack.updateAbility(this, isServer);
+	}
+
+	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if (c[2].equals("speed")) {
+			if (speeding.isNotOnCooldown()) {
+				armor = 5;
+				speed += 0.5f;
+				speeding.setTargetFrom(this, this);
+				speeding.setup(this);
+			}
+		} else if (c[2].equals("speeddown")) {
+			armor = 3;
+			speed -= 0.5f;
+			// speeding.setup(this);
+		}
 	}
 
 	@Override
@@ -128,9 +154,22 @@ public class W4SP extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
-	public void renderGround() {
+	public void display() {
+		super.display();
+		if (speeding.isSetup() && !speeding.isEvent())
+			drawBar(speeding.getProgressPercent());
+	}
+
+	@Override
+	public void renderAir() {
 		drawSelected();
-		getAnimation().draw(this, direction, currentFrame);
+		if (speeding.isSetup() && !speeding.isEvent()) {
+			if (getAnimation() == stand)
+				speeding.draw(this, direction, currentFrame);
+			else if (getAnimation() == basicAttack)
+				basicAttack2.draw(this, direction, currentFrame);
+		} else
+			getAnimation().draw(this, direction, currentFrame);
 		basicAttack.drawAbility(this, direction);
 		drawTaged();
 	}
@@ -156,4 +195,29 @@ public class W4SP extends Unit implements Attacker, Shooter {
 		return basicAttack;
 	}
 
+	public Attack getAbility() {
+		return speeding;
+	}
+
+	public static class SpeedActive extends MultiCDActive {
+		public SpeedActive(int x, int y, char n) {
+			super(x, y, n, standingImg);
+			clazz = W4SP.class;
+			setAbilityGetter("getAbility");
+		}
+
+		@Override
+		public String getDesription() {
+			return "speeds up and§gives armor";
+		}
+
+		@Override
+		public void onActivation() {
+			for (Entity e : ref.updater.selected) {
+				if (e instanceof W4SP) {
+					e.sendAnimation("speed");
+				}
+			}
+		}
+	}
 }

@@ -98,9 +98,8 @@ public class B0T extends Unit implements Attacker, Shooter {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && basicAttack.isNotOnCooldown()) {// änderung
-																					// wegen
-																					// kiter
+			} else if (importantEntity != null && basicAttack.isNotOnCooldown()) {
+				// änderung wegen kiter
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}

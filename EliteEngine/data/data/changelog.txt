@@ -1,4 +1,8 @@
-buffed b0t (can move while shooting)
+added W4SP active:
+ gives speed and armor for 2sec
+buffed KR4B1T costs
+buffed b0t and m1n1b0t
+ (can move while shooting)
 buffed Leuchte
 nerfed ahnentower cost
 updated the ahnenMB and

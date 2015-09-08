@@ -8,9 +8,11 @@ import entity.Building;
 import entity.Entity;
 import entity.Trainer;
 import entity.Unit;
+import entity.robots.W4SP;
 
 public class Animation {
-	public static Class<?> observe = Animation.class;
+	public static Class<?> observe = W4SP
+			.class;
 	// not assignable class == off
 	byte directions;
 	private byte frames;

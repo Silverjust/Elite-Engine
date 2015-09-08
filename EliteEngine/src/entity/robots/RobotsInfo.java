@@ -44,10 +44,11 @@ public class RobotsInfo extends NationInfo {
 		grid.addActive(1, 1, Unit.AttackActive.class, true);
 		grid.addActive(2, 1, Unit.WalkActive.class, true);
 		grid.addActive(3, 1, Unit.StopActive.class, true);
-		
+
 		grid.addActive(4, 2, M1N1B0T.BuildDepotActive.class, true);
 		grid.addActive(2, 2, ANT10N.AnchorActive.class, true);
 		grid.addActive(3, 2, SN41L10N.AnchorActive.class, true);
+		grid.addActive(3, 3, W4SP.SpeedActive.class, true);
 
 		grid.addActive(1, 1, Building.SetTargetActive.class, false);
 		grid.addBuildActive(4, 3, Commander.class, RobotsKaserne.class, false);

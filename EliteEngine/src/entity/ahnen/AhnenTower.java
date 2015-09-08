@@ -75,8 +75,9 @@ public class AhnenTower extends Building implements Commander {
 			stats = "";
 			Attack a = ((Attacker) unit).getBasicAttack();
 			if (a.pirce >= 0) {
-				stats += "dps: " + a.damage + "/" + a.cooldown / 1000.0 + " ("
-						+ a.pirce + ")";
+				stats += "dps: " + a.damage + "/" + a.cooldown / 1000.0 + " ="
+						+ PApplet.nfc(a.damage / (a.cooldown / 1000.0f), 2)
+						+ " (" + a.pirce + ")";
 				if (a.targetable == GroundPosition.GROUND)
 					stats += " _§";
 				else if (a.targetable == GroundPosition.AIR)
@@ -85,6 +86,8 @@ public class AhnenTower extends Building implements Commander {
 					stats += " _°§";
 			} else {
 				stats += "heal/s: " + a.damage + "/" + a.cooldown / 1000.0
+						+ " ="
+						+ PApplet.nfc(a.damage / (a.cooldown / 1000.0f), 2)
 						+ "§";
 			}
 		}

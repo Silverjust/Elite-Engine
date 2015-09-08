@@ -295,8 +295,9 @@ public abstract class Entity implements Informing {
 				&& ((Attacker) this).getBasicAttack() != null) {
 			Attack a = ((Attacker) this).getBasicAttack();
 			if (a.pirce >= 0) {
-				stats += "dps: " + a.damage + "/" + a.cooldown / 1000.0 + " ("
-						+ a.pirce + ")";
+				stats += "dps: " + a.damage + "/" + a.cooldown / 1000.0 + " ="
+						+ PApplet.nfc(a.damage / (a.cooldown / 1000.0f), 2)
+						+ " (" + a.pirce + ")";
 				if (a.targetable == GroundPosition.GROUND)
 					stats += " _§";
 				else if (a.targetable == GroundPosition.AIR)
@@ -305,6 +306,8 @@ public abstract class Entity implements Informing {
 					stats += " _°§";
 			} else {
 				stats += "heal/s: " + a.damage + "/" + a.cooldown / 1000.0
+						+ " ="
+						+ PApplet.nfc(a.damage / (a.cooldown / 1000.0f), 2)
 						+ "§";
 			}
 		}

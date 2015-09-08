@@ -208,7 +208,6 @@ public class Berserker extends Unit implements Attacker {
 			super(x, y, n, u.iconImg);
 			clazz = trainer;
 			setAbilityGetter("getAbility");
-			cooldown = new Berserker(null).buildLeuchte.cooldown;
 			building = ((Building) u).getClass();
 			descr = u.getDesription();
 			stats = u.getStatistics();

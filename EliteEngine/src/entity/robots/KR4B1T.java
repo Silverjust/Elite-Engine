@@ -40,7 +40,7 @@ public class KR4B1T extends Unit implements Attacker {
 		ySize = 20;
 		height = 0;
 
-		kerit = 100;
+		kerit = 90;
 		pax = 0;
 		arcanum = 0;
 		prunam = 1;

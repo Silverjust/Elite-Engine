@@ -26,7 +26,7 @@ public class MeleeAttack extends Attack {
 		super.setup(e);
 		if (isNotOnCooldown() && doRepeat(e))
 			if (getTarget() != null && getTarget().isAlive()) {
-				System.out.println("MeleeAttack.setup()");
+				// System.out.println("MeleeAttack.setup()");
 				isSetup = true;
 				startCooldown();
 			} else {
