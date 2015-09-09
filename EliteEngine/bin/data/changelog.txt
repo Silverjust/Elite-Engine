@@ -17,6 +17,11 @@ Scientists: building an advanced unit
  converts a guineapig
 buffed RocketGuineaPig
  costs and speed
+buffed Healer Damage
+buffed Spawner cooldown
+buffed Shieldy: added explosion
+ when shield breaks
+added ScientistWall
 -------------------------
 added AnenTower
 ---------------------------

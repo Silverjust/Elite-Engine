@@ -60,7 +60,7 @@ public class W4SP extends Unit implements Attacker, Shooter {
 
 		hp = hp_max = 100;
 		armor = 3;
-		speed = 1f;
+		speed = 0.8f;
 		radius = 5;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.AIR;
@@ -75,7 +75,7 @@ public class W4SP extends Unit implements Attacker, Shooter {
 		basicAttack.speed = 0.6f;
 		basicAttack.targetable = GroundPosition.GROUND;
 
-		speeding.setCastTime(2000);
+		speeding.setCastTime(1800);
 		speeding.cooldown = 20000;
 
 		stats = " ";
@@ -127,13 +127,13 @@ public class W4SP extends Unit implements Attacker, Shooter {
 		if (c[2].equals("speed")) {
 			if (speeding.isNotOnCooldown()) {
 				armor = 5;
-				speed += 0.5f;
+				speed += 0.7f;
 				speeding.setTargetFrom(this, this);
 				speeding.setup(this);
 			}
 		} else if (c[2].equals("speeddown")) {
 			armor = 3;
-			speed -= 0.5f;
+			speed -= 0.7f;
 			// speeding.setup(this);
 		}
 	}

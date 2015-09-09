@@ -44,7 +44,7 @@ public class Player {
 		gr.rect(x, y, 280, 20);
 		gr.fill(0);
 		if (nation != null)
-			gr.text(nation.toString(), x, y + ref.app.textAscent()
+			gr.text(nation.officialName(), x, y + ref.app.textAscent()
 					* ref.textScale);
 		gr.text(name, x + 70, y + ref.app.textAscent() * ref.textScale);
 	}

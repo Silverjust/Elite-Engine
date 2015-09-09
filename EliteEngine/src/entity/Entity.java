@@ -268,7 +268,7 @@ public abstract class Entity implements Informing {
 	public String getDesription() {
 		if (descr.equals(" "))
 			return this.getClass().getSimpleName();
-		return descr;
+		return this.getClass().getSimpleName() + "§" + descr;
 	}
 
 	@Override

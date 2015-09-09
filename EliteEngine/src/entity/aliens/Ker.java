@@ -72,8 +72,9 @@ public class Ker extends Unit implements Shooter {
 		shoot.speed = 1;
 
 		descr = " ";
-		stats = "dps: " + shoot.damage + "/" + shoot.cooldown / 1000.0
-				+ " (" + shoot.pirce + ")" + " _°§";
+		stats = "dps: " + shoot.damage + "/" + shoot.cooldown / 1000.0 + " ("
+				+ shoot.pirce + ")" + " ="
+				+ PApplet.nfc(shoot.damage / (shoot.cooldown / 1000.0f), 2) + " _°§";
 		// ************************************
 	}
 

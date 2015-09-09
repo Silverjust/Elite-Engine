@@ -152,4 +152,29 @@ public enum Nation {
 		return info;
 	}
 
+	public String officialName() {
+		String S = null;
+		switch (this) {
+		case AHNEN:
+			S = "ahnen";
+			break;
+		case ALIENS:
+			S = "aliens";
+			break;
+		case ROBOTS:
+			S = "A.W.I";
+			break;
+		case SCIENTISTS:
+			S = "scientists";
+			break;
+		case HUMANS:
+			S = "united humans";
+			break;
+		case NEUTRAL:
+			S = "neutral";
+			break;
+		}
+		return S;
+	}
+
 }

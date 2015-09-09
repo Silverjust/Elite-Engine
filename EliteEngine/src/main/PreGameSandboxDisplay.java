@@ -38,7 +38,7 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 		String[] nations = new String[Nation.values().length];
 		int neutralIndex = -1;
 		for (int i = 0; i < nations.length; i++) {
-			nations[i] = Nation.values()[i].toString();
+			nations[i] = Nation.values()[i].officialName();//TODO official names
 			if (nations[i].equals("neutral")) {
 				nations[i] = " ";
 				neutralIndex = i;
@@ -112,7 +112,7 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 			previousNation = droplist.getSelectedIndex();
 			ClientHandler.send("<setNation "
 					+ enemyArr[playerDroplist.getSelectedIndex()] + " "
-					+ droplist.getSelectedText());
+					+ Nation.values()[droplist.getSelectedIndex()]);
 
 		}
 	}

@@ -24,6 +24,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 
 	ShootAttack basicAttack;
 	MeleeAttack regenerate;
+	MeleeAttack explode;
 
 	public static void loadImages() {
 		String path = path(new Object() {
@@ -43,6 +44,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
 		regenerate = new MeleeAttack(shieldImg, 800);// shield regeneration
+		explode = new MeleeAttack(shieldImg, 1500);// shield break
 
 		setAnimation(walk);
 
@@ -72,6 +74,11 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
 
+		explode.pirce = 0;
+		explode.cooldown = 0;
+		explode.range = 15;
+		explode.setCastTime(100);
+
 		regenerate.damage = 6;
 		regenerate.pirce = -2;
 		regenerate.cooldown = 1500;
@@ -81,7 +88,9 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 
 		descr = " unit with shield";
 		stats = "shield: " + shield_max + " +" + regenerate.damage + "/"
-				+ (regenerate.cooldown / 1000.0) + "s";
+				+ (regenerate.cooldown / 1000.0) 
+				+ " ="
+				+ PApplet.nfc(regenerate.damage / (regenerate.cooldown / 1000.0f), 2);
 		// ************************************
 	}
 
@@ -121,17 +130,32 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
-		basicAttack.updateAbility(this, isServer);
-		regenerate.setTargetFrom(this, this);
+		if (regenerate.isNotOnCooldown()) {
+			regenerate.setTargetFrom(this, this);
+			regenerate.setup(this);
+		}
 		if (hp == hp_max)
 			regenerate.updateAbility(this, isServer);
+		explode.updateAbility(this, isServer);
+		basicAttack.updateAbility(this, isServer);
 	}
 
 	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater.send("<hit " + ((MeleeAttack) a).getTarget().number + " "
-				+ a.damage + " " + a.pirce);
-		// SoundHandler.startIngameSound(HUD.hm, x, y);
+		if (a == basicAttack || a == regenerate) {
+			ref.updater.send("<hit " + ((MeleeAttack) a).getTarget().number
+					+ " " + a.damage + " " + a.pirce);
+			// SoundHandler.startIngameSound(HUD.hm, x, y);
+		} else if (a == explode) {
+			for (Entity e : ref.updater.entities) {
+				if (e != null & e.isEnemyTo(this)
+						&& e.isInRange(x, y, e.radius + a.range)
+						&& e.groundPosition == GroundPosition.GROUND) {
+					ref.updater.send("<hit " + e.number + " " + a.damage + " "
+							+ a.pirce);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -145,6 +169,7 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 				shield -= damage;
 				if (shield < 0) {
 					hp += shield * 2;
+					sendAnimation("explode " + -shield * 2);
 					shield = 0;
 				}
 			} else {
@@ -161,6 +186,17 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 	}
 
 	@Override
+	public void exec(String[] c) {
+		super.exec(c);
+		if ("explode".equals(c[2])) {
+			byte n = Byte.parseByte(c[3]);
+			explode.damage = n;
+			explode.setTargetFrom(this, this);
+			explode.setup(this);
+		}
+	}
+
+	@Override
 	public void renderGround() {
 		drawSelected();
 		getAnimation().draw(this, direction, currentFrame);
@@ -168,6 +204,9 @@ public class ShieldGuineaPig extends Unit implements Attacker, Shooter {
 			ref.app.tint(255, ((float) shield / shield_max * 255f));
 			regenerate.draw(this, direction, currentFrame);
 			ref.app.tint(255);
+		}
+		if (explode.isSetup() && !explode.isEvent()) {
+			explode.draw(this, direction, currentFrame);
 		}
 		basicAttack.drawAbility(this, direction);
 		drawTaged();

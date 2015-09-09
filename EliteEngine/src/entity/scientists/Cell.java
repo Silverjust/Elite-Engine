@@ -57,8 +57,8 @@ public class Cell extends Unit implements Attacker {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = 60;
-		healAmount = 10;
-		heal.damage = 5;
+		healAmount = 15;
+		heal.damage = 10;
 		heal.pirce = 0;
 		heal.cooldown = 1500;
 		heal.range = 30;

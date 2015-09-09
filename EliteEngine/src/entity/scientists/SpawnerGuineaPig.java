@@ -52,7 +52,7 @@ public class SpawnerGuineaPig extends Unit {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		spawnRange = 90;
-		spawn.cooldown = 10000;
+		spawn.cooldown = 6000;
 		spawn.setCastTime(500);
 
 		descr = " ";
