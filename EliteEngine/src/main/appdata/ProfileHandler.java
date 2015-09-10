@@ -53,8 +53,9 @@ public class ProfileHandler implements appdataInfos {
 				oldProfile.setFloat("rate", 1000);
 			}
 			if (!oldProfile.hasKey("version")) {
-				oldProfile.setFloat("version", 1.5f);
+				oldProfile.setString("version", VersionCombiner.version);
 			}
+			VersionCombiner.versionSystemChange(oldProfile);
 			profile = oldProfile;
 			ref.app.saveJSONObject(profile, appdataInfos.path + "info.json");
 		} catch (Exception e) {
