@@ -200,7 +200,7 @@ public class F4CT0RY extends Unit implements Shooter {
 		public void updateAbility(Entity e, boolean isServer) {
 			if (target != null && isEvent()) {
 				if (isServer) {
-					ref.updater.send("<spawn M1N1B0T " + e.player.ip + " "
+					ref.updater.send("<spawn M1N1B0T " + e.player.user.ip + " "
 							+ e.x + " " + (e.y + e.radius + 8) + " " + target.x
 							+ " " + target.y);
 					/*

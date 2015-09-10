@@ -198,7 +198,7 @@ public class GuineaPig extends Unit implements Attacker, Shooter, Equiping {
 				if (isServer) {
 					ref.updater.send("<remove " + e.number);
 					ref.updater.send(//
-							"<spawn " + unit + " " + e.player.ip + " " + e.x
+							"<spawn " + unit + " " + e.player.user.ip + " " + e.x
 									+ " " + e.y + " " + ((Unit) e).xTarget
 									+ " " + ((Unit) e).yTarget
 									+ (e.isSelected ? " select" : ""));

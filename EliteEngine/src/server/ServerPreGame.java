@@ -3,8 +3,8 @@ package server;
 import main.PreGameNormalDisplay;
 import shared.ContentListHandler;
 import shared.Mode;
-import shared.Player;
 import shared.PreGame;
+import shared.User;
 import shared.ref;
 
 public class ServerPreGame extends PreGame {
@@ -34,11 +34,11 @@ public class ServerPreGame extends PreGame {
 
 	@Override
 	public void addPlayer(String ip, String name) {
-		if (!player.containsKey(ip)) {
-			Player p = Player.createPlayer(ip, name);
-			player.put(ip, p);
-		} else if (player.get(ip).name.equals(ip)) {
-			player.get(ip).name = name;
+		if (!users.containsKey(ip)) {
+			User u = new User(ip, name);
+			users.put(ip, u);
+		} else if (users.get(ip).name.equals(ip)) {
+			users.get(ip).name = name;
 		}
 	}
 

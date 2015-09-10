@@ -81,13 +81,13 @@ public class ProfileHandler implements appdataInfos {
 
 			if (ref.updater.gameState == GameState.WON) {
 				int wins = profile.getInt("wins");
-				int nationWins = profile.getInt(ref.player.nation.toString()
+				int nationWins = profile.getInt(ref.player.getNation().toString()
 						+ "-wins");
 				wins++;
 				nationWins++;
 
 				profile.setInt("wins", wins);
-				profile.setInt(ref.player.nation.toString() + "-wins",
+				profile.setInt(ref.player.getNation().toString() + "-wins",
 						nationWins);
 			}
 		}

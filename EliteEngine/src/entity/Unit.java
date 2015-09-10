@@ -159,8 +159,9 @@ public abstract class Unit extends Entity {
 	}
 
 	public void info() {
-		HUD.chat.println(this.getClass().getSimpleName() + number, "(" + x
-				+ "|" + y + ")->(" + xTarget + "|" + yTarget + ")\nhp:" + hp);
+		HUD.chat.println(this.getClass().getSimpleName() + "_" + number, "("
+				+ x + "|" + y + ")->(" + xTarget + "|" + yTarget + ")\nhp:"
+				+ hp);
 	}
 
 	@Override

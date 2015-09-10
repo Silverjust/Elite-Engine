@@ -69,7 +69,7 @@ public class Chat {
 	}
 
 	public void println(String name, String s) {
-		if (!name.equals("game") && GameDrawer.commandoutput) {
+		if (!name.equals("SERVER") && GameDrawer.commandoutput) {
 			ArrayList<String> chatText = new ArrayList<String>();
 			chatText.add(name + ">>" + s);
 			// chatHistory.setText((String[]) chatText.toArray());
@@ -90,10 +90,10 @@ public class Chat {
 				}
 			} else {
 				if (s.length() > 0 && s.charAt(0) == '/') {
-					HUD.chat.println(ref.player.name, s);
+					HUD.chat.println(ref.player.user.name, s);
 					CommandHandler.executeCommands(s);
 				} else {
-					ClientHandler.send("<say " + ref.player.ip + " " + s);
+					ClientHandler.send("<say " + ref.player.user.ip + " " + s);
 				}
 			}
 			textfield.setText("");

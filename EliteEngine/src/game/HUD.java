@@ -27,10 +27,10 @@ public class HUD {
 		arcImg = ImageHandler.load("", "Arcanum");
 		prunImg = ImageHandler.load("", "Prunam");
 		if (ref.player != null) {
-			overlay = ImageHandler.load(ref.player.nation.toString() + "/",
+			overlay = ImageHandler.load(ref.player.getNation().toString() + "/",
 					"overlay");
-			sound = ref.minim.loadFile(ref.player.nation.toString() + "/"
-					+ ref.player.nation.toString() + ".mp3");
+			sound = ref.minim.loadFile(ref.player.getNation().toString() + "/"
+					+ ref.player.getNation().toString() + ".mp3");
 			/** soundfiles are only tests and will be removed */
 		}
 	}
@@ -92,12 +92,12 @@ public class HUD {
 	}
 
 	public static String[] buttonImageFilename() {
-		if (ref.player == null || ref.player.nation == null)
+		if (ref.player == null || ref.player.getNation() == null)
 			return null;
 		return new String[] {
-				ref.player.nation.toString() + "/button_normal.png",
-				ref.player.nation.toString() + "/button_mouseover.png",
-				ref.player.nation.toString() + "/button_clicked.png" };
+				ref.player.getNation().toString() + "/button_normal.png",
+				ref.player.getNation().toString() + "/button_mouseover.png",
+				ref.player.getNation().toString() + "/button_clicked.png" };
 	}
 
 	public static void dispose() {

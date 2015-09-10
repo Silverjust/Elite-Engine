@@ -13,7 +13,9 @@ import shared.ref;
 
 public class ServerUpdater extends Updater {
 	public ServerUpdater() {
-		player = ref.preGame.player;
+		for (String key : ref.preGame.users.keySet()) {
+			player.put(key, Player.createPlayer(ref.preGame.users.get(key)));
+		}
 		neutral = Player.createNeutralPlayer();
 
 		map = new Map(ref.preGame.map);
@@ -71,7 +73,7 @@ public class ServerUpdater extends Updater {
 	public void write(String ip, String[] text) {
 		String name = null;
 		if (ref.updater.player.get(ip) != null)
-			name = ref.updater.player.get(ip).name;
+			name = ref.updater.player.get(ip).user.name;
 		if (name == null)
 			name = ip;
 		String completeText = "";
@@ -94,7 +96,7 @@ public class ServerUpdater extends Updater {
 		ArrayList<String> spawns = new ArrayList<String>();
 		for (Entity entity : entities) {
 			spawns.add("<spawn " + entity.getClass().getSimpleName() + " "
-					+ entity.player.ip + " " + entity.x + " " + entity.y);
+					+ entity.player.user.ip + " " + entity.x + " " + entity.y);
 		}
 		for (Entity entity : entities) {
 			ref.updater.send("<remove " + entity.number);

@@ -4,8 +4,8 @@ import processing.data.JSONObject;
 import shared.ContentListHandler;
 import shared.Mode;
 import shared.Nation;
-import shared.Player;
 import shared.PreGame;
+import shared.User;
 import shared.ref;
 
 public class MainPreGame extends PreGame {
@@ -20,12 +20,12 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void closeBecauseServer() {
-		player.clear();
-		name = "";
+		users.clear();
+		name = null;
 	}
 
 	public void setup() {
-		if (GameSettings.singlePlayer&&!GameSettings.tutorial)
+		if (GameSettings.singlePlayer && !GameSettings.tutorial)
 			display = new PreGameSandboxDisplay();
 		else
 			display = new PreGameNormalDisplay();
@@ -39,24 +39,24 @@ public class MainPreGame extends PreGame {
 
 	@Override
 	public void addPlayer(String ip, String name) {
-		if (!player.containsKey(ip)) {
-			Player p = Player.createPlayer(ip, name);
-			p.color = ref.app.color(200, 0, 0);// TODO get color setting
-			player.put(ip, p);
+		if (!users.containsKey(ip)) {
+			// Player p = Player.createPlayer(ip, name);
+			// p.color = ref.app.color(200, 0, 0);// TODO get color setting
+			users.put(ip, new User(ip, name));
 		}
 	}
 
 	public void addThisPlayer(String name) {
-		Player p = Player.createPlayer(ClientHandler.identification, name);
-		ref.player = p;
-		p.color = ref.app.color(0, 255, 100);// TODO get color setting
-		player.put(ClientHandler.identification, p);
+		User u = new User(ClientHandler.identification, name);
+		// ref.player = Player.createPlayer(u);
+		// p.color = ref.app.color(0, 255, 100);// TODO get color setting
+		users.put(ClientHandler.identification, u);
 
 	}
 
 	public void tryStart() {
-		for (String key : player.keySet())
-			if (player.get(key).nation == null)
+		for (String key : users.keySet())
+			if (users.get(key).nation == null)
 				return;
 		if (map == null)
 			return;
@@ -64,14 +64,13 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void setupPlayer() {
-
 		if (!GameSettings.singlePlayer) {
 			System.out.println(GameSettings.singlePlayer);
 			addThisPlayer(name);
 		} else {
 			addThisPlayer(name);
 			addPlayer("" + 2, "n000bBot");
-			player.get("2").nation = Nation.ALIENS;
+			users.get("2").nation = Nation.ALIENS;
 		}
 	}
 
@@ -116,15 +115,23 @@ public class MainPreGame extends PreGame {
 	}
 
 	@Override
+	public User getUser(String string) {
+		if (string.equals(""))//returns this user
+			return users.get(ClientHandler.identification);
+		return super.getUser(string);
+	}
+
+	@Override
 	public void dispose() {
 		if (display != null) {
 			display.dispose();
 		}
 	}
+
 	@Override
 	public void setActive(boolean b) {
 		if (display != null) {
-			display.setActive( b);
+			display.setActive(b);
 		}
 	}
 
@@ -132,6 +139,7 @@ public class MainPreGame extends PreGame {
 		public static boolean singlePlayer;
 		public static boolean sandbox;
 		public static boolean tutorial;
+
 		public static void setupGameSettings() {
 			singlePlayer = false;
 			sandbox = false;

@@ -55,11 +55,11 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 	}
 
 	private void updatePlayerDroplist() {
-		if (!preGame.player.isEmpty()) {
-			String[] enemyArr = new String[preGame.player.size()];
+		if (!preGame.users.isEmpty()) {
+			String[] enemyArr = new String[preGame.users.size()];
 			int i = 0;
-			for (String key : preGame.player.keySet()) {
-				enemyArr[i] = preGame.player.get(key).name;
+			for (String key : preGame.users.keySet()) {
+				enemyArr[i] = preGame.users.get(key).name;
 				i++;
 			}
 			playerDroplist.setItems(enemyArr, 0);
@@ -69,13 +69,13 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 	public void handleDroplistSelectPlayer(GDropList droplist, GEvent event) {
 		if (event == GEvent.SELECTED
 				&& ((MainApp) ref.app).mode == Mode.PREGAME) {
-			String[] enemyArr = new String[preGame.player.size()];
+			String[] enemyArr = new String[preGame.users.size()];
 			int i = 0;
-			for (String key : preGame.player.keySet()) {
-				enemyArr[i] = preGame.player.get(key).ip;
+			for (String key : preGame.users.keySet()) {
+				enemyArr[i] = preGame.users.get(key).ip;
 				i++;
 			}
-			Nation n = preGame.player
+			Nation n = preGame.users
 					.get(enemyArr[droplist.getSelectedIndex()]).nation;
 			byte b = -1;
 			if (n != null) {
@@ -93,10 +93,10 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 	public void handleDroplistSelectNation(GDropList droplist, GEvent event) {
 		if (event == GEvent.SELECTED
 				&& ((MainApp) ref.app).mode == Mode.PREGAME) {
-			String[] enemyArr = new String[preGame.player.size()];
+			String[] enemyArr = new String[preGame.users.size()];
 			int i = 0;
-			for (String key : preGame.player.keySet()) {
-				enemyArr[i] = preGame.player.get(key).ip;
+			for (String key : preGame.users.keySet()) {
+				enemyArr[i] = preGame.users.get(key).ip;
 				i++;
 			}
 			int neutralIndex = -1;
@@ -119,8 +119,8 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 
 	public void handleAddPlayer(GButton button, GEvent event) {
 		if (event == GEvent.CLICKED && ((MainApp) ref.app).mode == Mode.PREGAME) {
-			preGame.addPlayer(preGame.player.size() + 1 + "", "n000bBot"
-					+ preGame.player.size());
+			preGame.addPlayer(preGame.users.size() + 1 + "", "n000bBot"
+					+ preGame.users.size());
 			updatePlayerDroplist();
 		}
 	}

@@ -65,11 +65,11 @@ public class GUI {
 
 		player.beginDraw();
 		player.background(255);
-		if (!ref.preGame.player.isEmpty()) {
-			playerSlider.setLimits(0, ref.preGame.player.size() * 20 - 19);
+		if (!ref.preGame.users.isEmpty()) {
+			playerSlider.setLimits(0, ref.preGame.users.size() * 20 - 19);
 			int i = 0;
-			for (String key : ref.preGame.player.keySet()) {
-				ref.preGame.player.get(key).display(player, 0,
+			for (String key : ref.preGame.users.keySet()) {
+				ref.preGame.users.get(key).display(player, 0,
 						20 * i - playerSlider.getValueI());
 				i++;
 			}

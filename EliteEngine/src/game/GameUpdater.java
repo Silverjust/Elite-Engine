@@ -18,7 +18,15 @@ public class GameUpdater extends Updater {
 	public Input input;
 
 	public GameUpdater() {
-		player = ref.preGame.player;
+		for (String key : ref.preGame.users.keySet()) {
+			Player p = Player.createPlayer(ref.preGame.users.get(key));
+			if (p.user.ip == ClientHandler.identification) {
+				p.color = ref.app.color(0, 255, 100);
+				ref.player = p;
+			} else
+				p.color = ref.app.color(200, 0, 0);
+			player.put(key, p);
+		}
 		neutral = Player.createNeutralPlayer();
 		input = new Input();
 		map = new Map(ref.preGame.map);

@@ -274,7 +274,7 @@ public class Berserker extends Unit implements Attacker {
 			if (canPlaceAt(x, y)) {
 				ref.updater.send("<spawn "
 						+ buildable.getClass().getSimpleName() + " "
-						+ builder.player.ip + " " + x + " " + y);
+						+ builder.player.user.ip + " " + x + " " + y);
 				buildable.buyFrom(builder.player);
 			}
 			Entity builder = null;

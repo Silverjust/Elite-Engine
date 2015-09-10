@@ -32,7 +32,7 @@ public class ActivesGrid {
 	public ActivesGrid() {
 		Active.x = x;
 		Active.y = y;
-		setup(ref.player.nation);
+		setup(ref.player.getNation());
 		selectionChange(false);
 	}
 
@@ -76,7 +76,7 @@ public class ActivesGrid {
 		System.out.println("setupSandbox");
 		SandboxBuilding.commandRange = Integer.MAX_VALUE;
 		addActive(1, 1, SandboxBuilding.DeleteActive.class, true);
-		addBuildActive(2, 1, SandboxBuilding.class, ref.player.nation
+		addBuildActive(2, 1, SandboxBuilding.class, ref.player.getNation()
 				.getNationInfo().getMainBuilding(), true);
 		addBuildActive(1, 2, SandboxBuilding.class, Kerit.class, true);
 		addBuildActive(2, 2, SandboxBuilding.class, Pax.class, true);

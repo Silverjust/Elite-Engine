@@ -2,59 +2,43 @@ package shared;
 
 import java.util.ArrayList;
 
-import processing.core.PGraphics;
 import entity.Entity;
 import entity.MainBuilding;
 import game.GameDrawer;
 
 public class Player {
-	public String ip;
-	public String name;
 	public int color;
-	public Nation nation;
 	public int kerit, pax, arcanum, prunam;
 
 	public ArrayList<Entity> visibleEntities = new ArrayList<Entity>();
-	public boolean online;
-	public boolean isReady;
+	public User user;
 	public MainBuilding mainBuilding;
 
 	public static Player createNeutralPlayer() {
 		Player p = new Player();
-		p.online = true;
+		p.user = new User("", "neutral");
+		p.user.online = true;
 		p.color = ref.app.color(150);
-		p.nation = Nation.NEUTRAL;
+		p.setNation(Nation.NEUTRAL);
 		return p;
 	}
 
-	public static Player createPlayer(String ip, String name) {
+	public static Player createPlayer(User user) {
 		Player p = new Player();
-		p.ip = ip;
-		p.name = name;
+		p.user = user;
 		p.kerit = 200;
-		p.online = true;
 		return p;
 	}
 
 	private Player() {
 	}
 
-	public void display(PGraphics gr, int x, int y) {
-		gr.fill(255);
-		gr.rect(x, y, 280, 20);
-		gr.fill(0);
-		if (nation != null)
-			gr.text(nation.officialName(), x, y + ref.app.textAscent()
-					* ref.textScale);
-		gr.text(name, x + 70, y + ref.app.textAscent() * ref.textScale);
-	}
-
 	@Override
 	public String toString() {
-		if (online) {
-			return "[" + name + "]";
+		if (user.online) {
+			return "[" + user.name + "]";
 		}
-		return "offline:[" + name + "]";
+		return "offline:[" + user.name + "]";
 	}
 
 	public void give(String resource, int amount) {
@@ -90,6 +74,14 @@ public class Player {
 				buyable = false;
 		}
 		return buyable;
+	}
+
+	public Nation getNation() {
+		return user.nation;
+	}
+
+	public void setNation(Nation nation) {
+		user.nation = nation;
 	}
 
 }

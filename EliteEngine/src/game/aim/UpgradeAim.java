@@ -26,7 +26,7 @@ public class UpgradeAim extends BuildAim {
 		if (canPlaceAt(x, y)) {
 			ref.updater.send("<remove " + replaced.number);
 			ref.updater.send("<spawn " + buildable.getClass().getSimpleName()
-					+ " " + builder.player.ip + " " + x + " " + y);
+					+ " " + builder.player.user.ip + " " + x + " " + y);
 			((Entity) buildable).buyFrom(builder.player);
 		}
 	}

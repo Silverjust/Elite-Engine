@@ -118,11 +118,11 @@ public enum Nation {
 
 	// TODO remove, when all nations are stable
 	public static void setNationsToPlayableNations() {
-		for (String key : ref.preGame.player.keySet()) {
-			Nation n = ref.preGame.player.get(key).nation;
+		for (String key : ref.preGame.users.keySet()) {
+			Nation n = ref.preGame.users.get(key).nation;
 			if (n != Nation.AHNEN && n != Nation.ALIENS && n != Nation.ROBOTS
 					&& n != Nation.HUMANS && n != Nation.SCIENTISTS)
-				ref.preGame.player.get(key).nation = Nation.ALIENS;
+				ref.preGame.users.get(key).nation = Nation.ALIENS;
 		}
 	}
 

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public abstract class PreGame {
 
-	public HashMap<String, Player> player = new HashMap<String, Player>();
+	public HashMap<String, User> users = new HashMap<String, User>();
 	 public String map;
 
 	public abstract void startLoading();
@@ -19,5 +19,9 @@ public abstract class PreGame {
 	}
 
 	public void setActive(boolean b) {		
+	}
+
+	public User getUser(String string) {
+		return users.get(string);
 	}
 }

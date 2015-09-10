@@ -41,10 +41,10 @@ public class MouseSelection {
 					e.select();
 				if (PApplet.dist(x1, y1, e.x, e.y - e.flyHeight()) <= e.radius) {
 					e.select();
-					if (e.player.nation != HUD.activesGrid.nation
-							&& e.player.nation != Nation.NEUTRAL)
+					if (e.player.getNation() != HUD.activesGrid.nation
+							&& e.player.getNation() != Nation.NEUTRAL)
 						// for commanding other nations
-						HUD.activesGrid.setup(e.player.nation);
+						HUD.activesGrid.setup(e.player.getNation());
 				}
 			}
 		GroupHandler.recentGroup = null;

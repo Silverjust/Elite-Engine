@@ -40,23 +40,23 @@ public class MineAim extends UpgradeAim {
 	private void changeMine(Entity e) {
 		try {
 			if (e.getClass().equals(Kerit.class)) {
-				NationInfo n = builder.player.nation.getNationInfo();
+				NationInfo n = builder.player.getNation().getNationInfo();
 				buildable = n.getKeritMine().getConstructor(String[].class)
 						.newInstance(new Object[] { null });
 				oldBuildable = Kerit.class;
 			} else if (e.getClass().equals(Pax.class)) {
-				NationInfo n = builder.player.nation.getNationInfo();
+				NationInfo n = builder.player.getNation().getNationInfo();
 				buildable = n.getPaxDrillTower().getConstructor(String[].class)
 						.newInstance(new Object[] { null });
 				oldBuildable = Pax.class;
 			} else if (e.getClass().equals(Arcanum.class)) {
-				NationInfo n = builder.player.nation.getNationInfo();
+				NationInfo n = builder.player.getNation().getNationInfo();
 				buildable = n.getArcanumMine().getConstructor(String[].class)
 						.newInstance(new Object[] { null });
 				oldBuildable = Arcanum.class;
 
 			} else if (e.getClass().equals(Prunam.class)) {
-				NationInfo n = builder.player.nation.getNationInfo();
+				NationInfo n = builder.player.getNation().getNationInfo();
 				buildable = n.getPrunamHarvester()
 						.getConstructor(String[].class)
 						.newInstance(new Object[] { null });

@@ -71,7 +71,7 @@ public class Tutorial extends Unit {
 
 			break;
 		case 2:
-			ref.updater.send("<give " + ref.player.ip + " kerit " + 100);
+			ref.updater.send("<give " + ref.player.user.ip + " kerit " + 100);
 			for (Entity e : ref.updater.entities) {
 				if (e.getClass().equals(Kerit.class)) {
 					x = e.x;
@@ -97,7 +97,7 @@ public class Tutorial extends Unit {
 		case 4:
 			yTarget -= 100;
 			isMoving = true;
-			ref.updater.send("<give " + ref.player.ip + " kerit " + 400);
+			ref.updater.send("<give " + ref.player.user.ip + " kerit " + 400);
 			HUD.chat.println(tut, "###########################");
 			HUD.chat.println(tut, "you are producing kerit now");
 			HUD.chat.println(tut, "wait until you have 500 kerit and then press \""
@@ -112,7 +112,7 @@ public class Tutorial extends Unit {
 			}
 			break;
 		case 6:
-			ref.updater.send("<give " + ref.player.ip + " kerit " + 400);
+			ref.updater.send("<give " + ref.player.user.ip + " kerit " + 400);
 			HUD.chat.println(tut, "###########################");
 			HUD.chat.println(tut, "you built a barrack");
 			HUD.chat.println(tut,

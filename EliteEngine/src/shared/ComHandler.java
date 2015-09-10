@@ -130,20 +130,21 @@ public class ComHandler {
 					} else {// other player identify
 						ClientHandler.send("<identifying "
 								+ ClientHandler.identification + " "
-								+ ref.player.name);
+								+ ref.preGame.getUser("").name);
 					}
 				} else {
 					if (c[1].equals("server")) {
 						((MainApp) ref.app).mode = Mode.PREGAME;
 					}
-					System.out.println("identifying " + ref.player.name);
+					System.out.println("identifying "
+							+ ref.preGame.getUser("").name);
 					ClientHandler.send("<identifying "
 							+ ClientHandler.identification + " "
-							+ ref.player.name);
-					if (ref.player.nation != null)
+							+ ref.preGame.getUser("").name);
+					if (ref.preGame.getUser("").nation != null)
 						ClientHandler.send("<setNation "
 								+ ClientHandler.identification + " "
-								+ ref.player.nation.toString());
+								+ ref.preGame.getUser("").nation.toString());
 					if (ref.preGame.map != null)
 						ClientHandler.send("<setMap "
 								+ ClientHandler.identification + " "
@@ -158,7 +159,7 @@ public class ComHandler {
 				break;
 			case "<setNation":
 				// System.out.println(c[2]);
-				ref.preGame.player.get(c[1]).nation = Nation.fromString(c[2]);
+				ref.preGame.users.get(c[1]).nation = Nation.fromString(c[2]);
 				break;
 			case "<setMap":
 				ref.preGame.setMap(c[2]);
@@ -171,7 +172,7 @@ public class ComHandler {
 				break;
 			case "<ready":
 				// System.out.println(ref.preGame.player);
-				ref.preGame.player.get(c[1]).isReady = true;
+				ref.preGame.users.get(c[1]).isReady = true;
 				ref.loader.tryStartGame();
 				break;
 			case "<startGame":
@@ -194,7 +195,8 @@ public class ComHandler {
 					ref.updater.gameState = GameState.WON;
 				}
 				if (ref.app instanceof ServerApp) {
-					((ServerApp) ref.app).gui.addChatText(p.name + " has lost");
+					((ServerApp) ref.app).gui.addChatText(p.user.name
+							+ " has lost");
 				} else {
 					HUD.menue = new endGameMenu();
 					float f = Float.parseFloat(c[2]);

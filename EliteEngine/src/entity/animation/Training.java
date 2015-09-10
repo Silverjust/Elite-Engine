@@ -32,7 +32,7 @@ public class Training extends Ability {
 				ref.updater.send("<spawn "
 						+ toTrain.getClass().getSimpleName()
 						+ " "
-						+ e.player.ip
+						+ e.player.user.ip
 						+ " "
 						+ (e.x + (xt - e.x) / PApplet.dist(e.x, e.y, xt, yt)
 								* (e.radius + toTrain.radius))

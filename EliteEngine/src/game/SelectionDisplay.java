@@ -38,7 +38,7 @@ public class SelectionDisplay {
 		graphic.textSize(20);
 		// graphic.textLeading(100);
 		selectedEntitiesSlider = new GCustomSlider(ref.app, x + w + 20, y + 10,
-				h - 20, 20, ref.player.nation.toString());
+				h - 20, 20, ref.player.getNation().toString());
 		selectedEntitiesSlider.setRotation(PConstants.TAU / 4,
 				GControlMode.CORNER);
 		selectedEntitiesSlider.setLimits(0, 0, 1);

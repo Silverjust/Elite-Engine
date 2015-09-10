@@ -61,23 +61,26 @@ public class Helper {
 		Player p;
 		p = ref.updater.player.get(name);
 		if (p != null)
-			return p.ip;// ip from ip
+			return p.user.ip;// ip from ip
 		for (String key : ref.updater.player.keySet()) {
-			if (ref.updater.player.get(key).name.equalsIgnoreCase(name))
-				return ref.updater.player.get(key).ip;// ip from name
+			if (ref.updater.player.get(key).user.name.equalsIgnoreCase(name))
+				return ref.updater.player.get(key).user.ip;// ip from name
 		}
 		try {
 			String[] a = ref.updater.player.keySet().toArray(
 					new String[ref.updater.player.keySet().size()]);
-			return ref.updater.player.get(a[Integer.parseInt(name)]).ip;
+			return ref.updater.player.get(a[Integer.parseInt(name)]).user.ip;
 			// ip from number
 		} catch (Exception e) { // not a number
 		}
-		return ref.player.ip; // ip from this player
+		return ref.player.user.ip; // ip from this player
 	}
 
 	public static String ipToName(String ip) {
-		String name = ref.updater.player.get(ip).name;
+		Player p = ref.updater.player.get(ip);
+		String name = null;
+		if (p != null)
+			name = p.user.name;
 		if (name != null)
 			return name;
 		return ip;

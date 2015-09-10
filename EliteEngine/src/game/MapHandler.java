@@ -30,11 +30,11 @@ public class MapHandler {
 					}
 					String type = entity.getString("type");
 					if (type.equals("MainBuilding")) {
-						type = ref.updater.player.get(player).nation
+						type = ref.updater.player.get(player).getNation()
 								.getNationInfo().getMainBuilding()
 								.getSimpleName();
 					} else if (type.equals("KeritMine")) {
-						type = ref.updater.player.get(player).nation
+						type = ref.updater.player.get(player).getNation()
 								.getNationInfo().getKeritMine().getSimpleName();
 					}
 					/*
@@ -84,7 +84,7 @@ public class MapHandler {
 
 				atributes.setString("type", type);
 				int playerNumber = new ArrayList<String>(
-						ref.updater.player.keySet()).indexOf(e.player.ip);
+						ref.updater.player.keySet()).indexOf(e.player.user.ip);
 				atributes.setInt("player", playerNumber);
 				atributes.setFloat("x", e.x);
 				atributes.setFloat("y", e.y);

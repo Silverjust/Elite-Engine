@@ -57,7 +57,7 @@ public class SandboxBuilding extends Building implements Commander {
 	@Override
 	public PImage preview() {
 		System.out.println("woat?");
-		ref.updater.send("<say SERVER " + player.name + "cheats");
+		ref.updater.send("<say SERVER " + player.user.name + "cheats");
 		return standImg;
 	}
 
@@ -126,7 +126,7 @@ public class SandboxBuilding extends Building implements Commander {
 			for (Entity e : ref.updater.entities) {
 				if (e instanceof SandboxBuilding) {
 					i = new ArrayList<String>(ref.updater.player.keySet())
-							.indexOf(e.player.ip) + 1;
+							.indexOf(e.player.user.ip) + 1;
 				}
 			}
 			if (i >= ref.updater.player.keySet().size())

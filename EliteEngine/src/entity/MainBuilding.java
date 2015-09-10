@@ -17,7 +17,7 @@ public abstract class MainBuilding extends Building {
 	@Override
 	protected void onDeath() {
 		super.onDeath();
-		ref.updater.send("<lost " + player.ip + " " + ProfileHandler.getRate());
+		ref.updater.send("<lost " + player.user.ip + " " + ProfileHandler.getRate());
 	}
 
 }

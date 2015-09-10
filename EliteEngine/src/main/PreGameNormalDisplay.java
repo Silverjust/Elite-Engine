@@ -86,11 +86,11 @@ public class PreGameNormalDisplay {
 		ref.app.background(50);
 		playerList.beginDraw();
 		playerList.background(255);
-		if (!ref.preGame.player.isEmpty()) {
-			playerSlider.setLimits(0, ref.preGame.player.size() * 20 - 19);
+		if (!ref.preGame.users.isEmpty()) {
+			playerSlider.setLimits(0, ref.preGame.users.size() * 20 - 19);
 			int i = 0;
-			for (String key : preGame.player.keySet()) {
-				preGame.player.get(key).display(playerList, 0,
+			for (String key : preGame.users.keySet()) {
+				preGame.users.get(key).display(playerList, 0,
 						20 * i - playerSlider.getValueI());
 				i++;
 			}
@@ -106,7 +106,7 @@ public class PreGameNormalDisplay {
 				// System.out.println(nationButtons[i] == button);
 				if (nationButtons[i] == button) {
 					nationButtons[i].setSwitch(true);
-					ClientHandler.send("<setNation " + ref.player.ip + " "
+					ClientHandler.send("<setNation " + ref.preGame.getUser("").ip + " "
 							+ Nation.fromNumber(i).toString());
 				} else {
 					nationButtons[i].setSwitch(false);
@@ -126,7 +126,7 @@ public class PreGameNormalDisplay {
 				@SuppressWarnings("unused")
 				JSONObject mapData = ref.app.loadJSONObject(file);
 				previousMap = list.getSelectedIndex();
-				ClientHandler.send("<setMap " + ref.player.ip + " "
+				ClientHandler.send("<setMap " + ref.player.user.ip + " "
 						+ intNames[list.getSelectedIndex()]);
 			} catch (Exception e) {
 				System.err.println(file

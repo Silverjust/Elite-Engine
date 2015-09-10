@@ -15,7 +15,7 @@ public abstract class Updater {
 
 	public Map map;
 
-	public HashMap<String, Player> player;
+	public HashMap<String, Player> player = new HashMap<String, Player>();
 	public Player neutral;
 
 	public GameState gameState = GameState.PLAY;
@@ -28,7 +28,7 @@ public abstract class Updater {
 	public boolean arePlayerReady() {
 		boolean b = true;
 		for (String key : player.keySet()) {
-			if (!player.get(key).isReady)
+			if (!player.get(key).user.isReady)
 				b = false;
 		}
 		return b;
