@@ -59,7 +59,6 @@ public class Colum extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions(boolean isServer) {// colum: no info to client
-		// TODO insta stand command from nowhere
 		if (isServer&&heal.isNotOnCooldown()) {
 			heal.startCooldown();
 			heal.setTargetFrom(this, this);

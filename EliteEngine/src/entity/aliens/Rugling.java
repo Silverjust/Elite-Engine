@@ -119,9 +119,12 @@ public class Rugling extends Unit implements Attacker {
 	}
 
 	@Override
+	public void select() {
+		//do not select
+	}
+
+	@Override
 	public void renderGround() {
-		isSelected = false;// cant be selected
-		// drawSelected();
 		getAnimation().draw(this, direction, currentFrame);
 		drawTaged();
 	}

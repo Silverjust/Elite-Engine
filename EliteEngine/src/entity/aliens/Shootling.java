@@ -119,8 +119,11 @@ public class Shootling extends Unit implements Shooter {
 	}
 
 	@Override
+	public void select() { // do not select
+	}
+
+	@Override
 	public void renderGround() {
-		isSelected = false;
 		drawSelected();
 		getAnimation().draw(this, direction, currentFrame);
 		basicAttack.drawAbility(this, direction);

@@ -53,9 +53,9 @@ public class SN41L10N extends Unit implements Shooter {
 		ySize = 30;
 		height = 5;
 
-		kerit = 700;
+		kerit = 800;
 		pax = 0;
-		arcanum = 50;
+		arcanum = 25;
 		prunam = 0;
 		trainTime = 4000;
 
@@ -75,7 +75,7 @@ public class SN41L10N extends Unit implements Shooter {
 		basicAttack.setCastTime(200);// eventtime is defined by target distance
 		basicAttack.speed = 1f;
 
-		descr = " ";
+		descr = "~Shellion";
 		stats = " ";
 		// ************************************
 	}

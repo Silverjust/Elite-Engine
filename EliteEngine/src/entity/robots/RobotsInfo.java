@@ -59,7 +59,7 @@ public class RobotsInfo extends NationInfo {
 		grid.addTrainActive(1, 3, RobotsKaserne.class, M1N1B0T.class, false);
 		grid.addTrainActive(2, 3, RobotsKaserne.class, B0T.class, false);
 		grid.addTrainActive(3, 3, RobotsKaserne.class, W4SP.class, false);
-		grid.addTrainActive(2, 2, RobotsKaserne.class, ANT10N.class, false);
+		grid.addTrainActive(2, 2, RobotsKaserne.class, PL0S10N.class, false);
 		grid.addTrainActive(3, 2, RobotsKaserne.class, SN41L10N.class, false);
 		grid.addTrainActive(2, 1, RobotsKaserne.class, KR4B1T.class, false);
 		grid.addTrainActive(3, 1, RobotsKaserne.class, F4CT0RY.class, false);

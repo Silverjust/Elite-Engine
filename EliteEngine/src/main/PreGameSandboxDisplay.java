@@ -38,7 +38,7 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 		String[] nations = new String[Nation.values().length];
 		int neutralIndex = -1;
 		for (int i = 0; i < nations.length; i++) {
-			nations[i] = Nation.values()[i].officialName();//TODO official names
+			nations[i] = Nation.values()[i].officialName();
 			if (nations[i].equals("neutral")) {
 				nations[i] = " ";
 				neutralIndex = i;

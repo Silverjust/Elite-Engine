@@ -58,7 +58,7 @@ public class Warrior extends Unit implements Attacker {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.range = (byte) (radius + 10);
+		basicAttack.range = 11;
 		basicAttack.damage = 30;
 		basicAttack.pirce = 2;
 		basicAttack.cooldown = 800;

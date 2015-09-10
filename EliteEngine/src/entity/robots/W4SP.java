@@ -17,6 +17,8 @@ import entity.animation.ShootAttack;
 
 public class W4SP extends Unit implements Attacker, Shooter {
 
+	float speedingSpeed;
+
 	private static PImage standingImg;
 
 	byte aggroRange;
@@ -75,6 +77,7 @@ public class W4SP extends Unit implements Attacker, Shooter {
 		basicAttack.speed = 0.6f;
 		basicAttack.targetable = GroundPosition.GROUND;
 
+		speedingSpeed = 1.5f;
 		speeding.setCastTime(1800);
 		speeding.cooldown = 20000;
 
@@ -127,14 +130,13 @@ public class W4SP extends Unit implements Attacker, Shooter {
 		if (c[2].equals("speed")) {
 			if (speeding.isNotOnCooldown()) {
 				armor = 5;
-				speed += 0.7f;
+				speed = speedingSpeed;
 				speeding.setTargetFrom(this, this);
 				speeding.setup(this);
 			}
 		} else if (c[2].equals("speeddown")) {
 			armor = 3;
-			speed -= 0.7f;
-			// speeding.setup(this);
+			speed = speedingSpeed;
 		}
 	}
 

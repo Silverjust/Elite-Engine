@@ -91,7 +91,7 @@ public abstract class Active implements Informing {
 		return button.isVisible();
 	}
 
-	public boolean isActivateable() {// TODO use this methode
+	public boolean isActivateable() {
 		return true;
 	}
 

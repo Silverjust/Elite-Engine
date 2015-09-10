@@ -63,11 +63,6 @@ public class Setting {
 		ref.app.saveJSONObject(o, s);
 	}
 
-	public JSONObject toJSON() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	private void fillEmptySettings(JSONObject o) {
 
 		if (!o.hasKey("mouseCommand"))

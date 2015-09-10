@@ -93,7 +93,6 @@ public class MainPreGame extends PreGame {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 		}
 		if (index < 0) {
 			System.err.println(string + " not found");
