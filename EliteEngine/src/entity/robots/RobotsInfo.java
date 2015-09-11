@@ -46,7 +46,6 @@ public class RobotsInfo extends NationInfo {
 		grid.addActive(3, 1, Unit.StopActive.class, true);
 
 		grid.addActive(4, 2, M1N1B0T.BuildDepotActive.class, true);
-		grid.addActive(2, 2, ANT10N.AnchorActive.class, true);
 		grid.addActive(3, 2, SN41L10N.AnchorActive.class, true);
 		grid.addActive(3, 3, W4SP.SpeedActive.class, true);
 

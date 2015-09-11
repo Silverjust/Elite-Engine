@@ -13,17 +13,17 @@ import entity.animation.MeleeAttack;
 public class PL0S10N extends Unit implements Attacker {
 
 	private static PImage standingImg;
+	private static PImage attackImg;
 
 	MeleeAttack basicAttack;
 
 	private byte aggroRange;
 
-	private byte healAmount;
-
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "PL0S10N");
+		attackImg = game.ImageHandler.load(path, "PL0S10N_plode");
 	}
 
 	public PL0S10N(String[] c) {
@@ -34,13 +34,14 @@ public class PL0S10N extends Unit implements Attacker {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new MeleeAttack(standingImg, 800);
+		basicAttack = new MeleeAttack(attackImg, 1500);
 
 		setAnimation(walk);
 
 		// ************************************
-		xSize = 15;
-		ySize = 15;
+		xSize = 25;
+		ySize = 25;
+		height = 10;
 
 		kerit = 400;
 		pax = 400;
@@ -51,7 +52,7 @@ public class PL0S10N extends Unit implements Attacker {
 		hp = hp_max = 300;
 		armor = 3;
 		speed = 0.9f;
-		radius = 7;
+		radius = 9;
 		sight = 70;
 		groundPosition = Entity.GroundPosition.GROUND;
 
@@ -63,7 +64,6 @@ public class PL0S10N extends Unit implements Attacker {
 		basicAttack.setCastTime(100);
 
 		descr = " ";
-		stats = "heal/s: " + healAmount + "/" + (basicAttack.cooldown / 1000.0);
 		// ************************************
 	}
 
@@ -71,29 +71,38 @@ public class PL0S10N extends Unit implements Attacker {
 	public void updateDecisions(boolean isServer) {
 		if (isServer
 				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
+			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
-				if (e.isAllyTo(this)) {
-					if (e.isInRange(x, y, aggroRange + e.radius)
-							&& basicAttack.canTargetable(e)) {
-						float newImportance = calcImportanceOf(e);
-						if (newImportance > importance && e.hp < e.hp_max) {
-							importance = newImportance;
-							importantEntity = e;
+				if (e != this) {
+					if (e.isEnemyTo(this)) {
+						if (e.isInRange(x, y, aggroRange + e.radius)
+								&& basicAttack.canTargetable(e)) {
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
+						}
+						if (e.isInRange(x, y, basicAttack.range + e.radius)
+								&& basicAttack.canTargetable(e)) {
+							isEnemyInHitRange = true;
+							float newImportance = calcImportanceOf(e);
+							if (newImportance > importance) {
+								importance = newImportance;
+								importantEntity = e;
+							}
 						}
 					}
-
 				}
-
 			}
-			if (importantEntity != null) {
+			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
+				sendAnimation("basicAttack " + number);
+			} else if (importantEntity != null && basicAttack.isNotOnCooldown()) {
+				// änderung wegen kiter
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
-		}
-		if (basicAttack.isNotOnCooldown()) {
-			basicAttack.startCooldown();
-			basicAttack.setTargetFrom(this, this);
 		}
 		basicAttack.updateAbility(this, isServer);
 	}
@@ -102,9 +111,9 @@ public class PL0S10N extends Unit implements Attacker {
 	public void calculateDamage(Attack a) {
 		for (Entity e : ref.updater.entities) {
 			if (e != null && e.isInRange(x, y, e.radius + a.range)
-					&& e.isEnemyTo(this)) {
-				ref.updater.send("<hit " + e.number + " " + basicAttack.damage
-						+ " 0");
+					&& a.canTargetable(e) && e.isEnemyTo(this)) {
+				ref.updater.send("<hit " + e.number + " " + a.damage + " "
+						+ a.pirce);
 			}
 		}
 	}

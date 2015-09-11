@@ -11,6 +11,7 @@ import shared.ref;
 @SuppressWarnings("serial")
 public class ServerApp extends PApplet {
 	public static void main(String args[]) {
+		System.out.println("starting Server...");
 		PApplet.main(new String[] { "server.ServerApp" });
 	}
 
