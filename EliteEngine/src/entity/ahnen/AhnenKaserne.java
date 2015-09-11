@@ -1,6 +1,7 @@
 package entity.ahnen;
 
 import processing.core.PImage;
+import shared.Nation;
 import shared.ref;
 import entity.Active;
 import entity.Building;
@@ -25,11 +26,14 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 	private Training training;
 
 	private static PImage standImg;
+	private static PImage levelSym;
 
 	public static void loadImages() {
 		String path = path(new Object() {
 		});
 		standImg = ImageHandler.load(path, "AhnenKaserne");
+		levelSym = ImageHandler.load(Nation.AHNEN.toString() + "/symbols/",
+				"levelSym");
 	}
 
 	public AhnenKaserne(String[] c) {
@@ -132,7 +136,7 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 
 	public static class LevelActive extends Active {
 		public LevelActive(int x, int y, char n) {
-			super(x, y, n, standImg);
+			super(x, y, n, levelSym);
 			clazz = AhnenKaserne.class;
 		}
 

@@ -47,8 +47,8 @@ public class ScientistInfo extends NationInfo {
 		grid.addActive(3, 1, Unit.StopActive.class, true);
 
 		grid.addActive(1, 2, AirshipGuineaPig.AnchorActive.class, true);
-		grid.addActive(4, 3, PhysicsLab.TeleportActive.class, true);
 		grid.addActive(4, 1, ChemLab.ScientistWallActive.class, true);
+		grid.addActive(4, 3, PhysicsLab.TeleportActive.class, true);
 
 		grid.addActive(1, 1, Building.SetTargetActive.class, false);
 		grid.addActive(5, 3, BuildMineActive.class, Commander.class,

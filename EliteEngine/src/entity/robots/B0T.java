@@ -3,7 +3,6 @@ package entity.robots;
 import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
-import entity.Attacker;
 import entity.Entity;
 import entity.Shooter;
 import entity.Unit;
@@ -12,7 +11,7 @@ import entity.animation.Attack;
 import entity.animation.Death;
 import entity.animation.ShootAttack;
 
-public class B0T extends Unit implements Attacker, Shooter {
+public class B0T extends Unit implements Shooter {
 
 	private static PImage standingImg;
 

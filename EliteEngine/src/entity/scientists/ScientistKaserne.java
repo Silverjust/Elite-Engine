@@ -1,6 +1,9 @@
 package entity.scientists;
 
+import java.util.ArrayList;
+
 import processing.core.PImage;
+import shared.Helper;
 import shared.ref;
 import entity.Active;
 import entity.Building;
@@ -23,6 +26,7 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 	protected float yTarget;
 
 	private Ability training;
+	public ArrayList<Entity> labs = new ArrayList<Entity>();
 
 	private static PImage standImg;
 
@@ -66,6 +70,18 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 	}
 
 	@Override
+	public void updateDecisions(boolean isServer) {
+		super.updateDecisions(isServer);
+		for (Entity e : player.visibleEntities) {
+			if (e instanceof Lab && e.isAllyTo(e) && e.isAlive()
+					&& isInRange(x, y, commandingRange)) {
+				if (!labs.contains(e))
+					labs.add(e);
+			}
+		}
+	}
+
+	@Override
 	public void exec(String[] c) {
 		super.exec(c);
 		Training.updateExecTraining(c, this);
@@ -75,6 +91,14 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 	public void renderGround() {
 		drawSelected();
 		getAnimation().draw(this, (byte) 0, currentFrame);
+		if (!labs.isEmpty()) {
+			for (Entity e : labs) {
+				ref.app.stroke(100);
+				ref.app.line(xToGrid(x), yToGrid(y - ySize), e.x,
+						(e.y - e.flyHeight()) / 2);
+				ref.app.stroke(0);
+			}
+		}
 	}
 
 	@Override
@@ -133,17 +157,24 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 
 		@Override
 		public void onActivation() {
-			Entity trainer = null;
-			for (Entity e : ref.player.visibleEntities) {
-				if (e instanceof GuineaPig
-						&& (e.getAnimation() == e.stand || e.getAnimation() == ((Unit) e).walk)) {
-					for (Entity e2 : ref.player.visibleEntities) {
-						if (e2.player == e.player
-								&& e2.getClass().equals(lab)
-								&& e.isInRange(e2.x, e2.y, e.radius
-										+ ((Lab) e2).equipRange)) {
-							trainer = e;
-						}
+			ScientistKaserne trainer = null;
+			Entity trained = null;
+			for (Entity e : ref.updater.selected) {
+				if (e instanceof ScientistKaserne
+						&& e.isAlive()
+						&& Helper.listContainsInstanceOf(lab,
+								((ScientistKaserne) e).labs)) {
+					trainer = (ScientistKaserne) e;
+				}
+			}
+			if (trainer != null) {
+				for (Entity e : ref.player.visibleEntities) {
+					if (e instanceof GuineaPig
+							&& e.isAlive()
+							&& e.isAllyTo(trainer)
+							&& e.isInRange(trainer.x, trainer.y,
+									trainer.commandingRange)) {
+						trained = e;
 					}
 				}
 			}
@@ -155,10 +186,10 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 				e.printStackTrace();
 			}
 
-			if (trainer != null && newUnit != null
-					&& newUnit.canBeBought(trainer.player)) {
-				newUnit.buyFrom(trainer.player);
-				trainer.sendAnimation("equip " + unit.getSimpleName());
+			if (trained != null && newUnit != null
+					&& newUnit.canBeBought(trained.player)) {
+				newUnit.buyFrom(trained.player);
+				trained.sendAnimation("equip " + unit.getSimpleName());
 			}
 		}
 
@@ -173,6 +204,7 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 		}
 	}
 
+	@Deprecated
 	public static class ScientistTrainActive extends TrainActive {
 
 		private Class<? extends Entity> lab;
