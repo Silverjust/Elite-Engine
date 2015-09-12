@@ -26,7 +26,7 @@ public class MouseSelection {
 	public void endSelection(float X2, float Y2) {
 		x2 = Helper.gridToX(X2);
 		y2 = Helper.gridToY(Y2);
-		
+
 		if (!((GameUpdater) ref.updater).input.shiftMode) {
 			for (Entity e : ref.updater.entities) {
 				e.isSelected = false;
@@ -37,7 +37,8 @@ public class MouseSelection {
 
 		for (Entity e : ref.updater.entities)
 			if (GameDrawer.godhand || e.isAllyTo(ref.player)) {
-				if (shared.Helper.isBetween(e.x, e.y, x1, y1, x2, y2))
+				if (shared.Helper.isBetween(e.x, e.y - e.flyHeight(), x1, y1,
+						x2, y2))
 					e.select();
 				if (PApplet.dist(x1, y1, e.x, e.y - e.flyHeight()) <= e.radius) {
 					e.select();

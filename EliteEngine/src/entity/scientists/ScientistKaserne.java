@@ -1,9 +1,6 @@
 package entity.scientists;
 
-import java.util.ArrayList;
-
 import processing.core.PImage;
-import shared.Helper;
 import shared.ref;
 import entity.Active;
 import entity.Building;
@@ -26,7 +23,6 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 	protected float yTarget;
 
 	private Ability training;
-	public ArrayList<Entity> labs = new ArrayList<Entity>();
 
 	private static PImage standImg;
 
@@ -70,18 +66,6 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 	}
 
 	@Override
-	public void updateDecisions(boolean isServer) {
-		super.updateDecisions(isServer);
-		for (Entity e : player.visibleEntities) {
-			if (e instanceof Lab && e.isAllyTo(e) && e.isAlive()
-					&& isInRange(x, y, commandingRange)) {
-				if (!labs.contains(e))
-					labs.add(e);
-			}
-		}
-	}
-
-	@Override
 	public void exec(String[] c) {
 		super.exec(c);
 		Training.updateExecTraining(c, this);
@@ -91,8 +75,10 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 	public void renderGround() {
 		drawSelected();
 		getAnimation().draw(this, (byte) 0, currentFrame);
-		if (!labs.isEmpty()) {
-			for (Entity e : labs) {
+
+		for (Entity e : ref.player.visibleEntities) {
+			if (e instanceof Lab && e.isAllyTo(e) && e.isAlive()
+					&& isInRange(x, y, commandingRange)) {
 				ref.app.stroke(100);
 				ref.app.line(xToGrid(x), yToGrid(y - ySize), e.x,
 						(e.y - e.flyHeight()) / 2);
@@ -160,11 +146,18 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 			ScientistKaserne trainer = null;
 			Entity trained = null;
 			for (Entity e : ref.updater.selected) {
-				if (e instanceof ScientistKaserne
-						&& e.isAlive()
-						&& Helper.listContainsInstanceOf(lab,
-								((ScientistKaserne) e).labs)) {
-					trainer = (ScientistKaserne) e;
+				if (e instanceof ScientistKaserne && e.isAlive()) {
+					for (Entity e2 : ref.player.visibleEntities) {
+						if (e2 instanceof Lab
+								&& e2.getClass().equals(lab)
+								&& e2.isAllyTo(e)
+								&& e2.isAlive()
+								&& e2.isInRange(e.x, e.y,
+										((ScientistKaserne) e).commandingRange)) {
+							trainer = (ScientistKaserne) e;
+
+						}
+					}
 				}
 			}
 			if (trainer != null) {
