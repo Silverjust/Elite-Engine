@@ -129,7 +129,7 @@ public class Helper {
 	}
 
 	static public class Timer {
-		int cooldown;
+		public int cooldown;
 		private int cooldownTimer;
 
 		public Timer() {

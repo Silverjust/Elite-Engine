@@ -396,14 +396,12 @@ public abstract class Entity implements Informing {
 		return (e != null) && (this.player != null) && (e.player != null)
 				&& (this.player != e.player)
 				&& (this.player != ref.updater.neutral)
-				&& (e.player != ref.updater.neutral) && e.isAlive()
-				&& isAlive();
+				&& (e.player != ref.updater.neutral) //
+				&& isAlive() && e.isAlive();
 	}
 
 	public boolean isEnemyTo(Player p) {
-		return (p != null) && (this.player != null) && (this.player != p)
-				&& (this.player != ref.updater.neutral)
-				&& (p != ref.updater.neutral) && isAlive();
+		return isEnemyTo(p.mainBuilding);
 	}
 
 	public boolean isAllyTo(Entity e) {
@@ -445,11 +443,13 @@ public abstract class Entity implements Informing {
 	}
 
 	public void buyFrom(Player p, int kerit, int pax, int arcanum, int prunam) {
-		ref.updater.send("<give " + p.getUser().ip + " " + "kerit" + " -" + kerit);
+		ref.updater.send("<give " + p.getUser().ip + " " + "kerit" + " -"
+				+ kerit);
 		ref.updater.send("<give " + p.getUser().ip + " " + "pax" + " -" + pax);
 		ref.updater.send("<give " + p.getUser().ip + " " + "arcanum" + " -"
 				+ arcanum);
-		ref.updater.send("<give " + p.getUser().ip + " " + "prunam" + " -" + prunam);
+		ref.updater.send("<give " + p.getUser().ip + " " + "prunam" + " -"
+				+ prunam);
 	}
 
 	public void setupTarget() {

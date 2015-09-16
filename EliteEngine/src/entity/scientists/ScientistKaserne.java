@@ -75,10 +75,9 @@ public class ScientistKaserne extends Building implements Commander, Trainer,
 	public void renderGround() {
 		drawSelected();
 		getAnimation().draw(this, (byte) 0, currentFrame);
-
 		for (Entity e : ref.player.visibleEntities) {
 			if (e instanceof Lab && e.isAllyTo(e) && e.isAlive()
-					&& isInRange(x, y, commandingRange)) {
+					&& e.isInRange(x, y, commandingRange)) {
 				ref.app.stroke(100);
 				ref.app.line(xToGrid(x), yToGrid(y - ySize), e.x,
 						(e.y - e.flyHeight()) / 2);
