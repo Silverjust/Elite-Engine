@@ -17,7 +17,7 @@ public class PreGameSandboxDisplay extends PreGameNormalDisplay {
 	GButton addPlayer;
 
 	public PreGameSandboxDisplay() {
-		super((byte) 1);
+		super((byte) 1);		
 		startButton = new GButton(ref.app, ref.app.width - 320,
 				ref.app.height - 200, 300, 175);
 		startButton.setText("START");

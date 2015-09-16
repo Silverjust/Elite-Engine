@@ -13,10 +13,11 @@ public abstract class VersionCombiner {
 		String[] sa1 = s1.split("\\.");
 		String[] sa2 = s2.split("\\.");
 		System.out.println(s1 + " " + s2);
-		for (int i = 0; i < sa1.length; i++) {
-			System.out.println(Integer.parseInt(sa1[i]) + " "
-					+ Integer.parseInt(sa2[i]));
-			if (Integer.parseInt(sa1[i]) > Integer.parseInt(sa2[i]))
+		for (int i = 0; i < (sa1.length > sa2.length ? sa1.length : sa2.length); i++) {
+			int i1 = (sa1.length > i ? Integer.parseInt(sa1[i]) : 0);
+			int i2 = (sa2.length > i ? Integer.parseInt(sa2[i]) : 0);
+			System.out.println(i1 + " " + i2);
+			if (i1 > i2)
 				return true;
 		}
 		return false;

@@ -236,7 +236,7 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		public void updateAbility(Entity e, boolean isServer) {
 			if (target != null && isEvent()) {
 				if (isServer) {
-					ref.updater.send("<spawn Orb " + e.player.user.ip + " " + e.x
+					ref.updater.send("<spawn Orb " + e.player.getUser().ip + " " + e.x
 							+ " " + (e.y + e.radius + 8) + " " + target.x + " "
 							+ target.y + " " + e.number);
 					/*

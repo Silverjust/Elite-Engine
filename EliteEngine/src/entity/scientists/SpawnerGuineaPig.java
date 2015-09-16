@@ -137,7 +137,7 @@ public class SpawnerGuineaPig extends Unit {
 		public void updateAbility(Entity e, boolean isServer) {
 			if (target != null && isEvent()) {
 				if (isServer) {
-					ref.updater.send("<spawn GuineaPig " + e.player.user.ip + " "
+					ref.updater.send("<spawn GuineaPig " + e.player.getUser().ip + " "
 							+ e.x + " " + (e.y + e.radius + 8) + " " + target.x
 							+ " " + target.y);
 				}

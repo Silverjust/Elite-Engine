@@ -3,8 +3,9 @@ package entity;
 import main.appdata.ProfileHandler;
 import shared.ref;
 
-public abstract class MainBuilding extends Building {
+public abstract class MainBuilding extends Building implements Commander {
 	protected static final int RADIUS = 27;
+	protected int commandingRange;
 
 	public MainBuilding(String[] c) {
 		super(c);
@@ -17,7 +18,13 @@ public abstract class MainBuilding extends Building {
 	@Override
 	protected void onDeath() {
 		super.onDeath();
-		ref.updater.send("<lost " + player.user.ip + " " + ProfileHandler.getRate());
+		ref.updater.send("<lost " + player.getUser().ip + " "
+				+ ProfileHandler.getRate());
+	}
+
+	@Override
+	public int commandRange() {
+		return commandingRange;
 	}
 
 }

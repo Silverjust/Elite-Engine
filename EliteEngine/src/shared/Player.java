@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entity.Entity;
 import entity.MainBuilding;
+import entity.gameAI.GameAI;
 import game.GameDrawer;
 
 public class Player {
@@ -11,13 +12,14 @@ public class Player {
 	public int kerit, pax, arcanum, prunam;
 
 	public ArrayList<Entity> visibleEntities = new ArrayList<Entity>();
-	public User user;
+	private User user;
 	public MainBuilding mainBuilding;
 
 	public static Player createNeutralPlayer() {
 		Player p = new Player();
-		p.user = new User("", "neutral");
-		p.user.online = true;
+		p.setUser(new User("", "neutral"));
+		p.getUser().player = p;
+		p.getUser().online = true;
 		p.color = ref.app.color(150);
 		p.setNation(Nation.NEUTRAL);
 		return p;
@@ -25,7 +27,8 @@ public class Player {
 
 	public static Player createPlayer(User user) {
 		Player p = new Player();
-		p.user = user;
+		p.setUser(user);
+		p.getUser().player = p;
 		p.kerit = 200;
 		return p;
 	}
@@ -35,10 +38,10 @@ public class Player {
 
 	@Override
 	public String toString() {
-		if (user.online) {
-			return "[" + user.name + "]";
+		if (getUser().online) {
+			return "[" + getUser().name + "]";
 		}
-		return "offline:[" + user.name + "]";
+		return "offline:[" + getUser().name + "]";
 	}
 
 	public void give(String resource, int amount) {
@@ -77,11 +80,23 @@ public class Player {
 	}
 
 	public Nation getNation() {
-		return user.nation;
+		return getUser().nation;
 	}
 
 	public void setNation(Nation nation) {
-		user.nation = nation;
+		getUser().nation = nation;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		System.out.println("Player.setUser()");
+
+		if (user instanceof GameAI)
+			System.out.println("Player.setUser()ai");
+		this.user = user;
 	}
 
 }

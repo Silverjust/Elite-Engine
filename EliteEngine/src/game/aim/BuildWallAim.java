@@ -74,7 +74,7 @@ public class BuildWallAim extends BuildAim {
 			if (canPlaceAt(x, y)) {
 				ref.updater.send("<spawn "
 						+ buildable.getClass().getSimpleName() + " "
-						+ builder.player.user.ip + " " + x + " " + y + " start");
+						+ builder.player.getUser().ip + " " + x + " " + y + " start");
 				// start nur beim startbuilding
 				buildable.buyFrom(builder.player);
 			}
@@ -93,7 +93,7 @@ public class BuildWallAim extends BuildAim {
 					ref.updater
 							.send("<spawn "
 									+ buildable.getClass().getSimpleName()
-									+ " " + builder.player.user.ip + " " + x1 + " "
+									+ " " + builder.player.getUser().ip + " " + x1 + " "
 									+ y1 + " part");
 					// part nur beim partbuilding
 					buildable.buyFrom(builder.player);
@@ -102,7 +102,7 @@ public class BuildWallAim extends BuildAim {
 			if (canPlaceAt(x2, y2)) {
 				ref.updater.send("<spawn "
 						+ buildable.getClass().getSimpleName() + " "
-						+ builder.player.user.ip + " " + x2 + " " + y2 + " start");
+						+ builder.player.getUser().ip + " " + x2 + " " + y2 + " start");
 				// start nur beim startbuilding
 				buildable.buyFrom(builder.player);
 			}

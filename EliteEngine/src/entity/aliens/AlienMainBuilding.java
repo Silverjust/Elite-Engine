@@ -10,8 +10,6 @@ import entity.animation.Death;
 import game.ImageHandler;
 
 public class AlienMainBuilding extends MainBuilding implements Commander {
-	private int commandingRange;
-
 	private static PImage standImg;
 	private static PImage previewImg;
 	static PImage groundImg;
@@ -73,11 +71,6 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 
 	public PImage preview() {
 		return previewImg;
-	}
-
-	@Override
-	public int commandRange() {
-		return commandingRange;
 	}
 
 	static PImage getGround() {

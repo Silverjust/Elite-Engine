@@ -199,7 +199,7 @@ public class Rug extends Unit implements Shooter {
 		public void updateAbility(Entity e, boolean isServer) {
 			if (target != null && isEvent()) {
 				if (isServer) {
-					ref.updater.send("<spawn Rugling " + e.player.user.ip + " "
+					ref.updater.send("<spawn Rugling " + e.player.getUser().ip + " "
 							+ e.x + " " + (e.y + e.radius + 8) + " " + target.x
 							+ " " + target.y);
 					/*

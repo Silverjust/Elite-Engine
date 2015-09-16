@@ -180,7 +180,7 @@ public class M1N1B0T extends Unit implements Attacker, Shooter {
 			if (trainer != null && newUnit != null
 					&& newUnit.canBeBought(trainer.player)) {
 				newUnit.buyFrom(trainer.player);
-				ref.updater.send("<spawn RobotsDepot " + trainer.player.user.ip
+				ref.updater.send("<spawn RobotsDepot " + trainer.player.getUser().ip
 						+ " " + trainer.x + " " + trainer.y + " select");
 				ref.updater.send("<remove " + trainer.number);
 			}

@@ -445,11 +445,11 @@ public abstract class Entity implements Informing {
 	}
 
 	public void buyFrom(Player p, int kerit, int pax, int arcanum, int prunam) {
-		ref.updater.send("<give " + p.user.ip + " " + "kerit" + " -" + kerit);
-		ref.updater.send("<give " + p.user.ip + " " + "pax" + " -" + pax);
-		ref.updater.send("<give " + p.user.ip + " " + "arcanum" + " -"
+		ref.updater.send("<give " + p.getUser().ip + " " + "kerit" + " -" + kerit);
+		ref.updater.send("<give " + p.getUser().ip + " " + "pax" + " -" + pax);
+		ref.updater.send("<give " + p.getUser().ip + " " + "arcanum" + " -"
 				+ arcanum);
-		ref.updater.send("<give " + p.user.ip + " " + "prunam" + " -" + prunam);
+		ref.updater.send("<give " + p.getUser().ip + " " + "prunam" + " -" + prunam);
 	}
 
 	public void setupTarget() {

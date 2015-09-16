@@ -92,6 +92,7 @@ public class StartPage {
 				}
 			} else if (button == singleplayerButton) {
 				GameSettings.singlePlayer = true;
+				GameSettings.againstAI = true;// ai
 			} else if (button == sandboxButton) {
 				GameSettings.singlePlayer = true;
 				GameSettings.sandbox = true;

@@ -65,7 +65,8 @@ public class Chat {
 
 	public void hide() {
 		// System.out.println("Chat.hide()");
-		chatLine.setVisible(false);
+		if (chatLine.isVisible())
+			chatLine.setVisible(false);
 	}
 
 	public void println(String name, String s) {
@@ -90,10 +91,11 @@ public class Chat {
 				}
 			} else {
 				if (s.length() > 0 && s.charAt(0) == '/') {
-					HUD.chat.println(ref.player.user.name, s);
+					HUD.chat.println(ref.player.getUser().name, s);
 					CommandHandler.executeCommands(s);
 				} else {
-					ClientHandler.send("<say " + ref.player.user.ip + " " + s);
+					ClientHandler.send("<say " + ref.player.getUser().ip + " "
+							+ s);
 				}
 			}
 			textfield.setText("");

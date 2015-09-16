@@ -1,5 +1,6 @@
 package main;
 
+import entity.gameAI.testAliensAI;
 import processing.data.JSONObject;
 import shared.ContentListHandler;
 import shared.Mode;
@@ -42,7 +43,14 @@ public class MainPreGame extends PreGame {
 		if (!users.containsKey(ip)) {
 			// Player p = Player.createPlayer(ip, name);
 			// p.color = ref.app.color(200, 0, 0);// TODO get color setting
-			users.put(ip, new User(ip, name));
+			User u;
+			System.out.println("MainPreGame.addPlayer()-----"
+					+ GameSettings.againstAI);
+			if (GameSettings.againstAI) {
+				u = new testAliensAI(ip, name);
+			} else
+				u = new User(ip, name);
+			users.put(ip, u);
 		}
 	}
 
@@ -115,7 +123,7 @@ public class MainPreGame extends PreGame {
 
 	@Override
 	public User getUser(String string) {
-		if (string.equals(""))//returns this user
+		if (string.equals(""))// returns this user
 			return users.get(ClientHandler.identification);
 		return super.getUser(string);
 	}
@@ -138,11 +146,13 @@ public class MainPreGame extends PreGame {
 		public static boolean singlePlayer;
 		public static boolean sandbox;
 		public static boolean tutorial;
+		public static boolean againstAI;
 
 		public static void setupGameSettings() {
 			singlePlayer = false;
 			sandbox = false;
 			tutorial = false;
+			againstAI = false;
 		}
 	}
 }

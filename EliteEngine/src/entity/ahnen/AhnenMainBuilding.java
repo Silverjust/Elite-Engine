@@ -2,15 +2,12 @@ package entity.ahnen;
 
 import processing.core.PGraphics;
 import processing.core.PImage;
-import entity.Commander;
 import entity.MainBuilding;
 import entity.animation.Animation;
 import entity.animation.Death;
 import game.ImageHandler;
 
-public class AhnenMainBuilding extends MainBuilding implements Commander {
-
-	private int commandingRange;
+public class AhnenMainBuilding extends MainBuilding {
 
 	private static PImage standImg;
 	private static PImage previewImg;
@@ -73,9 +70,6 @@ public class AhnenMainBuilding extends MainBuilding implements Commander {
 		return previewImg;
 	}
 
-	@Override
-	public int commandRange() {
-		return commandingRange;
-	}
+	
 
 }

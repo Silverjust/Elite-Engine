@@ -9,8 +9,6 @@ import game.ImageHandler;
 
 public class HumanMainBuilding extends MainBuilding implements Commander {
 
-	private int commandingRange;
-
 	private static PImage standImg;
 	private static PImage previewImg;
 
@@ -57,11 +55,6 @@ public class HumanMainBuilding extends MainBuilding implements Commander {
 
 	public PImage preview() {
 		return previewImg;
-	}
-
-	@Override
-	public int commandRange() {
-		return commandingRange;
 	}
 
 }

@@ -8,6 +8,9 @@ public class User {
 	public boolean online;
 	public boolean isReady;
 	public Nation nation;
+	
+	protected Player player;
+
 
 	public User(String ip, String name) {
 		this.ip = ip;

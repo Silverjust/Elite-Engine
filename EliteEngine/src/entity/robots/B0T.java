@@ -32,7 +32,7 @@ public class B0T extends Unit implements Shooter {
 		stand = new Animation(standingImg, 1000);
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
-		basicAttack = new ShootAttack(standingImg, 800);
+		basicAttack = new ShootAttack(standingImg, 2000);
 
 		setAnimation(walk);
 

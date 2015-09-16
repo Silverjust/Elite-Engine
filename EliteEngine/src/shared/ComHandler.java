@@ -195,7 +195,7 @@ public class ComHandler {
 					ref.updater.gameState = GameState.WON;
 				}
 				if (ref.app instanceof ServerApp) {
-					((ServerApp) ref.app).gui.addChatText(p.user.name
+					((ServerApp) ref.app).gui.addChatText(p.getUser().name
 							+ " has lost");
 				} else {
 					HUD.menue = new endGameMenu();

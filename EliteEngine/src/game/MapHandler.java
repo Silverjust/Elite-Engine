@@ -84,7 +84,7 @@ public class MapHandler {
 
 				atributes.setString("type", type);
 				int playerNumber = new ArrayList<String>(
-						ref.updater.player.keySet()).indexOf(e.player.user.ip);
+						ref.updater.player.keySet()).indexOf(e.player.getUser().ip);
 				atributes.setInt("player", playerNumber);
 				atributes.setFloat("x", e.x);
 				atributes.setFloat("y", e.y);

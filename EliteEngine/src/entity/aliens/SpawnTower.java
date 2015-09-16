@@ -170,7 +170,7 @@ public class SpawnTower extends Building implements Commander {
 					float xt = target.x;
 					byte shootlingRadius = 5;
 					ref.updater.send("<spawn Shootling "
-							+ e.player.user.ip
+							+ e.player.getUser().ip
 							+ " "
 							+ (e.x + (xt - e.x)
 									/ PApplet.dist(e.x, e.y, xt, yt)

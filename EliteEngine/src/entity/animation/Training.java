@@ -32,7 +32,7 @@ public class Training extends Ability {
 				ref.updater.send("<spawn "
 						+ toTrain.getClass().getSimpleName()
 						+ " "
-						+ e.player.user.ip
+						+ e.player.getUser().ip
 						+ " "
 						+ (e.x + (xt - e.x) / PApplet.dist(e.x, e.y, xt, yt)
 								* (e.radius + toTrain.radius))
@@ -88,7 +88,8 @@ public class Training extends Ability {
 				e.printStackTrace();
 			}
 
-			if (toTrain != null && a.isNotOnCooldown()) {
+			if (toTrain != null && a.isNotOnCooldown()
+					&& trainer.getAnimation().isInterruptable()) {
 				a.cooldown = ((Unit) toTrain).trainTime;
 				a.setEntity(toTrain);
 				trainer.setAnimation(a);

@@ -73,7 +73,7 @@ public class ServerUpdater extends Updater {
 	public void write(String ip, String[] text) {
 		String name = null;
 		if (ref.updater.player.get(ip) != null)
-			name = ref.updater.player.get(ip).user.name;
+			name = ref.updater.player.get(ip).getUser().name;
 		if (name == null)
 			name = ip;
 		String completeText = "";
@@ -96,7 +96,7 @@ public class ServerUpdater extends Updater {
 		ArrayList<String> spawns = new ArrayList<String>();
 		for (Entity entity : entities) {
 			spawns.add("<spawn " + entity.getClass().getSimpleName() + " "
-					+ entity.player.user.ip + " " + entity.x + " " + entity.y);
+					+ entity.player.getUser().ip + " " + entity.x + " " + entity.y);
 		}
 		for (Entity entity : entities) {
 			ref.updater.send("<remove " + entity.number);

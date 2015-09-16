@@ -126,7 +126,7 @@ public class PreGameNormalDisplay {
 				@SuppressWarnings("unused")
 				JSONObject mapData = ref.app.loadJSONObject(file);
 				previousMap = list.getSelectedIndex();
-				ClientHandler.send("<setMap " + ref.player.user.ip + " "
+				ClientHandler.send("<setMap " + ref.player.getUser().ip + " "
 						+ intNames[list.getSelectedIndex()]);
 			} catch (Exception e) {
 				System.err.println(file

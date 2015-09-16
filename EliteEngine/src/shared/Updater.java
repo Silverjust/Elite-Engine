@@ -28,7 +28,7 @@ public abstract class Updater {
 	public boolean arePlayerReady() {
 		boolean b = true;
 		for (String key : player.keySet()) {
-			if (!player.get(key).user.isReady)
+			if (!player.get(key).getUser().isReady)
 				b = false;
 		}
 		return b;

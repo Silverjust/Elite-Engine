@@ -59,10 +59,10 @@ public class ServerHandler {
 		if (app.mode == Mode.GAME
 				&& ref.updater.player.containsKey(someClient.ip())) {
 			Player p = ref.updater.player.get(someClient.ip());
-			app.gui.addChatText(p.user.name + " has reconnected");
+			app.gui.addChatText(p.getUser().name + " has reconnected");
 			send("<identify reconnect");
-			send("<setNation " + p.user.ip + " " + p.getNation().toString());
-			send("<setMap " + p.user.ip + " " + ref.preGame.map);
+			send("<setNation " + p.getUser().ip + " " + p.getNation().toString());
+			send("<setMap " + p.getUser().ip + " " + ref.preGame.map);
 		} else {
 			app.gui.addChatText("We have a new client: " + someClient.ip());
 			ref.preGame.addPlayer(someClient.ip(), someClient.ip());

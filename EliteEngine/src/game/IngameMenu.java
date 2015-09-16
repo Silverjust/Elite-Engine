@@ -35,7 +35,7 @@ public class IngameMenu extends Menu {
 	public void handleButtonEvents(GButton button, GEvent event) {
 		if (event == GEvent.CLICKED) {
 			if (button == surrender) {
-				ref.updater.send("<lost " + ref.player.user.ip + " "
+				ref.updater.send("<lost " + ref.player.getUser().ip + " "
 						+ ProfileHandler.getRate());
 				dispose();
 			} else if (button == options) {

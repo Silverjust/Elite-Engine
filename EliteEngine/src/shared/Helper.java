@@ -61,26 +61,27 @@ public class Helper {
 		Player p;
 		p = ref.updater.player.get(name);
 		if (p != null)
-			return p.user.ip;// ip from ip
+			return p.getUser().ip;// ip from ip
 		for (String key : ref.updater.player.keySet()) {
-			if (ref.updater.player.get(key).user.name.equalsIgnoreCase(name))
-				return ref.updater.player.get(key).user.ip;// ip from name
+			if (ref.updater.player.get(key).getUser().name
+					.equalsIgnoreCase(name))
+				return ref.updater.player.get(key).getUser().ip;// ip from name
 		}
 		try {
 			String[] a = ref.updater.player.keySet().toArray(
 					new String[ref.updater.player.keySet().size()]);
-			return ref.updater.player.get(a[Integer.parseInt(name)]).user.ip;
+			return ref.updater.player.get(a[Integer.parseInt(name)]).getUser().ip;
 			// ip from number
 		} catch (Exception e) { // not a number
 		}
-		return ref.player.user.ip; // ip from this player
+		return ref.player.getUser().ip; // ip from this player
 	}
 
 	public static String ipToName(String ip) {
 		Player p = ref.updater.player.get(ip);
 		String name = null;
 		if (p != null)
-			name = p.user.name;
+			name = p.getUser().name;
 		if (name != null)
 			return name;
 		return ip;
@@ -106,6 +107,21 @@ public class Helper {
 
 		}
 		return false;
+	}
+
+	public static int listContainsInstancesOf(Class<?> c,
+			ArrayList<Entity> arrlist) {
+		if (c == null) {
+			return 0;
+		}
+		int i = 0;
+		for (Entity e : arrlist) {
+			if (c.isAssignableFrom(e.getClass())) {
+				i++;
+			}
+
+		}
+		return i;
 	}
 
 	public float fontHeight() {

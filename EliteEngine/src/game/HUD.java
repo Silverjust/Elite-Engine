@@ -42,7 +42,7 @@ public class HUD {
 		Minimap.setup();
 		GroupHandler.setup();
 		activesGrid = new ActivesGrid();
-		boolean b = true;
+		boolean b = false;
 		if (b) {
 			sound.play();
 			sound.setGain(-25);

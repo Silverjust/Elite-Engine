@@ -11,6 +11,7 @@ import shared.ref;
 import entity.Entity;
 import entity.EntityHeightComparator;
 import entity.Unit;
+import entity.gameAI.GameAI;
 
 public class GameUpdater extends Updater {
 	// FIXME einheiten vibrieren
@@ -20,7 +21,7 @@ public class GameUpdater extends Updater {
 	public GameUpdater() {
 		for (String key : ref.preGame.users.keySet()) {
 			Player p = Player.createPlayer(ref.preGame.users.get(key));
-			if (p.user.ip == ClientHandler.identification) {
+			if (p.getUser().ip == ClientHandler.identification) {
 				p.color = ref.app.color(0, 255, 100);
 				ref.player = p;
 			} else
@@ -34,6 +35,7 @@ public class GameUpdater extends Updater {
 
 	public void update() {
 		input.update();
+		updateAIs();
 
 		if (gameState == GameState.PLAY) {
 			for (int i = 0; i < toAdd.size(); i++) {
@@ -96,6 +98,17 @@ public class GameUpdater extends Updater {
 			}
 		}
 
+	}
+
+	private void updateAIs() {
+		if (GameSettings.againstAI) {
+			for (String key : player.keySet()) {
+				Player p = player.get(key);
+				if (p.getUser() instanceof GameAI) {
+					((GameAI) p.getUser()).update();
+				}
+			}
+		}
 	}
 
 	@Override
