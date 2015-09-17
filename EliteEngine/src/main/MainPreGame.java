@@ -1,6 +1,6 @@
 package main;
 
-import entity.gameAI.testAliensAI;
+import entity.gameAI.GameAI;
 import processing.data.JSONObject;
 import shared.ContentListHandler;
 import shared.Mode;
@@ -44,10 +44,8 @@ public class MainPreGame extends PreGame {
 			// Player p = Player.createPlayer(ip, name);
 			// p.color = ref.app.color(200, 0, 0);// TODO get color setting
 			User u;
-			System.out.println("MainPreGame.addPlayer()-----"
-					+ GameSettings.againstAI);
 			if (GameSettings.againstAI) {
-				u = new testAliensAI(ip, name);
+				u = new GameAI(ip, name);
 			} else
 				u = new User(ip, name);
 			users.put(ip, u);

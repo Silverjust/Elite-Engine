@@ -10,12 +10,14 @@ import entity.aliens.Valcyrix;
 import entity.neutral.Kerit;
 import entity.neutral.Prunam;
 import shared.Helper;
+import shared.Nation;
 import shared.ref;
 
 public class testAliensAI extends GameAI {
 
 	public testAliensAI(String ip, String name) {
 		super(ip, name);
+		nation = Nation.ALIENS;
 	}
 
 	@Override
@@ -87,10 +89,13 @@ public class testAliensAI extends GameAI {
 				player.visibleEntities) >= 6) {// attack with annoy army
 			MainBuilding target = getWeakestEnemy().mainBuilding;
 			for (Entity e : player.visibleEntities) {
-				if (e instanceof Valcyrix) {
-					System.out.println("testAliensAI.update() attack with Valc");
-					e.sendAnimation("walk " + target.x + " " + target.y
-							+ "  " + true);
+				if (e instanceof Valcyrix//
+						&& ((Valcyrix) e).xTarget != target.x
+						&& ((Valcyrix) e).yTarget != target.y) {
+					System.out
+							.println("testAliensAI.update() attack with Valc");
+					e.sendAnimation("walk " + target.x + " " + target.y + "  "
+							+ true);
 				}
 			}
 		}

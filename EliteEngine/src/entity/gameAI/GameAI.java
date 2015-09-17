@@ -7,17 +7,32 @@ import shared.Player;
 import shared.User;
 import shared.ref;
 
-public abstract class GameAI extends User {
+public class GameAI extends User {
+
+	public Class<? extends GameAI> ai;
 
 	public GameAI(String ip, String name) {
 		super(ip, name + "AI");
 	}
 
-	public abstract void update();
+	public User getAI() {
+		GameAI ai = null;
+		try {
+			ai = this.ai.getConstructor(String.class, String.class)
+					.newInstance(new Object[] { ip, name });
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new User(ip, name);
+		}
+		return ai;
+	}
+
+	public void update() {
+	}
 
 	protected void spawn(Entity e, float x, float y) {
 		if (e.canBeBought(player) && canBePlacedAt(x, y)) {
-			System.out.println("testAliensAI.update() build "
+			System.out.println(this.getClass().getSimpleName() + " build "
 					+ e.getClass().getSimpleName());
 			e.buyFrom(player);
 			ref.updater.send("<spawn " + e.getClass().getSimpleName() + " "
@@ -29,7 +44,7 @@ public abstract class GameAI extends User {
 		float x = xo + (dx - xo) / PApplet.dist(xo, yo, dx, dy) * (r);
 		float y = yo + (dy - yo) / PApplet.dist(xo, yo, dx, dy) * (r);
 		if (e.canBeBought(player) && canBePlacedAt(x, y)) {
-			System.out.println("testAliensAI.update() build "
+			System.out.println(this.getClass().getSimpleName() + " build "
 					+ e.getClass().getSimpleName());
 			e.buyFrom(player);
 			ref.updater.send("<spawn " + e.getClass().getSimpleName() + " "
@@ -39,7 +54,7 @@ public abstract class GameAI extends User {
 
 	protected void upgrade(Entity e, Entity e2) {
 		if (e.canBeBought(player) && canBePlacedAt(e2.x, e2.y)) {
-			System.out.println("testAliensAI.update() upgrade "
+			System.out.println(this.getClass().getSimpleName() + " upgrade "
 					+ e.getClass().getSimpleName());
 			e.buyFrom(player);
 			ref.updater.send("<spawn " + e.getClass().getSimpleName() + " "
@@ -51,7 +66,7 @@ public abstract class GameAI extends User {
 	protected void train(Entity toTrain, Entity trainer) {
 		if (toTrain.canBeBought(player)
 				&& trainer.getAnimation() == trainer.stand) {
-			System.out.println("testAliensAI.update() train "
+			System.out.println(this.getClass().getSimpleName() + " train "
 					+ toTrain.getClass().getSimpleName());
 			toTrain.buyFrom(trainer.player);
 			trainer.sendAnimation("train " + toTrain.getClass().getSimpleName());

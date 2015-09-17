@@ -5,13 +5,17 @@ import java.util.Collections;
 import main.ClientHandler;
 import main.MainPreGame.GameSettings;
 import shared.Helper;
+import shared.Nation;
 import shared.Player;
 import shared.Updater;
+import shared.User;
 import shared.ref;
 import entity.Entity;
 import entity.EntityHeightComparator;
 import entity.Unit;
 import entity.gameAI.GameAI;
+import entity.gameAI.testAliensAI;
+import entity.gameAI.testRobotsRush;
 
 public class GameUpdater extends Updater {
 	// FIXME einheiten vibrieren
@@ -20,7 +24,15 @@ public class GameUpdater extends Updater {
 
 	public GameUpdater() {
 		for (String key : ref.preGame.users.keySet()) {
-			Player p = Player.createPlayer(ref.preGame.users.get(key));
+			User user = ref.preGame.users.get(key);
+			if (user instanceof GameAI) {
+				if (user.nation == Nation.ALIENS)
+					((GameAI) user).ai = testAliensAI.class;
+				if (user.nation == Nation.ROBOTS)
+					((GameAI) user).ai = testRobotsRush.class;
+				user = ((GameAI) user).getAI();
+			}
+			Player p = Player.createPlayer(user);
 			if (p.getUser().ip == ClientHandler.identification) {
 				p.color = ref.app.color(0, 255, 100);
 				ref.player = p;
