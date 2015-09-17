@@ -1,11 +1,11 @@
 package entity.scientists;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 import shared.ref;
 import entity.Active;
 import entity.Entity;
 import entity.MultiCDActive;
-import entity.ahnen.Berserker.LeuchteAim;
 import entity.animation.Ability;
 import entity.animation.Animation;
 import entity.animation.Death;
@@ -54,7 +54,7 @@ public class BioLab extends Lab {
 	@Override
 	public void renderUnder() {
 		super.renderUnder();
-		if (isAlive() && AimHandler.getAim() instanceof LeuchteAim
+		if (isAlive() && AimHandler.getAim() instanceof SwampAim
 				&& swampify.isNotOnCooldown()) {
 			ref.app.tint(player.color);
 			ref.app.image(selectedImg, xToGrid(x), yToGrid(y), equipRange * 2,
@@ -69,9 +69,13 @@ public class BioLab extends Lab {
 
 	public static class CreateSwampActive extends MultiCDActive {
 		Entity builder = null;
+		private int acooldown, adamage;
 
 		public CreateSwampActive(int x, int y, char n) {
 			super(x, y, n, new Swamp(null).iconImg);
+			Swamp swamp = new Swamp(null);
+			acooldown = swamp.getBasicAttack().cooldown;
+			adamage = swamp.getBasicAttack().damage;
 			clazz = BioLab.class;
 			setAbilityGetter("getSwampify");
 		}
@@ -91,6 +95,13 @@ public class BioLab extends Lab {
 		@Override
 		public String getDesription() {
 			return "creates a swamp§damaging ground units";
+		}
+
+		@Override
+		public String getStatistics() {
+			return super.getStatistics() + "dps: " + adamage + "/"
+					+ (acooldown / 1000.0) + " ="
+					+ PApplet.nfc(adamage / (acooldown / 1000.0f), 2) + " (0)";
 		}
 	}
 

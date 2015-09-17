@@ -117,7 +117,11 @@ public class GameUpdater extends Updater {
 			for (String key : player.keySet()) {
 				Player p = player.get(key);
 				if (p.getUser() instanceof GameAI) {
-					((GameAI) p.getUser()).update();
+					try {
+						((GameAI) p.getUser()).update();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

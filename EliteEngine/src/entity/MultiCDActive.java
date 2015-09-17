@@ -1,6 +1,7 @@
 package entity;
 
 import entity.animation.Ability;
+
 import java.lang.reflect.Method;
 
 import processing.core.PImage;
@@ -21,6 +22,9 @@ public abstract class MultiCDActive extends Active {
 	protected void setAbilityGetter(String name) {
 		try {
 			abilityGetter = clazz.getMethod(name, new Class[] {});
+			Entity e = (Entity) clazz.getConstructor(String[].class)
+					.newInstance(new Object[] { null });
+			cooldown = ((Ability) abilityGetter.invoke(e)).cooldown;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
