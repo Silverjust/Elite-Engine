@@ -27,8 +27,8 @@ public class HUD {
 		arcImg = ImageHandler.load("", "Arcanum");
 		prunImg = ImageHandler.load("", "Prunam");
 		if (ref.player != null) {
-			overlay = ImageHandler.load(ref.player.getNation().toString() + "/",
-					"overlay");
+			overlay = ImageHandler.load(
+					ref.player.getNation().toString() + "/", "overlay");
 			sound = ref.minim.loadFile(ref.player.getNation().toString() + "/"
 					+ ref.player.getNation().toString() + ".mp3");
 			/** soundfiles are only tests and will be removed */
@@ -42,11 +42,11 @@ public class HUD {
 		Minimap.setup();
 		GroupHandler.setup();
 		activesGrid = new ActivesGrid();
-		boolean b = false;
+		boolean b = true;
 		if (b) {
 			sound.play();
 			sound.setGain(-25);
-			//sound.loop();
+			// sound.loop();
 		}
 	}
 
@@ -102,12 +102,12 @@ public class HUD {
 
 	public static void dispose() {
 		try {
-			if(activesGrid != null)
-			activesGrid.dispose();
+			if (activesGrid != null)
+				activesGrid.dispose();
 			GroupHandler.dispose();
-		//	ImageHandler.dispose();
-			if(sound != null)
-			sound.close();
+			// ImageHandler.dispose();
+			if (sound != null)
+				sound.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
