@@ -65,7 +65,7 @@ public class testRobotsRush extends GameAI {
 		 * e.sendAnimation("setTarget " + e.x + 50 + " " + e.y + 50); train(t,
 		 * e); } } }
 		 */
-		if (Helper.listContainsInstancesOf(B0T.class, player.visibleEntities) >= 6) {
+		if (Helper.listContainsInstancesOf(B0T.class, player.visibleEntities) >= 4) {
 			// attack with annoy army
 			MainBuilding target = getWeakestEnemy().mainBuilding;
 			for (Entity e : player.visibleEntities) {
