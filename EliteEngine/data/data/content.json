@@ -20,12 +20,14 @@
 		"AlienPaxDrillTower": "entity.aliens.AlienPaxDrillTower",
 		"AlienArcanumMine": "entity.aliens.AlienArcanumMine",
 		"AlienPrunamHarvester": "entity.aliens.AlienPrunamHarvester",
+		
 		"Kerit": "entity.neutral.Kerit",
 		"Pax": "entity.neutral.Pax",
 		"Arcanum": "entity.neutral.Arcanum",
 		"Prunam": "entity.neutral.Prunam",
 		"Rock": "entity.neutral.Rock",
 		"SandboxBuilding": "entity.neutral.SandboxBuilding",
+		
 		"HumanMainBuilding": "entity.humans.HumanMainBuilding",
 		"HumanKaserne": "entity.humans.HumanKaserne",
 		"HumanMechKaserne": "entity.humans.HumanMechKaserne",
@@ -43,6 +45,7 @@
 		"Tank": "entity.humans.Tank",
 		"Drone": "entity.humans.Drone",
 		"Helicopter": "entity.humans.Helicopter",
+		
 		"ScientistMainBuilding": "entity.scientists.ScientistMainBuilding",
 		"ScientistKeritMine": "entity.scientists.ScientistKeritMine",
 		"ScientistPaxDrillTower": "entity.scientists.ScientistPaxDrillTower",
@@ -61,6 +64,7 @@
 		"SpawnerGuineaPig": "entity.scientists.SpawnerGuineaPig",
 		"AirshipGuineaPig": "entity.scientists.AirshipGuineaPig",
 		"RocketGuineaPig": "entity.scientists.RocketGuineaPig",
+		
 		"AhnenMainBuilding": "entity.ahnen.AhnenMainBuilding",
 		"AhnenKeritMine": "entity.ahnen.AhnenKeritMine",
 		"AhnenPaxDrillTower": "entity.ahnen.AhnenPaxDrillTower",
@@ -76,6 +80,7 @@
 		"Astrator": "entity.ahnen.Astrator",
 		"Destructor": "entity.ahnen.Destructor",
 		"Orb": "entity.ahnen.Orb",
+		
 		"RobotsMainBuilding": "entity.robots.RobotsMainBuilding",
 		"RobotsKaserne": "entity.robots.RobotsKaserne",
 		"RobotsDepot": "entity.robots.RobotsDepot",
@@ -134,7 +139,7 @@
 
 			"robots": 
 			{
-				
+				"0": "maps/campain/robots/lvl1/lvl1"
 			},
 
 			"1": "maps/campain/TutorialMap/TutorialMap"
