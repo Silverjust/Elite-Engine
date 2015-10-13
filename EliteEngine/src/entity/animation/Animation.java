@@ -8,6 +8,7 @@ import entity.Building;
 import entity.Entity;
 import entity.Trainer;
 import entity.Unit;
+import game.ImageHandler;
 
 public class Animation {
 	public static Class<?> observe = Animation
@@ -86,11 +87,11 @@ public class Animation {
 		}
 
 		if (imgWD != null && d < directions && f < frames) {
-			ref.app.image(imgWD[d][f], Entity.xToGrid(e.x),
-					Entity.yToGrid(e.y), e.xSize, e.ySize);
+			ImageHandler.drawImage(ref.app, imgWD[d][f],
+					Entity.xToGrid(e.x), Entity.yToGrid(e.y), e.xSize, e.ySize);
 		} else if (img != null && f < frames) {
-			ref.app.image(img[f], Entity.xToGrid(e.x),
-					Entity.yToGrid(e.y - e.height), e.xSize, e.ySize);
+			ImageHandler.drawImage(ref.app, img[f],
+					Entity.xToGrid(e.x), Entity.yToGrid(e.y - e.height), e.xSize, e.ySize);
 		}
 		if (Animation.observe.isAssignableFrom(e.getClass())) {
 			ref.app.text(getName(e), Entity.xToGrid(e.x),
@@ -110,11 +111,11 @@ public class Animation {
 		}
 
 		if (imgWD != null && d < directions && f < frames) {
-			ref.app.image(imgWD[d][f], Entity.xToGrid(x), Entity.yToGrid(y),
-					e.xSize, e.ySize);
+			ImageHandler.drawImage(ref.app, imgWD[d][f],
+					Entity.xToGrid(x), Entity.yToGrid(y), e.xSize, e.ySize);
 		} else if (img != null && f < frames) {
-			ref.app.image(img[f], Entity.xToGrid(x),
-					Entity.yToGrid(y - e.height), e.xSize, e.ySize);
+			ImageHandler.drawImage(ref.app, img[f],
+					Entity.xToGrid(x), Entity.yToGrid(y - e.height), e.xSize, e.ySize);
 		}
 		if (Animation.observe.isAssignableFrom(e.getClass())) {
 			ref.app.text(getName(e), Entity.xToGrid(e.x),

@@ -4,6 +4,7 @@ import processing.core.PImage;
 import shared.Updater;
 import shared.ref;
 import entity.Entity;
+import game.ImageHandler;
 
 public class Explosion extends Animation {
 
@@ -48,8 +49,8 @@ public class Explosion extends Animation {
 		}
 
 		if (img != null && currentFrame < img.length) {
-			ref.app.image(img[currentFrame], Entity.xToGrid(x),
-					Entity.yToGrid(y), xSize, ySize);
+			ImageHandler.drawImage(ref.app, img[currentFrame],
+					Entity.xToGrid(x), Entity.yToGrid(y), xSize, ySize);
 		}
 	}
 

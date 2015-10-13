@@ -164,7 +164,8 @@ public abstract class Entity implements Informing {
 	}
 
 	protected void drawShadow() {
-		ref.app.image(shadowImg, xToGrid(x), yToGrid(y), radius * 2, radius);
+		ImageHandler.drawImage(ref.app, shadowImg, xToGrid(x), yToGrid(y),
+				radius * 2, radius);
 	}
 
 	public byte flyHeight() {
@@ -176,8 +177,8 @@ public abstract class Entity implements Informing {
 	protected void drawSelected() {
 		if (isSelected && isAlive()) {
 			ref.app.tint(player.color);
-			ref.app.image(selectedImg, xToGrid(x), yToGrid(y - flyHeight()),
-					radius * 2, radius);
+			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x),
+					yToGrid(y - flyHeight()), radius * 2, radius);
 			ref.app.tint(255);
 		}
 	}
@@ -201,7 +202,7 @@ public abstract class Entity implements Informing {
 			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight()) - radius * 1.5f,
 					radius * 2, h);
 			ref.app.tint(player.color);
-			ref.app.image(hpImg, xToGrid(x), yToGrid(y - flyHeight()) - radius
+			ImageHandler.drawImage(ref.app, hpImg, xToGrid(x), yToGrid(y - flyHeight()) - radius
 					* 1.5f, radius * 2 * hp / hp_max, h);
 			ref.app.tint(255);
 		}
@@ -214,7 +215,7 @@ public abstract class Entity implements Informing {
 			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight() - h * 3) - radius
 					* 1.5f, radius * 2, h);
 			ref.app.tint(200);
-			ref.app.image(hpImg, xToGrid(x), yToGrid(y - flyHeight() - h * 3)
+			ImageHandler.drawImage(ref.app, hpImg, xToGrid(x), yToGrid(y - flyHeight() - h * 3)
 					- radius * 1.5f, radius * 2 * f, h);
 			ref.app.tint(255);
 		}
@@ -227,18 +228,20 @@ public abstract class Entity implements Informing {
 			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight() - h * 3) - radius
 					* 1.5f, radius * 2, h);
 			ref.app.tint(c);
-			ref.app.image(hpImg, xToGrid(x), yToGrid(y - flyHeight() - h * 3)
+			ImageHandler.drawImage(ref.app, hpImg, xToGrid(x), yToGrid(y - flyHeight() - h * 3)
 					- radius * 1.5f, radius * 2 * f, h);
 			ref.app.tint(255);
 		}
 	}
 
 	protected void drawCircle(int r) {
-		ref.app.image(selectedImg, xToGrid(x), yToGrid(y), r * 2, r);
+		ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x), yToGrid(y),
+				r * 2, r);
 	}
 
 	protected void drawCircle(float x, float y, byte range) {
-		ref.app.image(selectedImg, xToGrid(x), yToGrid(y), range * 2, range);
+		ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x), yToGrid(y),
+				range * 2, range);
 	}
 
 	void drawLine(float tx, float ty) {

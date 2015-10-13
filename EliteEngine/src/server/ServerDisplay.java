@@ -2,6 +2,7 @@ package server;
 
 import entity.Entity;
 import g4p_controls.G4P;
+import game.ImageHandler;
 
 import javax.swing.JFrame;
 
@@ -38,11 +39,11 @@ public class ServerDisplay extends PApplet {
 		scale(zoom);
 		stroke(0);
 
-		image(ref.updater.map.textur, 0, 0, ref.updater.map.width,
+		ImageHandler.drawImage(this, ref.updater.map.textur, 0, 0, ref.updater.map.width,
 				ref.updater.map.height);
 		ref.updater.map.updateFogofWar(ref.player);
 		blendMode(PConstants.MULTIPLY);
-		image(ref.updater.map.fogOfWar, 0, 0, ref.updater.map.width,
+		ImageHandler.drawImage(this, ref.updater.map.fogOfWar, 0, 0, ref.updater.map.width,
 				ref.updater.map.height);
 		blendMode(PConstants.BLEND);
 		imageMode(PConstants.CENTER);

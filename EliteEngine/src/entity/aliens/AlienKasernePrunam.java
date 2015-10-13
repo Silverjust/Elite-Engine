@@ -70,8 +70,8 @@ public class AlienKasernePrunam extends Building implements Commander, Trainer {
 
 	@Override
 	public void renderTerrain() {
-		ref.app.image(AlienMainBuilding.groundImg, xToGrid(x), yToGrid(y),
-				commanderRange * 2, commanderRange);
+		ImageHandler.drawImage(ref.app, AlienMainBuilding.groundImg, xToGrid(x),
+				yToGrid(y), commanderRange * 2, commanderRange);
 	}
 
 	@Override

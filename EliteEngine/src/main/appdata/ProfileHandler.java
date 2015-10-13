@@ -1,6 +1,6 @@
 package main.appdata;
 
-import main.MainPreGame.GameSettings;
+import main.preGame.MainPreGame.GameSettings;
 import processing.data.JSONObject;
 import shared.VersionCombiner;
 import shared.ref;

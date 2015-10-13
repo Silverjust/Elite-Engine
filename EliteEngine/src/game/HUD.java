@@ -82,8 +82,8 @@ public class HUD {
 				ref.app.textAscent() + 15 + 10 + 64 * 3);
 
 		ref.app.fill(ref.app.color(255));
-		ref.app.image(overlay, 0, ref.app.height - height, ref.app.width,
-				height);
+		ImageHandler.drawImage(ref.app, overlay, 0, ref.app.height - height,
+				ref.app.width, height);
 
 		SelectionDisplay.update();
 		Minimap.update();
@@ -105,7 +105,7 @@ public class HUD {
 			if (activesGrid != null)
 				activesGrid.dispose();
 			GroupHandler.dispose();
-			// ImageHandler.dispose();
+			ImageHandler.dispose();
 			if (sound != null)
 				sound.close();
 		} catch (Exception e) {

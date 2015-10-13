@@ -1,6 +1,7 @@
 package main;
 
-import main.MainPreGame.GameSettings;
+import main.preGame.MainPreGame;
+import main.preGame.MainPreGame.GameSettings;
 import shared.Client;
 import shared.ComHandler;
 import shared.ref;

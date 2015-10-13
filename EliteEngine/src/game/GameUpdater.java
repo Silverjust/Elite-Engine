@@ -2,8 +2,8 @@ package game;
 
 import java.util.Collections;
 
+import main.preGame.MainPreGame.GameSettings;
 import main.ClientHandler;
-import main.MainPreGame.GameSettings;
 import shared.Helper;
 import shared.Nation;
 import shared.Player;

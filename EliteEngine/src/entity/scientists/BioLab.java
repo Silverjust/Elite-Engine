@@ -57,8 +57,8 @@ public class BioLab extends Lab {
 		if (isAlive() && AimHandler.getAim() instanceof SwampAim
 				&& swampify.isNotOnCooldown()) {
 			ref.app.tint(player.color);
-			ref.app.image(selectedImg, xToGrid(x), yToGrid(y), equipRange * 2,
-					equipRange);
+			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x),
+					yToGrid(y), equipRange * 2, equipRange);
 			ref.app.tint(255);
 		}
 	}

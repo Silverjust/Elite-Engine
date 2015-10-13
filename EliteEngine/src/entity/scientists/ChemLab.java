@@ -52,8 +52,8 @@ public class ChemLab extends Lab {
 		super.renderUnder();
 		if (isAlive() && AimHandler.getAim() instanceof ScientistWallAim) {
 			ref.app.tint(player.color);
-			ref.app.image(selectedImg, xToGrid(x), yToGrid(y), buildRange * 2,
-					buildRange);
+			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x),
+					yToGrid(y), buildRange * 2, buildRange);
 			ref.app.tint(255);
 		}
 	}

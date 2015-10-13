@@ -173,12 +173,27 @@ public class ImageHandler {
 	}
 
 	public static void dispose() {
+		/*for (PImage img : imagesToLoad) {
+			Object cache = ref.app.getCache(img);
+			if (cache instanceof Texture)
+				((Texture) cache).disposeSourceBuffer();
+			ref.app.removeCache(img);
+		}
 		dispose = true;
 		requestAllImages();
 		dispose = false;
 
 		// for (int i = 0; i < imagesToLoad.size(); i++) { imagesToLoad }
 
-		imagesToLoad.clear();
+		imagesToLoad.clear();*/
+	}
+
+	public static void drawImage(PApplet pApplet, PImage img, float a, float b,
+			float c, float d) {
+		try {
+			pApplet.image(img, a, b, c, d);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

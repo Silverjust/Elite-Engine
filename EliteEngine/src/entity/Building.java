@@ -6,6 +6,7 @@ import shared.ref;
 import entity.animation.Build;
 import game.AimHandler;
 import game.AimHandler.Cursor;
+import game.ImageHandler;
 import game.aim.BuildAim;
 import game.aim.CustomAim;
 
@@ -65,8 +66,8 @@ public abstract class Building extends Entity {
 				&& AimHandler.getAim() instanceof BuildAim) {
 			Commander c = (Commander) this;
 			ref.app.tint(player.color);
-			ref.app.image(selectedImg, xToGrid(x), yToGrid(y),
-					c.commandRange() * 2, c.commandRange());
+			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x),
+					yToGrid(y), c.commandRange() * 2, c.commandRange());
 			ref.app.tint(255);
 		}
 	}

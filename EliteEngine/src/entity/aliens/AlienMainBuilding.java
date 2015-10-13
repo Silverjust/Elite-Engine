@@ -49,8 +49,8 @@ public class AlienMainBuilding extends MainBuilding implements Commander {
 
 	@Override
 	public void renderTerrain() {
-		ref.app.image(groundImg, xToGrid(x), yToGrid(y), commandingRange * 2,
-				commandingRange);
+		ImageHandler.drawImage(ref.app, groundImg, xToGrid(x), yToGrid(y),
+				commandingRange * 2, commandingRange);
 	}
 
 	@Override

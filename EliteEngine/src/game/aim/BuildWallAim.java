@@ -5,6 +5,7 @@ import shared.ref;
 import entity.Building;
 import entity.Entity;
 import game.AimHandler;
+import game.ImageHandler;
 
 public class BuildWallAim extends BuildAim {
 	boolean isStartWall;
@@ -27,8 +28,7 @@ public class BuildWallAim extends BuildAim {
 			} else {
 				ref.app.tint(255, 100, 100, 150);
 			}
-			ref.app.image(buildable.preview(), x, y / 2, buildable.xSize,
-					buildable.ySize);
+			ImageHandler.drawImage(ref.app, buildable.preview(), x, y / 2, buildable.xSize, buildable.ySize);
 			ref.app.tint(255);
 		} else {
 			float x1 = xStartWall, y1 = yStartWall;
@@ -43,8 +43,8 @@ public class BuildWallAim extends BuildAim {
 				} else {
 					ref.app.tint(255, 100, 100, 150);
 				}
-				ref.app.image(buildable.preview(), x1, y1 / 2, buildable.xSize,
-						buildable.ySize);
+				ImageHandler.drawImage(ref.app, buildable.preview(), x1,
+						y1 / 2, buildable.xSize, buildable.ySize);
 				ref.app.tint(255);
 			}
 			if (canPlaceAt(x2, y2)) {
@@ -52,8 +52,7 @@ public class BuildWallAim extends BuildAim {
 			} else {
 				ref.app.tint(255, 100, 100, 150);
 			}
-			ref.app.image(buildable.preview(), x2, y2 / 2, buildable.xSize,
-					buildable.ySize);
+			ImageHandler.drawImage(ref.app, buildable.preview(), x2, y2 / 2, buildable.xSize, buildable.ySize);
 			ref.app.tint(255);
 		}
 	}

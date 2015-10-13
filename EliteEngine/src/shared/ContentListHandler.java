@@ -1,6 +1,6 @@
 package shared;
 
-import main.MainPreGame.GameSettings;
+import main.preGame.MainPreGame.GameSettings;
 import processing.data.JSONObject;
 
 public class ContentListHandler {
@@ -23,7 +23,14 @@ public class ContentListHandler {
 	}
 
 	public static JSONObject getModeMaps() {
-		return contentList.getJSONObject("maps").getJSONObject(
-				GameSettings.tutorial ? "tutorial" : "standard");
+		if (GameSettings.campain) {
+			if (ref.preGame.getUser("").nation != null && ref.preGame.getUser("").nation != Nation.NEUTRAL) {
+				return contentList.getJSONObject("maps").getJSONObject("campain")
+						.getJSONObject(ref.preGame.getUser("").nation.toString());
+			} else {
+				return new JSONObject();
+			}
+		}
+		return contentList.getJSONObject("maps").getJSONObject("standard");
 	}
 }

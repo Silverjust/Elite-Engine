@@ -1,6 +1,7 @@
 package main;
 
-import main.MainPreGame.GameSettings;
+import main.preGame.MainPreGame;
+import main.preGame.MainPreGame.GameSettings;
 import main.appdata.ProfileHandler;
 import main.appdata.StatScreen;
 import shared.Helper;
@@ -18,7 +19,7 @@ public class StartPage {
 	GTextField playerName, serverIp;
 	GPassword password;
 	GButton multiplayerButton, singleplayerButton, sandboxButton,
-			tutorialButton, statisticsButton, localhost, startServer;
+			campainButton, statisticsButton, localhost, startServer;
 	GTextArea changes;
 
 	public StartPage() {
@@ -50,9 +51,9 @@ public class StartPage {
 		sandboxButton.setText("sandbox");
 		sandboxButton.addEventHandler(this, "handleAcceptEvents");
 
-		tutorialButton = new GButton(ref.app, 300, 540, 300, 40);
-		tutorialButton.setText("tutorial");
-		tutorialButton.addEventHandler(this, "handleAcceptEvents");
+		campainButton = new GButton(ref.app, 300, 540, 300, 40);
+		campainButton.setText("campain");
+		campainButton.addEventHandler(this, "handleAcceptEvents");
 
 		statisticsButton = new GButton(ref.app, 300, 590, 300, 40);
 		statisticsButton.setText("statistics");
@@ -67,7 +68,7 @@ public class StartPage {
 		startServer.setText("make to Server");
 		startServer.addEventHandler(this, "handleStartServerEvents");
 
-		main.MainPreGame.GameSettings.setupGameSettings();
+		MainPreGame.GameSettings.setupGameSettings();
 		ref.app.clear();
 		ref.app.background(200);
 	}
@@ -96,9 +97,9 @@ public class StartPage {
 			} else if (button == sandboxButton) {
 				GameSettings.singlePlayer = true;
 				GameSettings.sandbox = true;
-			} else if (button == tutorialButton) {
+			} else if (button == campainButton) {
 				GameSettings.singlePlayer = true;
-				GameSettings.tutorial = true;
+				GameSettings.campain = true;
 			} else if (button == statisticsButton) {
 				StatScreen.setup();
 				return;
@@ -132,7 +133,7 @@ public class StartPage {
 			multiplayerButton.dispose();
 			singleplayerButton.dispose();
 			sandboxButton.dispose();
-			tutorialButton.dispose();
+			campainButton.dispose();
 			statisticsButton.dispose();
 			changes.dispose();
 			startServer.dispose();
@@ -165,7 +166,7 @@ public class StartPage {
 			multiplayerButton.setEnabled(b);
 			singleplayerButton.setEnabled(b);
 			sandboxButton.setEnabled(b);
-			tutorialButton.setEnabled(b);
+			campainButton.setEnabled(b);
 			statisticsButton.setEnabled(b);
 			changes.setEnabled(b);
 			startServer.setEnabled(b);

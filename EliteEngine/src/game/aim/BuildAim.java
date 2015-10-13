@@ -6,6 +6,7 @@ import entity.Entity;
 import entity.Commander;
 import entity.Entity.GroundPosition;
 import game.AimHandler.Cursor;
+import game.ImageHandler;
 
 public class BuildAim extends Aim {
 	protected Building buildable;
@@ -36,8 +37,7 @@ public class BuildAim extends Aim {
 		} else {
 			ref.app.tint(255, 100, 100, 150);
 		}
-		ref.app.image(buildable.preview(), x, y / 2, buildable.xSize,
-				buildable.ySize);
+		ImageHandler.drawImage(ref.app, buildable.preview(), x, y / 2, buildable.xSize, buildable.ySize);
 		ref.app.tint(255);
 	}
 

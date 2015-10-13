@@ -42,8 +42,8 @@ public class GameDrawer {
 		ref.app.scale(zoom);
 		ref.app.stroke(0);
 
-		ref.app.image(ref.updater.map.textur, 0, 0, ref.updater.map.width,
-				ref.updater.map.height / 2);
+		ImageHandler.drawImage(ref.app, ref.updater.map.textur, 0, 0,
+				ref.updater.map.width, ref.updater.map.height / 2);
 		ref.app.imageMode(PConstants.CENTER);
 		ref.app.rectMode(PConstants.CENTER);
 		ArrayList<Entity> entities = ref.updater.entities;
@@ -55,8 +55,8 @@ public class GameDrawer {
 		ref.app.rectMode(PConstants.CORNER);
 		ref.updater.map.updateFogofWar(ref.player);
 		ref.app.blendMode(PConstants.MULTIPLY);
-		ref.app.image(ref.updater.map.fogOfWar, 0, 0, ref.updater.map.width,
-				ref.updater.map.height / 2);// hä?
+		ImageHandler.drawImage(ref.app, ref.updater.map.fogOfWar, 0, 0,
+				ref.updater.map.width, ref.updater.map.height / 2);// hä?
 		ref.app.blendMode(PConstants.BLEND);
 		ref.app.imageMode(PConstants.CENTER);
 		ref.app.rectMode(PConstants.CENTER);

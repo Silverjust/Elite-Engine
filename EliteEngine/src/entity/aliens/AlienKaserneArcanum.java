@@ -70,8 +70,8 @@ public class AlienKaserneArcanum extends Building implements Commander, Trainer 
 
 	@Override
 	public void renderTerrain() {
-		ref.app.image(AlienMainBuilding.groundImg, xToGrid(x), yToGrid(y),
-				commandRange * 2, commandRange);
+		ImageHandler.drawImage(ref.app, AlienMainBuilding.groundImg, xToGrid(x),
+				yToGrid(y), commandRange * 2, commandRange);
 	}
 
 	@Override

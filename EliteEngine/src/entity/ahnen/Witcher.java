@@ -18,6 +18,7 @@ import entity.animation.MeleeAttack;
 import entity.animation.ShootAttack;
 import game.AimHandler;
 import game.AimHandler.Cursor;
+import game.ImageHandler;
 import game.aim.CustomAim;
 
 public class Witcher extends Unit implements Attacker, Shooter {
@@ -173,8 +174,8 @@ public class Witcher extends Unit implements Attacker, Shooter {
 			displayBurstArea = false;
 		if (isAlive() && displayBurstArea && burst.isNotOnCooldown()) {
 			ref.app.tint(player.color);
-			ref.app.image(selectedImg, xToGrid(x), yToGrid(y),
-					basicAttack.range * 2, basicAttack.range);
+			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x),
+					yToGrid(y), basicAttack.range * 2, basicAttack.range);
 			ref.app.tint(255);
 		}
 	}

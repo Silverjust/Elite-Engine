@@ -1,6 +1,6 @@
 package main;
 
-import main.MainPreGame.GameSettings;
+import main.preGame.MainPreGame.GameSettings;
 import shared.Loader;
 import shared.Mode;
 import shared.ref;
@@ -21,12 +21,12 @@ public class MainLoader extends Loader {
 			state = State.STARTIMAGES;
 			break;
 		case STARTIMAGES:
-				boolean b = ImageHandler.requestAllImages();
-				if (b) {
-					state = State.IMAGES;
-				} else {
-					state = State.ERROR;
-				}
+			boolean b = ImageHandler.requestAllImages();
+			if (b) {
+				state = State.IMAGES;
+			} else {
+				state = State.ERROR;
+			}
 			break;
 		case IMAGES:
 			float f = ImageHandler.stateOfLoading();
@@ -47,8 +47,10 @@ public class MainLoader extends Loader {
 			if (GameSettings.singlePlayer) {
 				if (GameSettings.sandbox)
 					ref.updater.send("<spawn SandboxBuilding 0 20 20");
-				/*if (GameSettings.tutorial)
-					ref.updater.send("<spawn Tutorial 0 20 20");*/
+				/*
+				 * if (GameSettings.tutorial)
+				 * ref.updater.send("<spawn Tutorial 0 20 20");
+				 */
 				MapHandler.setupEntities(ref.updater.map.mapData);
 				/*
 				 * int i = 0; for (String key : ref.updater.player.keySet()) {

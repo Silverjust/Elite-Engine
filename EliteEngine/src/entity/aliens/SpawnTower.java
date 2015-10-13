@@ -118,8 +118,8 @@ public class SpawnTower extends Building implements Commander {
 
 	@Override
 	public void renderTerrain() {
-		ref.app.image(AlienMainBuilding.groundImg, xToGrid(x), yToGrid(y),
-				commandingRange * 2, commandingRange);
+		ImageHandler.drawImage(ref.app, AlienMainBuilding.groundImg, xToGrid(x),
+				yToGrid(y), commandingRange * 2, commandingRange);
 	}
 
 	@Override

@@ -109,8 +109,8 @@ public class ThornTower extends Building implements Shooter, Commander {
 
 	@Override
 	public void renderTerrain() {
-		ref.app.image(AlienMainBuilding.groundImg, xToGrid(x), yToGrid(y),
-				commandingRange * 2, commandingRange);
+		ImageHandler.drawImage(ref.app, AlienMainBuilding.groundImg, xToGrid(x),
+				yToGrid(y), commandingRange * 2, commandingRange);
 	}
 
 	@Override

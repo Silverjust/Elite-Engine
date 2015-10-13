@@ -12,6 +12,7 @@ import entity.animation.Death;
 import entity.animation.MeleeAttack;
 import game.AimHandler;
 import game.AimHandler.Cursor;
+import game.ImageHandler;
 import game.aim.Aim;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -155,8 +156,8 @@ public class Berserker extends Unit implements Attacker {
 		if (isAlive() && AimHandler.getAim() instanceof LeuchteAim
 				&& buildLeuchte.isNotOnCooldown()) {
 			ref.app.tint(player.color);
-			ref.app.image(selectedImg, xToGrid(x), yToGrid(y), buildRange * 2,
-					buildRange);
+			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x),
+					yToGrid(y), buildRange * 2, buildRange);
 			ref.app.tint(255);
 		}
 	}
@@ -264,8 +265,7 @@ public class Berserker extends Unit implements Attacker {
 			} else {
 				ref.app.tint(255, 100, 100, 150);
 			}
-			ref.app.image(buildable.preview(), x, y / 2, buildable.xSize,
-					buildable.ySize);
+			ImageHandler.drawImage(ref.app, buildable.preview(), x, y / 2, buildable.xSize, buildable.ySize);
 			ref.app.tint(255);
 		}
 

@@ -1,7 +1,9 @@
-package main;
+package main.preGame;
 
+import main.ClientHandler;
+import main.MainApp;
+import main.MainLoader;
 import entity.gameAI.GameAI;
-import processing.data.JSONObject;
 import shared.ContentListHandler;
 import shared.Mode;
 import shared.Nation;
@@ -11,7 +13,7 @@ import shared.ref;
 
 public class MainPreGame extends PreGame {
 
-	public PreGameNormalDisplay display;
+	public PreGameDisplay display;
 
 	private String name;
 
@@ -26,8 +28,10 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void setup() {
-		if (GameSettings.singlePlayer && !GameSettings.tutorial)
+		if (GameSettings.singlePlayer && !GameSettings.campain)
 			display = new PreGameSandboxDisplay();
+		else if (GameSettings.campain)
+			display = new PreGameCampainDisplay();
 		else
 			display = new PreGameNormalDisplay();
 	}
@@ -82,31 +86,8 @@ public class MainPreGame extends PreGame {
 
 	@Override
 	public void setMap(String string) {
-		int size = ContentListHandler.getModeMaps().keys().size();
-		@SuppressWarnings("unchecked")
-		String[] mapArray = (String[]) ContentListHandler.getModeMaps().keys()
-				.toArray(new String[size]);
-		int index = -1;
-		for (int i = 0; i < mapArray.length; i++) {
-			try {
-				if (mapArray[i].equals(string)) {
-					@SuppressWarnings("unused")
-					JSONObject mapData = ref.app.loadJSONObject("data/"
-							+ ContentListHandler.getModeMaps().getString(
-									mapArray[i]) + ".json");
-					index = i;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if (index < 0) {
-			System.err.println(string + " not found");
-			return;
-		}
-		map = ContentListHandler.getModeMaps().getString(mapArray[index]);
 		if (display != null)
-			display.mapSelector.setSelected(index);
+			display.mapSelect.setMap(string);
 	}
 
 	@Override
@@ -143,13 +124,13 @@ public class MainPreGame extends PreGame {
 	public static class GameSettings {
 		public static boolean singlePlayer;
 		public static boolean sandbox;
-		public static boolean tutorial;
+		public static boolean campain;
 		public static boolean againstAI;
 
 		public static void setupGameSettings() {
 			singlePlayer = false;
 			sandbox = false;
-			tutorial = false;
+			campain = false;
 			againstAI = false;
 		}
 	}
