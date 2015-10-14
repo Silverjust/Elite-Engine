@@ -60,7 +60,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 		prunam = 10;
 		trainTime = 4000;
 
-		hp = hp_max = 200;
+		hp = hp_max = 100;
 		armor = 1;
 		speed = 0.7f;
 		radius = 7;
@@ -72,7 +72,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 		basicAttack.damage = 80;
 		basicAttack.pirce = 1;
 		basicAttack.cooldown = 3000;
-		basicAttack.range = 30;
+		basicAttack.range = 25;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
 

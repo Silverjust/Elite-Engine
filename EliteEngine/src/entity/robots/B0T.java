@@ -57,7 +57,7 @@ public class B0T extends Unit implements Shooter {
 		basicAttack.damage = 30;
 		basicAttack.pirce = 0;
 		basicAttack.cooldown = 1500;
-		basicAttack.range = 35;
+		basicAttack.range = 40;
 		basicAttack.setCastTime(500);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
 
