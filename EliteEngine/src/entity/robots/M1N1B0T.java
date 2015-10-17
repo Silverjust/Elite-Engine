@@ -39,8 +39,8 @@ public class M1N1B0T extends Unit implements Attacker, Shooter {
 		setAnimation(walk);
 
 		// ************************************
-		xSize = 10;
-		ySize = 10;
+		xSize = 15;
+		ySize = 15;
 
 		kerit = 28;
 		pax = 0;
@@ -56,14 +56,14 @@ public class M1N1B0T extends Unit implements Attacker, Shooter {
 		groundPosition = Entity.GroundPosition.GROUND;
 
 		aggroRange = (byte) (radius + 50);
-		basicAttack.damage = 10;
+		basicAttack.damage = 40;
 		basicAttack.pirce = 0;
-		basicAttack.cooldown = 1500;
-		basicAttack.range = 40;
+		basicAttack.cooldown = 3000;
+		basicAttack.range = 30;
 		basicAttack.setCastTime(100);// eventtime is defined by target distance
 		basicAttack.speed = 0.6f;
 
-		descr = "M1N1B0T§can move while§attack§and build Depots";
+		descr = "M1N1B0T§can attack§and build Depots";
 		// ************************************
 	}
 
@@ -99,32 +99,11 @@ public class M1N1B0T extends Unit implements Attacker, Shooter {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && basicAttack.isNotOnCooldown()) {
-				// änderung wegen kiter
+			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
 			}
 		}
 		basicAttack.updateAbility(this, isServer);
-	}
-
-	@Override
-	public void exec(String[] c) {
-		super.exec(c);
-		// move while attack
-		if ("walk".equals(c[2])) {
-			xTarget = Float.parseFloat(c[3]);
-			yTarget = Float.parseFloat(c[4]);
-			if (PApplet.dist(x, y, xTarget, yTarget) >= speed) {
-				isMoving = true;
-				// isAggro = Boolean.valueOf(c[5]);
-				// setAnimation(walk);
-			} else {
-				isMoving = false;
-				// setAnimation(stand);
-			}
-		}
-		if (c[2].equals("basicAttack"))
-			isMoving = true;
 	}
 
 	@Override
