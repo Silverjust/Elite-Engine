@@ -21,11 +21,13 @@ public abstract class PreGameDisplay {
 	PlayerPanel playerPanel;
 	NationSelect nationSelect;
 	SandboxSelection sandboxSelection;
+	PreGameChat chat;
 
 	public PreGameDisplay() {
 		preGame = (MainPreGame) ref.preGame;
-		
+
 		mapSelect = new MapSelect(this, startMap);
+		chat = new PreGameChat();
 
 		startButton = new GButton(ref.app, ref.app.width - 320, ref.app.height - 200, 300, 175);
 		startButton.setText("START");
@@ -66,6 +68,7 @@ public abstract class PreGameDisplay {
 	public void dispose() {
 		mapSelect.dispose(this);
 		startButton.dispose();
+		chat.dispose();
 	}
 
 	public void setActive(boolean b) {

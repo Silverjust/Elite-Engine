@@ -78,10 +78,10 @@ public class Helper {
 	}
 
 	public static String ipToName(String ip) {
-		Player p = ref.updater.player.get(ip);
+		User u = ref.preGame.getUser(ip);
 		String name = null;
-		if (p != null)
-			name = p.getUser().name;
+		if (u != null)
+			name = u.name;
 		if (name != null)
 			return name;
 		return ip;

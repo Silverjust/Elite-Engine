@@ -2,6 +2,7 @@ package server;
 
 import main.preGame.PreGameNormalDisplay;
 import shared.ContentListHandler;
+import shared.Helper;
 import shared.Mode;
 import shared.PreGame;
 import shared.User;
@@ -14,8 +15,7 @@ public class ServerPreGame extends PreGame {
 		int i = ContentListHandler.getModeMaps().size();
 
 		@SuppressWarnings("unchecked")
-		String[] intNames = (String[]) ContentListHandler.getModeMaps().keys()
-				.toArray(new String[i]);
+		String[] intNames = (String[]) ContentListHandler.getModeMaps().keys().toArray(new String[i]);
 		map = ContentListHandler.getModeMaps().getString(intNames[new PreGameNormalDisplay().startMap]);
 		// PApplet.printArray(intNames);
 		// System.out.println(map);
@@ -50,4 +50,14 @@ public class ServerPreGame extends PreGame {
 
 	}
 
+	@Override
+	public void write(String ip, String[] text) {
+		String name = Helper.ipToName(ip);
+		String completeText = "";
+		for (int i = 2; i < text.length; i++) {// c[0] und c[1] auslassen
+			completeText = completeText.concat(" ").concat(text[i]);
+		}
+		((ServerApp) ref.app).gui.addChatText(name + ">>" + completeText);
+		System.out.println(" " + name + ">>" + completeText);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import entity.Entity;
 import game.Map;
+import shared.Helper.Timer;
 
 public abstract class Updater {
 	public HashMap<Integer, Entity> namedEntities = new HashMap<Integer, Entity>();
@@ -21,9 +22,9 @@ public abstract class Updater {
 	public GameState gameState = GameState.PLAY;
 	public boolean selectionChanged;
 
-	public abstract void update();
+	static public Timer resfreeze;
 
-	public abstract void write(String ip, String[] c);
+	public abstract void update();
 
 	public boolean arePlayerReady() {
 		boolean b = true;
@@ -64,8 +65,7 @@ public abstract class Updater {
 			if (pauseStart == 0)
 				return ref.app.millis() - pauseTime;
 			else
-				return ref.app.millis()
-						- (pauseTime + ref.app.millis() - pauseStart);
+				return ref.app.millis() - (pauseTime + ref.app.millis() - pauseStart);
 		}
 	}
 
@@ -82,6 +82,8 @@ public abstract class Updater {
 		toAdd.clear();
 		toRemove.clear();
 		selected.clear();
+
+		resfreeze = null;
 	}
 
 	public void onGameStart() {

@@ -4,16 +4,15 @@ import javax.naming.NoInitialContextException;
 
 import main.ClientHandler;
 import processing.core.PApplet;
+import shared.Helper.Timer;
 import shared.Updater.GameState;
 import entity.Entity;
 import g4p_controls.GCScheme;
 import game.GameDrawer;
-import game.HUD;
 import game.ImageHandler;
 import game.MapHandler;
 
 public class CommandHandler {
-
 	public static void executeCommands(String command) {
 		String[] c = PApplet.splitTokens(command, " ");
 
@@ -22,20 +21,6 @@ public class CommandHandler {
 			float f;
 			Entity e;
 			switch (c[0]) {
-			case "/move":
-				if (c[1].equals("s")) {
-					for (Entity entity : ref.updater.selected) {
-						ClientHandler.send("<execute " + entity.number
-								+ " walk " + c[2] + " " + c[3]);
-					}
-				} else {
-					ClientHandler.send("<execute " + c[1] + " walk " + c[2]
-							+ " " + c[3]);
-				}
-				break;
-			case "/amove":
-				// ClientHandler.send(command.replaceFirst("/", "<"));
-				break;
 			case "/hit":
 				if (c[1].equals("s")) {
 					for (Entity entity : ref.updater.selected) {
@@ -48,8 +33,7 @@ public class CommandHandler {
 			case "/tp":
 				if (c[1].equals("s")) {
 					for (Entity entity : ref.updater.selected) {
-						ClientHandler.send("<tp " + entity.number + c[2] + " "
-								+ c[3]);
+						ClientHandler.send("<tp " + entity.number + c[2] + " " + c[3]);
 					}
 				} else {
 					ClientHandler.send("<tp " + c[1] + " " + c[2] + " " + c[3]);
@@ -97,7 +81,7 @@ public class CommandHandler {
 				MapHandler.saveMap(c[1], c[2]);
 				break;
 			case "/fps":
-				HUD.chat.println("fps", ref.app.frameRate + "");
+				ref.preGame.write("fps", ref.app.frameRate + "");
 				break;
 			case "/scheme":
 				i = Integer.parseInt(c[1]);
@@ -105,6 +89,12 @@ public class CommandHandler {
 				int g = Integer.parseInt(c[3]);
 				int b = Integer.parseInt(c[4]);
 				GCScheme.setScheme(8, i, ref.app.color(r, g, b));
+				break;
+			case "/resfreeze":
+				int cooldown = (int) (Float.parseFloat(c[1]) * 60 * 1000);
+				System.out.println("CommandHandler.executeCommands()" + cooldown);
+				Updater.resfreeze = new Timer(cooldown);
+				Updater.resfreeze.startCooldown();
 				break;
 			case "/pause":
 				if (ref.updater.gameState == GameState.PAUSE) {
@@ -134,18 +124,19 @@ public class CommandHandler {
 				throw new NoInitialContextException("no command found");
 			}
 		} catch (IllegalArgumentException e) {
-			System.err.println("no entity found " + command);
-			HUD.chat.println("Chat", "no entity found ");
+			System.err.println("error " + command);
+			e.printStackTrace();
+			ref.preGame.write("Chat", "error");
 		} catch (ClassCastException e) {
 			System.err.println("wrong entity " + command);
-			HUD.chat.println("Chat", "wrong entity ");
+			ref.preGame.write("Chat", "wrong entity");
 		} catch (NoInitialContextException e) {
 			System.err.println(command + " was not found");
-			HUD.chat.println("Chat", "command was not found");
+			ref.preGame.write("Chat", "command was not found");
 		} catch (Exception e) {
 			System.err.println("command error in " + command);
 			e.printStackTrace();
-			HUD.chat.println("Chat", "command error");
+			ref.preGame.write("Chat", "command error");
 		}
 
 	}

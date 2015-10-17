@@ -4,7 +4,9 @@ import main.ClientHandler;
 import main.MainApp;
 import main.MainLoader;
 import entity.gameAI.GameAI;
+import game.HUD;
 import shared.ContentListHandler;
+import shared.Helper;
 import shared.Mode;
 import shared.Nation;
 import shared.PreGame;
@@ -56,6 +58,12 @@ public class MainPreGame extends PreGame {
 		}
 	}
 
+	public static void addPlayer(String name, Nation nation) {
+		System.out.println("MainPreGame.addPlayer()" + ref.preGame.users.size());
+		ref.preGame.addPlayer("" + 2, name);
+		ref.preGame.users.get("2").nation = nation;
+	}
+
 	public void addThisPlayer(String name) {
 		User u = new User(ClientHandler.identification, name);
 		// ref.player = Player.createPlayer(u);
@@ -76,6 +84,8 @@ public class MainPreGame extends PreGame {
 	public void setupPlayer() {
 		if (!GameSettings.singlePlayer) {
 			System.out.println(GameSettings.singlePlayer);
+			addThisPlayer(name);
+		} else if (GameSettings.campain) {
 			addThisPlayer(name);
 		} else {
 			addThisPlayer(name);
@@ -133,5 +143,18 @@ public class MainPreGame extends PreGame {
 			campain = false;
 			againstAI = false;
 		}
+	}
+
+	@Override
+	public void write(String ip, String[] text) {
+		String name = Helper.ipToName(ip);
+		String completeText = "";
+		for (int i = 2; i < text.length; i++) {// c[0] und c[1] auslassen
+			completeText = completeText.concat(" ").concat(text[i]);
+		}
+		if (((MainApp) ref.app).mode == Mode.PREGAME)
+			display.chat.println(name, completeText);
+		else if (((MainApp) ref.app).mode == Mode.GAME)
+			HUD.chat.println(name, completeText);
 	}
 }

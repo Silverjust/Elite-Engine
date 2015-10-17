@@ -112,7 +112,7 @@ public class ComHandler {
 				p.give(c[2], Integer.parseInt(c[3]));
 				break;
 			case "<say":
-				ref.updater.write(c[1], c);
+				ref.preGame.write(c[1], c);
 				break;
 
 			// before game

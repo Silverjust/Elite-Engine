@@ -2,9 +2,11 @@ package entity.campain;
 
 import entity.Entity;
 import shared.Helper.Timer;
+import shared.Nation;
 import shared.ref;
 import game.Map;
 import game.MapCode;
+import main.preGame.MainPreGame;
 
 public class testMap extends MapCode {
 	public testMap(Map map) {
@@ -15,6 +17,7 @@ public class testMap extends MapCode {
 
 	@Override
 	public void setup() {
+		MainPreGame.addPlayer("Aliens", Nation.ALIENS);
 		rockTimer = new Timer(10000);
 	}
 

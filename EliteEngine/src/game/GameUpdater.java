@@ -4,7 +4,6 @@ import java.util.Collections;
 
 import main.preGame.MainPreGame.GameSettings;
 import main.ClientHandler;
-import shared.Helper;
 import shared.Nation;
 import shared.Player;
 import shared.Updater;
@@ -21,8 +20,12 @@ public class GameUpdater extends Updater {
 	// FIXME einheiten vibrieren
 
 	public Input input;
-
+	
 	public GameUpdater() {
+		neutral = Player.createNeutralPlayer();
+		input = new Input();
+		map = new Map(ref.preGame.map);
+
 		for (String key : ref.preGame.users.keySet()) {
 			User user = ref.preGame.users.get(key);
 			if (user instanceof GameAI) {
@@ -40,9 +43,6 @@ public class GameUpdater extends Updater {
 				p.color = ref.app.color(200, 0, 0);
 			player.put(key, p);
 		}
-		neutral = Player.createNeutralPlayer();
-		input = new Input();
-		map = new Map(ref.preGame.map);
 	}
 
 	public void update() {
@@ -87,8 +87,7 @@ public class GameUpdater extends Updater {
 				}
 			}
 			// sortierfunktion
-			Collections.sort(ref.player.visibleEntities,
-					new EntityHeightComparator());
+			Collections.sort(ref.player.visibleEntities, new EntityHeightComparator());
 			map.mapCodeUpdate();
 			for (Entity e : entities) {
 				e.updateAnimation();
@@ -125,16 +124,6 @@ public class GameUpdater extends Updater {
 				}
 			}
 		}
-	}
-
-	@Override
-	public void write(String ip, String[] text) {
-		String name = Helper.ipToName(ip);
-		String completeText = "";
-		for (int i = 2; i < text.length; i++) {// c[0] und c[1] auslassen
-			completeText = completeText.concat(" ").concat(text[i]);
-		}
-		HUD.chat.println(name, completeText);
 	}
 
 	@Override

@@ -69,20 +69,7 @@ public class ServerUpdater extends Updater {
 		}
 	}
 
-	@Override
-	public void write(String ip, String[] text) {
-		String name = null;
-		if (ref.updater.player.get(ip) != null)
-			name = ref.updater.player.get(ip).getUser().name;
-		if (name == null)
-			name = ip;
-		String completeText = "";
-		for (int i = 2; i < text.length; i++) {// c[0] und c[1] auslassen
-			completeText = completeText.concat(" ").concat(text[i]);
-		}
-		((ServerApp) ref.app).gui.addChatText(name + ">>" + completeText);
-		System.out.println(" " + name + ">>" + completeText);
-	}
+	
 
 	@Override
 	public void send(String string) {

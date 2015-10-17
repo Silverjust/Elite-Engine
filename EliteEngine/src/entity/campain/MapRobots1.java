@@ -3,6 +3,8 @@ package entity.campain;
 import game.HUD;
 import game.Map;
 import game.MapCode;
+import main.preGame.MainPreGame;
+import shared.Nation;
 import shared.ref;
 
 public class MapRobots1 extends MapCode {
@@ -12,6 +14,7 @@ public class MapRobots1 extends MapCode {
 
 	@Override
 	public void setup() {
+		MainPreGame.addPlayer("Scientists", Nation.SCIENTISTS);
 	}
 
 	@Override

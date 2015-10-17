@@ -32,18 +32,19 @@ public class Map {
 			width = mapData.getInt("w");
 			height = mapData.getInt("h");
 			if (mapData.hasKey("MapCode")) {
-				System.out.println("Map.Map()" + ref.updater);
-				mapCode = (MapCode) Class.forName(mapData.getString("MapCode"))
-						.getConstructor(Map.class)
+				System.out.println("Map.Map() creating mapcode");
+				mapCode = (MapCode) Class.forName(mapData.getString("MapCode")).getConstructor(Map.class)
 						.newInstance(new Object[] { this });
 			}
 		} catch (Exception e) {
 			System.err.println(map + " could not be loaded");
 			e.printStackTrace();
 		}
-		if (mapCode == null)
+		if (mapCode == null) {
 			mapCode = new MapCode(this) {
 			};
+		}
+		mapCode.setup();
 	}
 
 	public void loadImages() {
@@ -51,17 +52,14 @@ public class Map {
 			textur = ImageHandler.load("", mapData.getString("texture"));
 			collision = ImageHandler.load("", mapData.getString("coll"));
 		} catch (Exception e) {
-			System.err.println(mapData.getString("texture") + " "
-					+ mapData.getString("coll"));
+			System.err.println(mapData.getString("texture") + " " + mapData.getString("coll"));
 			e.printStackTrace();
 		}
-		fogOfWar = ref.app.createGraphics(width / fogScale, height / 2
-				/ fogScale, PConstants.P2D);
+		fogOfWar = ref.app.createGraphics(width / fogScale, height / 2 / fogScale, PConstants.P2D);
 	}
 
 	public void setup() {
 		// PathHandler.makeGraph(graph, collision, 20, 20);
-		mapCode.setup();
 	}
 
 	public void updateFogofWar(Player player) {

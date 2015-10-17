@@ -42,8 +42,7 @@ public class GUI {
 		modeDisplay = new GTextField(ref.app, 300, 0, 200, 20);
 		modeDisplay.setTextEditEnabled(false);
 
-		displayCommands = new GCheckbox(ref.app, 0, ref.app.height - 300, 30,
-				20);
+		displayCommands = new GCheckbox(ref.app, 0, ref.app.height - 300, 30, 20);
 
 		chat = ref.app.createGraphics(500, 280);
 		player = ref.app.createGraphics(300, 178);
@@ -69,8 +68,7 @@ public class GUI {
 			playerSlider.setLimits(0, ref.preGame.users.size() * 20 - 19);
 			int i = 0;
 			for (String key : ref.preGame.users.keySet()) {
-				ref.preGame.users.get(key).display(player, 0,
-						20 * i - playerSlider.getValueI());
+				ref.preGame.users.get(key).display(player, 0, 20 * i - playerSlider.getValueI());
 				i++;
 			}
 		}
@@ -80,8 +78,7 @@ public class GUI {
 		chat.beginDraw();
 		chat.background(255);
 		chat.fill(0);
-		chat.text(chatText.toString(), 10,
-				ref.app.textAscent() - chatSlider.getValueI());
+		chat.text(chatText.toString(), 10, ref.app.textAscent() - chatSlider.getValueI());
 		chat.endDraw();
 		ref.app.image(chat, 0, ref.app.height - 280);
 	}
@@ -100,9 +97,8 @@ public class GUI {
 
 	public void chatEvents(GTextField textfield, GEvent event) {
 		if (event == GEvent.ENTERED) {
-			String s = textfield.getText().length() > 0 ? (textfield.getText()
-					.charAt(0) == ' ' ? (textfield.getText().substring(1))
-					: (textfield.getText())) : ("");
+			String s = textfield.getText().length() > 0 ? (textfield.getText().charAt(0) == ' '
+					? (textfield.getText().substring(1)) : (textfield.getText())) : ("");
 			s = Helper.secureInput(s);
 			System.out.println(s);
 			if (!s.equals("") && !s.equals(" ")) {
@@ -110,7 +106,7 @@ public class GUI {
 					addChatText(">>" + s);
 					CommandHandler.executeCommands(s);
 				} else {
-					if (((ServerApp) ref.app).mode == Mode.GAME)
+					if (((ServerApp) ref.app).mode == Mode.GAME || ((ServerApp) ref.app).mode == Mode.PREGAME)
 						ref.updater.send("<say " + "SERVER" + " " + s);
 				}
 			}

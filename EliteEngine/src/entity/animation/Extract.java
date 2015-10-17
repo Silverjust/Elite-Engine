@@ -2,6 +2,7 @@ package entity.animation;
 
 import entity.Entity;
 import processing.core.PImage;
+import shared.Updater;
 import shared.ref;
 
 public class Extract extends Ability {
@@ -28,8 +29,10 @@ public class Extract extends Ability {
 			int amount = (int) (e.hp * 1.0 / e.hp_max * efficenty);
 			amount = amount < 0 ? 0 : amount;
 			if (isServer) {
-				ref.updater.send("<give " + e.player.getUser().ip + " " + ressource + " "
-						+ amount);
+				if (Updater.resfreeze != null && Updater.resfreeze.isNotOnCooldown())
+					System.out.println("Extract.updateAbility() resfreeze");
+				else
+					ref.updater.send("<give " + e.player.getUser().ip + " " + ressource + " " + amount);
 			}
 			isSetup = false;
 		}
