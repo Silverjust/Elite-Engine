@@ -1,26 +1,32 @@
 package server;
 
 import main.ClientHandler;
+
+import java.util.HashMap;
+
 import entity.Entity;
-import entity.aliens.AlienKaserne;
 import processing.core.PApplet;
+import processing.data.JSONArray;
+import processing.data.JSONObject;
 import shared.Mode;
+import shared.Player;
 import shared.Updater;
+import shared.VersionCombiner;
 import shared.ref;
+import shared.Updater.GameState;
 
 public class Protocol {
 	static int protocollNumber;
 	static String protocollText = "";
 
-	static Class<?> clazz = AlienKaserne.class;
+	static Class<?> clazz;
 
 	public static void collectInfos() {
 		try {
 			if (((ServerApp) ref.app).mode == Mode.GAME) {
 				for (Entity e : ref.updater.entities) {
 					if (e.getClass().equals(clazz)) {
-						addInfo("0 " + e.number + " :"
-								+ e.getAnimation().toString());
+						addInfo("0 " + e.number + " :" + e.getAnimation().toString());
 						addInfo("0 " + e.number + " :" + e.player.kerit);
 					}
 				}
@@ -34,8 +40,7 @@ public class Protocol {
 		try {
 			String[] c = PApplet.splitTokens(s, " " + ClientHandler.endSymbol);
 			if (c[0].equals("<execute")
-					&& ref.updater.namedEntities.get(Integer.parseInt(c[1]))
-							.getClass().equals(clazz))
+					&& ref.updater.namedEntities.get(Integer.parseInt(c[1])).getClass().equals(clazz))
 				addInfo(info + s);
 
 			if (c[0].equals("<give") && Integer.parseInt(c[3]) < 0)
@@ -50,18 +55,62 @@ public class Protocol {
 
 	private static void addInfo(String s) {
 		protocollText += getTime() + s + "\n";
-		System.out.println(getTime() + s);
+		// System.out.println(getTime() + s);
+	}
 
+	static public void createFile() {
+		String name = "statistics_" + VersionCombiner.version.replace(".", "_");
+		String file = System.getProperty("user.home").replace("\\", "/") + "/Desktop/EE_stats/" + name + ".json";
+		JSONArray array;
+		try {
+			array = ref.app.loadJSONArray(file);
+		} catch (Exception e) {
+			System.out.println("creating new statistics");
+			array = new JSONArray();
+		}
+		JSONObject game = new JSONObject();
+		if (Updater.resfreeze != null)
+			game.setFloat("time", Updater.resfreeze.cooldown / 1000 / 60);
+		int i = 0;
+		for (String key : ref.updater.player.keySet()) {
+			i++;
+			Player p = ref.updater.player.get(key);
+			JSONObject player = new JSONObject();
+			player.setString("name", p.getUser().name);
+			player.setString("nation", p.getUser().nation.toString());
+			player.setBoolean("win", p.gameState == GameState.WON);
+
+			String[] lines = PApplet.splitTokens(protocollText, "\n");
+			HashMap<String, Integer> countedUnits = new HashMap<>();
+			for (String line : lines) {
+				String[] c = PApplet.splitTokens(line, " ");
+				int n = 4;
+				PApplet.printArray(line);
+				if (c[n].equals("<spawn") && ref.updater.player.get(c[2 + n]) == p) {
+					if (countedUnits.get(c[1 + n]) == null)
+						countedUnits.put(c[1 + n], 1);
+					else
+						countedUnits.put(c[1 + n], countedUnits.get(c[1 + n]) + 1);
+				}
+			}
+			String units = "";
+			System.out.println("Protocol.createFile()" + countedUnits.size());
+			for (String unitName : countedUnits.keySet()) {
+				int n = countedUnits.get(unitName);
+				units = units + n + " " + unitName + "\n";
+			}
+			System.out.println("Protocol.createFile()" + units);
+			player.setString("units", units);
+			game.setJSONObject(i + "", player);
+		}
+		array.append(game);
+		ref.app.saveJSONArray(array, file);
+		System.out.println("saved as " + file);
 	}
 
 	static String getTime() {
-		return " m"
-				+ min()
-				+ " s"
-				+ (min() == 0 ? sec() : (sec() % (min() * 60)))
-				+ " ms"
-				+ (sec() == 0 ? Updater.Time.getMillis() : (Updater.Time
-						.getMillis() % (sec() * 1000)) + " :");
+		return " m" + min() + " s" + (min() == 0 ? sec() : (sec() % (min() * 60))) + " ms"
+				+ (sec() == 0 ? Updater.Time.getMillis() : (Updater.Time.getMillis() % (sec() * 1000)) + " :");
 	}
 
 	static int sec() {
@@ -70,5 +119,9 @@ public class Protocol {
 
 	static int min() {
 		return PApplet.floor(Updater.Time.getMillis() / 60000);
+	}
+
+	public static void dispose() {
+
 	}
 }

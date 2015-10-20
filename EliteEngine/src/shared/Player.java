@@ -6,6 +6,7 @@ import entity.Entity;
 import entity.MainBuilding;
 import entity.gameAI.GameAI;
 import game.GameDrawer;
+import shared.Updater.GameState;
 
 public class Player {
 	public int color;
@@ -14,6 +15,7 @@ public class Player {
 	public ArrayList<Entity> visibleEntities = new ArrayList<Entity>();
 	private User user;
 	public MainBuilding mainBuilding;
+	public GameState gameState;//win, loose
 
 	public static Player createNeutralPlayer() {
 		Player p = new Player();
@@ -30,6 +32,7 @@ public class Player {
 		p.setUser(user);
 		p.getUser().player = p;
 		p.kerit = 200;
+		p.gameState=GameState.PLAY;
 		return p;
 	}
 

@@ -46,8 +46,7 @@ public class ServerUpdater extends Updater {
 				ref.updater.send("<say SERVER " + "sync");
 				for (Entity e : entities) {
 					if (e instanceof Unit) {
-						ref.updater.send("<tp " + e.number + " " + e.x + " "
-								+ e.y + " false");
+						ref.updater.send("<tp " + e.number + " " + e.x + " " + e.y + " false");
 					}
 				}
 			}
@@ -69,8 +68,6 @@ public class ServerUpdater extends Updater {
 		}
 	}
 
-	
-
 	@Override
 	public void send(String string) {
 		ComHandler.executeCom(string);
@@ -82,8 +79,8 @@ public class ServerUpdater extends Updater {
 		ref.updater.send("<pause true");
 		ArrayList<String> spawns = new ArrayList<String>();
 		for (Entity entity : entities) {
-			spawns.add("<spawn " + entity.getClass().getSimpleName() + " "
-					+ entity.player.getUser().ip + " " + entity.x + " " + entity.y);
+			spawns.add("<spawn " + entity.getClass().getSimpleName() + " " + entity.player.getUser().ip + " " + entity.x
+					+ " " + entity.y);
 		}
 		for (Entity entity : entities) {
 			ref.updater.send("<remove " + entity.number);

@@ -61,7 +61,7 @@ public class MainApp extends PApplet {
 		ref.setMinim(new Minim(this));
 
 		SettingHandler.setup();
-		startPage = new StartPage();	
+		startPage = new StartPage();
 	}
 
 	public void draw() {
@@ -115,6 +115,8 @@ public class MainApp extends PApplet {
 	@Override
 	public void dispose() {// Player in schlieﬂen
 		try {
+			if (ClientHandler.client != null)
+				ref.updater.send("<pause true");
 			if (startPage != null)
 				startPage.dispose();
 			if (ref.preGame != null)

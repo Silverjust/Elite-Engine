@@ -15,7 +15,7 @@ public class ServerApp extends PApplet {
 		PApplet.main(new String[] { "server.ServerApp" });
 	}
 
-	ServerHandler serverHandler;
+	public ServerHandler serverHandler;
 
 	public GUI gui;
 
@@ -71,4 +71,9 @@ public class ServerApp extends PApplet {
 		serverHandler.serverEvent(server, someClient);
 	}
 
+	@Override
+	public void dispose() {
+		serverHandler.dispose();
+		super.dispose();
+	}
 }

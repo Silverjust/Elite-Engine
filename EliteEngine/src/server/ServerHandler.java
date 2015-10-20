@@ -16,7 +16,7 @@ public class ServerHandler {
 
 	char endSymbol = '>';
 
-	private boolean doProtocol = false;
+	public boolean doProtocol = false;
 
 	ServerHandler() {
 		app = (ServerApp) ref.app;
@@ -83,4 +83,9 @@ public class ServerHandler {
 				+ " disconnected");
 		send("<pause true");
 	}
+	
+		void dispose(){
+			Protocol.createFile();
+			Protocol.dispose();
+		}
 }

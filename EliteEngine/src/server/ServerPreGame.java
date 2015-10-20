@@ -16,7 +16,8 @@ public class ServerPreGame extends PreGame {
 
 		@SuppressWarnings("unchecked")
 		String[] intNames = (String[]) ContentListHandler.getModeMaps().keys().toArray(new String[i]);
-		map = ContentListHandler.getModeMaps().getString(intNames[new PreGameNormalDisplay().startMap]);
+		int startMapNumber =PreGameNormalDisplay.getStartMap();// new PreGameNormalDisplay().startMap;
+		map = ContentListHandler.getModeMaps().getString(intNames[startMapNumber]);
 		// PApplet.printArray(intNames);
 		// System.out.println(map);
 	}

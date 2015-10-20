@@ -3,7 +3,10 @@ package shared;
 import javax.naming.NoInitialContextException;
 
 import main.ClientHandler;
+import main.preGame.MainPreGame.GameSettings;
 import processing.core.PApplet;
+import server.Protocol;
+import server.ServerApp;
 import shared.Helper.Timer;
 import shared.Updater.GameState;
 import entity.Entity;
@@ -89,12 +92,18 @@ public class CommandHandler {
 				int g = Integer.parseInt(c[3]);
 				int b = Integer.parseInt(c[4]);
 				GCScheme.setScheme(8, i, ref.app.color(r, g, b));
-				break;
-			case "/resfreeze":
-				int cooldown = (int) (Float.parseFloat(c[1]) * 60 * 1000);
-				System.out.println("CommandHandler.executeCommands()" + cooldown);
-				Updater.resfreeze = new Timer(cooldown);
-				Updater.resfreeze.startCooldown();
+				break;case "/proto":
+					Protocol.createFile();
+					break;
+			case "/rf":
+				if (GameSettings.singlePlayer || ref.app instanceof ServerApp) {
+					int cooldown = (int) (Float.parseFloat(c[1]) * 60 * 1000);
+					ref.preGame.write("GAME", "resfreeze in " + (cooldown / 60.0 / 1000.0));
+					Updater.resfreeze = new Timer(cooldown);
+					if (ref.app instanceof ServerApp)
+						((ServerApp) ref.app).serverHandler.doProtocol = true;
+				} else
+					throw new IllegalArgumentException();
 				break;
 			case "/pause":
 				if (ref.updater.gameState == GameState.PAUSE) {

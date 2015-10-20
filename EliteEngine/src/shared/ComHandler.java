@@ -11,6 +11,7 @@ import main.MainLoader;
 import main.appdata.ProfileHandler;
 import main.preGame.MainPreGame;
 import processing.core.PApplet;
+import server.Protocol;
 import server.ServerApp;
 import server.ServerUpdater;
 import shared.Updater.GameState;
@@ -128,27 +129,21 @@ public class ComHandler {
 						((MainLoader) ref.loader).isReconnectLoad = true;
 						((MainApp) ref.app).mode = Mode.LADESCREEN;
 					} else {// other player identify
-						ClientHandler.send("<identifying "
-								+ ClientHandler.identification + " "
-								+ ref.preGame.getUser("").name);
+						ClientHandler.send(
+								"<identifying " + ClientHandler.identification + " " + ref.preGame.getUser("").name);
 					}
 				} else {
 					if (c[1].equals("server")) {
 						((MainApp) ref.app).mode = Mode.PREGAME;
 					}
-					System.out.println("identifying "
-							+ ref.preGame.getUser("").name);
-					ClientHandler.send("<identifying "
-							+ ClientHandler.identification + " "
-							+ ref.preGame.getUser("").name);
+					System.out.println("identifying " + ref.preGame.getUser("").name);
+					ClientHandler
+							.send("<identifying " + ClientHandler.identification + " " + ref.preGame.getUser("").name);
 					if (ref.preGame.getUser("").nation != null)
-						ClientHandler.send("<setNation "
-								+ ClientHandler.identification + " "
+						ClientHandler.send("<setNation " + ClientHandler.identification + " "
 								+ ref.preGame.getUser("").nation.toString());
 					if (ref.preGame.map != null)
-						ClientHandler.send("<setMap "
-								+ ClientHandler.identification + " "
-								+ ref.preGame.map);
+						ClientHandler.send("<setMap " + ClientHandler.identification + " " + ref.preGame.map);
 					// TODO send color
 					// nur an clienthandler
 
@@ -176,6 +171,8 @@ public class ComHandler {
 				ref.loader.tryStartGame();
 				break;
 			case "<startGame":
+				if (Updater.resfreeze != null)
+					Updater.resfreeze.startCooldown();
 				ref.loader.startGame();
 				break;
 			case "<pause":
@@ -189,18 +186,37 @@ public class ComHandler {
 				break;
 			case "<lost":
 				p = ref.updater.player.get(c[1]);
-				if (p == ref.player) {
-					ref.updater.gameState = GameState.LOST;
-				} else {
-					ref.updater.gameState = GameState.WON;
-				}
-				if (ref.app instanceof ServerApp) {
-					((ServerApp) ref.app).gui.addChatText(p.getUser().name
-							+ " has lost");
-				} else {
-					HUD.menue = new endGameMenu();
-					float f = Float.parseFloat(c[2]);
-					ProfileHandler.gameEndCalculations(f);
+				if (p.gameState != GameState.LOST) {
+					p.gameState = GameState.LOST;
+					if (p == ref.player) {
+						ref.updater.gameState = GameState.LOST;
+						ref.preGame.write("GAME", "you lost the game");
+					} else {
+						ref.preGame.write("GAME", p.getUser().name + " lost the game");
+
+						boolean b1 = true;
+						for (String key : ref.updater.player.keySet()) {
+							Player player = ref.updater.player.get(key);
+							if (player.gameState != GameState.LOST && !(player == ref.player)) {
+								b1 = false;
+							}
+						}
+
+						if (b1) {
+							ref.updater.gameState = GameState.WON;
+							ref.player.gameState = GameState.WON;
+							ref.preGame.write("GAME", "you win");
+						}
+					}
+					if (ref.app instanceof ServerApp) {
+						((ServerApp) ref.app).gui.addChatText(p.getUser().name + " has lost");
+						Protocol.createFile();
+					} else if (ref.player.gameState != GameState.PLAY) {
+						System.out.println("ComHandler.executeCom()endgame");
+						HUD.menue = new endGameMenu();
+						float f = Float.parseFloat(c[2]);
+						ProfileHandler.gameEndCalculations(f);
+					}
 				}
 				break;
 			default:

@@ -30,7 +30,7 @@ public class Extract extends Ability {
 			amount = amount < 0 ? 0 : amount;
 			if (isServer) {
 				if (Updater.resfreeze != null && Updater.resfreeze.isNotOnCooldown())
-					System.out.println("Extract.updateAbility() resfreeze");
+					;//System.out.println("Extract.updateAbility() resfreeze");
 				else
 					ref.updater.send("<give " + e.player.getUser().ip + " " + ressource + " " + amount);
 			}

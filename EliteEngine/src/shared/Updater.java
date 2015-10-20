@@ -14,6 +14,11 @@ public abstract class Updater {
 	public ArrayList<Entity> toRemove = new ArrayList<Entity>();
 	public ArrayList<Entity> selected = new ArrayList<Entity>();
 
+	public Updater() {
+		if (resfreeze != null)
+			resfreeze.startCooldown();
+	}
+
 	public Map map;
 
 	public HashMap<String, Player> player = new HashMap<String, Player>();

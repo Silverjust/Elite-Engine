@@ -7,10 +7,9 @@ public class PreGameNormalDisplay extends PreGameDisplay {
 
 	public PreGameNormalDisplay() {
 		super();
-		
+		startMap = getStartMap();
 		nationSelect = new NationSelect(this);
 		playerPanel = new PlayerPanel();
-
 	}
 
 	@Override
@@ -24,8 +23,6 @@ public class PreGameNormalDisplay extends PreGameDisplay {
 		nationSelect.handleSelectNation(button, event);
 	}
 
-	
-
 	public void dispose() {
 		super.dispose();
 		playerPanel.dispose();
@@ -36,5 +33,9 @@ public class PreGameNormalDisplay extends PreGameDisplay {
 		super.setActive(b);
 		playerPanel.setEnabled(b);
 		nationSelect.setEnabled(b);
+	}
+
+	public static int getStartMap() {
+		return 0;
 	}
 }

@@ -22,6 +22,7 @@ public class MainPreGame extends PreGame {
 	public MainPreGame(String name) {
 		this.name = name;
 		ContentListHandler.load();
+		System.out.println("MainPreGame.MainPreGame()");
 	}
 
 	public void closeBecauseServer() {
@@ -30,6 +31,7 @@ public class MainPreGame extends PreGame {
 	}
 
 	public void setup() {
+		System.out.println("MainPreGame.setup()");
 		if (GameSettings.singlePlayer && !GameSettings.campain)
 			display = new PreGameSandboxDisplay();
 		else if (GameSettings.campain)
