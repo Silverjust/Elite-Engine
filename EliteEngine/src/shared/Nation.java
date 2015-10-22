@@ -64,6 +64,31 @@ public enum Nation {
 		return n;
 	}
 
+	public int toNumber() {
+		int n = -1;
+		switch (this) {
+		case AHNEN:
+			n = 4;
+			break;
+		case ALIENS:
+			n = 0;
+			break;
+		case ROBOTS:
+			n = 1;
+			break;
+		case SCIENTISTS:
+			n = 3;
+			break;
+		case HUMANS:
+			n = 2;
+			break;
+		case NEUTRAL:
+			n = 5;
+			break;
+		}
+		return n;
+	}
+
 	public static Nation fromNumber(int i) {
 		Nation nation = null;
 		switch (i) {

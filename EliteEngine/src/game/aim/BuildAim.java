@@ -21,6 +21,9 @@ public class BuildAim extends Aim {
 		}
 
 	}
+	public  Class<? extends Building> getToBuild() {
+		return buildable.getClass();
+	}
 
 	@Override
 	public Cursor getCursor() {

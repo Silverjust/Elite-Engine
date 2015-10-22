@@ -95,9 +95,15 @@ public class Setting {
 		if (!o.hasKey("buildingsShortcuts"))
 			o.setJSONArray("buildingsShortcuts", JSONArray.parse(standardGrid));
 		if (!o.hasKey("hotKeys"))
-			o.setJSONArray(
-					"hotKeys",
-					JSONArray
-							.parse("[ \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"0\" ]"));
+			o.setJSONArray("hotKeys",
+					JSONArray.parse("[ \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"0\" ]"));
+	}
+
+	public static String getKeyName(int i) {
+		if (i == 39)
+			return "right-click";
+		if (i == 37)
+			return "left-click";
+		return i + "";
 	}
 }

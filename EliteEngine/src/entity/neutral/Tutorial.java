@@ -1,12 +1,8 @@
 package entity.neutral;
 
-import entity.Active;
 import entity.Entity;
-import entity.TrainActive;
-import entity.Trainer;
 import entity.Unit;
 import entity.animation.Animation;
-import game.HUD;
 import processing.core.PImage;
 import shared.ref;
 
@@ -51,7 +47,7 @@ public class Tutorial extends Unit {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		float x = 0, y = 0;
+		/*float x = 0, y = 0;
 		Active[][] bActives = HUD.activesGrid.buildingGrid;
 		// System.out.println(xTarget + " " + yTarget);
 		switch (i) {
@@ -162,7 +158,7 @@ public class Tutorial extends Unit {
 			break;
 		default:
 			break;
-		}
+		}*/
 	}
 
 	@Override

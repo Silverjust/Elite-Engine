@@ -31,12 +31,9 @@ public abstract class Unit extends Entity {
 	public Animation walk;
 
 	public static void loadImages() {
-		attackSym = ImageHandler.load(Nation.NEUTRAL.toString() + "/symbols/",
-				"attack");
-		walkSym = ImageHandler.load(Nation.NEUTRAL.toString() + "/symbols/",
-				"walk");
-		stopSym = ImageHandler.load(Nation.NEUTRAL.toString() + "/symbols/",
-				"stop");
+		attackSym = ImageHandler.load(Nation.NEUTRAL.toString() + "/symbols/", "attack");
+		walkSym = ImageHandler.load(Nation.NEUTRAL.toString() + "/symbols/", "walk");
+		stopSym = ImageHandler.load(Nation.NEUTRAL.toString() + "/symbols/", "stop");
 	}
 
 	public Unit(String[] c) {
@@ -59,8 +56,7 @@ public abstract class Unit extends Entity {
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (isCollision(e)) {
-						if (e.getAnimation() == e.stand
-								&& e.isInRange(xTarget, yTarget, e.radius))
+						if (e.getAnimation() == e.stand && e.isInRange(xTarget, yTarget, e.radius))
 							sendAnimation("stand");
 						hasColided = true;
 						xDeglich += x - e.x;
@@ -72,17 +68,14 @@ public abstract class Unit extends Entity {
 			// stand still
 		}
 
-		if (PApplet.dist(x, y, xTarget, yTarget) < speed
-				&& getAnimation() == walk) {
+		if (PApplet.dist(x, y, xTarget, yTarget) < speed && getAnimation() == walk) {
 			// System.out.println(1000000000+" "+(animation == walk));
 			isMoving = false;
 			setAnimation(stand);
 			sendAnimation("stand");
 		}
 
-		if (isMoving
-				&& !hasColided
-				&& PApplet.dist(x, y, xTarget + xDeglich, yTarget + yDeglich) > speed) {
+		if (isMoving && !hasColided && PApplet.dist(x, y, xTarget + xDeglich, yTarget + yDeglich) > speed) {
 			x = xNext(xTarget + xDeglich, yTarget + yDeglich);
 			y = yNext(xTarget + xDeglich, yTarget + yDeglich);
 		} else if (PApplet.dist(x, y, x + xDeglich, y + yDeglich) > speed) {
@@ -94,12 +87,10 @@ public abstract class Unit extends Entity {
 	@Override
 	public void renderUnder() {
 		direction = Helper.getDirection(x, y, xTarget, yTarget);
-		if (this instanceof Attacker
-				&& ((Attacker) this).getBasicAttack().getTarget() != null
+		if (this instanceof Attacker && ((Attacker) this).getBasicAttack().getTarget() != null
 				&& ((Attacker) this).getBasicAttack() == getAnimation()) {
 			Attack a = ((Attacker) this).getBasicAttack();
-			direction = Helper.getDirection(x, y, a.getTarget().x,
-					a.getTarget().y);
+			direction = Helper.getDirection(x, y, a.getTarget().x, a.getTarget().y);
 		}
 		drawShadow();
 	}
@@ -131,7 +122,8 @@ public abstract class Unit extends Entity {
 			yTarget = Float.parseFloat(c[4]);
 			if (PApplet.dist(x, y, xTarget, yTarget) >= speed) {
 				isMoving = true;
-				isAggro = Boolean.valueOf(c[5]);
+				if (c.length > 5)
+					isAggro = Boolean.valueOf(c[5]);
 				setAnimation(walk);
 			} else {
 				isMoving = false;
@@ -159,9 +151,8 @@ public abstract class Unit extends Entity {
 	}
 
 	public void info() {
-		HUD.chat.println(this.getClass().getSimpleName() + "_" + number, "("
-				+ x + "|" + y + ")->(" + xTarget + "|" + yTarget + ")\nhp:"
-				+ hp);
+		HUD.chat.println(this.getClass().getSimpleName() + "_" + number,
+				"(" + x + "|" + y + ")->(" + xTarget + "|" + yTarget + ")\nhp:" + hp);
 	}
 
 	@Override
@@ -171,8 +162,7 @@ public abstract class Unit extends Entity {
 		else {
 			sendAnimation("stand");
 			if (Animation.observe.isAssignableFrom(this.getClass())) {
-				System.out.println("Unit.sendDefaultAnimation()send stand"
-						+ PApplet.dist(x, y, xTarget, yTarget));
+				System.out.println("Unit.sendDefaultAnimation()send stand" + PApplet.dist(x, y, xTarget, yTarget));
 			}
 		}
 	}
