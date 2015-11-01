@@ -2,6 +2,7 @@ package entity.campain;
 
 import entity.Entity;
 import entity.MainBuilding;
+import game.HUD;
 import game.Map;
 import game.MapCode;
 import main.appdata.SettingHandler;
@@ -22,8 +23,10 @@ public class CampainMapCode extends MapCode {
 		if (report)
 			System.out.println("CampainMapCode.isNext() " + n + " " + i);
 		boolean b = n == i;
-		if (b)
+		if (b) {
+			HUD.chat.printSpace();
 			n++;
+		}
 		i++;
 		return b;
 	}

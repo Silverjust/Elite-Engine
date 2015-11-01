@@ -125,4 +125,12 @@ public class Chat {
 		return chatLine.hasFocus();
 	}
 
+	public void printSpace() {
+		ArrayList<String> chatText = new ArrayList<String>();
+		chatText.add(" ");
+		// chatHistory.setText((String[]) chatText.toArray());
+		chatHistory.appendText(" \n");
+		System.out.println(" ");
+	}
+
 }

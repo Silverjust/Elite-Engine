@@ -7,7 +7,7 @@ import processing.data.JSONArray;
 import processing.data.JSONObject;
 
 public abstract class VersionCombiner {
-	public final static String version = "1.5.3";
+	public final static String version = "1.5.4";
 
 	public static boolean isNewerVersion(String s1, String s2) {
 		String[] sa1 = s1.split("\\.");
