@@ -78,6 +78,7 @@ public class Protocol {
 			JSONObject player = new JSONObject();
 			player.setString("name", p.getUser().name);
 			player.setString("nation", p.getUser().nation.toString());
+			System.out.println("Protocol.createFile()"+p.gameState);
 			player.setBoolean("win", p.gameState == GameState.WON);
 
 			String[] lines = PApplet.splitTokens(protocollText, "\n");
@@ -94,12 +95,12 @@ public class Protocol {
 				}
 			}
 			String units = "";
-			System.out.println("Protocol.createFile()" + countedUnits.size());
+			//System.out.println("Protocol.createFile()" + countedUnits.size());
 			for (String unitName : countedUnits.keySet()) {
 				int n = countedUnits.get(unitName);
 				units = units + n + " " + unitName + "\n";
 			}
-			System.out.println("Protocol.createFile()" + units);
+			//System.out.println("Protocol.createFile()" + units);
 			player.setString("units", units);
 			game.setJSONObject(i + "", player);
 		}

@@ -5,6 +5,7 @@ import game.MapHandler;
 import shared.Loader;
 import shared.Mode;
 import shared.Nation;
+import shared.Updater;
 import shared.ref;
 
 public class MultiplayerLoader extends Loader {
@@ -57,6 +58,7 @@ public class MultiplayerLoader extends Loader {
 			app.mode = Mode.GAME;
 			app.serverHandler.send("<startGame");
 			System.out.println("Game Start");
+			sendRFInfo();
 			break;
 		case ERROR:
 			System.out.println("error");
@@ -78,6 +80,12 @@ public class MultiplayerLoader extends Loader {
 			state = State.ENTITIES;
 		} else if (app.mode == Mode.GAME) {
 			app.serverHandler.send("<startGame");
+		}
+	}
+
+	private void sendRFInfo() {
+		if (Updater.resfreeze != null) {
+			ref.preGame.write("GAME", "resfreeze in " + (Updater.resfreeze.cooldown / 60.0 / 1000.0));
 		}
 	}
 }

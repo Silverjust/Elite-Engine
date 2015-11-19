@@ -5,8 +5,10 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import shared.Client;
 import shared.Server;
+import shared.Updater;
 import shared.Mode;
 import shared.ref;
+import shared.Helper.Timer;
 
 @SuppressWarnings("serial")
 public class ServerApp extends PApplet {
@@ -36,6 +38,7 @@ public class ServerApp extends PApplet {
 		gui = new GUI();
 		serverHandler = new ServerHandler();
 
+		startRF();
 	}
 
 	public void draw() {
@@ -69,6 +72,15 @@ public class ServerApp extends PApplet {
 
 	public void serverEvent(Server server, Client someClient) {
 		serverHandler.serverEvent(server, someClient);
+	}
+
+	private void startRF() {
+		float time = (float) (((int) (Math.random() * 500.0)) / 100.0);
+		int cooldown = (int) (time * 60 * 1000);
+		ref.preGame.write("GAME", "resfreeze in " + (cooldown / 60.0 / 1000.0));
+		Updater.resfreeze = new Timer(cooldown);
+		if (ref.app instanceof ServerApp)
+			((ServerApp) ref.app).serverHandler.doProtocol = true;
 	}
 
 	@Override

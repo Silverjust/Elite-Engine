@@ -1,13 +1,11 @@
 package server;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import shared.CommandHandler;
 import shared.Helper;
 import shared.Mode;
+import shared.Server;
 import shared.ref;
 import g4p_controls.GCheckbox;
 import g4p_controls.GControlMode;
@@ -33,11 +31,7 @@ public class GUI {
 	public GUI() {
 
 		ipAdress = new GTextField(ref.app, 0, 0, 300, 20);
-		try {
-			ipAdress.setText(InetAddress.getLocalHost() + "");
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
+		ipAdress.setText(Server.ip()+ "");
 
 		modeDisplay = new GTextField(ref.app, 300, 0, 200, 20);
 		modeDisplay.setTextEditEnabled(false);
