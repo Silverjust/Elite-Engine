@@ -70,7 +70,7 @@ public class Protocol {
 		}
 		JSONObject game = new JSONObject();
 		if (Updater.resfreeze != null)
-			game.setFloat("time", Updater.resfreeze.cooldown / 1000 / 60);
+			game.setFloat("time", Updater.resfreeze.cooldown / 1000.0f / 60.0f);
 		int i = 0;
 		for (String key : ref.updater.player.keySet()) {
 			i++;
@@ -78,7 +78,7 @@ public class Protocol {
 			JSONObject player = new JSONObject();
 			player.setString("name", p.getUser().name);
 			player.setString("nation", p.getUser().nation.toString());
-			System.out.println("Protocol.createFile()"+p.gameState);
+			System.out.println("Protocol.createFile()" + p.gameState);
 			player.setBoolean("win", p.gameState == GameState.WON);
 
 			String[] lines = PApplet.splitTokens(protocollText, "\n");
@@ -86,7 +86,7 @@ public class Protocol {
 			for (String line : lines) {
 				String[] c = PApplet.splitTokens(line, " ");
 				int n = 4;
-				//PApplet.printArray(line);
+				// PApplet.printArray(line);
 				if (c[n].equals("<spawn") && ref.updater.player.get(c[2 + n]) == p) {
 					if (countedUnits.get(c[1 + n]) == null)
 						countedUnits.put(c[1 + n], 1);
@@ -95,7 +95,8 @@ public class Protocol {
 				}
 			}
 			String units = "";
-			//System.out.println("Protocol.createFile()" + countedUnits.size());
+			// System.out.println("Protocol.createFile()" +
+			// countedUnits.size());
 			for (String unitName : countedUnits.keySet()) {
 				int n = countedUnits.get(unitName);
 				units = units + n + " " + unitName + "\n";
@@ -110,7 +111,7 @@ public class Protocol {
 	}
 
 	static String getTime() {
-		//System.out.println("Protocol.getTime()");
+		// System.out.println("Protocol.getTime()");
 		return " m" + min() + " s" + (min() == 0 ? sec() : (sec() % (min() * 60))) + " ms"
 				+ (sec() == 0 ? Updater.Time.getMillis() : (Updater.Time.getMillis() % (sec() * 1000)) + " :");
 	}
