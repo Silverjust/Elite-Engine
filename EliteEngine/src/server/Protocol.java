@@ -86,7 +86,7 @@ public class Protocol {
 			for (String line : lines) {
 				String[] c = PApplet.splitTokens(line, " ");
 				int n = 4;
-				PApplet.printArray(line);
+				//PApplet.printArray(line);
 				if (c[n].equals("<spawn") && ref.updater.player.get(c[2 + n]) == p) {
 					if (countedUnits.get(c[1 + n]) == null)
 						countedUnits.put(c[1 + n], 1);
@@ -100,7 +100,7 @@ public class Protocol {
 				int n = countedUnits.get(unitName);
 				units = units + n + " " + unitName + "\n";
 			}
-			//System.out.println("Protocol.createFile()" + units);
+			System.out.println("Protocol.createFile()" + units);
 			player.setString("units", units);
 			game.setJSONObject(i + "", player);
 		}
@@ -110,6 +110,7 @@ public class Protocol {
 	}
 
 	static String getTime() {
+		//System.out.println("Protocol.getTime()");
 		return " m" + min() + " s" + (min() == 0 ? sec() : (sec() % (min() * 60))) + " ms"
 				+ (sec() == 0 ? Updater.Time.getMillis() : (Updater.Time.getMillis() % (sec() * 1000)) + " :");
 	}

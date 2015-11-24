@@ -109,8 +109,8 @@ public class ComHandler {
 				}
 				break;
 			case "<give":
-				Player p = ref.updater.player.get(c[1]);
-				p.give(c[2], Integer.parseInt(c[3]));
+				Player looserP = ref.updater.player.get(c[1]);
+				looserP.give(c[2], Integer.parseInt(c[3]));
 				break;
 			case "<say":
 				ref.preGame.write(c[1], c);
@@ -185,31 +185,42 @@ public class ComHandler {
 				}
 				break;
 			case "<lost":
-				p = ref.updater.player.get(c[1]);
-				if (p.gameState != GameState.LOST) {
-					p.gameState = GameState.LOST;
-					if (p == ref.player) {
+				looserP = ref.updater.player.get(c[1]);
+				if (looserP.gameState != GameState.LOST) {
+					looserP.gameState = GameState.LOST;
+					if (looserP == ref.player) {
 						ref.updater.gameState = GameState.LOST;
 						ref.preGame.write("GAME", "you lost the game");
 					} else {
-						ref.preGame.write("GAME", p.getUser().name + " lost the game");
+						ref.preGame.write("GAME", looserP.getUser().name + " lost the game");
 
-						boolean b1 = true;
+						int nPlayersInGame = 0;
 						for (String key : ref.updater.player.keySet()) {
 							Player player = ref.updater.player.get(key);
-							if (player.gameState != GameState.LOST && !(player == ref.player)) {
-								b1 = false;
+							if (player.gameState != GameState.LOST) {
+								nPlayersInGame++;
 							}
 						}
 
-						if (b1) {
+						if (nPlayersInGame == 1) {
+							Player lastPlayingPlayer = null;
+							for (String key : ref.updater.player.keySet()) {
+								Player player = ref.updater.player.get(key);
+								if (player.gameState != GameState.LOST) {
+
+									lastPlayingPlayer = player;
+								}
+							}
+							if (lastPlayingPlayer != null)
+								lastPlayingPlayer.gameState = GameState.WON;
 							ref.updater.gameState = GameState.WON;
-							ref.player.gameState = GameState.WON;
+							if (ref.player != null)
+								ref.player.gameState = GameState.WON;
 							ref.preGame.write("GAME", "you win");
 						}
 					}
 					if (ref.app instanceof ServerApp) {
-						((ServerApp) ref.app).gui.addChatText(p.getUser().name + " has lost");
+						((ServerApp) ref.app).gui.addChatText(looserP.getUser().name + " has lost");
 						Protocol.createFile();
 					} else if (ref.player.gameState != GameState.PLAY) {
 						System.out.println("ComHandler.executeCom()endgame");
