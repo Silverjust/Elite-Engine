@@ -84,24 +84,21 @@ public class Berserker extends Unit implements Attacker {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (isServer
-				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
+		if (isServer && (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& basicAttack.canTargetable(e)) {
+						if (e.isInRange(x, y, aggroRange + e.radius) && basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& basicAttack.canTargetable(e)) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius) && basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -134,18 +131,12 @@ public class Berserker extends Unit implements Attacker {
 	@Override
 	public void calculateDamage(Attack a) {
 		float x, y, xDirection = a.getTarget().x, yDirection = a.getTarget().y;
-		x = (this.x + (xDirection - this.x)
-				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
-				* (attackDistance));
-		y = (this.y + (yDirection - this.y)
-				/ PApplet.dist(this.x, this.y, xDirection, yDirection)
-				* (attackDistance));
+		x = (this.x + (xDirection - this.x) / PApplet.dist(this.x, this.y, xDirection, yDirection) * (attackDistance));
+		y = (this.y + (yDirection - this.y) / PApplet.dist(this.x, this.y, xDirection, yDirection) * (attackDistance));
 		for (Entity e : ref.updater.entities) {
-			if (e != null & e.isEnemyTo(this)
-					&& e.isInRange(x, y, e.radius + a.range)) {
-				ref.updater.send("<hit " + e.number + " "
-						+ (e instanceof Building ? a.damage / 4 : a.damage)
-						+ " " + a.pirce);
+			if (e != null & e.isEnemyTo(this) && e.isInRange(x, y, e.radius + a.range)) {
+				ref.updater.send(
+						HIT + S + e.number + " " + (e instanceof Building ? a.damage / 4 : a.damage) + " " + a.pirce);
 			}
 		}
 	}
@@ -153,11 +144,9 @@ public class Berserker extends Unit implements Attacker {
 	@Override
 	public void renderUnder() {
 		super.renderUnder();
-		if (isAlive() && AimHandler.getAim() instanceof LeuchteAim
-				&& buildLeuchte.isNotOnCooldown()) {
+		if (isAlive() && AimHandler.getAim() instanceof LeuchteAim && buildLeuchte.isNotOnCooldown()) {
 			ref.app.tint(player.color);
-			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x),
-					yToGrid(y), buildRange * 2, buildRange);
+			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x), yToGrid(y), buildRange * 2, buildRange);
 			ref.app.tint(255);
 		}
 	}
@@ -172,23 +161,18 @@ public class Berserker extends Unit implements Attacker {
 	@Override
 	public void renderRange() {
 		if (this instanceof Unit) {
-			ref.app.line(x, y / 2, ((Unit) this).xTarget,
-					((Unit) this).yTarget / 2);
+			ref.app.line(x, y / 2, ((Unit) this).xTarget, ((Unit) this).yTarget / 2);
 		}
 		if (basicAttack.getTarget() != null) {
 
 			float x, y, xDirection = basicAttack.getTarget().x, //
-			yDirection = basicAttack.getTarget().y;
-			x = (this.x + (xDirection - this.x)
-					/ PApplet.dist(this.x, this.y, xDirection, yDirection)
-					* (attackDistance));
-			y = (this.y + (yDirection - this.y)
-					/ PApplet.dist(this.x, this.y, xDirection, yDirection)
-					* (attackDistance));
+					yDirection = basicAttack.getTarget().y;
+			x = (this.x
+					+ (xDirection - this.x) / PApplet.dist(this.x, this.y, xDirection, yDirection) * (attackDistance));
+			y = (this.y
+					+ (yDirection - this.y) / PApplet.dist(this.x, this.y, xDirection, yDirection) * (attackDistance));
 			drawCircle(x, y, basicAttack.range);
-			drawCircle(x, y,
-					(byte) (basicAttack.range * basicAttack
-							.getCooldownPercent()));
+			drawCircle(x, y, (byte) (basicAttack.range * basicAttack.getCooldownPercent()));
 		}
 	}
 
@@ -272,9 +256,8 @@ public class Berserker extends Unit implements Attacker {
 		@Override
 		public void execute(float x, float y) {
 			if (canPlaceAt(x, y)) {
-				ref.updater.send("<spawn "
-						+ buildable.getClass().getSimpleName() + " "
-						+ builder.player.getUser().ip + " " + x + " " + y);
+				ref.updater.send(SPAWN + S + buildable.getClass().getSimpleName() + " " + builder.player.getUser().ip
+						+ " " + x + " " + y);
 				buildable.buyFrom(builder.player);
 			}
 			Entity builder = null;
@@ -295,8 +278,7 @@ public class Berserker extends Unit implements Attacker {
 			boolean placeFree = true;
 			boolean inBerserkerRange = false;
 			for (Entity e : ref.updater.entities) {
-				if (e.isInRange(x, y, buildable.radius + e.radius)
-						&& e.groundPosition == GroundPosition.GROUND)
+				if (e.isInRange(x, y, buildable.radius + e.radius) && e.groundPosition == GroundPosition.GROUND)
 					placeFree = false;
 				if (e instanceof Berserker && e.player == builder.player
 						&& e.isInRange(x, y, ((Berserker) e).buildRange)

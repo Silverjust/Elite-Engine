@@ -1,10 +1,11 @@
 package entity;
 
 import main.appdata.ProfileHandler;
+import shared.Coms;
 import shared.Helper.Timer;
 import shared.ref;
 
-public abstract class MainBuilding extends Building implements Commander {
+public abstract class MainBuilding extends Building implements Commander, Coms {
 	protected static final int RADIUS = 27;
 	protected int commandingRange;
 	public Timer progress;
@@ -20,7 +21,7 @@ public abstract class MainBuilding extends Building implements Commander {
 	@Override
 	protected void onDeath() {
 		super.onDeath();
-		ref.updater.send("<lost " + player.getUser().ip + " " + ProfileHandler.getRate());
+		ref.updater.send(GAMEEND + " lost " + player.getUser().ip + " " + ProfileHandler.getRate());
 	}
 
 	@Override

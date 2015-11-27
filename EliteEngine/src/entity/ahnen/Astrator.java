@@ -36,7 +36,7 @@ public class Astrator extends Unit implements Shooter, Buffing {
 		walk = new Animation(standingImg, 800);
 		death = new Death(standingImg, 500);
 		basicAttack = new ShootAttack(standingImg, 800);
-	//	basicAttack.explosion = new Explosion(selectedImg, 1000);
+		// basicAttack.explosion = new Explosion(selectedImg, 1000);
 
 		setAnimation(walk);
 
@@ -75,24 +75,21 @@ public class Astrator extends Unit implements Shooter, Buffing {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (isServer
-				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
+		if (isServer && (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& basicAttack.canTargetable(e)) {
+						if (e.isInRange(x, y, aggroRange + e.radius) && basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& basicAttack.canTargetable(e)) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius) && basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -116,8 +113,7 @@ public class Astrator extends Unit implements Shooter, Buffing {
 	public void hit(int damage, byte pirce) {
 		boolean isBuffed = false;
 		for (Entity e : ref.updater.entities) {
-			if (e instanceof Leuchte
-					&& ((Leuchte) e).upgrade == Upgrade.BUFF
+			if (e instanceof Leuchte && ((Leuchte) e).upgrade == Upgrade.BUFF
 					&& isInRange(e.x, e.y, ((Leuchte) e).getBasicAttack().range))
 				isBuffed = true;
 		}
@@ -126,9 +122,7 @@ public class Astrator extends Unit implements Shooter, Buffing {
 			armor = 5;
 		}
 		if (isMortal()) {// only for nonimmortal objects
-			hp -= damage
-					* (1.0 - ((armor - pirce > 0) ? armor - pirce : 0) * 0.05)
-					* (isBuffed ? 0.75 : 1);
+			hp -= damage * (1.0 - ((armor - pirce > 0) ? armor - pirce : 0) * 0.05) * (isBuffed ? 0.75 : 1);
 			/** check if it was lasthit */
 			if (hp <= 0 && hp != Integer.MAX_VALUE) {// marker
 				hp = -32768;
@@ -141,8 +135,7 @@ public class Astrator extends Unit implements Shooter, Buffing {
 	@Override
 	public void calculateDamage(Attack a) {
 		Entity target = a.getTarget();
-		ref.updater.send("<hit " + target.number + " " + a.damage + " "
-				+ a.pirce);
+		ref.updater.send(HIT + " " + target.number + " " + a.damage + " " + a.pirce);
 	}
 
 	@Override
@@ -156,8 +149,7 @@ public class Astrator extends Unit implements Shooter, Buffing {
 	@Override
 	public void drawShot(Entity target, float progress) {
 		float x = PApplet.lerp(this.x, target.x, progress);
-		float y = PApplet.lerp(this.y - height, target.y - target.height,
-				progress);
+		float y = PApplet.lerp(this.y - height, target.y - target.height, progress);
 		ref.app.fill(50, 0, 255);
 		ref.app.strokeWeight(0);
 		ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);

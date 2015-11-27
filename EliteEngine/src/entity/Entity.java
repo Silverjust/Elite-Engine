@@ -3,6 +3,7 @@ package entity;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
+import shared.Coms;
 import shared.Nation;
 import shared.Player;
 import shared.Updater;
@@ -14,7 +15,7 @@ import game.GameDrawer;
 import game.HUD;
 import game.ImageHandler;
 
-public abstract class Entity implements Informing {
+public abstract class Entity implements Informing, Coms {
 	// TODO upgrades für einheiten
 	public static int entityCounter;
 	public int number;
@@ -63,8 +64,7 @@ public abstract class Entity implements Informing {
 	public void updateAnimation() {
 		animation = getNextAnimation();
 		if (Animation.observe.isAssignableFrom(this.getClass())) {
-			System.out.println("Entity.updateAnimation()"
-					+ animation.getName(this));
+			System.out.println("Entity.updateAnimation()" + animation.getName(this));
 		}
 		animation.update(this);
 	}
@@ -92,15 +92,13 @@ public abstract class Entity implements Informing {
 	}
 
 	public void renderRange() {
-		if (this instanceof Attacker
-				&& ((Attacker) this).getBasicAttack() != null) {
+		if (this instanceof Attacker && ((Attacker) this).getBasicAttack() != null) {
 			Attack a = ((Attacker) this).getBasicAttack();
 			drawCircle(a.range);
 			drawCircle((int) (a.range * a.getCooldownPercent()));
 		}
 		if (this instanceof Unit) {
-			ref.app.line(x, y / 2, ((Unit) this).xTarget,
-					((Unit) this).yTarget / 2);
+			ref.app.line(x, y / 2, ((Unit) this).xTarget, ((Unit) this).yTarget / 2);
 		}
 	}
 
@@ -132,8 +130,7 @@ public abstract class Entity implements Informing {
 		if (isMortal()) {// only for nonimmortal objects
 			// SoundHandler.startIngameSound(hit, x, y);
 
-			hp -= damage
-					* (1.0 - ((armor - pirce > 0) ? armor - pirce : 0) * 0.05);
+			hp -= damage * (1.0 - ((armor - pirce > 0) ? armor - pirce : 0) * 0.05);
 			/** check if it was lasthit */
 			if (hp <= 0 && hp != Integer.MAX_VALUE) {// marker
 				hp = -32768;
@@ -159,13 +156,11 @@ public abstract class Entity implements Informing {
 	}
 
 	public void info() {
-		HUD.chat.println(this.getClass().getSimpleName() + "_" + number, "("
-				+ x + "|" + y + ")" + "\nhp:" + hp);
+		HUD.chat.println(this.getClass().getSimpleName() + "_" + number, "(" + x + "|" + y + ")" + "\nhp:" + hp);
 	}
 
 	protected void drawShadow() {
-		ImageHandler.drawImage(ref.app, shadowImg, xToGrid(x), yToGrid(y),
-				radius * 2, radius);
+		ImageHandler.drawImage(ref.app, shadowImg, xToGrid(x), yToGrid(y), radius * 2, radius);
 	}
 
 	public byte flyHeight() {
@@ -177,8 +172,7 @@ public abstract class Entity implements Informing {
 	protected void drawSelected() {
 		if (isSelected && isAlive()) {
 			ref.app.tint(player.color);
-			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x),
-					yToGrid(y - flyHeight()), radius * 2, radius);
+			ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x), yToGrid(y - flyHeight()), radius * 2, radius);
 			ref.app.tint(255);
 		}
 	}
@@ -188,8 +182,7 @@ public abstract class Entity implements Informing {
 		if (isTaged) {
 			ref.app.fill(0, 0);
 			ref.app.stroke(player.color);
-			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight()) - radius * 0.3f,
-					radius * 2, radius * 1.5f);
+			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight()) - radius * 0.3f, radius * 2, radius * 1.5f);
 			ref.app.stroke(0);
 		}
 		isTaged = false;
@@ -199,11 +192,10 @@ public abstract class Entity implements Informing {
 		int h = 1;
 		if (isAlive() && isMortal()) {//
 			ref.app.fill(0, 150);
-			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight()) - radius * 1.5f,
-					radius * 2, h);
+			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight()) - radius * 1.5f, radius * 2, h);
 			ref.app.tint(player.color);
-			ImageHandler.drawImage(ref.app, hpImg, xToGrid(x), yToGrid(y - flyHeight()) - radius
-					* 1.5f, radius * 2 * hp / hp_max, h);
+			ImageHandler.drawImage(ref.app, hpImg, xToGrid(x), yToGrid(y - flyHeight()) - radius * 1.5f,
+					radius * 2 * hp / hp_max, h);
 			ref.app.tint(255);
 		}
 	}
@@ -212,11 +204,10 @@ public abstract class Entity implements Informing {
 		int h = 1;
 		if (isAlive() && isMortal()) {//
 			ref.app.fill(0, 150);
-			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight() - h * 3) - radius
-					* 1.5f, radius * 2, h);
+			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight() - h * 3) - radius * 1.5f, radius * 2, h);
 			ref.app.tint(200);
-			ImageHandler.drawImage(ref.app, hpImg, xToGrid(x), yToGrid(y - flyHeight() - h * 3)
-					- radius * 1.5f, radius * 2 * f, h);
+			ImageHandler.drawImage(ref.app, hpImg, xToGrid(x), yToGrid(y - flyHeight() - h * 3) - radius * 1.5f,
+					radius * 2 * f, h);
 			ref.app.tint(255);
 		}
 	}
@@ -225,23 +216,20 @@ public abstract class Entity implements Informing {
 		int h = 1;
 		if (isAlive() && isMortal()) {//
 			ref.app.fill(0, 150);
-			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight() - h * 3) - radius
-					* 1.5f, radius * 2, h);
+			ref.app.rect(xToGrid(x), yToGrid(y - flyHeight() - h * 3) - radius * 1.5f, radius * 2, h);
 			ref.app.tint(c);
-			ImageHandler.drawImage(ref.app, hpImg, xToGrid(x), yToGrid(y - flyHeight() - h * 3)
-					- radius * 1.5f, radius * 2 * f, h);
+			ImageHandler.drawImage(ref.app, hpImg, xToGrid(x), yToGrid(y - flyHeight() - h * 3) - radius * 1.5f,
+					radius * 2 * f, h);
 			ref.app.tint(255);
 		}
 	}
 
 	protected void drawCircle(int r) {
-		ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x), yToGrid(y),
-				r * 2, r);
+		ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x), yToGrid(y), r * 2, r);
 	}
 
 	protected void drawCircle(float x, float y, byte range) {
-		ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x), yToGrid(y),
-				range * 2, range);
+		ImageHandler.drawImage(ref.app, selectedImg, xToGrid(x), yToGrid(y), range * 2, range);
 	}
 
 	void drawLine(float tx, float ty) {
@@ -256,8 +244,7 @@ public abstract class Entity implements Informing {
 
 	public void drawSight(Updater updater) {
 		int scale = updater.map.fogScale;
-		updater.map.fogOfWar.ellipse(x / scale, y / scale / 2, sight * 2
-				/ scale, sight / scale);
+		updater.map.fogOfWar.ellipse(x / scale, y / scale / 2, sight * 2 / scale, sight / scale);
 	}
 
 	@Override
@@ -280,11 +267,9 @@ public abstract class Entity implements Informing {
 		if (kerit == 0 && pax == 0 && arcanum == 0 && prunam == 0)
 			stats += "§§§§";
 		else
-			stats += "kerit: " + kerit + "§pax: " + pax + "§arcanum: "
-					+ arcanum + "§prunam: " + prunam + "§";
+			stats += "kerit: " + kerit + "§pax: " + pax + "§arcanum: " + arcanum + "§prunam: " + prunam + "§";
 		if (this instanceof Building && ((Building) this).build != null)
-			stats += "time: " + ((Building) this).build.cooldown / 1000.0
-					+ "§§";
+			stats += "time: " + ((Building) this).build.cooldown / 1000.0 + "§§";
 		else if (this instanceof Unit)
 			stats += "time: " + ((Unit) this).trainTime / 1000.0 + "§§";
 		else
@@ -294,13 +279,11 @@ public abstract class Entity implements Informing {
 		else
 			stats += "hp: Immortal Object§";
 
-		if (this instanceof Attacker
-				&& ((Attacker) this).getBasicAttack() != null) {
+		if (this instanceof Attacker && ((Attacker) this).getBasicAttack() != null) {
 			Attack a = ((Attacker) this).getBasicAttack();
 			if (a.pirce >= 0) {
 				stats += "dps: " + a.damage + "/" + a.cooldown / 1000.0 + " ="
-						+ PApplet.nfc(a.damage / (a.cooldown / 1000.0f), 2)
-						+ " (" + a.pirce + ")";
+						+ PApplet.nfc(a.damage / (a.cooldown / 1000.0f), 2) + " (" + a.pirce + ")";
 				if (a.targetable == GroundPosition.GROUND)
 					stats += " _§";
 				else if (a.targetable == GroundPosition.AIR)
@@ -308,10 +291,8 @@ public abstract class Entity implements Informing {
 				else if (a.targetable == null)
 					stats += " _°§";
 			} else {
-				stats += "heal/s: " + a.damage + "/" + a.cooldown / 1000.0
-						+ " ="
-						+ PApplet.nfc(a.damage / (a.cooldown / 1000.0f), 2)
-						+ "§";
+				stats += "heal/s: " + a.damage + "/" + a.cooldown / 1000.0 + " ="
+						+ PApplet.nfc(a.damage / (a.cooldown / 1000.0f), 2) + "§";
 			}
 		}
 		return stats + this.stats;
@@ -328,8 +309,7 @@ public abstract class Entity implements Informing {
 	}
 
 	public void setAnimation(Animation a) {
-		if ((a != null && animation == null)
-				|| (a != null && animation.isInterruptable() && animation != a)) {
+		if ((a != null && animation == null) || (a != null && animation.isInterruptable() && animation != a)) {
 			if (Animation.observe.isAssignableFrom(this.getClass())) {
 				System.out.println("Entity.setAnimation()" + a.getName(this));
 			}
@@ -349,8 +329,7 @@ public abstract class Entity implements Informing {
 	}
 
 	public float calcImportanceOf(Entity e) {
-		float importance = PApplet.abs(10000 / (e.hp
-				* PApplet.dist(x, y, e.x, e.y) - radius - e.radius));
+		float importance = PApplet.abs(10000 / (e.hp * PApplet.dist(x, y, e.x, e.y) - radius - e.radius));
 		// TODO speziefische Thread werte
 		if (e instanceof Attacker) {
 			importance *= 20;
@@ -378,8 +357,7 @@ public abstract class Entity implements Informing {
 		if (radius == 0 || e.radius == 0)
 			return false;
 		float f = PApplet.dist(x, y, e.x, e.y);
-		boolean b = f < radius + e.radius && e.groundPosition == groundPosition
-				&& e.isCollidable(this);
+		boolean b = f < radius + e.radius && e.groundPosition == groundPosition && e.isCollidable(this);
 		// if(b)System.out.println(number + "/" + e.number + ":" + f + b);
 		return b;
 	}
@@ -396,10 +374,8 @@ public abstract class Entity implements Informing {
 	}
 
 	public boolean isEnemyTo(Entity e) {
-		return (e != null) && (this.player != null) && (e.player != null)
-				&& (this.player != e.player)
-				&& (this.player != ref.updater.neutral)
-				&& (e.player != ref.updater.neutral) //
+		return (e != null) && (this.player != null) && (e.player != null) && (this.player != e.player)
+				&& (this.player != ref.updater.neutral) && (e.player != ref.updater.neutral) //
 				&& isAlive() && e.isAlive();
 	}
 
@@ -428,8 +404,7 @@ public abstract class Entity implements Informing {
 	public boolean isVisibleTo(Player p) {
 		boolean isVisible = false;
 		for (Entity spotter : ref.updater.entities) {
-			if (spotter.player == p
-					&& spotter.isInRange(x, y, spotter.sight + radius))
+			if (spotter.player == p && spotter.isInRange(x, y, spotter.sight + radius))
 				isVisible = true;
 			if (player == ref.updater.neutral)
 				isVisible = true;
@@ -446,13 +421,10 @@ public abstract class Entity implements Informing {
 	}
 
 	public void buyFrom(Player p, int kerit, int pax, int arcanum, int prunam) {
-		ref.updater.send("<give " + p.getUser().ip + " " + "kerit" + " -"
-				+ kerit);
+		ref.updater.send("<give " + p.getUser().ip + " " + "kerit" + " -" + kerit);
 		ref.updater.send("<give " + p.getUser().ip + " " + "pax" + " -" + pax);
-		ref.updater.send("<give " + p.getUser().ip + " " + "arcanum" + " -"
-				+ arcanum);
-		ref.updater.send("<give " + p.getUser().ip + " " + "prunam" + " -"
-				+ prunam);
+		ref.updater.send("<give " + p.getUser().ip + " " + "arcanum" + " -" + arcanum);
+		ref.updater.send("<give " + p.getUser().ip + " " + "prunam" + " -" + prunam);
 	}
 
 	public void setupTarget() {
@@ -468,21 +440,18 @@ public abstract class Entity implements Informing {
 	}
 
 	protected static String path(Object object) {
-		String pack = object.getClass().getEnclosingClass().getPackage()
-				.getName();
+		String pack = object.getClass().getEnclosingClass().getPackage().getName();
 		if (pack.equals("entity"))
 			pack = "neutral";
 		else
 			pack = pack.substring(pack.lastIndexOf('.') + 1, pack.length());
 
-		String path = pack + "/"
-				+ object.getClass().getEnclosingClass().getSimpleName() + "/";
+		String path = pack + "/" + object.getClass().getEnclosingClass().getSimpleName() + "/";
 		return path;
 	}
 
 	protected static String path(Nation nation, Object object) {
-		String path = nation.toString() + "/"
-				+ object.getClass().getEnclosingClass().getSimpleName() + "/";
+		String path = nation.toString() + "/" + object.getClass().getEnclosingClass().getSimpleName() + "/";
 		return path;
 	}
 

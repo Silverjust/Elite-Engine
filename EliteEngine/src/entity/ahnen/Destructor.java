@@ -91,24 +91,21 @@ public class Destructor extends Unit implements Shooter, Buffing {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (isServer
-				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
+		if (isServer && (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& basicAttack.canTargetable(e)) {
+						if (e.isInRange(x, y, aggroRange + e.radius) && basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
 								importantEntity = e;
 							}
 						}
-						if (e.isInRange(x, y, basicAttack.range + e.radius)
-								&& basicAttack.canTargetable(e)) {
+						if (e.isInRange(x, y, basicAttack.range + e.radius) && basicAttack.canTargetable(e)) {
 							isEnemyInHitRange = true;
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
@@ -132,8 +129,7 @@ public class Destructor extends Unit implements Shooter, Buffing {
 			}
 			if (isEnemyInHitRange && basicAttack.isNotOnCooldown()) {
 				sendAnimation("basicAttack " + importantEntity.number);
-			} else if (importantEntity != null && spawn.isNotOnCooldown()
-					&& hasNoOrb() && isBuffed()) {
+			} else if (importantEntity != null && spawn.isNotOnCooldown() && hasNoOrb() && isBuffed()) {
 				sendAnimation("spawn " + importantEntity.number);
 			} else if (importantEntity != null) {
 				Attack.sendWalkToEnemy(this, importantEntity, basicAttack.range);
@@ -146,8 +142,7 @@ public class Destructor extends Unit implements Shooter, Buffing {
 	private boolean isBuffed() {
 		boolean isBuffed = false;
 		for (Entity e : ref.updater.entities) {
-			if (e instanceof Leuchte
-					&& ((Leuchte) e).upgrade == Upgrade.BUFF
+			if (e instanceof Leuchte && ((Leuchte) e).upgrade == Upgrade.BUFF
 					&& isInRange(e.x, e.y, ((Leuchte) e).getBasicAttack().range))
 				isBuffed = true;
 		}
@@ -181,11 +176,9 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		boolean isBuffed = isBuffed();
 		Entity target = ((ShootAttack) a).getTarget();
 		for (Entity e : ref.updater.entities) {
-			if (e != null & e.isEnemyTo(this)
-					&& e.isInRange(target.x, target.y, e.radius + splashrange)
+			if (e != null & e.isEnemyTo(this) && e.isInRange(target.x, target.y, e.radius + splashrange)
 					&& e.groundPosition == GroundPosition.GROUND) {
-				ref.updater.send("<hit " + e.number + " "
-						+ (isBuffed ? a.damage * 2 : a.damage) + " "
+				ref.updater.send(HIT + S + e.number + " " + (isBuffed ? a.damage * 2 : a.damage) + " "
 						+ (isBuffed ? 5 : a.pirce));
 			}
 		}
@@ -202,8 +195,7 @@ public class Destructor extends Unit implements Shooter, Buffing {
 	@Override
 	public void drawShot(Entity target, float progress) {
 		float x = PApplet.lerp(this.x, target.x, progress);
-		float y = PApplet.lerp(this.y - height, target.y - target.height,
-				progress);
+		float y = PApplet.lerp(this.y - height, target.y - target.height, progress);
 		ref.app.fill(50, 255, 0);
 		ref.app.strokeWeight(0);
 		ref.app.ellipse(xToGrid(x), yToGrid(y), 1, 1);
@@ -236,9 +228,8 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		public void updateAbility(Entity e, boolean isServer) {
 			if (target != null && isEvent()) {
 				if (isServer) {
-					ref.updater.send("<spawn Orb " + e.player.getUser().ip + " " + e.x
-							+ " " + (e.y + e.radius + 8) + " " + target.x + " "
-							+ target.y + " " + e.number);
+					ref.updater.send(SPAWN + " Orb " + e.player.getUser().ip + " " + e.x + " " + (e.y + e.radius + 8)
+							+ " " + target.x + " " + target.y + " " + e.number);
 					/*
 					 * ref.updater.send("<spawn Rugling " + e.player.ip + " " +
 					 * e.x + " " + (e.y - e.radius - 8) + " " + target.x + " " +
@@ -270,12 +261,9 @@ public class Destructor extends Unit implements Shooter, Buffing {
 		@Override
 		public void onActivation() {
 			for (Entity e : ref.updater.entities) {
-				if (e instanceof Leuchte
-						&& e.getAnimation() == ((Leuchte) e).heal) {
+				if (e instanceof Leuchte && e.getAnimation() == ((Leuchte) e).heal) {
 					for (Entity e2 : ref.updater.selected) {
-						if (e2 instanceof Buffing
-								&& e.isInRange(e2.x, e2.y,
-										((Buffing) e2).getUpgradeRange())) {
+						if (e2 instanceof Buffing && e.isInRange(e2.x, e2.y, ((Buffing) e2).getUpgradeRange())) {
 							e.sendAnimation("buff");
 						}
 					}

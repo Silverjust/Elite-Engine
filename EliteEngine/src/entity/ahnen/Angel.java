@@ -2,6 +2,7 @@ package entity.ahnen;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import shared.Coms;
 import shared.Nation;
 import shared.Player;
 import shared.ref;
@@ -33,8 +34,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 		String path = path(new Object() {
 		});
 		standingImg = game.ImageHandler.load(path, "Angel");
-		cloakSym = ImageHandler.load(Nation.AHNEN.toString() + "/symbols/",
-				"cloak");
+		cloakSym = ImageHandler.load(Nation.AHNEN.toString() + "/symbols/", "cloak");
 	}
 
 	public Angel(String[] c) {
@@ -86,16 +86,14 @@ public class Angel extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void updateDecisions(boolean isServer) {
-		if (isServer
-				&& (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
+		if (isServer && (getAnimation() == walk && isAggro || getAnimation() == stand)) {// ****************************************************
 			boolean isEnemyInHitRange = false;
 			float importance = 0;
 			Entity importantEntity = null;
 			for (Entity e : player.visibleEntities) {
 				if (e != this) {
 					if (e.isEnemyTo(this)) {
-						if (e.isInRange(x, y, aggroRange + e.radius)
-								&& basicAttack.canTargetable(e)) {
+						if (e.isInRange(x, y, aggroRange + e.radius) && basicAttack.canTargetable(e)) {
 							float newImportance = calcImportanceOf(e);
 							if (newImportance > importance) {
 								importance = newImportance;
@@ -161,8 +159,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 
 	@Override
 	public void calculateDamage(Attack a) {
-		ref.updater.send("<hit " + basicAttack.getTarget().number + " "
-				+ a.damage + " " + a.pirce);
+		ref.updater.send(Coms.HIT+" " + basicAttack.getTarget().number + " " + a.damage + " " + a.pirce);
 		// SoundHandler.startIngameSound(HUD.hm, x, y);
 	}
 
@@ -188,8 +185,7 @@ public class Angel extends Unit implements Attacker, Shooter {
 	@Override
 	public void drawShot(Entity target, float progress) {
 		float x = PApplet.lerp(this.x, target.x, progress);
-		float y = PApplet.lerp(this.y - height, target.y - target.height,
-				progress);
+		float y = PApplet.lerp(this.y - height, target.y - target.height, progress);
 		ref.app.fill(0, 200, 255);
 		ref.app.strokeWeight(0);
 		ref.app.ellipse(xToGrid(x), yToGrid(y), 3, 3);

@@ -8,6 +8,7 @@ import entity.Entity;
 import processing.core.PApplet;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
+import shared.Coms;
 import shared.Mode;
 import shared.Player;
 import shared.Updater;
@@ -39,7 +40,7 @@ public class Protocol {
 	public static void filterComs(String info, String s) {
 		try {
 			String[] c = PApplet.splitTokens(s, " " + ClientHandler.endSymbol);
-			if (c[0].equals("<execute")
+			if (c[0].equals(Coms.EXECUTE)
 					&& ref.updater.namedEntities.get(Integer.parseInt(c[1])).getClass().equals(clazz))
 				addInfo(info + s);
 

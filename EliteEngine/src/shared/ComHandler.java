@@ -21,14 +21,13 @@ import game.GameUpdater;
 import game.HUD;
 import game.endGameMenu;
 
-public class ComHandler {
-
+public class ComHandler implements Coms {
 	public static void setup(GameUpdater UPDATER) {
 		ref.updater = UPDATER;
 	}
 
 	public static void executeCom(String com) {
-		String[] c = PApplet.splitTokens(com, " " + ClientHandler.endSymbol);
+		String[] c = PApplet.splitTokens(com, S + ClientHandler.endSymbol);
 
 		try {
 			byte b;
@@ -36,19 +35,7 @@ public class ComHandler {
 			float x, y;
 			Entity e;
 			switch (c[0]) {
-			case "<move":
-				n = Integer.parseInt(c[1]);
-				e = ref.updater.namedEntities.get(n);
-				x = Float.parseFloat(c[2]);
-				y = Float.parseFloat(c[3]);
-				if (e != null) {
-					System.err.println("remove move");
-					// ((Unit) e).move(x, y);
-				} else {
-					throw new IllegalArgumentException("no entity found");
-				}
-				break;
-			case "<hit":
+			case HIT:
 				n = Integer.parseInt(c[1]);
 				e = ref.updater.namedEntities.get(n);
 				n = Integer.parseInt(c[2]);
@@ -59,7 +46,7 @@ public class ComHandler {
 					throw new IllegalArgumentException("no entity found");
 				}
 				break;
-			case "<heal":
+			case HEAL:
 				n = Integer.parseInt(c[1]);
 				e = ref.updater.namedEntities.get(n);
 				n = Integer.parseInt(c[2]);
@@ -69,7 +56,7 @@ public class ComHandler {
 					throw new IllegalArgumentException("no entity found");
 				}
 				break;
-			case "<tp":
+			case TP:
 				n = Integer.parseInt(c[1]);
 				e = ref.updater.namedEntities.get(n);
 				x = Float.parseFloat(c[2]);
@@ -83,14 +70,14 @@ public class ComHandler {
 					throw new IllegalArgumentException("no entity found");
 				}
 				break;
-			case "<spawn":
+			case SPAWN:
 				c[1] = ContentListHandler.getEntityContent().getString(c[1]);
 				Class<?> clazz = Class.forName(c[1]);
 				Constructor<?> ctor = clazz.getConstructor(String[].class);
 				e = (Entity) ctor.newInstance(new Object[] { c });
 				ref.updater.toAdd.add(e);
 				break;
-			case "<execute":// who what info
+			case EXECUTE:// who what info
 				n = Integer.parseInt(c[1]);
 				e = ref.updater.namedEntities.get(n);
 				if (e != null) {
@@ -99,7 +86,7 @@ public class ComHandler {
 					throw new IllegalArgumentException("no entity found");
 				}
 				break;
-			case "<remove":
+			case REMOVE:
 				n = Integer.parseInt(c[1]);
 				e = ref.updater.namedEntities.get(n);
 				if (e != null) {
@@ -108,16 +95,16 @@ public class ComHandler {
 					throw new IllegalArgumentException("no entity found");
 				}
 				break;
-			case "<give":
+			case GIVE:
 				Player looserP = ref.updater.player.get(c[1]);
 				looserP.give(c[2], Integer.parseInt(c[3]));
 				break;
-			case "<say":
+			case SAY:
 				ref.preGame.write(c[1], c);
 				break;
 
 			// before game
-			case "<identify":
+			case IDENTIFY:
 				if (c[1].equals("reconnect")) {
 					if (((MainApp) ref.app).mode == Mode.HAUPTMENUE) {
 						while (((MainPreGame) ref.preGame).display == null) {
@@ -130,7 +117,7 @@ public class ComHandler {
 						((MainApp) ref.app).mode = Mode.LADESCREEN;
 					} else {// other player identify
 						ClientHandler.send(
-								"<identifying " + ClientHandler.identification + " " + ref.preGame.getUser("").name);
+								IDENTIFYING + S + ClientHandler.identification + S + ref.preGame.getUser("").name);
 					}
 				} else {
 					if (c[1].equals("server")) {
@@ -138,44 +125,44 @@ public class ComHandler {
 					}
 					System.out.println("identifying " + ref.preGame.getUser("").name);
 					ClientHandler
-							.send("<identifying " + ClientHandler.identification + " " + ref.preGame.getUser("").name);
+							.send("<identifying " + ClientHandler.identification + S + ref.preGame.getUser("").name);
 					if (ref.preGame.getUser("").nation != null)
-						ClientHandler.send("<setNation " + ClientHandler.identification + " "
+						ClientHandler.send("<setNation " + ClientHandler.identification + S
 								+ ref.preGame.getUser("").nation.toString());
 					if (ref.preGame.map != null)
-						ClientHandler.send("<setMap " + ClientHandler.identification + " " + ref.preGame.map);
+						ClientHandler.send("<setMap " + ClientHandler.identification + S + ref.preGame.map);
 					// TODO send color
 					// nur an clienthandler
 
 				}
 				break;
-			case "<identifying":
+			case IDENTIFYING:
 				ref.preGame.addPlayer(c[1], c[2]);
 				break;
-			case "<setNation":
+			case SET_NATION:
 				// System.out.println(c[2]);
 				ref.preGame.users.get(c[1]).nation = Nation.fromString(c[2]);
 				break;
-			case "<setMap":
+			case SET_MAP:
 				ref.preGame.setMap(c[2]);
 				break;
-			case "<load":
+			case LOAD:
 				ref.preGame.startLoading();
 				break;
-			case "<reconnect":
+			case RECONNECT:
 				((ServerUpdater) ref.updater).reconnect();
 				break;
-			case "<ready":
+			case READY:
 				// System.out.println(ref.preGame.player);
 				ref.preGame.users.get(c[1]).isReady = true;
 				ref.loader.tryStartGame();
 				break;
-			case "<startGame":
+			case START_GAME:
 				if (Updater.resfreeze != null)
 					Updater.resfreeze.startCooldown();
 				ref.loader.startGame();
 				break;
-			case "<pause":
+			case PAUSE:
 				if (Boolean.valueOf(c[1])) {
 					Updater.Time.startPause();
 					ref.updater.startPause();
@@ -184,8 +171,8 @@ public class ComHandler {
 					ref.updater.endPause();
 				}
 				break;
-			case "<lost":
-				looserP = ref.updater.player.get(c[1]);
+			case GAMEEND:
+				looserP = ref.updater.player.get(c[2]);
 				if (looserP.gameState != GameState.LOST) {
 					looserP.gameState = GameState.LOST;
 					if (looserP == ref.player) {
@@ -225,7 +212,7 @@ public class ComHandler {
 					} else if (ref.player.gameState != GameState.PLAY) {
 						System.out.println("ComHandler.executeCom()endgame");
 						HUD.menue = new endGameMenu();
-						float f = Float.parseFloat(c[2]);
+						float f = Float.parseFloat(c[3]);
 						ProfileHandler.gameEndCalculations(f);
 					}
 				}
