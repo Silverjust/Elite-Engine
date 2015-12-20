@@ -5,6 +5,7 @@ import main.MainApp;
 import main.MainLoader;
 import entity.gameAI.GameAI;
 import game.HUD;
+import shared.Coms;
 import shared.ContentListHandler;
 import shared.Helper;
 import shared.Mode;
@@ -80,7 +81,7 @@ public class MainPreGame extends PreGame {
 				return;
 		if (map == null)
 			return;
-		ClientHandler.send("<load");
+		ClientHandler.send(Coms.LOAD+"");
 	}
 
 	public void setupPlayer() {

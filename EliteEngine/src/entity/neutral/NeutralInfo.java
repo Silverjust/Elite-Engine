@@ -2,6 +2,7 @@ package entity.neutral;
 
 import entity.MainBuilding;
 import game.ActivesGrid;
+import game.ActivesGridHandler;
 import shared.NationInfo;
 
 public class NeutralInfo extends NationInfo {
@@ -32,7 +33,7 @@ public class NeutralInfo extends NationInfo {
 	}
 
 	@Override
-	public void setupActives(ActivesGrid grid) {
+	public void setupActives(ActivesGrid grid, ActivesGridHandler handler) {
 	}
 
 }

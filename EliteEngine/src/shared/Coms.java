@@ -16,10 +16,12 @@ public interface Coms {
 	/**tells clients or server it finished loading*/
 	String READY = "<ready";
 	
-	/***/
+	/**command to start the reconnect <p>
+	 * @see server.ServerUpdater#reconnect*/
 	String RECONNECT = "<reconnect";
 	
-	/**starts the loading sequence*/
+	/**starts the loading sequence
+	 * @see shared.Loader*/
 	String LOAD = "<load";
 	
 	String SET_MAP = "<setMap";

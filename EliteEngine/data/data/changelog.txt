@@ -1,4 +1,7 @@
-1.5.4test------------------
+1.5.4------------------
+changed hotkey system
+armor and pirce is 
+ 100% stronger
 nerfed angel hp and range
 buffed minibot damage
 1.5.3----------------------

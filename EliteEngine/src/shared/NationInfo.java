@@ -6,6 +6,7 @@ import entity.neutral.KeritMine;
 import entity.neutral.PaxDrillTower;
 import entity.neutral.PrunamHarvester;
 import game.ActivesGrid;
+import game.ActivesGridHandler;
 
 public abstract class NationInfo {
 	public abstract Class<? extends MainBuilding> getMainBuilding();
@@ -18,6 +19,6 @@ public abstract class NationInfo {
 
 	public abstract Class<? extends PrunamHarvester> getPrunamHarvester();
 
-	public abstract void setupActives(ActivesGrid grid);
+	public abstract void setupActives(ActivesGrid grid, ActivesGridHandler handler);
 
 }

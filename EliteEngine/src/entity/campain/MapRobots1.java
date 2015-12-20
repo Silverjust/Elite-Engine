@@ -11,6 +11,7 @@ import entity.robots.RobotsDepot;
 import entity.robots.RobotsInfo;
 import entity.robots.RobotsKaserne;
 import entity.robots.RobotsKeritMine;
+import game.ActivesGrid;
 import game.AimHandler;
 import game.HUD;
 import game.Map;
@@ -43,11 +44,12 @@ public class MapRobots1 extends CampainMapCode {
 	public void onGameStart() {
 		mb = ref.player.mainBuilding;
 		HUD.activesGrid.removeActives();
-		HUD.activesGrid.addActive(1, 1, Unit.AttackActive.class, true);
-		HUD.activesGrid.addActive(2, 1, Unit.WalkActive.class, true);
-		HUD.activesGrid.addActive(3, 1, Unit.StopActive.class, true);
-		HUD.activesGrid.addActive(5, 3, BuildMineActive.class, Commander.class, new RobotsInfo().getKeritMine(), false);
-		HUD.activesGrid.addActive(1, 1, Building.SetTargetActive.class, false);
+		ActivesGrid grid = HUD.activesGrid.baseGrid;
+		grid.addActive(1, 1, Unit.AttackActive.class);
+		grid.addActive(2, 1, Unit.WalkActive.class);
+		grid.addActive(3, 1, Unit.StopActive.class);
+		grid.addActive(5, 3, BuildMineActive.class, Commander.class, new RobotsInfo().getKeritMine());
+		grid.addActive(1, 1, Building.SetTargetActive.class);
 		ref.updater.selectionChanged = true;
 
 		ref.updater.send("<spawn Tutorial " + ref.player.getUser().ip + " 0 0 " + mb.x + " " + mb.y);
@@ -92,9 +94,10 @@ public class MapRobots1 extends CampainMapCode {
 		}
 		nextIf(mb.progress != null && mb.progress.isNotOnCooldown());
 		if (isNext()) {
-			HUD.activesGrid.addActive(4, 2, M1N1B0T.BuildDepotActive.class, true);
-			HUD.activesGrid.addBuildActive(4, 3, Commander.class, RobotsKaserne.class, false);
-			HUD.activesGrid.addTrainActive(1, 3, RobotsKaserne.class, M1N1B0T.class, false);
+			ActivesGrid grid = HUD.activesGrid.baseGrid;
+			grid.addActive(4, 2, M1N1B0T.BuildDepotActive.class);
+			grid.addBuildActive(4, 3, Commander.class, RobotsKaserne.class);
+			grid.addTrainActive(1, 3, RobotsKaserne.class, M1N1B0T.class);
 			ref.updater.selectionChanged = true;
 		}
 		nextIf(ref.player.kerit >= 400);

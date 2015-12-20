@@ -107,9 +107,9 @@ public class CommandHandler {
 				break;
 			case "/pause":
 				if (ref.updater.gameState == GameState.PAUSE) {
-					ref.updater.send("<pause false");
+					ref.updater.send(Coms.PAUSE+" false");
 				} else {
-					ref.updater.send("<pause true");
+					ref.updater.send(Coms.PAUSE+" true");
 				}
 				break;
 			case "/gamerule":

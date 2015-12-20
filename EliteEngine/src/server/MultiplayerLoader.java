@@ -2,6 +2,7 @@ package server;
 
 import game.ImageHandler;
 import game.MapHandler;
+import shared.Coms;
 import shared.Loader;
 import shared.Mode;
 import shared.Nation;
@@ -56,7 +57,7 @@ public class MultiplayerLoader extends Loader {
 			// ServerDisplay.main(new String[] {});
 			state = State.NEWGAME;
 			app.mode = Mode.GAME;
-			app.serverHandler.send("<startGame");
+			app.serverHandler.send(Coms.START_GAME+"");
 			System.out.println("Game Start");
 			sendRFInfo();
 			break;
@@ -79,7 +80,7 @@ public class MultiplayerLoader extends Loader {
 		if (state == State.WAIT && ref.updater.arePlayerReady()) {
 			state = State.ENTITIES;
 		} else if (app.mode == Mode.GAME) {
-			app.serverHandler.send("<startGame");
+			app.serverHandler.send(Coms.START_GAME+"");
 		}
 	}
 

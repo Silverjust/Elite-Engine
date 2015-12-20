@@ -66,7 +66,7 @@ public class Group {
 				entity.select();
 			}
 			GroupHandler.recentGroup = this;
-			HUD.activesGrid.selectionChange(unitActives);
+			HUD.activesGrid.selectionChange();
 		}
 	}
 }

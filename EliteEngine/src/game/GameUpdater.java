@@ -11,7 +11,6 @@ import shared.User;
 import shared.ref;
 import entity.Entity;
 import entity.EntityHeightComparator;
-import entity.Unit;
 import entity.gameAI.GameAI;
 import entity.gameAI.testAliensAI;
 import entity.gameAI.testRobotsRush;
@@ -95,16 +94,7 @@ public class GameUpdater extends Updater {
 				e.updateMovement();
 			}
 			if (selectionChanged) {
-				boolean containsUnits = false;
-				if (GroupHandler.recentGroup != null) {
-					containsUnits = GroupHandler.recentGroup.unitActives;
-				} else {
-					for (Entity entity : selected) {
-						if (entity instanceof Unit)
-							containsUnits = true;
-					}
-				}
-				HUD.activesGrid.selectionChange(containsUnits);
+				HUD.activesGrid.selectionChange();
 				selectionChanged = false;
 			}
 		}

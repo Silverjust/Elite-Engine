@@ -3,6 +3,7 @@ package server;
 import shared.Client;
 import shared.Server;
 import shared.ComHandler;
+import shared.Coms;
 import shared.Mode;
 import shared.Player;
 import shared.ref;
@@ -81,7 +82,7 @@ public class ServerHandler {
 	public void disconnectEvent(Client client) {
 		app.gui.addChatText(ref.updater.player.get(client.ip())
 				+ " disconnected");
-		send("<pause true");
+		send(Coms.PAUSE+" true");
 	}
 	
 		void dispose(){

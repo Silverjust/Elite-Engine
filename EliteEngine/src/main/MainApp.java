@@ -14,6 +14,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 import shared.Client;
+import shared.Coms;
 import shared.Menu;
 import shared.Mode;
 import shared.ref;
@@ -116,7 +117,7 @@ public class MainApp extends PApplet {
 	public void dispose() {// Player in schlieﬂen
 		try {
 			if (ClientHandler.client != null)
-				ref.updater.send("<pause true");
+				ref.updater.send(Coms.PAUSE+" true");
 			if (startPage != null)
 				startPage.dispose();
 			if (ref.preGame != null)

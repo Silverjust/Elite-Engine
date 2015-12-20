@@ -17,6 +17,7 @@ public class Setting {
 	public int changeAbilityMode;
 	public int togglePause;
 	public char[][] unitsShortcuts = new char[3][7];
+	@Deprecated
 	public char[][] buildingsShortcuts = new char[3][7];
 	public char[] hotKeys = new char[10];
 

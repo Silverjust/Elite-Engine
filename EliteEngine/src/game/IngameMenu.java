@@ -1,5 +1,6 @@
 package game;
 
+import shared.Coms;
 import shared.Menu;
 import main.FrameInfo;
 import main.OptionsMenu;
@@ -42,7 +43,7 @@ public class IngameMenu extends Menu {
 				dispose();
 				HUD.menue = new OptionsMenu();
 			} else if (button == returnToGame) {
-				ref.updater.send("<pause false");
+				ref.updater.send(Coms.PAUSE+" false");
 			}
 		}
 	}

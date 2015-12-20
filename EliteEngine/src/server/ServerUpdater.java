@@ -7,6 +7,7 @@ import game.Map;
 import java.util.ArrayList;
 
 import shared.ComHandler;
+import shared.Coms;
 import shared.Player;
 import shared.Updater;
 import shared.ref;
@@ -74,9 +75,10 @@ public class ServerUpdater extends Updater {
 		((ServerApp) ref.app).serverHandler.send(string);
 	}
 
+	/** pauses the game, clears all entities, respawns every entity and unpauses*/
 	public void reconnect() {
 		gameState = GameState.PAUSE;
-		ref.updater.send("<pause true");
+		ref.updater.send(Coms.PAUSE + " true");
 		ArrayList<String> spawns = new ArrayList<String>();
 		for (Entity entity : entities) {
 			spawns.add("<spawn " + entity.getClass().getSimpleName() + " " + entity.player.getUser().ip + " " + entity.x
@@ -89,7 +91,7 @@ public class ServerUpdater extends Updater {
 			ref.updater.send(com);
 		}
 		System.out.println("finished reconnect, restart game");
-		ref.updater.send("<pause false");
+		ref.updater.send(Coms.PAUSE + " false");
 		gameState = GameState.PLAY;
 	}
 }

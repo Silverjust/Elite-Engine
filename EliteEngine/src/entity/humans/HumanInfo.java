@@ -10,6 +10,7 @@ import entity.neutral.KeritMine;
 import entity.neutral.PaxDrillTower;
 import entity.neutral.PrunamHarvester;
 import game.ActivesGrid;
+import game.ActivesGridHandler;
 import game.aim.MineAim.BuildMineActive;
 import shared.NationInfo;
 
@@ -41,31 +42,28 @@ public class HumanInfo extends NationInfo {
 	}
 
 	@Override
-	public void setupActives(ActivesGrid grid) {
-		grid.addActive(1, 1, Unit.AttackActive.class, true);
-		grid.addActive(2, 1, Unit.WalkActive.class, true);
-		grid.addActive(3, 1, Unit.StopActive.class, true);
+	public void setupActives(ActivesGrid grid, ActivesGridHandler handler) {
+		grid.addActive(1, 1, Unit.AttackActive.class);
+		grid.addActive(2, 1, Unit.WalkActive.class);
+		grid.addActive(3, 1, Unit.StopActive.class);
 		
-		grid.addActive(1, 1, Building.SetTargetActive.class, false);
-		grid.addBuildActive(4, 3, Commander.class, HumanKaserne.class, false);
-		grid.addBuildActive(4, 2, Commander.class, HumanMechKaserne.class,
-				false);
-		grid.addBuildActive(5, 1, Commander.class, HumanDepot.class, false);
+		grid.addActive(1, 1, Building.SetTargetActive.class);
+		grid.addBuildActive(4, 3, Commander.class, HumanKaserne.class);
+		grid.addBuildActive(4, 2, Commander.class, HumanMechKaserne.class);
+		grid.addBuildActive(5, 1, Commander.class, HumanDepot.class);
 		grid.addActive(5, 2, BuildWallActive.class, Commander.class,
-				HumanWall.class, false);
+				HumanWall.class);
 		grid.addActive(5, 3, BuildMineActive.class, Commander.class,
-				getKeritMine(), false);
+				getKeritMine());
 
-		grid.addTrainActive(1, 3, HumanKaserne.class, Scout.class, false);
-		grid.addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class, false);
-		grid.addTrainActive(1, 2, HumanKaserne.class, Medic.class, false);
-		grid.addTrainActive(3, 3, HumanKaserne.class, Exo.class, false);
-		grid.addTrainActive(2, 2, HumanMechKaserne.class, SmallTank.class,
-				false);
-		grid.addTrainActive(3, 2, HumanMechKaserne.class, Tank.class, false);
-		grid.addTrainActive(2, 1, HumanMechKaserne.class, Drone.class, false);
-		grid.addTrainActive(3, 1, HumanMechKaserne.class, Helicopter.class,
-				false);
+		grid.addTrainActive(1, 3, HumanKaserne.class, Scout.class);
+		grid.addTrainActive(2, 3, HumanKaserne.class, HeavyAssault.class);
+		grid.addTrainActive(1, 2, HumanKaserne.class, Medic.class);
+		grid.addTrainActive(3, 3, HumanKaserne.class, Exo.class);
+		grid.addTrainActive(2, 2, HumanMechKaserne.class, SmallTank.class);
+		grid.addTrainActive(3, 2, HumanMechKaserne.class, Tank.class);
+		grid.addTrainActive(2, 1, HumanMechKaserne.class, Drone.class);
+		grid.addTrainActive(3, 1, HumanMechKaserne.class, Helicopter.class);
 	}
 
 }

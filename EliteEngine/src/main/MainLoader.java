@@ -1,6 +1,7 @@
 package main;
 
 import main.preGame.MainPreGame.GameSettings;
+import shared.Coms;
 import shared.Loader;
 import shared.Mode;
 import shared.ref;
@@ -81,11 +82,11 @@ public class MainLoader extends Loader {
 				GameDrawer.showRanges = true;
 			}
 			if (isReconnectLoad)
-				ref.updater.send("<reconnect");
+				ref.updater.send(Coms.RECONNECT+"");
 			state = State.WAIT;
 			break;
 		case WAIT:
-			ref.updater.send("<ready " + ClientHandler.identification);
+			ref.updater.send(Coms.READY+" " + ClientHandler.identification);
 			break;
 		case END:
 			state = State.NEWGAME;

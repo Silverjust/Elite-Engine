@@ -14,7 +14,7 @@ public class HUD {
 	static PImage keritImg, paxImg, arcImg, prunImg;
 	static PImage overlay;
 	public static int height = 200;
-	public static ActivesGrid activesGrid;
+	public static ActivesGridHandler activesGrid;
 
 	public static AudioPlayer sound;
 
@@ -41,7 +41,7 @@ public class HUD {
 		SelectionDisplay.setup();
 		Minimap.setup();
 		GroupHandler.setup();
-		activesGrid = new ActivesGrid();
+		activesGrid = new ActivesGridHandler();
 		boolean b = true;
 		if (b) {
 			sound.play();
