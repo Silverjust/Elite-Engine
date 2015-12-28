@@ -53,6 +53,7 @@ public class AhnenInfo extends NationInfo {
 		unitActives.addActive(2, 2, Witcher.BurstActive.class);
 
 		ActivesGrid buildingActives = grid.createTab(2, 1, Commander.class, handler, ActivesGrid.BUILDINGS);
+		//TODO first use doesnt work
 		buildingActives.addBuildActive(1, 1, Commander.class, AhnenKaserne.class);
 		buildingActives.addActive(2, 1, BuildMineActive.class, Commander.class, getKeritMine());
 		buildingActives.addBuildActive(3, 1, Commander.class, AhnenTower.class);

@@ -10,6 +10,8 @@ import entity.TrainActive;
 import entity.Unit;
 import entity.UpgradeActive;
 import main.appdata.SettingHandler;
+import shared.Helper;
+import shared.ref;
 import entity.GridActive;
 
 public class ActivesGrid {
@@ -20,8 +22,8 @@ public class ActivesGrid {
 	public static final String TRAINING = "training";
 	public static final String NORMAL = "back to normal";
 	private Active[][] baseActivesGrid;
+	private char[][] shortcuts;// TODO load shortcuts
 	private String descr = "";
-	
 
 	/** only use when individual grid */
 	public ActivesGrid(ActivesGridHandler handler, String description) {
@@ -42,6 +44,34 @@ public class ActivesGrid {
 		return baseActivesGrid[x][y];
 	}
 
+	/**
+	 * returns the most obvious grid<p> if grid only contains one visible
+	 * gridactive it returns the grid of the active
+	 */
+	public ActivesGrid getObviousGrid() {
+		int n;
+		Active ability;
+		ActivesGrid grid = this;
+		while (true) {
+			n = 0;
+			ability = null;
+			for (int x = 0; x < gridWidth; x++) {
+				for (int y = 0; y < gridHeight; y++) {
+					if (grid.get(x, y) != null
+							&& Helper.listContainsInstanceOf(grid.get(x, y).clazz, ref.updater.selected)) {
+						n++;
+						ability = grid.get(x, y);
+						if (n > 1 || !(ability instanceof GridActive))
+							return grid;
+					}
+				}
+			}
+			if (ability == null)
+				return grid;
+			grid = ((GridActive) ability).getGrid();
+		}
+	}
+
 	public void disposeActive(int x, int y) {
 		if (baseActivesGrid[x][y] != null) {
 			baseActivesGrid[x][y].button.dispose();
@@ -50,7 +80,8 @@ public class ActivesGrid {
 	}
 
 	/**
-	 * @param grid active displays this grid
+	 * @param grid
+	 *            active displays this grid
 	 */
 	public void addGridActive(int x, int y, Class<?> displayer, ActivesGrid grid, ActivesGridHandler handler) {
 		x--;

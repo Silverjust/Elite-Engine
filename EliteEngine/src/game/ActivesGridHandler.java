@@ -1,12 +1,11 @@
 package game;
 
 import main.preGame.MainPreGame.GameSettings;
-
 import java.util.ArrayList;
 
 import entity.Active;
 import entity.BuildWallActive;
-import entity.GridActive;
+import entity.Entity;
 import entity.neutral.*;
 import shared.Helper;
 import shared.Nation;
@@ -65,16 +64,18 @@ public class ActivesGridHandler {
 	public void setupSandbox() {
 		System.out.println("setupSandbox");
 		SandboxBuilding.commandRange = Integer.MAX_VALUE;
-		baseGrid.addActive(1, 1, SandboxBuilding.DeleteActive.class);
-		baseGrid.addBuildActive(2, 1, SandboxBuilding.class, ref.player.getNation().getNationInfo().getMainBuilding());
-		baseGrid.addBuildActive(1, 2, SandboxBuilding.class, Kerit.class);
-		baseGrid.addBuildActive(2, 2, SandboxBuilding.class, Pax.class);
-		baseGrid.addBuildActive(1, 3, SandboxBuilding.class, Arcanum.class);
-		baseGrid.addBuildActive(2, 3, SandboxBuilding.class, Prunam.class);
-		baseGrid.addBuildActive(3, 2, SandboxBuilding.class, Rock.class);
-		baseGrid.addActive(3, 3, BuildWallActive.class, SandboxBuilding.class, Rock.class);
-		baseGrid.addActive(3, 1, SandboxBuilding.ChangeSide.class);
-		baseGrid.addActive(4, 1, SandboxBuilding.AddPlayer.class);
+		ActivesGrid unitActives = baseGrid.createTab(7, 1, Entity.class, this, "sandbox");
+		unitActives.addActive(1, 1, SandboxBuilding.DeleteActive.class);
+		unitActives.addBuildActive(2, 1, SandboxBuilding.class,
+				ref.player.getNation().getNationInfo().getMainBuilding());
+		unitActives.addBuildActive(1, 2, SandboxBuilding.class, Kerit.class);
+		unitActives.addBuildActive(2, 2, SandboxBuilding.class, Pax.class);
+		unitActives.addBuildActive(1, 3, SandboxBuilding.class, Arcanum.class);
+		unitActives.addBuildActive(2, 3, SandboxBuilding.class, Prunam.class);
+		unitActives.addBuildActive(3, 2, SandboxBuilding.class, Rock.class);
+		unitActives.addActive(3, 3, BuildWallActive.class, SandboxBuilding.class, Rock.class);
+		unitActives.addActive(3, 1, SandboxBuilding.ChangeSide.class);
+		unitActives.addActive(4, 1, SandboxBuilding.AddPlayer.class);
 	}
 
 	public void removeActives() {
@@ -90,32 +91,7 @@ public class ActivesGridHandler {
 	}
 
 	public void selectionChange() {
-		int n = 0;
-		Active ability = null;
-		System.out.println("ActivesGridHandler.selectionChange()start " + displayGrid.getType());
-		boolean b = true;
-		clearlySearch: {
-			while (b) {
-				n = 0;
-				ability = null;
-				for (int x = 0; x < gridWidth; x++) {
-					for (int y = 0; y < gridHeight; y++) {
-						if (displayGrid.get(x, y) != null
-								&& Helper.listContainsInstanceOf(displayGrid.get(x, y).clazz, ref.updater.selected)) {
-							n++;
-							ability = displayGrid.get(x, y);
-							System.out.println("ActivesGridHandler.selectionChange()" + n + " " + displayGrid.getType()
-									+ " " + (ability instanceof GridActive));
-							if (n > 1 || !(ability instanceof GridActive))
-								break clearlySearch;
-						}
-					}
-				}
-				if (ability == null)
-					break clearlySearch;
-				displayGrid = ((GridActive) ability).getGrid();
-			}
-		}
+		displayGrid = displayGrid.getObviousGrid();
 		System.out.println("ActivesGridHandler.selectionChange() " + displayGrid.getType());
 		for (int x = 0; x < gridWidth; x++) {
 			for (int y = 0; y < gridHeight; y++) {
