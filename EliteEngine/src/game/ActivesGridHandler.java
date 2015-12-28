@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 import entity.Active;
 import entity.BuildWallActive;
+import entity.GridActive;
 import entity.neutral.*;
-import game.ActivesGrid.GridType;
 import shared.Helper;
 import shared.Nation;
 import shared.ref;
@@ -29,7 +29,7 @@ public class ActivesGridHandler {
 	public ActivesGridHandler() {
 		Active.x = x;
 		Active.y = y;
-		displayGrid = baseGrid = new ActivesGrid(this,GridType.NORMAL);
+		displayGrid = baseGrid = new ActivesGrid(this, ActivesGrid.NORMAL);
 
 		gridList.add(displayGrid);
 		setup(ref.player.getNation());
@@ -90,12 +90,40 @@ public class ActivesGridHandler {
 	}
 
 	public void selectionChange() {
+		int n = 0;
+		Active ability = null;
+		System.out.println("ActivesGridHandler.selectionChange()start " + displayGrid.getType());
+		boolean b = true;
+		clearlySearch: {
+			while (b) {
+				n = 0;
+				ability = null;
+				for (int x = 0; x < gridWidth; x++) {
+					for (int y = 0; y < gridHeight; y++) {
+						if (displayGrid.get(x, y) != null
+								&& Helper.listContainsInstanceOf(displayGrid.get(x, y).clazz, ref.updater.selected)) {
+							n++;
+							ability = displayGrid.get(x, y);
+							System.out.println("ActivesGridHandler.selectionChange()" + n + " " + displayGrid.getType()
+									+ " " + (ability instanceof GridActive));
+							if (n > 1 || !(ability instanceof GridActive))
+								break clearlySearch;
+						}
+					}
+				}
+				if (ability == null)
+					break clearlySearch;
+				displayGrid = ((GridActive) ability).getGrid();
+			}
+		}
+		System.out.println("ActivesGridHandler.selectionChange() " + displayGrid.getType());
 		for (int x = 0; x < gridWidth; x++) {
 			for (int y = 0; y < gridHeight; y++) {
 				if (displayGrid.get(x, y) != null)
 					if (Helper.listContainsInstanceOf(displayGrid.get(x, y).clazz, ref.updater.selected)) {
 						displayGrid.get(x, y).setVisible(true);
 						displayGrid.get(x, y).selectionUpdate();
+
 					} else
 						displayGrid.get(x, y).setVisible(false);
 				for (ActivesGrid activesGrid : gridList) {
@@ -104,7 +132,12 @@ public class ActivesGridHandler {
 				}
 
 			}
+
 		}
 
+	}
+
+	public void resetGrid() {
+		displayGrid = baseGrid;
 	}
 }

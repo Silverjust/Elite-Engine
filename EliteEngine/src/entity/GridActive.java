@@ -4,6 +4,7 @@ import game.ActivesGrid;
 import game.ActivesGridHandler;
 
 public class GridActive extends Active {
+	/** aktive fähigkeit die grid aufruft */
 	Class<? extends Building> building;
 	String descr = " ", stats = " ";
 	private ActivesGrid grid;
@@ -17,18 +18,23 @@ public class GridActive extends Active {
 	}
 
 	@Override
-	public void onActivation() {
-		handler.displayGrid = grid;
+	protected void onActivation() {
+		handler.displayGrid = getGrid();
 		handler.selectionChange();
 	}
 
 	@Override
 	public String getDesription() {
-		return grid.getDesription();
+		return getGrid().getDesription();
 	}
 
 	@Override
 	public String getStatistics() {
 		return "";
 	}
+
+	public ActivesGrid getGrid() {
+		return grid;
+	}
+
 }

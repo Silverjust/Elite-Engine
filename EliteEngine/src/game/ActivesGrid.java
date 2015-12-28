@@ -15,11 +15,15 @@ import entity.GridActive;
 public class ActivesGrid {
 	static final int gridHeight = 3;
 	static final int gridWidth = 7;
+	public static final String UNITS = "unit abilities";
+	public static final String BUILDINGS = "construction";
+	public static final String TRAINING = "training";
+	public static final String NORMAL = "back to normal";
 	private Active[][] baseActivesGrid;
 	private String descr = "";
+	
 
 	/** only use when individual grid */
-	@Deprecated
 	public ActivesGrid(ActivesGridHandler handler, String description) {
 		baseActivesGrid = new Active[gridWidth][gridHeight];
 		handler.gridList.add(this);
@@ -30,17 +34,8 @@ public class ActivesGrid {
 		this(handler, "");
 	}
 
-	public ActivesGrid(ActivesGridHandler handler, GridType type) {
-		this(handler, type.descr);
-	}
-
-	public enum GridType {
-		NORMAL("back"), UNITS("to unit abilities"), BUILDINGS("to construction"), TRAINING("to training");
-		final String descr;
-
-		GridType(String s) {
-			descr = s;
-		}
+	public String getType() {
+		return descr;
 	}
 
 	public Active get(int x, int y) {
@@ -75,7 +70,6 @@ public class ActivesGrid {
 			Constructor<?> ctor = a.getConstructor(int.class, int.class, char.class);
 			baseActivesGrid[x][y] = (Active) ctor.newInstance(//
 					new Object[] { x, y, SettingHandler.setting.unitsShortcuts[y][x] });
-			System.out.println("ActivesGrid.addActive()" + baseActivesGrid[x][y].getDesription());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -137,7 +131,7 @@ public class ActivesGrid {
 
 	/**
 	 * creates ActiveGrid and GridActive to new grid and a back-GridActive at
-	 * 1,3
+	 * 5,3
 	 * 
 	 * @param displayer
 	 *            TODO
@@ -145,18 +139,7 @@ public class ActivesGrid {
 	public ActivesGrid createTab(int x, int y, Class<?> displayer, ActivesGridHandler handler, String descr) {
 		ActivesGrid newGrid = new ActivesGrid(handler, descr);
 		this.addGridActive(x, y, displayer, newGrid, handler);
-		newGrid.addGridActive(1, 3, Entity.class, this, handler);
+		newGrid.addGridActive(5, 3, Entity.class, this, handler);
 		return newGrid;
-	}
-
-	/**
-	 * creates ActiveGrid and GridActive to new grid and a back-GridActive at
-	 * 1,3
-	 * 
-	 * @param displayer
-	 *            TODO
-	 */
-	public ActivesGrid createTab(int x, int y, Class<?> displayer, ActivesGridHandler handler, GridType type) {
-		return createTab(x, y, displayer, handler, type.descr);
 	}
 }

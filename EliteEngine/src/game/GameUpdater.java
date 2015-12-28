@@ -19,7 +19,7 @@ public class GameUpdater extends Updater {
 	// FIXME einheiten vibrieren
 
 	public Input input;
-	
+
 	public GameUpdater() {
 		neutral = Player.createNeutralPlayer();
 		input = new Input();
@@ -65,8 +65,10 @@ public class GameUpdater extends Updater {
 					for (Group g : GroupHandler.groups)
 						g.remove(entity);
 					namedEntities.remove(n);
-					if (entity.isSelected)
+					if (entity.isSelected) {
 						selectionChanged = true;
+						keepGrid = true;
+					}
 					selected.remove(entity);
 					entities.remove(entity);
 					toRemove.remove(i);
@@ -94,8 +96,11 @@ public class GameUpdater extends Updater {
 				e.updateMovement();
 			}
 			if (selectionChanged) {
+				if (!keepGrid)
+					HUD.activesGrid.resetGrid();
 				HUD.activesGrid.selectionChange();
 				selectionChanged = false;
+				keepGrid = false;
 			}
 		}
 

@@ -32,6 +32,7 @@ public abstract class Lab extends Unit implements Equiping {
 	@Override
 	public void onSpawn(boolean isServer) {
 		ref.updater.selectionChanged = true;
+		ref.updater.keepGrid = true;
 	}
 
 	@Override

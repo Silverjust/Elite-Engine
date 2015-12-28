@@ -81,7 +81,7 @@ public abstract class Active implements Informing {
 		}
 	}
 
-	public abstract void onActivation();
+	protected abstract void onActivation();
 
 	public void setVisible(boolean b) {
 		button.setVisible(b);

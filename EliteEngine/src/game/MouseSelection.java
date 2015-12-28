@@ -18,8 +18,7 @@ public class MouseSelection {
 	public void disp() {
 		ref.app.stroke(ref.player.color);
 		ref.app.fill(0, 0);
-		ref.app.rect(x1, y1 / 2, Helper.gridToX(ref.app.mouseX) - x1,
-				Helper.gridToY(ref.app.mouseY) / 2 - y1 / 2);
+		ref.app.rect(x1, y1 / 2, Helper.gridToX(ref.app.mouseX) - x1, Helper.gridToY(ref.app.mouseY) / 2 - y1 / 2);
 		ref.app.stroke(0);
 	}
 
@@ -33,17 +32,18 @@ public class MouseSelection {
 			}
 			ref.updater.selected.clear();
 			ref.updater.selectionChanged = true;
+		} else {
+			ref.updater.selectionChanged = true;
+			ref.updater.keepGrid = true;
 		}
 
 		for (Entity e : ref.updater.entities)
 			if (GameDrawer.godhand || e.isAllyTo(ref.player)) {
-				if (shared.Helper.isBetween(e.x, e.y - e.flyHeight(), x1, y1,
-						x2, y2))
+				if (shared.Helper.isBetween(e.x, e.y - e.flyHeight(), x1, y1, x2, y2))
 					e.select();
 				if (PApplet.dist(x1, y1, e.x, e.y - e.flyHeight()) <= e.radius) {
 					e.select();
-					if (e.player.getNation() != HUD.activesGrid.nation
-							&& e.player.getNation() != Nation.NEUTRAL)
+					if (e.player.getNation() != HUD.activesGrid.nation && e.player.getNation() != Nation.NEUTRAL)
 						// for commanding other nations
 						HUD.activesGrid.setup(e.player.getNation());
 				}

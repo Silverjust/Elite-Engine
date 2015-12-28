@@ -74,6 +74,7 @@ public class AhnenKaserne extends Building implements Trainer, Commander {
 			level = (byte) Integer.parseInt(c[3]);
 			stats = "level " + (level + 1);
 			ref.updater.selectionChanged = true;
+			ref.updater.keepGrid = true;
 			setAnimation(build);
 		} else if (c[2].equals("train")) {
 			boolean b = false;

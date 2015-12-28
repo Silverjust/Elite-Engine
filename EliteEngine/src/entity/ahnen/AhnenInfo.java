@@ -3,13 +3,13 @@ package entity.ahnen;
 import entity.Building;
 import entity.Commander;
 import entity.MainBuilding;
+import entity.Trainer;
 import entity.Unit;
 import entity.neutral.ArcanumMine;
 import entity.neutral.KeritMine;
 import entity.neutral.PaxDrillTower;
 import entity.neutral.PrunamHarvester;
 import game.ActivesGrid;
-import game.ActivesGrid.GridType;
 import game.ActivesGridHandler;
 import game.aim.MineAim.BuildMineActive;
 import shared.NationInfo;
@@ -42,25 +42,23 @@ public class AhnenInfo extends NationInfo {
 	}
 
 	public void setupActives(ActivesGrid grid, ActivesGridHandler handler) {
-
-		ActivesGrid unitActives = grid.createTab(1, 1, Unit.class, handler, GridType.UNITS);
+		ActivesGrid unitActives = grid.createTab(1, 1, Unit.class, handler, ActivesGrid.UNITS);
 		unitActives.addActive(1, 1, Unit.AttackActive.class);
 		unitActives.addActive(2, 1, Unit.WalkActive.class);
 		unitActives.addActive(3, 1, Unit.StopActive.class);
-		
-		unitActives.addActive(2, 3, Berserker.LeuchteActive.class, Berserker.class, Leuchte.class);
-		unitActives.addActive(3, 3, Witcher.UpgradeActive.class);
-		unitActives.addActive(4, 3, Destructor.UpgradeActive.class);
+		unitActives.addActive(1, 3, Berserker.LeuchteActive.class, Berserker.class, Leuchte.class);
+		unitActives.addActive(2, 3, Witcher.UpgradeActive.class);
+		unitActives.addActive(3, 3, Destructor.UpgradeActive.class);
 		unitActives.addActive(1, 2, Angel.CloakActive.class);
 		unitActives.addActive(2, 2, Witcher.BurstActive.class);
 
-		ActivesGrid buildingActives = grid.createTab(2, 1, Commander.class, handler, GridType.BUILDINGS);
-		buildingActives.addBuildActive(4, 3, Commander.class, AhnenKaserne.class);
-		buildingActives.addBuildActive(5, 1, Commander.class, AhnenTower.class);
-		buildingActives.addActive(5, 3, BuildMineActive.class, Commander.class, getKeritMine());
-		buildingActives.addActive(5, 2, AhnenTower.SelectActive.class);
+		ActivesGrid buildingActives = grid.createTab(2, 1, Commander.class, handler, ActivesGrid.BUILDINGS);
+		buildingActives.addBuildActive(1, 1, Commander.class, AhnenKaserne.class);
+		buildingActives.addActive(2, 1, BuildMineActive.class, Commander.class, getKeritMine());
+		buildingActives.addBuildActive(3, 1, Commander.class, AhnenTower.class);
+		buildingActives.addActive(3, 2, AhnenTower.SelectActive.class);
 
-		ActivesGrid trainActives = grid.createTab(3, 1, AhnenKaserne.class, handler, GridType.TRAINING);
+		ActivesGrid trainActives = grid.createTab(3, 1, Trainer.class, handler, ActivesGrid.TRAINING);
 		trainActives.addActive(4, 2, AhnenKaserne.LevelActive.class);
 		trainActives.addActive(1, 1, AhnenKaserne.AhnenTrainActive.class, AhnenKaserne.class, Berserker.class);
 		trainActives.addActive(2, 1, AhnenKaserne.AhnenTrainActive.class, AhnenKaserne.class, Witcher.class);

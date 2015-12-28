@@ -26,6 +26,7 @@ public abstract class Updater {
 
 	public GameState gameState = GameState.PLAY;
 	public boolean selectionChanged;
+	public boolean keepGrid;
 
 	static public Timer resfreeze;
 

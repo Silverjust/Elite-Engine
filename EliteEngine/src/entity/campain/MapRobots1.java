@@ -99,6 +99,8 @@ public class MapRobots1 extends CampainMapCode {
 			grid.addBuildActive(4, 3, Commander.class, RobotsKaserne.class);
 			grid.addTrainActive(1, 3, RobotsKaserne.class, M1N1B0T.class);
 			ref.updater.selectionChanged = true;
+			ref.updater.keepGrid = true;
+
 		}
 		nextIf(ref.player.kerit >= 400);
 		if (isNext()) {
