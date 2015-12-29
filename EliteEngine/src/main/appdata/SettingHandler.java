@@ -16,8 +16,8 @@ public class SettingHandler {
 
 	private static void loadSettings() {
 		Setting oldSettings = new Setting();
-		oldSettings.fromJSON(appdataInfos.path + "settings.json");
 		try {
+			oldSettings.fromJSON(appdataInfos.path + "settings.json");
 			setting = oldSettings;
 		} catch (Exception e) {
 			e.printStackTrace();

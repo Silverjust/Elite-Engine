@@ -3,11 +3,12 @@ package shared;
 import java.util.Set;
 
 import main.appdata.ProfileHandler;
+import processing.core.PApplet;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 
 public abstract class VersionCombiner {
-	public final static String version = "1.5.4";
+	public final static String version = "1.5.4.1";
 
 	public static boolean isNewerVersion(String s1, String s2) {
 		String[] sa1 = s1.split("\\.");
@@ -23,6 +24,13 @@ public abstract class VersionCombiner {
 		return false;
 	}
 
+	public static void testVersion() {
+		String chanegelogVersion = PApplet.splitTokens(ref.app.loadStrings("data/changelog.txt")[0], "-")[0];
+		if (!chanegelogVersion.equals(version))
+			System.err.println("changelog has different version than VC " + chanegelogVersion + " " + version+" (VersionCombiner.java:10)");
+	}
+
+	// **********************************************************************
 	public static void objToArray(JSONObject mapData, String mapName) {
 		try {
 			mapData.getJSONArray("entities");
@@ -32,15 +40,14 @@ public abstract class VersionCombiner {
 			Set<String> entitySet = mapData.getJSONObject("entities").keys();
 			JSONArray entitys = new JSONArray();
 			for (String string : entitySet) {
-				JSONObject entity = mapData.getJSONObject("entities")
-						.getJSONObject(string);
+				JSONObject entity = mapData.getJSONObject("entities").getJSONObject(string);
 				entitys.append(entity);
 			}
 			mapData.remove("entities");
 			mapData.setJSONArray("entities", entitys);
 			if (ProfileHandler.isDeveloper())
-				ref.app.saveJSONObject(mapData, System.getProperty("user.home")
-						.replace("\\", "/") + "/Desktop/" + mapName + ".json");
+				ref.app.saveJSONObject(mapData,
+						System.getProperty("user.home").replace("\\", "/") + "/Desktop/" + mapName + ".json");
 		}
 	}
 
@@ -60,6 +67,13 @@ public abstract class VersionCombiner {
 				oldProfile.setString("version", version);
 			}
 
+		}
+	}
+
+	public static void setToBaseShortcuts(JSONObject o) {
+		if (o.hasKey("unitsShortcuts")) {
+			o.setJSONArray("baseShortcuts", o.getJSONArray("unitsShortcuts"));
+			o.remove("unitsShortcuts");
 		}
 	}
 }

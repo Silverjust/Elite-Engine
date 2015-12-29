@@ -1,5 +1,6 @@
 package entity.campain;
 
+import entity.Active;
 import entity.Building;
 import entity.Commander;
 import entity.Entity;
@@ -39,17 +40,22 @@ public class MapRobots1 extends CampainMapCode {
 	String name = "AWI.ai";
 	private Entity kerit1;
 	private Entity kerit2;
+	private ActivesGrid grid;
+	private Active mineActive;
+	private Active depotActive;
+	private Active kaserneActive;
+	private Active minibotActive;
 
 	@Override
 	public void onGameStart() {
 		mb = ref.player.mainBuilding;
 		HUD.activesGrid.removeActives();
-		ActivesGrid grid = HUD.activesGrid.baseGrid;
+		grid = HUD.activesGrid.baseGrid;
 		grid.addActive(1, 1, Unit.AttackActive.class);
 		grid.addActive(2, 1, Unit.WalkActive.class);
 		grid.addActive(3, 1, Unit.StopActive.class);
-		grid.addActive(5, 3, BuildMineActive.class, Commander.class, new RobotsInfo().getKeritMine());
-		grid.addActive(1, 1, Building.SetTargetActive.class);
+		mineActive = grid.addActive(5, 3, BuildMineActive.class, Commander.class, new RobotsInfo().getKeritMine());
+		grid.addActive(1, 2, Building.SetTargetActive.class);
 		ref.updater.selectionChanged = true;
 
 		ref.updater.send("<spawn Tutorial " + ref.player.getUser().ip + " 0 0 " + mb.x + " " + mb.y);
@@ -75,7 +81,7 @@ public class MapRobots1 extends CampainMapCode {
 		nextIf(ref.player.mainBuilding.isSelected);
 		if (isNext()) {
 			HUD.chat.println(name, "have to collect kerit");
-			HUD.chat.println(name, "should " + getActiveBindingText(5, 3) + " to choose the Mine");
+			HUD.chat.println(name, "should " + getActiveBindingText(mineActive) + " to choose the Mine");
 		}
 		nextIf(AimHandler.getAim() instanceof MineAim);
 		if (isNext()) {
@@ -94,17 +100,16 @@ public class MapRobots1 extends CampainMapCode {
 		}
 		nextIf(mb.progress != null && mb.progress.isNotOnCooldown());
 		if (isNext()) {
-			ActivesGrid grid = HUD.activesGrid.baseGrid;
-			grid.addActive(4, 2, M1N1B0T.BuildDepotActive.class);
-			grid.addBuildActive(4, 3, Commander.class, RobotsKaserne.class);
-			grid.addTrainActive(1, 3, RobotsKaserne.class, M1N1B0T.class);
+			depotActive=grid.addActive(4, 2, M1N1B0T.BuildDepotActive.class);
+			kaserneActive=grid.addBuildActive(4, 3, Commander.class, RobotsKaserne.class);
+			minibotActive=grid.addTrainActive(1, 3, RobotsKaserne.class, M1N1B0T.class);
 			ref.updater.selectionChanged = true;
 			ref.updater.keepGrid = true;
 
 		}
 		nextIf(ref.player.kerit >= 400);
 		if (isNext()) {
-			HUD.chat.println(name, "should " + getActiveBindingText(4, 3) + " to choose the new Robotfactory");
+			HUD.chat.println(name, "should " + getActiveBindingText(kaserneActive) + " to choose the new Robotfactory");
 		}
 		nextIf(AimHandler.getAim() instanceof BuildAim
 				&& ((BuildAim) AimHandler.getAim()).getToBuild().equals(RobotsKaserne.class));
@@ -115,7 +120,7 @@ public class MapRobots1 extends CampainMapCode {
 		}
 		nextIf(Helper.listContainsInstancesOf(RobotsKaserne.class, ref.updater.entities) >= 1);
 		if (isNext()) {
-			HUD.chat.println(name, "should " + getActiveBindingText(1, 3) + " to produce the new robot:M1N1B0T");
+			HUD.chat.println(name, "should " + getActiveBindingText(minibotActive) + " to produce the new robot:M1N1B0T");
 		}
 		nextIf(Helper.listContainsInstancesOf(M1N1B0T.class, ref.updater.entities) >= 1);
 		if (isNext()) {
@@ -131,7 +136,7 @@ public class MapRobots1 extends CampainMapCode {
 			nextIf(b);
 		}
 		if (isNext()) {
-			HUD.chat.println(name, "should " + getActiveBindingText(4, 2) + " to create a depot");
+			HUD.chat.println(name, "should " + getActiveBindingText(depotActive) + " to create a depot");
 		}
 		{
 			boolean b = false;
@@ -141,7 +146,7 @@ public class MapRobots1 extends CampainMapCode {
 			nextIf(b);
 		}
 		if (isNext()) {
-			HUD.chat.println(name, "should " + getActiveBindingText(5, 3) + " to choose the Mine");
+			HUD.chat.println(name, "should " + getActiveBindingText(mineActive) + " to choose the Mine");
 		}
 		nextIf(AimHandler.getAim() instanceof MineAim);
 		if (isNext()) {

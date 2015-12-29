@@ -96,7 +96,7 @@ public class Input {
 			}
 			for (int x = 0; x < 7; x++) {
 				for (int y = 0; y < 3; y++) {
-					if (app.key == SettingHandler.setting.unitsShortcuts[y][x]) {
+					if (app.key == SettingHandler.setting.baseShortcuts[y][x]) {
 						HUD.activesGrid.fire(x, y);
 					}
 				}

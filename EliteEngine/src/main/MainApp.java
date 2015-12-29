@@ -17,6 +17,7 @@ import shared.Client;
 import shared.Coms;
 import shared.Menu;
 import shared.Mode;
+import shared.VersionCombiner;
 import shared.ref;
 
 @SuppressWarnings("serial")
@@ -63,6 +64,7 @@ public class MainApp extends PApplet {
 
 		SettingHandler.setup();
 		startPage = new StartPage();
+		VersionCombiner.testVersion();
 	}
 
 	public void draw() {
@@ -117,7 +119,7 @@ public class MainApp extends PApplet {
 	public void dispose() {// Player in schlieﬂen
 		try {
 			if (ClientHandler.client != null)
-				ref.updater.send(Coms.PAUSE+" true");
+				ref.updater.send(Coms.PAUSE + " true");
 			if (startPage != null)
 				startPage.dispose();
 			if (ref.preGame != null)

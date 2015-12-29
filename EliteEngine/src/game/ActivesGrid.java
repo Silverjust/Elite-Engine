@@ -15,12 +15,12 @@ import shared.ref;
 import entity.GridActive;
 
 public class ActivesGrid {
-	static final int gridHeight = 3;
-	static final int gridWidth = 7;
-	public static final String UNITS = "unit abilities";
+	public static final int gridHeight = 3;
+	public static final int gridWidth = 7;
+	public static final String UNITS = "unit-abilities";
 	public static final String BUILDINGS = "construction";
 	public static final String TRAINING = "training";
-	public static final String NORMAL = "back to normal";
+	public static final String BASEGRID = "base-grid";
 	private Active[][] baseActivesGrid;
 	private char[][] shortcuts;// TODO load shortcuts
 	private String descr = "";
@@ -30,6 +30,9 @@ public class ActivesGrid {
 		baseActivesGrid = new Active[gridWidth][gridHeight];
 		handler.gridList.add(this);
 		this.descr = description;
+		this.shortcuts = SettingHandler.setting.getShortcut(handler.nation.toString(), descr);
+		if (shortcuts == null){System.out.println("ActivesGrid.ActivesGrid() use base shortcuts");
+			this.shortcuts = SettingHandler.setting.baseShortcuts;}
 	}
 
 	public ActivesGrid(ActivesGridHandler handler) {
@@ -40,13 +43,19 @@ public class ActivesGrid {
 		return descr;
 	}
 
+	public char[][] getShortcuts() {
+		return shortcuts;
+	}
+
 	public Active get(int x, int y) {
 		return baseActivesGrid[x][y];
 	}
 
 	/**
-	 * returns the most obvious grid<p> if grid only contains one visible
-	 * gridactive it returns the grid of the active
+	 * returns the most obvious grid
+	 * <p>
+	 * if grid only contains one visible gridactive it returns the grid of the
+	 * active
 	 */
 	public ActivesGrid getObviousGrid() {
 		int n;
@@ -82,82 +91,92 @@ public class ActivesGrid {
 	/**
 	 * @param grid
 	 *            active displays this grid
+	 * @return
 	 */
-	public void addGridActive(int x, int y, Class<?> displayer, ActivesGrid grid, ActivesGridHandler handler) {
+	public Active addGridActive(int x, int y, Class<?> displayer, ActivesGrid grid, ActivesGridHandler handler) {
 		x--;
 		y--;
 		try {
-			baseActivesGrid[x][y] = new GridActive(x, y, SettingHandler.setting.unitsShortcuts[y][x], displayer, grid,
-					handler);
+			baseActivesGrid[x][y] = new GridActive(x, y, shortcuts[y][x], displayer, grid, handler);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return baseActivesGrid[x][y];
 	}
 
-	public void addActive(int x, int y, Class<? extends Active> a) {
+	public Active addActive(int x, int y, Class<? extends Active> a) {
 		x--;
 		y--;
 		try {
 			Constructor<?> ctor = a.getConstructor(int.class, int.class, char.class);
 			baseActivesGrid[x][y] = (Active) ctor.newInstance(//
-					new Object[] { x, y, SettingHandler.setting.unitsShortcuts[y][x] });
+					new Object[] { x, y, shortcuts[y][x] });
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return baseActivesGrid[x][y];
 	}
 
-	public void addActive(int x, int y, Class<? extends Active> a, Class<?> builder, Class<? extends Entity> building) {
+	public Active addActive(int x, int y, Class<? extends Active> a, Class<?> builder,
+			Class<? extends Entity> building) {
 		x--;
 		y--;
 		try {
 			Constructor<?> ctor = a.getConstructor(int.class, int.class, char.class, Entity.class, Class.class);
 			Entity b = building.getConstructor(String[].class).newInstance(new Object[] { null });
 			baseActivesGrid[x][y] = (Active) ctor.newInstance(//
-					new Object[] { x, y, SettingHandler.setting.unitsShortcuts[y][x], b, builder });
+					new Object[] { x, y, shortcuts[y][x], b, builder });
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return baseActivesGrid[x][y];
 	}
 
-	public void addTrainActive(int x, int y, Class<? extends Entity> trainer, Class<? extends Unit> toTrain) {
+	public Active addTrainActive(int x, int y, Class<? extends Entity> trainer, Class<? extends Unit> toTrain) {
 		x--;
 		y--;
 		try {
 			Unit u = toTrain.getConstructor(String[].class).newInstance(new Object[] { null });
-			baseActivesGrid[x][y] = new TrainActive(x, y, SettingHandler.setting.unitsShortcuts[y][x], u, trainer);
+			baseActivesGrid[x][y] = new TrainActive(x, y, shortcuts[y][x], u, trainer);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return baseActivesGrid[x][y];
+
 	}
 
-	public void addBuildActive(int x, int y, Class<?> builder, Class<? extends Building> building) {
+	public Active addBuildActive(int x, int y, Class<?> builder, Class<? extends Building> building) {
 		x--;
 		y--;
 		try {
 			Building b = building.getConstructor(String[].class).newInstance(new Object[] { null });
-			baseActivesGrid[x][y] = new BuildActive(x, y, SettingHandler.setting.unitsShortcuts[y][x], b, builder);
+			baseActivesGrid[x][y] = new BuildActive(x, y, shortcuts[y][x], b, builder);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return baseActivesGrid[x][y];
+
 	}
 
-	void addUpgradeActive(int x, int y, Class<? extends Entity> builder, Class<? extends Building> newBuilding,
+	public Active addUpgradeActive(int x, int y, Class<? extends Entity> builder, Class<? extends Building> newBuilding,
 			Class<? extends Building> oldBuilding) {
 		x--;
 		y--;
 		try {
 			Building b = newBuilding.getConstructor(String[].class).newInstance(new Object[] { null });
-			baseActivesGrid[x][y] = new UpgradeActive(x, y, SettingHandler.setting.unitsShortcuts[y][x], b, oldBuilding,
-					builder);
+			baseActivesGrid[x][y] = new UpgradeActive(x, y, shortcuts[y][x], b, oldBuilding, builder);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return baseActivesGrid[x][y];
 	}
 
 	public String getDesription() {
-		return descr;
+		if (descr.equals(BASEGRID))
+			return "back to " + descr;
+		return "go to " + descr;
 	}
 
 	/**

@@ -26,10 +26,12 @@ public class ActivesGridHandler {
 	public ActivesGrid displayGrid;
 
 	public ActivesGridHandler() {
+		if (ref.player.getNation() != null) {
+			this.nation = ref.player.getNation();
+		}
 		Active.x = x;
 		Active.y = y;
-		displayGrid = baseGrid = new ActivesGrid(this, ActivesGrid.NORMAL);
-
+		displayGrid = baseGrid = new ActivesGrid(this, ActivesGrid.BASEGRID);
 		gridList.add(displayGrid);
 		setup(ref.player.getNation());
 		selectionChange();

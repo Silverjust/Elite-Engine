@@ -1,11 +1,12 @@
 package entity.campain;
 
+import entity.Active;
 import entity.Entity;
 import entity.MainBuilding;
+import game.ActivesGrid;
 import game.HUD;
 import game.Map;
 import game.MapCode;
-import main.appdata.SettingHandler;
 
 public class CampainMapCode extends MapCode {
 
@@ -52,8 +53,22 @@ public class CampainMapCode extends MapCode {
 			tutorial.sendAnimation("walk " + x + " " + y);
 	}
 
-	protected String getActiveBindingText(int i, int j) {
-		char key = SettingHandler.setting.buildingsShortcuts[j - 1][i - 1];
+	@Deprecated
+	protected String getActiveBindingText(ActivesGrid grid, int i, int j) {
+		char key = grid.getShortcuts()[j - 1][i - 1];
+		return "{press " + key + " , click the " + key + "-button}";
+	}
+
+	protected String getActiveBindingText(Active a) {
+		char key = '?';
+		for (ActivesGrid grid : HUD.activesGrid.gridList) {
+			for (int x = 0; x < ActivesGrid.gridWidth; x++) {
+				for (int y = 0; y < ActivesGrid.gridHeight; y++) {
+					if (a == (grid.get(x, y)))
+						key = grid.getShortcuts()[y][x];
+				}
+			}
+		}
 		return "{press " + key + " , click the " + key + "-button}";
 	}
 

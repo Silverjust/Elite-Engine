@@ -5,6 +5,7 @@ import java.awt.im.InputContext;
 import processing.core.PConstants;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
+import shared.VersionCombiner;
 import shared.ref;
 
 public class Setting {
@@ -16,10 +17,9 @@ public class Setting {
 	public int shift;
 	public int changeAbilityMode;
 	public int togglePause;
-	public char[][] unitsShortcuts = new char[3][7];
-	@Deprecated
-	public char[][] buildingsShortcuts = new char[3][7];
+	public char[][] baseShortcuts = new char[3][7];
 	public char[] hotKeys = new char[10];
+	private JSONObject shortcutsJson;
 
 	public void fromJSON(String s) {
 		JSONObject o = null;
@@ -37,20 +37,12 @@ public class Setting {
 		changeAbilityMode = o.getInt("changeAbilityMode");
 		togglePause = o.getInt("togglePause");
 		{
-			JSONArray jarr = o.getJSONArray("unitsShortcuts");
+			VersionCombiner.setToBaseShortcuts(o);
+			JSONArray jarr = o.getJSONArray("baseShortcuts");
 			for (int i = 0; i < jarr.size(); i++) {
 				JSONArray jarrIn = jarr.getJSONArray(i);
 				for (int j = 0; j < jarrIn.size(); j++) {
-					unitsShortcuts[i][j] = jarrIn.getString(j).charAt(0);
-				}
-			}
-		}
-		{
-			JSONArray jarr = o.getJSONArray("buildingsShortcuts");
-			for (int i = 0; i < jarr.size(); i++) {
-				JSONArray jarrIn = jarr.getJSONArray(i);
-				for (int j = 0; j < jarrIn.size(); j++) {
-					buildingsShortcuts[i][j] = jarrIn.getString(j).charAt(0);
+					baseShortcuts[i][j] = jarrIn.getString(j).charAt(0);
 				}
 			}
 		}
@@ -91,13 +83,27 @@ public class Setting {
 					+ "[ \"a\", \"s\", \"d\", \"f\", \"g\", \"h\", \"j\" ], "
 					+ "[ \"y\", \"x\", \"c\", \"v\", \"b\", \"n\", \"m\" ] ]";
 
-		if (!o.hasKey("unitsShortcuts"))
-			o.setJSONArray("unitsShortcuts", JSONArray.parse(standardGrid));
-		if (!o.hasKey("buildingsShortcuts"))
-			o.setJSONArray("buildingsShortcuts", JSONArray.parse(standardGrid));
+		if (!o.hasKey("baseShortcuts"))
+			o.setJSONArray("baseShortcuts", JSONArray.parse(standardGrid));
 		if (!o.hasKey("hotKeys"))
 			o.setJSONArray("hotKeys",
 					JSONArray.parse("[ \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"0\" ]"));
+	}
+
+	public char[][] getShortcut(String nation, String name) {
+		char[][] shortcuts = new char[3][7];
+		try {
+			JSONArray jarr = shortcutsJson.getJSONObject(nation).getJSONArray(name);
+			for (int i = 0; i < jarr.size(); i++) {
+				JSONArray jarrIn = jarr.getJSONArray(i);
+				for (int j = 0; j < jarrIn.size(); j++)
+					shortcuts[i][j] = jarrIn.getString(j).charAt(0);
+
+			}
+		} catch (Exception e) {
+			return null;
+		}
+		return shortcuts;
 	}
 
 	public static String getKeyName(int i) {
