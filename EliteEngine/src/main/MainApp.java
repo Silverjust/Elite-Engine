@@ -64,7 +64,7 @@ public class MainApp extends PApplet {
 
 		SettingHandler.setup();
 		startPage = new StartPage();
-		VersionCombiner.testVersion();
+		VersionCombiner.versionControle();
 	}
 
 	public void draw() {

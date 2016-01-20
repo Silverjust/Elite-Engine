@@ -8,7 +8,7 @@ import processing.data.JSONArray;
 import processing.data.JSONObject;
 
 public abstract class VersionCombiner {
-	public final static String version = "1.5.4.1";
+	public final static String version = "1.5.4";
 
 	public static boolean isNewerVersion(String s1, String s2) {
 		String[] sa1 = s1.split("\\.");
@@ -24,10 +24,11 @@ public abstract class VersionCombiner {
 		return false;
 	}
 
-	public static void testVersion() {
+	public static void versionControle() {
 		String chanegelogVersion = PApplet.splitTokens(ref.app.loadStrings("data/changelog.txt")[0], "-")[0];
 		if (!chanegelogVersion.equals(version))
-			System.err.println("changelog has different version than VC " + chanegelogVersion + " " + version+" (VersionCombiner.java:10)");
+			System.err.println("changelog has different version than VC " + chanegelogVersion + " " + version
+					+ " (VersionCombiner.java:11)");
 	}
 
 	// **********************************************************************

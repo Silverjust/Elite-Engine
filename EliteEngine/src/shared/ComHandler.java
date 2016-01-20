@@ -124,13 +124,13 @@ public class ComHandler implements Coms {
 						((MainApp) ref.app).mode = Mode.PREGAME;
 					}
 					System.out.println("identifying " + ref.preGame.getUser("").name);
-					ClientHandler
-							.send("<identifying " + ClientHandler.identification + S + ref.preGame.getUser("").name);
+					ClientHandler.send(IDENTIFYING + " " + ClientHandler.identification + S
+							+ ref.preGame.getUser("").name + S + VersionCombiner.version);
 					if (ref.preGame.getUser("").nation != null)
-						ClientHandler.send("<setNation " + ClientHandler.identification + S
+						ClientHandler.send(SET_NATION + S + ClientHandler.identification + S
 								+ ref.preGame.getUser("").nation.toString());
 					if (ref.preGame.map != null)
-						ClientHandler.send("<setMap " + ClientHandler.identification + S + ref.preGame.map);
+						ClientHandler.send(SET_MAP + S + ClientHandler.identification + S + ref.preGame.map);
 					// TODO send color
 					// nur an clienthandler
 
@@ -138,6 +138,12 @@ public class ComHandler implements Coms {
 				break;
 			case IDENTIFYING:
 				ref.preGame.addPlayer(c[1], c[2]);
+				if (c.length > 3 && c[3] != null && !c[3].equals(VersionCombiner.version)) {
+					System.err.println("player " + c[2] + " has different version than Server " + c[3] + " "
+							+ VersionCombiner.version + " (VersionCombiner.java:11)");
+					ref.preGame.write("WARNING", "player " + c[2] + " has different version than Server " + c[3] + " "
+							+ VersionCombiner.version + " (VersionCombiner.java:11)");
+				}
 				break;
 			case SET_NATION:
 				// System.out.println(c[2]);
@@ -180,7 +186,7 @@ public class ComHandler implements Coms {
 						HUD.menue = new endGameMenu();
 						float f = Float.parseFloat(c[3]);
 						ProfileHandler.gameEndCalculations(f);
-					} 
+					}
 				}
 				break;
 			default:
